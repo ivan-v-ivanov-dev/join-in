@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+  login-service:
+    build:
+      context: ./login
+    ports:
+      - 8080:8080
+  profile-service:
+    build:
+      context: ./profile
+    ports:
+      - 8081:8081
