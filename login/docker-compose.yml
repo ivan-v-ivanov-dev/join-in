@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+
+  # Spring boot application
+  login-service:
+    container_name: login-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - login-service-network
+    restart: on-failure
+
+# Docker containers network (name attribute is needed!)
+networks:
+  login-service-network:
+    name: login-service-network
+    driver: bridge
