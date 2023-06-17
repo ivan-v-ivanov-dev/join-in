@@ -2,14 +2,48 @@ version: '3.5'
 
 services:
 
+  # MySQL
+  mysql:
+    image: mysql:8.0.33
+    container_name: mysql
+    ports:
+      - 3306:3306
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: storage
+    networks:
+      - login-service-network
+
+  # Flyway
+  flyway:
+    image: flyway/flyway:9.8.1
+    container_name: flyway
+    volumes:
+      - ./src/main/resources/flyway:/flyway/sql
+    command:
+      -url=jdbc:mysql://mysql:3306/storage 
+      -user=root 
+      -password=root 
+      -locations=filesystem:/flyway/sql migrate
+    depends_on:
+      - mysql
+    restart: on-failure
+    networks:
+      - login-service-network
+
   # Spring boot application
   login-service:
     container_name: login-service
+    depends_on:
+      - mysql
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/storage?autoReconnect=true&useSSL=false
     networks:
       - login-service-network
     restart: on-failure
