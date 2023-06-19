@@ -1,0 +1,19 @@
+server:
+  port: '8080'
+
+#MySQL
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/storage
+    password: root
+
+#Feign
+profile:
+  endpoint: /profile
+  service:
+    feign:
+      client:
+        name: Profile-Service
+    url: http://localhost:8081
