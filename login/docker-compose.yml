@@ -12,8 +12,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: storage
-    networks:
-      - login-service-network
 
   # Flyway
   flyway:
@@ -29,27 +27,3 @@ services:
     depends_on:
       - mysql
     restart: on-failure
-    networks:
-      - login-service-network
-
-  # Spring boot application
-  login-service:
-    container_name: login-service
-    depends_on:
-      - mysql
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 8080:8080
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/storage?autoReconnect=true&useSSL=false
-    networks:
-      - login-service-network
-    restart: on-failure
-
-# Docker containers network (name attribute is needed!)
-networks:
-  login-service-network:
-    name: login-service-network
-    driver: bridge
