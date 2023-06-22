@@ -2,20 +2,13 @@ version: '3.5'
 
 services:
 
-  # Spring boot application
-  profile-service:
-    container_name: profile-service
-    build:
-      context: .
-      dockerfile: Dockerfile
+  # MongoDB
+  mongo:
+    image: mongo
+    container_name: mongo
     ports:
-      - 8081:8081
-    networks:
-      - profile-service-network
-    restart: on-failure
-
-# Docker containers network (name attribute is needed!)
-networks:
-  profile-service-network:
-    name: profile-service-network
-    driver: bridge
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+      - MONGO_INITDB_DATABASE=storage
