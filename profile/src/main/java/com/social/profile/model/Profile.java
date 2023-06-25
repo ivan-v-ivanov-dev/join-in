@@ -1,5 +1,6 @@
 package com.social.profile.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -18,13 +19,15 @@ public class Profile {
 
     private String image;
 
-    @Indexed
+    @Indexed(unique = true)
+    @JsonIgnore
     private String identity;
 
     private String firstName;
 
     private String lastName;
 
+    @Indexed(unique = true)
     private String email;
 
 }
