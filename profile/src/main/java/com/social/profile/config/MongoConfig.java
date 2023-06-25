@@ -20,7 +20,7 @@ import java.util.Collections;
 @Slf4j
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
-    public static String IMPORT_SAMPLE_DATA = "In PROFILE :: Import sample data.";
+    public static String IMPORT_SAMPLE_DATA = "In Mongo Config :: Import sample data.";
 
     @Value("${spring.data.mongodb.authentication-database}")
     private String authenticationDb;
@@ -51,7 +51,6 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
 
     @Bean
     CommandLineRunner commandLineRunner(ProfileRepository profileRepository) {
-        log.info(IMPORT_SAMPLE_DATA);
         return strings -> {
             profileRepository.save(Profile.builder().image(null).email("petur@petur.com").identity("1f7bf12277853b6c72a4e68f66e8c582c65570c0b62ff79b0846696997cf37246b1079bc8794f27516ed389232359831822e249e715bb5e8651fd6648ab26ef0").firstName("Petur").lastName("Petrov").build());
             profileRepository.save(Profile.builder().image(null).email("georgi@georgi.com").identity("a0df099e81ec99fc63ada8715fc4ad8a071e98e4907a1ab4cb76359d32601f66e9b4e286f6837dc3c0f47b77647e94b7d56d660664a46951c541d7d4720c2ed2").firstName("Georgi").lastName("Vankov").build());
@@ -59,6 +58,7 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
             profileRepository.save(Profile.builder().image(null).email("victoriya@victoriya.com").identity("7e15b4ca44311b7a7e5b2c176f693cd85f28cb4670d35abbfeed8cb3ce17ef18a353f534f4b47fa3b546ae79cfaa6141c7b771dc8431f567033128eaca558e81").firstName("Viktoriya").lastName("Stefanova").build());
             profileRepository.save(Profile.builder().image(null).email("mariya@mariya.com").identity("f7e9d7e4d7622aefe395172350261857f7efb20dd6368eb95a71ed8caf74ffd3bc9d16404b74908911595e6f7261cf5108e30ee08551c246cb520eb8b98a1d6a").firstName("Mariya").lastName("Ivanova").build());
             profileRepository.save(Profile.builder().image(null).email("konstantin@konstantin.com").identity("477c9125eddcf72ab3c33c8af5ac2e22971eca09e2a2d27daba3c925ce04210c8a04bf9f900e902c7c647683d9df0ac9c6367cb74261c63c8b55f625a4085ed4").firstName("Konstantin").lastName("Petrov").build());
+            log.info(IMPORT_SAMPLE_DATA);
         };
     }
 }
