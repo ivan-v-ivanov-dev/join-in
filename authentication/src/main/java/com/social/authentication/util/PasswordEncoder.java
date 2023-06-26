@@ -8,8 +8,8 @@ public class PasswordEncoder {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public PasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    public PasswordEncoder() {
+        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
 
     public boolean areEqual(String queryPassword, String databasePassword) {
