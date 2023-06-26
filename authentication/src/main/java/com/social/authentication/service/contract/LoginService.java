@@ -1,5 +1,5 @@
 package com.social.authentication.service.contract;
 
 public interface LoginService {
-    void login();
+    void login(String email, String password);
 }
