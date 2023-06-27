@@ -8,12 +8,16 @@ import com.social.authentication.service.contract.LoginService;
 import com.social.authentication.service.feign.ProfileClient;
 import com.social.authentication.util.PasswordEncoderImpl;
 import com.social.authentication.util.contracts.PasswordEncoder;
+import feign.RetryableException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.net.ConnectException;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import static com.social.authentication.service.constants.ExceptionConstants.BAD_CREDENTIALS;
+import static com.social.authentication.service.constants.ExceptionConstants.PROFILE_PAGE_CAN_NOT_BE_LOADED;
 import static com.social.authentication.service.constants.LoggerConstants.*;
 
 @Service
@@ -36,7 +40,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public void login(String email, String password) {
+    public void login(String email, String password) throws ConnectException {
         User loggedUser = userRepository.findByEmail(email);
 
         if (loggedUser != null && passwordEncoder.areEqual(password, loggedUser.getPassword())) {
@@ -47,10 +51,15 @@ public class LoginServiceImpl implements LoginService {
             log.info(String.format(USER_LOGIN_SAVED_IN_DATABASE_TEMPLATE, email));
 
             log.info(REDIRECTING_TO_PROFILE_SERVICE);
-            profileClient.profile(loggedUser.getIdentity());
+            try {
+                profileClient.profile(loggedUser.getIdentity());
+            } catch (RetryableException retryableException) {
+                log.error(String.format(CAN_NOT_REDIRECT_TO_PROFILE_SERVICE_TEMPLATE, retryableException.getMessage()));
+                throw new ConnectException(PROFILE_PAGE_CAN_NOT_BE_LOADED);
+            }
         }
 
         log.error(FAILED_TO_AUTHENTICATE_WITH_CREDENTIALS);
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(BAD_CREDENTIALS);
     }
 }
