@@ -39,7 +39,7 @@ public class AuthenticationController {
             loginService.login(email, password);
             return "Redirect to Profile Service";
         } catch (IllegalArgumentException | ConnectException exception) {
-            model.addAttribute(exception.getMessage());
+            model.addAttribute("error", exception.getMessage());
             return "error";
         }
     }
@@ -53,8 +53,6 @@ public class AuthenticationController {
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("registerDto") RegisterDto registerDto,
                                BindingResult errors, Model model) {
-        model.addAttribute("registerDto", new RegisterDto());
-
         if (errors.hasErrors()) {
             return "register";
         }
@@ -63,7 +61,7 @@ public class AuthenticationController {
             registerService.register(registerDto);
             return "redirect:/";
         } catch (IllegalArgumentException illegalArgumentException) {
-            model.addAttribute(illegalArgumentException.getMessage());
+            model.addAttribute("error", illegalArgumentException.getMessage());
             return "error";
         }
     }
