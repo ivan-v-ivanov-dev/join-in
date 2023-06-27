@@ -3,7 +3,6 @@ package com.social.authentication.controller;
 import com.social.authentication.model.dto.RegisterDto;
 import com.social.authentication.service.contract.LoginService;
 import com.social.authentication.service.contract.RegisterService;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.net.ConnectException;
 
-@Controller
-public class LoginController {
+@org.springframework.stereotype.Controller
+public class Controller {
 
     private final LoginService loginService;
     private final RegisterService registerService;
 
-    public LoginController(LoginService loginService,
-                           RegisterService registerService) {
+    public Controller(LoginService loginService,
+                      RegisterService registerService) {
         this.loginService = loginService;
         this.registerService = registerService;
     }
