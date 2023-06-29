@@ -20,7 +20,9 @@ db.profiles.insertMany([
         birthDate: "2008-05-17",
         gender: "Male",
         joined: "2020-07-06",
-        status: "Single"
+        status: "Single",
+        website: "petur.com",
+        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
   },
   {     profileImage: "profileImage",
         backgroundImage: "backgroundImage",
@@ -35,9 +37,12 @@ db.profiles.insertMany([
         birthDate: "2009-09-21",
         gender: "Male",
         joined: "2021-01-12",
-        status: "Single"
+        status: "Single",
+        website: "petur.com",
+        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
     },
-    {   profileImage: "profileImage",
+    {
+        profileImage: "profileImage",
         backgroundImage: "backgroundImage",
         identity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
         firstName: "Stoyan",
@@ -50,7 +55,9 @@ db.profiles.insertMany([
         birthDate: "1988-03-01",
         gender: "Male",
         joined: "2018-12-15",
-        status: "Married"
+        status: "Married",
+        website: "Stoyan.com",
+        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
     },
     {   profileImage: "profileImage",
         backgroundImage: "backgroundImage",
@@ -65,7 +72,9 @@ db.profiles.insertMany([
         birthDate: "2001-03-11",
         gender: "Female",
         joined: "2019-06-08",
-        status: "Single"
+        status: "Single",
+        website: "victoriya.com",
+        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
     },
     {   profileImage: "profileImage",
         backgroundImage: "backgroundImage",
@@ -80,7 +89,9 @@ db.profiles.insertMany([
         birthDate: "2005-11-09",
         gender: "Female",
         joined: "2020-06-19",
-        status: "Single"
+        status: "Single",
+        website: "mariya.com",
+        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
     },
     {
         profileImage: "profileImage",
@@ -96,7 +107,9 @@ db.profiles.insertMany([
         birthDate: "1992-04-22",
         gender: "Female",
         joined: "2020-04-22",
-        status: "Married"
+        status: "Married",
+        website: "konstantin.com",
+        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
     }
 ]);
 console.log('*** Data Imported ***')
