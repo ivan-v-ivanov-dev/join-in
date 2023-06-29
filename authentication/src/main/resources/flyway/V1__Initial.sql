@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `users`
     `id`                    INT PRIMARY KEY AUTO_INCREMENT,
     `email`                 VARCHAR(30) UNIQUE NOT NULL,
     `password`              VARCHAR(60)        NOT NULL,
-    `personal_identity`     VARCHAR(128)        NOT NULL
+    `personal_identity`     VARCHAR(64) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `logs`
@@ -15,12 +15,12 @@ CREATE TABLE IF NOT EXISTS `logs`
             FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
 
-INSERT INTO users (id, email, password, personal_identity) VALUES (1, 'petur@petur.com', '$2a$10$8C7RWgXFzla8YpDzazbL8urFwNstW367.tLlbiAqju.MA50fEWSDy', '1f7bf12277853b6c72a4e68f66e8c582c65570c0b62ff79b0846696997cf37246b1079bc8794f27516ed389232359831822e249e715bb5e8651fd6648ab26ef0');
-INSERT INTO users (id, email, password, personal_identity) VALUES (2, 'georgi@georgi.com', '$2a$10$XmhbPfFcvhZOFxb1dQ0hb.U.sjeX3DlCrXN8a59YFTAG9MPaiuDTi', 'a0df099e81ec99fc63ada8715fc4ad8a071e98e4907a1ab4cb76359d32601f66e9b4e286f6837dc3c0f47b77647e94b7d56d660664a46951c541d7d4720c2ed2');
-INSERT INTO users (id, email, password, personal_identity) VALUES (3, 'stoyan@stoyan.com', '$2a$10$oAiICuow8.1JFJa52eRtdO6egsDg9HUVHtJciYTSxxHn3zyaOvOQq', '557348e4d21af46b3895497ad6c6b05a04ad7b5e6a0492432ea4a56c6d7510d63c62dd3928d4291e33259158b1809e6c6ce26e54654393e7fb33d6d1352df8cb');
-INSERT INTO users (id, email, password, personal_identity) VALUES (4, 'victoriya@victoriya.com', '$2a$10$uebMHPSE852zfwiZpbtkUev/ZfSj4M6qIDdhNHcqQbA5zC412qMDK', '7e15b4ca44311b7a7e5b2c176f693cd85f28cb4670d35abbfeed8cb3ce17ef18a353f534f4b47fa3b546ae79cfaa6141c7b771dc8431f567033128eaca558e81');
-INSERT INTO users (id, email, password, personal_identity) VALUES (5, 'mariya@mariya.com', '$2a$10$DfTKhofFD.C7UkBDj9vMY.f2XYSlQQGz7uqZAIyJwJF2dG/HCd.mi', 'f7e9d7e4d7622aefe395172350261857f7efb20dd6368eb95a71ed8caf74ffd3bc9d16404b74908911595e6f7261cf5108e30ee08551c246cb520eb8b98a1d6a');
-INSERT INTO users (id, email, password, personal_identity) VALUES (6, 'konstantin@konstantin.com', '$2a$10$4UWpEpQL8BvvfDk2cUX/6uGNGwrPU8IOb.YVRnbhg5srhEBhay/vu', '477c9125eddcf72ab3c33c8af5ac2e22971eca09e2a2d27daba3c925ce04210c8a04bf9f900e902c7c647683d9df0ac9c6367cb74261c63c8b55f625a4085ed4');
+INSERT INTO users (id, email, password, personal_identity) VALUES (1, 'petur@petur.com', '$2a$10$8C7RWgXFzla8YpDzazbL8urFwNstW367.tLlbiAqju.MA50fEWSDy', '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032');
+INSERT INTO users (id, email, password, personal_identity) VALUES (2, 'georgi@georgi.com', '$2a$10$XmhbPfFcvhZOFxb1dQ0hb.U.sjeX3DlCrXN8a59YFTAG9MPaiuDTi', '771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551');
+INSERT INTO users (id, email, password, personal_identity) VALUES (3, 'stoyan@stoyan.com', '$2a$10$oAiICuow8.1JFJa52eRtdO6egsDg9HUVHtJciYTSxxHn3zyaOvOQq', '788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627');
+INSERT INTO users (id, email, password, personal_identity) VALUES (4, 'victoriya@victoriya.com', '$2a$10$uebMHPSE852zfwiZpbtkUev/ZfSj4M6qIDdhNHcqQbA5zC412qMDK', 'd52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8');
+INSERT INTO users (id, email, password, personal_identity) VALUES (5, 'mariya@mariya.com', '$2a$10$DfTKhofFD.C7UkBDj9vMY.f2XYSlQQGz7uqZAIyJwJF2dG/HCd.mi', '8a27182c66548a4dcdc9b0cbf26227defcc076a464faa6b66e9f1c876590c94f');
+INSERT INTO users (id, email, password, personal_identity) VALUES (6, 'konstantin@konstantin.com', '$2a$10$4UWpEpQL8BvvfDk2cUX/6uGNGwrPU8IOb.YVRnbhg5srhEBhay/vu', 'c5f825c26e2edad6bedd8c23b5da3006638793c4a38faaa6bd49cfbe4ab6dd85');
 
 INSERT INTO logs (id, user_id, log_date) VALUES ('ad7d1a68-39b6-4450-b597-087b4f38f3f3', '1', '2023-06-10');
 INSERT INTO logs (id, user_id, log_date) VALUES ('6082d7d4-514b-4e55-a941-4199f4851137', '1', '2023-05-18');
