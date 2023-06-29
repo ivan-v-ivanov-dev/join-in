@@ -10,14 +10,14 @@ import java.util.UUID;
 @Component
 public class IdentityGeneratorImpl implements IdentityGenerator {
 
-    private static final String SHA_512 = "SHA-512";
+    private static final String SHA_256 = "SHA-256";
 
     public String generate(String email) {
         String toHash = UUID.randomUUID() + email + UUID.randomUUID();
         StringBuilder checksum = new StringBuilder();
 
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance(SHA_512);
+            MessageDigest messageDigest = MessageDigest.getInstance(SHA_256);
             byte[] checksumBytes = messageDigest.digest(toHash.getBytes());
 
             for (byte currentByte : checksumBytes) {
