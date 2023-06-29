@@ -6,10 +6,6 @@ server:
 spring:
   data:
     mongodb:
-      authentication-database: admin
-      username: rootuser
-      password: rootpass
+      uri: mongodb://rootuser:rootpass@localhost:27017/storage
       database: storage
-      host: localhost
-      port: 27017
 
