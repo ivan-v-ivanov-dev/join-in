@@ -50,4 +50,8 @@ public class Profile {
 
     private String status;
 
+    private String website;
+
+    private String hobbies;
+
 }
