@@ -15,6 +15,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=rootpass
       - MONGO_INITDB_DATABASE=storage
 
+  # Mongo Express web tool
   mongo-express:
     image: mongo-express:1.0.0-alpha
     container_name: mongo-express
