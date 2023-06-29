@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+
 @Document(collection = "profiles")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +19,9 @@ public class Profile {
     @Id
     private String id;
 
-    private String image;
+    private String profileImage;
+
+    private String backgroundImage;
 
     @Indexed(unique = true)
     @JsonIgnore
@@ -29,5 +33,21 @@ public class Profile {
 
     @Indexed(unique = true)
     private String email;
+
+    private String aboutMe;
+
+    private String mobile;
+
+    private String city;
+
+    private String country;
+
+    private LocalDate birthDate;
+
+    private String gender;
+
+    private LocalDate joined;
+
+    private String status;
 
 }
