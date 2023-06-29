@@ -1,7 +1,7 @@
 package com.social.profile.service;
 
 import com.social.profile.model.Profile;
-import com.social.profile.repository.ProfileRepository;
+import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contrancts.ProfileService;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +16,6 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Profile findByIdentity(String identity) {
-        return this.profileRepository.findByIdentity(identity);
+        return profileRepository.findByIdentity(identity);
     }
 }
