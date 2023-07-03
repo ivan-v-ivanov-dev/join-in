@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+import static com.social.profile.config.ConfigConstants.CREATE_MONGO_CLIENT;
+import static com.social.profile.config.ConfigConstants.CREATE_MONGO_TEMPLATE;
+
 @Configuration
 @Slf4j
 public class MongoConfig {
-
-    private final String MONGO_CLIENT_CREATED = "Mongo Config :: Mongo Client created";
-    private final String MONGO_TEMPLATE_CREATED = "Mongo Config :: Mongo Template created";
 
     @Value("${spring.data.mongodb.uri}")
     private String mongoUri;
@@ -28,14 +28,16 @@ public class MongoConfig {
                 .applyConnectionString(new ConnectionString(mongoUri))
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
-        log.info(MONGO_CLIENT_CREATED);
+        log.info(CREATE_MONGO_CLIENT);
+
         return mongoClient;
     }
 
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
         MongoTemplate mongoTemplate = new MongoTemplate(mongoClient(), database);
-        log.info(MONGO_TEMPLATE_CREATED);
+        log.info(CREATE_MONGO_TEMPLATE);
+
         return mongoTemplate;
     }
 }

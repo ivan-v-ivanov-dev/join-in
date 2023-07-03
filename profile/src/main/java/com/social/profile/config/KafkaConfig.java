@@ -1,6 +1,7 @@
 package com.social.profile.config;
 
 import com.social.kafka.messages.contract.KafkaMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +17,12 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.social.profile.config.ConfigConstants.KAFKA_CONFIG_CREATE_CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY;
+import static com.social.profile.config.ConfigConstants.KAFKA_CONFIG_CREATE_DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGE;
+
 @Configuration
 @EnableKafka
+@Slf4j
 public class KafkaConfig {
 
     @Value("${spring.kafka.consumer.bootstrap-servers}")
@@ -46,7 +51,11 @@ public class KafkaConfig {
         props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
         props.put(JsonDeserializer.KEY_DEFAULT_TYPE, this.consumerKeyTypePackages);
         props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, this.consumerValueTypePackages);
-        return new DefaultKafkaConsumerFactory<>(props);
+
+        DefaultKafkaConsumerFactory<String, KafkaMessage> kafkaConsumerFactory = new DefaultKafkaConsumerFactory<>(props);
+        log.info(KAFKA_CONFIG_CREATE_DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGE);
+
+        return kafkaConsumerFactory;
     }
 
     @Bean
@@ -54,6 +63,8 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, KafkaMessage> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
+        log.info(KAFKA_CONFIG_CREATE_CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY);
+
         return factory;
     }
 }
