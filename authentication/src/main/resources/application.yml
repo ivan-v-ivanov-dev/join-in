@@ -9,6 +9,13 @@ spring:
     username: root
     url: jdbc:mysql://127.0.0.1:3306/storage
     password: root
+  kafka:
+    partitions: 3
+    topic:
+      name: registered-user-profile-topic
+    replicas: 1
+    producer:
+      bootstrap-servers: localhost:9092
 
 #Feign
 profile:
