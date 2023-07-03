@@ -7,6 +7,12 @@ import com.social.authentication.service.contract.RegisterService;
 import com.social.authentication.util.PasswordEncoderImpl;
 import com.social.authentication.util.contracts.IdentityGenerator;
 import com.social.authentication.util.contracts.PasswordEncoder;
+import com.social.kafka.messages.RegisteredUserMessage;
+import com.social.kafka.messages.contract.KafkaMessage;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import static com.social.authentication.service.constants.ExceptionConstants.USER_EMAIL_IS_ALREADY_IN_USE;
@@ -17,13 +23,16 @@ public class RegisterServiceImpl implements RegisterService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final IdentityGenerator identityGenerator;
+    private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
 
     public RegisterServiceImpl(UserRepository userRepository,
                                PasswordEncoderImpl passwordEncoder,
-                               IdentityGenerator identityGenerator) {
+                               IdentityGenerator identityGenerator,
+                               KafkaTemplate<String, KafkaMessage> kafkaTemplate) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.identityGenerator = identityGenerator;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     @Override
@@ -38,9 +47,18 @@ public class RegisterServiceImpl implements RegisterService {
                 .identity(identityGenerator.generate(registerDto.getEmail()))
                 .build();
 
-        userRepository.save(user);
+        user = userRepository.save(user);
 
-        // TODO: Send Kafka event to Profile and other services that new user is registered
+        KafkaMessage kafkaMessage = RegisteredUserMessage.builder()
+                .identity(user.getIdentity())
+                .email(user.getEmail())
+                .build();
 
+        Message<KafkaMessage> message = MessageBuilder
+                .withPayload(kafkaMessage)
+                .setHeader(KafkaHeaders.TOPIC, "registered-user-profile-topic")
+                .build();
+
+        kafkaTemplate.send(message);
     }
 }
