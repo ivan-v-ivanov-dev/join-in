@@ -1,4 +1,4 @@
-package com.social.profile.service.contrancts;
+package com.social.profile.service.contracts;
 
 import com.social.profile.model.Profile;
 
