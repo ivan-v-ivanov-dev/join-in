@@ -44,11 +44,11 @@ public class LoginServiceImpl implements LoginService {
         User loggedUser = userRepository.findByEmail(email);
 
         if (loggedUser != null && passwordEncoder.areEqual(password, loggedUser.getPassword())) {
-            log.info(String.format(USER_LOGGED_TEMPLATE, email));
+            log.info(String.format(USER_WITH_IDENTITY_LOGGED_TEMPLATE, loggedUser.getIdentity()));
 
             Log loggedUserLog = Log.builder().id(UUID.randomUUID().toString()).user(loggedUser).logDate(LocalDate.now()).build();
             logRepository.save(loggedUserLog);
-            log.info(String.format(USER_LOGIN_SAVED_IN_DATABASE_TEMPLATE, email));
+            log.info(String.format(USER_WITH_IDENTITY_LOGIN_SAVED_IN_DATABASE_TEMPLATE, loggedUser.getIdentity()));
 
             log.info(REDIRECTING_TO_PROFILE_SERVICE);
             try {
