@@ -15,6 +15,8 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 import static com.social.authentication.service.constants.ExceptionConstants.USER_EMAIL_IS_ALREADY_IN_USE;
 
 @Service
@@ -51,7 +53,10 @@ public class RegisterServiceImpl implements RegisterService {
 
         KafkaMessage kafkaMessage = RegisteredUserMessage.builder()
                 .identity(user.getIdentity())
-                .email(user.getEmail())
+                .firstName(registerDto.getFirstName())
+                .lastName(registerDto.getLastName())
+                .email(registerDto.getEmail())
+                .joined(LocalDate.now())
                 .build();
 
         Message<KafkaMessage> message = MessageBuilder
