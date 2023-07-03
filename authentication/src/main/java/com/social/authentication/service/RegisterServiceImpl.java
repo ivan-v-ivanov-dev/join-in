@@ -9,6 +9,8 @@ import com.social.authentication.util.contracts.IdentityGenerator;
 import com.social.authentication.util.contracts.PasswordEncoder;
 import com.social.kafka.messages.RegisteredUserMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -18,14 +20,19 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 import static com.social.authentication.service.constants.ExceptionConstants.USER_EMAIL_IS_ALREADY_IN_USE;
+import static com.social.authentication.service.constants.LoggerConstants.NEW_REGISTERED_USER_MESSAGE_SEND_TO_PROFILE_SERVICE_TEMPLATE;
+import static com.social.authentication.service.constants.LoggerConstants.NEW_REGISTERED_USER_SAVED_IN_DATABASE_TEMPLATE;
 
 @Service
+@Slf4j
 public class RegisterServiceImpl implements RegisterService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final IdentityGenerator identityGenerator;
     private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
+    @Value("${spring.kafka.topic.name}")
+    private String topicName;
 
     public RegisterServiceImpl(UserRepository userRepository,
                                PasswordEncoderImpl passwordEncoder,
@@ -50,6 +57,7 @@ public class RegisterServiceImpl implements RegisterService {
                 .build();
 
         user = userRepository.save(user);
+        log.info(String.format(NEW_REGISTERED_USER_SAVED_IN_DATABASE_TEMPLATE, user.getIdentity()));
 
         KafkaMessage kafkaMessage = RegisteredUserMessage.builder()
                 .identity(user.getIdentity())
@@ -61,9 +69,10 @@ public class RegisterServiceImpl implements RegisterService {
 
         Message<KafkaMessage> message = MessageBuilder
                 .withPayload(kafkaMessage)
-                .setHeader(KafkaHeaders.TOPIC, "registered-user-profile-topic")
+                .setHeader(KafkaHeaders.TOPIC, topicName)
                 .build();
 
         kafkaTemplate.send(message);
+        log.info(String.format(NEW_REGISTERED_USER_MESSAGE_SEND_TO_PROFILE_SERVICE_TEMPLATE, user.getIdentity(), topicName));
     }
 }
