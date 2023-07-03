@@ -27,6 +27,8 @@ spring:
           packages: com.social.kafka.messages.contract.KafkaMessage
     topic:
       name: registered-user-profile-topic
+    group:
+      id: group-id
 
 #Exclude Kafka logging
 logging:
