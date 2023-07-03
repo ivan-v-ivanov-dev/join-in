@@ -20,4 +20,9 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     public Profile findByIdentity(String identity) {
         return mongoTemplate.findOne(Query.query(Criteria.where("identity").is(identity)), Profile.class);
     }
+
+    @Override
+    public Profile save(Profile profile) {
+        return mongoTemplate.save(profile);
+    }
 }

@@ -4,4 +4,6 @@ import com.social.profile.model.Profile;
 
 public interface ProfileRepository {
     Profile findByIdentity(String identity);
+
+    Profile save(Profile profile);
 }
