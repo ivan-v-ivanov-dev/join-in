@@ -2,12 +2,13 @@ server:
   port: 8081
   max-http-header-size: 10MB
 
-#Mongo
 spring:
+  #Mongo
   data:
     mongodb:
       uri: mongodb://rootuser:rootpass@localhost:27017/storage
       database: storage
+  #Kafka
   kafka:
     consumer:
       auto-offset-reset: earliest
@@ -26,3 +27,8 @@ spring:
           packages: com.social.kafka.messages.contract.KafkaMessage
     topic:
       name: registered-user-profile-topic
+
+#Exclude Kafka logging
+logging:
+  level:
+    org.apache: OFF
