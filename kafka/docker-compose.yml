@@ -17,7 +17,7 @@ services:
     container_name: kafka
     depends_on:
       - zookeeper
-#    restart: on-failure
+    restart: on-failure
     ports:
       - 9092:9092
     environment:
