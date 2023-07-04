@@ -14,4 +14,13 @@ public class ConfigConstants {
             "Jackson2JsonRedisSerializer Created";
     public static final String REDIS_CONFIGURATION_REDIS_TEMPLATE_CREATED = REDIS_CONFIGURATION +
             "RedisTemplate Created";
+
+    // Mongo Configuration Logger Constants
+
+    public static final String MONGO_CONFIGURATION = "Mongo Configuration :: ";
+
+    public static final String CREATE_MONGO_CLIENT = MONGO_CONFIGURATION + "Create Mongo Client";
+
+    public static final String CREATE_MONGO_TEMPLATE = MONGO_CONFIGURATION + "Create Mongo Template";
+
 }

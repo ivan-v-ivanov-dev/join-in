@@ -2,7 +2,13 @@ server:
   port: 8082
 
 spring:
+  # Redis
   redis:
     password: root
     host: localhost
     port: 6379
+  #Mongo
+  data:
+    mongodb:
+      uri: mongodb://rootuser:rootpass@localhost:27020/storage
+      database: storage
