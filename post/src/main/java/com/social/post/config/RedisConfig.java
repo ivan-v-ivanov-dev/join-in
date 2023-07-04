@@ -5,14 +5,19 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.social.post.model.Comment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.time.LocalDate;
 
 import static com.social.post.config.ConfigConstants.*;
 
@@ -55,20 +60,38 @@ public class RedisConfig {
     }
 
     @Bean
-    public Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer() {
-        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
+    public Jackson2JsonRedisSerializer<Comment> jackson2JsonRedisSerializer() {
+        Jackson2JsonRedisSerializer<Comment> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Comment.class);
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper());
         log.info(REDIS_CONFIGURATION_JACKSON_2_JSON_REDIS_SERIALIZER_CREATED);
         return jackson2JsonRedisSerializer;
     }
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
+    public RedisTemplate<String, Comment> redisTemplate() {
+        RedisTemplate<String, Comment> template = new RedisTemplate<>();
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(jackson2JsonRedisSerializer());
+        template.setHashValueSerializer(jackson2JsonRedisSerializer());
         template.setConnectionFactory(jedisConnectionFactory());
         template.setDefaultSerializer(jackson2JsonRedisSerializer());
         template.setEnableTransactionSupport(true);
         log.info(REDIS_CONFIGURATION_REDIS_TEMPLATE_CREATED);
         return template;
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner(RedisTemplate<String, Comment> redisTemplate) {
+        Comment comment = Comment.builder()
+                .commentIdentity("identity")
+                .authorIdentity("identity")
+                .content("content")
+                .postDate(LocalDate.now())
+                .build();
+
+        return strings -> {
+            redisTemplate.opsForHash().put("COMMENT", comment.getCommentIdentity(), comment);
+        };
     }
 }
