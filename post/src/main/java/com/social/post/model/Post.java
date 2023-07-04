@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Document(collection = "posts")
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-public class Post {
+public class Post implements Serializable {
 
     @Id
     private String id;
