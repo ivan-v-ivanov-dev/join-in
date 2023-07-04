@@ -22,7 +22,8 @@
     <!-- color customizer css -->
     <link rel="stylesheet" th:href="@{/assets/css/customizer.css}">
     <!-- Add icon library -->
-    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
 
 </head>
 
@@ -625,7 +626,7 @@
                         <div class="card-body profile-page p-0">
                             <div class="profile-header">
                                 <div class="position-relative">
-                                    <img  alt="profile-bg" class="rounded img-fluid"
+                                    <img alt="profile-bg" class="rounded img-fluid"
                                          loading="lazy" src="../assets/images/page-img/profile-bg1.jpg">
                                     <ul class="header-nav list-inline d-flex flex-wrap justify-end p-0 m-0">
                                         <li><a class="material-symbols-outlined" href="#">
@@ -640,11 +641,14 @@
                                 </div>
                                 <div class="user-detail text-center mb-3">
                                     <div class="profile-img">
-                                        <img th:src="${profile.getProfileImage()}" alt="profile-img" class="avatar-130 img-fluid" loading="lazy"
-                                             src="../assets/images/user/11.png"/>
+                                        <img alt="profile-img" class="avatar-130 img-fluid"
+                                             loading="lazy" src="../assets/images/user/11.png"
+                                             th:src="${profile.getProfileImage()}"/>
                                     </div>
                                     <div class="profile-detail">
-                                        <h3 class="" th:text="${profile.getFirstName()} + ' ' + ${profile.getLastName()}">Bni Cyst</h3>
+                                        <h3 class=""
+                                            th:text="${profile.getFirstName()} + ' ' + ${profile.getLastName()}">Bni
+                                            Cyst</h3>
                                     </div>
                                 </div>
                                 <div class="profile-info p-3 d-flex align-items-center justify-content-between position-relative">
@@ -867,10 +871,12 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
+
                                                     <div class="user-img">
                                                         <img alt="userimg" class="avatar-60 rounded-circle"
                                                              src="../assets/images/user/1.jpg">
                                                     </div>
+
                                                     <form action="#" class="post-text ms-3 w-100 "
                                                           data-bs-target="#post-modal" data-bs-toggle="modal">
                                                         <input class="form-control rounded"
@@ -878,6 +884,7 @@
                                                                style="border:none;"
                                                                type="text">
                                                     </form>
+
                                                 </div>
                                                 <hr>
 
@@ -895,27 +902,35 @@
                                                             </a>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="user-img">
-                                                                    <img alt="userimg"
-                                                                         class="avatar-60 rounded-circle img-fluid"
-                                                                         loading="lazy"
-                                                                         src="../assets/images/user/1.jpg">
-                                                                </div>
-                                                                <form action="#" class="post-text ms-3 w-100">
+                                                            <form action="http://localhost:8082/"
+                                                                  class="post-text ms-3 w-100" method="post">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="user-img">
+                                                                        <img alt="userimg"
+                                                                             class="avatar-60 rounded-circle img-fluid" loading="lazy" src="../assets/images/user/1.jpg">
+                                                                    </div>
+
+                                                                    <input name="userIdentity"
+                                                                           th:value="${profile.getIdentity()}"
+                                                                           type="hidden"/>
                                                                     <input class="form-control rounded"
+                                                                           name="content"
                                                                            placeholder="Write something here..."
                                                                            style="border:none;"
                                                                            type="text">
-                                                                </form>
-                                                            </div>
 
-                                                            <hr>
+                                                                </div>
 
-                                                            <button class="btn btn-primary d-block w-100 mt-3"
-                                                                    type="submit">Post
-                                                            </button>
+                                                                <hr>
+
+                                                                <button class="btn btn-primary d-block w-100 mt-3"
+                                                                        type="submit">Post
+                                                                </button>
+
+                                                            </form>
+
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -1031,41 +1046,54 @@
                                                                     <div class="like-data">
                                                                         <div class="dropdown">
                                                                             <!-- Use an element to toggle between a like/dislike icon -->
-                                                                            <i class="fa fa-thumbs-o-up" style="font-size:24px"></i>
-                                                   <span aria-expanded="false" aria-haspopup="true"
-                                                         class="dropdown-toggle" data-bs-toggle="dropdown"
-                                                                            role="button">
+                                                                            <i class="fa fa-thumbs-o-up"
+                                                                               style="font-size:24px"></i>
+                                                                            <span aria-expanded="false"
+                                                                                  aria-haspopup="true"
+                                                                                  class="dropdown-toggle"
+                                                                                  data-bs-toggle="dropdown"
+                                                                                  role="button">
                                                    </span>
                                                                             <div class="dropdown-menu py-2">
                                                                                 <a class="ms-2 me-2"
                                                                                    data-bs-placement="top"
                                                                                    data-bs-toggle="tooltip"
                                                                                    th:href="@{/like}" title="Like">
-                                                                                    <i class="fa fa-thumbs-up" style="font-size:24px"></i>
+                                                                                    <i class="fa fa-thumbs-up"
+                                                                                       style="font-size:24px"></i>
 
-                                                                                <a class="me-2" data-bs-placement="top"
-                                                                                   data-bs-toggle="tooltip"
-                                                                                   th:href="@{dislike}" title="Dislike">
-                                                                                    <i class="fa fa-thumbs-down" style="font-size:24px;color:red"></i>
+                                                                                    <a class="me-2"
+                                                                                       data-bs-placement="top"
+                                                                                       data-bs-toggle="tooltip"
+                                                                                       th:href="@{dislike}"
+                                                                                       title="Dislike">
+                                                                                        <i class="fa fa-thumbs-down"
+                                                                                           style="font-size:24px;color:red"></i>
 
-                                                                                <a class="me-2" data-bs-placement="top"
-                                                                                   data-bs-toggle="tooltip"
-                                                                                   href="#" title="Laugh">
-                                                                                    <i class="fa fa-star-o" style="font-size:24px"></i>
+                                                                                        <a class="me-2"
+                                                                                           data-bs-placement="top"
+                                                                                           data-bs-toggle="tooltip"
+                                                                                           href="#" title="Laugh">
+                                                                                            <i class="fa fa-star-o"
+                                                                                               style="font-size:24px"></i>
 
-                                                                                <a class="me-2" data-bs-placement="top"
-                                                                                   data-bs-toggle="tooltip">
+                                                                                            <a class="me-2"
+                                                                                               data-bs-placement="top"
+                                                                                               data-bs-toggle="tooltip">
 
-                                                                                <a class="me-2" data-bs-placement="top"
-                                                                                   data-bs-toggle="tooltip">
-                                                                                </a>
+                                                                                                <a class="me-2"
+                                                                                                   data-bs-placement="top"
+                                                                                                   data-bs-toggle="tooltip">
+                                                                                                </a>
 
-                                                                                <a class="me-2" data-bs-placement="top"
-                                                                                   data-bs-toggle="tooltip">
-                                                                                </a>
-                                                                                <a class="me-2" data-bs-placement="top"
-                                                                                   data-bs-toggle="tooltip">
-                                                                                </a>
+                                                                                                <a class="me-2"
+                                                                                                   data-bs-placement="top"
+                                                                                                   data-bs-toggle="tooltip">
+                                                                                                </a>
+                                                                                                <a class="me-2"
+                                                                                                   data-bs-placement="top"
+                                                                                                   data-bs-toggle="tooltip">
+                                                                                                </a>
 
                                                                             </div>
 
@@ -1221,12 +1249,16 @@
                                                             </li>
                                                         </ul>
 
-                                                        <form action="javascript:void(0);" class="comment-text d-flex align-items-center mt-3">
+                                                        <form action="javascript:void(0);"
+                                                              class="comment-text d-flex align-items-center mt-3">
                                                             <input class="form-control rounded"
                                                                    placeholder="Enter Your Comment"
                                                                    type="text">
                                                             <div class="comment-attagement d-flex">
-                                                                <button onclick="submit" type="submit" class="btn btn-primary float-end">Comment</button>
+                                                                <button class="btn btn-primary float-end"
+                                                                        onclick="submit"
+                                                                        type="submit">Comment
+                                                                </button>
 
                                                             </div>
                                                         </form>
@@ -1369,7 +1401,8 @@
                                                             <h6>Website:</h6>
                                                         </div>
                                                         <div class="col-9">
-                                                            <p class="mb-0" th:text="${profile.getWebsite()}">www.bootstrap.com</p>
+                                                            <p class="mb-0" th:text="${profile.getWebsite()}">
+                                                                www.bootstrap.com</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1379,7 +1412,8 @@
                                                     <h4 class="mt-2">Hobbies and Interests</h4>
                                                     <hr>
                                                     <h6 class="mb-1">Hobbies:</h6>
-                                                    <p th:text="${profile.getHobbies()}">Hi, I’m Bni, I’m 26 and I work as a Web Designer for the
+                                                    <p th:text="${profile.getHobbies()}">Hi, I’m Bni, I’m 26 and I work
+                                                        as a Web Designer for the
                                                         iqonicdesign.I like to ride the bike to work, swimming, and
                                                         working out. I also like reading design magazines, go to
                                                         museums, and binge watching a good tv show while it’s raining
@@ -1498,9 +1532,9 @@
                                                                     <div class="d-flex align-items-center">
                                                                         <a>
                                                                             <img
-                                                                                 alt="profile-img"
-                                                                                 class="img-fluid" loading="lazy"
-                                                                                 src="../assets/images/user/05.jpg">
+                                                                                    alt="profile-img"
+                                                                                    class="img-fluid" loading="lazy"
+                                                                                    src="../assets/images/user/05.jpg">
                                                                         </a>
                                                                         <div class="friend-info ms-3">
                                                                             <h5>Petey Cruiser</h5>
