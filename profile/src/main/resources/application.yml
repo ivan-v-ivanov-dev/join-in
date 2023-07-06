@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
   max-http-header-size: 10MB
 
 spring:
@@ -25,6 +25,8 @@ spring:
       value:
         type:
           packages: com.social.kafka.messages.contract.KafkaMessage
+    producer:
+      bootstrap-servers: localhost:9092
     topic:
       name: registered-user-profile-topic
     group:
@@ -34,3 +36,20 @@ spring:
 logging:
   level:
     org.apache: OFF
+
+#Feign
+post:
+  endpoint: /
+  service:
+    feign:
+      client:
+        name: Post-Service
+    url: http://localhost:8082
+
+login:
+  endpoint: /
+  service:
+    feign:
+      client:
+        name: Login-Service
+    url: http://localhost:8081
