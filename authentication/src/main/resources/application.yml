@@ -10,6 +10,30 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/storage
     password: root
 
+  # Kafka Listener Topic
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+      key:
+        type:
+          packages: '*'
+      value:
+        type:
+          packages: com.social.kafka.messages.contract.KafkaMessage
+    topic:
+      name:
+        registered:
+          user: registered-user-topic-for-authentication-service
+    group:
+      id: group-id
+
 #Exclude Kafka logging
 logging:
   level:
