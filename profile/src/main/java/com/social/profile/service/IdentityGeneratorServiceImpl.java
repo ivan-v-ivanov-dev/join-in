@@ -1,5 +1,6 @@
 package com.social.profile.service;
 
+import com.social.profile.service.contracts.IdentityGeneratorService;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
@@ -7,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 @Service
-public class IdentityGeneratorServiceImpl {
+public class IdentityGeneratorServiceImpl implements IdentityGeneratorService {
 
     private static final String SHA_256 = "SHA-256";
 
