@@ -4,25 +4,33 @@ import com.social.profile.model.dto.RegisterDto;
 import com.social.profile.service.contracts.LoginService;
 import com.social.profile.service.contracts.PostService;
 import com.social.profile.service.contracts.ProfileService;
+import com.social.profile.service.contracts.RegisterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
+
 @Controller
 public class ProfileController {
 
     private final LoginService loginService;
+    private final RegisterService registerService;
     private final ProfileService profileService;
     private final PostService postService;
 
     public ProfileController(LoginService loginService,
+                             RegisterService registerService,
                              ProfileService profileService,
                              PostService postService) {
         this.loginService = loginService;
+        this.registerService = registerService;
         this.profileService = profileService;
         this.postService = postService;
     }
@@ -49,6 +57,17 @@ public class ProfileController {
     public String register(Model model) {
         model.addAttribute("registerDto", new RegisterDto());
         return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@Valid @ModelAttribute("registerDto") RegisterDto registerDto,
+                               BindingResult errors, Model model) {
+        if (errors.hasErrors()) {
+            return "register";
+        }
+
+        registerService.register(registerDto);
+        return "redirect:/";
     }
 
     @GetMapping("/profile")
