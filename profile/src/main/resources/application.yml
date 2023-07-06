@@ -31,6 +31,8 @@ spring:
       name:
         registered:
           user: registered-user-topic-for-authentication-service
+        post:
+          publication: post-publication-topic-for-post-service
     partitions: 3
     replicas: 1
     group:
@@ -41,15 +43,7 @@ logging:
   level:
     org.apache: OFF
 
-#Feign
-post:
-  endpoint: /
-  service:
-    feign:
-      client:
-        name: Post-Service
-    url: http://localhost:8082
-
+#Feign Login service
 login:
   endpoint: /
   service:

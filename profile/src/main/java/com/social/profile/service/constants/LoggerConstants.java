@@ -7,6 +7,8 @@ public class LoggerConstants {
     public static final String NEW_REGISTERED_USER_PROFILE_SAVED_IN_DATABASE_TEMPLATE =
             "New registered user (Profile identity: %s) saved in database";
 
+    public static final String KAFKA_MESSAGE_FOR_NEW_POST_CREATED_AND_SEND_TO_POST_SERVICE_IN_TOPIC_TEMPLATE =
+            "Kafka Message for new post (posted by Profile %s) created and send to Post service (Kafka topic: %s)";
     private LoggerConstants() {
     }
 }
