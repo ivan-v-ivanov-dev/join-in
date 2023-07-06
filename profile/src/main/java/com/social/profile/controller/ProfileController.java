@@ -82,6 +82,7 @@ public class ProfileController {
                              RedirectAttributes attributes) {
         postService.post(userIdentity, content);
         attributes.addAttribute("identity", userIdentity);
+        // TODO: Redirect to FEED when implemented
         return new RedirectView("/");
     }
 

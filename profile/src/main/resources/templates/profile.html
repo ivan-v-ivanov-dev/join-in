@@ -902,22 +902,21 @@
                                                             </a>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="http://localhost:8082/"
-                                                                  class="post-text ms-3 w-100" method="post">
+                                                            <form th:action="@{/post}" class="post-text ms-3 w-100" method="post">
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="user-img">
                                                                         <img alt="userimg"
                                                                              class="avatar-60 rounded-circle img-fluid" loading="lazy" src="../assets/images/user/1.jpg">
                                                                     </div>
 
-                                                                    <input name="userIdentity"
+                                                                    <input th:name="userIdentity"
                                                                            th:value="${profile.getIdentity()}"
                                                                            type="hidden"/>
                                                                     <input class="form-control rounded"
-                                                                           name="content"
+                                                                           th:name="content"
                                                                            placeholder="Write something here..."
                                                                            style="border:none;"
-                                                                           type="text">
+                                                                           type="text" >
 
                                                                 </div>
 
