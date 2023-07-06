@@ -28,7 +28,11 @@ spring:
     producer:
       bootstrap-servers: localhost:9092
     topic:
-      name: registered-user-profile-topic
+      name:
+        registered:
+          user: registered-user-topic-for-authentication-service
+    partitions: 3
+    replicas: 1
     group:
       id: group-id
 
