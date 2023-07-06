@@ -1,5 +1,6 @@
 package com.social.profile.controller;
 
+import com.social.profile.model.dto.RegisterDto;
 import com.social.profile.service.contracts.LoginService;
 import com.social.profile.service.contracts.PostService;
 import com.social.profile.service.contracts.ProfileService;
@@ -42,6 +43,12 @@ public class ProfileController {
             model.addAttribute("error", illegalArgumentException.getMessage());
             return "error";
         }
+    }
+
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("registerDto", new RegisterDto());
+        return "register";
     }
 
     @GetMapping("/profile")
