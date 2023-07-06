@@ -9,25 +9,8 @@ spring:
     username: root
     url: jdbc:mysql://127.0.0.1:3306/storage
     password: root
-  #Kafka
-  kafka:
-    partitions: 3
-    topic:
-      name: registered-user-profile-topic
-    replicas: 1
-    producer:
-      bootstrap-servers: localhost:9092
 
 #Exclude Kafka logging
 logging:
   level:
     org.apache: OFF
-
-#Feign
-profile:
-  endpoint: /
-  service:
-    feign:
-      client:
-        name: Profile-Service
-    url: http://localhost:8081
