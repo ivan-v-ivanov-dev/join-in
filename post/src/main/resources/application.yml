@@ -32,6 +32,12 @@ spring:
       value:
         type:
           packages: com.social.kafka.messages.contract.KafkaMessage
+    topic:
+      name:
+        post:
+          publication: post-publication-topic-for-post-service
+    group:
+      id: group-id
 
 #Exclude Kafka logging
 logging:
