@@ -1,27 +1,26 @@
 package com.social.authentication.service;
 
+import com.social.authentication.model.User;
 import com.social.authentication.repository.UserRepository;
 import com.social.authentication.service.contract.RegisterService;
-import com.social.authentication.util.PasswordEncoderImpl;
-import com.social.authentication.util.contracts.IdentityGenerator;
-import com.social.authentication.util.contracts.PasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import static com.social.authentication.service.constants.LoggerConstants.NEW_REGISTERED_USER_SAVED_IN_DATABASE_TEMPLATE;
 
 @Service
 @Slf4j
 public class RegisterServiceImpl implements RegisterService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final IdentityGenerator identityGenerator;
 
-    public RegisterServiceImpl(UserRepository userRepository,
-                               PasswordEncoderImpl passwordEncoder,
-                               IdentityGenerator identityGenerator) {
+    public RegisterServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.identityGenerator = identityGenerator;
     }
 
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
+        log.info(String.format(NEW_REGISTERED_USER_SAVED_IN_DATABASE_TEMPLATE, user.getIdentity()));
+    }
 }
