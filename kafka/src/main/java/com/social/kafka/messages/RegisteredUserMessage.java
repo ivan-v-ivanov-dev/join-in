@@ -2,9 +2,7 @@ package com.social.kafka.messages;
 
 import com.social.kafka.messages.contract.KafkaMessage;
 import lombok.*;
-import org.springframework.stereotype.Component;
 
-@Component
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
