@@ -84,6 +84,7 @@ public class RedisConfig {
     @Bean
     CommandLineRunner commandLineRunner(RedisTemplate<String, Comment> redisTemplate) {
         Comment comment = Comment.builder()
+                .postIdentity("postIdentity")
                 .commentIdentity("identity")
                 .authorIdentity("identity")
                 .content("content")
@@ -91,7 +92,7 @@ public class RedisConfig {
                 .build();
 
         return strings -> {
-            redisTemplate.opsForHash().put("COMMENT", comment.getCommentIdentity(), comment);
+            redisTemplate.opsForHash().put(comment.getPostIdentity(), comment.getCommentIdentity(), comment);
         };
     }
 }
