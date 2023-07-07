@@ -14,9 +14,11 @@ import java.time.LocalDate;
 @Builder
 public class Comment implements Serializable {
 
-    private String authorIdentity;
+    private String postIdentity;
 
     private String commentIdentity;
+
+    private String authorIdentity;
 
     private String content;
 
