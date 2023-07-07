@@ -27,6 +27,9 @@ public class ConfigConstants {
     public static final String KAFKA_TOPIC_CREATE_TOPIC_FOR_NEW_POST_TEMPLATE =
             "Kafka Topic :: Create Kafka Topic (%s) for new post to send messages to Post service";
 
+    public static final String KAFKA_TOPIC_CREATE_TOPIC_FOR_NEW_COMMENT_TEMPLATE =
+            "Kafka Topic :: Create Kafka Topic (%s) for new comment to send messages to Post service";
+
     private ConfigConstants() {
     }
 }

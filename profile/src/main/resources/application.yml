@@ -33,6 +33,7 @@ spring:
           user: registered-user-topic-for-authentication-service
         post:
           publication: post-publication-topic-for-post-service
+          comment: post-comment-topic-for-post-service
     partitions: 3
     replicas: 1
     group:
