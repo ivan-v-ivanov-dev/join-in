@@ -1,10 +1,7 @@
 package com.social.profile.controller;
 
 import com.social.profile.model.dto.RegisterDto;
-import com.social.profile.service.contracts.LoginService;
-import com.social.profile.service.contracts.PostService;
-import com.social.profile.service.contracts.ProfileService;
-import com.social.profile.service.contracts.RegisterService;
+import com.social.profile.service.contracts.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,15 +21,18 @@ public class ProfileController {
     private final RegisterService registerService;
     private final ProfileService profileService;
     private final PostService postService;
+    private final CommentService commentService;
 
     public ProfileController(LoginService loginService,
                              RegisterService registerService,
                              ProfileService profileService,
-                             PostService postService) {
+                             PostService postService,
+                             CommentService commentService) {
         this.loginService = loginService;
         this.registerService = registerService;
         this.profileService = profileService;
         this.postService = postService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/")
@@ -84,6 +84,13 @@ public class ProfileController {
         attributes.addAttribute("identity", userIdentity);
         // TODO: Redirect to FEED when implemented
         return new RedirectView("/");
+    }
+
+    @PostMapping("/comment")
+    public String comment(@RequestParam("userIdentity") String userIdentity,
+                          @RequestParam("comment") String comment) {
+        commentService.comment(userIdentity, comment);
+        return "redirect:/profile?identity=" + userIdentity;
     }
 
     @GetMapping("/health")

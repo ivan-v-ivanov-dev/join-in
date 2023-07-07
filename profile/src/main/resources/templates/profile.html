@@ -1051,8 +1051,7 @@
                                                                                   aria-haspopup="true"
                                                                                   class="dropdown-toggle"
                                                                                   data-bs-toggle="dropdown"
-                                                                                  role="button">
-                                                   </span>
+                                                                                  role="button"></span>
                                                                             <div class="dropdown-menu py-2">
                                                                                 <a class="ms-2 me-2"
                                                                                    data-bs-placement="top"
@@ -1248,9 +1247,12 @@
                                                             </li>
                                                         </ul>
 
-                                                        <form action="javascript:void(0);"
-                                                              class="comment-text d-flex align-items-center mt-3">
-                                                            <input class="form-control rounded"
+                                                        <form th:action="@{/comment}" action="javascript:void(0);"
+                                                              class="comment-text d-flex align-items-center mt-3" method="post">
+                                                            <input th:name="userIdentity"
+                                                                   th:value="${profile.getIdentity()}"
+                                                                   type="hidden"/>
+                                                            <input th:name="comment" class="form-control rounded"
                                                                    placeholder="Enter Your Comment"
                                                                    type="text">
                                                             <div class="comment-attagement d-flex">
