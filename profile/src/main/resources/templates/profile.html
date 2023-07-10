@@ -627,8 +627,9 @@
                             <div class="profile-header">
                                 <div class="position-relative">
                                     <img alt="profile-bg" class="rounded img-fluid"
-                                         th:src="${profile.getBackgroundImage()}"
-                                         loading="lazy" src="../assets/images/page-img/profile-bg1.jpg">
+                                         loading="lazy"
+                                         src="../assets/images/page-img/profile-bg1.jpg"
+                                         th:src="${profile.getBackgroundImage()}">
                                     <ul class="header-nav list-inline d-flex flex-wrap justify-end p-0 m-0">
                                         <li><a class="material-symbols-outlined" href="#">
                                             edit
@@ -875,8 +876,8 @@
 
                                                     <div class="user-img">
                                                         <img alt="userimg" class="avatar-60 rounded-circle"
-                                                             th:src="${profile.getProfileImage()}"
-                                                             src="../assets/images/user/1.jpg">
+                                                             src="../assets/images/user/1.jpg"
+                                                             th:src="${profile.getProfileImage()}">
                                                     </div>
 
                                                     <form action="#" class="post-text ms-3 w-100 "
@@ -904,23 +905,25 @@
                                                             </a>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form th:action="@{/post}" class="post-text ms-3 w-100" method="post">
+                                                            <form class="post-text ms-3 w-100" method="post"
+                                                                  th:action="@{/post}">
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="user-img">
                                                                         <img alt="userimg"
-                                                                             th:src="${profile.getProfileImage()}"
                                                                              class="avatar-60 rounded-circle img-fluid"
-                                                                             loading="lazy" src="../assets/images/user/1.jpg">
+                                                                             loading="lazy"
+                                                                             src="../assets/images/user/1.jpg"
+                                                                             th:src="${profile.getProfileImage()}">
                                                                     </div>
 
                                                                     <input th:name="userIdentity"
                                                                            th:value="${profile.getIdentity()}"
                                                                            type="hidden"/>
                                                                     <input class="form-control rounded"
-                                                                           th:name="content"
                                                                            placeholder="Write something here..."
                                                                            style="border:none;"
-                                                                           type="text" >
+                                                                           th:name="content"
+                                                                           type="text">
 
                                                                 </div>
 
@@ -945,56 +948,62 @@
                                                 <div class="post-item">
                                                     <div class="user-post-data pb-3">
                                                         <div class="d-flex justify-content-between">
-                                                            <div class="me-3" >
-                                                                <img th:src="${currentPost.getAuthorPhoto()}" alt=""
-                                                                     class="rounded-circle  avatar-60" loading="lazy"
-                                                                     src="../assets/images/user/1.jpg">
+                                                            <div class="me-3">
+                                                                <img alt="" class="rounded-circle  avatar-60"
+                                                                     loading="lazy" src="../assets/images/user/1.jpg"
+                                                                     th:src="${currentPost.getAuthorPhoto()}">
                                                             </div>
                                                             <div class="w-100">
                                                                 <div class="d-flex justify-content-between flex-wrap">
                                                                     <div class="">
                                                                         <h5 class="mb-0 d-inline-block"
                                                                             th:text="${currentPost.getAuthor()}">
-                                                                            <a class="" >Bni Cyst</a>
+                                                                            <a class="">Bni Cyst</a>
                                                                         </h5>
-                                                                        <p class="ms-1 mb-0 d-inline-block">added new post</p>
-                                                                        <p class="mb-0" th:text="${currentPost.getPostedAgo}">3 hour ago</p>
+                                                                        <p class="ms-1 mb-0 d-inline-block">added new
+                                                                            post</p>
+                                                                        <p class="mb-0"
+                                                                           th:text="${currentPost.getPostedAgo}">3 hour
+                                                                            ago</p>
                                                                     </div>
                                                                     <div class="card-post-toolbar">
                                                                         <div class="dropdown">
                                                    <span aria-expanded="false"
                                                          aria-haspopup="true"
                                                          class="dropdown-toggle material-symbols-outlined"
-                                                         data-bs-toggle="dropdown" role="button">
-                                                   more_horiz
+                                                         data-bs-toggle="dropdown" role="button">more_horiz
                                                    </span>
                                                                             <div class="dropdown-menu m-0 p-0">
 
                                                                                 <a class="dropdown-item p-3" href="#">
 
                                                                                     <div class="d-flex align-items-top">
-                                                            <span class="material-symbols-outlined">
-                                                            edit
-                                                            </span>
+                                                                                        <span class="material-symbols-outlined">edit</span>
                                                                                         <div class="data ms-2">
                                                                                             <h6>Edit Post</h6>
-                                                                                            <p class="mb-0">Update your post</p>
+                                                                                            <p class="mb-0">Update your
+                                                                                                post</p>
                                                                                         </div>
                                                                                     </div>
 
                                                                                 </a>
 
-                                                                                <a class="dropdown-item p-3" href="#">
-                                                                                    <div class="d-flex align-items-top">
-                                                            <span class="material-symbols-outlined">
-                                                            delete
-                                                            </span>
-                                                                                        <div class="data ms-2">
-                                                                                            <h6>Delete</h6>
-                                                                                            <p class="mb-0">Remove this post</p>
+                                                                                <form th:action="@{/post/delete(userIdentity=${profile.getIdentity()}, postIdentity=${currentPost.getPostIdentity()})}"
+                                                                                      th:method="post">
+                                                                                    <button class="dropdown-item p-3" type="submit">
+                                                                                        <div class="d-flex align-items-top">
+                                                                                            <span class="material-symbols-outlined">delete</span>
+
+                                                                                            <div class="data ms-2">
+                                                                                                <h6>Delete</h6>
+                                                                                                <p class="mb-0">Remove
+                                                                                                    this post</p>
+
+                                                                                            </div>
+
                                                                                         </div>
-                                                                                    </div>
-                                                                                </a>
+                                                                                    </button>
+                                                                                </form>
 
                                                                             </div>
                                                                         </div>
@@ -1005,7 +1014,8 @@
                                                     </div>
                                                     <div class="user-post">
                                                         <a href="#">
-                                                            <h4 th:text="${currentPost.getContent()}">This is a comment</h4>
+                                                            <h4 th:text="${currentPost.getContent()}">This is a
+                                                                comment</h4>
                                                         </a>
                                                     </div>
                                                     <div class="comment-area mt-3">
@@ -1176,13 +1186,16 @@
 
                                                         </div>
 
-                                                        <form th:action="@{/comment}" action="javascript:void(0);"
-                                                              class="comment-text d-flex align-items-center mt-3" method="post">
+                                                        <form action="javascript:void(0);"
+                                                              class="comment-text d-flex align-items-center mt-3"
+                                                              method="post"
+                                                              th:action="@{/comment}">
                                                             <input th:name="userIdentity"
                                                                    th:value="${profile.getIdentity()}"
                                                                    type="hidden"/>
-                                                            <input th:name="comment" class="form-control rounded"
+                                                            <input class="form-control rounded"
                                                                    placeholder="Enter Your Comment"
+                                                                   th:name="comment"
                                                                    type="text">
                                                             <div class="comment-attagement d-flex">
                                                                 <button class="btn btn-primary float-end"

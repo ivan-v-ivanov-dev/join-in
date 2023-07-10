@@ -13,6 +13,9 @@ public class LoggerConstants {
     public static final String KAFKA_MESSAGE_FOR_NEW_COMMENT_CREATED_AND_SEND_TO_POST_SERVICE_IN_TOPIC_TEMPLATE =
             "Kafka Message for new comment (posted by Profile %s) created and send to Post service (Kafka topic: %s)";
 
+    public static final String KAFKA_MESSAGE_FOR_DELETE_POST_CREATED_AND_SEND_TO_POST_SERVICE_IN_TOPIC_TEMPLATE =
+            "Kafka Message for delete post (Post identity %s) created and send to Post service (Kafka topic: %s)";
+
     private LoggerConstants() {
     }
 }
