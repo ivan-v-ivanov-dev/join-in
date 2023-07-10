@@ -55,6 +55,7 @@ public class RedisConfig {
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+        objectMapper.disableDefaultTyping();
         log.info(REDIS_CONFIGURATION_OBJECT_MAPPER_CREATED);
         return objectMapper;
     }
