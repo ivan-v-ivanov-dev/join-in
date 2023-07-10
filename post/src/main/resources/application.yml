@@ -37,6 +37,8 @@ spring:
         post:
           publication: post-publication-topic-for-post-service
           comment: post-comment-topic-for-post-service
+        delete:
+          post: delete-post-topic-for-post-service
     group:
       id: group-id
 
