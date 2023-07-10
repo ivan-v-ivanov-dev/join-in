@@ -52,3 +52,12 @@ login:
       client:
         name: Login-Service
     url: http://localhost:8081
+
+post:
+  publications:
+    endpoint: /posts
+  service:
+    feign:
+      client:
+        name: Post-Service
+    url: http://localhost:8082
