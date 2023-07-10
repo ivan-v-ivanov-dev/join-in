@@ -72,7 +72,8 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String profile(@RequestParam("identity") String identity, Model model) {
-        model.addAttribute("profile", this.profileService.findByIdentity(identity));
+        model.addAttribute("profile", profileService.findByIdentity(identity));
+        model.addAttribute("posts", profileService.findAllPosts(identity));
         return "profile";
     }
 
