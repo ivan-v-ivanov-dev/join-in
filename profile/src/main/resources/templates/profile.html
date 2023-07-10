@@ -627,6 +627,7 @@
                             <div class="profile-header">
                                 <div class="position-relative">
                                     <img alt="profile-bg" class="rounded img-fluid"
+                                         th:src="${profile.getBackgroundImage()}"
                                          loading="lazy" src="../assets/images/page-img/profile-bg1.jpg">
                                     <ul class="header-nav list-inline d-flex flex-wrap justify-end p-0 m-0">
                                         <li><a class="material-symbols-outlined" href="#">
@@ -874,6 +875,7 @@
 
                                                     <div class="user-img">
                                                         <img alt="userimg" class="avatar-60 rounded-circle"
+                                                             th:src="${profile.getProfileImage()}"
                                                              src="../assets/images/user/1.jpg">
                                                     </div>
 
@@ -906,7 +908,9 @@
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="user-img">
                                                                         <img alt="userimg"
-                                                                             class="avatar-60 rounded-circle img-fluid" loading="lazy" src="../assets/images/user/1.jpg">
+                                                                             th:src="${profile.getProfileImage()}"
+                                                                             class="avatar-60 rounded-circle img-fluid"
+                                                                             loading="lazy" src="../assets/images/user/1.jpg">
                                                                     </div>
 
                                                                     <input th:name="userIdentity"
@@ -937,24 +941,24 @@
 
                                         <!--One Post from Timeline-->
                                         <div class="card">
-                                            <div class="card-body">
+                                            <div class="card-body" th:each="currentPost : ${posts}">
                                                 <div class="post-item">
                                                     <div class="user-post-data pb-3">
                                                         <div class="d-flex justify-content-between">
-                                                            <div class="me-3">
-                                                                <img alt=""
+                                                            <div class="me-3" >
+                                                                <img th:src="${currentPost.getAuthorPhoto()}" alt=""
                                                                      class="rounded-circle  avatar-60" loading="lazy"
                                                                      src="../assets/images/user/1.jpg">
                                                             </div>
                                                             <div class="w-100">
                                                                 <div class="d-flex justify-content-between flex-wrap">
                                                                     <div class="">
-                                                                        <h5 class="mb-0 d-inline-block">
-                                                                            <a class="" href="#">Bni Cyst</a>
+                                                                        <h5 class="mb-0 d-inline-block"
+                                                                            th:text="${currentPost.getAuthor()}">
+                                                                            <a class="" >Bni Cyst</a>
                                                                         </h5>
-                                                                        <p class="ms-1 mb-0 d-inline-block">added new
-                                                                            post</p>
-                                                                        <p class="mb-0">3 hour ago</p>
+                                                                        <p class="ms-1 mb-0 d-inline-block">added new post</p>
+                                                                        <p class="mb-0" th:text="${currentPost.getPostedAgo}">3 hour ago</p>
                                                                     </div>
                                                                     <div class="card-post-toolbar">
                                                                         <div class="dropdown">
@@ -965,42 +969,21 @@
                                                    more_horiz
                                                    </span>
                                                                             <div class="dropdown-menu m-0 p-0">
+
                                                                                 <a class="dropdown-item p-3" href="#">
-                                                                                    <div class="d-flex align-items-top">
-                                                            <span class="material-symbols-outlined">
-                                                            save
-                                                            </span>
-                                                                                        <div class="data ms-2">
-                                                                                            <h6>Save Post</h6>
-                                                                                            <p class="mb-0">Add this to
-                                                                                                your saved items</p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </a>
-                                                                                <a class="dropdown-item p-3" href="#">
+
                                                                                     <div class="d-flex align-items-top">
                                                             <span class="material-symbols-outlined">
                                                             edit
                                                             </span>
                                                                                         <div class="data ms-2">
                                                                                             <h6>Edit Post</h6>
-                                                                                            <p class="mb-0">Update your
-                                                                                                post and saved items</p>
+                                                                                            <p class="mb-0">Update your post</p>
                                                                                         </div>
                                                                                     </div>
+
                                                                                 </a>
-                                                                                <a class="dropdown-item p-3" href="#">
-                                                                                    <div class="d-flex align-items-top">
-                                                            <span class="material-symbols-outlined">
-                                                            cancel
-                                                            </span>
-                                                                                        <div class="data ms-2">
-                                                                                            <h6>Hide From Timeline</h6>
-                                                                                            <p class="mb-0">See fewer
-                                                                                                posts like this.</p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </a>
+
                                                                                 <a class="dropdown-item p-3" href="#">
                                                                                     <div class="d-flex align-items-top">
                                                             <span class="material-symbols-outlined">
@@ -1008,24 +991,11 @@
                                                             </span>
                                                                                         <div class="data ms-2">
                                                                                             <h6>Delete</h6>
-                                                                                            <p class="mb-0">Remove thids
-                                                                                                Post on Timeline</p>
+                                                                                            <p class="mb-0">Remove this post</p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </a>
-                                                                                <a class="dropdown-item p-3" href="#">
-                                                                                    <div class="d-flex align-items-top">
-                                                            <span class="material-symbols-outlined">
-                                                            notifications
-                                                            </span>
-                                                                                        <div class="data ms-2">
-                                                                                            <h6>Notifications</h6>
-                                                                                            <p class="mb-0">Turn on
-                                                                                                notifications for this
-                                                                                                post</p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </a>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1035,7 +1005,7 @@
                                                     </div>
                                                     <div class="user-post">
                                                         <a href="#">
-                                                            <h4>This is a comment</h4>
+                                                            <h4 th:text="${currentPost.getContent()}">This is a comment</h4>
                                                         </a>
                                                     </div>
                                                     <div class="comment-area mt-3">
@@ -1205,47 +1175,6 @@
                                                             </div>
 
                                                         </div>
-                                                        <hr>
-                                                        <ul class="post-comments p-0 m-0">
-                                                            <li class="mb-2">
-                                                                <div class="d-flex flex-wrap">
-                                                                    <div class="user-img">
-                                                                        <img alt="userimg"
-                                                                             class="avatar-35 rounded-circle img-fluid"
-                                                                             loading="lazy"
-                                                                             src="../assets/images/user/02.jpg">
-                                                                    </div>
-                                                                    <div class="comment-data-block ms-3">
-                                                                        <h6>Monty Carlo</h6>
-                                                                        <p class="mb-0">Lorem ipsum dolor sit amet</p>
-                                                                        <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                            <a href="#">like</a>
-                                                                            <a href="#">translate</a>
-                                                                            <span> 5 min </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="d-flex flex-wrap">
-                                                                    <div class="user-img">
-                                                                        <img alt="userimg"
-                                                                             class="avatar-35 rounded-circle img-fluid"
-                                                                             loading="lazy"
-                                                                             src="../assets/images/user/03.jpg">
-                                                                    </div>
-                                                                    <div class="comment-data-block ms-3">
-                                                                        <h6>Paul Molive</h6>
-                                                                        <p class="mb-0">Lorem ipsum dolor sit amet</p>
-                                                                        <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                            <a href="#">like</a>
-                                                                            <a href="#">translate</a>
-                                                                            <span> 5 min </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
 
                                                         <form th:action="@{/comment}" action="javascript:void(0);"
                                                               class="comment-text d-flex align-items-center mt-3" method="post">
@@ -1266,6 +1195,7 @@
 
                                                     </div>
                                                 </div>
+                                                <hr>
                                             </div>
                                         </div>
                                         <!--End of One Post from Timeline-->
