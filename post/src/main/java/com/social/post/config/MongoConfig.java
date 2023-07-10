@@ -29,15 +29,13 @@ public class MongoConfig {
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
         log.info(CREATE_MONGO_CLIENT);
-
         return mongoClient;
     }
 
     @Bean
-    public MongoTemplate mongoTemplate() throws Exception {
+    public MongoTemplate mongoTemplate() {
         MongoTemplate mongoTemplate = new MongoTemplate(mongoClient(), database);
         log.info(CREATE_MONGO_TEMPLATE);
-
         return mongoTemplate;
     }
 }
