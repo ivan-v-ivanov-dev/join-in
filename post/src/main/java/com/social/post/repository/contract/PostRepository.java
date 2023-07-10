@@ -8,4 +8,6 @@ public interface PostRepository {
     void save(Post post);
 
     List<Post> findAllPostsByAuthorIdentity(String authorIdentity);
+
+    void delete(String postIdentity);
 }

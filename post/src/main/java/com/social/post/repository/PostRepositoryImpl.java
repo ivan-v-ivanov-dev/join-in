@@ -27,4 +27,10 @@ public class PostRepositoryImpl implements PostRepository {
     public List<Post> findAllPostsByAuthorIdentity(String authorIdentity) {
         return mongoTemplate.find(new Query(Criteria.where("authorIdentity").is(authorIdentity)), Post.class, "posts");
     }
+
+    @Override
+    public void delete(String postIdentity) {
+        Query query = new Query(Criteria.where("postIdentity").is(postIdentity));
+        mongoTemplate.remove(query, Post.class);
+    }
 }
