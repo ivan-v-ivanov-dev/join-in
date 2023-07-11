@@ -24,13 +24,13 @@ public class DeletePostTopic {
 
     @Bean
     public NewTopic deletePostTopicForPostService() {
-        NewTopic postCommentTopicForPostService = TopicBuilder
+        NewTopic deletePostTopicForPostService = TopicBuilder
                 .name(topicName)
                 .partitions(Integer.parseInt(partitions))
                 .replicas(Integer.parseInt(replicas))
                 .build();
         log.info(String.format(KAFKA_TOPIC_TO_DELETE_POSTS_TEMPLATE, topicName));
 
-        return postCommentTopicForPostService;
+        return deletePostTopicForPostService;
     }
 }
