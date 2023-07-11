@@ -5,9 +5,10 @@ import com.social.profile.service.contracts.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -75,13 +76,11 @@ public class ProfileController {
     }
 
     @PostMapping("/post")
-    public RedirectView post(@RequestParam("userIdentity") String userIdentity,
-                             @RequestParam("content") String content,
-                             RedirectAttributes attributes) {
+    public String post(@RequestParam("userIdentity") String userIdentity,
+                       @RequestParam("content") String content) {
         postService.post(userIdentity, content);
-        attributes.addAttribute("identity", userIdentity);
         // TODO: Redirect to FEED when implemented
-        return new RedirectView("/");
+        return "redirect:/profile?identity=" + userIdentity;
     }
 
     @PostMapping("/post/delete")
