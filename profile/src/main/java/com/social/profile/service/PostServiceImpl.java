@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService {
 
         kafkaMessageSender.send(postPublicationMessage, postPublicationTopic);
         log.info(String.format(NEW_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE,
-                userIdentity, postPublicationTopic));
+                postPublicationTopic, userIdentity));
     }
 
     @Override
@@ -43,6 +43,6 @@ public class PostServiceImpl implements PostService {
 
         kafkaMessageSender.send(deletePostMessage, deletePostTopic);
         log.info(String.format(DELETE_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE,
-                postIdentity, deletePostTopic));
+                deletePostTopic, postIdentity));
     }
 }

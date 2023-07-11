@@ -32,6 +32,6 @@ public class CommentServiceImpl implements CommentService {
 
         kafkaMessageSender.send(createNewCommentMessage, postCommentTopic);
         log.info(String.format(NEW_COMMENT_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE,
-                userIdentity, postCommentTopic));
+                postCommentTopic, userIdentity));
     }
 }

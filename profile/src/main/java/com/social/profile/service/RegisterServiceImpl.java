@@ -48,7 +48,7 @@ public class RegisterServiceImpl implements RegisterService {
 
         kafkaMessageSender.send(registeredUserMessage, registeredUserTopic);
         log.info(String.format(NEW_REGISTERED_USER_CREATED_AND_SEND_TO_AUTHENTICATION_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE,
-                userIdentity, registeredUserTopic));
+                registeredUserTopic, userIdentity));
 
         Profile profile = Profile.builder()
                 .identity(userIdentity)
