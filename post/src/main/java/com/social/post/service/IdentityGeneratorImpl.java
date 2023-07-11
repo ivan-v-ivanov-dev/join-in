@@ -1,6 +1,6 @@
 package com.social.post.service;
 
-import com.social.post.service.contracts.IdentityGeneratorService;
+import com.social.post.service.contracts.IdentityGenerator;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
@@ -10,7 +10,7 @@ import static com.social.post.service.constants.IdentityConstants.SHA_512;
 import static com.social.post.service.constants.IdentityConstants.TO_HASH_STRING_TEMPLATE;
 
 @Service
-public class IdentityGeneratorServiceImpl implements IdentityGeneratorService {
+public class IdentityGeneratorImpl implements IdentityGenerator {
 
     public String generate(String userIdentity, String content, String createDate) {
         String toHash = String.format(TO_HASH_STRING_TEMPLATE, userIdentity, content, createDate);

@@ -4,7 +4,7 @@ import com.social.kafka.messages.CommentMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.model.Comment;
 import com.social.post.service.contracts.CommentService;
-import com.social.post.service.contracts.IdentityGeneratorService;
+import com.social.post.service.contracts.IdentityGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -18,14 +18,14 @@ import static com.social.post.service.constants.LoggerConstants.NEW_COMMENT_PUBL
 @Slf4j
 public class PostCommentListener {
 
-    private final IdentityGeneratorService identityGeneratorService;
+    private final IdentityGenerator identityGenerator;
     private final CommentService commentService;
     private final String kafkaTopic;
 
-    public PostCommentListener(IdentityGeneratorService identityGeneratorService,
+    public PostCommentListener(IdentityGenerator identityGenerator,
                                CommentService commentService,
                                @Value("${spring.kafka.topic.name.post.comment}") String kafkaTopic) {
-        this.identityGeneratorService = identityGeneratorService;
+        this.identityGenerator = identityGenerator;
         this.commentService = commentService;
         this.kafkaTopic = kafkaTopic;
     }
@@ -41,7 +41,7 @@ public class PostCommentListener {
         Comment comment = Comment.builder()
                 .postIdentity(commentMessage.getPostIdentity())
                 .authorIdentity(commentMessage.getUserIdentity())
-                .commentIdentity(identityGeneratorService
+                .commentIdentity(identityGenerator
                         .generate(commentMessage.getUserIdentity(), commentMessage.getContent(), dateNow.toString()))
                 .content(commentMessage.getContent())
                 .postDate(dateNow)

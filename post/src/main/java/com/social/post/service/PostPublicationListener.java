@@ -3,7 +3,7 @@ package com.social.post.service;
 import com.social.kafka.messages.PostMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.model.Post;
-import com.social.post.service.contracts.IdentityGeneratorService;
+import com.social.post.service.contracts.IdentityGenerator;
 import com.social.post.service.contracts.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,14 +18,14 @@ import static com.social.post.service.constants.LoggerConstants.NEW_POST_PUBLISH
 @Slf4j
 public class PostPublicationListener {
 
-    private final IdentityGeneratorService identityGeneratorService;
+    private final IdentityGenerator identityGenerator;
     private final PostService postService;
     @Value("${spring.kafka.topic.name.post.publication}")
     private String kafkaTopic;
 
-    public PostPublicationListener(IdentityGeneratorService identityGeneratorService,
+    public PostPublicationListener(IdentityGenerator identityGenerator,
                                    PostService postService) {
-        this.identityGeneratorService = identityGeneratorService;
+        this.identityGenerator = identityGenerator;
         this.postService = postService;
     }
 
@@ -39,7 +39,7 @@ public class PostPublicationListener {
 
         Post post = Post.builder()
                 .authorIdentity(postMessage.getUserIdentity())
-                .postIdentity(identityGeneratorService
+                .postIdentity(identityGenerator
                         .generate(postMessage.getUserIdentity(), postMessage.getContent(), dateNow.toString()))
                 .content(postMessage.getContent())
                 .postDate(dateNow)
