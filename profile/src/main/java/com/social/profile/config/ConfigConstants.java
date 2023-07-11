@@ -3,35 +3,45 @@ package com.social.profile.config;
 public class ConfigConstants {
 
     // MongoDB Configurations
-    public static final String CREATE_MONGO_CLIENT = "Mongo Config :: Create Mongo Client";
+    private static final String MONGO_CONFIGURATIONS = "Mongo Configurations :: ";
 
-    public static final String CREATE_MONGO_TEMPLATE = "Mongo Config :: Create Mongo Template";
+    public static final String MONGO_CLIENT_CREATED = MONGO_CONFIGURATIONS + "Mongo Client created";
+
+    public static final String MONGO_TEMPLATE_CREATED = MONGO_CONFIGURATIONS + "Mongo Template created";
 
     // Kafka Configurations
-    public static final String KAFKA_CONFIG_CREATE_DEFAULT_PRODUCER_FACTORY_FOR_KAFKA_MESSAGE =
-            "Kafka Config :: Create Default Producer Factory for Kafka Message";
+    private static final String KAFKA_CONFIGURATIONS = "Kafka Configurations :: ";
 
-    public static final String KAFKA_CONFIG_CREATE_KAFKA_TEMPLATE_FOR_KAFKA_MESSAGE =
-            "Kafka Config :: Create Kafka Template for Kafka Message";
+    private static final String FOR_KAFKA_MESSAGING_CREATED = " for Kafka messaging created";
 
-    public static final String KAFKA_CONFIG_CREATE_DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGE =
-            "Kafka Config :: Create Default Consumer Factory for Kafka Message";
+    public static final String DEFAULT_PRODUCER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
+            KAFKA_CONFIGURATIONS + "Default Producer Factory" + FOR_KAFKA_MESSAGING_CREATED;
 
-    public static final String KAFKA_CONFIG_CREATE_CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY =
-            "Kafka Config :: Create Concurrent Kafka Listener Container Factor for Kafka Message";
+    public static final String KAFKA_TEMPLATE_FOR_KAFKA_MESSAGING_CREATED =
+            KAFKA_CONFIGURATIONS + "Kafka Template" + FOR_KAFKA_MESSAGING_CREATED;
 
-    // Kafka Topic
-    public static final String KAFKA_TOPIC_CREATE_TOPIC_FOR_NEW_REGISTERED_USER_TEMPLATE =
-            "Kafka Topic :: Create Kafka Topic (%s) for new registered users to send messages to Profile service";
+    public static final String DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
+            KAFKA_CONFIGURATIONS + "Default Consumer Factory" + FOR_KAFKA_MESSAGING_CREATED;
 
-    public static final String KAFKA_TOPIC_CREATE_TOPIC_FOR_NEW_POST_TEMPLATE =
-            "Kafka Topic :: Create Kafka Topic (%s) for new post to send messages to Post service";
+    public static final String CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
+            KAFKA_CONFIGURATIONS + "Concurrent Kafka Listener Container Factor" + FOR_KAFKA_MESSAGING_CREATED;
 
-    public static final String KAFKA_TOPIC_CREATE_TOPIC_FOR_NEW_COMMENT_TEMPLATE =
-            "Kafka Topic :: Create Kafka Topic (%s) for new comment to send messages to Post service";
+    // Kafka Topic constants
+    private static final String KAFKA_TOPIC_NEW_TOPIC_FOR = "Kafka Topic :: New topic for ";
 
-    public static final String KAFKA_TOPIC_DELETE_POST_TOPIC_FOR_NEW_COMMENT_TEMPLATE =
-            "Kafka Topic :: Create Kafka Topic (%s) for post deleting to send messages to Post service";
+    private static final String CREATED_TOPIC_NAME = " created (name:  %s)";
+
+    public static final String KAFKA_TOPIC_FOR_NEW_REGISTERED_USERS_CREATED_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "new registered users" + CREATED_TOPIC_NAME;
+
+    public static final String KAFKA_TOPIC_FOR_NEW_POSTS_CREATED_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "new posts" + CREATED_TOPIC_NAME;
+
+    public static final String KAFKA_TOPIC_FOR_NEW_COMMENTS_CREATED_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "new comments" + CREATED_TOPIC_NAME;
+
+    public static final String KAFKA_TOPIC_TO_DELETE_POSTS_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "deleting posts" + CREATED_TOPIC_NAME;
 
     private ConfigConstants() {
     }

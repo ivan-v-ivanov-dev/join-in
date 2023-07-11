@@ -49,7 +49,7 @@ public class KafkaConfig {
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
         DefaultKafkaProducerFactory<String, KafkaMessage> defaultKafkaProducerFactory = new DefaultKafkaProducerFactory<>(props);
-        log.info(KAFKA_CONFIG_CREATE_DEFAULT_PRODUCER_FACTORY_FOR_KAFKA_MESSAGE);
+        log.info(DEFAULT_PRODUCER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
 
         return defaultKafkaProducerFactory;
     }
@@ -57,7 +57,7 @@ public class KafkaConfig {
     @Bean
     public KafkaTemplate<String, KafkaMessage> kafkaTemplate() {
         KafkaTemplate<String, KafkaMessage> kafkaTemplate = new KafkaTemplate<>(producerFactory());
-        log.info(KAFKA_CONFIG_CREATE_KAFKA_TEMPLATE_FOR_KAFKA_MESSAGE);
+        log.info(KAFKA_TEMPLATE_FOR_KAFKA_MESSAGING_CREATED);
 
         return kafkaTemplate;
     }
@@ -77,7 +77,7 @@ public class KafkaConfig {
         props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, this.consumerValueTypePackages);
 
         DefaultKafkaConsumerFactory<String, KafkaMessage> kafkaConsumerFactory = new DefaultKafkaConsumerFactory<>(props);
-        log.info(KAFKA_CONFIG_CREATE_DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGE);
+        log.info(DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
 
         return kafkaConsumerFactory;
     }
@@ -87,7 +87,7 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, KafkaMessage> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        log.info(KAFKA_CONFIG_CREATE_CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY);
+        log.info(CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
 
         return factory;
     }

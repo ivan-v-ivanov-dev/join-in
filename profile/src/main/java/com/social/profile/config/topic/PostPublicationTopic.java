@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.TopicBuilder;
 
-import static com.social.profile.config.ConfigConstants.KAFKA_TOPIC_CREATE_TOPIC_FOR_NEW_POST_TEMPLATE;
+import static com.social.profile.config.ConfigConstants.KAFKA_TOPIC_FOR_NEW_POSTS_CREATED_TEMPLATE;
 
 @Configuration
 @EnableKafka
@@ -29,7 +29,7 @@ public class PostPublicationTopic {
                 .partitions(Integer.parseInt(partitions))
                 .replicas(Integer.parseInt(replicas))
                 .build();
-        log.info(String.format(KAFKA_TOPIC_CREATE_TOPIC_FOR_NEW_POST_TEMPLATE, topicName));
+        log.info(String.format(KAFKA_TOPIC_FOR_NEW_POSTS_CREATED_TEMPLATE, topicName));
 
         return postPublicationTopicForPostService;
     }

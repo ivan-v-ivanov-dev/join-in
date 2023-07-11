@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import static com.social.profile.config.ConfigConstants.CREATE_MONGO_CLIENT;
-import static com.social.profile.config.ConfigConstants.CREATE_MONGO_TEMPLATE;
+import static com.social.profile.config.ConfigConstants.MONGO_CLIENT_CREATED;
+import static com.social.profile.config.ConfigConstants.MONGO_TEMPLATE_CREATED;
 
 @Configuration
 @Slf4j
@@ -28,7 +28,7 @@ public class MongoConfig {
                 .applyConnectionString(new ConnectionString(mongoUri))
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
-        log.info(CREATE_MONGO_CLIENT);
+        log.info(MONGO_CLIENT_CREATED);
 
         return mongoClient;
     }
@@ -36,7 +36,7 @@ public class MongoConfig {
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
         MongoTemplate mongoTemplate = new MongoTemplate(mongoClient(), database);
-        log.info(CREATE_MONGO_TEMPLATE);
+        log.info(MONGO_TEMPLATE_CREATED);
 
         return mongoTemplate;
     }
