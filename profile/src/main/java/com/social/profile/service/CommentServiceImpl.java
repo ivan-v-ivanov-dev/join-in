@@ -24,8 +24,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void comment(String userIdentity, String comment) {
+    public void comment(String userIdentity, String postIdentity, String comment) {
         KafkaMessage createNewCommentMessage = CommentMessage.builder()
+                .postIdentity(postIdentity)
                 .userIdentity(userIdentity)
                 .content(comment)
                 .build();

@@ -92,8 +92,9 @@ public class ProfileController {
 
     @PostMapping("/comment")
     public String comment(@RequestParam("userIdentity") String userIdentity,
+                          @RequestParam("postIdentity") String postIdentity,
                           @RequestParam("comment") String comment) {
-        commentService.comment(userIdentity, comment);
+        commentService.comment(userIdentity, postIdentity, comment);
         return "redirect:/profile?identity=" + userIdentity;
     }
 

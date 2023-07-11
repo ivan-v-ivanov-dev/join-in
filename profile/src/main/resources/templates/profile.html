@@ -1193,6 +1193,9 @@
                                                             <input th:name="userIdentity"
                                                                    th:value="${profile.getIdentity()}"
                                                                    type="hidden"/>
+                                                            <input th:name="postIdentity"
+                                                                   th:value="${currentPost.getPostIdentity()}"
+                                                                   type="hidden"/>
                                                             <input class="form-control rounded"
                                                                    placeholder="Enter Your Comment"
                                                                    th:name="comment"
