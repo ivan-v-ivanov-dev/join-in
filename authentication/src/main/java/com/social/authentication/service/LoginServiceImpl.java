@@ -25,7 +25,7 @@ public class LoginServiceImpl implements LoginService {
 
     public LoginServiceImpl(LogRepository logRepository,
                             UserRepository userRepository,
-                            PasswordEncoderImpl passwordEncoder) {
+                            PasswordEncoder passwordEncoder) {
         this.logRepository = logRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
