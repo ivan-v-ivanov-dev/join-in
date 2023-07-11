@@ -36,6 +36,8 @@ spring:
           comment: post-comment-topic-for-post-service
         delete:
           post: delete-post-topic-for-post-service
+        edit:
+          post: edit-post-topic-for-post-service
     partitions: 3
     replicas: 1
     group:
@@ -55,9 +57,11 @@ login:
         name: Login-Service
     url: http://localhost:8081
 
+#Feign Post service
 post:
-  publications:
-    endpoint: /posts
+  find:
+    all: /posts
+    one: /post
   service:
     feign:
       client:
