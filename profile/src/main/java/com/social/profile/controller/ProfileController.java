@@ -72,6 +72,7 @@ public class ProfileController {
     public String profile(@RequestParam("identity") String identity, Model model) {
         model.addAttribute("profile", profileService.findByIdentity(identity));
         model.addAttribute("posts", profileService.findAllPosts(identity));
+        model.addAttribute("postsCount", profileService.findUserPostsCount(identity));
         return "profile";
     }
 

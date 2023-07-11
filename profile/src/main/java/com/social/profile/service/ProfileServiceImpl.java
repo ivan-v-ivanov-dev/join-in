@@ -47,6 +47,11 @@ public class ProfileServiceImpl implements ProfileService {
         return posts;
     }
 
+    @Override
+    public int findUserPostsCount(String identity) {
+        return postClient.findAuthorPostsCount(identity);
+    }
+
     private void calculatePostedAgo(PostDto postDto) {
         LocalDate now = LocalDate.now();
 

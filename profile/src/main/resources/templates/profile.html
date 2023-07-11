@@ -50,9 +50,6 @@
                     <h3 class="logo-title d-none d-sm-block" data-setting="app_name">Join In</h3>
                 </a>
                 <a class="sidebar-toggle" data-active="true" data-toggle="sidebar" href="javascript:void(0);">
-                    <div class="icon material-symbols-outlined iq-burger-menu">
-                        menu
-                    </div>
                 </a>
             </div>
             <div class="d-block d-md-none">
@@ -547,9 +544,10 @@
                     <a aria-expanded="false" aria-haspopup="true" class="d-flex align-items-center dropdown-toggle"
                        data-bs-toggle="dropdown" href="javascript:void(0);" id="drop-down-arrow">
                         <img alt="user" class="img-fluid rounded-circle me-3" loading="lazy"
-                             src="../assets/images/user/1.jpg">
+                             src="../assets/images/user/1.jpg" th:src="${profile.getProfileImage()}">
                         <div class="caption">
-                            <h6 class="mb-0 line-height">Bni Cyst</h6>
+                            <h6 class="mb-0 line-height"
+                                th:text="${profile.getFirstName()} + ' ' + ${profile.getLastName()}">Bni Cyst</h6>
                         </div>
                     </a>
                     <div aria-labelledby="drop-down-arrow" class="sub-drop dropdown-menu caption-menu">
@@ -661,7 +659,7 @@
                                         <ul class="social-data-block d-flex align-items-center justify-content-between list-inline p-0 m-0">
                                             <li class="text-center ps-3">
                                                 <h6>Posts</h6>
-                                                <p class="mb-0">690</p>
+                                                <p class="mb-0" th:text="${postsCount}">690</p>
                                             </li>
                                             <li class="text-center ps-3">
                                                 <h6>Followers</h6>

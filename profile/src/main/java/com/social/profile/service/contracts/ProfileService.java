@@ -11,4 +11,6 @@ public interface ProfileService {
     Profile save(Profile profile);
 
     List<PostDto> findAllPosts(String identity);
+
+    int findUserPostsCount(String identity);
 }
