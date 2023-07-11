@@ -2,18 +2,20 @@ package com.social.post.service.constants;
 
 public class LoggerConstants {
 
-    // Kafka Received Messages
-    public static final String NEW_POST_PUBLISHED_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
-            "Kafka Message for new publication posted by User %s received from Profile service (Kafka topic: %s)";
+    // Kafka received messages
+    private static final String KAFKA_MESSAGING = "Kafka Messaging :: ";
 
-    public static final String NEW_COMMENT_PUBLISHED_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
-            "Kafka Message for new comment posted by User %s received from Profile service (Kafka topic: %s)";
+    public static final String NEW_PUBLISHED_POST_MESSAGE_RECEIVED__TOPIC_NAME_AUTHOR_IDENTITY_TEMPLATE =
+            KAFKA_MESSAGING +  "New post published message received (Kafka topic: %s, Post user: %s)";
 
-    public static final String NEW_DELETE_POST_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
-            "Kafka Message for post deleting Post %s received from Profile service (Kafka topic: %s)";
+    public static final String NEW_PUBLISHED_COMMENT_MESSAGE_RECEIVED_TOPIC_NAME_AUTHOR_IDENTITY_TEMPLATE =
+            KAFKA_MESSAGING +  "New comment published message received (Kafka topic: %s, Comment user %s)";
+
+    public static final String NEW_DELETE_POST_MESSAGE_RECEIVED_TOPIC_NAME_POST_POST_IDENTITY_TEMPLATE =
+            KAFKA_MESSAGING +  "New delete post message received (Kafka topic: %s, Post identity: %s)";
 
     // Post create
-    public static final String NEW_POST_SAVED_IN_DATABASE_TEMPLATE =
+    public static final String NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE =
             "New Post saved in database (User identity %s, Post identity: %s)";
 
     private LoggerConstants() {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.social.post.service.constants.LoggerConstants.NEW_POST_SAVED_IN_DATABASE_TEMPLATE;
+import static com.social.post.service.constants.LoggerConstants.NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE;
 
 @Service
 @Slf4j
@@ -23,7 +23,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public void save(Post post) {
         postRepository.save(post);
-        log.info(String.format(NEW_POST_SAVED_IN_DATABASE_TEMPLATE, post.getAuthorIdentity(), post.getPostIdentity()));
+        log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE,
+                post.getAuthorIdentity(), post.getPostIdentity()));
     }
 
     @Override

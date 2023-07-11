@@ -46,8 +46,8 @@ public class PostListener {
     @KafkaListener(topics = "${spring.kafka.topic.name.post.publication}", groupId = "${spring.kafka.group.id}")
     public void postPublicationListener(KafkaMessage kafkaMessage) {
         PostMessage postMessage = (PostMessage) kafkaMessage;
-        log.info(String.format(NEW_POST_PUBLISHED_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
-                postMessage.getUserIdentity(), postPublicationTopic));
+        log.info(String.format(NEW_PUBLISHED_POST_MESSAGE_RECEIVED__TOPIC_NAME_AUTHOR_IDENTITY_TEMPLATE,
+                postPublicationTopic, postMessage.getUserIdentity()));
 
         LocalDate dateNow = LocalDate.now();
 
@@ -65,8 +65,8 @@ public class PostListener {
     @KafkaListener(topics = "${spring.kafka.topic.name.post.comment}", groupId = "${spring.kafka.group.id}")
     public void postCommentListener(KafkaMessage kafkaMessage) {
         CommentMessage commentMessage = (CommentMessage) kafkaMessage;
-        log.info(String.format(NEW_COMMENT_PUBLISHED_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
-                commentMessage.getUserIdentity(), postCommentTopic));
+        log.info(String.format(NEW_PUBLISHED_COMMENT_MESSAGE_RECEIVED_TOPIC_NAME_AUTHOR_IDENTITY_TEMPLATE,
+                postCommentTopic, commentMessage.getUserIdentity()));
 
         LocalDate dateNow = LocalDate.now();
 
@@ -85,8 +85,8 @@ public class PostListener {
     @KafkaListener(topics = "${spring.kafka.topic.name.delete.post}", groupId = "${spring.kafka.group.id}")
     public void deletePostListener(KafkaMessage kafkaMessage) {
         DeletePostMessage deletePostMessage = (DeletePostMessage) kafkaMessage;
-        log.info(String.format(NEW_DELETE_POST_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
-                deletePostMessage.getPostIdentity(), deletePostTopic));
+        log.info(String.format(NEW_DELETE_POST_MESSAGE_RECEIVED_TOPIC_NAME_POST_POST_IDENTITY_TEMPLATE,
+                deletePostTopic, deletePostMessage.getPostIdentity()));
 
         postService.delete(deletePostMessage.getPostIdentity());
     }
