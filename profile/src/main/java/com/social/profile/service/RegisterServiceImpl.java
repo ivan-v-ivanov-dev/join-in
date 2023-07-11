@@ -6,13 +6,10 @@ import com.social.profile.model.Profile;
 import com.social.profile.model.dto.RegisterDto;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.IdentityGenerator;
+import com.social.profile.service.contracts.KafkaMessageSender;
 import com.social.profile.service.contracts.RegisterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,44 +22,40 @@ import static com.social.profile.service.constants.LoggerConstants.NEW_REGISTERE
 public class RegisterServiceImpl implements RegisterService {
 
     private final IdentityGenerator identityGenerator;
-    private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
+    private final KafkaMessageSender kafkaMessageSender;
     private final ProfileRepository profileRepository;
-    @Value("${spring.kafka.topic.name.registered.user}")
-    private String kafkaTopicRegisteredUser;
+    private final String registeredUserTopic;
 
     public RegisterServiceImpl(IdentityGenerator identityGenerator,
-                               KafkaTemplate<String, KafkaMessage> kafkaTemplate,
-                               ProfileRepository profileRepository) {
+                               KafkaMessageSender kafkaMessageSender,
+                               ProfileRepository profileRepository,
+                               @Value("${spring.kafka.topic.name.registered.user}") String registeredUserTopic) {
         this.identityGenerator = identityGenerator;
-        this.kafkaTemplate = kafkaTemplate;
+        this.kafkaMessageSender = kafkaMessageSender;
+        this.registeredUserTopic = registeredUserTopic;
         this.profileRepository = profileRepository;
     }
-
 
     @Override
     public void register(RegisterDto registerDto) {
         String userIdentity = identityGenerator.generate(registerDto.getEmail());
 
-        KafkaMessage kafkaMessage = RegisteredUserMessage.builder()
+        KafkaMessage registeredUserMessage = RegisteredUserMessage.builder()
                 .identity(userIdentity)
                 .email(registerDto.getEmail())
                 .password(registerDto.getPassword())
                 .build();
 
-        Message<KafkaMessage> message = MessageBuilder
-                .withPayload(kafkaMessage)
-                .setHeader(KafkaHeaders.TOPIC, kafkaTopicRegisteredUser)
-                .build();
-
-        kafkaTemplate.send(message);
+        kafkaMessageSender.send(registeredUserMessage, registeredUserTopic);
         log.info(String.format(KAFKA_MESSAGE_FOR_NEW_REGISTERED_USER_CREATED_AND_SEND_TO_AUTHENTICATION_SERVICE_IN_TOPIC_TEMPLATE,
-                userIdentity, kafkaTopicRegisteredUser));
+                userIdentity, registeredUserTopic));
 
         Profile profile = Profile.builder()
                 .identity(userIdentity)
                 .firstName(registerDto.getFirstName())
                 .lastName(registerDto.getLastName())
-                .email(registerDto.getEmail()).joined(LocalDate.now())
+                .email(registerDto.getEmail())
+                .joined(LocalDate.now())
                 .build();
         profileRepository.save(profile);
         log.info(String.format(NEW_REGISTERED_USER_PROFILE_SAVED_IN_DATABASE_TEMPLATE, userIdentity));

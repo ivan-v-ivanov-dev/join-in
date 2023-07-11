@@ -15,18 +15,23 @@ import static com.social.profile.service.constants.LoggerConstants.KAFKA_MESSAGE
 public class CommentServiceImpl implements CommentService {
 
     private final KafkaMessageSender kafkaMessageSender;
-    @Value("${spring.kafka.topic.name.post.comment}")
-    private String topicName;
+    private final String postCommentTopic;
 
-    public CommentServiceImpl(KafkaMessageSender kafkaMessageSender) {
+    public CommentServiceImpl(KafkaMessageSender kafkaMessageSender,
+                              @Value("${spring.kafka.topic.name.post.comment}") String topicName) {
         this.kafkaMessageSender = kafkaMessageSender;
+        this.postCommentTopic = topicName;
     }
 
     @Override
     public void comment(String userIdentity, String comment) {
-        KafkaMessage kafkaMessage = CommentMessage.builder().userIdentity(userIdentity).content(comment).build();
+        KafkaMessage createNewCommentMessage = CommentMessage.builder()
+                .userIdentity(userIdentity)
+                .content(comment)
+                .build();
 
-        kafkaMessageSender.send(kafkaMessage, topicName);
-        log.info(String.format(KAFKA_MESSAGE_FOR_NEW_COMMENT_CREATED_AND_SEND_TO_POST_SERVICE_IN_TOPIC_TEMPLATE, userIdentity, topicName));
+        kafkaMessageSender.send(createNewCommentMessage, postCommentTopic);
+        log.info(String.format(KAFKA_MESSAGE_FOR_NEW_COMMENT_CREATED_AND_SEND_TO_POST_SERVICE_IN_TOPIC_TEMPLATE,
+                userIdentity, postCommentTopic));
     }
 }
