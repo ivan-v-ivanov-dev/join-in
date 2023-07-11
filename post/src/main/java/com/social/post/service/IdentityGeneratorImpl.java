@@ -6,8 +6,7 @@ import org.springframework.stereotype.Service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import static com.social.post.service.constants.IdentityConstants.SHA_512;
-import static com.social.post.service.constants.IdentityConstants.TO_HASH_STRING_TEMPLATE;
+import static com.social.post.service.constants.IdentityConstants.*;
 
 @Service
 public class IdentityGeneratorImpl implements IdentityGenerator {
@@ -21,7 +20,7 @@ public class IdentityGeneratorImpl implements IdentityGenerator {
             byte[] checksumBytes = messageDigest.digest(toHash.getBytes());
 
             for (byte currentByte : checksumBytes) {
-                checksum.append(String.format("%02x", currentByte));
+                checksum.append(String.format(CHECKSUM_TEMPLATE_FORMAT, currentByte));
             }
 
         } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
