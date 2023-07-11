@@ -18,6 +18,11 @@ public class PostController {
         this.postService = postService;
     }
 
+    @PostMapping("/post")
+    public Post findByPostIdentity(@RequestParam("postIdentity") String postIdentity) {
+        return postService.findByPostIdentity(postIdentity);
+    }
+
     @PostMapping("/posts")
     public List<Post> findAllPostsByAuthorIdentity(@RequestParam("authorIdentity") String authorIdentity) {
         return postService.findAllPostsByAuthorIdentity(authorIdentity);
