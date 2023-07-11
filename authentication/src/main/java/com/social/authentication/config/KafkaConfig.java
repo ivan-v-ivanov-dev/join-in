@@ -22,11 +22,11 @@ import java.util.Map;
 @Slf4j
 public class KafkaConfig {
 
-    private static final String KAFKA_CONFIG_CREATE_DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGE =
-            "Kafka Config :: Create Default Consumer Factory for Kafka Message";
+    private static final String DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
+            "Kafka Configuration :: Default Consumer Factory for Kafka messaging created";
 
-    private static final String KAFKA_CONFIG_CREATE_CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY =
-            "Kafka Config :: Create Concurrent Kafka Listener Container Factor for Kafka Message";
+    private static final String CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
+            "Kafka Configuration :: Concurrent Kafka Listener Container Factor for Kafka messaging created";
 
     @Value("${spring.kafka.consumer.bootstrap-servers}")
     private String consumerServer;
@@ -56,7 +56,7 @@ public class KafkaConfig {
         props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, this.consumerValueTypePackages);
 
         DefaultKafkaConsumerFactory<String, KafkaMessage> kafkaConsumerFactory = new DefaultKafkaConsumerFactory<>(props);
-        log.info(KAFKA_CONFIG_CREATE_DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGE);
+        log.info(DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
 
         return kafkaConsumerFactory;
     }
@@ -66,7 +66,7 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, KafkaMessage> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        log.info(KAFKA_CONFIG_CREATE_CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY);
+        log.info(CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
 
         return factory;
     }
