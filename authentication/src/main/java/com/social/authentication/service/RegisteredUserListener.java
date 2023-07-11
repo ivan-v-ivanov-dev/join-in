@@ -31,7 +31,7 @@ public class RegisteredUserListener {
     public void shopListener(KafkaMessage kafkaMessage) {
         RegisteredUserMessage registeredUserMessage = (RegisteredUserMessage) kafkaMessage;
         log.info(String.format(NEW_REGISTERED_USER_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
-                registeredUserMessage.getIdentity(), kafkaTopic));
+                kafkaTopic, registeredUserMessage.getIdentity()));
 
         User user = User.builder()
                 .email(registeredUserMessage.getEmail())
