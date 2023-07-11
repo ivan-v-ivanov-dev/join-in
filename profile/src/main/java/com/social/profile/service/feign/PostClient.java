@@ -16,4 +16,8 @@ public interface PostClient {
 
     @PostMapping("${post.find.one}")
     EditPostDto findByPostIdentity(@RequestParam(name = "postIdentity") String postIdentity);
+
+    @PostMapping("${post.author.posts.count}")
+    int findAuthorPostsCount(@RequestParam(name = "authorIdentity") String authorIdentity);
+
 }

@@ -62,6 +62,9 @@ post:
   find:
     all: /posts
     one: /post
+  author:
+    posts:
+      count: /author/posts/count
   service:
     feign:
       client:
