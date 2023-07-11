@@ -5,8 +5,7 @@ import com.social.authentication.model.User;
 import com.social.authentication.repository.LogRepository;
 import com.social.authentication.repository.UserRepository;
 import com.social.authentication.service.contract.LoginService;
-import com.social.authentication.util.PasswordEncoderImpl;
-import com.social.authentication.util.contracts.PasswordEncoder;
+import com.social.authentication.service.contract.PasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

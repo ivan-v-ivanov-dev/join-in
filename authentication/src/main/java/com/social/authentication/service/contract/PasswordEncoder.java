@@ -1,4 +1,4 @@
-package com.social.authentication.util.contracts;
+package com.social.authentication.service.contract;
 
 public interface PasswordEncoder {
 

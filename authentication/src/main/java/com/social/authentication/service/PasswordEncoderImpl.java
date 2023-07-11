@@ -1,10 +1,10 @@
-package com.social.authentication.util;
+package com.social.authentication.service;
 
-import com.social.authentication.util.contracts.PasswordEncoder;
+import com.social.authentication.service.contract.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class PasswordEncoderImpl implements PasswordEncoder {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;

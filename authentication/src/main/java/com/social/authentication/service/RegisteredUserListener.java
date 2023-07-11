@@ -1,8 +1,8 @@
 package com.social.authentication.service;
 
 import com.social.authentication.model.User;
+import com.social.authentication.service.contract.PasswordEncoder;
 import com.social.authentication.service.contract.RegisterService;
-import com.social.authentication.util.contracts.PasswordEncoder;
 import com.social.kafka.messages.RegisteredUserMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import lombok.extern.slf4j.Slf4j;
