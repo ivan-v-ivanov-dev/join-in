@@ -83,6 +83,21 @@ public class ProfileController {
         return "redirect:/profile?identity=" + userIdentity;
     }
 
+    @PostMapping("/post/view")
+    public String editPostView(@RequestParam("postIdentity") String postIdentity,
+                               Model model) {
+        model.addAttribute("post", postService.findByIdentity(postIdentity));
+        return "edit-post";
+    }
+
+    @PostMapping("/post/edit")
+    public String editPost(@RequestParam("userIdentity") String userIdentity,
+                           @RequestParam("postIdentity") String postIdentity,
+                           @RequestParam("newContent") String newContent) {
+        postService.edit(postIdentity, newContent);
+        return "redirect:/profile?identity=" + userIdentity;
+    }
+
     @PostMapping("/post/delete")
     public String deletePost(@RequestParam("userIdentity") String userIdentity,
                              @RequestParam("postIdentity") String postIdentity) {

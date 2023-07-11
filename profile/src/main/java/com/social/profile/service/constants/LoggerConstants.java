@@ -16,6 +16,9 @@ public class LoggerConstants {
     public static final String DELETE_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE =
             KAFKA_MESSAGING + "Delete post message created and send to Post service (Kafka topic: %s, Post identity %s)";
 
+    public static final String EDIT_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE =
+            KAFKA_MESSAGING + "Edit post message created and send to Post service (Kafka topic: %s, Post identity %s)";
+
     public static final String NEW_REGISTERED_USER_PROFILE_SAVED_IN_DATABASE_TEMPLATE =
             "New registered user saved in database (User identity: %s)";
 
