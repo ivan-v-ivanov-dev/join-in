@@ -2,6 +2,7 @@ package com.social.post.service;
 
 import com.social.kafka.messages.CommentMessage;
 import com.social.kafka.messages.DeletePostMessage;
+import com.social.kafka.messages.EditPostMessage;
 import com.social.kafka.messages.PostMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.model.Comment;
@@ -28,19 +29,22 @@ public class PostListener {
     private final String postPublicationTopic;
     private final String postCommentTopic;
     private final String deletePostTopic;
+    private final String editPostTopic;
 
     public PostListener(IdentityGenerator identityGenerator,
                         PostService postService,
                         CommentService commentService,
                         @Value("${spring.kafka.topic.name.post.publication}") String postPublicationTopic,
                         @Value("${spring.kafka.topic.name.post.comment}") String postCommentTopic,
-                        @Value("${spring.kafka.topic.name.delete.post}") String deletePostTopic) {
+                        @Value("${spring.kafka.topic.name.delete.post}") String deletePostTopic,
+                        @Value("${spring.kafka.topic.name.edit.post}") String editPostTopic) {
         this.identityGenerator = identityGenerator;
         this.postService = postService;
         this.commentService = commentService;
         this.postPublicationTopic = postPublicationTopic;
         this.postCommentTopic = postCommentTopic;
         this.deletePostTopic = deletePostTopic;
+        this.editPostTopic = editPostTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.post.publication}", groupId = "${spring.kafka.group.id}")
@@ -85,9 +89,18 @@ public class PostListener {
     @KafkaListener(topics = "${spring.kafka.topic.name.delete.post}", groupId = "${spring.kafka.group.id}")
     public void deletePostListener(KafkaMessage kafkaMessage) {
         DeletePostMessage deletePostMessage = (DeletePostMessage) kafkaMessage;
-        log.info(String.format(NEW_DELETE_POST_MESSAGE_RECEIVED_TOPIC_NAME_POST_POST_IDENTITY_TEMPLATE,
+        log.info(String.format(NEW_DELETE_POST_MESSAGE_RECEIVED_TOPIC_NAME_POST_IDENTITY_TEMPLATE,
                 deletePostTopic, deletePostMessage.getPostIdentity()));
 
         postService.delete(deletePostMessage.getPostIdentity());
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.name.edit.post}", groupId = "${spring.kafka.group.id}")
+    public void editPostListener(KafkaMessage kafkaMessage) {
+        EditPostMessage editPostMessage = (EditPostMessage) kafkaMessage;
+        log.info(String.format(NEW_EDIT_POST_MESSAGE_RECEIVED_TOPIC_NAME_POST_IDENTITY_TEMPLATE,
+                editPostTopic, editPostMessage.getPostIdentity()));
+
+        postService.edit(editPostMessage.getPostIdentity(), editPostMessage.getNewContent());
     }
 }

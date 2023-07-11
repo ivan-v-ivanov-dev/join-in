@@ -7,7 +7,11 @@ import java.util.List;
 public interface PostRepository {
     void save(Post post);
 
+    Post findByPostIdentity(String postIdentity);
+
     List<Post> findAllPostsByAuthorIdentity(String authorIdentity);
 
     void delete(String postIdentity);
+
+    void updateOne(String postIdentity, String newContent);
 }

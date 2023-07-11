@@ -21,6 +21,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Post findByPostIdentity(String postIdentity) {
+        return postRepository.findByPostIdentity(postIdentity);
+    }
+
+    @Override
     public void save(Post post) {
         postRepository.save(post);
         log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE,
@@ -35,5 +40,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(String postIdentity) {
         postRepository.delete(postIdentity);
+    }
+
+    @Override
+    public void edit(String postIdentity, String newContent) {
+        postRepository.updateOne(postIdentity, newContent);
     }
 }

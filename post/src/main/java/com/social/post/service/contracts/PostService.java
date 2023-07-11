@@ -7,7 +7,11 @@ import java.util.List;
 public interface PostService {
     void save(Post post);
 
+    Post findByPostIdentity(String postIdentity);
+
     List<Post> findAllPostsByAuthorIdentity(String authorIdentity);
 
     void delete(String postIdentity);
+
+    void edit(String postIdentity, String newContent);
 }

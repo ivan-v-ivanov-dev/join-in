@@ -5,6 +5,7 @@ import com.social.post.repository.contract.PostRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,18 +20,31 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
+    public Post findByPostIdentity(String postIdentity) {
+        Query query = new Query(Criteria.where("postIdentity").is(postIdentity));
+        return mongoTemplate.findOne(query, Post.class, "posts");
+    }
+
+    @Override
     public void save(Post post) {
-        mongoTemplate.save(post);
+        mongoTemplate.save(post, "posts");
     }
 
     @Override
     public List<Post> findAllPostsByAuthorIdentity(String authorIdentity) {
-        return mongoTemplate.find(new Query(Criteria.where("authorIdentity").is(authorIdentity)), Post.class, "posts");
+        Query query = new Query(Criteria.where("authorIdentity").is(authorIdentity));
+        return mongoTemplate.find(query, Post.class, "posts");
     }
 
     @Override
     public void delete(String postIdentity) {
         Query query = new Query(Criteria.where("postIdentity").is(postIdentity));
         mongoTemplate.remove(query, Post.class);
+    }
+
+    @Override
+    public void updateOne(String postIdentity, String newContent) {
+        Query query = new Query(Criteria.where("postIdentity").is(postIdentity));
+        mongoTemplate.updateFirst(query, Update.update("content", newContent), Post.class, "posts");
     }
 }
