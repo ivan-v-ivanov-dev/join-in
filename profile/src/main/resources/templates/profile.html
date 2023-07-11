@@ -974,23 +974,27 @@
                                                          data-bs-toggle="dropdown" role="button">more_horiz
                                                    </span>
                                                                             <div class="dropdown-menu m-0 p-0">
+                                                                                <form th:action="@{/post/view(postIdentity=${currentPost.getPostIdentity()})}"
+                                                                                      th:method="POST">
+                                                                                    <button class="dropdown-item p-3"
+                                                                                            type="submit">
 
-                                                                                <a class="dropdown-item p-3" href="#">
-
-                                                                                    <div class="d-flex align-items-top">
-                                                                                        <span class="material-symbols-outlined">edit</span>
-                                                                                        <div class="data ms-2">
-                                                                                            <h6>Edit Post</h6>
-                                                                                            <p class="mb-0">Update your
-                                                                                                post</p>
+                                                                                        <div class="d-flex align-items-top">
+                                                                                            <span class="material-symbols-outlined">edit</span>
+                                                                                            <div class="data ms-2">
+                                                                                                <h6>Edit Post</h6>
+                                                                                                <p class="mb-0">Update
+                                                                                                    your post</p>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
 
-                                                                                </a>
+                                                                                    </button>
+                                                                                </form>
 
                                                                                 <form th:action="@{/post/delete(userIdentity=${profile.getIdentity()}, postIdentity=${currentPost.getPostIdentity()})}"
                                                                                       th:method="post">
-                                                                                    <button class="dropdown-item p-3" type="submit">
+                                                                                    <button class="dropdown-item p-3"
+                                                                                            type="submit">
                                                                                         <div class="d-flex align-items-top">
                                                                                             <span class="material-symbols-outlined">delete</span>
 
