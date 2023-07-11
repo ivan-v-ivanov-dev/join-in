@@ -18,20 +18,21 @@ public class RegisteredUserListener {
 
     private final PasswordEncoder passwordEncoder;
     private final RegisterService registerService;
-    @Value("${spring.kafka.topic.name.registered.user}")
-    private String kafkaTopic;
+    private final String registeredUserTopic;
 
     public RegisteredUserListener(PasswordEncoder passwordEncoder,
-                                  RegisterService registerService) {
+                                  RegisterService registerService,
+                                  @Value("${spring.kafka.topic.name.registered.user}") String registeredUserTopic) {
         this.passwordEncoder = passwordEncoder;
         this.registerService = registerService;
+        this.registeredUserTopic = registeredUserTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.registered.user}", groupId = "${spring.kafka.group.id}")
     public void shopListener(KafkaMessage kafkaMessage) {
         RegisteredUserMessage registeredUserMessage = (RegisteredUserMessage) kafkaMessage;
         log.info(String.format(NEW_REGISTERED_USER_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
-                kafkaTopic, registeredUserMessage.getIdentity()));
+                registeredUserTopic, registeredUserMessage.getIdentity()));
 
         User user = User.builder()
                 .email(registeredUserMessage.getEmail())
