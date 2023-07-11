@@ -43,6 +43,9 @@ public class ConfigConstants {
     public static final String KAFKA_TOPIC_TO_DELETE_POSTS_TEMPLATE =
             KAFKA_TOPIC_NEW_TOPIC_FOR + "deleting posts" + CREATED_TOPIC_NAME;
 
+    public static final String KAFKA_TOPIC_FOR_EDIT_POST_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "edit post" + CREATED_TOPIC_NAME;
+
     private ConfigConstants() {
     }
 }
