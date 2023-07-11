@@ -17,8 +17,8 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.social.post.config.ConfigConstants.KAFKA_CONFIGURATION_CREATE_CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY;
-import static com.social.post.config.ConfigConstants.KAFKA_CONFIGURATION_CREATE_DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGE;
+import static com.social.post.config.ConfigConstants.CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED;
+import static com.social.post.config.ConfigConstants.DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED;
 
 @Configuration
 @EnableKafka
@@ -53,7 +53,7 @@ public class KafkaConfig {
         props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, this.consumerValueTypePackages);
 
         DefaultKafkaConsumerFactory<String, KafkaMessage> kafkaConsumerFactory = new DefaultKafkaConsumerFactory<>(props);
-        log.info(KAFKA_CONFIGURATION_CREATE_DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGE);
+        log.info(DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
 
         return kafkaConsumerFactory;
     }
@@ -63,7 +63,7 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, KafkaMessage> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        log.info(KAFKA_CONFIGURATION_CREATE_CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY);
+        log.info(CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
 
         return factory;
     }
