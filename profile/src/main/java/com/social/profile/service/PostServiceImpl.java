@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import static com.social.profile.service.constants.LoggerConstants.KAFKA_MESSAGE_FOR_DELETE_POST_CREATED_AND_SEND_TO_POST_SERVICE_IN_TOPIC_TEMPLATE;
-import static com.social.profile.service.constants.LoggerConstants.KAFKA_MESSAGE_FOR_NEW_POST_CREATED_AND_SEND_TO_POST_SERVICE_IN_TOPIC_TEMPLATE;
+import static com.social.profile.service.constants.LoggerConstants.DELETE_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE;
+import static com.social.profile.service.constants.LoggerConstants.NEW_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE;
 
 @Service
 @Slf4j
@@ -33,7 +33,7 @@ public class PostServiceImpl implements PostService {
         KafkaMessage postPublicationMessage = PostMessage.builder().userIdentity(userIdentity).content(content).build();
 
         kafkaMessageSender.send(postPublicationMessage, postPublicationTopic);
-        log.info(String.format(KAFKA_MESSAGE_FOR_NEW_POST_CREATED_AND_SEND_TO_POST_SERVICE_IN_TOPIC_TEMPLATE,
+        log.info(String.format(NEW_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE,
                 userIdentity, postPublicationTopic));
     }
 
@@ -42,7 +42,7 @@ public class PostServiceImpl implements PostService {
         KafkaMessage deletePostMessage = DeletePostMessage.builder().postIdentity(postIdentity).build();
 
         kafkaMessageSender.send(deletePostMessage, deletePostTopic);
-        log.info(String.format(KAFKA_MESSAGE_FOR_DELETE_POST_CREATED_AND_SEND_TO_POST_SERVICE_IN_TOPIC_TEMPLATE,
+        log.info(String.format(DELETE_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE,
                 postIdentity, deletePostTopic));
     }
 }
