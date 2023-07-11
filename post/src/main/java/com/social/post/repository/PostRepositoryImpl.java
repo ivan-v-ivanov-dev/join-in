@@ -47,4 +47,10 @@ public class PostRepositoryImpl implements PostRepository {
         Query query = new Query(Criteria.where("postIdentity").is(postIdentity));
         mongoTemplate.updateFirst(query, Update.update("content", newContent), Post.class, "posts");
     }
+
+    @Override
+    public int findAuthorPostsCount(String authorIdentity) {
+        Query query = new Query(Criteria.where("authorIdentity").is(authorIdentity));
+        return (int) mongoTemplate.count(query, Post.class, "posts");
+    }
 }

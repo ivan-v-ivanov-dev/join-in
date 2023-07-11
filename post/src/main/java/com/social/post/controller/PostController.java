@@ -23,9 +23,15 @@ public class PostController {
         return postService.findByPostIdentity(postIdentity);
     }
 
+    // TODO: Refactor endpoitn to /author/posts
     @PostMapping("/posts")
     public List<Post> findAllPostsByAuthorIdentity(@RequestParam("authorIdentity") String authorIdentity) {
         return postService.findAllPostsByAuthorIdentity(authorIdentity);
+    }
+
+    @PostMapping("/author/posts/count")
+    public int findAuthorPostsCount(@RequestParam("authorIdentity") String authorIdentity) {
+        return postService.findAuthorPostsCount(authorIdentity);
     }
 
     @GetMapping("/health")

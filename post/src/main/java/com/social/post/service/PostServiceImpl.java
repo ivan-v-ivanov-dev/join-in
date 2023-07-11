@@ -46,4 +46,9 @@ public class PostServiceImpl implements PostService {
     public void edit(String postIdentity, String newContent) {
         postRepository.updateOne(postIdentity, newContent);
     }
+
+    @Override
+    public int findAuthorPostsCount(String authorIdentity) {
+        return postRepository.findAuthorPostsCount(authorIdentity);
+    }
 }

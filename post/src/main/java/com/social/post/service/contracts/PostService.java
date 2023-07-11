@@ -14,4 +14,6 @@ public interface PostService {
     void delete(String postIdentity);
 
     void edit(String postIdentity, String newContent);
+
+    int findAuthorPostsCount(String authorIdentity);
 }

@@ -14,4 +14,6 @@ public interface PostRepository {
     void delete(String postIdentity);
 
     void updateOne(String postIdentity, String newContent);
+
+    int findAuthorPostsCount(String authorIdentity);
 }
