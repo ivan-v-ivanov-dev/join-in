@@ -1,5 +1,5 @@
 package com.social.profile.service.contracts;
 
-public interface IdentityGeneratorService {
+public interface IdentityGenerator {
     String generate(String email);
 }

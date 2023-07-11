@@ -5,7 +5,7 @@ import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.profile.model.Profile;
 import com.social.profile.model.dto.RegisterDto;
 import com.social.profile.repository.contract.ProfileRepository;
-import com.social.profile.service.contracts.IdentityGeneratorService;
+import com.social.profile.service.contracts.IdentityGenerator;
 import com.social.profile.service.contracts.RegisterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,13 +24,13 @@ import static com.social.profile.service.constants.LoggerConstants.NEW_REGISTERE
 @Slf4j
 public class RegisterServiceImpl implements RegisterService {
 
-    private final IdentityGeneratorService identityGenerator;
+    private final IdentityGenerator identityGenerator;
     private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
     private final ProfileRepository profileRepository;
     @Value("${spring.kafka.topic.name.registered.user}")
     private String kafkaTopicRegisteredUser;
 
-    public RegisterServiceImpl(IdentityGeneratorService identityGenerator,
+    public RegisterServiceImpl(IdentityGenerator identityGenerator,
                                KafkaTemplate<String, KafkaMessage> kafkaTemplate,
                                ProfileRepository profileRepository) {
         this.identityGenerator = identityGenerator;
