@@ -29,17 +29,17 @@ public class GraphController {
     }
 
     @PostMapping("/post/likes")
-    public long findLikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
+    public int findLikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
         return profileService.findLikesAPostProfileCount(postIdentity);
     }
 
     @PostMapping("/post/dislikes")
-    public long findDislikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
+    public int findDislikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
         return profileService.findDislikesAPostProfileCount(postIdentity);
     }
 
     @PostMapping("/post/stars")
-    public long findStarsAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
+    public int findStarsAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
         return profileService.findStarsAPostProfileCount(postIdentity);
     }
 

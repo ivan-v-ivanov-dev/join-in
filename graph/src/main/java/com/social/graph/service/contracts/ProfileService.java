@@ -9,9 +9,9 @@ public interface ProfileService {
 
     List<Profile> findFriendsByProfileIdentity(String identity);
 
-    long findLikesAPostProfileCount(String postIdentity);
+    int findLikesAPostProfileCount(String postIdentity);
 
-    long findDislikesAPostProfileCount(String postIdentity);
+    int findDislikesAPostProfileCount(String postIdentity);
 
-    long findStarsAPostProfileCount(String postIdentity);
+    int findStarsAPostProfileCount(String postIdentity);
 }
