@@ -12,4 +12,6 @@ public interface ProfileService {
     long findLikesAPostProfileCount(String postIdentity);
 
     long findDislikesAPostProfileCount(String postIdentity);
+
+    long findStarsAPostProfileCount(String postIdentity);
 }
