@@ -7,8 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-import static com.social.graph.repository.queries.Queries.FIND_HOW_MANY_PROFILES_LIKE_THE_POST_TEMPLATE;
-import static com.social.graph.repository.queries.Queries.FIND_THE_FRIENDS_FOR_A_PROFILE_BY_PROFILE_IDENTITY_TEMPLATE;
+import static com.social.graph.repository.queries.Queries.*;
 
 public interface ProfileRepository extends Neo4jRepository<Profile, String> {
 
@@ -19,4 +18,7 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
 
     @Query(FIND_HOW_MANY_PROFILES_LIKE_THE_POST_TEMPLATE)
     long findLikesAPostProfileCount(@Param("postIdentity") String postIdentity);
+
+    @Query(FIND_HOW_MANY_PROFILES_DISLIKE_THE_POST_TEMPLATE)
+    long findDislikesAPostProfileCount(@Param("postIdentity") String postIdentity);
 }

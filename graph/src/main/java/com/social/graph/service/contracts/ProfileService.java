@@ -10,4 +10,6 @@ public interface ProfileService {
     List<Profile> findFriendsByProfileIdentity(String identity);
 
     long findLikesAPostProfileCount(String postIdentity);
+
+    long findDislikesAPostProfileCount(String postIdentity);
 }
