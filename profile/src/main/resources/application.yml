@@ -70,3 +70,18 @@ post:
       client:
         name: Post-Service
     url: http://localhost:8082
+
+#Feign Graph service
+graph:
+  find:
+    likes:
+      count: /post/likes
+    dislikes:
+      count: /post/dislikes
+    stars:
+      count: /post/stars
+  service:
+    feign:
+      client:
+        name: Graph-Service
+    url: http://localhost:8083
