@@ -5,6 +5,8 @@ import com.social.graph.repository.ProfileRepository;
 import com.social.graph.service.contracts.ProfileService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProfileServiceImpl implements ProfileService {
 
@@ -17,5 +19,10 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Profile findByIdentity(String identity) {
         return profileRepository.findByIdentity(identity);
+    }
+
+    @Override
+    public List<Profile> findFriendsByProfileIdentity(String identity) {
+        return profileRepository.findFriendsByProfileIdentity(identity);
     }
 }

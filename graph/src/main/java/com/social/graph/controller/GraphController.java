@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class GraphController {
 
@@ -17,8 +19,13 @@ public class GraphController {
     }
 
     @PostMapping("/")
-    public Profile profiles(@RequestParam("identity") String identity) {
+    public Profile profile(@RequestParam("identity") String identity) {
         return profileService.findByIdentity(identity);
+    }
+
+    @PostMapping("/friends")
+    public List<Profile> findFriends(@RequestParam("identity") String identity) {
+        return profileService.findFriendsByProfileIdentity(identity);
     }
 
     @GetMapping("/health")
