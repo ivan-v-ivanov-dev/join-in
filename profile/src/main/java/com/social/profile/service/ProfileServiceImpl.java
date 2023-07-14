@@ -4,6 +4,7 @@ import com.social.profile.model.Profile;
 import com.social.profile.model.dto.PostDto;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.ProfileService;
+import com.social.profile.service.feign.GraphClient;
 import com.social.profile.service.feign.PostClient;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,14 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository profileRepository;
     private final PostClient postClient;
+    private final GraphClient graphClient;
 
     public ProfileServiceImpl(ProfileRepository profileRepository,
-                              PostClient postClient) {
+                              PostClient postClient,
+                              GraphClient graphClient) {
         this.profileRepository = profileRepository;
         this.postClient = postClient;
+        this.graphClient = graphClient;
     }
 
     @Override
@@ -42,6 +46,16 @@ public class ProfileServiceImpl implements ProfileService {
             Profile profile = profileRepository.findByIdentity(post.getAuthorIdentity());
             post.setAuthor(String.format(AUTHOR_NAME_TEMPLATE, profile.getFirstName(), profile.getLastName()));
             post.setAuthorPhoto(profile.getProfileImage());
+
+            int likes = graphClient.findLikesAPostProfileCount(post.getPostIdentity());
+            post.setLikes(likes);
+
+            int dislikes = graphClient.findDislikesAPostProfileCount(post.getPostIdentity());
+            post.setDislikes(dislikes);
+
+            int stars = graphClient.findStarsAPostProfileCount(post.getPostIdentity());
+            post.setStars(stars);
+
         });
         posts.forEach(this::calculatePostedAgo);
         return posts;

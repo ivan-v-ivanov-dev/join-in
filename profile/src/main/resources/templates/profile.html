@@ -1080,7 +1080,8 @@
                                                                         <div class="dropdown">
                                                    <span aria-expanded="false" aria-haspopup="true"
                                                          class="dropdown-toggle" data-bs-toggle="dropdown"
-                                                         role="button">
+                                                         role="button"
+                                                         th:text="${currentPost.getLikes()} + ' Likes'">
                                                        140 Likes
                                                    </span>
                                                                             <div class="dropdown-menu">
@@ -1106,7 +1107,8 @@
                                                                         <div class="dropdown">
                                                    <span aria-expanded="false" aria-haspopup="true"
                                                          class="dropdown-toggle" data-bs-toggle="dropdown"
-                                                         role="button">
+                                                         role="button"
+                                                         th:text="${currentPost.getDislikes()} + ' Dislikes'">
                                                        140 Dislikes
                                                    </span>
                                                                             <div class="dropdown-menu">
@@ -1132,7 +1134,8 @@
                                                                         <div class="dropdown">
                                                    <span aria-expanded="false" aria-haspopup="true"
                                                          class="dropdown-toggle" data-bs-toggle="dropdown"
-                                                         role="button">
+                                                         role="button"
+                                                         th:text="${currentPost.getStars()} + ' Stars'">
                                                        140 Stars
                                                    </span>
                                                                             <div class="dropdown-menu">
