@@ -1,27 +1,25 @@
 package com.social.graph.model;
 
 import lombok.*;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.Relationship;
+import org.springframework.data.neo4j.core.schema.Property;
 
-import java.util.List;
+import java.io.Serializable;
 
-@Node("Profile")
+@Node(labels = "Profile")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Profile {
+public class Profile implements Serializable {
 
     @Id
-    @GeneratedValue
-    private long id;
-
+    @Property("identity")
     private String identity;
 
-    @Relationship(type = "FRIEND", direction = Relationship.Direction.OUTGOING)
-    List<Profile> friends;
+    @Property("name")
+    private String name;
+
 }
