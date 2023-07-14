@@ -33,4 +33,13 @@ public class PostDto implements Serializable {
 
     @Transient
     private String postedAgo;
+
+    @Transient
+    private int likes;
+
+    @Transient
+    private int dislikes;
+
+    @Transient
+    private int stars;
 }
