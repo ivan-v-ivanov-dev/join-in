@@ -25,4 +25,9 @@ public class ProfileServiceImpl implements ProfileService {
     public List<Profile> findFriendsByProfileIdentity(String identity) {
         return profileRepository.findFriendsByProfileIdentity(identity);
     }
+
+    @Override
+    public long findLikesAPostProfileCount(String postIdentity) {
+        return profileRepository.findLikesAPostProfileCount(postIdentity);
+    }
 }

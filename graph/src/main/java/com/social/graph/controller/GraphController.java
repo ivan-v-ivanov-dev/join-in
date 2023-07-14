@@ -28,6 +28,11 @@ public class GraphController {
         return profileService.findFriendsByProfileIdentity(identity);
     }
 
+    @PostMapping("/post/likes")
+    public long findLikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
+        return profileService.findLikesAPostProfileCount(postIdentity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Graph service is HEALTHY!";

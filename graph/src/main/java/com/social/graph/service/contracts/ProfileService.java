@@ -8,4 +8,6 @@ public interface ProfileService {
     Profile findByIdentity(String identity);
 
     List<Profile> findFriendsByProfileIdentity(String identity);
+
+    long findLikesAPostProfileCount(String postIdentity);
 }
