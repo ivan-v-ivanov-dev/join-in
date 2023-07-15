@@ -1,16 +1,15 @@
 package com.social.kafka.messages;
 
-import com.social.kafka.messages.contract.KafkaMessage;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Builder
-public class RegisteredUserMessage implements KafkaMessage {
-
-    private String identity;
+public class RegisteredUserMessage extends NewUserMessage {
 
     private String email;
 
