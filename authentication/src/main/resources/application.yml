@@ -33,6 +33,8 @@ spring:
           user: registered-user-topic-for-authentication-service
     group:
       id: group-id
+    producer:
+      bootstrap-servers: localhost:9092
 
 #Exclude Kafka logging
 logging:
