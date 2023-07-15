@@ -23,7 +23,7 @@ public class NewUserTopic {
     private String replicas;
 
     @Bean
-    public NewTopic newUserTopic() {
+    public NewTopic newUserTopicForMultipleServices() {
         NewTopic registeredUserTopicForProfileService = TopicBuilder
                 .name(topicName)
                 .partitions(Integer.parseInt(partitions))
