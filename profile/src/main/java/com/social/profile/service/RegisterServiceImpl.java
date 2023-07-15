@@ -1,7 +1,6 @@
 package com.social.profile.service;
 
 import com.social.kafka.messages.RegisteredUserMessage;
-import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.profile.model.Profile;
 import com.social.profile.model.dto.RegisterDto;
 import com.social.profile.repository.contract.ProfileRepository;
@@ -40,11 +39,10 @@ public class RegisterServiceImpl implements RegisterService {
     public void register(RegisterDto registerDto) {
         String userIdentity = identityGenerator.generate(registerDto.getEmail());
 
-        KafkaMessage registeredUserMessage = RegisteredUserMessage.builder()
-                .identity(userIdentity)
-                .email(registerDto.getEmail())
-                .password(registerDto.getPassword())
-                .build();
+        RegisteredUserMessage registeredUserMessage = new RegisteredUserMessage();
+        registeredUserMessage.setIdentity(userIdentity);
+        registeredUserMessage.setEmail(registerDto.getEmail());
+        registeredUserMessage.setPassword(registerDto.getPassword());
 
         kafkaMessageSender.send(registeredUserMessage, registeredUserTopic);
         log.info(String.format(NEW_REGISTERED_USER_CREATED_AND_SEND_TO_AUTHENTICATION_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE,
