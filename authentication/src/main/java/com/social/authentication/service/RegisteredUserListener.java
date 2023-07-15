@@ -29,7 +29,7 @@ public class RegisteredUserListener {
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.registered.user}", groupId = "${spring.kafka.group.id}")
-    public void shopListener(KafkaMessage kafkaMessage) {
+    public void listener(KafkaMessage kafkaMessage) {
         RegisteredUserMessage registeredUserMessage = (RegisteredUserMessage) kafkaMessage;
         log.info(String.format(NEW_REGISTERED_USER_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
                 registeredUserTopic, registeredUserMessage.getIdentity()));
