@@ -18,6 +18,9 @@ public class KafkaConstants {
     public static final String KAFKA_TEMPLATE_FOR_KAFKA_MESSAGING_CREATED =
             KAFKA_CONFIGURATIONS + "Kafka Template" + FOR_KAFKA_MESSAGING_CREATED;
 
+    public static final String KAFKA_TOPIC_FOR_NEW_USER_CREATED_TEMPLATE =
+            "Kafka Topic :: New topic for new user created (name:  %s)";
+
     private KafkaConstants() {
     }
 }

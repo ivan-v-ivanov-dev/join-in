@@ -31,10 +31,14 @@ spring:
       name:
         registered:
           user: registered-user-topic-for-authentication-service
+        new:
+          user: new-user-topic
     group:
       id: group-id
     producer:
       bootstrap-servers: localhost:9092
+    partitions: 3
+    replicas: 1
 
 #Exclude Kafka logging
 logging:
