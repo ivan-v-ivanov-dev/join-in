@@ -84,4 +84,4 @@ reaction:
     feign:
       client:
         name: Graph-Service
-    url: http://localhost:8083
+    url: http://localhost:8084
