@@ -1,4 +1,4 @@
-package com.social.graph.service.constants;
+package com.social.relationship.service.constants;
 
 public class LoggerConstants {
 

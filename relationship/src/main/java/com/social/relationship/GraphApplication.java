@@ -1,4 +1,4 @@
-package com.social.graph;
+package com.social.relationship;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

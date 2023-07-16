@@ -1,6 +1,6 @@
-package com.social.graph.service.contracts;
+package com.social.relationship.service.contracts;
 
-import com.social.graph.model.Profile;
+import com.social.relationship.model.Profile;
 
 import java.util.List;
 

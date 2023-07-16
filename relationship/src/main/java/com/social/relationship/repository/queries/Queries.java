@@ -1,4 +1,4 @@
-package com.social.graph.repository.queries;
+package com.social.relationship.repository.queries;
 
 public class Queries {
 

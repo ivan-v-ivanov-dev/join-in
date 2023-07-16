@@ -1,4 +1,4 @@
-package com.social.graph.model;
+package com.social.relationship.model;
 
 import lombok.*;
 import org.springframework.data.neo4j.core.schema.Id;

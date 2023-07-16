@@ -1,7 +1,7 @@
-package com.social.graph.controller;
+package com.social.relationship.controller;
 
-import com.social.graph.model.Profile;
-import com.social.graph.service.contracts.ProfileService;
+import com.social.relationship.model.Profile;
+import com.social.relationship.service.contracts.ProfileService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

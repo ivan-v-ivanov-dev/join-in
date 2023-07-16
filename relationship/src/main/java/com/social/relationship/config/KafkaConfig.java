@@ -1,4 +1,4 @@
-package com.social.graph.config;
+package com.social.relationship.config;
 
 import com.social.kafka.messages.contract.KafkaMessage;
 import lombok.extern.slf4j.Slf4j;

@@ -1,8 +1,8 @@
-package com.social.graph.service;
+package com.social.relationship.service;
 
-import com.social.graph.model.Profile;
-import com.social.graph.repository.ProfileRepository;
-import com.social.graph.service.contracts.ProfileService;
+import com.social.relationship.model.Profile;
+import com.social.relationship.repository.ProfileRepository;
+import com.social.relationship.service.contracts.ProfileService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
