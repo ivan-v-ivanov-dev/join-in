@@ -16,4 +16,6 @@ public interface PostRepository {
     void updateOne(String postIdentity, String newContent);
 
     int findAuthorPostsCount(String authorIdentity);
+
+    void createNewUserCollection(String identity);
 }

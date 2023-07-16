@@ -1,9 +1,6 @@
 package com.social.post.service;
 
-import com.social.kafka.messages.CommentMessage;
-import com.social.kafka.messages.DeletePostMessage;
-import com.social.kafka.messages.EditPostMessage;
-import com.social.kafka.messages.PostMessage;
+import com.social.kafka.messages.*;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.model.Comment;
 import com.social.post.model.Post;
@@ -30,6 +27,7 @@ public class PostListener {
     private final String postCommentTopic;
     private final String deletePostTopic;
     private final String editPostTopic;
+    private final String newUserTopic;
 
     public PostListener(IdentityGenerator identityGenerator,
                         PostService postService,
@@ -37,7 +35,8 @@ public class PostListener {
                         @Value("${spring.kafka.topic.name.post.publication}") String postPublicationTopic,
                         @Value("${spring.kafka.topic.name.post.comment}") String postCommentTopic,
                         @Value("${spring.kafka.topic.name.delete.post}") String deletePostTopic,
-                        @Value("${spring.kafka.topic.name.edit.post}") String editPostTopic) {
+                        @Value("${spring.kafka.topic.name.edit.post}") String editPostTopic,
+                        @Value("${spring.kafka.topic.name.new.user}") String newUserTopic) {
         this.identityGenerator = identityGenerator;
         this.postService = postService;
         this.commentService = commentService;
@@ -45,6 +44,7 @@ public class PostListener {
         this.postCommentTopic = postCommentTopic;
         this.deletePostTopic = deletePostTopic;
         this.editPostTopic = editPostTopic;
+        this.newUserTopic = newUserTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.post.publication}", groupId = "${spring.kafka.group.id}")
@@ -102,5 +102,14 @@ public class PostListener {
                 editPostTopic, editPostMessage.getPostIdentity()));
 
         postService.edit(editPostMessage.getPostIdentity(), editPostMessage.getNewContent());
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")
+    public void listener(KafkaMessage kafkaMessage) {
+        NewUserMessage newUserMessage = (NewUserMessage) kafkaMessage;
+        log.info(String.format(NEW_USER_MESSAGE_RECEIVED_FROM_AUTHENTICATION_SERVICE_TEMPLATE,
+                newUserTopic, newUserMessage.getIdentity()));
+
+        postService.createNewUserCollection(newUserMessage.getIdentity());
     }
 }

@@ -17,6 +17,9 @@ public class LoggerConstants {
     public static final String NEW_EDIT_POST_MESSAGE_RECEIVED_TOPIC_NAME_POST_IDENTITY_TEMPLATE =
             KAFKA_MESSAGING +  "New edit post message received (Kafka topic: %s, Post identity: %s)";
 
+    public static final String NEW_USER_MESSAGE_RECEIVED_FROM_AUTHENTICATION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING +  "New user message received from Authentication service (Kafka topic: %s, User identity: %s)";
+
     // Post create
     public static final String NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE =
             "New Post saved in database (User identity %s, Post identity: %s)";

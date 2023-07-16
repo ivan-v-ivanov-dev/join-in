@@ -53,4 +53,9 @@ public class PostRepositoryImpl implements PostRepository {
         Query query = new Query(Criteria.where("authorIdentity").is(authorIdentity));
         return (int) mongoTemplate.count(query, Post.class, "posts");
     }
+
+    @Override
+    public void createNewUserCollection(String identity) {
+        mongoTemplate.createCollection(identity);
+    }
 }

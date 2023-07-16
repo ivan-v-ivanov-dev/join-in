@@ -16,4 +16,6 @@ public interface PostService {
     void edit(String postIdentity, String newContent);
 
     int findAuthorPostsCount(String authorIdentity);
+
+    void createNewUserCollection(String identity);
 }

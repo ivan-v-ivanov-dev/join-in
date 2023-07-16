@@ -41,6 +41,8 @@ spring:
           post: delete-post-topic
         edit:
           post: edit-post-topic
+        new:
+          user: new-user-topic
     group:
       id: group-id
 

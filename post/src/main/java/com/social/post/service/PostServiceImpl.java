@@ -51,4 +51,9 @@ public class PostServiceImpl implements PostService {
     public int findAuthorPostsCount(String authorIdentity) {
         return postRepository.findAuthorPostsCount(authorIdentity);
     }
+
+    @Override
+    public void createNewUserCollection(String identity) {
+        postRepository.createNewUserCollection(identity);
+    }
 }
