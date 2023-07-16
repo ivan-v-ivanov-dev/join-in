@@ -4,4 +4,5 @@ public interface ProfileService {
 
     int findLikesAPostProfileCount(String postIdentity);
 
+    int findDislikesAPostProfileCount(String postIdentity);
 }

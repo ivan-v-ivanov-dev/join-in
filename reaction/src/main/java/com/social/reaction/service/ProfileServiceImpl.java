@@ -18,4 +18,8 @@ public class ProfileServiceImpl implements ProfileService {
         return profileRepository.findLikesAPostProfileCount(postIdentity);
     }
 
+    @Override
+    public int findDislikesAPostProfileCount(String postIdentity) {
+        return profileRepository.findDislikesAPostProfileCount(postIdentity);
+    }
 }

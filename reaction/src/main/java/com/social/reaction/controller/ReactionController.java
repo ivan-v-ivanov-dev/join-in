@@ -20,6 +20,12 @@ public class ReactionController {
         return profileService.findLikesAPostProfileCount(postIdentity);
     }
 
+    @PostMapping("/post/dislikes")
+    public int findDislikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
+        return profileService.findDislikesAPostProfileCount(postIdentity);
+    }
+
+
     @GetMapping("/health")
     public String health() {
         return "Reaction service is HEALTHY!";
