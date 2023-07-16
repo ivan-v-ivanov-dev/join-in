@@ -12,5 +12,7 @@ public class EditPostMessage implements KafkaMessage {
 
     private String postIdentity;
 
+    private String auhthorIdentity;
+
     private String newContent;
 }
