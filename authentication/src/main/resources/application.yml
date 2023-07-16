@@ -10,7 +10,7 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/storage
     password: root
 
-  # Kafka Listener Topic
+  # Kafka
   kafka:
     consumer:
       auto-offset-reset: earliest
