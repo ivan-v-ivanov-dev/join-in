@@ -30,14 +30,14 @@ spring:
     topic:
       name:
         registered:
-          user: registered-user-topic-for-authentication-service
+          user: registered-user-topic
         post:
-          publication: post-publication-topic-for-post-service
-          comment: post-comment-topic-for-post-service
+          publication: post-publication-topic
+          comment: post-comment-topic
         delete:
-          post: delete-post-topic-for-post-service
+          post: delete-post-topic
         edit:
-          post: edit-post-topic-for-post-service
+          post: edit-post-topic
     partitions: 3
     replicas: 1
     group:

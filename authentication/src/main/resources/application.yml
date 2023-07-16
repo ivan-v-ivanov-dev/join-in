@@ -30,7 +30,7 @@ spring:
     topic:
       name:
         registered:
-          user: registered-user-topic-for-authentication-service
+          user: registered-user-topic
         new:
           user: new-user-topic
     group:
