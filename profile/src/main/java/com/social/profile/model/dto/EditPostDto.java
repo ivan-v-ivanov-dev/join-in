@@ -18,8 +18,6 @@ public class EditPostDto {
     @JsonIgnore
     private String id;
 
-    private String authorIdentity;
-
     @Transient
     private String author;
 
