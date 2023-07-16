@@ -30,6 +30,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-core</artifactId>
+            <version>4.0.5</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.social</groupId>
             <artifactId>kafka</artifactId>
             <version>0.0.1-SNAPSHOT</version>
@@ -39,18 +45,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.social</groupId>
-            <artifactId>kafka</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-ogm-core</artifactId>
-            <version>4.0.5</version>
         </dependency>
 
         <dependency>
