@@ -968,7 +968,7 @@
                                                          data-bs-toggle="dropdown" role="button">more_horiz
                                                    </span>
                                                                             <div class="dropdown-menu m-0 p-0">
-                                                                                <form th:action="@{/post/view(postIdentity=${currentPost.getPostIdentity()})}"
+                                                                                <form th:action="@{/post/view(postIdentity=${currentPost.getPostIdentity()}, authorIdentity=${profile.getIdentity()})}"
                                                                                       th:method="POST">
                                                                                     <button class="dropdown-item p-3"
                                                                                             type="submit">
