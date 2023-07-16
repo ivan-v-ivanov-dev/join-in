@@ -9,4 +9,6 @@ public interface ProfileService {
     List<Profile> findFriendsByProfileIdentity(String identity);
 
     void save(Profile profile);
+
+    int findFriendCountByProfileIdentity(String identity);
 }

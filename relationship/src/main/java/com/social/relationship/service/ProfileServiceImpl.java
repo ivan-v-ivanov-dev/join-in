@@ -25,4 +25,9 @@ public class ProfileServiceImpl implements ProfileService {
     public void save(Profile profile) {
         profileRepository.save(profile);
     }
+
+    @Override
+    public int findFriendCountByProfileIdentity(String identity) {
+        return profileRepository.findFriendCountByProfileIdentity(identity);
+    }
 }

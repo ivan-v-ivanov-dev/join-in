@@ -4,6 +4,7 @@ import com.social.relationship.model.Profile;
 import com.social.relationship.service.contracts.ProfileService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,6 +21,11 @@ public class RelationController {
     @PostMapping("/profile/friends")
     public List<Profile> findFriendsByProfileIdentity(String identity) {
         return profileService.findFriendsByProfileIdentity(identity);
+    }
+
+    @PostMapping("/profile/friends/count")
+    public int findFriendCountByProfileIdentity(@RequestParam("identity") String identity) {
+        return profileService.findFriendCountByProfileIdentity(identity);
     }
 
     @GetMapping("/health")
