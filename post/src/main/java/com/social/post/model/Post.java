@@ -19,9 +19,6 @@ public class Post implements Serializable {
     @Id
     private String id;
 
-    @Indexed
-    private String authorIdentity;
-
     @Indexed(unique = true)
     private String postIdentity;
 
