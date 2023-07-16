@@ -83,5 +83,16 @@ reaction:
   service:
     feign:
       client:
-        name: Graph-Service
+        name: Reaction-Service
     url: http://localhost:8084
+
+#Feign Relationship service
+relationship:
+  find:
+    friends:
+      count: /profile/friends/count
+  service:
+    feign:
+      client:
+        name: Relationship-Service
+    url: http://localhost:8083
