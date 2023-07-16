@@ -71,8 +71,8 @@ post:
         name: Post-Service
     url: http://localhost:8082
 
-#Feign Graph service
-graph:
+#Feign Reaction service
+reaction:
   find:
     likes:
       count: /post/likes

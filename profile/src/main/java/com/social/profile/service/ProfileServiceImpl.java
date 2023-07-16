@@ -4,7 +4,7 @@ import com.social.profile.model.Profile;
 import com.social.profile.model.dto.PostDto;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.ProfileService;
-import com.social.profile.service.feign.GraphClient;
+import com.social.profile.service.feign.ReactionClient;
 import com.social.profile.service.feign.PostClient;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +19,14 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository profileRepository;
     private final PostClient postClient;
-    private final GraphClient graphClient;
+    private final ReactionClient reactionClient;
 
     public ProfileServiceImpl(ProfileRepository profileRepository,
                               PostClient postClient,
-                              GraphClient graphClient) {
+                              ReactionClient reactionClient) {
         this.profileRepository = profileRepository;
         this.postClient = postClient;
-        this.graphClient = graphClient;
+        this.reactionClient = reactionClient;
     }
 
     @Override
@@ -47,13 +47,13 @@ public class ProfileServiceImpl implements ProfileService {
             post.setAuthor(String.format(AUTHOR_NAME_TEMPLATE, profile.getFirstName(), profile.getLastName()));
             post.setAuthorPhoto(profile.getProfileImage());
 
-            int likes = graphClient.findLikesAPostProfileCount(post.getPostIdentity());
+            int likes = reactionClient.findLikesAPostProfileCount(post.getPostIdentity());
             post.setLikes(likes);
 
-            int dislikes = graphClient.findDislikesAPostProfileCount(post.getPostIdentity());
+            int dislikes = reactionClient.findDislikesAPostProfileCount(post.getPostIdentity());
             post.setDislikes(dislikes);
 
-            int stars = graphClient.findStarsAPostProfileCount(post.getPostIdentity());
+            int stars = reactionClient.findStarsAPostProfileCount(post.getPostIdentity());
             post.setStars(stars);
 
         });

@@ -4,15 +4,15 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "${graph.service.feign.client.name}", url = "${graph.service.url}")
-public interface GraphClient {
+@FeignClient(name = "${reaction.service.feign.client.name}", url = "${reactionv.service.url}")
+public interface ReactionClient {
 
-    @PostMapping("${graph.find.likes.count}")
+    @PostMapping("${reaction.find.likes.count}")
     int findLikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity);
 
-    @PostMapping("${graph.find.dislikes.count}")
+    @PostMapping("${reaction.find.dislikes.count}")
     int findDislikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity);
 
-    @PostMapping("${graph.find.stars.count}")
+    @PostMapping("${reaction.find.stars.count}")
     int findStarsAPostProfileCount(@RequestParam("postIdentity") String postIdentity);
 }
