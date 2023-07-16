@@ -17,28 +17,8 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile findByIdentity(String identity) {
-        return profileRepository.findByIdentity(identity);
-    }
-
-    @Override
     public List<Profile> findFriendsByProfileIdentity(String identity) {
         return profileRepository.findFriendsByProfileIdentity(identity);
-    }
-
-    @Override
-    public int findLikesAPostProfileCount(String postIdentity) {
-        return profileRepository.findLikesAPostProfileCount(postIdentity);
-    }
-
-    @Override
-    public int findDislikesAPostProfileCount(String postIdentity) {
-        return profileRepository.findDislikesAPostProfileCount(postIdentity);
-    }
-
-    @Override
-    public int findStarsAPostProfileCount(String postIdentity) {
-        return profileRepository.findStarsAPostProfileCount(postIdentity);
     }
 
     @Override
