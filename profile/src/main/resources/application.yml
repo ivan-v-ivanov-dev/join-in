@@ -60,7 +60,7 @@ login:
 #Feign Post service
 post:
   find:
-    all: /posts
+    all: /author/posts
     one: /post
   author:
     posts:

@@ -43,9 +43,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public EditPostDto findByIdentity(String postIdentity) {
-        EditPostDto post = postClient.findByPostIdentity(postIdentity);
-        Profile profile = profileRepository.findByIdentity(post.getAuthorIdentity());
+    public EditPostDto findByIdentity(String postIdentity, String authorIdentity) {
+        EditPostDto post = postClient.findByPostIdentity(postIdentity, authorIdentity);
+        Profile profile = profileRepository.findByIdentity(authorIdentity);
         post.setAuthor(String.format(AUTHOR_NAME_TEMPLATE, profile.getFirstName(), profile.getLastName()));
         post.setAuthorPhoto(profile.getProfileImage());
         return post;
@@ -61,8 +61,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void edit(String postIdentity, String newContent) {
-        KafkaMessage editPostMessage = EditPostMessage.builder().postIdentity(postIdentity).newContent(newContent).build();
+    public void edit(String postIdentity, String authorIdentity, String newContent) {
+        KafkaMessage editPostMessage = EditPostMessage.builder()
+                .postIdentity(postIdentity)
+                .auhthorIdentity(authorIdentity)
+                .newContent(newContent).build();
 
         kafkaMessageSender.send(editPostMessage, editPostTopic);
         log.info(String.format(EDIT_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE,
@@ -70,8 +73,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void delete(String postIdentity) {
-        KafkaMessage deletePostMessage = DeletePostMessage.builder().postIdentity(postIdentity).build();
+    public void delete(String postIdentity, String authorIdentity) {
+        KafkaMessage deletePostMessage = DeletePostMessage.builder()
+                .postIdentity(postIdentity)
+                .authorIdentity(authorIdentity)
+                .build();
 
         kafkaMessageSender.send(deletePostMessage, deletePostTopic);
         log.info(String.format(DELETE_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE,

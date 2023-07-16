@@ -86,8 +86,10 @@ public class ProfileController {
 
     @PostMapping("/post/view")
     public String editPostView(@RequestParam("postIdentity") String postIdentity,
+                               @RequestParam("authorIdentity") String authorIdentity,
                                Model model) {
-        model.addAttribute("post", postService.findByIdentity(postIdentity));
+        model.addAttribute("authorIdentity", authorIdentity);
+        model.addAttribute("post", postService.findByIdentity(postIdentity, authorIdentity));
         return "edit-post";
     }
 
@@ -95,14 +97,14 @@ public class ProfileController {
     public String editPost(@RequestParam("userIdentity") String userIdentity,
                            @RequestParam("postIdentity") String postIdentity,
                            @RequestParam("newContent") String newContent) {
-        postService.edit(postIdentity, newContent);
+        postService.edit(postIdentity, userIdentity, newContent);
         return "redirect:/profile?identity=" + userIdentity;
     }
 
     @PostMapping("/post/delete")
     public String deletePost(@RequestParam("userIdentity") String userIdentity,
                              @RequestParam("postIdentity") String postIdentity) {
-        postService.delete(postIdentity);
+        postService.delete(postIdentity, userIdentity);
         return "redirect:/profile?identity=" + userIdentity;
     }
 

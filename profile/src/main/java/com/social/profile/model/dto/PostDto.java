@@ -17,8 +17,6 @@ public class PostDto implements Serializable {
 
     private String id;
 
-    private String authorIdentity;
-
     @Transient
     private String author;
 
