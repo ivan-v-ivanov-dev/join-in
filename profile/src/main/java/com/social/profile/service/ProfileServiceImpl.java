@@ -43,7 +43,7 @@ public class ProfileServiceImpl implements ProfileService {
     public List<PostDto> findAllPosts(String identity) {
         List<PostDto> posts = postClient.findAllPostsByAuthorIdentity(identity);
         posts.forEach(post -> {
-            Profile profile = profileRepository.findByIdentity(post.getAuthorIdentity());
+            Profile profile = profileRepository.findByIdentity(identity);
             post.setAuthor(String.format(AUTHOR_NAME_TEMPLATE, profile.getFirstName(), profile.getLastName()));
             post.setAuthorPhoto(profile.getProfileImage());
 
