@@ -14,4 +14,6 @@ public interface ProfileService {
     int findDislikesAPostProfileCount(String postIdentity);
 
     int findStarsAPostProfileCount(String postIdentity);
+
+    void save(Profile profile);
 }

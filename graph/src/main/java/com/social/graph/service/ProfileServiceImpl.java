@@ -40,4 +40,9 @@ public class ProfileServiceImpl implements ProfileService {
     public int findStarsAPostProfileCount(String postIdentity) {
         return profileRepository.findStarsAPostProfileCount(postIdentity);
     }
+
+    @Override
+    public void save(Profile profile) {
+        profileRepository.save(profile);
+    }
 }
