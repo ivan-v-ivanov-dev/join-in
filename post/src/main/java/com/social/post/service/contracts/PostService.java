@@ -5,15 +5,15 @@ import com.social.post.model.Post;
 import java.util.List;
 
 public interface PostService {
-    void save(Post post);
+    void save(Post post, String authorIdentity);
 
-    Post findByPostIdentity(String postIdentity);
+    Post findByPostIdentity(String postIdentity, String authorIdentity);
 
     List<Post> findAllPostsByAuthorIdentity(String authorIdentity);
 
-    void delete(String postIdentity);
+    void delete(String postIdentity, String authorIdentity);
 
-    void edit(String postIdentity, String newContent);
+    void edit(String postIdentity, String newContent, String authorIdentity);
 
     int findAuthorPostsCount(String authorIdentity);
 

@@ -19,12 +19,12 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public Post findByPostIdentity(@RequestParam("postIdentity") String postIdentity) {
-        return postService.findByPostIdentity(postIdentity);
+    public Post findByPostIdentity(@RequestParam("postIdentity") String postIdentity,
+                                   @RequestParam(name = "authorIdentity") String authorIdentity) {
+        return postService.findByPostIdentity(postIdentity, authorIdentity);
     }
 
-    // TODO: Refactor endpoitn to /author/posts
-    @PostMapping("/posts")
+    @PostMapping("/author/posts")
     public List<Post> findAllPostsByAuthorIdentity(@RequestParam("authorIdentity") String authorIdentity) {
         return postService.findAllPostsByAuthorIdentity(authorIdentity);
     }

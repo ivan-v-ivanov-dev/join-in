@@ -56,14 +56,13 @@ public class PostListener {
         LocalDate dateNow = LocalDate.now();
 
         Post post = Post.builder()
-                .authorIdentity(postMessage.getUserIdentity())
                 .postIdentity(identityGenerator
                         .generate(postMessage.getUserIdentity(), postMessage.getContent(), dateNow.toString()))
                 .content(postMessage.getContent())
                 .postDate(dateNow)
                 .build();
 
-        postService.save(post);
+        postService.save(post, postMessage.getUserIdentity());
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.post.comment}", groupId = "${spring.kafka.group.id}")
@@ -92,7 +91,7 @@ public class PostListener {
         log.info(String.format(NEW_DELETE_POST_MESSAGE_RECEIVED_TOPIC_NAME_POST_IDENTITY_TEMPLATE,
                 deletePostTopic, deletePostMessage.getPostIdentity()));
 
-        postService.delete(deletePostMessage.getPostIdentity());
+        postService.delete(deletePostMessage.getPostIdentity(), deletePostMessage.getAuthorIdentity());
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.edit.post}", groupId = "${spring.kafka.group.id}")
@@ -101,7 +100,7 @@ public class PostListener {
         log.info(String.format(NEW_EDIT_POST_MESSAGE_RECEIVED_TOPIC_NAME_POST_IDENTITY_TEMPLATE,
                 editPostTopic, editPostMessage.getPostIdentity()));
 
-        postService.edit(editPostMessage.getPostIdentity(), editPostMessage.getNewContent());
+        postService.edit(editPostMessage.getPostIdentity(), editPostMessage.getNewContent(), editPostMessage.getAuhthorIdentity());
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")

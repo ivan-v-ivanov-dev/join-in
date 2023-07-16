@@ -5,17 +5,17 @@ import com.social.post.model.Post;
 import java.util.List;
 
 public interface PostRepository {
-    void save(Post post);
+    void save(Post post, String collection);
 
-    Post findByPostIdentity(String postIdentity);
+    Post findByPostIdentity(String postIdentity, String collection);
 
-    List<Post> findAllPostsByAuthorIdentity(String authorIdentity);
+    List<Post> findAllPostsByAuthorIdentity(String collection);
 
-    void delete(String postIdentity);
+    void delete(String postIdentity, String collection);
 
-    void updateOne(String postIdentity, String newContent);
+    void updateOne(String postIdentity, String newContent, String collection);
 
-    int findAuthorPostsCount(String authorIdentity);
+    int findAuthorPostsCount(String collection);
 
-    void createNewUserCollection(String identity);
+    void createNewUserCollection(String collection);
 }

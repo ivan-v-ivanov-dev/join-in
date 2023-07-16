@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.social.post.service.constants.CollectionTemplateConstant.COLLECTION_TEMPLATE;
 import static com.social.post.service.constants.LoggerConstants.NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE;
 
 @Service
@@ -21,39 +22,39 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findByPostIdentity(String postIdentity) {
-        return postRepository.findByPostIdentity(postIdentity);
+    public Post findByPostIdentity(String postIdentity, String authorIdentity) {
+        return postRepository.findByPostIdentity(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
     }
 
     @Override
-    public void save(Post post) {
-        postRepository.save(post);
+    public void save(Post post, String authorIdentity) {
+        postRepository.save(post, String.format(COLLECTION_TEMPLATE, authorIdentity));
         log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE,
-                post.getAuthorIdentity(), post.getPostIdentity()));
+                authorIdentity, post.getPostIdentity()));
     }
 
     @Override
     public List<Post> findAllPostsByAuthorIdentity(String authorIdentity) {
-        return postRepository.findAllPostsByAuthorIdentity(authorIdentity);
+        return postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, authorIdentity));
     }
 
     @Override
-    public void delete(String postIdentity) {
-        postRepository.delete(postIdentity);
+    public void delete(String postIdentity, String authorIdentity) {
+        postRepository.delete(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
     }
 
     @Override
-    public void edit(String postIdentity, String newContent) {
-        postRepository.updateOne(postIdentity, newContent);
+    public void edit(String postIdentity, String newContent, String authorIdentity) {
+        postRepository.updateOne(postIdentity, newContent, String.format(COLLECTION_TEMPLATE, authorIdentity));
     }
 
     @Override
     public int findAuthorPostsCount(String authorIdentity) {
-        return postRepository.findAuthorPostsCount(authorIdentity);
+        return postRepository.findAuthorPostsCount(String.format(COLLECTION_TEMPLATE, authorIdentity));
     }
 
     @Override
     public void createNewUserCollection(String identity) {
-        postRepository.createNewUserCollection(identity);
+        postRepository.createNewUserCollection(String.format(COLLECTION_TEMPLATE, identity));
     }
 }
