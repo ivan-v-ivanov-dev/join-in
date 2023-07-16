@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "${reaction.service.feign.client.name}", url = "${reactionv.service.url}")
+@FeignClient(name = "${reaction.service.feign.client.name}", url = "${reaction.service.url}")
 public interface ReactionClient {
 
     @PostMapping("${reaction.find.likes.count}")
