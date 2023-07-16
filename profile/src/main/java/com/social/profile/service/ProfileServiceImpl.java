@@ -6,6 +6,7 @@ import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.ProfileService;
 import com.social.profile.service.feign.ReactionClient;
 import com.social.profile.service.feign.PostClient;
+import com.social.profile.service.feign.RelationshipClient;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,13 +21,16 @@ public class ProfileServiceImpl implements ProfileService {
     private final ProfileRepository profileRepository;
     private final PostClient postClient;
     private final ReactionClient reactionClient;
+    private final RelationshipClient relationshipClient;
 
     public ProfileServiceImpl(ProfileRepository profileRepository,
                               PostClient postClient,
-                              ReactionClient reactionClient) {
+                              ReactionClient reactionClient,
+                              RelationshipClient relationshipClient) {
         this.profileRepository = profileRepository;
         this.postClient = postClient;
         this.reactionClient = reactionClient;
+        this.relationshipClient = relationshipClient;
     }
 
     @Override
@@ -64,6 +68,11 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public int findUserPostsCount(String identity) {
         return postClient.findAuthorPostsCount(identity);
+    }
+
+    @Override
+    public int findFriendsCount(String identity) {
+        return relationshipClient.findFriendCountByProfileIdentity(identity);
     }
 
     private void calculatePostedAgo(PostDto postDto) {

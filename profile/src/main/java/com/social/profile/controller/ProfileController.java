@@ -73,6 +73,7 @@ public class ProfileController {
         model.addAttribute("profile", profileService.findByIdentity(identity));
         model.addAttribute("posts", profileService.findAllPosts(identity));
         model.addAttribute("postsCount", profileService.findUserPostsCount(identity));
+        model.addAttribute("friendsCount", profileService.findFriendsCount(identity));
         return "profile";
     }
 

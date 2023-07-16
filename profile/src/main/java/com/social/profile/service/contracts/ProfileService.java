@@ -13,4 +13,6 @@ public interface ProfileService {
     List<PostDto> findAllPosts(String identity);
 
     int findUserPostsCount(String identity);
+
+    int findFriendsCount(String identity);
 }
