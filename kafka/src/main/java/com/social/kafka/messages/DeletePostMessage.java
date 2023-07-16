@@ -11,4 +11,6 @@ import lombok.*;
 public class DeletePostMessage implements KafkaMessage {
 
     private String postIdentity;
+
+    private String authorIdentity;
 }
