@@ -31,3 +31,8 @@ spring:
           user: new-user-topic
     group:
       id: group-id
+
+#Exclude Kafka logging
+logging:
+  level:
+    org.apache: OFF
