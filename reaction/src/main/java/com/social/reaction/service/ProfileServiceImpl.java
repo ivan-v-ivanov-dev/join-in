@@ -1,5 +1,6 @@
 package com.social.reaction.service;
 
+import com.social.reaction.model.Profile;
 import com.social.reaction.repository.ProfileRepository;
 import com.social.reaction.service.contracts.ProfileService;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,10 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public int findStarsAPostProfileCount(String postIdentity) {
         return profileRepository.findStarsAPostProfileCount(postIdentity);
+    }
+
+    @Override
+    public void save(Profile profile) {
+        profileRepository.save(profile);
     }
 }
