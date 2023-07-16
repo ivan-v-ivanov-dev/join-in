@@ -1,31 +1,18 @@
 package com.social.relationship.controller;
 
-import com.social.relationship.model.Profile;
 import com.social.relationship.service.contracts.ProfileService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-public class GraphController {
+public class RelationController {
 
     private final ProfileService profileService;
 
-    public GraphController(ProfileService profileService) {
+    public RelationController(ProfileService profileService) {
         this.profileService = profileService;
-    }
-
-    @PostMapping("/")
-    public Profile profile(@RequestParam("identity") String identity) {
-        return profileService.findByIdentity(identity);
-    }
-
-    @PostMapping("/friends")
-    public List<Profile> findFriends(@RequestParam("identity") String identity) {
-        return profileService.findFriendsByProfileIdentity(identity);
     }
 
     @PostMapping("/post/likes")
