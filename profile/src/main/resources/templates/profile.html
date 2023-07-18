@@ -544,7 +544,7 @@
                     <a aria-expanded="false" aria-haspopup="true" class="d-flex align-items-center dropdown-toggle"
                        data-bs-toggle="dropdown" href="javascript:void(0);" id="drop-down-arrow">
                         <img alt="user" class="img-fluid rounded-circle me-3" loading="lazy"
-                             src="../assets/images/user/1.jpg" th:src="${profile.getProfileImage()}">
+                             src="../assets/images/user/1.jpg" th:src="${profileImage}">
                         <div class="caption">
                             <h6 class="mb-0 line-height"
                                 th:text="${profile.getFirstName()} + ' ' + ${profile.getLastName()}">Bni Cyst</h6>
@@ -627,7 +627,7 @@
                                     <img alt="profile-bg" class="rounded img-fluid"
                                          loading="lazy"
                                          src="../assets/images/page-img/profile-bg1.jpg"
-                                         th:src="${profile.getBackgroundImage()}">
+                                         th:src="${backgroundImage}">
                                     <ul class="header-nav list-inline d-flex flex-wrap justify-end p-0 m-0">
                                         <li><a class="material-symbols-outlined" href="#">
                                             edit
@@ -643,7 +643,7 @@
                                     <div class="profile-img">
                                         <img alt="profile-img" class="avatar-130 img-fluid"
                                              loading="lazy" src="../assets/images/user/11.png"
-                                             th:src="${profile.getProfileImage()}"/>
+                                             th:src="${profileImage}"/>
                                     </div>
                                     <div class="profile-detail">
                                         <h3 class=""
@@ -714,7 +714,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <ul class="profile-img-gallary p-0 m-0 list-unstyled">
-                                                    <li class="" th:each="currentImage: ${profile.getAlbumImages()}">
+                                                    <li class="" th:each="currentImage: ${albumImages}">
                                                         <a data-fslightbox="gallery"
                                                            href="../assets/images/page-img/g1.jpg">
                                                             <img alt="photo-profile"
@@ -807,7 +807,7 @@
                                                     <div class="user-img">
                                                         <img alt="userimg" class="avatar-60 rounded-circle"
                                                              src="../assets/images/user/1.jpg"
-                                                             th:src="${profile.getProfileImage()}">
+                                                             th:src="${profileImage}">
                                                     </div>
 
                                                     <form action="#" class="post-text ms-3 w-100 "
@@ -843,7 +843,7 @@
                                                                              class="avatar-60 rounded-circle img-fluid"
                                                                              loading="lazy"
                                                                              src="../assets/images/user/1.jpg"
-                                                                             th:src="${profile.getProfileImage()}">
+                                                                             th:src="${profileImage}">
                                                                     </div>
 
                                                                     <input th:name="userIdentity"
