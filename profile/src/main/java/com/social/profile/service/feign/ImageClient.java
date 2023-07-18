@@ -9,4 +9,7 @@ public interface ImageClient {
 
     @PostMapping("${image.profile}")
     String findProfileImage(@RequestParam("userIdentity") String userIdentity);
+
+    @PostMapping("${image.background}")
+    String findProfileBackgroundImage(@RequestParam("userIdentity") String userIdentity);
 }

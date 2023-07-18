@@ -104,4 +104,5 @@ image:
       client:
         name: Image-Service
     url: http://localhost:8085
-  profile: "/profile-image"
+  profile: /profile-image
+  background: /profile-background-image

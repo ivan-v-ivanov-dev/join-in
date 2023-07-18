@@ -4,8 +4,9 @@ import com.social.profile.model.Profile;
 import com.social.profile.model.dto.PostDto;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.ProfileService;
-import com.social.profile.service.feign.ReactionClient;
+import com.social.profile.service.feign.ImageClient;
 import com.social.profile.service.feign.PostClient;
+import com.social.profile.service.feign.ReactionClient;
 import com.social.profile.service.feign.RelationshipClient;
 import org.springframework.stereotype.Service;
 
@@ -22,20 +23,26 @@ public class ProfileServiceImpl implements ProfileService {
     private final PostClient postClient;
     private final ReactionClient reactionClient;
     private final RelationshipClient relationshipClient;
+    private final ImageClient imageClient;
 
     public ProfileServiceImpl(ProfileRepository profileRepository,
                               PostClient postClient,
                               ReactionClient reactionClient,
-                              RelationshipClient relationshipClient) {
+                              RelationshipClient relationshipClient,
+                              ImageClient imageClient) {
         this.profileRepository = profileRepository;
         this.postClient = postClient;
         this.reactionClient = reactionClient;
         this.relationshipClient = relationshipClient;
+        this.imageClient = imageClient;
     }
 
     @Override
     public Profile findByIdentity(String identity) {
-        return profileRepository.findByIdentity(identity);
+        Profile profile = profileRepository.findByIdentity(identity);
+        profile.setProfileImage(imageClient.findProfileImage(identity));
+        profile.setBackgroundImage(imageClient.findProfileBackgroundImage(identity));
+        return profile;
     }
 
     @Override
@@ -47,7 +54,7 @@ public class ProfileServiceImpl implements ProfileService {
     public List<PostDto> findAllPosts(String identity) {
         List<PostDto> posts = postClient.findAllPostsByAuthorIdentity(identity);
         posts.forEach(post -> {
-            Profile profile = profileRepository.findByIdentity(identity);
+            Profile profile = this.findByIdentity(identity);
             post.setAuthor(String.format(AUTHOR_NAME_TEMPLATE, profile.getFirstName(), profile.getLastName()));
             post.setAuthorPhoto(profile.getProfileImage());
 
