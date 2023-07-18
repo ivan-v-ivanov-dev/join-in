@@ -18,12 +18,12 @@ public class RelationController {
     }
 
     @PostMapping("/profile/friends")
-    public List<String> findFriendsByProfileIdentity(String identity) {
+    public List<String> findFriends(@RequestParam("identity") String identity) {
         return profileService.findFriendsByProfileIdentity(identity);
     }
 
     @PostMapping("/profile/friends/count")
-    public int findFriendCountByProfileIdentity(@RequestParam("identity") String identity) {
+    public int findFriendCount(@RequestParam("identity") String identity) {
         return profileService.findFriendCountByProfileIdentity(identity);
     }
 
