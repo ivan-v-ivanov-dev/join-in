@@ -3,6 +3,7 @@ package com.social.profile.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,8 +20,10 @@ public class Profile {
     @Id
     private String id;
 
+    @Transient
     private String profileImage;
 
+    @Transient
     private String backgroundImage;
 
     @Indexed(unique = true)
