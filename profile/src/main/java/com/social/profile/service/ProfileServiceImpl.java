@@ -39,11 +39,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Profile findByIdentity(String identity) {
-        Profile profile = profileRepository.findByIdentity(identity);
-        profile.setProfileImage(imageClient.findProfileImage(identity));
-        profile.setBackgroundImage(imageClient.findProfileBackgroundImage(identity));
-        profile.setAlbumImages(imageClient.findProfileAlbumImage(identity));
-        return profile;
+        return profileRepository.findByIdentity(identity);
     }
 
     @Override

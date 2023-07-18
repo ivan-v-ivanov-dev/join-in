@@ -20,17 +20,20 @@ public class ProfileController {
     private final ProfileService profileService;
     private final PostService postService;
     private final CommentService commentService;
+    private final ImageService imageService;
 
     public ProfileController(LoginService loginService,
                              RegisterService registerService,
                              ProfileService profileService,
                              PostService postService,
-                             CommentService commentService) {
+                             CommentService commentService,
+                             ImageService imageService) {
         this.loginService = loginService;
         this.registerService = registerService;
         this.profileService = profileService;
         this.postService = postService;
         this.commentService = commentService;
+        this.imageService = imageService;
     }
 
     @GetMapping("/")
@@ -71,6 +74,9 @@ public class ProfileController {
     @GetMapping("/profile")
     public String profile(@RequestParam("identity") String identity, Model model) {
         model.addAttribute("profile", profileService.findByIdentity(identity));
+        model.addAttribute("profileImage", imageService.findProfileImage(identity));
+        model.addAttribute("backgroundImage", imageService.findProfileBackgroundImage(identity));
+        model.addAttribute("albumImages", imageService.findProfileAlbumImage(identity));
         model.addAttribute("posts", profileService.findAllPosts(identity));
         model.addAttribute("postsCount", profileService.findUserPostsCount(identity));
         model.addAttribute("friendsCount", profileService.findFriendsCount(identity));
