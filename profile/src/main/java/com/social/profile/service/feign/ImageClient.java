@@ -4,6 +4,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @FeignClient(name = "${image.service.feign.client.name}", url = "${image.service.url}")
 public interface ImageClient {
 
@@ -12,4 +14,7 @@ public interface ImageClient {
 
     @PostMapping("${image.background}")
     String findProfileBackgroundImage(@RequestParam("userIdentity") String userIdentity);
+
+    @PostMapping("${album.images}")
+    List<String> findProfileAlbumImage(@RequestParam("userIdentity") String userIdentity);
 }

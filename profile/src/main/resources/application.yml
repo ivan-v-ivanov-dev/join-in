@@ -106,3 +106,5 @@ image:
     url: http://localhost:8085
   profile: /profile-image
   background: /profile-background-image
+album:
+  images: /profile-album-images
