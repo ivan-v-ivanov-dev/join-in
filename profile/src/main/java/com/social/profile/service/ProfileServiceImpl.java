@@ -77,7 +77,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public int findFriendsCount(String identity) {
-        return relationshipClient.findFriendCountByProfileIdentity(identity);
+        return relationshipClient.findFriendCount(identity);
     }
 
     private void calculatePostedAgo(PostDto postDto) {
