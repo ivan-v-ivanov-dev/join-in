@@ -9,6 +9,7 @@ import com.social.profile.model.dto.EditPostDto;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.KafkaMessageSender;
 import com.social.profile.service.contracts.PostService;
+import com.social.profile.service.feign.ImageClient;
 import com.social.profile.service.feign.PostClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,7 @@ public class PostServiceImpl implements PostService {
 
     private final KafkaMessageSender kafkaMessageSender;
     private final PostClient postClient;
+    private final ImageClient imageClient;
     private final ProfileRepository profileRepository;
     private final String postPublicationTopic;
     private final String deletePostTopic;
@@ -30,12 +32,14 @@ public class PostServiceImpl implements PostService {
 
     public PostServiceImpl(KafkaMessageSender kafkaMessageSender,
                            PostClient postClient,
+                           ImageClient imageClient,
                            ProfileRepository profileRepository,
                            @Value("${spring.kafka.topic.name.post.publication}") String postPublicationTopic,
                            @Value("${spring.kafka.topic.name.delete.post}") String deletePostTopic,
                            @Value("${spring.kafka.topic.name.edit.post}") String editPostTopic) {
         this.kafkaMessageSender = kafkaMessageSender;
         this.postClient = postClient;
+        this.imageClient = imageClient;
         this.profileRepository = profileRepository;
         this.postPublicationTopic = postPublicationTopic;
         this.deletePostTopic = deletePostTopic;
@@ -47,7 +51,7 @@ public class PostServiceImpl implements PostService {
         EditPostDto post = postClient.findByPostIdentity(postIdentity, authorIdentity);
         Profile profile = profileRepository.findByIdentity(authorIdentity);
         post.setAuthor(String.format(AUTHOR_NAME_TEMPLATE, profile.getFirstName(), profile.getLastName()));
-        post.setAuthorPhoto(profile.getProfileImage());
+        post.setAuthorPhoto(imageClient.findProfileImage(authorIdentity));
         return post;
     }
 
