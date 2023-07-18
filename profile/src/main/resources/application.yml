@@ -91,6 +91,8 @@ relationship:
   find:
     friends:
       count: /profile/friends/count
+      for:
+        user: /profile/friends
   service:
     feign:
       client:
