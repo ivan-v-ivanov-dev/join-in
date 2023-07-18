@@ -5,8 +5,9 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import static com.social.post.repository.constants.Constants.BACKGROUND_IMAGE_FIELD;
-import static com.social.post.repository.constants.Constants.PROFILE_IMAGE_FIELD;
+import java.util.List;
+
+import static com.social.post.repository.constants.Constants.*;
 
 @Repository
 public class ImageRepositoryImpl implements ImageRepository {
@@ -25,5 +26,10 @@ public class ImageRepositoryImpl implements ImageRepository {
     @Override
     public String findProfileBackgroundImage(String collection) {
         return mongoTemplate.findDistinct(new Query(), BACKGROUND_IMAGE_FIELD, collection, String.class).get(0);
+    }
+
+    @Override
+    public List<String> findProfileAlbumImage(String collection) {
+        return mongoTemplate.findDistinct(new Query(), ALBUM_IMAGES_FIELD, collection, String.class);
     }
 }
