@@ -13,7 +13,7 @@ import static com.social.relationship.repository.queries.Queries.FIND_THE_FRIEND
 public interface ProfileRepository extends Neo4jRepository<Profile, String> {
 
     @Query(FIND_THE_FRIENDS_FOR_A_PROFILE_BY_PROFILE_IDENTITY_TEMPLATE)
-    List<Profile> findFriendsByProfileIdentity(@Param("identity") String identity);
+    List<String> findFriendsByProfileIdentity(@Param("identity") String identity);
 
     @Query(FIND_HOW_MANY_FRIENDS_HAS_A_PROFILE_TEMPLATE)
     int findFriendCountByProfileIdentity(@Param("identity") String identity);

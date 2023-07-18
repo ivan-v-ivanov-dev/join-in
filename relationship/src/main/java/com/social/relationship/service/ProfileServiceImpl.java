@@ -17,7 +17,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public List<Profile> findFriendsByProfileIdentity(String identity) {
+    public List<String> findFriendsByProfileIdentity(String identity) {
         return profileRepository.findFriendsByProfileIdentity(identity);
     }
 

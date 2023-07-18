@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProfileService {
 
-    List<Profile> findFriendsByProfileIdentity(String identity);
+    List<String> findFriendsByProfileIdentity(String identity);
 
     void save(Profile profile);
 
