@@ -20,6 +20,11 @@ public class ImageController {
         return imageService.findProfileImage(userIdentity);
     }
 
+    @PostMapping("/profile-background-image")
+    public String findProfileBackgroundImage(@RequestParam("userIdentity") String userIdentity) {
+        return imageService.findProfileBackgroundImage(userIdentity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Image service is HEALTHY";

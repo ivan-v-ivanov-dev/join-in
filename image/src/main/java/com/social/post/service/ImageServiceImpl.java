@@ -19,4 +19,9 @@ public class ImageServiceImpl implements ImageService {
     public String findProfileImage(String userIdentity) {
         return imageRepository.findProfileImage(String.format(COLLECTION_TEMPLATE, userIdentity));
     }
+
+    @Override
+    public String findProfileBackgroundImage(String userIdentity) {
+        return imageRepository.findProfileBackgroundImage(String.format(COLLECTION_TEMPLATE, userIdentity));
+    }
 }
