@@ -42,6 +42,7 @@ public class ProfileServiceImpl implements ProfileService {
         Profile profile = profileRepository.findByIdentity(identity);
         profile.setProfileImage(imageClient.findProfileImage(identity));
         profile.setBackgroundImage(imageClient.findProfileBackgroundImage(identity));
+        profile.setAlbumImages(imageClient.findProfileAlbumImage(identity));
         return profile;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Document(collection = "profiles")
 @NoArgsConstructor
@@ -25,6 +26,9 @@ public class Profile {
 
     @Transient
     private String backgroundImage;
+
+    @Transient
+    private List<String> albumImages;
 
     @Indexed(unique = true)
     @JsonIgnore
