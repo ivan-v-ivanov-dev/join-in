@@ -21,19 +21,22 @@ public class ProfileController {
     private final PostService postService;
     private final CommentService commentService;
     private final ImageService imageService;
+    private final RelationshipService relationshipService;
 
     public ProfileController(LoginService loginService,
                              RegisterService registerService,
                              ProfileService profileService,
                              PostService postService,
                              CommentService commentService,
-                             ImageService imageService) {
+                             ImageService imageService,
+                             RelationshipService relationshipService) {
         this.loginService = loginService;
         this.registerService = registerService;
         this.profileService = profileService;
         this.postService = postService;
         this.commentService = commentService;
         this.imageService = imageService;
+        this.relationshipService = relationshipService;
     }
 
     @GetMapping("/")
@@ -80,6 +83,7 @@ public class ProfileController {
         model.addAttribute("posts", profileService.findAllPosts(identity));
         model.addAttribute("postsCount", profileService.findUserPostsCount(identity));
         model.addAttribute("friendsCount", profileService.findFriendsCount(identity));
+        model.addAttribute("friends", relationshipService.findFriends(identity));
         return "profile";
     }
 
