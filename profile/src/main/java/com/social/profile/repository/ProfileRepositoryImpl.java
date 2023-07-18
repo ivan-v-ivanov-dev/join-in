@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import static com.social.profile.repository.constants.Constants.*;
+
 @Repository
 public class ProfileRepositoryImpl implements ProfileRepository {
 
@@ -18,11 +20,21 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 
     @Override
     public Profile findByIdentity(String identity) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("identity").is(identity)), Profile.class);
+        return mongoTemplate.findOne(Query.query(Criteria.where(IDENTITY_FIELD).is(identity)), Profile.class);
     }
 
     @Override
     public Profile save(Profile profile) {
         return mongoTemplate.save(profile);
+    }
+
+    @Override
+    public String findProfileFirstName(String identity) {
+        return mongoTemplate.findDistinct(new Query(), FIRST_NAME_FIELD, PROFILES_COLLECTION, String.class).get(0);
+    }
+
+    @Override
+    public String findProfileLastName(String identity) {
+        return mongoTemplate.findDistinct(new Query(), LAST_NAME_FIELD, PROFILES_COLLECTION, String.class).get(0);
     }
 }
