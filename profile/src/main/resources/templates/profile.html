@@ -714,76 +714,12 @@
                                             </div>
                                             <div class="card-body">
                                                 <ul class="profile-img-gallary p-0 m-0 list-unstyled">
-                                                    <li class="">
+                                                    <li class="" th:each="currentImage: ${profile.getAlbumImages()}">
                                                         <a data-fslightbox="gallery"
                                                            href="../assets/images/page-img/g1.jpg">
                                                             <img alt="photo-profile"
                                                                  class="img-fluid" loading="lazy"
-                                                                 src="../assets/images/page-img/g1.jpg">
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a data-fslightbox="gallery"
-                                                           href="../assets/images/page-img/g2.jpg">
-                                                            <img alt="photo-profile"
-                                                                 class="img-fluid" loading="lazy"
-                                                                 src="../assets/images/page-img/g2.jpg">
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a data-fslightbox="gallery"
-                                                           href="../assets/images/page-img/g3.jpg">
-                                                            <img alt="photo-profile"
-                                                                 class="img-fluid" loading="lazy"
-                                                                 src="../assets/images/page-img/g3.jpg">
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a data-fslightbox="gallery"
-                                                           href="../assets/images/page-img/g4.jpg">
-                                                            <img alt="photo-profile"
-                                                                 class="img-fluid" loading="lazy"
-                                                                 src="../assets/images/page-img/g4.jpg">
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a data-fslightbox="gallery"
-                                                           href="../assets/images/page-img/g5.jpg">
-                                                            <img alt="photo-profile"
-                                                                 class="img-fluid" loading="lazy"
-                                                                 src="../assets/images/page-img/g5.jpg">
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a data-fslightbox="gallery"
-                                                           href="../assets/images/page-img/g6.jpg">
-                                                            <img alt="photo-profile"
-                                                                 class="img-fluid" loading="lazy"
-                                                                 src="../assets/images/page-img/g6.jpg">
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a data-fslightbox="gallery"
-                                                           href="../assets/images/page-img/g7.jpg">
-                                                            <img alt="photo-profile"
-                                                                 class="img-fluid" loading="lazy"
-                                                                 src="../assets/images/page-img/g7.jpg">
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a data-fslightbox="gallery"
-                                                           href="../assets/images/page-img/g8.jpg">
-                                                            <img alt="photo-profile"
-                                                                 class="img-fluid" loading="lazy"
-                                                                 src="../assets/images/page-img/g8.jpg">
-                                                        </a>
-                                                    </li>
-                                                    <li class="">
-                                                        <a data-fslightbox="gallery"
-                                                           href="../assets/images/page-img/g9.jpg">
-                                                            <img alt="photo-profile"
-                                                                 class="img-fluid" loading="lazy"
-                                                                 src="../assets/images/page-img/g9.jpg">
+                                                                 th:src="${currentImage}">
                                                         </a>
                                                     </li>
                                                 </ul>
