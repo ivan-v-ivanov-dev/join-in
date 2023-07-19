@@ -28,13 +28,6 @@ spring:
           packages: com.social.kafka.messages.contract.KafkaMessage
     topic:
       name:
-        post:
-          publication: post-publication-topic
-          comment: post-comment-topic
-        delete:
-          post: delete-post-topic
-        edit:
-          post: edit-post-topic
         new:
           user: new-user-topic
     group:
