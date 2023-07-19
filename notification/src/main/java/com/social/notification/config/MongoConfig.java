@@ -1,4 +1,4 @@
-package com.social.post.config;
+package com.social.notification.config;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import static com.social.post.config.ConfigConstants.MONGO_CLIENT_CREATED;
-import static com.social.post.config.ConfigConstants.MONGO_TEMPLATE_CREATED;
+import static com.social.notification.config.ConfigConstants.MONGO_CLIENT_CREATED;
+import static com.social.notification.config.ConfigConstants.MONGO_TEMPLATE_CREATED;
 
 @Configuration
 @Slf4j

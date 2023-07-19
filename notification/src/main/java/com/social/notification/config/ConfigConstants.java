@@ -1,4 +1,4 @@
-package com.social.post.config;
+package com.social.notification.config;
 
 public class ConfigConstants {
 

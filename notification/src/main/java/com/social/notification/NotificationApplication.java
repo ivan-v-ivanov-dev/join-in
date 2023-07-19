@@ -1,4 +1,4 @@
-package com.social.post;
+package com.social.notification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
