@@ -3,9 +3,13 @@ package com.social.reaction.service;
 import com.social.reaction.model.Profile;
 import com.social.reaction.repository.ProfileRepository;
 import com.social.reaction.service.contracts.ProfileService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import static com.social.reaction.service.constants.LoggerConstants.NEW_USER_SAVED_IN_DATABASE_TEMPLATE;
+
 @Service
+@Slf4j
 public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository profileRepository;
@@ -32,5 +36,6 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public void save(Profile profile) {
         profileRepository.save(profile);
+        log.info(String.format(NEW_USER_SAVED_IN_DATABASE_TEMPLATE, profile.getIdentity()));
     }
 }
