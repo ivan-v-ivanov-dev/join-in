@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.social.post.service.constants.CollectionTemplateConstant.COLLECTION_TEMPLATE;
 import static com.social.post.service.constants.LoggerConstants.NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE;
+import static com.social.post.service.constants.LoggerConstants.NEW_USER_SAVED_IN_DATABASE_TEMPLATE;
 
 @Service
 @Slf4j
@@ -56,5 +57,6 @@ public class PostServiceImpl implements PostService {
     @Override
     public void createNewUserCollection(String identity) {
         postRepository.createNewUserCollection(String.format(COLLECTION_TEMPLATE, identity));
+        log.info(String.format(NEW_USER_SAVED_IN_DATABASE_TEMPLATE, identity));
     }
 }

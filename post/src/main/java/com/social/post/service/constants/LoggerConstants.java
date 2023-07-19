@@ -24,6 +24,9 @@ public class LoggerConstants {
     public static final String NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE =
             "New Post saved in database (User identity %s, Post identity: %s)";
 
+    public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
+            "New user saved in database (User identity: %s)";
+
     private LoggerConstants() {
     }
 }
