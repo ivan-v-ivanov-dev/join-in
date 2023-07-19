@@ -1,2 +1,10 @@
 server:
   port: 8086
+
+spring:
+
+  #Mongo
+  data:
+    mongodb:
+      uri: mongodb://rootuser:rootpass@localhost:27019/storage
+      database: storage
