@@ -8,7 +8,7 @@
 		<version>2.5.0</version>
 	</parent>
 	<groupId>com.social</groupId>
-	<artifactId>post</artifactId>
+	<artifactId>image</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>image</name>
 	<description>Image Service</description>
