@@ -5,7 +5,7 @@ services:
   # MongoDB
   mongo:
     image: mongo:6.0
-    container_name: mongo-image-service
+    container_name: mongo-notification-service
     volumes:
       - ./src/main/resources/mongo/init.js:/docker-entrypoint-initdb.d/init.js
     ports:
@@ -18,7 +18,7 @@ services:
   # Mongo Express web tool
   mongo-express:
     image: mongo-express:1.0.0-alpha
-    container_name: mongo-express-image-service
+    container_name: mongo-express-notification-service
     restart: always
     depends_on:
       - mongo
