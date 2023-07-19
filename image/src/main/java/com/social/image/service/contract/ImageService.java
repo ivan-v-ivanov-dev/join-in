@@ -1,4 +1,4 @@
-package com.social.post.service.contract;
+package com.social.image.service.contract;
 
 import java.util.List;
 

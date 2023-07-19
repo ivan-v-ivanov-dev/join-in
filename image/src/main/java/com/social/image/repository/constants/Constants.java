@@ -1,4 +1,4 @@
-package com.social.post.repository.constants;
+package com.social.image.repository.constants;
 
 public class Constants {
 

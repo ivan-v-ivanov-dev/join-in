@@ -1,4 +1,4 @@
-package com.social.post.config;
+package com.social.image.config;
 
 public class ConfigConstants {
 

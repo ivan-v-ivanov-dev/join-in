@@ -1,6 +1,6 @@
-package com.social.post.controller;
+package com.social.image.controller;
 
-import com.social.post.service.contract.ImageService;
+import com.social.image.service.contract.ImageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

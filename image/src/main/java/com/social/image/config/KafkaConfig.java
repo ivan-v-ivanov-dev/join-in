@@ -1,4 +1,4 @@
-package com.social.post.config;
+package com.social.image.config;
 
 import com.social.kafka.messages.contract.KafkaMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +16,6 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.social.post.config.ConfigConstants.CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED;
-import static com.social.post.config.ConfigConstants.DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED;
 
 @Configuration
 @EnableKafka
@@ -53,7 +50,7 @@ public class KafkaConfig {
         props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, this.consumerValueTypePackages);
 
         DefaultKafkaConsumerFactory<String, KafkaMessage> kafkaConsumerFactory = new DefaultKafkaConsumerFactory<>(props);
-        log.info(DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
+        log.info(ConfigConstants.DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
 
         return kafkaConsumerFactory;
     }
@@ -63,7 +60,7 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, KafkaMessage> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        log.info(CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
+        log.info(ConfigConstants.CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
 
         return factory;
     }

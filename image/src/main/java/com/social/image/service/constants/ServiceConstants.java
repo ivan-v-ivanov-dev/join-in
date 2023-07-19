@@ -1,4 +1,4 @@
-package com.social.post.service.constants;
+package com.social.image.service.constants;
 
 public class ServiceConstants {
 

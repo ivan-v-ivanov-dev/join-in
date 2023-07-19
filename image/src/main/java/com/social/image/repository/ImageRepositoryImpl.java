@@ -1,13 +1,13 @@
-package com.social.post.repository;
+package com.social.image.repository;
 
-import com.social.post.repository.contract.ImageRepository;
+import com.social.image.repository.contract.ImageRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.social.post.repository.constants.Constants.*;
+import static com.social.image.repository.constants.Constants.*;
 
 @Repository
 public class ImageRepositoryImpl implements ImageRepository {
