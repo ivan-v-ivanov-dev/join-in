@@ -32,4 +32,9 @@ public class ImageRepositoryImpl implements ImageRepository {
     public List<String> findProfileAlbumImage(String collection) {
         return mongoTemplate.findDistinct(new Query(), ALBUM_IMAGES_FIELD, collection, String.class);
     }
+
+    @Override
+    public void createCollection(String collection) {
+        mongoTemplate.createCollection(collection);
+    }
 }

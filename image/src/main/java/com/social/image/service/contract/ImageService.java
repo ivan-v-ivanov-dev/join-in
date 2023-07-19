@@ -8,4 +8,6 @@ public interface ImageService {
     String findProfileBackgroundImage(String userIdentity);
 
     List<String> findProfileAlbumImage(String userIdentity);
+
+    void createCollection(String identity);
 }

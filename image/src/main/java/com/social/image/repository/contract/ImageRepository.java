@@ -8,4 +8,6 @@ public interface ImageRepository {
     String findProfileBackgroundImage(String collection);
 
     List<String> findProfileAlbumImage(String collection);
+
+    void createCollection(String collection);
 }
