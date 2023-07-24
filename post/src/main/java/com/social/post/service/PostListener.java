@@ -60,7 +60,7 @@ public class PostListener {
                 .postDate(LocalDate.parse(postMessage.getPostDate()))
                 .build();
 
-        postService.save(post, postMessage.getUserIdentity());
+        postService.save(post, postMessage.getUserIdentity(), postMessage.getUserNames());
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.post.comment}", groupId = "${spring.kafka.group.id}")

@@ -5,7 +5,7 @@ import com.social.post.model.Post;
 import java.util.List;
 
 public interface PostService {
-    void save(Post post, String authorIdentity);
+    void save(Post post, String authorIdentity, String authorNames);
 
     Post findByPostIdentity(String postIdentity, String authorIdentity);
 

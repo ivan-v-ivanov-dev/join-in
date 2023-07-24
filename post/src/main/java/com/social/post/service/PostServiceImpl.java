@@ -14,6 +14,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.social.post.service.constants.CollectionTemplateConstant.COLLECTION_TEMPLATE;
@@ -44,7 +45,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void save(Post post, String authorIdentity) {
+    public void save(Post post, String authorIdentity, String authorNames) {
         postRepository.save(post, String.format(COLLECTION_TEMPLATE, authorIdentity));
         log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE,
                 authorIdentity, post.getPostIdentity()));
@@ -55,6 +56,9 @@ public class PostServiceImpl implements PostService {
         KafkaMessage newPostNotifications = NewPostNotificationMessage.builder()
                 .friends(friends)
                 .authorIdentity(authorIdentity)
+                .postIdentity(post.getPostIdentity())
+                .authorNames(authorNames)
+                .date(LocalDate.now().toString())
                 .build();
 
         Message<KafkaMessage> message = MessageBuilder
