@@ -14,4 +14,6 @@ public class PostMessage implements KafkaMessage {
 
     private String content;
 
+    private String postDate;
+
 }
