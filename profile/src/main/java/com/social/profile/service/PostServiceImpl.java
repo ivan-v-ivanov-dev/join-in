@@ -61,6 +61,9 @@ public class PostServiceImpl implements PostService {
     public void post(String userIdentity, String content) {
         KafkaMessage postPublicationMessage = PostMessage.builder()
                 .userIdentity(userIdentity)
+                .userNames(String.format(AUTHOR_NAME_TEMPLATE,
+                        profileRepository.findProfileFirstName(userIdentity),
+                        profileRepository.findProfileLastName(userIdentity)))
                 .content(content)
                 .postDate(LocalDate.now().toString())
                 .build();
