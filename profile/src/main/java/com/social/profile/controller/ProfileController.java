@@ -127,6 +127,11 @@ public class ProfileController {
         return "redirect:/profile?identity=" + userIdentity;
     }
 
+    @GetMapping("/signout")
+    public String signOut() {
+        return "redirect:/";
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Profile service is HEALTHY.";
