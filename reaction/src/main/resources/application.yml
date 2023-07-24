@@ -29,6 +29,8 @@ spring:
       name:
         new:
           user: new-user-topic
+          post:
+            node: new-post-node
     group:
       id: group-id
 
