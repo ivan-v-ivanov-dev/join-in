@@ -30,6 +30,8 @@ spring:
       name:
         new:
           user: new-user-topic
+          post:
+            notifications: new-post-notifications
     group:
       id: group-id
 
