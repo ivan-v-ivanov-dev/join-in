@@ -20,8 +20,11 @@ public class LoggerConstants {
     public static final String NEW_USER_MESSAGE_RECEIVED_FROM_AUTHENTICATION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING +  "New user message received from Authentication service (Kafka topic: %s, User identity: %s)";
 
-    public static final String NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE =
-            KAFKA_MESSAGING +  "New post notification received send to Notification service (Kafka topic: %s)";
+    public static final String NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING +  "New post notification send to Notification service (Kafka topic: %s)";
+
+    public static final String NEW_POST_NODE_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING +  "New post node send to Reaction service (Kafka topic: %s)";
 
     // Post create
     public static final String NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE =

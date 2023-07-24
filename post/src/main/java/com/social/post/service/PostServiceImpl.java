@@ -1,17 +1,15 @@
 package com.social.post.service;
 
+import com.social.kafka.messages.NewPostNodeMessage;
 import com.social.kafka.messages.NewPostNotificationMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.model.Post;
 import com.social.post.repository.contract.PostRepository;
+import com.social.post.service.contracts.KafkaMessageSender;
 import com.social.post.service.contracts.PostService;
 import com.social.post.service.feign.RelationshipClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.KafkaHeaders;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -26,17 +24,16 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final RelationshipClient relationshipClient;
-    private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
+    private final KafkaMessageSender kafkaMessageSender;
     private final String newPostNotificationTopic;
+    private final String newPostNodeTopic;
 
-    public PostServiceImpl(PostRepository postRepository,
-                           RelationshipClient relationshipClient,
-                           KafkaTemplate<String, KafkaMessage> kafkaTemplate,
-                           @Value("${spring.kafka.topic.name.new.post.notifications}") String newPostNotificationTopic) {
+    public PostServiceImpl(PostRepository postRepository, RelationshipClient relationshipClient, KafkaMessageSender kafkaMessageSender, @Value("${spring.kafka.topic.name.new.post.notifications}") String newPostNotificationTopic, @Value("${spring.kafka.topic.name.new.post.node}") String newPostNodeTopic) {
         this.postRepository = postRepository;
         this.relationshipClient = relationshipClient;
-        this.kafkaTemplate = kafkaTemplate;
+        this.kafkaMessageSender = kafkaMessageSender;
         this.newPostNotificationTopic = newPostNotificationTopic;
+        this.newPostNodeTopic = newPostNodeTopic;
     }
 
     @Override
@@ -47,26 +44,18 @@ public class PostServiceImpl implements PostService {
     @Override
     public void save(Post post, String authorIdentity, String authorNames) {
         postRepository.save(post, String.format(COLLECTION_TEMPLATE, authorIdentity));
-        log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE,
-                authorIdentity, post.getPostIdentity()));
+        log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE, authorIdentity, post.getPostIdentity()));
 
         List<String> friends = relationshipClient.findFriends(authorIdentity);
         log.info(String.format(RETRIEVE_ALL_FRIENDS_FROM_RELATIONSHIP_SERVICE_TEMPLATE, authorIdentity));
 
-        KafkaMessage newPostNotifications = NewPostNotificationMessage.builder()
-                .friends(friends)
-                .authorIdentity(authorIdentity)
-                .postIdentity(post.getPostIdentity())
-                .authorNames(authorNames)
-                .date(LocalDate.now().toString())
-                .build();
+        KafkaMessage newPostNotifications = NewPostNotificationMessage.builder().friends(friends).authorIdentity(authorIdentity).postIdentity(post.getPostIdentity()).authorNames(authorNames).date(LocalDate.now().toString()).build();
+        kafkaMessageSender.send(newPostNotifications, newPostNotificationTopic);
+        log.info(String.format(NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE, newPostNotificationTopic));
 
-        Message<KafkaMessage> message = MessageBuilder
-                .withPayload(newPostNotifications)
-                .setHeader(KafkaHeaders.TOPIC, newPostNotificationTopic)
-                .build();
-        kafkaTemplate.send(message);
-        log.info(String.format(NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE, newPostNotificationTopic));
+        KafkaMessage newPostNodeMessage = NewPostNodeMessage.builder().postIdentity(post.getPostIdentity()).build();
+        kafkaMessageSender.send(newPostNodeMessage, newPostNodeTopic);
+        log.info(String.format(NEW_POST_NODE_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE, newPostNodeTopic));
     }
 
     @Override
