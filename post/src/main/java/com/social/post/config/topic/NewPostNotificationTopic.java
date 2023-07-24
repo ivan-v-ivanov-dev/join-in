@@ -24,13 +24,13 @@ public class NewPostNotificationTopic {
 
     @Bean
     public NewTopic newPostNotifications() {
-        NewTopic postCommentTopicForPostService = TopicBuilder
+        NewTopic postPublishedTopicForNotificationService = TopicBuilder
                 .name(topicName)
                 .partitions(Integer.parseInt(partitions))
                 .replicas(Integer.parseInt(replicas))
                 .build();
         log.info(String.format(KAFKA_TOPIC_FOR_NEW_POST_NOTIFICATIONS_CREATED_TEMPLATE, topicName));
 
-        return postCommentTopicForPostService;
+        return postPublishedTopicForNotificationService;
     }
 }
