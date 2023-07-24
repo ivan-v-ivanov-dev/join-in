@@ -20,12 +20,18 @@ public class LoggerConstants {
     public static final String NEW_USER_MESSAGE_RECEIVED_FROM_AUTHENTICATION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING +  "New user message received from Authentication service (Kafka topic: %s, User identity: %s)";
 
+    public static final String NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE =
+            KAFKA_MESSAGING +  "New post notification received send to Notification service (Kafka topic: %s)";
+
     // Post create
     public static final String NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE =
             "New Post saved in database (User identity %s, Post identity: %s)";
 
     public static final String NEW_COLLECTION_SAVED_IN_DATABASE_TEMPLATE =
             "New collection created (Collection: %s)";
+
+    public static final String RETRIEVE_ALL_FRIENDS_FROM_RELATIONSHIP_SERVICE_TEMPLATE =
+            "Retrieve all friends from Relationship service (User identity: %s)";
 
     private LoggerConstants() {
     }

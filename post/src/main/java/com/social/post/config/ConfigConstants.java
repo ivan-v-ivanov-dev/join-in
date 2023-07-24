@@ -14,7 +14,7 @@ public class ConfigConstants {
             REDIS_CONFIGURATION + "Jedis Connection Factory" + CREATED;
 
     public static final String REDIS_CONFIGURATION_OBJECT_MAPPER_CREATED =
-            REDIS_CONFIGURATION + "ObjectMapper" + CREATED;;
+            REDIS_CONFIGURATION + "ObjectMapper" + CREATED;
 
     public static final String REDIS_CONFIGURATION_JACKSON_2_JSON_REDIS_SERIALIZER_CREATED =
             REDIS_CONFIGURATION + "Jackson 2 Json Redis Serializer" + CREATED;
@@ -34,10 +34,23 @@ public class ConfigConstants {
 
     private static final String FOR_KAFKA_MESSAGING_CREATED = " for Kafka messaging created";
 
+    public static final String DEFAULT_PRODUCER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
+            KAFKA_CONFIGURATION + "Default Producer Factory" + FOR_KAFKA_MESSAGING_CREATED;
+
+    public static final String KAFKA_TEMPLATE_FOR_KAFKA_MESSAGING_CREATED =
+            KAFKA_CONFIGURATION + "Kafka Template" + FOR_KAFKA_MESSAGING_CREATED;
+
     public static final String DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
             KAFKA_CONFIGURATION + "Default Consumer Factory" + FOR_KAFKA_MESSAGING_CREATED;
 
     public static final String CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
             KAFKA_CONFIGURATION + "Concurrent Kafka Listener Container Factor" + FOR_KAFKA_MESSAGING_CREATED;
 
+    // Kafka Topics
+    private static final String KAFKA_TOPIC_NEW_TOPIC_FOR = "Kafka Topic :: New topic for ";
+
+    private static final String CREATED_TOPIC_NAME = " created (name:  %s)";
+
+    public static final String KAFKA_TOPIC_FOR_NEW_POST_NOTIFICATIONS_CREATED_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "new posts notifications" + CREATED_TOPIC_NAME;
 }
