@@ -47,6 +47,7 @@ spring:
           user: new-user-topic
           post:
             notifications: new-post-notifications
+            node: new-post-node
     partitions: 3
     replicas: 1
     group:
