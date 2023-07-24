@@ -53,13 +53,11 @@ public class PostListener {
         log.info(String.format(NEW_PUBLISHED_POST_MESSAGE_RECEIVED__TOPIC_NAME_AUTHOR_IDENTITY_TEMPLATE,
                 postPublicationTopic, postMessage.getUserIdentity()));
 
-        LocalDate dateNow = LocalDate.now();
-
         Post post = Post.builder()
                 .postIdentity(identityGenerator
-                        .generate(postMessage.getUserIdentity(), postMessage.getContent(), dateNow.toString()))
+                        .generate(postMessage.getUserIdentity(), postMessage.getContent(), postMessage.getPostDate()))
                 .content(postMessage.getContent())
-                .postDate(dateNow)
+                .postDate(LocalDate.parse(postMessage.getPostDate()))
                 .build();
 
         postService.save(post, postMessage.getUserIdentity());
