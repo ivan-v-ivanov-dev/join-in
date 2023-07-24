@@ -17,6 +17,4 @@ public class Profile implements Serializable {
     @Id
     private String identity;
 
-    private String email;
-
 }
