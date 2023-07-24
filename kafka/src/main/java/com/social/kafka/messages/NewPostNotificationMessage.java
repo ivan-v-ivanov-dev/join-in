@@ -14,4 +14,5 @@ public class NewPostNotificationMessage implements KafkaMessage {
 
     private List<String> friends;
 
+    private String authorIdentity;
 }

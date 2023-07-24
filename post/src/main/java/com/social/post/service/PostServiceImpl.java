@@ -52,7 +52,10 @@ public class PostServiceImpl implements PostService {
         List<String> friends = relationshipClient.findFriends(authorIdentity);
         log.info(String.format(RETRIEVE_ALL_FRIENDS_FROM_RELATIONSHIP_SERVICE_TEMPLATE, authorIdentity));
 
-        KafkaMessage newPostNotifications = NewPostNotificationMessage.builder().friends(friends).build();
+        KafkaMessage newPostNotifications = NewPostNotificationMessage.builder()
+                .friends(friends)
+                .authorIdentity(authorIdentity)
+                .build();
 
         Message<KafkaMessage> message = MessageBuilder
                 .withPayload(newPostNotifications)
