@@ -164,6 +164,10 @@ Runs on **http://localhost:8080/**. Stores profie information for users. Contain
 
 # 5. Page layout  
 
+## 5.1. Profile page
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/7776f18b-6fa1-4104-9be4-b00920d106c9)
+
 # 6. Disclaimer  
 
 This is personal coding skills training project. NO real software products are distrubuted. NO real personal identities/information/profiles/names/photos are distrubuted/collected - the data/identities are non-realistic. Official Docker images are used for the technologies. Paid bootstrap theme was used for the frontend view (for styled HTML sources). Sample images obtained from https://pixabay.com/bg/.
