@@ -20,7 +20,8 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 
     @Override
     public Profile findByIdentity(String identity) {
-        return mongoTemplate.findOne(Query.query(Criteria.where(IDENTITY_FIELD).is(identity)), Profile.class);
+        Query query = Query.query(Criteria.where(IDENTITY_FIELD).is(identity));
+        return mongoTemplate.findOne(query, Profile.class);
     }
 
     @Override
@@ -30,11 +31,13 @@ public class ProfileRepositoryImpl implements ProfileRepository {
 
     @Override
     public String findProfileFirstName(String identity) {
-        return mongoTemplate.findDistinct(new Query(), FIRST_NAME_FIELD, PROFILES_COLLECTION, String.class).get(0);
+        Query query = Query.query(Criteria.where(IDENTITY_FIELD).is(identity));
+        return mongoTemplate.findDistinct(query, FIRST_NAME_FIELD, PROFILES_COLLECTION, String.class).get(0);
     }
 
     @Override
     public String findProfileLastName(String identity) {
-        return mongoTemplate.findDistinct(new Query(), LAST_NAME_FIELD, PROFILES_COLLECTION, String.class).get(0);
+        Query query = Query.query(Criteria.where(IDENTITY_FIELD).is(identity));
+        return mongoTemplate.findDistinct(query, LAST_NAME_FIELD, PROFILES_COLLECTION, String.class).get(0);
     }
 }
