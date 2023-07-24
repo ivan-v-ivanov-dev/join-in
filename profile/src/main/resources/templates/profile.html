@@ -554,20 +554,10 @@
                         <div class="card shadow-none m-0">
                             <div class="card-header ">
                                 <div class="header-title">
-                                    <h5 class="mb-0 ">Hello Bni Cyst</h5>
+                                    <h5 class="mb-0 " th:text="${profile.getFirstName()} + ' ' + ${profile.getLastName()}">Hello Bni Cyst</h5>
                                 </div>
                             </div>
                             <div class="card-body p-0 ">
-                                <div class="d-flex align-items-center iq-sub-card border-0">
-                                <span class="material-symbols-outlined">
-                                   line_style
-                                </span>
-                                    <div class="ms-3">
-                                        <a class="mb-0 h6" href="../app/profile.html">
-                                            My Profile
-                                        </a>
-                                    </div>
-                                </div>
                                 <div class="d-flex align-items-center iq-sub-card border-0">
                                 <span class="material-symbols-outlined">
                                    edit_note
