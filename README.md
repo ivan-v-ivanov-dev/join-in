@@ -42,13 +42,14 @@ In order to start the project you need to have Docker Desktop installed on your 
 7. New User message is send from Authentication to Image service to create new collection for the user
 8. New User message is send from Authentication to Post service to create new collection for the user
 
-## 3.2. Post and edit a Publication / Comment
+## 3.2. Post a Publication / Comment
 
-![image](https://github.com/ivanovbiol/join-in/assets/51414119/95e3ead0-103a-42d9-9ff2-023882efb087)
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/cc43ef20-a7c9-400d-a6f9-d08fc7447e27)
 
 1. When new publication/comment is posted or updated new Kafka message is send from Profile to Post service
 2. Post service retrieves all frinds for the user from Relationship service
-3. Post sends Kafka message notifications to the Notification service for all friends of the user that new publication/comment is created/edited
+3. Post sends Kafka message to Reaction service to create new node for the new post/comment
+4. Post sends Kafka message notifications to Notification service for all friends of the user that new publication/comment is created
 
 ## 3.3. React to Post(publication) / Comment
 
