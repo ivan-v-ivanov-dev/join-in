@@ -19,7 +19,4 @@ public class Profile implements Serializable {
     @Property("identity")
     private String identity;
 
-    @Property("name")
-    private String name;
-
 }
