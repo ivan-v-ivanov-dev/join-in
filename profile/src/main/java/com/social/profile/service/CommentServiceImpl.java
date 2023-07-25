@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 import static com.social.profile.service.constants.LoggerConstants.NEW_COMMENT_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE;
 import static com.social.profile.service.constants.ServiceConstants.AUTHOR_NAME_TEMPLATE;
 
@@ -38,6 +40,7 @@ public class CommentServiceImpl implements CommentService {
                         profileRepository.findProfileFirstName(commentAuthorIdentity),
                         profileRepository.findProfileLastName(commentAuthorIdentity)))
                 .content(comment)
+                .postDate(LocalDate.now().toString())
                 .build();
 
         kafkaMessageSender.send(createNewCommentMessage, postCommentTopic);
