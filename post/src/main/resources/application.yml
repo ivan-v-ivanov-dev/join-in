@@ -3,12 +3,6 @@ server:
 
 spring:
 
-  # Redis
-  redis:
-    password: root
-    host: localhost
-    port: 6379
-
   #Mongo
   data:
     mongodb:
