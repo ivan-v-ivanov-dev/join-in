@@ -167,7 +167,15 @@ Runs on **http://localhost:8080/**. Stores profie information for users. Contain
 
 # 5. Page layout  
 
-## 5.1. Profile page
+## 5.1. Sign in
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/e6701756-0b40-45ec-8464-b764e72c5ce8)
+
+## 5.2. Sign up
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/e677e9bb-2a32-48d9-b9de-55ffbb6a63d1)
+
+## 5.3. User Profile
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/7776f18b-6fa1-4104-9be4-b00920d106c9)
 
