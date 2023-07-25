@@ -12,7 +12,11 @@ public class CommentMessage implements KafkaMessage {
 
     private String postIdentity;
 
-    private String userIdentity;
+    private String postAuthorIdentity;
+
+    private String commentAuthorIdentity;
+
+    private String commentAuthorNames;
 
     private String content;
 
