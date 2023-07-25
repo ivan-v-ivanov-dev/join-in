@@ -7,5 +7,5 @@ import java.util.Set;
 public interface NotificationService {
     void createCollection(String identity);
 
-    void save(Notification notification, Set<String> friends);
+    void save(Notification notification, Set<String> peopleToNotify);
 }

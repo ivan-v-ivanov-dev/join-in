@@ -31,7 +31,9 @@ spring:
         new:
           user: new-user-topic
           post:
-            notifications: new-post-notifications
+            notification: new-post-notification
+          comment:
+            notification: new-comment-notification
     group:
       id: group-id
 

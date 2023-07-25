@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-import static com.social.notification.service.constants.LoggerConstants.NEW_POST_NOTIFICATION_MESSAGE_RECEIVED_FROM_POST_SERVICE_TEMPLATE;
-import static com.social.notification.service.constants.LoggerConstants.NEW_USER_MESSAGE_RECEIVED_FROM_AUTHENTICATION_SERVICE_TEMPLATE;
+import static com.social.notification.service.constants.LoggerConstants.*;
+import static com.social.notification.service.constants.ServiceConstants.NEW_COMMENT_NOTIFICATION_TEMPLATE;
 import static com.social.notification.service.constants.ServiceConstants.NEW_POST_NOTIFICATION_TEMPLATE;
 
 @Service
@@ -23,13 +23,16 @@ public class NotificationListener {
     private final NotificationService notificationService;
     private final String newUserTopic;
     private final String newPostNotificationTopic;
+    private final String newCommentNotificationTopic;
 
     public NotificationListener(NotificationService notificationService,
                                 @Value("${spring.kafka.topic.name.new.user}") String newUserTopic,
-                                @Value("${spring.kafka.topic.name.new.post.notifications}") String newPostNotificationTopic) {
+                                @Value("${spring.kafka.topic.name.new.post.notification}") String newPostNotificationTopic,
+                                @Value("${spring.kafka.topic.name.new.comment.notification}") String newCommentNotificationTopic) {
         this.notificationService = notificationService;
         this.newUserTopic = newUserTopic;
         this.newPostNotificationTopic = newPostNotificationTopic;
+        this.newCommentNotificationTopic = newCommentNotificationTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")
@@ -57,4 +60,19 @@ public class NotificationListener {
         notificationService.save(notification, newPostCommentNotificationMessage.getPeopleToNotify());
     }
 
+    @KafkaListener(topics = "${spring.kafka.topic.name.new.comment.notification}", groupId = "${spring.kafka.group.id}")
+    public void newCommentNotificationListener(KafkaMessage kafkaMessage) {
+        NewPostCommentNotificationMessage newPostCommentNotificationMessage = (NewPostCommentNotificationMessage) kafkaMessage;
+        log.info(String.format(NEW_COMMENT_NOTIFICATION_MESSAGE_RECEIVED_FROM_POST_SERVICE_TEMPLATE, newCommentNotificationTopic));
+
+        Notification notification = Notification.builder()
+                .authorIdentity(newPostCommentNotificationMessage.getAuthorIdentity())
+                .postIdentity(newPostCommentNotificationMessage.getPostIdentity())
+                .notification(String.format(NEW_COMMENT_NOTIFICATION_TEMPLATE, newPostCommentNotificationMessage.getAuthorNames()))
+                .date(LocalDate.parse(newPostCommentNotificationMessage.getDate()))
+                .seen(false)
+                .build();
+
+        notificationService.save(notification, newPostCommentNotificationMessage.getPeopleToNotify());
+    }
 }
