@@ -23,7 +23,7 @@ public class LikePostTopic {
     private String replicas;
 
     @Bean
-    public NewTopic likePostTopic() {
+    public NewTopic likeAPostTopic() {
         NewTopic likePostTopicForReactionService = TopicBuilder
                 .name(topicName)
                 .partitions(Integer.parseInt(partitions))
