@@ -54,7 +54,7 @@ public class NotificationListener {
                 .seen(false)
                 .build();
 
-        notificationService.save(notification, newPostCommentNotificationMessage.getFriends());
+        notificationService.save(notification, newPostCommentNotificationMessage.getPeopleToNotify());
     }
 
 }

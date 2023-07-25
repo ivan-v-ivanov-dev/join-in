@@ -6,7 +6,7 @@ import com.social.notification.service.contracts.NotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 import static com.social.notification.service.constants.LoggerConstants.NEW_COLLECTION_CREATED_TEMPLATE;
 import static com.social.notification.service.constants.LoggerConstants.NEW_POST_NOTIFICATIONS_SAVED_FOR_ALL_USERS;
@@ -29,7 +29,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void save(Notification notification, List<String> friends) {
+    public void save(Notification notification, Set<String> friends) {
         friends.forEach(friend -> notificationRepository.save(notification, String.format(COLLECTION_TEMPLATE, friend)));
         log.info(NEW_POST_NOTIFICATIONS_SAVED_FOR_ALL_USERS);
     }
