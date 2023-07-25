@@ -54,7 +54,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post findByPostIdentity(String postIdentity, String authorIdentity) {
-        return postRepository.findByPostIdentity(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
+        Post post = postRepository.findByPostIdentity(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
+        log.info(String.format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
+        return post;
     }
 
     @Override
@@ -86,22 +88,28 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findAllPostsByAuthorIdentity(String authorIdentity) {
-        return postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, authorIdentity));
+        List<Post> posts = postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, authorIdentity));
+        log.info(RETRIEVE_POSTS);
+        return posts;
     }
 
     @Override
     public void delete(String postIdentity, String authorIdentity) {
         postRepository.delete(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
+        log.info(String.format(DELETE_POST_TEMPLATE, postIdentity));
     }
 
     @Override
     public void edit(String postIdentity, String newContent, String authorIdentity) {
         postRepository.updateOne(postIdentity, newContent, String.format(COLLECTION_TEMPLATE, authorIdentity));
+        log.info(String.format(UPDATE_POST_CONTENT_TEMPLATE, postIdentity));
     }
 
     @Override
     public int findAuthorPostsCount(String authorIdentity) {
-        return postRepository.findAuthorPostsCount(String.format(COLLECTION_TEMPLATE, authorIdentity));
+        int authorPostsCount = postRepository.findAuthorPostsCount(String.format(COLLECTION_TEMPLATE, authorIdentity));
+        log.info(String.format(FIND_AUTHOR_POSTS_COUNT_TEMPLATE, authorPostsCount));
+        return authorPostsCount;
     }
 
     @Override

@@ -48,6 +48,22 @@ public class LoggerConstants {
     public static final String RETRIEVE_ALL_USERS_WHO_REACTED_AND_COMMENTED_THE_POST_TEMPLATE =
             "Retrieve all users who reacted and commented the Post (Post identity: %s)";
 
+    public static final String RETRIEVE_POST_TEMPLATE =
+            "Retrieve Post (Post identity: %s)";
+
+    public static final String RETRIEVE_POSTS =
+            "Retrieve Posts";
+
+    public static final String DELETE_POST_TEMPLATE =
+            "Delete Post (Post identity: %s)";
+
+    public static final String UPDATE_POST_CONTENT_TEMPLATE =
+            "Update Post content (Post identity: %s)";
+
+    public static final String FIND_AUTHOR_POSTS_COUNT_TEMPLATE =
+            "Retrieve author posts count (Author identity: %s)";
+
+
     private LoggerConstants() {
     }
 }
