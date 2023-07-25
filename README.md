@@ -20,12 +20,14 @@ Keep in mind that I use MVC controllers, which means that I always need to gener
 
 # 2. How to start the project
 
-Git clone the repository and start on first place the **docker-compose.yml** file in each service - it contains the database (as official docker image) and database UI tool for each service. In all services (excluding Relatinship and Reaction services) the sample data will be imported automatiocally, since I am using docker volumes (see **Microservice description** for more details).    
-As a second step start each service individually since each service is a single standalone Spring Boot application.     
-The **Join IN** application runs on **http://localhost:8080/**
+ - Git clone the repository and start on first place the **docker-compose.yml** file in each service - it contains the database (as official docker image) and database UI tool for each service. In all services (excluding Relatinship and Reaction services) the sample data will be imported automatiocally, since I am using docker volumes (see **Microservice description** for more details).    
+ - As a second step start each service individually since each service is a single standalone Spring Boot application.     
+ - The **Join IN** application runs on **http://localhost:8080/**
 
 **Note**   
-In order to start the project you need to have Docker Desktop installed on your machine.  
+In order to start the project you need to have Docker Desktop installed on your machine. Also, the Flyway container in Authentication service starts, creates the tables and imports the data in the MySQL container and after that shuts down, which is the normal behaviour. Despite of the fact that Flyway depends on MySQL, keep an eye on it and restart it manually if needed.
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/c138f481-c8cb-4455-9aad-1f61ebce17c9)
 
 # 3. Microvervice communication
 
