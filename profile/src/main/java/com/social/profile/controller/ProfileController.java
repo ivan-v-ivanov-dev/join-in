@@ -120,11 +120,12 @@ public class ProfileController {
     }
 
     @PostMapping("/comment")
-    public String comment(@RequestParam("userIdentity") String userIdentity,
+    public String comment(@RequestParam("commentAuthorIdentity") String commentAuthorIdentity,
                           @RequestParam("postIdentity") String postIdentity,
+                          @RequestParam("postAuthorIdentity") String postAuthorIdentity,
                           @RequestParam("comment") String comment) {
-        commentService.comment(userIdentity, postIdentity, comment);
-        return "redirect:/profile?identity=" + userIdentity;
+        commentService.comment(commentAuthorIdentity, postIdentity, postAuthorIdentity, comment);
+        return "redirect:/profile?identity=" + commentAuthorIdentity;
     }
 
     @GetMapping("/signout")
