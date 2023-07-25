@@ -20,4 +20,5 @@ public class CommentMessage implements KafkaMessage {
 
     private String content;
 
+    private String postDate;
 }
