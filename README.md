@@ -20,8 +20,8 @@ Keep in mind that I use MVC controllers, which means that I always need to gener
 
 # 2. How to start the project
 
- - Git clone the repository and start on first place the **docker-compose.yml** file in each service - it contains the database (as official docker image) and database UI tool for each service. In all services (excluding Relatinship and Reaction services) the sample data will be imported automatiocally, since I am using docker volumes (see **Microservice description** for more details).    
- - As a second step start each service individually since each service is a single standalone Spring Boot application.     
+ - Git clone the repository and on first place start the **docker-compose.yml** file in each service - it contains the database (as official docker image) and database UI tool for each service. In all services (excluding Relationship and Reaction services) the sample data will be imported automatically, since I am using docker volumes (see **Microservice description** for more details).    
+ - As a second step, start each service individually since each service is a standalone Spring Boot application.     
  - The **Join IN** application runs on **http://localhost:8080/**
 
 **Note**   
@@ -35,25 +35,41 @@ In order to start the project you need to have Docker Desktop installed on your 
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/e8822fac-d29e-469a-bfef-89e145cb73c4)
 
-1. When the user signs up, a POST Feign request is sent to the Authentication service with the user credentials   
-2. When new user is registered Kafka Message is sent to Authentication service to add the new user credentials
-3. New User message is send from Authentication to Relashionship service to create new Node for the user
-4. New User message is send from Authentication to Reaction service to create new Node for the user
-5. New User message is send from Authentication to Notification service to create new collection for the user
-6. New User message is send from Authentication to Message service to create new collection for the user
-7. New User message is send from Authentication to Image service to create new collection for the user
-8. New User message is send from Authentication to Post service to create new collection for the user
+1. When the user signs up, a POST Feign request is sent to the Authentication service with the user credentials   
+2. When a new user is registered, a Kafka Message is sent to Authentication service to add the new user's credentials
+3. New User message is sent from Authentication to Relashionship service to create a new Node for the user
+4. New User message is sent from Authentication to Reaction service to create a new Node for the user
+5. New User message is sent from Authentication to Notification service to create a new collection for the user
+6. New User message is sent from Authentication to Message service to create a new collection for the user
+7. New User message is sent from Authentication to Image service to create a new collection for the user
+8. New User message is sent from Authentication to Post service to create a new collection for the user
 
-## 3.2. Post a Publication / Comment
+## 3.2. Post a Publication
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/cc43ef20-a7c9-400d-a6f9-d08fc7447e27)
 
-1. When new publication/comment is posted or updated new Kafka message is send from Profile to Post service
-2. Post service retrieves all frinds for the user from Relationship service
-3. Post sends Kafka message to Reaction service to create new node for the new post/comment
-4. Post sends Kafka message notifications to Notification service for all friends of the user that new publication/comment is created
+1. When a new publication is posted or edited, a new Kafka message is sent from the Profile to Post service 
+2. Post service retrieves all friends for the user from Relationship service (when a post is edited or deleted, this communication is not performed)
+3. Post sends a Kafka message to Reaction service to create a new node for the new post (when a post is edited or deleted, this communication is not performed)
+4. Post sends Kafka message notifications to Notification service for all friends of the user that new publication is created (when a post is edited or deleted, this communication is not performed)
 
-## 3.3. React to Post(publication) / Comment
+## 3.4. Post a Comment on a publication
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/974a8dab-9b8a-4658-a103-54a910b244ea)
+
+1. When a new comment is posted or edited, a new Kafka message is sent from the Profile to Post service 
+2. Post service retrieves people who have already reacted to the post from Reaction service. Also Post service retrieves all users who commented on the publication already from Post service itself (not shown in the picture) (when a comment is edited, these communications are not performed). 
+3. Post sends a Kafka message to the Reaction service to create a new node for the new comment (when a comment is edited, this communication is not performed)
+4. Post sends Kafka message notifications to Notification service to all users related to the publication that new comment is posted (when comment is edited this communication is not performed)
+
+## 3.5. Delete a Post
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/d5a297c4-4f5f-4d54-82f7-acf62a0844fe)
+
+1. When a post is deleted new Kafka message is sent from the Profile to Post service
+2. Post sends a Kafka message to Reaction to delete the nodes for the post and all its comments
+
+## 3.6. React to Post / Comment
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/78c9670a-94d4-47ca-b78a-68bb9917fc7c)
 
@@ -61,7 +77,7 @@ In order to start the project you need to have Docker Desktop installed on your 
 2. Reaction service retrieves all friends of the user whose post/comment has been reacted
 3. Reaction service sends notifications via Kafka messaging to Notification service that someone reacted to the post/comment
 
-## 3.4. Generate User profile page
+## 3.7. Generate User profile page
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/202f9a0d-0f9f-44a5-bb96-11091e288d15)
 
