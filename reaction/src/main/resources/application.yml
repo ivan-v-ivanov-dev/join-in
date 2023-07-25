@@ -31,6 +31,8 @@ spring:
           user: new-user-topic
           post:
             node: new-post-node
+          comment:
+            node: new-comment-node
     group:
       id: group-id
 
