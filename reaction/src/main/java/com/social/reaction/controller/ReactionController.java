@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 public class ReactionController {
 
@@ -28,6 +30,11 @@ public class ReactionController {
     @PostMapping("/post/stars")
     public int findStarsAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
         return profileService.findStarsAPostProfileCount(postIdentity);
+    }
+
+    @PostMapping("/post/reactions/users")
+    public Set<String> findPeopleWhoReactedToPost(@RequestParam("postIdentity") String postIdentity) {
+        return profileService.findPeopleWhoReactedToPost(postIdentity);
     }
 
     @GetMapping("/health")

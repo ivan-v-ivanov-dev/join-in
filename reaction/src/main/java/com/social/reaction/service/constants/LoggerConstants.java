@@ -11,6 +11,9 @@ public class LoggerConstants {
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
 
+    public static final String RETRIEVE_USERS_WHO_REACTED_TO_POST_TEMPLATE =
+            "Retrieve users identities who reacted to post (Post identity: %s)";
+
     private LoggerConstants() {
     }
 }

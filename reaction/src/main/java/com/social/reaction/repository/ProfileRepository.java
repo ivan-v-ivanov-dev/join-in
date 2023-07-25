@@ -5,6 +5,8 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Set;
+
 import static com.social.reaction.repository.queries.Queries.*;
 
 public interface ProfileRepository extends Neo4jRepository<Profile, String> {
@@ -16,6 +18,8 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
     int findDislikesAPostProfileCount(@Param("postIdentity") String postIdentity);
 
     @Query(FIND_HOW_MANY_PROFILES_STAR_THE_POST_TEMPLATE)
-    int findStarsAPostProfileCount(String postIdentity);
+    int findStarsAPostProfileCount(@Param("postIdentity") String postIdentity);
 
+    @Query(FIND_USER_IDENTITIES_WHO_REACTED_TO_THE_POST)
+    Set<String> findPeopleWhoReactedToPost(@Param("postIdentity") String postIdentity);
 }
