@@ -54,6 +54,9 @@ public class ConfigConstants {
     public static final String KAFKA_TOPIC_FOR_NEW_POST_NOTIFICATIONS_CREATED_TEMPLATE =
             KAFKA_TOPIC_NEW_TOPIC_FOR + "new posts notifications" + CREATED_TOPIC_NAME;
 
+    public static final String KAFKA_TOPIC_FOR_NEW_COMMENT_NOTIFICATIONS_CREATED_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "new comment notifications" + CREATED_TOPIC_NAME;
+
     public static final String KAFKA_TOPIC_FOR_NEW_POST_NODE_CREATED_TEMPLATE =
             KAFKA_TOPIC_NEW_TOPIC_FOR + "new post node" + CREATED_TOPIC_NAME;
 }

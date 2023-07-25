@@ -40,8 +40,10 @@ spring:
         new:
           user: new-user-topic
           post:
-            notifications: new-post-notifications
+            notification: new-post-notification
             node: new-post-node
+          comment:
+            notification: new-comment-notification
     partitions: 3
     replicas: 1
     group:
