@@ -909,13 +909,17 @@
                                                                                   class="dropdown-toggle"
                                                                                   data-bs-toggle="dropdown"
                                                                                   role="button"></span>
+
+                                                                            <form id="likeForm" th:action="@{/like}" method="post">
+                                                                                <input type="hidden" name="userIdentity" th:value="${profile.getIdentity()}" />
+                                                                                <input type="hidden" name="postIdentity" th:value="${currentPost.getPostIdentity()}" />
+                                                                            </form>
+
                                                                             <div class="dropdown-menu py-2">
-                                                                                <a class="ms-2 me-2"
-                                                                                   data-bs-placement="top"
-                                                                                   data-bs-toggle="tooltip"
-                                                                                   th:href="@{/like}" title="Like">
-                                                                                    <i class="fa fa-thumbs-up"
-                                                                                       style="font-size:24px"></i>
+                                                                                    <a class="ms-2 me-2" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                                                       onclick="document.getElementById('likeForm').submit()" title="Like">
+                                                                                        <i class="fa fa-thumbs-up" style="font-size:24px"></i>
+                                                                                    </a>
 
                                                                                     <a class="me-2"
                                                                                        data-bs-placement="top"
@@ -924,31 +928,15 @@
                                                                                        title="Dislike">
                                                                                         <i class="fa fa-thumbs-down"
                                                                                            style="font-size:24px;color:red"></i>
+                                                                                    </a>
 
-                                                                                        <a class="me-2"
-                                                                                           data-bs-placement="top"
-                                                                                           data-bs-toggle="tooltip"
-                                                                                           href="#" title="Laugh">
-                                                                                            <i class="fa fa-star-o"
-                                                                                               style="font-size:24px"></i>
-
-                                                                                            <a class="me-2"
-                                                                                               data-bs-placement="top"
-                                                                                               data-bs-toggle="tooltip">
-
-                                                                                                <a class="me-2"
-                                                                                                   data-bs-placement="top"
-                                                                                                   data-bs-toggle="tooltip">
-                                                                                                </a>
-
-                                                                                                <a class="me-2"
-                                                                                                   data-bs-placement="top"
-                                                                                                   data-bs-toggle="tooltip">
-                                                                                                </a>
-                                                                                                <a class="me-2"
-                                                                                                   data-bs-placement="top"
-                                                                                                   data-bs-toggle="tooltip">
-                                                                                                </a>
+                                                                                    <a class="me-2"
+                                                                                       data-bs-placement="top"
+                                                                                       data-bs-toggle="tooltip"
+                                                                                       href="#" title="Star">
+                                                                                        <i class="fa fa-star-o"
+                                                                                           style="font-size:24px"></i>
+                                                                                    </a>
 
                                                                             </div>
 

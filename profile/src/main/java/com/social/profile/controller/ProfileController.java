@@ -22,6 +22,7 @@ public class ProfileController {
     private final CommentService commentService;
     private final ImageService imageService;
     private final RelationshipService relationshipService;
+    private final ReactionService reactionService;
 
     public ProfileController(LoginService loginService,
                              RegisterService registerService,
@@ -29,7 +30,8 @@ public class ProfileController {
                              PostService postService,
                              CommentService commentService,
                              ImageService imageService,
-                             RelationshipService relationshipService) {
+                             RelationshipService relationshipService,
+                             ReactionService reactionService) {
         this.loginService = loginService;
         this.registerService = registerService;
         this.profileService = profileService;
@@ -37,6 +39,7 @@ public class ProfileController {
         this.commentService = commentService;
         this.imageService = imageService;
         this.relationshipService = relationshipService;
+        this.reactionService = reactionService;
     }
 
     @GetMapping("/")
@@ -126,6 +129,13 @@ public class ProfileController {
                           @RequestParam("comment") String comment) {
         commentService.comment(commentAuthorIdentity, postIdentity, postAuthorIdentity, comment);
         return "redirect:/profile?identity=" + commentAuthorIdentity;
+    }
+
+    @PostMapping("/like")
+    public String likeAPost(@RequestParam("userIdentity") String userIdentity,
+                            @RequestParam("postIdentity") String postIdentity) {
+        reactionService.likePost(userIdentity, postIdentity);
+        return "redirect:/profile?identity=" + userIdentity;
     }
 
     @GetMapping("/signout")
