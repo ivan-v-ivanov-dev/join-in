@@ -44,6 +44,7 @@ spring:
             node: new-post-node
           comment:
             notification: new-comment-notification
+            node: new-comment-node
     partitions: 3
     replicas: 1
     group:
