@@ -2,14 +2,16 @@ package com.social.reaction.service.constants;
 
 public class LoggerConstants {
 
+    private static final String KAFKA_MESSAGING = "Kafka Messaging :: ";
+
     public static final String NEW_USER_MESSAGE_RECEIVED_FROM_AUTHENTICATION_SERVICE_TEMPLATE =
-            "Kafka Messaging :: New user message received from Authentication service (Kafka topic: %s, User identity: %s)";
+            KAFKA_MESSAGING + "New user message received from Authentication service (Kafka topic: %s, User identity: %s)";
 
     public static final String NEW_POST_NODE_RECEIVED_FROM_POST_SERVICE_TEMPLATE =
-            "Kafka Messaging :: New post message received from Post service (Kafka topic: %s, Post identity: %s)";
+            KAFKA_MESSAGING + "New post message received from Post service (Kafka topic: %s, Post identity: %s)";
 
     public static final String NEW_COMMENT_NODE_RECEIVED_FROM_POST_SERVICE_TEMPLATE =
-            "Kafka Messaging :: New comment message received from Post service (Kafka topic: %s, Comment identity: %s)";
+            KAFKA_MESSAGING + "New comment message received from Post service (Kafka topic: %s, Comment identity: %s)";
 
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
