@@ -1,6 +1,6 @@
 package com.social.reaction.service;
 
-import com.social.kafka.messages.NewPostNodeMessage;
+import com.social.kafka.messages.NewNodeMessage;
 import com.social.kafka.messages.NewUserMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.reaction.model.Post;
@@ -47,11 +47,11 @@ public class ReactionListener {
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.post.node}", groupId = "${spring.kafka.group.id}")
     public void newPostNodeListener(KafkaMessage kafkaMessage) {
-        NewPostNodeMessage newPostNodeMessage = (NewPostNodeMessage) kafkaMessage;
+        NewNodeMessage newNodeMessage = (NewNodeMessage) kafkaMessage;
         log.info(String.format(NEW_POST_NODE_RECEIVED_FROM_POST_SERVICE_TEMPLATE,
-                newPostNodeTopic, newPostNodeMessage.getPostIdentity()));
+                newPostNodeTopic, newNodeMessage.getIdentity()));
 
-        Post post = Post.builder().identity(newPostNodeMessage.getPostIdentity()).build();
+        Post post = Post.builder().identity(newNodeMessage.getIdentity()).build();
         postService.save(post);
     }
 }

@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class NewPostNodeMessage implements KafkaMessage {
+public class NewNodeMessage implements KafkaMessage {
 
-    private String postIdentity;
+    private String identity;
 }
