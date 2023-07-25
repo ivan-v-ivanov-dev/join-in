@@ -3,13 +3,11 @@ package com.social.post.model;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Document(collection = "posts")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
