@@ -15,7 +15,7 @@ import static com.social.post.config.ConfigConstants.KAFKA_TOPIC_FOR_NEW_POST_NO
 @Slf4j
 public class NewPostNotificationTopic {
 
-    @Value("${spring.kafka.topic.name.new.post.notifications}")
+    @Value("${spring.kafka.topic.name.new.post.notification}")
     private String topicName;
     @Value("${spring.kafka.partitions}")
     private String partitions;
@@ -23,7 +23,7 @@ public class NewPostNotificationTopic {
     private String replicas;
 
     @Bean
-    public NewTopic newPostNotifications() {
+    public NewTopic newPostNotification() {
         NewTopic postPublishedTopicForNotificationService = TopicBuilder
                 .name(topicName)
                 .partitions(Integer.parseInt(partitions))
