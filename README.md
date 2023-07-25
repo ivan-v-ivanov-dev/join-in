@@ -25,7 +25,7 @@ Keep in mind that I use MVC controllers, which means that I always need to gener
  - The **Join IN** application runs on **http://localhost:8080/**
 
 **Note**   
-In order to start the project you need to have Docker Desktop installed on your machine. Also, the Flyway container in Authentication service starts, creates the tables and imports the data in the MySQL container and after that shuts down, which is the normal behaviour. Despite of the fact that Flyway depends on MySQL, keep an eye on it and restart it manually if needed.
+In order to start the project you need to have Docker Desktop installed on your machine. Also, the Flyway container in Authentication service starts, creates the tables and imports the data into the MySQL container then shuts down, which is normal behavior. Despite the fact that Flyway depends on MySQL, keep an eye on it and restart it manually if needed.
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/c138f481-c8cb-4455-9aad-1f61ebce17c9)
 
