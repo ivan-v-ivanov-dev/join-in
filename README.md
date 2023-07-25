@@ -132,7 +132,11 @@ Runs on **http://localhost:8085/**. Service stores user images (profile photo, b
 
 ## 4.5. Reaction service  
 
-Runs on **http://localhost:8084/**. Stores posts reactions (likes, dislikes and stars) and comment reactions (likes, dislikes). Uses Neo4j as a database.
+Runs on **http://localhost:8084/**. Stores posts reactions (likes, dislikes and stars) and comment reactions (likes, dislikes). Uses Neo4j as a database. Posts, comments and users are created as nodes (with identity as Id) and Users has a relationship to the posts and comments.
+
+Example
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/c4b8f185-073b-41af-a7f8-d6365bc287d8)
 
 ### Technical overview     
 
@@ -143,7 +147,11 @@ Runs on **http://localhost:8084/**. Stores posts reactions (likes, dislikes and 
 
 ## 4.6. Relashionship service  
 
-Runs on **http://localhost:8083/**. Stores friendship relations for the users. Uses Neo4j as a database.
+Runs on **http://localhost:8083/**. Stores friendship relations for the users. Uses Neo4j as a database. The relationships are outgoing for each user. So far only FRIENDSHIP is used, but the service can be extended to support other relationships (FOLLOWS, for example) as well.
+
+Example
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/02bb4e5f-c585-4163-9cf8-7fa96f8da44b)
 
 ### Technical overview     
 
