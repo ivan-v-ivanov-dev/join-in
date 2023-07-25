@@ -4,6 +4,7 @@ import com.social.post.model.Comment;
 import com.social.post.model.Post;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PostRepository {
     void save(Post post, String collection);
@@ -20,5 +21,7 @@ public interface PostRepository {
 
     void createNewUserCollection(String collection);
 
-    void saveComment(Comment comment, String postIdentity);
+    void saveComment(Comment comment, String postIdentity, String collection);
+
+    Set<String> findAllUsersCommentingThePost(String postIdentity, String collection);
 }

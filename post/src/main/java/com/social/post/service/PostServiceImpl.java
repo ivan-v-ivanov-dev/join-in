@@ -1,13 +1,14 @@
 package com.social.post.service;
 
-import com.social.kafka.messages.NewPostNodeMessage;
-import com.social.kafka.messages.NewPostNotificationMessage;
+import com.social.kafka.messages.NewNodeMessage;
+import com.social.kafka.messages.NewPostCommentNotificationMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.model.Comment;
 import com.social.post.model.Post;
 import com.social.post.repository.contract.PostRepository;
 import com.social.post.service.contracts.KafkaMessageSender;
 import com.social.post.service.contracts.PostService;
+import com.social.post.service.feign.ReactionClient;
 import com.social.post.service.feign.RelationshipClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static com.social.post.service.constants.CollectionTemplateConstant.COLLECTION_TEMPLATE;
 import static com.social.post.service.constants.LoggerConstants.*;
@@ -25,16 +27,29 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final RelationshipClient relationshipClient;
+    private final ReactionClient reactionClient;
     private final KafkaMessageSender kafkaMessageSender;
     private final String newPostNotificationTopic;
+    private final String newCommentNotificationTopic;
     private final String newPostNodeTopic;
+    private final String newCommentNodeTopic;
 
-    public PostServiceImpl(PostRepository postRepository, RelationshipClient relationshipClient, KafkaMessageSender kafkaMessageSender, @Value("${spring.kafka.topic.name.new.post.notifications}") String newPostNotificationTopic, @Value("${spring.kafka.topic.name.new.post.node}") String newPostNodeTopic) {
+    public PostServiceImpl(PostRepository postRepository,
+                           RelationshipClient relationshipClient,
+                           ReactionClient reactionClient,
+                           KafkaMessageSender kafkaMessageSender,
+                           @Value("${spring.kafka.topic.name.new.post.notification}") String newPostNotificationTopic,
+                           @Value("${spring.kafka.topic.name.new.comment.notification}") String newCommentNotificationTopic,
+                           @Value("${spring.kafka.topic.name.new.post.node}") String newPostNodeTopic,
+                           @Value("${spring.kafka.topic.name.new.comment.node}") String newCommentNodeTopic) {
         this.postRepository = postRepository;
         this.relationshipClient = relationshipClient;
+        this.reactionClient = reactionClient;
         this.kafkaMessageSender = kafkaMessageSender;
         this.newPostNotificationTopic = newPostNotificationTopic;
+        this.newCommentNotificationTopic = newCommentNotificationTopic;
         this.newPostNodeTopic = newPostNodeTopic;
+        this.newCommentNodeTopic = newCommentNodeTopic;
     }
 
     @Override
@@ -45,22 +60,26 @@ public class PostServiceImpl implements PostService {
     @Override
     public void save(Post post, String authorIdentity, String authorNames) {
         postRepository.save(post, String.format(COLLECTION_TEMPLATE, authorIdentity));
-        log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE, authorIdentity, post.getPostIdentity()));
+        log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE,
+                authorIdentity, post.getPostIdentity()));
 
-        List<String> friends = relationshipClient.findFriends(authorIdentity);
+        Set<String> friends = relationshipClient.findFriends(authorIdentity);
         log.info(String.format(RETRIEVE_ALL_FRIENDS_FROM_RELATIONSHIP_SERVICE_TEMPLATE, authorIdentity));
 
-        KafkaMessage newPostNotifications = NewPostNotificationMessage.builder()
-                .friends(friends)
+        KafkaMessage newPostCommentNotificationMessage = NewPostCommentNotificationMessage.builder()
+                .peopleToNotify(friends)
                 .authorIdentity(authorIdentity)
                 .postIdentity(post.getPostIdentity())
                 .authorNames(authorNames)
                 .date(LocalDate.now().toString())
                 .build();
-        kafkaMessageSender.send(newPostNotifications, newPostNotificationTopic);
-        log.info(String.format(NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE, newPostNotificationTopic));
+        kafkaMessageSender.send(newPostCommentNotificationMessage, newPostNotificationTopic);
+        log.info(String.format(NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                newPostNotificationTopic));
 
-        KafkaMessage newPostNodeMessage = NewPostNodeMessage.builder().postIdentity(post.getPostIdentity()).build();
+        KafkaMessage newPostNodeMessage = NewNodeMessage.builder()
+                .identity(post.getPostIdentity())
+                .build();
         kafkaMessageSender.send(newPostNodeMessage, newPostNodeTopic);
         log.info(String.format(NEW_POST_NODE_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE, newPostNodeTopic));
     }
@@ -92,7 +111,34 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void saveComment(Comment comment, String postIdentity) {
-        postRepository.saveComment(comment, postIdentity);
+    public void saveComment(Comment comment, String postIdentity, String postAuthorIdentity, String authorNames) {
+        postRepository.saveComment(comment, postIdentity, String.format(COLLECTION_TEMPLATE, postAuthorIdentity));
+        log.info(String.format(NEW_COMMENT_SAVED_IN_DATABASE_AUTHOR_IDENTITY_COMMENT_IDENTITY_TEMPLATE,
+                comment.getAuthorIdentity(), postIdentity));
+
+        Set<String> peopleToNotify = postRepository
+                .findAllUsersCommentingThePost(postIdentity, String.format(COLLECTION_TEMPLATE, postAuthorIdentity));
+        peopleToNotify.addAll(reactionClient.findPeopleWhoReactedToPost(postIdentity));
+        peopleToNotify.add(comment.getAuthorIdentity());
+        log.info(String.format(RETRIEVE_ALL_USERS_WHO_REACTED_AND_COMMENTED_THE_POST_TEMPLATE, postIdentity));
+
+        // TODO: Create listener
+        KafkaMessage newPostCommentNotificationMessage = NewPostCommentNotificationMessage.builder()
+                .peopleToNotify(peopleToNotify)
+                .authorIdentity(comment.getAuthorIdentity())
+                .postIdentity(postIdentity)
+                .authorNames(authorNames)
+                .date(LocalDate.now().toString())
+                .build();
+        kafkaMessageSender.send(newPostCommentNotificationMessage, newCommentNotificationTopic);
+        log.info(String.format(NEW_COMMENT_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                newCommentNotificationTopic));
+
+        // TODO: Create listener
+        KafkaMessage newCommentNodeMessage = NewNodeMessage.builder()
+                .identity(comment.getCommentIdentity())
+                .build();
+        kafkaMessageSender.send(newCommentNodeMessage, newCommentNodeTopic);
+        log.info(String.format(NEW_COMMENT_NODE_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE, newCommentNodeTopic));
     }
 }

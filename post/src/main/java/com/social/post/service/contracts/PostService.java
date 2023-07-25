@@ -20,5 +20,5 @@ public interface PostService {
 
     void createNewUserCollection(String identity);
 
-    void saveComment(Comment comment, String postIdentity);
+    void saveComment(Comment comment, String postIdentity, String postAuthorIdentity, String authorNames);
 }

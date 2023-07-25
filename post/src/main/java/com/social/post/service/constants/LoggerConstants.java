@@ -23,10 +23,16 @@ public class LoggerConstants {
     public static final String NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING +  "New post notification send to Notification service (Kafka topic: %s)";
 
+    public static final String NEW_COMMENT_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING +  "New comment notification send to Notification service (Kafka topic: %s)";
+
     public static final String NEW_POST_NODE_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING +  "New post node send to Reaction service (Kafka topic: %s)";
 
-    // Post create
+    public static final String NEW_COMMENT_NODE_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING +  "New comment node send to Reaction service (Kafka topic: %s)";
+
+    // Post and Comment
     public static final String NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE =
             "New Post saved in database (User identity %s, Post identity: %s)";
 
@@ -35,6 +41,12 @@ public class LoggerConstants {
 
     public static final String RETRIEVE_ALL_FRIENDS_FROM_RELATIONSHIP_SERVICE_TEMPLATE =
             "Retrieve all friends from Relationship service (User identity: %s)";
+
+    public static final String NEW_COMMENT_SAVED_IN_DATABASE_AUTHOR_IDENTITY_COMMENT_IDENTITY_TEMPLATE =
+            "New Comment saved in database (User identity %s, Comment identity: %s)";
+
+    public static final String RETRIEVE_ALL_USERS_WHO_REACTED_AND_COMMENTED_THE_POST_TEMPLATE =
+            "Retrieve all users who reacted and commented the Post (Post identity: %s)";
 
     private LoggerConstants() {
     }

@@ -63,19 +63,18 @@ public class PostListener {
     public void postCommentListener(KafkaMessage kafkaMessage) {
         CommentMessage commentMessage = (CommentMessage) kafkaMessage;
         log.info(String.format(NEW_PUBLISHED_COMMENT_MESSAGE_RECEIVED_TOPIC_NAME_AUTHOR_IDENTITY_TEMPLATE,
-                postCommentTopic, commentMessage.getUserIdentity()));
-
-        LocalDate dateNow = LocalDate.now();
+                postCommentTopic, commentMessage.getCommentAuthorIdentity()));
 
         Comment comment = Comment.builder()
-                .authorIdentity(commentMessage.getUserIdentity())
+                .authorIdentity(commentMessage.getCommentAuthorIdentity())
                 .commentIdentity(identityGenerator
-                        .generate(commentMessage.getUserIdentity(), commentMessage.getContent(), dateNow.toString()))
+                        .generate(commentMessage.getCommentAuthorIdentity(), commentMessage.getContent(), commentMessage.getPostDate()))
                 .content(commentMessage.getContent())
-                .postDate(dateNow)
+                .postDate(LocalDate.parse(commentMessage.getPostDate()))
                 .build();
 
-        postService.saveComment(comment, commentMessage.getPostIdentity());
+        postService.saveComment(comment, commentMessage.getPostIdentity(),
+                commentMessage.getPostAuthorIdentity(), commentMessage.getCommentAuthorNames());
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.delete.post}", groupId = "${spring.kafka.group.id}")

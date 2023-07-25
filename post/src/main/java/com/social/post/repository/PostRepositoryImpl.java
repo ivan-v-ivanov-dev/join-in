@@ -1,6 +1,5 @@
 package com.social.post.repository;
 
-import com.mongodb.client.result.UpdateResult;
 import com.social.post.model.Comment;
 import com.social.post.model.Post;
 import com.social.post.repository.contract.PostRepository;
@@ -10,7 +9,9 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class PostRepositoryImpl implements PostRepository {
@@ -60,9 +61,17 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
-    public void saveComment(Comment comment, String postIdentity) {
+    public void saveComment(Comment comment, String postIdentity, String collection) {
         Query query = new Query(Criteria.where("postIdentity").is(postIdentity));
         Update update = new Update().push("comments", comment);
-        mongoTemplate.updateFirst(query, update, Post.class);
+        mongoTemplate.updateFirst(query, update, Post.class, collection);
+    }
+
+    @Override
+    public Set<String> findAllUsersCommentingThePost(String postIdentity, String collection) {
+        Set<String> authors = new HashSet<>();
+        Query query = new Query(Criteria.where("postIdentity").is(postIdentity).all(Comment.class));
+        mongoTemplate.find(query, Comment.class, collection).forEach(comment -> authors.add(comment.getAuthorIdentity()));
+        return authors;
     }
 }
