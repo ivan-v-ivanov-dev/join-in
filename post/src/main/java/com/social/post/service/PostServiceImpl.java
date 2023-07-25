@@ -3,6 +3,7 @@ package com.social.post.service;
 import com.social.kafka.messages.NewPostNodeMessage;
 import com.social.kafka.messages.NewPostNotificationMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
+import com.social.post.model.Comment;
 import com.social.post.model.Post;
 import com.social.post.repository.contract.PostRepository;
 import com.social.post.service.contracts.KafkaMessageSender;
@@ -49,7 +50,13 @@ public class PostServiceImpl implements PostService {
         List<String> friends = relationshipClient.findFriends(authorIdentity);
         log.info(String.format(RETRIEVE_ALL_FRIENDS_FROM_RELATIONSHIP_SERVICE_TEMPLATE, authorIdentity));
 
-        KafkaMessage newPostNotifications = NewPostNotificationMessage.builder().friends(friends).authorIdentity(authorIdentity).postIdentity(post.getPostIdentity()).authorNames(authorNames).date(LocalDate.now().toString()).build();
+        KafkaMessage newPostNotifications = NewPostNotificationMessage.builder()
+                .friends(friends)
+                .authorIdentity(authorIdentity)
+                .postIdentity(post.getPostIdentity())
+                .authorNames(authorNames)
+                .date(LocalDate.now().toString())
+                .build();
         kafkaMessageSender.send(newPostNotifications, newPostNotificationTopic);
         log.info(String.format(NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE, newPostNotificationTopic));
 
@@ -82,5 +89,10 @@ public class PostServiceImpl implements PostService {
     public void createNewUserCollection(String identity) {
         postRepository.createNewUserCollection(String.format(COLLECTION_TEMPLATE, identity));
         log.info(String.format(NEW_COLLECTION_SAVED_IN_DATABASE_TEMPLATE, identity));
+    }
+
+    @Override
+    public void saveComment(Comment comment, String postIdentity) {
+        postRepository.saveComment(comment, postIdentity);
     }
 }

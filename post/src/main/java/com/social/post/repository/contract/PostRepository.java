@@ -1,5 +1,6 @@
 package com.social.post.repository.contract;
 
+import com.social.post.model.Comment;
 import com.social.post.model.Post;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface PostRepository {
     int findAuthorPostsCount(String collection);
 
     void createNewUserCollection(String collection);
+
+    void saveComment(Comment comment, String postIdentity);
 }

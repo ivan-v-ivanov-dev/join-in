@@ -4,7 +4,6 @@ import com.social.kafka.messages.*;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.model.Comment;
 import com.social.post.model.Post;
-import com.social.post.service.contracts.CommentService;
 import com.social.post.service.contracts.IdentityGenerator;
 import com.social.post.service.contracts.PostService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +21,6 @@ public class PostListener {
 
     private final IdentityGenerator identityGenerator;
     private final PostService postService;
-    private final CommentService commentService;
     private final String postPublicationTopic;
     private final String postCommentTopic;
     private final String deletePostTopic;
@@ -31,7 +29,6 @@ public class PostListener {
 
     public PostListener(IdentityGenerator identityGenerator,
                         PostService postService,
-                        CommentService commentService,
                         @Value("${spring.kafka.topic.name.post.publication}") String postPublicationTopic,
                         @Value("${spring.kafka.topic.name.post.comment}") String postCommentTopic,
                         @Value("${spring.kafka.topic.name.delete.post}") String deletePostTopic,
@@ -39,7 +36,6 @@ public class PostListener {
                         @Value("${spring.kafka.topic.name.new.user}") String newUserTopic) {
         this.identityGenerator = identityGenerator;
         this.postService = postService;
-        this.commentService = commentService;
         this.postPublicationTopic = postPublicationTopic;
         this.postCommentTopic = postCommentTopic;
         this.deletePostTopic = deletePostTopic;
@@ -72,7 +68,6 @@ public class PostListener {
         LocalDate dateNow = LocalDate.now();
 
         Comment comment = Comment.builder()
-                .postIdentity(commentMessage.getPostIdentity())
                 .authorIdentity(commentMessage.getUserIdentity())
                 .commentIdentity(identityGenerator
                         .generate(commentMessage.getUserIdentity(), commentMessage.getContent(), dateNow.toString()))
@@ -80,7 +75,7 @@ public class PostListener {
                 .postDate(dateNow)
                 .build();
 
-        commentService.save(comment);
+        postService.saveComment(comment, commentMessage.getPostIdentity());
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.delete.post}", groupId = "${spring.kafka.group.id}")

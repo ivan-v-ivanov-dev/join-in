@@ -1,5 +1,7 @@
 package com.social.post.repository;
 
+import com.mongodb.client.result.UpdateResult;
+import com.social.post.model.Comment;
 import com.social.post.model.Post;
 import com.social.post.repository.contract.PostRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -55,5 +57,12 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public void createNewUserCollection(String collection) {
         mongoTemplate.createCollection(collection);
+    }
+
+    @Override
+    public void saveComment(Comment comment, String postIdentity) {
+        Query query = new Query(Criteria.where("postIdentity").is(postIdentity));
+        Update update = new Update().push("comments", comment);
+        mongoTemplate.updateFirst(query, update, Post.class);
     }
 }
