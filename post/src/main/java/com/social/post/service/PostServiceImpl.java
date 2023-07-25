@@ -122,7 +122,6 @@ public class PostServiceImpl implements PostService {
         peopleToNotify.add(comment.getAuthorIdentity());
         log.info(String.format(RETRIEVE_ALL_USERS_WHO_REACTED_AND_COMMENTED_THE_POST_TEMPLATE, postIdentity));
 
-        // TODO: Create listener
         KafkaMessage newPostCommentNotificationMessage = NewPostCommentNotificationMessage.builder()
                 .peopleToNotify(peopleToNotify)
                 .authorIdentity(comment.getAuthorIdentity())
@@ -134,7 +133,6 @@ public class PostServiceImpl implements PostService {
         log.info(String.format(NEW_COMMENT_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
                 newCommentNotificationTopic));
 
-        // TODO: Create listener
         KafkaMessage newCommentNodeMessage = NewNodeMessage.builder()
                 .identity(comment.getCommentIdentity())
                 .build();
