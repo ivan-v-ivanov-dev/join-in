@@ -38,6 +38,8 @@ spring:
           post: delete-post-topic
         edit:
           post: edit-post-topic
+        like:
+          post: like-post-topic
     partitions: 3
     replicas: 1
     group:
