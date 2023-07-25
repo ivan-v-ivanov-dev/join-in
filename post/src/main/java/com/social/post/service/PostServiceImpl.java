@@ -101,11 +101,11 @@ public class PostServiceImpl implements PostService {
     public void delete(String postIdentity, String authorIdentity) {
         Set<String> identitiesToDelete = postRepository.findAllCommentIdentitiesForAPost(postIdentity,
                 String.format(COLLECTION_TEMPLATE, authorIdentity));
-        identitiesToDelete.add(postIdentity);
         log.info(String.format(RETRIEVE_COMMENT_IDENTITIES_FOR_A_POST_TEMPLATE, postIdentity));
 
         KafkaMessage nodesToDeleteMessage = DeleteNodesMessage.builder()
-                .nodesIdentitiesToDelete(identitiesToDelete)
+                .commentsNodesIdentities(identitiesToDelete)
+                .postIdentity(postIdentity)
                 .build();
         kafkaMessageSender.send(nodesToDeleteMessage, deleteNodesTopic);
         log.info(String.format(DELETE_NODES_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE, deleteNodesTopic));
