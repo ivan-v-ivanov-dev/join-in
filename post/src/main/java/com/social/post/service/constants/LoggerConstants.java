@@ -32,6 +32,9 @@ public class LoggerConstants {
     public static final String NEW_COMMENT_NODE_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING +  "New comment node send to Reaction service (Kafka topic: %s)";
 
+    public static final String DELETE_NODES_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING +  "Delete nodes send to Reaction service (Kafka topic: %s)";
+
     // Post and Comment
     public static final String NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE =
             "New Post saved in database (User identity %s, Post identity: %s)";
@@ -60,8 +63,11 @@ public class LoggerConstants {
     public static final String UPDATE_POST_CONTENT_TEMPLATE =
             "Update Post content (Post identity: %s)";
 
-    public static final String FIND_AUTHOR_POSTS_COUNT_TEMPLATE =
+    public static final String RETRIEVE_AUTHOR_POSTS_COUNT_TEMPLATE =
             "Retrieve author posts count (Author identity: %s)";
+
+    public static final String RETRIEVE_COMMENT_IDENTITIES_FOR_A_POST_TEMPLATE =
+            "Retrieve comment identities for a post (Post identity: %s)";
 
 
     private LoggerConstants() {

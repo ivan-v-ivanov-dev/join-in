@@ -1,5 +1,6 @@
 package com.social.post.service;
 
+import com.social.kafka.messages.DeleteNodesMessage;
 import com.social.kafka.messages.NewNodeMessage;
 import com.social.kafka.messages.NewPostCommentNotificationMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
@@ -33,6 +34,7 @@ public class PostServiceImpl implements PostService {
     private final String newCommentNotificationTopic;
     private final String newPostNodeTopic;
     private final String newCommentNodeTopic;
+    private final String deleteNodesTopic;
 
     public PostServiceImpl(PostRepository postRepository,
                            RelationshipClient relationshipClient,
@@ -41,7 +43,8 @@ public class PostServiceImpl implements PostService {
                            @Value("${spring.kafka.topic.name.new.post.notification}") String newPostNotificationTopic,
                            @Value("${spring.kafka.topic.name.new.comment.notification}") String newCommentNotificationTopic,
                            @Value("${spring.kafka.topic.name.new.post.node}") String newPostNodeTopic,
-                           @Value("${spring.kafka.topic.name.new.comment.node}") String newCommentNodeTopic) {
+                           @Value("${spring.kafka.topic.name.new.comment.node}") String newCommentNodeTopic,
+                           @Value("${spring.kafka.topic.name.delete.nodes}") String deleteNodesTopic) {
         this.postRepository = postRepository;
         this.relationshipClient = relationshipClient;
         this.reactionClient = reactionClient;
@@ -50,6 +53,7 @@ public class PostServiceImpl implements PostService {
         this.newCommentNotificationTopic = newCommentNotificationTopic;
         this.newPostNodeTopic = newPostNodeTopic;
         this.newCommentNodeTopic = newCommentNodeTopic;
+        this.deleteNodesTopic = deleteNodesTopic;
     }
 
     @Override
@@ -95,8 +99,20 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void delete(String postIdentity, String authorIdentity) {
+        Set<String> identitiesToDelete = postRepository.findAllCommentIdentitiesForAPost(postIdentity,
+                String.format(COLLECTION_TEMPLATE, authorIdentity));
+        identitiesToDelete.add(postIdentity);
+        log.info(String.format(RETRIEVE_COMMENT_IDENTITIES_FOR_A_POST_TEMPLATE, postIdentity));
+
+        KafkaMessage nodesToDeleteMessage = DeleteNodesMessage.builder()
+                .nodesIdentitiesToDelete(identitiesToDelete)
+                .build();
+        kafkaMessageSender.send(nodesToDeleteMessage, deleteNodesTopic);
+        log.info(String.format(DELETE_NODES_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE, deleteNodesTopic));
+
         postRepository.delete(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
         log.info(String.format(DELETE_POST_TEMPLATE, postIdentity));
+
     }
 
     @Override
@@ -108,7 +124,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public int findAuthorPostsCount(String authorIdentity) {
         int authorPostsCount = postRepository.findAuthorPostsCount(String.format(COLLECTION_TEMPLATE, authorIdentity));
-        log.info(String.format(FIND_AUTHOR_POSTS_COUNT_TEMPLATE, authorPostsCount));
+        log.info(String.format(RETRIEVE_AUTHOR_POSTS_COUNT_TEMPLATE, authorPostsCount));
         return authorPostsCount;
     }
 

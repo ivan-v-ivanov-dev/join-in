@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -73,5 +74,13 @@ public class PostRepositoryImpl implements PostRepository {
         Query query = new Query(Criteria.where("postIdentity").is(postIdentity).all(Comment.class));
         mongoTemplate.find(query, Comment.class, collection).forEach(comment -> authors.add(comment.getAuthorIdentity()));
         return authors;
+    }
+
+    @Override
+    public Set<String> findAllCommentIdentitiesForAPost(String postIdentity, String collection) {
+        Set<String> commentIdentities = new LinkedHashSet<>();
+        Query query = new Query(Criteria.where("postIdentity").is(postIdentity).all(Comment.class));
+        mongoTemplate.find(query, Comment.class, collection).forEach(comment -> commentIdentities.add(comment.getCommentIdentity()));
+        return commentIdentities;
     }
 }

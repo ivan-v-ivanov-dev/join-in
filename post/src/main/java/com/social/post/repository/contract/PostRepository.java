@@ -24,4 +24,6 @@ public interface PostRepository {
     void saveComment(Comment comment, String postIdentity, String collection);
 
     Set<String> findAllUsersCommentingThePost(String postIdentity, String collection);
+
+    Set<String> findAllCommentIdentitiesForAPost(String postIdentity, String collection);
 }
