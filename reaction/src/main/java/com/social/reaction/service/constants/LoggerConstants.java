@@ -16,6 +16,9 @@ public class LoggerConstants {
     public static final String DELETE_NODES_RECEIVED_FROM_POST_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "Delete nodes received from Post service (Kafka topic: %s)";
 
+    public static final String LIKE_POST_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "LIKE post message received from Profile service (Kafka topic: %s, Post identity: %s)";
+
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
 
@@ -29,6 +32,8 @@ public class LoggerConstants {
     public static final String COMMENT_NODES_DELETED = "Comment nodes deleted with their relations";
 
     public static final String POST_NODE_DELETED = "Post node deleted with its relations";
+
+    public static final String POST_LIKED_BY_USER_TEMPLATE = "Post liked by user (Post identity: %s, User identity: %s)";
 
     private LoggerConstants() {
     }

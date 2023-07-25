@@ -3,6 +3,7 @@ package com.social.reaction.service;
 import com.social.kafka.messages.DeleteNodesMessage;
 import com.social.kafka.messages.NewNodeMessage;
 import com.social.kafka.messages.NewUserMessage;
+import com.social.kafka.messages.PostReactionMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.reaction.model.Comment;
 import com.social.reaction.model.Post;
@@ -28,6 +29,7 @@ public class ReactionListener {
     private final String newPostNodeTopic;
     private final String newCommentNodeTopic;
     private final String deleteNodesTopic;
+    private final String likePostTopic;
 
     public ReactionListener(ProfileService profileService,
                             PostService postService,
@@ -35,7 +37,8 @@ public class ReactionListener {
                             @Value("${spring.kafka.topic.name.new.user}") String newUserTopic,
                             @Value("${spring.kafka.topic.name.new.post.node}") String newPostNodeTopic,
                             @Value("${spring.kafka.topic.name.new.comment.node}") String newCommentNodeTopic,
-                            @Value("${spring.kafka.topic.name.delete.nodes}") String deleteNodesTopic) {
+                            @Value("${spring.kafka.topic.name.delete.nodes}") String deleteNodesTopic,
+                            @Value("${spring.kafka.topic.name.like.post}") String likePostTopic) {
         this.profileService = profileService;
         this.postService = postService;
         this.commentService = commentService;
@@ -43,6 +46,7 @@ public class ReactionListener {
         this.newPostNodeTopic = newPostNodeTopic;
         this.newCommentNodeTopic = newCommentNodeTopic;
         this.deleteNodesTopic = deleteNodesTopic;
+        this.likePostTopic = likePostTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")
@@ -83,5 +87,14 @@ public class ReactionListener {
 
         commentService.deleteNodes(deleteNodesMessage.getCommentsNodesIdentities());
         postService.deleteNode(deleteNodesMessage.getPostIdentity());
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.name.like.post}", groupId = "${spring.kafka.group.id}")
+    public void likePostListener(KafkaMessage kafkaMessage) {
+        PostReactionMessage postReactionMessage = (PostReactionMessage) kafkaMessage;
+        log.info(String.format(LIKE_POST_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
+                likePostTopic, postReactionMessage.getPostIdentity()));
+
+        postService.likePost(postReactionMessage.getUserIdentity(), postReactionMessage.getPostIdentity());
     }
 }

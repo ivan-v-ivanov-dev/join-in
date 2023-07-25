@@ -35,6 +35,8 @@ spring:
             node: new-comment-node
         delete:
           nodes: delete-nodes-topic
+        like:
+          post: like-post-topic
     group:
       id: group-id
 

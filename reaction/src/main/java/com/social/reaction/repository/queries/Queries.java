@@ -20,6 +20,9 @@ public class Queries {
     public static final String DELETE_POST_NODE_WITH_RELATIONS =
             "MATCH (p:Post) WHERE p.identity = $identity DETACH DELETE p";
 
+    public static final String USER_LIKES_POST =
+            "MATCH (profile:Profile), (post:Post) WHERE profile.identity = $userIdentity AND post.identity = $postIdentity MERGE (profile)-[:LIKE]->(post)";
+
     private Queries() {
     }
 }

@@ -6,5 +6,7 @@ public interface PostService {
     void save(Post post);
 
     void deleteNode(String postIdentity);
+
+    void likePost(String userIdentity, String postIdentity);
 }
 
