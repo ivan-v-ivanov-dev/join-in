@@ -12,5 +12,7 @@ import java.util.Set;
 @Builder
 public class DeleteNodesMessage implements KafkaMessage {
 
-    private Set<String> nodesIdentitiesToDelete;
+    private Set<String> commentsNodesIdentities;
+
+    private String postIdentity;
 }
