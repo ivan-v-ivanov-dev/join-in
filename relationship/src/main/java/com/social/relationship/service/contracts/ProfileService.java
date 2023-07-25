@@ -2,11 +2,11 @@ package com.social.relationship.service.contracts;
 
 import com.social.relationship.model.Profile;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ProfileService {
 
-    List<String> findFriendsByProfileIdentity(String identity);
+    Set<String> findFriendsByProfileIdentity(String identity);
 
     void save(Profile profile);
 

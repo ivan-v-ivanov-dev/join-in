@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 public class RelationController {
@@ -18,7 +18,7 @@ public class RelationController {
     }
 
     @PostMapping("/profile/friends")
-    public List<String> findFriends(@RequestParam("identity") String identity) {
+    public Set<String> findFriends(@RequestParam("identity") String identity) {
         return profileService.findFriendsByProfileIdentity(identity);
     }
 

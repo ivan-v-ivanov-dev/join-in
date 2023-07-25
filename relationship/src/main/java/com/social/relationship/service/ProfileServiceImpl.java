@@ -6,7 +6,7 @@ import com.social.relationship.service.contracts.ProfileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 import static com.social.relationship.service.constants.LoggerConstants.NEW_USER_SAVED_IN_DATABASE_TEMPLATE;
 
@@ -21,7 +21,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public List<String> findFriendsByProfileIdentity(String identity) {
+    public Set<String> findFriendsByProfileIdentity(String identity) {
         return profileRepository.findFriendsByProfileIdentity(identity);
     }
 
