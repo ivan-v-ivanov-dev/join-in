@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Document(collection = "posts")
 @NoArgsConstructor
@@ -22,7 +23,11 @@ public class Post implements Serializable {
     @Indexed(unique = true)
     private String postIdentity;
 
+    private String authorIdentity;
+
     private String content;
+
+    private List<Comment> comments;
 
     private LocalDate postDate;
 
