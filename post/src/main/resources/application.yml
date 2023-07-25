@@ -62,3 +62,15 @@ relationship:
   find:
     profile:
       friends: /profile/friends
+
+#Feign Reaction service
+reaction:
+  service:
+    url: http://localhost:8084
+    feign:
+      client:
+        name: Reaction-Service
+  post:
+    reactions:
+      users:
+        identities: /post/reactions/users
