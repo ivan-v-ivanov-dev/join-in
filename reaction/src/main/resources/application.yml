@@ -33,6 +33,8 @@ spring:
             node: new-post-node
           comment:
             node: new-comment-node
+        delete:
+          nodes: delete-nodes-topic
     group:
       id: group-id
 

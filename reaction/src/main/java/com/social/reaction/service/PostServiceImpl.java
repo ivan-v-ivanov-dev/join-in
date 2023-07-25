@@ -6,6 +6,7 @@ import com.social.reaction.service.contracts.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import static com.social.reaction.service.constants.LoggerConstants.POST_NODE_DELETED;
 import static com.social.reaction.service.constants.LoggerConstants.SAVE_POST_IN_DATABASE_TEMPLATE;
 
 @Service
@@ -22,5 +23,11 @@ public class PostServiceImpl implements PostService {
     public void save(Post post) {
         postRepository.save(post);
         log.info(String.format(SAVE_POST_IN_DATABASE_TEMPLATE, post.getIdentity()));
+    }
+
+    @Override
+    public void deleteNode(String postIdentity) {
+        postRepository.deleteNodeWithRelations(postIdentity);
+        log.info(POST_NODE_DELETED);
     }
 }

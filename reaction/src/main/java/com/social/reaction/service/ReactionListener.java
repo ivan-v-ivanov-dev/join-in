@@ -1,5 +1,6 @@
 package com.social.reaction.service;
 
+import com.social.kafka.messages.DeleteNodesMessage;
 import com.social.kafka.messages.NewNodeMessage;
 import com.social.kafka.messages.NewUserMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
@@ -26,19 +27,22 @@ public class ReactionListener {
     private final String newUserTopic;
     private final String newPostNodeTopic;
     private final String newCommentNodeTopic;
+    private final String deleteNodesTopic;
 
     public ReactionListener(ProfileService profileService,
                             PostService postService,
                             CommentService commentService,
                             @Value("${spring.kafka.topic.name.new.user}") String newUserTopic,
                             @Value("${spring.kafka.topic.name.new.post.node}") String newPostNodeTopic,
-                            @Value("${spring.kafka.topic.name.new.comment.node}") String newCommentNodeTopic) {
+                            @Value("${spring.kafka.topic.name.new.comment.node}") String newCommentNodeTopic,
+                            @Value("${spring.kafka.topic.name.delete.nodes}") String deleteNodesTopic) {
         this.profileService = profileService;
         this.postService = postService;
         this.commentService = commentService;
         this.newUserTopic = newUserTopic;
         this.newPostNodeTopic = newPostNodeTopic;
         this.newCommentNodeTopic = newCommentNodeTopic;
+        this.deleteNodesTopic = deleteNodesTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")
@@ -70,5 +74,14 @@ public class ReactionListener {
 
         Comment comment = Comment.builder().identity(newNodeMessage.getIdentity()).build();
         commentService.save(comment);
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.name.delete.nodes}", groupId = "${spring.kafka.group.id}")
+    public void deleteNodesListener(KafkaMessage kafkaMessage) {
+        DeleteNodesMessage deleteNodesMessage = (DeleteNodesMessage) kafkaMessage;
+        log.info(String.format(DELETE_NODES_RECEIVED_FROM_POST_SERVICE_TEMPLATE, deleteNodesTopic));
+
+        commentService.deleteNodes(deleteNodesMessage.getCommentsNodesIdentities());
+        postService.deleteNode(deleteNodesMessage.getPostIdentity());
     }
 }

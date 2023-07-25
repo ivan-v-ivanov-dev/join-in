@@ -14,6 +14,12 @@ public class Queries {
     public static final String FIND_USER_IDENTITIES_WHO_REACTED_TO_THE_POST =
             "MATCH (p:Profile)-[:LIKE|DISLIKE|STAR]->(post:Post) WHERE post.identity = $postIdentity RETURN DISTINCT p.identity";
 
+    public static final String DELETE_COMMENT_NODE_WITH_RELATIONS =
+            "MATCH (c:Comment) WHERE c.identity = $identity DETACH DELETE c";
+
+    public static final String DELETE_POST_NODE_WITH_RELATIONS =
+            "MATCH (p:Post) WHERE p.identity = $identity DETACH DELETE p";
+
     private Queries() {
     }
 }
