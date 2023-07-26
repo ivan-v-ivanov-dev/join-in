@@ -39,13 +39,15 @@ spring:
           nodes: delete-nodes-topic
         like:
           post: like-post-topic
-            notification: like-post-notification-topic
+          notification: like-post-notification-topic
         dislike:
           post: dislike-post-topic
-            notification: dislike-post-notification-topic
+          notification: dislike-post-notification-topic
         star:
           post: star-post-topic
-            notification: star-post-notification-topic
+          notification: star-post-notification-topic
+    partitions: 3
+    replicas: 1
     group:
       id: group-id
 

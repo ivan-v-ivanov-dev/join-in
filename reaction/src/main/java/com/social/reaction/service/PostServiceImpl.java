@@ -34,9 +34,9 @@ public class PostServiceImpl implements PostService {
                            ProfileRepository profileRepository,
                            PostClient postClient,
                            KafkaMessageSender kafkaMessageSender,
-                           @Value("${spring.kafka.topic.name.like.post.notification}") String likePostNotificationTopic,
-                           @Value("${spring.kafka.topic.name.dislike.post.notification}") String dislikePostNotificationTopic,
-                           @Value("${spring.kafka.topic.name.star.post.notification}") String starPostNotificationTopic) {
+                           @Value("${spring.kafka.topic.name.like.notification}") String likePostNotificationTopic,
+                           @Value("${spring.kafka.topic.name.dislike.notification}") String dislikePostNotificationTopic,
+                           @Value("${spring.kafka.topic.name.star.notification}") String starPostNotificationTopic) {
         this.postRepository = postRepository;
         this.profileRepository = profileRepository;
         this.postClient = postClient;
