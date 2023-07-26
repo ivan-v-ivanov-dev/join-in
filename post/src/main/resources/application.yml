@@ -78,3 +78,12 @@ reaction:
     reactions:
       users:
         identities: /post/reactions/users
+
+#Feign Image service
+image:
+  service:
+    url: http://localhost:8085
+    feign:
+      client:
+        name: Image-Service
+  profile: /profile-image
