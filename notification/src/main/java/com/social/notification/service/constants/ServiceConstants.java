@@ -8,9 +8,11 @@ public class ServiceConstants {
 
     public static final String NEW_COMMENT_NOTIFICATION_TEMPLATE = "%s wrote a new comment";
 
-    public static final String LIKES_POST_NOTIFICATION_TEMPLATE = "%s likes a a post";
+    public static final String LIKES_POST_NOTIFICATION_TEMPLATE = "%s likes a post";
 
-    public static final String DISLIKES_POST_NOTIFICATION_TEMPLATE = "%s disliked a a post";
+    public static final String DISLIKES_POST_NOTIFICATION_TEMPLATE = "%s disliked a post";
+
+    public static final String STARS_POST_NOTIFICATION_TEMPLATE = "%s stared a post";
 
     private ServiceConstants() {
     }

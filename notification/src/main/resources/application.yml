@@ -32,6 +32,8 @@ spring:
           notification: like-post-notification-topic
         dislike:
           notification: dislike-post-notification-topic
+        star:
+          notification: star-post-notification-topic
         new:
           user: new-user-topic
           post:
