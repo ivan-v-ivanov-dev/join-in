@@ -2,6 +2,7 @@ package com.social.post.model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.io.Serializable;
@@ -22,6 +23,9 @@ public class Post implements Serializable {
     private String postIdentity;
 
     private String authorIdentity;
+
+    @Transient
+    private String authorProfileImage;
 
     private String content;
 

@@ -1,10 +1,8 @@
 package com.social.post.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.io.Serializable;
@@ -13,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Builder
 public class Comment implements Serializable {
 
@@ -23,6 +22,9 @@ public class Comment implements Serializable {
     private String commentIdentity;
 
     private String authorIdentity;
+
+    @Transient
+    private String authorProfileImage;
 
     private String content;
 

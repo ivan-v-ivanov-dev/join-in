@@ -10,6 +10,7 @@ import com.social.post.repository.contract.PostRepository;
 import com.social.post.repository.contract.ProfileRepository;
 import com.social.post.service.contracts.KafkaMessageSender;
 import com.social.post.service.contracts.PostService;
+import com.social.post.service.feign.ImageClient;
 import com.social.post.service.feign.ReactionClient;
 import com.social.post.service.feign.RelationshipClient;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,7 @@ public class PostServiceImpl implements PostService {
     private final ProfileRepository profileRepository;
     private final RelationshipClient relationshipClient;
     private final ReactionClient reactionClient;
+    private final ImageClient imageClient;
     private final KafkaMessageSender kafkaMessageSender;
     private final String newPostNotificationTopic;
     private final String newCommentNotificationTopic;
@@ -42,6 +44,7 @@ public class PostServiceImpl implements PostService {
                            ProfileRepository profileRepository,
                            RelationshipClient relationshipClient,
                            ReactionClient reactionClient,
+                           ImageClient imageClient,
                            KafkaMessageSender kafkaMessageSender,
                            @Value("${spring.kafka.topic.name.new.post.notification}") String newPostNotificationTopic,
                            @Value("${spring.kafka.topic.name.new.comment.notification}") String newCommentNotificationTopic,
@@ -52,6 +55,7 @@ public class PostServiceImpl implements PostService {
         this.profileRepository = profileRepository;
         this.relationshipClient = relationshipClient;
         this.reactionClient = reactionClient;
+        this.imageClient = imageClient;
         this.kafkaMessageSender = kafkaMessageSender;
         this.newPostNotificationTopic = newPostNotificationTopic;
         this.newCommentNotificationTopic = newCommentNotificationTopic;
@@ -63,6 +67,8 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post findByPostIdentity(String postIdentity, String authorIdentity) {
         Post post = postRepository.findByPostIdentity(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
+        post.setAuthorProfileImage(imageClient.findProfileImage(post.getAuthorIdentity()));
+        post.getComments().forEach(comment -> comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity())));
         log.info(String.format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
         return post;
     }
