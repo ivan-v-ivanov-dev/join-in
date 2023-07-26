@@ -922,6 +922,12 @@
                                                                                 <input type="hidden" name="postAuthorIdentity" th:value="${currentPost.getAuthorIdentity()}" />
                                                                             </form>
 
+                                                                            <form id="starForm" th:action="@{/post/star}" method="post">
+                                                                                <input type="hidden" name="reactingUserIdentity" th:value="${profile.getIdentity()}" />
+                                                                                <input type="hidden" name="postIdentity" th:value="${currentPost.getPostIdentity()}" />
+                                                                                <input type="hidden" name="postAuthorIdentity" th:value="${currentPost.getAuthorIdentity()}" />
+                                                                            </form>
+
                                                                             <div class="dropdown-menu py-2">
                                                                                     <a class="ms-2 me-2" data-bs-placement="top" data-bs-toggle="tooltip"
                                                                                        onclick="document.getElementById('likeForm').submit()" title="Like">
@@ -933,12 +939,9 @@
                                                                                         <i class="fa fa-thumbs-down" style="font-size:24px;color:red"></i>
                                                                                     </a>
 
-                                                                                    <a class="me-2"
-                                                                                       data-bs-placement="top"
-                                                                                       data-bs-toggle="tooltip"
-                                                                                       href="#" title="Star">
-                                                                                        <i class="fa fa-star-o"
-                                                                                           style="font-size:24px"></i>
+                                                                                    <a class="me-2" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                                                       onclick="document.getElementById('starForm').submit()" title="Star">
+                                                                                        <i class="fa fa-star-o" style="font-size:24px"></i>
                                                                                     </a>
 
                                                                             </div>

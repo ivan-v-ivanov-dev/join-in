@@ -42,6 +42,8 @@ spring:
           post: like-post-topic
         dislike:
           post: dislike-post-topic
+        star:
+          post: star-post-topic
     partitions: 3
     replicas: 1
     group:

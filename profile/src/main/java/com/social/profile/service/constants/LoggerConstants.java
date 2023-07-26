@@ -20,10 +20,13 @@ public class LoggerConstants {
             KAFKA_MESSAGING + "Edit post message created and send to Post service (Kafka topic: %s, Post identity %s)";
 
     public static final String LIKE_POST_MESSAGE_CREATED_AND_SEND_TO_REACTION_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE =
-            KAFKA_MESSAGING + "Like post message created and send to Reaction service (Kafka topic: %s, Post identity %s)";
+            KAFKA_MESSAGING + "LIKE post message created and send to Reaction service (Kafka topic: %s, Post identity %s)";
 
     public static final String DISLIKE_POST_MESSAGE_CREATED_AND_SEND_TO_REACTION_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE =
-            KAFKA_MESSAGING + "Dislike post message created and send to Reaction service (Kafka topic: %s, Post identity %s)";
+            KAFKA_MESSAGING + "DISLIKE post message created and send to Reaction service (Kafka topic: %s, Post identity %s)";
+
+    public static final String STAR_POST_MESSAGE_CREATED_AND_SEND_TO_REACTION_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE =
+            KAFKA_MESSAGING + "STAR post message created and send to Reaction service (Kafka topic: %s, Post identity %s)";
 
     public static final String NEW_REGISTERED_USER_PROFILE_SAVED_IN_DATABASE_TEMPLATE =
             "New registered user saved in database (User identity: %s)";

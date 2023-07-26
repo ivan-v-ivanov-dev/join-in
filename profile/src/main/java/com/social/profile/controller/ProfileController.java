@@ -147,6 +147,14 @@ public class ProfileController {
         return "redirect:/profile?identity=" + reactingUserIdentity;
     }
 
+    @PostMapping("/post/star")
+    public String starAPost(@RequestParam("reactingUserIdentity") String reactingUserIdentity,
+                            @RequestParam("postIdentity") String postIdentity,
+                            @RequestParam("postAuthorIdentity") String postAuthorIdentity) {
+        reactionService.starPost(reactingUserIdentity, postIdentity, postAuthorIdentity);
+        return "redirect:/profile?identity=" + reactingUserIdentity;
+    }
+
     @GetMapping("/signout")
     public String signOut() {
         return "redirect:/";
