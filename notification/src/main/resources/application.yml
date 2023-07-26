@@ -28,6 +28,9 @@ spring:
           packages: com.social.kafka.messages.contract.KafkaMessage
     topic:
       name:
+        like:
+          post:
+            notification: like-post-notification-topic
         new:
           user: new-user-topic
           post:

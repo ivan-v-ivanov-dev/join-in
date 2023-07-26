@@ -13,11 +13,14 @@ public class LoggerConstants {
     public static final String NEW_COMMENT_NOTIFICATION_MESSAGE_RECEIVED_FROM_POST_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "New comment notification message received from Post service (Kafka topic: %s)";
 
+    public static final String LIKE_POST_NOTIFICATION_MESSAGE_RECEIVED_FROM_REACTION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "LIKE post notification message received from Reaction service (Kafka topic: %s)";
+
     public static final String NEW_COLLECTION_CREATED_TEMPLATE =
             "New Collection created (Collection name: %s)";
 
-    public static final String NEW_POST_COMMENT_NOTIFICATIONS_SAVED_FOR_ALL_USERS =
-            "New post/comment notifications saved for all related users";
+    public static final String NOTIFICATIONS_SAVED_FOR_ALL_RELATED_USERS =
+            "Notifications saved for all related users";
 
     private LoggerConstants(){}
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 import static com.social.notification.service.constants.LoggerConstants.NEW_COLLECTION_CREATED_TEMPLATE;
-import static com.social.notification.service.constants.LoggerConstants.NEW_POST_COMMENT_NOTIFICATIONS_SAVED_FOR_ALL_USERS;
+import static com.social.notification.service.constants.LoggerConstants.NOTIFICATIONS_SAVED_FOR_ALL_RELATED_USERS;
 import static com.social.notification.service.constants.ServiceConstants.COLLECTION_TEMPLATE;
 
 @Service
@@ -31,6 +31,6 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void save(Notification notification, Set<String> peopleToNotify) {
         peopleToNotify.forEach(person -> notificationRepository.save(notification, String.format(COLLECTION_TEMPLATE, person)));
-        log.info(NEW_POST_COMMENT_NOTIFICATIONS_SAVED_FOR_ALL_USERS);
+        log.info(NOTIFICATIONS_SAVED_FOR_ALL_RELATED_USERS);
     }
 }

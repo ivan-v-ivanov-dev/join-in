@@ -8,6 +8,8 @@ public class ServiceConstants {
 
     public static final String NEW_COMMENT_NOTIFICATION_TEMPLATE = "%s wrote a new comment";
 
+    public static final String LIKED_POST_NOTIFICATION_TEMPLATE = "%s liked a a post";
+
     private ServiceConstants() {
     }
 }
