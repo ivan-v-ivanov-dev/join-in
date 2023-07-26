@@ -44,7 +44,7 @@ public class NotificationListener {
         notificationService.createCollection(newUserMessage.getIdentity());
     }
 
-    @KafkaListener(topics = "${spring.kafka.topic.name.new.post.notifications}", groupId = "${spring.kafka.group.id}")
+    @KafkaListener(topics = "${spring.kafka.topic.name.new.post.notification}", groupId = "${spring.kafka.group.id}")
     public void newPostNotificationListener(KafkaMessage kafkaMessage) {
         NewPostCommentNotificationMessage newPostCommentNotificationMessage = (NewPostCommentNotificationMessage) kafkaMessage;
         log.info(String.format(NEW_POST_NOTIFICATION_MESSAGE_RECEIVED_FROM_POST_SERVICE_TEMPLATE, newPostNotificationTopic));
