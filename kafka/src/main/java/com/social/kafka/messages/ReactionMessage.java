@@ -15,4 +15,6 @@ public class ReactionMessage implements KafkaMessage {
     private String postIdentity;
 
     private String postAuthorIdentity;
+
+    private String postAuthorNames;
 }
