@@ -131,11 +131,12 @@ public class ProfileController {
         return "redirect:/profile?identity=" + commentAuthorIdentity;
     }
 
-    @PostMapping("/like")
-    public String likeAPost(@RequestParam("userIdentity") String userIdentity,
-                            @RequestParam("postIdentity") String postIdentity) {
-        reactionService.likePost(userIdentity, postIdentity);
-        return "redirect:/profile?identity=" + userIdentity;
+    @PostMapping("/post/like")
+    public String likeAPost(@RequestParam("reactingUserIdentity") String reactingUserIdentity,
+                            @RequestParam("postIdentity") String postIdentity,
+                            @RequestParam("postAuthorIdentity") String postAuthorIdentity) {
+        reactionService.likePost(reactingUserIdentity, postIdentity, postAuthorIdentity);
+        return "redirect:/profile?identity=" + reactingUserIdentity;
     }
 
     @GetMapping("/signout")

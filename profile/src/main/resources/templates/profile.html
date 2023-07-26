@@ -910,9 +910,10 @@
                                                                                   data-bs-toggle="dropdown"
                                                                                   role="button"></span>
 
-                                                                            <form id="likeForm" th:action="@{/like}" method="post">
-                                                                                <input type="hidden" name="userIdentity" th:value="${profile.getIdentity()}" />
+                                                                            <form id="likeForm" th:action="@{/post/like}" method="post">
+                                                                                <input type="hidden" name="reactingUserIdentity" th:value="${profile.getIdentity()}" />
                                                                                 <input type="hidden" name="postIdentity" th:value="${currentPost.getPostIdentity()}" />
+                                                                                <input type="hidden" name="postOwnerIdentity" th:value="${currentPost.getAuthorIdentity()}" />
                                                                             </form>
 
                                                                             <div class="dropdown-menu py-2">

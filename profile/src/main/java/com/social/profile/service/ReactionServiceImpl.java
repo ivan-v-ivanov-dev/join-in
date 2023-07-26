@@ -24,10 +24,11 @@ public class ReactionServiceImpl implements ReactionService {
     }
 
     @Override
-    public void likePost(String userIdentity, String postIdentity) {
+    public void likePost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity) {
         KafkaMessage postReactionMessage = ReactionMessage.builder()
-                .userIdentity(userIdentity)
+                .reactingUserIdentity(reactingUserIdentity)
                 .postIdentity(postIdentity)
+                .postAuthorIdentity(postAuthorIdentity)
                 .build();
 
         kafkaMessageSender.send(postReactionMessage, likePostTopic);
