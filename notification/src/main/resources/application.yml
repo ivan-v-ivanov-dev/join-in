@@ -29,11 +29,9 @@ spring:
     topic:
       name:
         like:
-          post:
-            notification: like-post-notification-topic
-        dislikes:
-          post:
-            notification: dislike-post-notification-topic
+          notification: like-post-notification-topic
+        dislike:
+          notification: dislike-post-notification-topic
         new:
           user: new-user-topic
           post:
