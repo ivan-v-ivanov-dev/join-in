@@ -25,6 +25,10 @@ The MVC approach complicates the microservice communication even further. A Reac
  - As a second step, start each service individually since each service is a standalone Spring Boot application.     
  - The **Join IN** application runs on **http://localhost:8080/**
 
+**User login credentials**  
+email:    ```petur@petur.com```    
+password: ```petur@petur.com```     
+
 **Note**   
 In order to start the project you need to have Docker Desktop installed on your machine. Also, the Flyway container in Authentication service starts, creates the tables and imports the data into the MySQL container then shuts down, which is normal behavior. Despite the fact that Flyway depends on MySQL, keep an eye on it and restart it manually if needed.
 
