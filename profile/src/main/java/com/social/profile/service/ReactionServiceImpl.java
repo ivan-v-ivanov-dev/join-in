@@ -1,6 +1,6 @@
 package com.social.profile.service;
 
-import com.social.kafka.messages.PostReactionMessage;
+import com.social.kafka.messages.ReactionMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.profile.service.contracts.KafkaMessageSender;
 import com.social.profile.service.contracts.ReactionService;
@@ -25,7 +25,7 @@ public class ReactionServiceImpl implements ReactionService {
 
     @Override
     public void likePost(String userIdentity, String postIdentity) {
-        KafkaMessage postReactionMessage = PostReactionMessage.builder()
+        KafkaMessage postReactionMessage = ReactionMessage.builder()
                 .userIdentity(userIdentity)
                 .postIdentity(postIdentity)
                 .build();

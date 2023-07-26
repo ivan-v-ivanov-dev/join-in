@@ -3,7 +3,7 @@ package com.social.reaction.service;
 import com.social.kafka.messages.DeleteNodesMessage;
 import com.social.kafka.messages.NewNodeMessage;
 import com.social.kafka.messages.NewUserMessage;
-import com.social.kafka.messages.PostReactionMessage;
+import com.social.kafka.messages.ReactionMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.reaction.model.Comment;
 import com.social.reaction.model.Post;
@@ -91,10 +91,10 @@ public class ReactionListener {
 
     @KafkaListener(topics = "${spring.kafka.topic.name.like.post}", groupId = "${spring.kafka.group.id}")
     public void likePostListener(KafkaMessage kafkaMessage) {
-        PostReactionMessage postReactionMessage = (PostReactionMessage) kafkaMessage;
+        ReactionMessage reactionMessage = (ReactionMessage) kafkaMessage;
         log.info(String.format(LIKE_POST_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
-                likePostTopic, postReactionMessage.getPostIdentity()));
+                likePostTopic, reactionMessage.getPostIdentity()));
 
-        postService.likePost(postReactionMessage.getUserIdentity(), postReactionMessage.getPostIdentity());
+        postService.likePost(reactionMessage.getUserIdentity(), reactionMessage.getPostIdentity());
     }
 }
