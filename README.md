@@ -80,7 +80,7 @@ In order to start the project you need to have Docker Desktop installed on your 
 
 1. Profile service sends Kafka message to Reaction service for the Post reaction
 2. Reaction service retrieves all users who commented the post to sends them notification about the reaction
-3. Reaction service sends notifications via Kafka messaging to Notification service that someone reacted to the post (notifications are send to those who reacted previously to the post or has commented the post)
+3. Reaction service sends notifications via Kafka messaging to Notification service that someone reacted to the post (notifications are send to those users who reacted previously to the post /obtained from Reaction service/ or has commented the post /obtained from Post service/)
 
 ## 3.7. Generate User profile page
 
