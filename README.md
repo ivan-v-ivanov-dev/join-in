@@ -74,13 +74,13 @@ In order to start the project you need to have Docker Desktop installed on your 
 1. When a post is deleted new Kafka message is sent from the Profile to Post service
 2. Post sends a Kafka message to Reaction to delete the nodes for the post and all its comments
 
-## 3.6. React to Post / Comment
+## 3.6. React to Post
 
-![image](https://github.com/ivanovbiol/join-in/assets/51414119/78c9670a-94d4-47ca-b78a-68bb9917fc7c)
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/9b7fd9c7-e1fa-45ee-b58d-3c64cd0b2e2e)
 
-1. Profile service sends Kafka message to Reaction service for the Post/Comment reaction
-2. Reaction service retrieves all friends of the user whose post/comment has been reacted
-3. Reaction service sends notifications via Kafka messaging to Notification service that someone reacted to the post/comment
+1. Profile service sends Kafka message to Reaction service for the Post reaction
+2. Reaction service retrieves all users who commented the post to sends them notification about the reaction
+3. Reaction service sends notifications via Kafka messaging to Notification service that someone reacted to the post (notifications are send to those who reacted previously to the post or has commented the post)
 
 ## 3.7. Generate User profile page
 
