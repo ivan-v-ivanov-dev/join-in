@@ -39,6 +39,7 @@ spring:
           nodes: delete-nodes-topic
         like:
           post: like-post-topic
+            notification: like-post-notification-topic
     group:
       id: group-id
 
