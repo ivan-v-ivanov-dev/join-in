@@ -43,6 +43,9 @@ spring:
         dislike:
           post: dislike-post-topic
             notification: dislike-post-notification-topic
+        star:
+          post: star-post-topic
+            notification: star-post-notification-topic
     group:
       id: group-id
 

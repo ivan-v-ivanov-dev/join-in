@@ -31,6 +31,7 @@ public class ReactionListener {
     private final String deleteNodesTopic;
     private final String likePostTopic;
     private final String dislikePostTopic;
+    private final String starPostTopic;
 
     public ReactionListener(ProfileService profileService,
                             PostService postService,
@@ -40,7 +41,8 @@ public class ReactionListener {
                             @Value("${spring.kafka.topic.name.new.comment.node}") String newCommentNodeTopic,
                             @Value("${spring.kafka.topic.name.delete.nodes}") String deleteNodesTopic,
                             @Value("${spring.kafka.topic.name.like.post}") String likePostTopic,
-                            @Value("${spring.kafka.topic.name.dislike.post}") String dislikePostTopic) {
+                            @Value("${spring.kafka.topic.name.dislike.post}") String dislikePostTopic,
+                            @Value("${spring.kafka.topic.name.star.post}") String starPostTopic) {
         this.profileService = profileService;
         this.postService = postService;
         this.commentService = commentService;
@@ -50,6 +52,7 @@ public class ReactionListener {
         this.deleteNodesTopic = deleteNodesTopic;
         this.likePostTopic = likePostTopic;
         this.dislikePostTopic = dislikePostTopic;
+        this.starPostTopic = starPostTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")
@@ -109,6 +112,16 @@ public class ReactionListener {
                 dislikePostTopic, reactionMessage.getPostIdentity()));
 
         postService.dislikePost(reactionMessage.getReactingUserIdentity(), reactionMessage.getPostIdentity(),
+                reactionMessage.getPostAuthorIdentity(), reactionMessage.getPostAuthorNames());
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.name.star.post}", groupId = "${spring.kafka.group.id}")
+    public void starPostListener(KafkaMessage kafkaMessage) {
+        ReactionMessage reactionMessage = (ReactionMessage) kafkaMessage;
+        log.info(String.format(STAR_POST_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
+                starPostTopic, reactionMessage.getPostIdentity()));
+
+        postService.starPost(reactionMessage.getReactingUserIdentity(), reactionMessage.getPostIdentity(),
                 reactionMessage.getPostAuthorIdentity(), reactionMessage.getPostAuthorNames());
     }
 }

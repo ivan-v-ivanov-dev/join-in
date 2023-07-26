@@ -10,5 +10,7 @@ public interface PostService {
     void likePost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames);
 
     void dislikePost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames);
+
+    void starPost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames);
 }
 

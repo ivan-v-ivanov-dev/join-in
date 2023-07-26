@@ -13,11 +13,14 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
     void deleteNodeWithRelations(@Param("identity") String postIdentity);
 
     @Query(USER_LIKES_POST)
-    void likePost(@Param("userIdentity") String userIdentity, @Param("postIdentity") String postIdentity);
+    void likePost(@Param("reactingUserIdentity") String reactingUserIdentity, @Param("postIdentity") String postIdentity);
 
     @Query(DELETE_POSSIBLE_PREVIOUS_REACTIONS)
-    void deletePossiblePreviousRelations(@Param("userIdentity") String userIdentity, @Param("postIdentity") String postIdentity);
+    void deletePossiblePreviousRelations(@Param("reactingUserIdentity") String reactingUserIdentity, @Param("postIdentity") String postIdentity);
 
     @Query(USER_DISLIKES_POST)
-    void dislikePost(@Param("userIdentity") String reactingUserIdentity, @Param("postIdentity") String postIdentity);
+    void dislikePost(@Param("reactingUserIdentity") String reactingUserIdentity, @Param("postIdentity") String postIdentity);
+
+    @Query(USER_STARS_POST)
+    void starPost(@Param("reactingUserIdentity") String reactingUserIdentity, @Param("postIdentity") String postIdentity);
 }

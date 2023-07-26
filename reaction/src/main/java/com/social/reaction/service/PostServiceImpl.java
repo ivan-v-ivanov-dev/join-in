@@ -28,19 +28,22 @@ public class PostServiceImpl implements PostService {
     private final KafkaMessageSender kafkaMessageSender;
     private final String likePostNotificationTopic;
     private final String dislikePostNotificationTopic;
+    private final String starPostNotificationTopic;
 
     public PostServiceImpl(PostRepository postRepository,
                            ProfileRepository profileRepository,
                            PostClient postClient,
                            KafkaMessageSender kafkaMessageSender,
                            @Value("${spring.kafka.topic.name.like.post.notification}") String likePostNotificationTopic,
-                           @Value("${spring.kafka.topic.name.dislike.post.notification}") String dislikePostNotificationTopic) {
+                           @Value("${spring.kafka.topic.name.dislike.post.notification}") String dislikePostNotificationTopic,
+                           @Value("${spring.kafka.topic.name.star.post.notification}") String starPostNotificationTopic) {
         this.postRepository = postRepository;
         this.profileRepository = profileRepository;
         this.postClient = postClient;
         this.kafkaMessageSender = kafkaMessageSender;
         this.likePostNotificationTopic = likePostNotificationTopic;
         this.dislikePostNotificationTopic = dislikePostNotificationTopic;
+        this.starPostNotificationTopic = starPostNotificationTopic;
     }
 
     @Override
@@ -63,7 +66,8 @@ public class PostServiceImpl implements PostService {
         postRepository.likePost(reactingUserIdentity, postIdentity);
         log.info(String.format(POST_LIKED_BY_USER_TEMPLATE, reactingUserIdentity, postIdentity));
 
-        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity, postAuthorNames, postIdentity, likePostNotificationTopic);
+        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
+                postAuthorNames, postIdentity, likePostNotificationTopic);
         log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
                 likePostNotificationTopic));
     }
@@ -76,9 +80,24 @@ public class PostServiceImpl implements PostService {
         postRepository.dislikePost(reactingUserIdentity, postIdentity);
         log.info(String.format(POST_DISLIKED_BY_USER_TEMPLATE, reactingUserIdentity, postIdentity));
 
-        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity, postAuthorNames, postIdentity, dislikePostNotificationTopic);
+        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
+                postAuthorNames, postIdentity, dislikePostNotificationTopic);
         log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
                 dislikePostNotificationTopic));
+    }
+
+    @Override
+    public void starPost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames) {
+        deletePreviousUserReactionsToThePost(reactingUserIdentity, postIdentity);
+        Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
+
+        postRepository.starPost(reactingUserIdentity, postIdentity);
+        log.info(String.format(POST_STARED_BY_USER_TEMPLATE, reactingUserIdentity, postIdentity));
+
+        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
+                postAuthorNames, postIdentity, starPostNotificationTopic);
+        log.info(String.format(STAR_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                starPostNotificationTopic));
     }
 
     private void deletePreviousUserReactionsToThePost(String reactingUserIdentity, String postIdentity) {
