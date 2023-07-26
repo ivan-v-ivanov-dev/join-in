@@ -43,6 +43,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_ALL_FRIENDS_FOR_PROFILE_TEMPLATE =
             "Retrieve all friends (Profile identity: %s)";
 
+    public static final String RETRIEVE_POST_TEMPLATE =
+            "Retrieve post (Post identity: %s)";
+
 
     private LoggerConstants() {
     }

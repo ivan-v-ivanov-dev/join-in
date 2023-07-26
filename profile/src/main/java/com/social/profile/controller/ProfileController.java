@@ -102,7 +102,6 @@ public class ProfileController {
     public String editPostView(@RequestParam("postIdentity") String postIdentity,
                                @RequestParam("authorIdentity") String authorIdentity,
                                Model model) {
-        model.addAttribute("authorIdentity", authorIdentity);
         model.addAttribute("post", postService.findByIdentity(postIdentity, authorIdentity));
         return "edit-post";
     }

@@ -1,6 +1,6 @@
 package com.social.profile.service.feign;
 
-import com.social.profile.model.dto.EditPostDto;
+import com.social.profile.model.EditPost;
 import com.social.profile.model.dto.PostDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +15,8 @@ public interface PostClient {
     List<PostDto> findAllPostsByAuthorIdentity(@RequestParam(name = "authorIdentity") String authorIdentity);
 
     @PostMapping("${post.find.one}")
-    EditPostDto findByPostIdentity(@RequestParam(name = "postIdentity") String postIdentity,
-                                   @RequestParam(name = "authorIdentity") String authorIdentity);
+    EditPost findByPostIdentity(@RequestParam(name = "postIdentity") String postIdentity,
+                                @RequestParam(name = "authorIdentity") String authorIdentity);
 
     @PostMapping("${post.author.posts.count}")
     int findAuthorPostsCount(@RequestParam(name = "authorIdentity") String authorIdentity);

@@ -1,4 +1,4 @@
-package com.social.profile.model.dto;
+package com.social.profile.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -13,21 +13,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-public class EditPostDto {
-
-    @JsonIgnore
-    private String id;
-
-    @Transient
-    private String author;
-
-    @Transient
-    private String authorPhoto;
+public class EditPost {
 
     private String postIdentity;
 
+    private String authorIdentity;
+
+    private String authorNames;
+
+    private String authorProfileImage;
+
     private String content;
 
-    @JsonIgnore
-    private LocalDate postDate;
 }

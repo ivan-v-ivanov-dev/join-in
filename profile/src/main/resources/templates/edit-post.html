@@ -630,7 +630,7 @@
                                         <div class="card" id="post-modal-data">
                                             <div class="card-header d-flex justify-content-between">
                                                 <div class="header-title">
-                                                    <h4 class="card-title" th:text="${post.getAuthor}">Create Post</h4>
+                                                    <h4 class="card-title" th:text="${post.getAuthorNames()}">Create Post</h4>
                                                 </div>
                                             </div>
                                             <div class="card-body">
@@ -639,7 +639,7 @@
                                                     <div class="user-img">
                                                         <img alt="userimg" class="avatar-60 rounded-circle"
                                                              src="../assets/images/user/1.jpg"
-                                                             th:src="${post.getAuthorPhoto()}">
+                                                             th:src="${post.getAuthorProfileImage()}">
                                                     </div>
 
                                                     <form action="#" class="post-text ms-3 w-100 "
@@ -661,7 +661,7 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="post-modalLabel"
-                                                                th:text="${post.getAuthor}">Create Post</h5>
+                                                                th:text="${post.getAuthorNames()}">Create Post</h5>
                                                             <a class="lh-1" data-bs-dismiss="modal"
                                                                href="javascript:void(0);">
                                                                 <span class="material-symbols-outlined">close</span>
@@ -676,11 +676,11 @@
                                                                              class="avatar-60 rounded-circle img-fluid"
                                                                              loading="lazy"
                                                                              src="../assets/images/user/1.jpg"
-                                                                             th:src="${post.getAuthorPhoto()}">
+                                                                             th:src="${post.getAuthorProfileImage()}">
                                                                     </div>
 
                                                                     <input th:name="userIdentity"
-                                                                           th:value="${authorIdentity}"
+                                                                           th:value="${post.getAuthorIdentity()}"
                                                                            type="hidden"/>
                                                                     <input th:name="postIdentity"
                                                                            th:value="${post.getPostIdentity()}"

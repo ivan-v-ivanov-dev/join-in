@@ -1,9 +1,9 @@
 package com.social.profile.service.contracts;
 
-import com.social.profile.model.dto.EditPostDto;
+import com.social.profile.model.EditPost;
 
 public interface PostService {
-    EditPostDto findByIdentity(String postIdentity, String authorIdentity);
+    EditPost findByIdentity(String postIdentity, String authorIdentity);
 
     void post(String userIdentity, String content);
 
