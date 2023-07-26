@@ -5,8 +5,7 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 
-import static com.social.reaction.repository.queries.Queries.DELETE_POST_NODE_WITH_RELATIONS;
-import static com.social.reaction.repository.queries.Queries.USER_LIKES_POST;
+import static com.social.reaction.repository.queries.Queries.*;
 
 public interface PostRepository extends Neo4jRepository<Post, String> {
 
@@ -15,4 +14,7 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
 
     @Query(USER_LIKES_POST)
     void likePost(@Param("userIdentity") String userIdentity, @Param("postIdentity") String postIdentity);
+
+    @Query(DELETE_POSSIBLE_PREVIOUS_REACTIONS)
+    void deletePossiblePreviousRelations(@Param("userIdentity") String userIdentity, @Param("postIdentity") String postIdentity);
 }

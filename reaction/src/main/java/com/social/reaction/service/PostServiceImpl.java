@@ -32,7 +32,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void likePost(String userIdentity, String postIdentity) {
+        postRepository.deletePossiblePreviousRelations(userIdentity, postIdentity);
+        log.info(String.format(DELETE_PREVIOUS_POSSIBLE_REACTIONS_TEMPLATE, userIdentity, postIdentity));
+
         postRepository.likePost(userIdentity, postIdentity);
-        log.info(String.format(POST_LIKED_BY_USER_TEMPLATE, postIdentity, userIdentity));
+        log.info(String.format(POST_LIKED_BY_USER_TEMPLATE, userIdentity, postIdentity));
     }
 }

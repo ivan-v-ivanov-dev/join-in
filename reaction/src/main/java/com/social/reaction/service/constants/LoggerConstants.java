@@ -33,7 +33,10 @@ public class LoggerConstants {
 
     public static final String POST_NODE_DELETED = "Post node deleted with its relations";
 
-    public static final String POST_LIKED_BY_USER_TEMPLATE = "Post liked by user (Post identity: %s, User identity: %s)";
+    public static final String DELETE_PREVIOUS_POSSIBLE_REACTIONS_TEMPLATE =
+            "Delete previous possible reactions (User identity: %s, Post identity: %s)";
+
+    public static final String POST_LIKED_BY_USER_TEMPLATE = "Post liked by user (User identity: %s, Post identity: %s)";
 
     private LoggerConstants() {
     }
