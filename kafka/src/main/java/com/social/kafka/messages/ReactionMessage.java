@@ -10,7 +10,9 @@ import lombok.*;
 @Builder
 public class ReactionMessage implements KafkaMessage {
 
-    private String userIdentity;
+    private String reactingUserIdentity;
 
     private String postIdentity;
+
+    private String postAuthorIdentity;
 }
