@@ -30,6 +30,7 @@ public class ReactionListener {
     private final String newCommentNodeTopic;
     private final String deleteNodesTopic;
     private final String likePostTopic;
+    private final String dislikePostTopic;
 
     public ReactionListener(ProfileService profileService,
                             PostService postService,
@@ -38,7 +39,8 @@ public class ReactionListener {
                             @Value("${spring.kafka.topic.name.new.post.node}") String newPostNodeTopic,
                             @Value("${spring.kafka.topic.name.new.comment.node}") String newCommentNodeTopic,
                             @Value("${spring.kafka.topic.name.delete.nodes}") String deleteNodesTopic,
-                            @Value("${spring.kafka.topic.name.like.post}") String likePostTopic) {
+                            @Value("${spring.kafka.topic.name.like.post}") String likePostTopic,
+                            @Value("${spring.kafka.topic.name.dislike.post}") String dislikePostTopic) {
         this.profileService = profileService;
         this.postService = postService;
         this.commentService = commentService;
@@ -47,6 +49,7 @@ public class ReactionListener {
         this.newCommentNodeTopic = newCommentNodeTopic;
         this.deleteNodesTopic = deleteNodesTopic;
         this.likePostTopic = likePostTopic;
+        this.dislikePostTopic = dislikePostTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")
@@ -96,6 +99,16 @@ public class ReactionListener {
                 likePostTopic, reactionMessage.getPostIdentity()));
 
         postService.likePost(reactionMessage.getReactingUserIdentity(), reactionMessage.getPostIdentity(),
+                reactionMessage.getPostAuthorIdentity(), reactionMessage.getPostAuthorNames());
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.name.dislike.post}", groupId = "${spring.kafka.group.id}")
+    public void dislikePostListener(KafkaMessage kafkaMessage) {
+        ReactionMessage reactionMessage = (ReactionMessage) kafkaMessage;
+        log.info(String.format(DISLIKE_POST_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
+                dislikePostTopic, reactionMessage.getPostIdentity()));
+
+        postService.dislikePost(reactionMessage.getReactingUserIdentity(), reactionMessage.getPostIdentity(),
                 reactionMessage.getPostAuthorIdentity(), reactionMessage.getPostAuthorNames());
     }
 }

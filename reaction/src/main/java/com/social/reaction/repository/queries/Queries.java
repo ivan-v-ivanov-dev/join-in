@@ -39,6 +39,12 @@ public class Queries {
                     "WHERE profile.identity = $userIdentity AND post.identity = $postIdentity " +
                     "DELETE reaction";
 
+    public static final String USER_DISLIKES_POST =
+            "MATCH (profile:Profile), (post:Post) " +
+                    "WHERE profile.identity = $userIdentity AND " +
+                    "post.identity = $postIdentity " +
+                    "MERGE (profile)-[:DISLIKE]->(post)";
+
     private Queries() {
     }
 }

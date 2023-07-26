@@ -40,6 +40,9 @@ spring:
         like:
           post: like-post-topic
             notification: like-post-notification-topic
+        dislike:
+          post: dislike-post-topic
+            notification: dislike-post-notification-topic
     group:
       id: group-id
 

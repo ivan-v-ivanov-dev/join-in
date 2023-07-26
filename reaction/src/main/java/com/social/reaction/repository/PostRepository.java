@@ -17,4 +17,7 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
 
     @Query(DELETE_POSSIBLE_PREVIOUS_REACTIONS)
     void deletePossiblePreviousRelations(@Param("userIdentity") String userIdentity, @Param("postIdentity") String postIdentity);
+
+    @Query(USER_DISLIKES_POST)
+    void dislikePost(@Param("userIdentity") String reactingUserIdentity, @Param("postIdentity") String postIdentity);
 }

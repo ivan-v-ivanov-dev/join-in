@@ -19,6 +19,9 @@ public class LoggerConstants {
     public static final String LIKE_POST_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "LIKE post message received from Profile service (Kafka topic: %s, Post identity: %s)";
 
+    public static final String DISLIKE_POST_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "DISLIKE post message received from Profile service (Kafka topic: %s, Post identity: %s)";
+
     public static final String LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "LIKE post message send to Notification service (Kafka topic: %s)";
 
@@ -40,6 +43,8 @@ public class LoggerConstants {
             "Delete previous possible reactions (User identity: %s, Post identity: %s)";
 
     public static final String POST_LIKED_BY_USER_TEMPLATE = "Post liked by user (User identity: %s, Post identity: %s)";
+
+    public static final String POST_DISLIKED_BY_USER_TEMPLATE = "Post disliked by user (User identity: %s, Post identity: %s)";
 
     private LoggerConstants() {
     }

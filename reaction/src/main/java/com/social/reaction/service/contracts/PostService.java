@@ -8,5 +8,7 @@ public interface PostService {
     void deleteNode(String postIdentity);
 
     void likePost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames);
+
+    void dislikePost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames);
 }
 

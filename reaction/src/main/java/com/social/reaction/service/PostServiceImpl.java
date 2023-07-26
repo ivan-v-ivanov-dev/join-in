@@ -27,17 +27,20 @@ public class PostServiceImpl implements PostService {
     private final PostClient postClient;
     private final KafkaMessageSender kafkaMessageSender;
     private final String likePostNotificationTopic;
+    private final String dislikePostNotificationTopic;
 
     public PostServiceImpl(PostRepository postRepository,
                            ProfileRepository profileRepository,
                            PostClient postClient,
                            KafkaMessageSender kafkaMessageSender,
-                           @Value("${spring.kafka.topic.name.like.post.notification}") String likePostNotificationTopic) {
+                           @Value("${spring.kafka.topic.name.like.post.notification}") String likePostNotificationTopic,
+                           @Value("${spring.kafka.topic.name.dislike.post.notification}") String dislikePostNotificationTopic) {
         this.postRepository = postRepository;
         this.profileRepository = profileRepository;
         this.postClient = postClient;
         this.kafkaMessageSender = kafkaMessageSender;
         this.likePostNotificationTopic = likePostNotificationTopic;
+        this.dislikePostNotificationTopic = dislikePostNotificationTopic;
     }
 
     @Override
@@ -54,26 +57,52 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void likePost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames) {
-        postRepository.deletePossiblePreviousRelations(reactingUserIdentity, postIdentity);
-        log.info(String.format(DELETE_PREVIOUS_POSSIBLE_REACTIONS_TEMPLATE, reactingUserIdentity, postIdentity));
-
-        Set<String> usersToNotify = new HashSet<>();
-        usersToNotify.addAll(profileRepository.findPeopleWhoReactedToPost(postIdentity));
-        usersToNotify.addAll(postClient.findAllUsersCommentingThePost(postIdentity, postAuthorIdentity));
-        usersToNotify.add(postAuthorIdentity);
+        deletePreviousUserReactionsToThePost(reactingUserIdentity, postIdentity);
+        Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
 
         postRepository.likePost(reactingUserIdentity, postIdentity);
         log.info(String.format(POST_LIKED_BY_USER_TEMPLATE, reactingUserIdentity, postIdentity));
 
-        KafkaMessage likePostMessage = NotificationMessage.builder()
+        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity, postAuthorNames, postIdentity, likePostNotificationTopic);
+        log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                likePostNotificationTopic));
+    }
+
+    @Override
+    public void dislikePost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames) {
+        deletePreviousUserReactionsToThePost(reactingUserIdentity, postIdentity);
+        Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
+
+        postRepository.dislikePost(reactingUserIdentity, postIdentity);
+        log.info(String.format(POST_DISLIKED_BY_USER_TEMPLATE, reactingUserIdentity, postIdentity));
+
+        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity, postAuthorNames, postIdentity, dislikePostNotificationTopic);
+        log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                dislikePostNotificationTopic));
+    }
+
+    private void deletePreviousUserReactionsToThePost(String reactingUserIdentity, String postIdentity) {
+        postRepository.deletePossiblePreviousRelations(reactingUserIdentity, postIdentity);
+        log.info(String.format(DELETE_PREVIOUS_POSSIBLE_REACTIONS_TEMPLATE, reactingUserIdentity, postIdentity));
+    }
+
+    private Set<String> collectUsersToNotify(String postIdentity, String postAuthorIdentity) {
+        Set<String> usersToNotify = new HashSet<>();
+        usersToNotify.addAll(profileRepository.findPeopleWhoReactedToPost(postIdentity));
+        usersToNotify.addAll(postClient.findAllUsersCommentingThePost(postIdentity, postAuthorIdentity));
+        usersToNotify.add(postAuthorIdentity);
+        return usersToNotify;
+    }
+
+    private void sendKafkaMessageNotificationsToTheRelatedUsers(Set<String> usersToNotify, String postAuthorIdentity,
+                                                                String postAuthorNames, String postIdentity, String topic) {
+        KafkaMessage message = NotificationMessage.builder()
                 .peopleToNotify(usersToNotify)
                 .authorIdentity(postAuthorIdentity)
                 .authorNames(postAuthorNames)
                 .postIdentity(postIdentity)
                 .date(LocalDate.now().toString())
                 .build();
-        kafkaMessageSender.send(likePostMessage, likePostNotificationTopic);
-        log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
-                likePostNotificationTopic));
+        kafkaMessageSender.send(message, topic);
     }
 }
