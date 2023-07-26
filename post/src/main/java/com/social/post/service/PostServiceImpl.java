@@ -7,6 +7,7 @@ import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.model.Comment;
 import com.social.post.model.Post;
 import com.social.post.repository.contract.PostRepository;
+import com.social.post.repository.contract.ProfileRepository;
 import com.social.post.service.contracts.KafkaMessageSender;
 import com.social.post.service.contracts.PostService;
 import com.social.post.service.feign.ReactionClient;
@@ -27,6 +28,7 @@ import static com.social.post.service.constants.LoggerConstants.*;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final ProfileRepository profileRepository;
     private final RelationshipClient relationshipClient;
     private final ReactionClient reactionClient;
     private final KafkaMessageSender kafkaMessageSender;
@@ -37,6 +39,7 @@ public class PostServiceImpl implements PostService {
     private final String deleteNodesTopic;
 
     public PostServiceImpl(PostRepository postRepository,
+                           ProfileRepository profileRepository,
                            RelationshipClient relationshipClient,
                            ReactionClient reactionClient,
                            KafkaMessageSender kafkaMessageSender,
@@ -46,6 +49,7 @@ public class PostServiceImpl implements PostService {
                            @Value("${spring.kafka.topic.name.new.comment.node}") String newCommentNodeTopic,
                            @Value("${spring.kafka.topic.name.delete.nodes}") String deleteNodesTopic) {
         this.postRepository = postRepository;
+        this.profileRepository = profileRepository;
         this.relationshipClient = relationshipClient;
         this.reactionClient = reactionClient;
         this.kafkaMessageSender = kafkaMessageSender;
@@ -112,7 +116,6 @@ public class PostServiceImpl implements PostService {
 
         postRepository.delete(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
         log.info(String.format(DELETE_POST_TEMPLATE, postIdentity));
-
     }
 
     @Override
@@ -140,7 +143,7 @@ public class PostServiceImpl implements PostService {
         log.info(String.format(NEW_COMMENT_SAVED_IN_DATABASE_AUTHOR_IDENTITY_COMMENT_IDENTITY_TEMPLATE,
                 comment.getAuthorIdentity(), postIdentity));
 
-        Set<String> peopleToNotify = postRepository
+        Set<String> peopleToNotify = profileRepository
                 .findAllUsersCommentingThePost(postIdentity, String.format(COLLECTION_TEMPLATE, postAuthorIdentity));
         peopleToNotify.addAll(reactionClient.findPeopleWhoReactedToPost(postIdentity));
         peopleToNotify.add(comment.getAuthorIdentity());
