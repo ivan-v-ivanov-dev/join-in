@@ -82,7 +82,15 @@ In order to start the project you need to have Docker Desktop installed on your 
 2. Reaction service retrieves all users who commented the post to sends them notification about the reaction
 3. Reaction service sends notifications via Kafka messaging to Notification service that someone reacted to the post (notifications are send to those users who reacted previously to the post /obtained from Reaction service/ or has commented the post /obtained from Post service/)
 
-## 3.7. Generate User profile page
+## 3.7 View and Edit a post
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/f93b64e3-b708-46c0-af1e-cfb83d29684a)
+
+1. Profile service retrieves Post from post service
+2. Post service retrieves user profile picture from Image service
+3. When post is edited new Kafka message is sent from Profile to Post service
+
+## 3.8. Generate User profile page
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/202f9a0d-0f9f-44a5-bb96-11091e288d15)
 
