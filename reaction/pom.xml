@@ -11,7 +11,7 @@
     <groupId>com.social</groupId>
     <artifactId>reaction</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>graph</name>
+    <name>reaction</name>
     <description>Reaction service</description>
 
     <properties>
