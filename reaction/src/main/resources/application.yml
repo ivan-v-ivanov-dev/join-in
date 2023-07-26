@@ -46,3 +46,13 @@ spring:
 logging:
   level:
     org.apache: OFF
+
+#Feign Post service
+post:
+  service:
+    url: http://localhost:8082
+    feign:
+      client:
+        name: Post-Service
+  comments:
+    authors: /post/comments/authors
