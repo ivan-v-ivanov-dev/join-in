@@ -16,7 +16,8 @@ This repository is **under development**.
 In this repository, I designed a social media platform with a microservice architecture. Each service is created as an individual module (a standalone Spring Boot application) with its own database (see the **docker-compose.yml** file for each module). Microservices communicate synchronously (Feign client) and asynchronously (using Kafka messages).   
 
 **Note**   
-Keep in mind that I use MVC controllers, which means that I always need to generate a View. As the "main" service that generates the Views (the html pages) I designed the Profile service. The MVC approach complicates microservice communication even further. When I design a React frontend for example, some of the microservice communication will be replaced with HTTP requests from the frontend towards the backend. All other services have REST controllers.     
+Keep in mind that I use MVC controllers, which means that I always need to generate a View. As the "main" service that generates the Views (the html pages) I designed the Profile service. All other services have REST controllers. 
+The MVC approach complicates the microservice communication even further. A React frontend, for example, would simplify some of the microservice communication - some of the Kafka messaging from Profile to other services would be replaced with HTTP requests from the frontend towards the backend.        
 
 # 2. How to start the project
 
@@ -101,7 +102,7 @@ Runs on **http://localhost:8089/**. The service contains all Kafka message model
 ### Technical overview   
 
  - **Spring Boot 2.5** and and **Java 17** used
- - **Maven** used as a a software project management and comprehension tool
+ - **Maven** used as a software project management and comprehension tool
  - **Kafka** as official docker image runnig on port **9092** (see **kafka/docker-compose.yml**)
  - **Zookeeper** as official docker image, running on port **2181** 
 
@@ -119,20 +120,18 @@ Runs on **http://localhost:8081/**. The service perform user authentication towa
 
 ## 4.3. Post service  
 
-Runs on **http://localhost:8082/**. Service stores Post (publications) and comments. The posts are stored in MongoDB collections (each user has it's own collection created when user is registered). The comment are stored in Redis hashmap with Post identity as Key and Comment as value. Post and comment identity used as @RequestParams in microservice communications are calculated as SHA-512 values of Post/Comment owner + content + posted date.   
+Runs on **http://localhost:8082/**. Service stores Post (publications) and comments. The posts are stored in MongoDB collections (each user has its own collection created when the user is registered). The comments are stored in the Posts (as embedded mongo relations). Post and comment identities used as @RequestParams in microservice communications are calculated as SHA-512 values of Post/Comment owner + content + posted date.   
 
 **Note**     
-It is debatable whether I should use Mongo relations to store comments or Neo4j as a database to store Posts and Comments. However I decided to user MongoDB for the posts and Redis for the comments for now (I might change the implementation in the future).
+It is debatable whether I should use MongoDB with relations relations or Neo4j as a database to store Posts and Comments. However I decided to user MongoDB (I might change the implementation in the future).
 
 ### Technical overview   
 
  - **Spring Boot 2.5** and and **Java 17** used
  - **Maven** used as a a software project management and comprehension tool
- - **MongoDB** as official docker image runnig on port **27020** (see **post/docker-compose.yml**). Collection and sample data are imported on start up via docker volume and **.js** script (see **resources/mongo/ini.js**)
+ - **MongoDB** as official docker image runnig on port **27020** (see **post/docker-compose.yml**). Collection and sample data are imported on start up via docker volume and **.js** script (see **resources/mongo/init.js**)
  - **Mongo express** as official docker image running on port **9091** as database UI tool
- - **Redis** as official docker image runnign on port **6379**. Sample data are imported on start up via **CommandLineRunner** (see **config/RedisConfig.java**)
- - **MongoTemplate** used as persistent strategy for the MongoDB persistence
- - **RedisTemplate** used as persistent strategy for the Redis persistence 
+ - **MongoTemplate** used as persistent strategy for the MongoDB persistence   
 
 ## 4.4. Image service   
 
@@ -142,7 +141,7 @@ Runs on **http://localhost:8085/**. Service stores user images (profile photo, b
 
  - **Spring Boot 2.5** and and **Java 17** used
  - **Maven** used as a a software project management and comprehension tool
- - **MongoDB** as official docker image runnig on port **27018** (see **image/docker-compose.yml**). Collection and sample data are imported on start up via docker volume and **.js** script (see **resources/mongo/ini.js**)
+ - **MongoDB** as official docker image runnig on port **27018** (see **image/docker-compose.yml**). Collection and sample data are imported on start up via docker volume and **.js** script (see **resources/mongo/init.js**)
  - **Mongo express** as official docker image running on port **9093** as database UI tool
  - **MongoTemplate** used as persistent strategy for the MongoDB persistence
 
@@ -150,7 +149,7 @@ Runs on **http://localhost:8085/**. Service stores user images (profile photo, b
 
 Runs on **http://localhost:8084/**. Stores posts reactions (likes, dislikes and stars) and comment reactions (likes, dislikes). Uses Neo4j as a database. Posts, comments and users are created as nodes (with identity as Id) and Users has a relationship to the posts and comments.
 
-Example
+Example of Users (purple nodes) and Posts/Comments (orange nodes)
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/c4b8f185-073b-41af-a7f8-d6365bc287d8)
 
@@ -163,7 +162,7 @@ Example
 
 ## 4.6. Relashionship service  
 
-Runs on **http://localhost:8083/**. Stores friendship relations for the users. Uses Neo4j as a database. The relationships are outgoing for each user. So far only FRIENDSHIP is used, but the service can be extended to support other relationships (FOLLOWS, for example) as well.
+Runs on **http://localhost:8083/**. Stores friendship relations for the users and friend invitations.  Uses Neo4j as a database. The FRIENDSHIP relationships are outgoing for each user. The FRIENDSHIP_REQUEST relationship are outgoing from the user who sends the invitation to another who accepts it. After accepting the frienship this relation is replaced with FRINEDSHIP. The service can be extended to support other relationships (FOLLOWS, for example).
 
 Example
 
@@ -186,8 +185,19 @@ Runs on **http://localhost:8080/**. Stores profie information for users. Contain
  - **Maven** used as a a software project management and comprehension tool
  - **Spring MVC framework** used to create the controllers and connect to the frontend
  - **Thymeleaf** used as a template engine to create and populate the html pages
- - **MongoDB** as official docker image runnig on port **27017** (see **profile/docker-compose.yml**). Collection and sample data are imported on start up via docker volume and **.js** script (see **resources/mongo/ini.js**)
+ - **MongoDB** as official docker image runnig on port **27017** (see **profile/docker-compose.yml**). Collection and sample data are imported on start up via docker volume and **.js** script (see **resources/mongo/init.js**)
  - **Mongo express** as official docker image running on port **9090** as database UI tool
+
+## 4.8. Notification service
+
+Runs on **http://localhost:8086/**. Stores the notificatins for each user. Each user has its own collection.
+
+ - **Spring Boot 2.5** and and **Java 17** used
+ - **Maven** used as a software project management and comprehension tool
+ - **MongoDB** as official docker image runnig on port **27019** (see **notification/docker-compose.yml**). Collection and sample data are imported on start up via docker volume and **.js** script (see **resources/mongo/init.js**)
+ - **Mongo express** as official docker image running on port **9094** as database UI tool
+ - **MongoTemplate** used as persistent strategy for the MongoDB persistence
+
 
 # 5. Page layout  
 
