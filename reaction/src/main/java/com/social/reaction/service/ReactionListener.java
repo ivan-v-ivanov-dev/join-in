@@ -95,6 +95,7 @@ public class ReactionListener {
         log.info(String.format(LIKE_POST_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
                 likePostTopic, reactionMessage.getPostIdentity()));
 
-        postService.likePost(reactionMessage.getUserIdentity(), reactionMessage.getPostIdentity());
+        postService.likePost(reactionMessage.getReactingUserIdentity(), reactionMessage.getPostIdentity(),
+                reactionMessage.getPostAuthorIdentity(), reactionMessage.getPostAuthorNames());
     }
 }

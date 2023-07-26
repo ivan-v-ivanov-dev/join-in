@@ -19,6 +19,9 @@ public class LoggerConstants {
     public static final String LIKE_POST_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "LIKE post message received from Profile service (Kafka topic: %s, Post identity: %s)";
 
+    public static final String LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "LIKE post message send to Notification service (Kafka topic: %s)";
+
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
 
