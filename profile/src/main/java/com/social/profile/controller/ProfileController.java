@@ -139,6 +139,14 @@ public class ProfileController {
         return "redirect:/profile?identity=" + reactingUserIdentity;
     }
 
+    @PostMapping("/post/dislike")
+    public String dislikeAPost(@RequestParam("reactingUserIdentity") String reactingUserIdentity,
+                               @RequestParam("postIdentity") String postIdentity,
+                               @RequestParam("postAuthorIdentity") String postAuthorIdentity) {
+        reactionService.dislikePost(reactingUserIdentity, postIdentity, postAuthorIdentity);
+        return "redirect:/profile?identity=" + reactingUserIdentity;
+    }
+
     @GetMapping("/signout")
     public String signOut() {
         return "redirect:/";
