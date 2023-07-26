@@ -3,32 +3,31 @@ package com.social.reaction.config;
 import com.social.kafka.messages.contract.KafkaMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
-import org.springframework.kafka.core.ConsumerFactory;
-import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
+import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.social.reaction.config.ConfigConstants.*;
 
 @Configuration
 @EnableKafka
 @Slf4j
 public class KafkaConfig {
 
-    private static final String KAFKA_CONFIGURATIONS = "Kafka Configurations :: ";
-    private static final String FOR_KAFKA_MESSAGING_CREATED = " for Kafka messaging created";
-    private static final String DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
-            KAFKA_CONFIGURATIONS + "Default Consumer Factory" + FOR_KAFKA_MESSAGING_CREATED;
-    private static final String CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
-            KAFKA_CONFIGURATIONS + "Concurrent Kafka Listener Container Factor" + FOR_KAFKA_MESSAGING_CREATED;
-
+    @Value("${spring.kafka.producer.bootstrap-servers}")
+    private String producerServer;
     @Value("${spring.kafka.consumer.bootstrap-servers}")
     private String consumerServer;
     @Value("${spring.kafka.consumer.group-id}")
@@ -41,6 +40,27 @@ public class KafkaConfig {
     private String consumerKeyTypePackages;
     @Value("${spring.kafka.consumer.value.type.packages}")
     private String consumerValueTypePackages;
+
+    @Bean
+    public ProducerFactory<String, KafkaMessage> producerFactory() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, this.producerServer);
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+
+        DefaultKafkaProducerFactory<String, KafkaMessage> defaultKafkaProducerFactory = new DefaultKafkaProducerFactory<>(props);
+        log.info(DEFAULT_PRODUCER_FACTORY_FOR_KAFKA_MESSAGING_CREATED);
+
+        return defaultKafkaProducerFactory;
+    }
+
+    @Bean
+    public KafkaTemplate<String, KafkaMessage> kafkaTemplate() {
+        KafkaTemplate<String, KafkaMessage> kafkaTemplate = new KafkaTemplate<>(producerFactory());
+        log.info(KAFKA_TEMPLATE_FOR_KAFKA_MESSAGING_CREATED);
+
+        return kafkaTemplate;
+    }
 
     @Bean
     public ConsumerFactory<String, KafkaMessage> consumerFactory() {
