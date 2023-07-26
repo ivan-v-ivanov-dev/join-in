@@ -1,6 +1,6 @@
 package com.social.notification.service;
 
-import com.social.kafka.messages.NewPostCommentNotificationMessage;
+import com.social.kafka.messages.NotificationMessage;
 import com.social.kafka.messages.NewUserMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.notification.model.Notification;
@@ -46,33 +46,33 @@ public class NotificationListener {
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.post.notification}", groupId = "${spring.kafka.group.id}")
     public void newPostNotificationListener(KafkaMessage kafkaMessage) {
-        NewPostCommentNotificationMessage newPostCommentNotificationMessage = (NewPostCommentNotificationMessage) kafkaMessage;
+        NotificationMessage notificationMessage = (NotificationMessage) kafkaMessage;
         log.info(String.format(NEW_POST_NOTIFICATION_MESSAGE_RECEIVED_FROM_POST_SERVICE_TEMPLATE, newPostNotificationTopic));
 
         Notification notification = Notification.builder()
-                .authorIdentity(newPostCommentNotificationMessage.getAuthorIdentity())
-                .postIdentity(newPostCommentNotificationMessage.getPostIdentity())
-                .notification(String.format(NEW_POST_NOTIFICATION_TEMPLATE, newPostCommentNotificationMessage.getAuthorNames()))
-                .date(LocalDate.parse(newPostCommentNotificationMessage.getDate()))
+                .authorIdentity(notificationMessage.getAuthorIdentity())
+                .postIdentity(notificationMessage.getPostIdentity())
+                .notification(String.format(NEW_POST_NOTIFICATION_TEMPLATE, notificationMessage.getAuthorNames()))
+                .date(LocalDate.parse(notificationMessage.getDate()))
                 .seen(false)
                 .build();
 
-        notificationService.save(notification, newPostCommentNotificationMessage.getPeopleToNotify());
+        notificationService.save(notification, notificationMessage.getPeopleToNotify());
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.comment.notification}", groupId = "${spring.kafka.group.id}")
     public void newCommentNotificationListener(KafkaMessage kafkaMessage) {
-        NewPostCommentNotificationMessage newPostCommentNotificationMessage = (NewPostCommentNotificationMessage) kafkaMessage;
+        NotificationMessage notificationMessage = (NotificationMessage) kafkaMessage;
         log.info(String.format(NEW_COMMENT_NOTIFICATION_MESSAGE_RECEIVED_FROM_POST_SERVICE_TEMPLATE, newCommentNotificationTopic));
 
         Notification notification = Notification.builder()
-                .authorIdentity(newPostCommentNotificationMessage.getAuthorIdentity())
-                .postIdentity(newPostCommentNotificationMessage.getPostIdentity())
-                .notification(String.format(NEW_COMMENT_NOTIFICATION_TEMPLATE, newPostCommentNotificationMessage.getAuthorNames()))
-                .date(LocalDate.parse(newPostCommentNotificationMessage.getDate()))
+                .authorIdentity(notificationMessage.getAuthorIdentity())
+                .postIdentity(notificationMessage.getPostIdentity())
+                .notification(String.format(NEW_COMMENT_NOTIFICATION_TEMPLATE, notificationMessage.getAuthorNames()))
+                .date(LocalDate.parse(notificationMessage.getDate()))
                 .seen(false)
                 .build();
 
-        notificationService.save(notification, newPostCommentNotificationMessage.getPeopleToNotify());
+        notificationService.save(notification, notificationMessage.getPeopleToNotify());
     }
 }

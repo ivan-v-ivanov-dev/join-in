@@ -2,7 +2,7 @@ package com.social.post.service;
 
 import com.social.kafka.messages.DeleteNodesMessage;
 import com.social.kafka.messages.NewNodeMessage;
-import com.social.kafka.messages.NewPostCommentNotificationMessage;
+import com.social.kafka.messages.NotificationMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.model.Comment;
 import com.social.post.model.Post;
@@ -76,7 +76,7 @@ public class PostServiceImpl implements PostService {
         Set<String> friends = relationshipClient.findFriends(authorIdentity);
         log.info(String.format(RETRIEVE_ALL_FRIENDS_FROM_RELATIONSHIP_SERVICE_TEMPLATE, authorIdentity));
 
-        KafkaMessage newPostCommentNotificationMessage = NewPostCommentNotificationMessage.builder()
+        KafkaMessage newPostCommentNotificationMessage = NotificationMessage.builder()
                 .peopleToNotify(friends)
                 .authorIdentity(authorIdentity)
                 .postIdentity(post.getPostIdentity())
@@ -149,7 +149,7 @@ public class PostServiceImpl implements PostService {
         peopleToNotify.add(comment.getAuthorIdentity());
         log.info(String.format(RETRIEVE_ALL_USERS_WHO_REACTED_AND_COMMENTED_THE_POST_TEMPLATE, postIdentity));
 
-        KafkaMessage newPostCommentNotificationMessage = NewPostCommentNotificationMessage.builder()
+        KafkaMessage newPostCommentNotificationMessage = NotificationMessage.builder()
                 .peopleToNotify(peopleToNotify)
                 .authorIdentity(comment.getAuthorIdentity())
                 .postIdentity(postIdentity)

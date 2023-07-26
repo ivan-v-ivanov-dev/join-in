@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-public class NewPostCommentNotificationMessage implements KafkaMessage {
+public class NotificationMessage implements KafkaMessage {
 
     private Set<String> peopleToNotify;
 
