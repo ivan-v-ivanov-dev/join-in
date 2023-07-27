@@ -8,6 +8,8 @@ public interface ProfileService {
 
     int findLikesAPostProfileCount(String postIdentity);
 
+    int findLikesACommentProfileCount(String commentIdentity);
+
     int findDislikesAPostProfileCount(String postIdentity);
 
     int findStarsAPostProfileCount(String postIdentity);
@@ -15,4 +17,5 @@ public interface ProfileService {
     void save(Profile profile);
 
     Set<String> findPeopleWhoReactedToPost(String postIdentity);
+
 }

@@ -7,6 +7,11 @@ public class Queries {
                     "WHERE post.identity = $postIdentity " +
                     "RETURN COUNT(DISTINCT profile)";
 
+    public static final String FIND_HOW_MANY_PROFILES_LIKE_THE_COMMENT_TEMPLATE =
+            "MATCH (profile:Profile)-[:LIKE]->(comment:Comment) " +
+                    "WHERE comment.identity = $commentIdentity " +
+                    "RETURN COUNT(DISTINCT profile)";
+
     public static final String FIND_HOW_MANY_PROFILES_DISLIKE_THE_POST_TEMPLATE =
             "MATCH (profile:Profile)-[:DISLIKE]->(post:Post) " +
                     "WHERE post.identity = $postIdentity " +

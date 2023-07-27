@@ -22,6 +22,11 @@ public class ReactionController {
         return profileService.findLikesAPostProfileCount(postIdentity);
     }
 
+    @PostMapping("/comment/likes")
+    public int findLikesACommentProfileCount(@RequestParam("commentIdentity") String commentIdentity) {
+        return profileService.findLikesACommentProfileCount(commentIdentity);
+    }
+
     @PostMapping("/post/dislikes")
     public int findDislikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity) {
         return profileService.findDislikesAPostProfileCount(postIdentity);
