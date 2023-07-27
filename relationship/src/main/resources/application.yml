@@ -31,6 +31,8 @@ spring:
           user: new-user-topic
         accept:
           friendship: accept-friendship-topic
+        decline:
+          friendship: decline-friendship-topic
     group:
       id: group-id
 

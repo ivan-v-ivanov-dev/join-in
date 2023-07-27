@@ -20,4 +20,6 @@ public interface ProfileService {
     int findFriendshipRequestCountByProfileIdentity(String identity);
 
     void acceptFriendship(String senderUserIdentity, String recipientUserIdentity);
+
+    void declineFriendship(String senderUserIdentity, String recipientUserIdentity);
 }

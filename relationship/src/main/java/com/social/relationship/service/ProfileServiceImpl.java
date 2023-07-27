@@ -81,9 +81,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public void acceptFriendship(String senderUserIdentity, String recipientUserIdentity) {
-        profileRepository.deleteFriendshipRequestRelationship(senderUserIdentity, recipientUserIdentity);
-        log.info(String.format(DELETE_FRIENDSHIP_REQUESTS_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
-                senderUserIdentity, recipientUserIdentity));
+        deleteFriendshipRequestRelationship(senderUserIdentity, recipientUserIdentity);
 
         profileRepository.createFriendshipRelationship(senderUserIdentity, recipientUserIdentity);
         log.info(String.format(CREATE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
@@ -92,5 +90,16 @@ public class ProfileServiceImpl implements ProfileService {
         profileRepository.createFriendshipRelationship(recipientUserIdentity, senderUserIdentity);
         log.info(String.format(CREATE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
                 recipientUserIdentity, senderUserIdentity));
+    }
+
+    @Override
+    public void declineFriendship(String senderUserIdentity, String recipientUserIdentity) {
+        deleteFriendshipRequestRelationship(senderUserIdentity, recipientUserIdentity);
+    }
+
+    private void deleteFriendshipRequestRelationship(String senderUserIdentity, String recipientUserIdentity) {
+        profileRepository.deleteFriendshipRequestRelationship(senderUserIdentity, recipientUserIdentity);
+        log.info(String.format(DELETE_FRIENDSHIP_REQUESTS_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
+                senderUserIdentity, recipientUserIdentity));
     }
 }
