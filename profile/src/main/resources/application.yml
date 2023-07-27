@@ -77,21 +77,6 @@ post:
         name: Post-Service
     url: http://localhost:8082
 
-#Feign Reaction service
-reaction:
-  find:
-    likes:
-      count: /post/likes
-    dislikes:
-      count: /post/dislikes
-    stars:
-      count: /post/stars
-  service:
-    feign:
-      client:
-        name: Reaction-Service
-    url: http://localhost:8084
-
 #Feign Relationship service
 relationship:
   find:
