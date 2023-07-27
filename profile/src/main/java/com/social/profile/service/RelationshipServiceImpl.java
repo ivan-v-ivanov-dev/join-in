@@ -28,7 +28,7 @@ public class RelationshipServiceImpl implements RelationshipService {
     public RelationshipServiceImpl(RelationshipClient relationshipClient,
                                    ProfileRepository profileRepository,
                                    KafkaMessageSender kafkaMessageSender,
-                                   @Value("${spring.kafka.topic.accept.friendship}") String acceptFriendshipTopic) {
+                                   @Value("${spring.kafka.topic.name.accept.friendship}") String acceptFriendshipTopic) {
         this.relationshipClient = relationshipClient;
         this.profileRepository = profileRepository;
         this.kafkaMessageSender = kafkaMessageSender;

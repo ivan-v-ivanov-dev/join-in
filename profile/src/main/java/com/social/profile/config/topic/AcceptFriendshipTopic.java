@@ -15,7 +15,7 @@ import static com.social.profile.config.ConfigConstants.KAFKA_TOPIC_FOR_ACCEPT_F
 @Slf4j
 public class AcceptFriendshipTopic {
 
-    @Value("${spring.kafka.topic.accept.friendship}")
+    @Value("${spring.kafka.topic.name.accept.friendship}")
     private String topicName;
     @Value("${spring.kafka.partitions}")
     private String partitions;
