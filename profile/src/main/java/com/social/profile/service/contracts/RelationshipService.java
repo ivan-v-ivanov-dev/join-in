@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RelationshipService {
     List<FriendsDto> findFriends(String identity);
+
+    int findFriendsCount(String identity);
 }

@@ -47,4 +47,9 @@ public class RelationshipServiceImpl implements RelationshipService {
 
         return friends;
     }
+
+    @Override
+    public int findFriendsCount(String identity) {
+        return relationshipClient.findFriendCount(identity);
+    }
 }

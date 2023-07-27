@@ -1,5 +1,6 @@
-package com.social.profile.model.dto;
+package com.social.profile.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,36 +9,36 @@ import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class PostDto implements Serializable {
+public class Post implements Serializable {
 
+    @JsonIgnore
     private String id;
 
-    @Transient
-    private String author;
+    private String authorIdentity;
 
-    @Transient
-    private String authorPhoto;
+    private String authorNames;
+
+    private String authorProfileImage;
 
     private String postIdentity;
 
     private String content;
 
+    List<Comment> comments;
+
     private LocalDate postDate;
 
-    @Transient
     private String postedAgo;
 
-    @Transient
     private int likes;
 
-    @Transient
     private int dislikes;
 
-    @Transient
     private int stars;
 }

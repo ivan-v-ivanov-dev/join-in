@@ -46,6 +46,12 @@ public class LoggerConstants {
     public static final String RETRIEVE_POST_TEMPLATE =
             "Retrieve post (Post identity: %s)";
 
+    public static final String RETRIEVE_USER_POSTS_FROM_POST_SERVICE_TEMPLATE =
+            "Retrieve user posts from Post service (User identity: %s)";
+
+    public static final String RETRIEVE_PROFILE_TEMPLATE =
+            "Retrieve Profile (User identity: %s)";
+
 
     private LoggerConstants() {
     }

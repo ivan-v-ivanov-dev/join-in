@@ -83,10 +83,10 @@ public class ProfileController {
         model.addAttribute("profileImage", imageService.findProfileImage(identity));
         model.addAttribute("backgroundImage", imageService.findProfileBackgroundImage(identity));
         model.addAttribute("albumImages", imageService.findProfileAlbumImage(identity));
-        model.addAttribute("posts", profileService.findAllPosts(identity));
-        model.addAttribute("postsCount", profileService.findUserPostsCount(identity));
-        model.addAttribute("friendsCount", profileService.findFriendsCount(identity));
+        model.addAttribute("posts", postService.findUserPosts(identity));
+        model.addAttribute("postsCount", postService.findUserPostsCount(identity));
         model.addAttribute("friends", relationshipService.findFriends(identity));
+        model.addAttribute("friendsCount", relationshipService.findFriendsCount(identity));
         return "profile";
     }
 

@@ -5,6 +5,7 @@ import com.social.kafka.messages.EditPostMessage;
 import com.social.kafka.messages.PostMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.profile.model.EditPost;
+import com.social.profile.model.Post;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.KafkaMessageSender;
 import com.social.profile.service.contracts.PostService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.social.profile.service.constants.LoggerConstants.*;
 import static com.social.profile.service.constants.ServiceConstants.AUTHOR_NAME_TEMPLATE;
@@ -91,5 +93,22 @@ public class PostServiceImpl implements PostService {
         kafkaMessageSender.send(deletePostMessage, deletePostTopic);
         log.info(String.format(DELETE_POST_CREATED_AND_SEND_TO_POST_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE,
                 deletePostTopic, postIdentity));
+    }
+
+    @Override
+    public List<Post> findUserPosts(String identity) {
+        List<Post> posts = postClient.findAllPostsByAuthorIdentity(identity);
+        posts.forEach(post ->
+                post.setAuthorNames(String.format(AUTHOR_NAME_TEMPLATE,
+                        profileRepository.findProfileFirstName(identity),
+                        profileRepository.findProfileLastName(identity))));
+
+        log.info(String.format(RETRIEVE_USER_POSTS_FROM_POST_SERVICE_TEMPLATE, identity));
+        return posts;
+    }
+
+    @Override
+    public int findUserPostsCount(String identity) {
+        return postClient.findAuthorPostsCount(identity);
     }
 }
