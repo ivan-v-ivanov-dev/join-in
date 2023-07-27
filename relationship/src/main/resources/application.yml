@@ -29,6 +29,8 @@ spring:
       name:
         new:
           user: new-user-topic
+        accept:
+          friendship: accept-friendship-topic
     group:
       id: group-id
 

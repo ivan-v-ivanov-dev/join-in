@@ -78,4 +78,19 @@ public class ProfileServiceImpl implements ProfileService {
         log.info(String.format(RETRIEVE_FRIENDSHIP_REQUESTS_COUNT_FOR_USER_TEMPLATE, identity));
         return friendshipRequestsCount;
     }
+
+    @Override
+    public void acceptFriendship(String senderUserIdentity, String recipientUserIdentity) {
+        profileRepository.deleteFriendshipRequestRelationship(senderUserIdentity, recipientUserIdentity);
+        log.info(String.format(DELETE_FRIENDSHIP_REQUESTS_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
+                senderUserIdentity, recipientUserIdentity));
+
+        profileRepository.createFriendshipRelationship(senderUserIdentity, recipientUserIdentity);
+        log.info(String.format(CREATE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
+                senderUserIdentity, recipientUserIdentity));
+
+        profileRepository.createFriendshipRelationship(recipientUserIdentity, senderUserIdentity);
+        log.info(String.format(CREATE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
+                recipientUserIdentity, senderUserIdentity));
+    }
 }

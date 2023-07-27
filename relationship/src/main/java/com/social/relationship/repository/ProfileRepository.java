@@ -18,8 +18,16 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
     int findFriendCountByProfileIdentity(@Param("identity") String identity);
 
     @Query(FIND_THE_FRIENDSHIP_REQUESTS_FOR_A_PROFILE_BY_PROFILE_IDENTITY_TEMPLATE)
-    Set<String> findFriendshipRequestByProfileIdentity(String identity);
+    Set<String> findFriendshipRequestByProfileIdentity(@Param("identity") String identity);
 
     @Query(FIND_HOW_MANY_FRIENDSHIP_REQUESTS_HAS_A_PROFILE_TEMPLATE)
-    int findFriendshipRequestCountByProfileIdentity(String identity);
+    int findFriendshipRequestCountByProfileIdentity(@Param("identity") String identity);
+
+    @Query(DELETE_FRIENDSHIP_REQUEST_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT)
+    void deleteFriendshipRequestRelationship(@Param("senderUserIdentity") String senderUserIdentity,
+                                             @Param("recipientUserIdentity") String recipientUserIdentity);
+
+    @Query(CREATE_FRIENDSHIP_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT)
+    void createFriendshipRelationship(@Param("senderUserIdentity") String senderUserIdentity,
+                                      @Param("recipientUserIdentity") String recipientUserIdentity);
 }

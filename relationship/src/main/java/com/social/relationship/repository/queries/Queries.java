@@ -22,6 +22,18 @@ public class Queries {
                     "WHERE profile.identity = $identity " +
                     "RETURN COUNT(DISTINCT friendship_request)";
 
+    public static final String DELETE_FRIENDSHIP_REQUEST_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT =
+            "MATCH (sender:Profile)-[relationship:FRIENDSHIP_REQUEST]->(recipient:Profile) " +
+                    "WHERE sender.identity = $senderUserIdentity AND " +
+                    "recipient.identity = $recipientUserIdentity " +
+                    "DELETE relationship";
+
+    public static final String CREATE_FRIENDSHIP_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT =
+            "MATCH (sender:Profile), (recipient:Profile) " +
+                    "WHERE sender.identity = $senderUserIdentity AND " +
+                    "recipient.identity = $recipientUserIdentity " +
+                    "MERGE (sender)-[:FRIEND]->(recipient)";
+
     private Queries() {
     }
 }
