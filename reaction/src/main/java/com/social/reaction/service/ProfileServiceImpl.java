@@ -37,6 +37,11 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public int findDislikesACommentProfileCount(String commentIdentity) {
+        return profileRepository.findDislikesACommentProfileCount(commentIdentity);
+    }
+
+    @Override
     public int findStarsAPostProfileCount(String postIdentity) {
         return profileRepository.findStarsAPostProfileCount(postIdentity);
     }
