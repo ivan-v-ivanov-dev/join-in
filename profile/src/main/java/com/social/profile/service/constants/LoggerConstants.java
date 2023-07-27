@@ -31,6 +31,9 @@ public class LoggerConstants {
     public static final String ACCEPT_FRIENDSHIP_MESSAGE_CREATED_AND_SEND_TO_RELATIONSHIP_SERVICE_TOPIC_NAME_RECIPIENT_IDENTITY_TEMPLATE =
             KAFKA_MESSAGING + "Accept friendship message created and send to Relationship service (Kafka topic: %s, Recipient user identity %s)";
 
+    public static final String DECLINE_FRIENDSHIP_MESSAGE_CREATED_AND_SEND_TO_RELATIONSHIP_SERVICE_TOPIC_NAME_RECIPIENT_IDENTITY_TEMPLATE =
+            KAFKA_MESSAGING + "Decline friendship message created and send to Relationship service (Kafka topic: %s, Recipient user identity %s)";
+
     public static final String NEW_REGISTERED_USER_PROFILE_SAVED_IN_DATABASE_TEMPLATE =
             "New registered user saved in database (User identity: %s)";
 

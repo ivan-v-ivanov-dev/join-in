@@ -163,6 +163,13 @@ public class ProfileController {
         return "redirect:/profile?identity=" + recipientUserIdentity;
     }
 
+    @PostMapping("/friendship/decline")
+    public String deleteFriendship(@RequestParam("recipientUserIdentity") String recipientUserIdentity,
+                                    @RequestParam("senderUserIdentity") String senderUserIdentity) {
+        relationshipService.declineFriendship(recipientUserIdentity, senderUserIdentity);
+        return "redirect:/profile?identity=" + recipientUserIdentity;
+    }
+
     @GetMapping("/signout")
     public String signOut() {
         return "redirect:/";

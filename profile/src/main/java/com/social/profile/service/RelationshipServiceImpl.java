@@ -24,15 +24,18 @@ public class RelationshipServiceImpl implements RelationshipService {
     private final ProfileRepository profileRepository;
     private final KafkaMessageSender kafkaMessageSender;
     private final String acceptFriendshipTopic;
+    private final String declineFriendshipTopic;
 
     public RelationshipServiceImpl(RelationshipClient relationshipClient,
                                    ProfileRepository profileRepository,
                                    KafkaMessageSender kafkaMessageSender,
-                                   @Value("${spring.kafka.topic.name.accept.friendship}") String acceptFriendshipTopic) {
+                                   @Value("${spring.kafka.topic.name.accept.friendship}") String acceptFriendshipTopic,
+                                   @Value("${spring.kafka.topic.name.decline.friendship}") String declineFriendshipTopic) {
         this.relationshipClient = relationshipClient;
         this.profileRepository = profileRepository;
         this.kafkaMessageSender = kafkaMessageSender;
         this.acceptFriendshipTopic = acceptFriendshipTopic;
+        this.declineFriendshipTopic = declineFriendshipTopic;
     }
 
     @Override
@@ -82,5 +85,17 @@ public class RelationshipServiceImpl implements RelationshipService {
         kafkaMessageSender.send(acceptFriendshipMessage, acceptFriendshipTopic);
         log.info(String.format(ACCEPT_FRIENDSHIP_MESSAGE_CREATED_AND_SEND_TO_RELATIONSHIP_SERVICE_TOPIC_NAME_RECIPIENT_IDENTITY_TEMPLATE,
                 acceptFriendshipTopic, recipientUserIdentity));
+    }
+
+    @Override
+    public void declineFriendship(String recipientUserIdentity, String senderUserIdentity) {
+        KafkaMessage declineFriendshipMessage = FriendshipMessage.builder()
+                .recipientUserIdentity(recipientUserIdentity)
+                .senderUserIdentity(senderUserIdentity)
+                .build();
+
+        kafkaMessageSender.send(declineFriendshipMessage, declineFriendshipTopic);
+        log.info(String.format(DECLINE_FRIENDSHIP_MESSAGE_CREATED_AND_SEND_TO_RELATIONSHIP_SERVICE_TOPIC_NAME_RECIPIENT_IDENTITY_TEMPLATE,
+                declineFriendshipTopic, recipientUserIdentity));
     }
 }

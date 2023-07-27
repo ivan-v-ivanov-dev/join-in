@@ -313,11 +313,17 @@
                                             <input type="hidden" name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
                                         </form>
 
+                                        <form id="declineForm" th:action="@{/friendship/delete}" method="post">
+                                            <input type="hidden" name="recipientUserIdentity" th:value="${profile.getIdentity()}" />
+                                            <input type="hidden" name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
+                                        </form>
+
                                         <div class="d-flex align-items-center">
                                             <a class="me-3 btn btn-primary rounded" href="javascript:void(0);"
                                                onclick="document.getElementById('confirmForm').submit()">Confirm</a>
 
-                                            <a class="me-3 btn btn-secondary rounded" href="javascript:void(0);">Delete Request</a>
+                                            <a class="me-3 btn btn-secondary rounded" href="javascript:void(0);"
+                                               onclick="document.getElementById('declineForm').submit()">Decline Request</a>
                                         </div>
                                     </div>
                                 </div>
