@@ -35,6 +35,11 @@ public class RelationController {
         return profileService.findFriendshipRequest(identity);
     }
 
+    @PostMapping("/profile/friendship/requests/count")
+    public int findFriendshipRequestsCount(@RequestParam("identity") String identity) {
+        return profileService.findFriendshipRequestCountByProfileIdentity(identity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Relation service is HEALTHY!";

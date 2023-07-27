@@ -20,6 +20,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_FRIENDS_COUNT_FOR_USER_TEMPLATE =
             "Retrieve friends count for user (User identity: %s)";
 
+    public static final String RETRIEVE_FRIENDSHIP_REQUESTS_COUNT_FOR_USER_TEMPLATE =
+            "Retrieve friendship requests count for user (User identity: %s)";
+
     private LoggerConstants() {
     }
 }

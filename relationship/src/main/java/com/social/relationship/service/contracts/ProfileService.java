@@ -16,4 +16,6 @@ public interface ProfileService {
     int findFriendCountByProfileIdentity(String identity);
 
     List<FriendshipRequest> findFriendshipRequest(String identity);
+
+    int findFriendshipRequestCountByProfileIdentity(String identity);
 }

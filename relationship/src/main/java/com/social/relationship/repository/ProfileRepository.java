@@ -19,4 +19,7 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
 
     @Query(FIND_THE_FRIENDSHIP_REQUESTS_FOR_A_PROFILE_BY_PROFILE_IDENTITY_TEMPLATE)
     Set<String> findFriendshipRequestByProfileIdentity(String identity);
+
+    @Query(FIND_HOW_MANY_FRIENDSHIP_REQUESTS_HAS_A_PROFILE_TEMPLATE)
+    int findFriendshipRequestCountByProfileIdentity(String identity);
 }

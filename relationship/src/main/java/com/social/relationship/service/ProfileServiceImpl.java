@@ -71,4 +71,11 @@ public class ProfileServiceImpl implements ProfileService {
         log.info(String.format(RETRIEVE_FRIENDSHIP_REQUESTS_FOR_USER_TEMPLATE, identity));
         return friendshipRequests;
     }
+
+    @Override
+    public int findFriendshipRequestCountByProfileIdentity(String identity) {
+        int friendshipRequestsCount = profileRepository.findFriendshipRequestCountByProfileIdentity(identity);
+        log.info(String.format(RETRIEVE_FRIENDSHIP_REQUESTS_COUNT_FOR_USER_TEMPLATE, identity));
+        return friendshipRequestsCount;
+    }
 }
