@@ -69,6 +69,19 @@ relationship:
 
 #Feign Reaction service
 reaction:
+  find:
+    post:
+      likes:
+        count: /post/likes
+      dislikes:
+        count: /post/dislikes
+      stars:
+        count: /post/stars
+    comment:
+      likes:
+        count: /comment/likes
+      dislikes:
+        count: /comment/dislikes
   service:
     url: http://localhost:8084
     feign:

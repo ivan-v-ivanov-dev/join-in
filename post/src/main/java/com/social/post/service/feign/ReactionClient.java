@@ -11,4 +11,19 @@ public interface ReactionClient {
 
     @PostMapping("${reaction.post.reactions.users.identities}")
     Set<String> findPeopleWhoReactedToPost(@RequestParam("postIdentity") String postIdentity);
+
+    @PostMapping("${reaction.find.post.likes.count}")
+    int findLikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity);
+
+    @PostMapping("${reaction.find.comment.likes.count}")
+    int findLikesACommentProfileCount(@RequestParam("commentIdentity") String commentIdentity);
+
+    @PostMapping("${reaction.find.post.dislikes.count}")
+    int findDislikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity);
+
+    @PostMapping("${reaction.find.comment.dislikes.count}")
+    int findDislikesACommentProfileCount(@RequestParam("commentIdentity") String commentIdentity);
+
+    @PostMapping("${reaction.find.post.stars.count}")
+    int findStarsAPostProfileCount(@RequestParam("postIdentity") String postIdentity);
 }
