@@ -1,6 +1,7 @@
 package com.social.profile.service;
 
 import com.social.profile.model.Friend;
+import com.social.profile.model.FriendshipRequest;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.RelationshipService;
 import com.social.profile.service.feign.RelationshipClient;
@@ -9,8 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.social.profile.service.constants.LoggerConstants.RETRIEVE_ALL_FRIENDS_FROM_RELATION_SERVICE_TEMPLATE;
-import static com.social.profile.service.constants.LoggerConstants.RETRIEVE_FRIENDS_COUNT_FROM_RELATION_SERVICE_TEMPLATE;
+import static com.social.profile.service.constants.LoggerConstants.*;
 
 @Service
 @Slf4j
@@ -41,5 +41,24 @@ public class RelationshipServiceImpl implements RelationshipService {
         int friendsCount = relationshipClient.findFriendCount(identity);
         log.info(String.format(RETRIEVE_FRIENDS_COUNT_FROM_RELATION_SERVICE_TEMPLATE, identity));
         return friendsCount;
+    }
+
+    @Override
+    public List<FriendshipRequest> findFriendshipRequests(String identity) {
+        List<FriendshipRequest> friendshipRequests = relationshipClient.findFriendshipRequests(identity);
+        log.info(String.format(RETRIEVE_FRIENDSHIP_REQUESTS_FROM_RELATION_SERVICE_TEMPLATE, identity));
+
+        friendshipRequests.forEach(friendshipRequest -> {
+            friendshipRequest.setFirstName(profileRepository.findProfileFirstName(friendshipRequest.getProfileIdentity()));
+            friendshipRequest.setLastName(profileRepository.findProfileLastName(friendshipRequest.getProfileIdentity()));
+        });
+        return friendshipRequests;
+    }
+
+    @Override
+    public int findFriendshipRequestsCount(String identity) {
+        int friendshipRequestsCount = relationshipClient.findFriendshipRequestsCount(identity);
+        log.info(String.format(RETRIEVE_FRIENDSHIP_REQUEST_COUNT_FROM_RELATION_SERVICE_TEMPLATE, identity));
+        return friendshipRequestsCount;
     }
 }

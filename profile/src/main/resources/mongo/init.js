@@ -21,7 +21,7 @@ db.profiles.insertMany([
         joined: "2020-07-06",
         status: "Single",
         website: "petur.com",
-        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
   },
   {
         identity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551",
@@ -37,7 +37,7 @@ db.profiles.insertMany([
         joined: "2021-01-12",
         status: "Single",
         website: "petur.com",
-        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
     },
     {
         identity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
@@ -53,7 +53,7 @@ db.profiles.insertMany([
         joined: "2018-12-15",
         status: "Married",
         website: "Stoyan.com",
-        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
     },
     {
         identity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
@@ -69,7 +69,7 @@ db.profiles.insertMany([
         joined: "2019-06-08",
         status: "Single",
         website: "victoriya.com",
-        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
     },
     {
         identity: "8a27182c66548a4dcdc9b0cbf26227defcc076a464faa6b66e9f1c876590c94f",
@@ -85,7 +85,7 @@ db.profiles.insertMany([
         joined: "2020-06-19",
         status: "Single",
         website: "mariya.com",
-        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
     },
     {
         identity: "c5f825c26e2edad6bedd8c23b5da3006638793c4a38faaa6bd49cfbe4ab6dd85",
@@ -97,12 +97,60 @@ db.profiles.insertMany([
         city: "Varna",
         country: "Bulgaria",
         birthDate: "1992-04-22",
-        gender: "Female",
+        gender: "Male",
         joined: "2020-04-22",
         status: "Married",
         website: "konstantin.com",
-        hobbies: "I like to ride the bike to work, swimming, and working out. I also like reading design magazines, go to museums, and binge watching a good tv show while it’s raining outside."
-    }
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
+    },
+    {
+        identity: "519ba91a5a5b4afb9dc66f8805ce8c442b6576316c19c6896af2fa9bda6aff71",
+        firstName: "Angel",
+        lastName: "Ivanov",
+        email: "angel@angel.com",
+        aboutMe: "I am a young person.",
+        mobile: "+359 123 123 123",
+        city: "Sofiya",
+        country: "Bulgaria",
+        birthDate: "1995-05-27",
+        gender: "Male",
+        joined: "2020-04-22",
+        status: "Married",
+        website: "angel.com",
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
+     },
+     {
+        identity: "a4fe133a6f4bc82ab1e102ba5bdc6aaa66b3e69bbfd6e64ac30ebf7708e8bff6",
+        firstName: "Iliya",
+        lastName: "Terziev",
+        email: "iliya@iliya.com",
+        aboutMe: "I am a young person.",
+        mobile: "+359 123 123 123",
+        city: "Vratsa",
+        country: "Bulgaria",
+        birthDate: "1988-07-03",
+        gender: "Male",
+        joined: "2020-04-01",
+        status: "Married",
+        website: "iliya.com",
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
+      },
+     {
+        identity: "31cae906048ac3f9dcd9525d0db54d766ffeca05e3c6f87e92f96306b8122d93",
+        firstName: "Tanya",
+        lastName: "Venelinova",
+        email: "tanya@tanya.com",
+        aboutMe: "I am a young person.",
+        mobile: "+359 123 123 123",
+        city: "Gorna Oryahovitsa",
+        country: "Bulgaria",
+        birthDate: "2000-09-12",
+        gender: "Female",
+        joined: "2020-05-22",
+        status: "Single",
+        website: "tanya.com",
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
+      }
 ]);
 console.log('*** Data Imported ***')
 

@@ -84,6 +84,11 @@ relationship:
       count: /profile/friends/count
       for:
         user: /profile/friends
+    friendship:
+      requests:
+        for:
+          user: /profile/friendship/requests
+        count: /profile/friendship/requests/count
   service:
     feign:
       client:

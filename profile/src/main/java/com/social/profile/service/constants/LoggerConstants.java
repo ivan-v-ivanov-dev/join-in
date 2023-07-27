@@ -46,6 +46,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_FRIENDS_COUNT_FROM_RELATION_SERVICE_TEMPLATE =
             "Retrieve friends count from Relation service (Profile identity: %s)";
 
+    public static final String RETRIEVE_FRIENDSHIP_REQUESTS_FROM_RELATION_SERVICE_TEMPLATE =
+            "Retrieve friendship requests from Relation service (Profile identity: %s)";
+
     public static final String RETRIEVE_POST_TEMPLATE =
             "Retrieve post (Post identity: %s)";
 
@@ -55,6 +58,8 @@ public class LoggerConstants {
     public static final String RETRIEVE_PROFILE_TEMPLATE =
             "Retrieve Profile (User identity: %s)";
 
+    public static final String RETRIEVE_FRIENDSHIP_REQUEST_COUNT_FROM_RELATION_SERVICE_TEMPLATE =
+            "Retrieve friendship request count from Relation service (Profile identity: %s)";
 
     private LoggerConstants() {
     }
