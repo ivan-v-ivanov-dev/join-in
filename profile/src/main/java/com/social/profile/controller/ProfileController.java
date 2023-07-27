@@ -156,6 +156,13 @@ public class ProfileController {
         return "redirect:/profile?identity=" + reactingUserIdentity;
     }
 
+    @PostMapping("/friendship/confirm")
+    public String confirmFriendship(@RequestParam("recipientUserIdentity") String recipientUserIdentity,
+                                    @RequestParam("senderUserIdentity") String senderUserIdentity) {
+        relationshipService.confirmFriendship(recipientUserIdentity, senderUserIdentity);
+        return "redirect:/profile?identity=" + recipientUserIdentity;
+    }
+
     @GetMapping("/signout")
     public String signOut() {
         return "redirect:/";

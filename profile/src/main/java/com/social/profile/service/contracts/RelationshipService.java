@@ -13,4 +13,6 @@ public interface RelationshipService {
     List<FriendshipRequest> findFriendshipRequests(String identity);
 
     int findFriendshipRequestsCount(String identity);
+
+    void confirmFriendship(String recipientUserIdentity, String senderUserIdentity);
 }

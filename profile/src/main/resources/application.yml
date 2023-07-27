@@ -44,6 +44,8 @@ spring:
           post: dislike-post-topic
         star:
           post: star-post-topic
+        accept:
+          friendship: accept-friendship-topic
     partitions: 3
     replicas: 1
     group:

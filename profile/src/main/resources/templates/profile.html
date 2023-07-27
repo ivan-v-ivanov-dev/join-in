@@ -307,75 +307,20 @@
                                                 <p class="mb-0" th:text="${currentFriendshipRequest.getFriendCount()}">40 friends</p>
                                             </div>
                                         </div>
+
+                                        <form id="confirmForm" th:action="@{/friendship/confirm}" method="post">
+                                            <input type="hidden" name="recipientUserIdentity" th:value="${profile.getIdentity()}" />
+                                            <input type="hidden" name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
+                                        </form>
+
                                         <div class="d-flex align-items-center">
-                                            <a class="me-3 btn btn-primary rounded"
-                                               href="javascript:void(0);">Confirm</a>
-                                            <a class="me-3 btn btn-secondary rounded"
-                                               href="javascript:void(0);">Delete Request</a>
+                                            <a class="me-3 btn btn-primary rounded" href="javascript:void(0);"
+                                               onclick="document.getElementById('confirmForm').submit()">Confirm</a>
+
+                                            <a class="me-3 btn btn-secondary rounded" href="javascript:void(0);">Delete Request</a>
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div class="iq-friend-request">-->
-<!--                                    <div-->
-<!--                                            class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <img alt="" class="avatar-40 rounded"-->
-<!--                                                 loading="lazy" src="../assets/images/user/02.jpg">-->
-<!--                                            <div class="ms-3">-->
-<!--                                                <h6 class="mb-0 ">Lucy Tania</h6>-->
-<!--                                                <p class="mb-0">12 friends</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a class="me-3 btn btn-primary rounded"-->
-<!--                                               href="javascript:void(0);">Confirm</a>-->
-<!--                                            <a class="me-3 btn btn-secondary rounded"-->
-<!--                                               href="javascript:void(0);">Delete Request</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="iq-friend-request">-->
-<!--                                    <div-->
-<!--                                            class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <img alt="" class="avatar-40 rounded"-->
-<!--                                                 loading="lazy" src="../assets/images/user/03.jpg">-->
-<!--                                            <div class=" ms-3">-->
-<!--                                                <h6 class="mb-0 ">Manny Petty</h6>-->
-<!--                                                <p class="mb-0">3 friends</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a class="me-3 btn btn-primary rounded"-->
-<!--                                               href="javascript:void(0);">Confirm</a>-->
-<!--                                            <a class="me-3 btn btn-secondary rounded"-->
-<!--                                               href="javascript:void(0);">Delete Request</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="iq-friend-request">-->
-<!--                                    <div-->
-<!--                                            class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <img alt="" class="avatar-40 rounded"-->
-<!--                                                 loading="lazy" src="../assets/images/user/04.jpg">-->
-<!--                                            <div class="ms-3">-->
-<!--                                                <h6 class="mb-0 ">Marsha Mello</h6>-->
-<!--                                                <p class="mb-0">15 friends</p>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="d-flex align-items-center">-->
-<!--                                            <a class="me-3 btn btn-primary rounded"-->
-<!--                                               href="javascript:void(0);">Confirm</a>-->
-<!--                                            <a class="me-3 btn btn-secondary rounded"-->
-<!--                                               href="javascript:void(0);">Delete Request</a>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
-<!--                                <div class="text-center">-->
-<!--                                    <a class=" btn text-primary" href="javascript:void(0);">View More Request</a>-->
-<!--                                </div>-->
 
                             </div>
                         </div>

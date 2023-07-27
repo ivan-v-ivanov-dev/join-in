@@ -1,11 +1,15 @@
 package com.social.profile.service;
 
+import com.social.kafka.messages.FriendshipMessage;
+import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.profile.model.Friend;
 import com.social.profile.model.FriendshipRequest;
 import com.social.profile.repository.contract.ProfileRepository;
+import com.social.profile.service.contracts.KafkaMessageSender;
 import com.social.profile.service.contracts.RelationshipService;
 import com.social.profile.service.feign.RelationshipClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +22,17 @@ public class RelationshipServiceImpl implements RelationshipService {
 
     private final RelationshipClient relationshipClient;
     private final ProfileRepository profileRepository;
+    private final KafkaMessageSender kafkaMessageSender;
+    private final String acceptFriendshipTopic;
 
     public RelationshipServiceImpl(RelationshipClient relationshipClient,
-                                   ProfileRepository profileRepository) {
+                                   ProfileRepository profileRepository,
+                                   KafkaMessageSender kafkaMessageSender,
+                                   @Value("${spring.kafka.topic.accept.friendship}") String acceptFriendshipTopic) {
         this.relationshipClient = relationshipClient;
         this.profileRepository = profileRepository;
+        this.kafkaMessageSender = kafkaMessageSender;
+        this.acceptFriendshipTopic = acceptFriendshipTopic;
     }
 
     @Override
@@ -60,5 +70,17 @@ public class RelationshipServiceImpl implements RelationshipService {
         int friendshipRequestsCount = relationshipClient.findFriendshipRequestsCount(identity);
         log.info(String.format(RETRIEVE_FRIENDSHIP_REQUEST_COUNT_FROM_RELATION_SERVICE_TEMPLATE, identity));
         return friendshipRequestsCount;
+    }
+
+    @Override
+    public void confirmFriendship(String recipientUserIdentity, String senderUserIdentity) {
+        KafkaMessage acceptFriendshipMessage = FriendshipMessage.builder()
+                .recipientUserIdentity(recipientUserIdentity)
+                .senderUserIdentity(senderUserIdentity)
+                .build();
+
+        kafkaMessageSender.send(acceptFriendshipMessage, acceptFriendshipTopic);
+        log.info(String.format(ACCEPT_FRIENDSHIP_MESSAGE_CREATED_AND_SEND_TO_RELATIONSHIP_SERVICE_TOPIC_NAME_RECIPIENT_IDENTITY_TEMPLATE,
+                acceptFriendshipTopic, recipientUserIdentity));
     }
 }
