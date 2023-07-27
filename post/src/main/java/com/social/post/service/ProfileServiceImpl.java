@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-import static com.social.post.service.constants.CollectionTemplateConstant.COLLECTION_TEMPLATE;
+import static com.social.post.service.constants.ServiceConstant.COLLECTION_TEMPLATE;
 
 @Service
 @Slf4j

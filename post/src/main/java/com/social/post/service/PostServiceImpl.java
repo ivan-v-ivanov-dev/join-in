@@ -18,11 +18,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Set;
 
-import static com.social.post.service.constants.CollectionTemplateConstant.COLLECTION_TEMPLATE;
 import static com.social.post.service.constants.LoggerConstants.*;
+import static com.social.post.service.constants.ServiceConstant.*;
 
 @Service
 @Slf4j
@@ -68,7 +69,8 @@ public class PostServiceImpl implements PostService {
     public Post findByPostIdentity(String postIdentity, String authorIdentity) {
         Post post = postRepository.findByPostIdentity(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
         post.setAuthorProfileImage(imageClient.findProfileImage(post.getAuthorIdentity()));
-        post.getComments().forEach(comment -> comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity())));
+        post.getComments().forEach(comment ->
+                comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity())));
         log.info(String.format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
         return post;
     }
@@ -103,7 +105,21 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> findAllPostsByAuthorIdentity(String authorIdentity) {
         List<Post> posts = postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, authorIdentity));
-        log.info(RETRIEVE_POSTS);
+        posts.forEach(post -> {
+            post.setAuthorProfileImage(imageClient.findProfileImage(post.getAuthorIdentity()));
+            post.setPostedAgo(calculatePostedAgo(post.getPostDate()));
+            post.setLikes(reactionClient.findLikesAPostProfileCount(post.getPostIdentity()));
+            post.setDislikes(reactionClient.findDislikesAPostProfileCount(post.getPostIdentity()));
+            post.setStars(reactionClient.findStarsAPostProfileCount(post.getPostIdentity()));
+
+            post.getComments().forEach(comment -> {
+                comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity()));
+                comment.setPostedAgo(calculatePostedAgo(comment.getPostDate()));
+                comment.setLikes(reactionClient.findLikesACommentProfileCount(comment.getCommentIdentity()));
+                comment.setLikes(reactionClient.findDislikesACommentProfileCount(comment.getCommentIdentity()));
+            });
+        });
+        log.info(String.format(RETRIEVE_POSTS_FOR_USER_TEMPLATE, authorIdentity));
         return posts;
     }
 
@@ -133,7 +149,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public int findAuthorPostsCount(String authorIdentity) {
         int authorPostsCount = postRepository.findAuthorPostsCount(String.format(COLLECTION_TEMPLATE, authorIdentity));
-        log.info(String.format(RETRIEVE_AUTHOR_POSTS_COUNT_TEMPLATE, authorPostsCount));
+        log.info(String.format(RETRIEVE_AUTHOR_POSTS_COUNT_TEMPLATE, authorIdentity));
         return authorPostsCount;
     }
 
@@ -171,5 +187,35 @@ public class PostServiceImpl implements PostService {
                 .build();
         kafkaMessageSender.send(newCommentNodeMessage, newCommentNodeTopic);
         log.info(String.format(NEW_COMMENT_NODE_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE, newCommentNodeTopic));
+    }
+
+    private String calculatePostedAgo(LocalDate postDate) {
+        LocalDate now = LocalDate.now();
+
+        if (now.isAfter(postDate.plusYears(1))) {
+            if (now.isBefore(postDate.plusYears(2))) {
+                return ONE_YEAR_AGO;
+            }
+
+            Period period = Period.between(postDate, now);
+            int years = period.getYears();
+            return String.format(SEVERAL_YEARS_AGO_TEMPLATE, years);
+        } else if (now.isAfter(postDate.plusMonths(1))) {
+            if (now.isBefore(postDate.plusMonths(2))) {
+                return ONE_MONTH_AGO;
+            }
+
+            Period period = Period.between(postDate, now);
+            int months = period.getMonths();
+            return String.format(SEVERAL_MONTHS_AGO_TEMPLATE, months);
+        } else {
+            if (now.isBefore(postDate.plusDays(2))) {
+                return ONE_DAY_AGO;
+            }
+
+            Period period = Period.between(postDate, now);
+            int days = period.getDays();
+            return String.format(SEVERAL_DAYS_AGO_TEMPLATE, days);
+        }
     }
 }

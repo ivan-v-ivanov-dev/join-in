@@ -1,5 +1,6 @@
 package com.social.post.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 public class Comment implements Serializable {
 
     @Id
+    @JsonIgnore
     private String id;
 
     @Indexed(unique = true)
@@ -26,7 +28,20 @@ public class Comment implements Serializable {
     @Transient
     private String authorProfileImage;
 
+    @Transient
+    private String authorNames;
+
     private String content;
 
+    @JsonIgnore
     private LocalDate postDate;
+
+    @Transient
+    private String postedAgo;
+
+    @Transient
+    private int likes;
+
+    @Transient
+    private int dislikes;
 }
