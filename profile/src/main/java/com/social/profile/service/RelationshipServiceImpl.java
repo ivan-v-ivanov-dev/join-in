@@ -1,55 +1,45 @@
 package com.social.profile.service;
 
-import com.social.profile.model.dto.FriendsDto;
+import com.social.profile.model.Friend;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.RelationshipService;
-import com.social.profile.service.feign.ImageClient;
 import com.social.profile.service.feign.RelationshipClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.social.profile.service.constants.LoggerConstants.RETRIEVE_ALL_FRIENDS_FOR_PROFILE_TEMPLATE;
+import static com.social.profile.service.constants.LoggerConstants.RETRIEVE_ALL_FRIENDS_FROM_RELATION_SERVICE_TEMPLATE;
+import static com.social.profile.service.constants.LoggerConstants.RETRIEVE_FRIENDS_COUNT_FROM_RELATION_SERVICE_TEMPLATE;
 
 @Service
 @Slf4j
 public class RelationshipServiceImpl implements RelationshipService {
 
     private final RelationshipClient relationshipClient;
-    private final ImageClient imageClient;
     private final ProfileRepository profileRepository;
 
     public RelationshipServiceImpl(RelationshipClient relationshipClient,
-                                   ImageClient imageClient,
                                    ProfileRepository profileRepository) {
         this.relationshipClient = relationshipClient;
-        this.imageClient = imageClient;
         this.profileRepository = profileRepository;
     }
 
     @Override
-    public List<FriendsDto> findFriends(String identity) {
-        List<FriendsDto> friends = new ArrayList<>();
-        List<String> friendIdentities = relationshipClient.findFriends(identity);
-
-        friendIdentities.forEach(friendIdentity -> {
-            FriendsDto friend = FriendsDto.builder()
-                    .profileImage(imageClient.findProfileImage(friendIdentity))
-                    .firstName(profileRepository.findProfileFirstName(friendIdentity))
-                    .lastName(profileRepository.findProfileLastName(friendIdentity))
-                    .build();
-
-            friends.add(friend);
+    public List<Friend> findFriends(String identity) {
+        List<Friend> friends = relationshipClient.findFriends(identity);
+        friends.forEach(friend -> {
+            friend.setFirstName(profileRepository.findProfileFirstName(friend.getProfileIdentity()));
+            friend.setLastName(profileRepository.findProfileLastName(friend.getProfileIdentity()));
         });
-        log.info(String.format(RETRIEVE_ALL_FRIENDS_FOR_PROFILE_TEMPLATE, identity));
-
+        log.info(String.format(RETRIEVE_ALL_FRIENDS_FROM_RELATION_SERVICE_TEMPLATE, identity));
         return friends;
     }
 
     @Override
     public int findFriendsCount(String identity) {
-        return relationshipClient.findFriendCount(identity);
+        int friendsCount = relationshipClient.findFriendCount(identity);
+        log.info(String.format(RETRIEVE_FRIENDS_COUNT_FROM_RELATION_SERVICE_TEMPLATE, identity));
+        return friendsCount;
     }
 }

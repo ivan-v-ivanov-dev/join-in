@@ -1,13 +1,17 @@
-package com.social.profile.model.dto;
+package com.social.profile.model;
 
 import lombok.*;
+
+import java.io.Serializable;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class FriendsDto {
+public class Friend implements Serializable {
+
+    private String profileIdentity;
 
     private String profileImage;
 

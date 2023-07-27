@@ -40,8 +40,11 @@ public class LoggerConstants {
     public static final String RETRIEVE_PROFILE_ALBUM_IMAGES_FROM_IMAGE_SERVICE_TEMPLATE =
             "Retrieve Profile album images from Image Service (Profile identity: %s)";
 
-    public static final String RETRIEVE_ALL_FRIENDS_FOR_PROFILE_TEMPLATE =
-            "Retrieve all friends (Profile identity: %s)";
+    public static final String RETRIEVE_ALL_FRIENDS_FROM_RELATION_SERVICE_TEMPLATE =
+            "Retrieve all friends from Relation service (Profile identity: %s)";
+
+    public static final String RETRIEVE_FRIENDS_COUNT_FROM_RELATION_SERVICE_TEMPLATE =
+            "Retrieve friends count from Relation service (Profile identity: %s)";
 
     public static final String RETRIEVE_POST_TEMPLATE =
             "Retrieve post (Post identity: %s)";
