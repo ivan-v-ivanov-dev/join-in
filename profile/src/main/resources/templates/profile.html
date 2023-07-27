@@ -313,7 +313,7 @@
                                             <input type="hidden" name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
                                         </form>
 
-                                        <form id="declineForm" th:action="@{/friendship/delete}" method="post">
+                                        <form id="declineForm" th:action="@{/friendship/decline}" method="post">
                                             <input type="hidden" name="recipientUserIdentity" th:value="${profile.getIdentity()}" />
                                             <input type="hidden" name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
                                         </form>
