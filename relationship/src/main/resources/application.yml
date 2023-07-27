@@ -36,3 +36,12 @@ spring:
 logging:
   level:
     org.apache: OFF
+
+#Feign Image service
+image:
+  service:
+    feign:
+      client:
+        name: Image-Service
+    url: http://localhost:8085
+  profile: /profile-image

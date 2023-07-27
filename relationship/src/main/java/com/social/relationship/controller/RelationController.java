@@ -1,5 +1,6 @@
 package com.social.relationship.controller;
 
+import com.social.relationship.model.Friend;
 import com.social.relationship.service.contracts.ProfileService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ public class RelationController {
     }
 
     @PostMapping("/profile/friends")
-    public Set<String> findFriends(@RequestParam("identity") String identity) {
+    public Set<Friend> findFriends(@RequestParam("identity") String identity) {
         return profileService.findFriendsByProfileIdentity(identity);
     }
 

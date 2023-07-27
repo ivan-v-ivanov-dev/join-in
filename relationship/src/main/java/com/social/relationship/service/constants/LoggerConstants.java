@@ -8,6 +8,12 @@ public class LoggerConstants {
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
 
+    public static final String RETRIEVE_FRIENDS_IDENTITIES_FOR_USER_TEMPLATE =
+            "Retrieve friends identities for user (User identity: %s)";
+
+    public static final String RETRIEVE_FRIENDS_PROFILE_IMAGES_FOR_USER_TEMPLATE =
+            "Retrieve friends profile images for user (User identity: %s)";
+
     private LoggerConstants() {
     }
 }
