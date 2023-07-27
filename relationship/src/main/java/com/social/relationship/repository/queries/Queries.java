@@ -3,10 +3,19 @@ package com.social.relationship.repository.queries;
 public class Queries {
 
     public static final String FIND_THE_FRIENDS_FOR_A_PROFILE_BY_PROFILE_IDENTITY_TEMPLATE =
-            "MATCH (p:Profile)-[:FRIEND]->(friend:Profile) WHERE p.identity = $identity RETURN DISTINCT friend.identity";
+            "MATCH (profile:Profile)-[:FRIEND]->(friend:Profile) " +
+                    "WHERE profile.identity = $identity " +
+                    "RETURN DISTINCT friend.identity";
 
     public static final String FIND_HOW_MANY_FRIENDS_HAS_A_PROFILE_TEMPLATE =
-            "MATCH (p:Profile)-[:FRIEND]->() WHERE p.identity = $identity RETURN count(p)";
+            "MATCH (profile:Profile)-[:FRIEND]->() " +
+                    "WHERE profile.identity = $identity " +
+                    "RETURN count(profile)";
+
+    public static final String FIND_THE_FRIENDSHIP_REQUESTS_FOR_A_PROFILE_BY_PROFILE_IDENTITY_TEMPLATE =
+            "MATCH (friendship_request:Profile)-[:FRIENDSHIP_REQUEST]->(profile:Profile) " +
+                    "WHERE profile.identity = $identity " +
+                    "RETURN DISTINCT friendship_request.identity";
 
     private Queries() {
     }

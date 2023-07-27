@@ -26,3 +26,11 @@ CREATE (Konstantin:Profile {name: 'Konstantin', identity: 'c5f825c26e2edad6bedd8
 
 CREATE (Mariya)-[:FRIEND]->(Konstantin),
 (Konstantin)-[:FRIEND]->(Mariya)
+
+CREATE (Angel:Profile {name: 'Angel', identity: '519ba91a5a5b4afb9dc66f8805ce8c442b6576316c19c6896af2fa9bda6aff71'})
+CREATE (Iliya:Profile {name: 'Iliya', identity: 'a4fe133a6f4bc82ab1e102ba5bdc6aaa66b3e69bbfd6e64ac30ebf7708e8bff6'})
+CREATE (Tanya:Profile {name: 'Tanya', identity: '31cae906048ac3f9dcd9525d0db54d766ffeca05e3c6f87e92f96306b8122d93'})
+
+CREATE (Angel)-[:FRIENDSHIP_REQUEST]->(Petur)
+CREATE (Iliya)-[:FRIENDSHIP_REQUEST]->(Petur)
+CREATE (Tanya)-[:FRIENDSHIP_REQUEST]->(Petur)

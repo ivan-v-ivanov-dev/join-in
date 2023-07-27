@@ -1,6 +1,7 @@
 package com.social.relationship.service;
 
 import com.social.relationship.model.Friend;
+import com.social.relationship.model.FriendshipRequest;
 import com.social.relationship.model.Profile;
 import com.social.relationship.repository.ProfileRepository;
 import com.social.relationship.service.contracts.ProfileService;
@@ -8,7 +9,9 @@ import com.social.relationship.service.feign.ImageClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.social.relationship.service.constants.LoggerConstants.*;
@@ -49,6 +52,23 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public int findFriendCountByProfileIdentity(String identity) {
-        return profileRepository.findFriendCountByProfileIdentity(identity);
+        int count = profileRepository.findFriendCountByProfileIdentity(identity);
+        log.info(String.format(RETRIEVE_FRIENDS_COUNT_FOR_USER_TEMPLATE, identity));
+        return count;
+    }
+
+    @Override
+    public List<FriendshipRequest> findFriendshipRequest(String identity) {
+        List<FriendshipRequest> friendshipRequests = new ArrayList<>();
+        Set<String> friendshipRequestProfileIdentities = profileRepository.findFriendshipRequestByProfileIdentity(identity);
+
+        friendshipRequestProfileIdentities.forEach(profileIdentity ->
+                friendshipRequests.add(FriendshipRequest.builder()
+                        .profileIdentity(profileIdentity)
+                        .profileImage(imageClient.findProfileImage(profileIdentity))
+                        .friendsCount(profileRepository.findFriendCountByProfileIdentity(profileIdentity))
+                        .build()));
+        log.info(String.format(RETRIEVE_FRIENDSHIP_REQUESTS_FOR_USER_TEMPLATE, identity));
+        return friendshipRequests;
     }
 }

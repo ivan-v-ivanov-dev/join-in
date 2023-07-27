@@ -14,6 +14,12 @@ public class LoggerConstants {
     public static final String RETRIEVE_FRIENDS_PROFILE_IMAGES_FOR_USER_TEMPLATE =
             "Retrieve friends profile images for user (User identity: %s)";
 
+    public static final String RETRIEVE_FRIENDSHIP_REQUESTS_FOR_USER_TEMPLATE =
+            "Retrieve friendship requests for user (User identity: %s)";
+
+    public static final String RETRIEVE_FRIENDS_COUNT_FOR_USER_TEMPLATE =
+            "Retrieve friends count for user (User identity: %s)";
+
     private LoggerConstants() {
     }
 }
