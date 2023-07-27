@@ -178,7 +178,7 @@ Runs on **http://localhost:8083/**. Stores friendship relations for the users an
 
 Example
 
-![image](https://github.com/ivanovbiol/join-in/assets/51414119/02bb4e5f-c585-4163-9cf8-7fa96f8da44b)
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/21386696-b01e-409a-9503-4cc0357b330c)
 
 ### Technical overview     
 
