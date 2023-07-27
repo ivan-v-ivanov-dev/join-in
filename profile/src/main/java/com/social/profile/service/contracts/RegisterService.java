@@ -1,7 +1,7 @@
 package com.social.profile.service.contracts;
 
-import com.social.profile.model.dto.RegisterDto;
+import com.social.profile.model.Register;
 
 public interface RegisterService {
-    void register(RegisterDto registerDto);
+    void register(Register register);
 }

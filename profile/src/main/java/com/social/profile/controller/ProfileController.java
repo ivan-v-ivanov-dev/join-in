@@ -1,6 +1,6 @@
 package com.social.profile.controller;
 
-import com.social.profile.model.dto.RegisterDto;
+import com.social.profile.model.Register;
 import com.social.profile.service.contracts.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,18 +62,18 @@ public class ProfileController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("registerDto", new RegisterDto());
+        model.addAttribute("registerDto", new Register());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("registerDto") RegisterDto registerDto,
+    public String registerUser(@Valid @ModelAttribute("register") Register register,
                                BindingResult errors, Model model) {
         if (errors.hasErrors()) {
             return "register";
         }
 
-        registerService.register(registerDto);
+        registerService.register(register);
         return "redirect:/";
     }
 

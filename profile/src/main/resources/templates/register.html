@@ -50,7 +50,7 @@
                         <h1 class="mb-0">Sign Up</h1>
                         <p>Enter your names, email and password</p>
 
-                        <form class="mt-4" method="post" th:action="@{/register}" th:object="${registerDto}">
+                        <form class="mt-4" method="post" th:action="@{/register}" th:object="${register}">
 
                             <div class="form-group">
                                 <label style="color: red" class="error" th:errors="*{firstName}">Error </label>
