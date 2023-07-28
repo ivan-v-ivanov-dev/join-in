@@ -1318,15 +1318,15 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="card-header-toolbar d-flex align-items-center">
-                                                                        <div class="dropdown">
 
-                                                                            <form th:action="@{/unfriend}" method="post">
-                                                                                <input type="hidden" th:name="recipientUserIdentity" th:value="${currentFriend.getProfileIdentity()}" />
-                                                                                <input type="hidden" th:name="senderUserIdentity" th:value="${profile.getIdentity()}" />
-                                                                                <button class="dropdownMenuButton01" type="submit" style="background-color: #C6DBD9;">Unfriend </button>
-                                                                            </form>
-
+                                                                        <div class="d-flex align-items-center">
+                                                                                <form th:action="@{/unfriend}" method="post">
+                                                                                    <input type="hidden" th:name="recipientUserIdentity" th:value="${currentFriend.getProfileIdentity()}" />
+                                                                                    <input type="hidden" th:name="senderUserIdentity" th:value="${profile.getIdentity()}" />
+                                                                                    <button class="me-3 btn btn-secondary rounded" type="submit" >Unfriend </button>
+                                                                                </form>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
