@@ -62,7 +62,7 @@ public class ProfileController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("registerDto", new Register());
+        model.addAttribute("register", new Register());
         return "register";
     }
 
