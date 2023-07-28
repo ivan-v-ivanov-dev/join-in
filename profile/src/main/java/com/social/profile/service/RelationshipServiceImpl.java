@@ -32,7 +32,7 @@ public class RelationshipServiceImpl implements RelationshipService {
                                    KafkaMessageSender kafkaMessageSender,
                                    @Value("${spring.kafka.topic.name.accept.friendship}") String acceptFriendshipTopic,
                                    @Value("${spring.kafka.topic.name.decline.friendship}") String declineFriendshipTopic,
-                                   @Value("${spring.kafka.topic.name.unfriend.}") String unfriendTopic) {
+                                   @Value("${spring.kafka.topic.name.unfriend}") String unfriendTopic) {
         this.relationshipClient = relationshipClient;
         this.profileRepository = profileRepository;
         this.kafkaMessageSender = kafkaMessageSender;
