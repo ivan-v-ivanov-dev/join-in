@@ -156,14 +156,14 @@ public class ProfileController {
         return "redirect:/profile?identity=" + reactingUserIdentity;
     }
 
-    @PostMapping("/friendship/confirm")
+    @PostMapping("/friendship-request/confirm")
     public String confirmFriendship(@RequestParam("recipientUserIdentity") String recipientUserIdentity,
                                     @RequestParam("senderUserIdentity") String senderUserIdentity) {
         relationshipService.confirmFriendship(recipientUserIdentity, senderUserIdentity);
         return "redirect:/profile?identity=" + recipientUserIdentity;
     }
 
-    @PostMapping("/friendship/decline")
+    @PostMapping("/friendship-request/decline")
     public String deleteFriendship(@RequestParam("recipientUserIdentity") String recipientUserIdentity,
                                     @RequestParam("senderUserIdentity") String senderUserIdentity) {
         relationshipService.declineFriendship(recipientUserIdentity, senderUserIdentity);
