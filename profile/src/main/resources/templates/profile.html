@@ -308,22 +308,20 @@
                                             </div>
                                         </div>
 
-                                        <form id="confirmForm" th:action="@{/friendship-request/confirm}" method="post">
-                                            <input type="hidden" name="recipientUserIdentity" th:value="${profile.getIdentity()}" />
-                                            <input type="hidden" name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
-                                        </form>
-
-                                        <form id="declineForm" th:action="@{/friendship-request/decline}" method="post">
-                                            <input type="hidden" name="recipientUserIdentity" th:value="${profile.getIdentity()}" />
-                                            <input type="hidden" name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
-                                        </form>
-
                                         <div class="d-flex align-items-center">
-                                            <a class="me-3 btn btn-primary rounded" href="javascript:void(0);"
-                                               onclick="document.getElementById('confirmForm').submit()">Confirm</a>
 
-                                            <a class="me-3 btn btn-secondary rounded" href="javascript:void(0);"
-                                               onclick="document.getElementById('declineForm').submit()">Decline Request</a>
+                                            <form id="confirmForm" th:action="@{/friendship-request/confirm}" method="post">
+                                                <input type="hidden" th:name="recipientUserIdentity" th:value="${profile.getIdentity()}" />
+                                                <input type="hidden" th:name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
+                                                <button class="me-3 btn btn-primary rounded" type="submit">Confirm</button>
+                                            </form>
+
+                                            <form id="declineForm" th:action="@{/friendship-request/decline}" method="post">
+                                                <input type="hidden" th:name="recipientUserIdentity" th:value="${profile.getIdentity()}" />
+                                                <input type="hidden" th:name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
+                                                <button class="me-3 btn btn-secondary rounded" type="submit">Decline Request</button>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
