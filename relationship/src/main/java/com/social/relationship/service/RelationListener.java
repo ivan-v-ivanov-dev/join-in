@@ -20,15 +20,18 @@ public class RelationListener {
     private final String newUserTopic;
     private final String acceptFriendshipTopic;
     private final String declineFriendshipTopic;
+    private final String unfriendTopic;
 
     public RelationListener(ProfileService profileService,
                             @Value("${spring.kafka.topic.name.new.user}") String newUserTopic,
                             @Value("${spring.kafka.topic.name.accept.friendship}") String acceptFriendshipTopic,
-                            @Value("${spring.kafka.topic.name.decline.friendship}") String declineFriendshipTopic) {
+                            @Value("${spring.kafka.topic.name.decline.friendship}") String declineFriendshipTopic,
+                            @Value("${spring.kafka.topic.name.unfriend}") String unfriendTopic) {
         this.profileService = profileService;
         this.newUserTopic = newUserTopic;
         this.acceptFriendshipTopic = acceptFriendshipTopic;
         this.declineFriendshipTopic = declineFriendshipTopic;
+        this.unfriendTopic = unfriendTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")
@@ -60,5 +63,14 @@ public class RelationListener {
 
         profileService.declineFriendship(declineFriendshipMessage.getSenderUserIdentity(),
                 declineFriendshipMessage.getRecipientUserIdentity());
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.name.unfriend}", groupId = "${spring.kafka.group.id}")
+    public void unfriendListener(KafkaMessage kafkaMessage) {
+        FriendshipMessage unfriendMessage = (FriendshipMessage) kafkaMessage;
+        log.info(String.format(UNFRIEND_USER_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
+                unfriendTopic, unfriendMessage.getRecipientUserIdentity()));
+
+        profileService.unfriend(unfriendMessage.getSenderUserIdentity(), unfriendMessage.getRecipientUserIdentity());
     }
 }

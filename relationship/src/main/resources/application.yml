@@ -33,6 +33,7 @@ spring:
           friendship: accept-friendship-topic
         decline:
           friendship: decline-friendship-topic
+        unfriend: unfriend-topic
     group:
       id: group-id
 

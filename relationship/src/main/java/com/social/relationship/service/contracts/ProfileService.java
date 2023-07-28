@@ -22,4 +22,6 @@ public interface ProfileService {
     void acceptFriendship(String senderUserIdentity, String recipientUserIdentity);
 
     void declineFriendship(String senderUserIdentity, String recipientUserIdentity);
+
+    void unfriend(String senderUserIdentity, String recipientUserIdentity);
 }

@@ -30,4 +30,9 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
     @Query(CREATE_FRIENDSHIP_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT)
     void createFriendshipRelationship(@Param("senderUserIdentity") String senderUserIdentity,
                                       @Param("recipientUserIdentity") String recipientUserIdentity);
+
+    @Query(DELETE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT)
+    void deleteFriendRelationship(@Param("senderUserIdentity") String senderUserIdentity,
+                                  @Param("recipientUserIdentity") String recipientUserIdentity);
+
 }

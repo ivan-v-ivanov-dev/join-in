@@ -97,6 +97,14 @@ public class ProfileServiceImpl implements ProfileService {
         deleteFriendshipRequestRelationship(senderUserIdentity, recipientUserIdentity);
     }
 
+    @Override
+    public void unfriend(String senderUserIdentity, String recipientUserIdentity) {
+        profileRepository.deleteFriendRelationship(senderUserIdentity, recipientUserIdentity);
+        profileRepository.deleteFriendRelationship(recipientUserIdentity, senderUserIdentity);
+        log.info(String.format(DELETE_FRIEND_RELATIONSHIP_FOR_BOTH_USERS_TEMPLATE,
+                senderUserIdentity, recipientUserIdentity));
+    }
+
     private void deleteFriendshipRequestRelationship(String senderUserIdentity, String recipientUserIdentity) {
         profileRepository.deleteFriendshipRequestRelationship(senderUserIdentity, recipientUserIdentity);
         log.info(String.format(DELETE_FRIENDSHIP_REQUESTS_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,

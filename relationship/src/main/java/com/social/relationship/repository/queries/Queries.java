@@ -34,6 +34,12 @@ public class Queries {
                     "recipient.identity = $recipientUserIdentity " +
                     "MERGE (sender)-[:FRIEND]->(recipient)";
 
+    public static final String DELETE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT =
+            "MATCH (sender:Profile)-[relationship:FRIEND]->(recipient:Profile) " +
+                    "WHERE sender.identity = $senderUserIdentity AND " +
+                    "recipient.identity = $recipientUserIdentity " +
+                    "DELETE relationship";
+
     private Queries() {
     }
 }

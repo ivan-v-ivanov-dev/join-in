@@ -13,6 +13,9 @@ public class LoggerConstants {
     public static final String DECLINE_FRIENDSHIP_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "Decline friendship message received from Profile service (Kafka topic: %s, Declining user identity: %s)";
 
+    public static final String UNFRIEND_USER_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "Unfriend user message received from Profile service (Kafka topic: %s, Unfriend user identity: %s)";
+
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
 
@@ -36,6 +39,9 @@ public class LoggerConstants {
 
     public static final String CREATE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE =
             "Create friend relationship between sender and recipient (Sender identity: %s, Recipient identity: %s)";
+
+    public static final String DELETE_FRIEND_RELATIONSHIP_FOR_BOTH_USERS_TEMPLATE =
+            "Delete friend relationship for both users (Sender identity: %s, Recipient identity: %s)";
 
     private LoggerConstants() {
     }
