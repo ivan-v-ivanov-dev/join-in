@@ -98,12 +98,18 @@ In order to start the project you need to have Docker Desktop installed on your 
 2. Profile retrieves user posts from Post service
 3. Post service retrieves user profile photo from Image service for each user post
 4. Post retrieves all reactions (likes, dislikes, stars) for each post from Reactions service
-5. Profile retrieves all friends form Relationship service
-6. Relationship service retrieves friends profile images from Image service
+5. Profile retrieves all friends and riendship requests form Relationship service
+6. Relationship service retrieves friends and friendship requests profile images from Image service
 7. Profile retrieves all notification for the user form Notification service
 8. Notofocations service retrieves profile image for each notification form Image service
 9. Profile retrieves all chat messages from Message service
 10. Message service retrieves user profile images for each chat message from Image service
+
+## 3.9. Accept / Decline / Send Friendship request
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/f6ac374e-f00f-4272-b3b8-f8ca4edfbca2)
+
+1. Profile service sends Kafka messaging to Relationship service the friendship request or to accept or decline it
 
 # 4. Microservice description   
 
