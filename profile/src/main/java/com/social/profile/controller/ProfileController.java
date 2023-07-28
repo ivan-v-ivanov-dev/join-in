@@ -165,9 +165,16 @@ public class ProfileController {
 
     @PostMapping("/friendship-request/decline")
     public String deleteFriendship(@RequestParam("recipientUserIdentity") String recipientUserIdentity,
-                                    @RequestParam("senderUserIdentity") String senderUserIdentity) {
+                                   @RequestParam("senderUserIdentity") String senderUserIdentity) {
         relationshipService.declineFriendship(recipientUserIdentity, senderUserIdentity);
         return "redirect:/profile?identity=" + recipientUserIdentity;
+    }
+
+    @PostMapping("/unfriend")
+    public String unfriend(@RequestParam("recipientUserIdentity") String recipientUserIdentity,
+                           @RequestParam("senderUserIdentity") String senderUserIdentity) {
+        relationshipService.unfriend(recipientUserIdentity, senderUserIdentity);
+        return "redirect:/profile?identity=" + senderUserIdentity;
     }
 
     @GetMapping("/signout")

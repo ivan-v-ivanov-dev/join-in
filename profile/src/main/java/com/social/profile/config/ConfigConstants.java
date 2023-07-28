@@ -52,6 +52,9 @@ public class ConfigConstants {
     public static final String KAFKA_TOPIC_FOR_ACCEPT_FRIENDSHIP_TEMPLATE =
             KAFKA_TOPIC_NEW_TOPIC_FOR + "accept friendship" + CREATED_TOPIC_NAME;
 
+    public static final String KAFKA_TOPIC_FOR_UNFRIEND_USER_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "unfriend user" + CREATED_TOPIC_NAME;
+
     private ConfigConstants() {
     }
 }

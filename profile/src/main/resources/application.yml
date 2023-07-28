@@ -48,6 +48,7 @@ spring:
           friendship: accept-friendship-topic
         decline:
           friendship: decline-friendship-topic
+        unfriend: unfriend-topic
     partitions: 3
     replicas: 1
     group:

@@ -25,17 +25,20 @@ public class RelationshipServiceImpl implements RelationshipService {
     private final KafkaMessageSender kafkaMessageSender;
     private final String acceptFriendshipTopic;
     private final String declineFriendshipTopic;
+    private final String unfriendTopic;
 
     public RelationshipServiceImpl(RelationshipClient relationshipClient,
                                    ProfileRepository profileRepository,
                                    KafkaMessageSender kafkaMessageSender,
                                    @Value("${spring.kafka.topic.name.accept.friendship}") String acceptFriendshipTopic,
-                                   @Value("${spring.kafka.topic.name.decline.friendship}") String declineFriendshipTopic) {
+                                   @Value("${spring.kafka.topic.name.decline.friendship}") String declineFriendshipTopic,
+                                   @Value("${spring.kafka.topic.name.unfriend.}") String unfriendTopic) {
         this.relationshipClient = relationshipClient;
         this.profileRepository = profileRepository;
         this.kafkaMessageSender = kafkaMessageSender;
         this.acceptFriendshipTopic = acceptFriendshipTopic;
         this.declineFriendshipTopic = declineFriendshipTopic;
+        this.unfriendTopic = unfriendTopic;
     }
 
     @Override
@@ -97,5 +100,17 @@ public class RelationshipServiceImpl implements RelationshipService {
         kafkaMessageSender.send(declineFriendshipMessage, declineFriendshipTopic);
         log.info(String.format(DECLINE_FRIENDSHIP_MESSAGE_CREATED_AND_SEND_TO_RELATIONSHIP_SERVICE_TOPIC_NAME_RECIPIENT_IDENTITY_TEMPLATE,
                 declineFriendshipTopic, recipientUserIdentity));
+    }
+
+    @Override
+    public void unfriend(String recipientUserIdentity, String senderUserIdentity) {
+        KafkaMessage unfriendMessage = FriendshipMessage.builder()
+                .recipientUserIdentity(recipientUserIdentity)
+                .senderUserIdentity(senderUserIdentity)
+                .build();
+
+        kafkaMessageSender.send(unfriendMessage, unfriendTopic);
+        log.info(String.format(UNFRIEND_MESSAGE_CREATED_AND_SEND_TO_RELATIONSHIP_SERVICE_TOPIC_NAME_RECIPIENT_IDENTITY_TEMPLATE,
+                unfriendTopic, recipientUserIdentity));
     }
 }

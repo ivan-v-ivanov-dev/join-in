@@ -17,4 +17,6 @@ public interface RelationshipService {
     void confirmFriendship(String recipientUserIdentity, String senderUserIdentity);
 
     void declineFriendship(String recipientUserIdentity, String senderUserIdentity);
+
+    void unfriend(String recipientUserIdentity, String senderUserIdentity);
 }

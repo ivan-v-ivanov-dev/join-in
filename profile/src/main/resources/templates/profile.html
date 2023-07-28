@@ -1329,16 +1329,15 @@
                                                    done
                                                    </i> Friend
                                                    </span>
+                                                                            <form id="unfriendForm" th:action="@{/unfriend}" method="post">
+                                                                                <input type="hidden" name="recipientUserIdentity" th:value="${currentFriend.getProfileIdentity()}" />
+                                                                                <input type="hidden" name="senderUserIdentity" th:value="${profile.getIdentity()}" />
+                                                                            </form>
+
                                                                             <div aria-labelledby="dropdownMenuButton01"
                                                                                  class="dropdown-menu dropdown-menu-right">
-                                                                                <a class="dropdown-item" href="#">Get
-                                                                                    Notification</a>
-                                                                                <a class="dropdown-item" href="#">Close
-                                                                                    Friend</a>
-                                                                                <a class="dropdown-item" href="#">Unfollow</a>
-                                                                                <a class="dropdown-item" href="#">Unfriend</a>
-                                                                                <a class="dropdown-item"
-                                                                                   href="#">Block</a>
+                                                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                                                   onclick="document.getElementById('unfriendForm').submit()">Unfriend</a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
