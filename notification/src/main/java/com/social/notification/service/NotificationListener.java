@@ -27,6 +27,7 @@ public class NotificationListener {
     private final String dislikePostNotificationTopic;
     private final String starPostNotificationTopic;
     private final String likeCommentNotificationTopic;
+    private final String dislikeCommentNotificationTopic;
 
     public NotificationListener(NotificationService notificationService,
                                 @Value("${spring.kafka.topic.name.new.user}") String newUserTopic,
@@ -35,7 +36,8 @@ public class NotificationListener {
                                 @Value("${spring.kafka.topic.name.like.notification}") String likePostNotificationTopic,
                                 @Value("${spring.kafka.topic.name.dislike.notification}") String dislikePostNotificationTopic,
                                 @Value("${spring.kafka.topic.name.star.notification}") String starPostNotificationTopic,
-                                @Value("${spring.kafka.topic.name.like.comment-notification}") String likeCommentNotificationTopic) {
+                                @Value("${spring.kafka.topic.name.like.comment-notification}") String likeCommentNotificationTopic,
+                                @Value("${spring.kafka.topic.name.dislike.comment-notification}") String dislikeCommentNotificationTopic) {
         this.notificationService = notificationService;
         this.newUserTopic = newUserTopic;
         this.newPostNotificationTopic = newPostNotificationTopic;
@@ -44,6 +46,7 @@ public class NotificationListener {
         this.dislikePostNotificationTopic = dislikePostNotificationTopic;
         this.starPostNotificationTopic = starPostNotificationTopic;
         this.likeCommentNotificationTopic = likeCommentNotificationTopic;
+        this.dislikeCommentNotificationTopic = dislikeCommentNotificationTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")
@@ -144,6 +147,23 @@ public class NotificationListener {
                 .authorIdentity(notificationMessage.getAuthorIdentity())
                 .postIdentity(notificationMessage.getPostIdentity())
                 .notification(String.format(LIKE_COMMENT_NOTIFICATION_TEMPLATE, notificationMessage.getAuthorNames()))
+                .date(LocalDate.parse(notificationMessage.getDate()))
+                .seen(false)
+                .build();
+
+        notificationService.save(notification, notificationMessage.getPeopleToNotify());
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.name.dislike.comment-notification}", groupId = "${spring.kafka.group.id}")
+    public void dislikeCommentNotificationListener(KafkaMessage kafkaMessage) {
+        NotificationMessage notificationMessage = (NotificationMessage) kafkaMessage;
+        log.info(String.format(DISLIKE_COMMENT_NOTIFICATION_MESSAGE_RECEIVED_FROM_REACTION_SERVICE_TEMPLATE,
+                dislikeCommentNotificationTopic));
+
+        Notification notification = Notification.builder()
+                .authorIdentity(notificationMessage.getAuthorIdentity())
+                .postIdentity(notificationMessage.getPostIdentity())
+                .notification(String.format(DISLIKE_COMMENT_NOTIFICATION_TEMPLATE, notificationMessage.getAuthorNames()))
                 .date(LocalDate.parse(notificationMessage.getDate()))
                 .seen(false)
                 .build();

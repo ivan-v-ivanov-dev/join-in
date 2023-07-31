@@ -30,9 +30,10 @@ spring:
       name:
         like:
           post-notification: like-post-notification-topic
-          comment-notification: like-comment-notification
+          comment-notification: like-comment-notification-topic
         dislike:
           post-notification: dislike-post-notification-topic
+          comment-notification: dislike-comment-notification-topic
         star:
           post-notification: star-post-notification-topic
         new:
