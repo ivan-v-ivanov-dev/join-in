@@ -28,6 +28,12 @@ public class ConfigConstants {
    public static final String KAFKA_TOPIC_FOR_STAR_A_POST_CREATED_TEMPLATE =
             "Kafka Topic :: New topic for star a post created (name:  %s)";
 
+   public static final String KAFKA_TOPIC_FOR_LIKE_A_COMMENT_CREATED_TEMPLATE =
+            "Kafka Topic :: New topic for like a comment created (name:  %s)";
+
+   public static final String KAFKA_TOPIC_FOR_DISLIKE_A_COMMENT_CREATED_TEMPLATE =
+            "Kafka Topic :: New topic for dislike a comment created (name:  %s)";
+
     private ConfigConstants() {
     }
 }
