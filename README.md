@@ -98,7 +98,7 @@ In order to start the project you need to have Docker Desktop installed on your 
 2. Profile retrieves user posts from Post service
 3. Post service retrieves user profile photo from Image service for each user post
 4. Post retrieves all reactions (likes, dislikes, stars) for each post from Reactions service
-5. Profile retrieves all friends and riendship requests form Relationship service
+5. Profile retrieves all friends and friendship requests form Relationship service
 6. Relationship service retrieves friends and friendship requests profile images from Image service
 7. Profile retrieves all notification for the user form Notification service
 8. Notofocations service retrieves profile image for each notification form Image service
@@ -230,6 +230,10 @@ Runs on **http://localhost:8086/**. Stores the notificatins for each user. Each 
 ## 5.3. User Profile
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/7776f18b-6fa1-4104-9be4-b00920d106c9)
+
+## Friendship requests
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/2bea4a4b-1be6-4c50-af37-d9904e0117cf)
 
 # 6. Disclaimer  
 
