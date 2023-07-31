@@ -72,6 +72,12 @@ public class Queries {
                     "comment.identity = $commentIdentity " +
                     "MERGE (profile)-[:LIKE]->(comment)";
 
+    public static final String USER_DISLIKES_COMMENT =
+            "MATCH (profile:Profile), (comment:Comment) " +
+                    "WHERE profile.identity = $reactingUserIdentity AND " +
+                    "comment.identity = $commentIdentity " +
+                    "MERGE (profile)-[:DISLIKE]->(comment)";
+
     private Queries() {
     }
 }

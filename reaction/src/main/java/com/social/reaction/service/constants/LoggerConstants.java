@@ -34,8 +34,14 @@ public class LoggerConstants {
     public static final String LIKE_COMMENT_NOTIFICATION_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "LIKE comment message send to Notification service (Kafka topic: %s)";
 
+    public static final String DISLIKE_COMMENT_NOTIFICATION_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "DISLIKE comment message send to Notification service (Kafka topic: %s)";
+
     public static final String LIKE_COMMENT_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
-            KAFKA_MESSAGING + "LIKE comment message received from Profile service (Kafka topic: %s, comment identity: %s)";
+            KAFKA_MESSAGING + "LIKE comment message received from Profile service (Kafka topic: %s, Comment identity: %s)";
+
+    public static final String DISLIKE_COMMENT_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "DISLIKE comment message received from Profile service (Kafka topic: %s, Comment identity: %s)";
 
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
@@ -64,6 +70,8 @@ public class LoggerConstants {
             "Delete previous possible reactions (User identity: %s, Comment identity: %s)";
 
     public static final String COMMENT_LIKED_BY_USER_TEMPLATE = "Comment liked by user (User identity: %s, Comment identity: %s)";
+
+    public static final String COMMENT_DISLIKED_BY_USER_TEMPLATE = "Comment disliked by user (User identity: %s, Comment identity: %s)";
 
     private LoggerConstants() {
     }

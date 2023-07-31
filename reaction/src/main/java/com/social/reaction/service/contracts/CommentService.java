@@ -11,4 +11,7 @@ public interface CommentService {
 
     void likeComment(String reactingUserIdentity, String commentIdentity, String postIdentity,
                      String commentAuthorIdentity, String commentAuthorNames);
+
+    void dislikeComment(String reactingUserIdentity, String commentIdentity, String postIdentity,
+                        String commentAuthorIdentity, String commentAuthorNames);
 }

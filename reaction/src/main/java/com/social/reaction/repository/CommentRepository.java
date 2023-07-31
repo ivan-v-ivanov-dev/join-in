@@ -19,4 +19,8 @@ public interface CommentRepository extends Neo4jRepository<Comment, String> {
     @Query(USER_LIKES_COMMENT)
     void likeComment(@Param("reactingUserIdentity") String reactingUserIdentity,
                      @Param("commentIdentity") String commentIdentity);
+
+    @Query(USER_DISLIKES_COMMENT)
+    void dislikeComment(@Param("reactingUserIdentity") String reactingUserIdentity,
+                        @Param("commentIdentity") String commentIdentity);
 }

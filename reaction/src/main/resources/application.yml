@@ -41,10 +41,12 @@ spring:
           post: like-post-topic
           post-notification: like-post-notification-topic
           comment: like-comment-topic
-          comment-notification: like-comment-notification
+          comment-notification: like-comment-notification-topic
         dislike:
           post: dislike-post-topic
           post-notification: dislike-post-notification-topic
+          comment: dislike-comment-topic
+          comment-notification: dislike-comment-notification-topic
         star:
           post: star-post-topic
           post-notification: star-post-notification-topic

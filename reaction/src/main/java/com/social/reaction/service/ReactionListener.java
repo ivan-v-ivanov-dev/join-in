@@ -30,6 +30,7 @@ public class ReactionListener {
     private final String dislikePostTopic;
     private final String starPostTopic;
     private final String likeCommentTopic;
+    private final String dislikeCommentTopic;
 
     public ReactionListener(ProfileService profileService,
                             PostService postService,
@@ -41,7 +42,8 @@ public class ReactionListener {
                             @Value("${spring.kafka.topic.name.like.post}") String likePostTopic,
                             @Value("${spring.kafka.topic.name.dislike.post}") String dislikePostTopic,
                             @Value("${spring.kafka.topic.name.star.post}") String starPostTopic,
-                            @Value("${spring.kafka.topic.name.like.comment}") String likeCommentTopic) {
+                            @Value("${spring.kafka.topic.name.like.comment}") String likeCommentTopic,
+                            @Value("${spring.kafka.topic.name.dislike.comment}") String dislikeCommentTopic) {
         this.profileService = profileService;
         this.postService = postService;
         this.commentService = commentService;
@@ -53,6 +55,7 @@ public class ReactionListener {
         this.dislikePostTopic = dislikePostTopic;
         this.starPostTopic = starPostTopic;
         this.likeCommentTopic = likeCommentTopic;
+        this.dislikeCommentTopic = dislikeCommentTopic;
     }
 
     @KafkaListener(topics = "${spring.kafka.topic.name.new.user}", groupId = "${spring.kafka.group.id}")
@@ -132,6 +135,16 @@ public class ReactionListener {
                 likeCommentTopic, commentReactionMessage.getPostIdentity()));
 
         commentService.likeComment(commentReactionMessage.getReactingUserIdentity(), commentReactionMessage.getCommentIdentity(),
+                commentReactionMessage.getPostIdentity(), commentReactionMessage.getCommentAuthorIdentity(), commentReactionMessage.getCommentAuthorNames());
+    }
+
+    @KafkaListener(topics = "${spring.kafka.topic.name.dislike.comment}", groupId = "${spring.kafka.group.id}")
+    public void dislikeCommentListener(KafkaMessage kafkaMessage) {
+        CommentReactionMessage commentReactionMessage = (CommentReactionMessage) kafkaMessage;
+        log.info(String.format(DISLIKE_COMMENT_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
+                dislikeCommentTopic, commentReactionMessage.getPostIdentity()));
+
+        commentService.dislikeComment(commentReactionMessage.getReactingUserIdentity(), commentReactionMessage.getCommentIdentity(),
                 commentReactionMessage.getPostIdentity(), commentReactionMessage.getCommentAuthorIdentity(), commentReactionMessage.getCommentAuthorNames());
     }
 }

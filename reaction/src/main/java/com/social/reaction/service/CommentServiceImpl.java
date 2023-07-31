@@ -22,13 +22,16 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final KafkaMessageSender kafkaMessageSender;
     private final String likeCommentNotificationTopic;
+    private final String dislikeCommentNotificationTopic;
 
     public CommentServiceImpl(CommentRepository commentRepository,
                               KafkaMessageSender kafkaMessageSender,
-                              @Value("${spring.kafka.topic.name.like.comment-notification}") String likeCommentNotificationTopic) {
+                              @Value("${spring.kafka.topic.name.like.comment-notification}") String likeCommentNotificationTopic,
+                              @Value("${spring.kafka.topic.name.dislike.comment-notification}") String dislikeCommentNotificationTopic) {
         this.commentRepository = commentRepository;
         this.kafkaMessageSender = kafkaMessageSender;
         this.likeCommentNotificationTopic = likeCommentNotificationTopic;
+        this.dislikeCommentNotificationTopic = dislikeCommentNotificationTopic;
     }
 
     @Override
@@ -54,6 +57,19 @@ public class CommentServiceImpl implements CommentService {
                 commentAuthorNames, postIdentity, likeCommentNotificationTopic);
         log.info(String.format(LIKE_COMMENT_NOTIFICATION_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
                 likeCommentNotificationTopic));
+    }
+
+    @Override
+    public void dislikeComment(String reactingUserIdentity, String commentIdentity, String postIdentity,
+                               String commentAuthorIdentity, String commentAuthorNames) {
+        deletePreviousUserReactionsToTheComment(reactingUserIdentity, commentIdentity);
+        commentRepository.dislikeComment(reactingUserIdentity, commentIdentity);
+        log.info(String.format(COMMENT_DISLIKED_BY_USER_TEMPLATE, reactingUserIdentity, commentIdentity));
+
+        sendKafkaMessageNotificationsToTheRelatedUsers(Set.of(commentAuthorIdentity), commentAuthorIdentity,
+                commentAuthorNames, postIdentity, dislikeCommentNotificationTopic);
+        log.info(String.format(DISLIKE_COMMENT_NOTIFICATION_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                dislikeCommentNotificationTopic));
     }
 
     private void deletePreviousUserReactionsToTheComment(String reactingUserIdentity, String commentIdentity) {
