@@ -159,8 +159,9 @@ public class ProfileController {
     @PostMapping("/comment/like")
     public String likeAComment(@RequestParam("reactingUserIdentity") String reactingUserIdentity,
                                @RequestParam("commentIdentity") String commentIdentity,
+                               @RequestParam("postIdentity") String postIdentity,
                                @RequestParam("commentAuthorIdentity") String commentAuthorIdentity) {
-        reactionService.likeComment(reactingUserIdentity, commentIdentity, commentAuthorIdentity);
+        reactionService.likeComment(reactingUserIdentity, commentIdentity, postIdentity, commentAuthorIdentity);
         return "redirect:/profile?identity=" + reactingUserIdentity;
     }
 

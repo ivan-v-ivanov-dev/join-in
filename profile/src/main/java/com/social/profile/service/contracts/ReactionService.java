@@ -7,5 +7,5 @@ public interface ReactionService {
 
     void starPost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity);
 
-    void likeComment(String reactingUserIdentity, String commentIdentity, String commentAuthorIdentity);
+    void likeComment(String reactingUserIdentity, String commentIdentity, String postIdentity, String commentAuthorIdentity);
 }
