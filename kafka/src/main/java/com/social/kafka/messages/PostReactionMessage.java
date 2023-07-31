@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class ReactionMessage implements KafkaMessage {
+public class PostReactionMessage implements KafkaMessage {
 
     private String reactingUserIdentity;
 
