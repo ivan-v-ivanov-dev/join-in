@@ -8,4 +8,7 @@ public interface CommentService {
     void save(Comment comment);
 
     void deleteNodes(Set<String> commentsNodesIdentities);
+
+    void likeComment(String reactingUserIdentity, String commentIdentity, String postIdentity,
+                     String commentAuthorIdentity, String commentAuthorNames);
 }

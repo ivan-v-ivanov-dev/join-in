@@ -131,7 +131,7 @@ public class ReactionListener {
         log.info(String.format(LIKE_COMMENT_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
                 likeCommentTopic, commentReactionMessage.getPostIdentity()));
 
-        postService.likeComment(commentReactionMessage.getReactingUserIdentity(), commentReactionMessage.getCommentIdentity(),
+        commentService.likeComment(commentReactionMessage.getReactingUserIdentity(), commentReactionMessage.getCommentIdentity(),
                 commentReactionMessage.getPostIdentity(), commentReactionMessage.getCommentAuthorIdentity(), commentReactionMessage.getCommentAuthorNames());
     }
 }

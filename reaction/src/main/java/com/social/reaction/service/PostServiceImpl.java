@@ -31,7 +31,6 @@ public class PostServiceImpl implements PostService {
     private final String likePostNotificationTopic;
     private final String dislikePostNotificationTopic;
     private final String starPostNotificationTopic;
-    private final String likeCommentNotificationTopic;
 
     public PostServiceImpl(PostRepository postRepository,
                            CommentRepository commentRepository,
@@ -40,8 +39,7 @@ public class PostServiceImpl implements PostService {
                            KafkaMessageSender kafkaMessageSender,
                            @Value("${spring.kafka.topic.name.like.post-notification}") String likePostNotificationTopic,
                            @Value("${spring.kafka.topic.name.dislike.post-notification}") String dislikePostNotificationTopic,
-                           @Value("${spring.kafka.topic.name.star.post-notification}") String starPostNotificationTopic,
-                           @Value("${spring.kafka.topic.name.like.comment-notification}") String likeCommentNotificationTopic) {
+                           @Value("${spring.kafka.topic.name.star.post-notification}") String starPostNotificationTopic) {
         this.postRepository = postRepository;
         this.commentRepository = commentRepository;
         this.profileRepository = profileRepository;
@@ -50,7 +48,6 @@ public class PostServiceImpl implements PostService {
         this.likePostNotificationTopic = likePostNotificationTopic;
         this.dislikePostNotificationTopic = dislikePostNotificationTopic;
         this.starPostNotificationTopic = starPostNotificationTopic;
-        this.likeCommentNotificationTopic = likeCommentNotificationTopic;
     }
 
     @Override
@@ -107,19 +104,6 @@ public class PostServiceImpl implements PostService {
                 starPostNotificationTopic));
     }
 
-    @Override
-    public void likeComment(String reactingUserIdentity, String commentIdentity, String postIdentity,
-                            String commentAuthorIdentity, String commentAuthorNames) {
-        deletePreviousUserReactionsToTheComment(reactingUserIdentity, commentIdentity);
-        commentRepository.likeComment(reactingUserIdentity, commentIdentity);
-        log.info(String.format(COMMENT_LIKED_BY_USER_TEMPLATE, reactingUserIdentity, commentIdentity));
-
-        sendKafkaMessageNotificationsToTheRelatedUsers(Set.of(commentAuthorIdentity), commentAuthorIdentity,
-                commentAuthorNames, postIdentity, likeCommentNotificationTopic);
-        log.info(String.format(LIKE_COMMENT_NOTIFICATION_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
-                likeCommentNotificationTopic));
-    }
-
     private void deletePreviousUserReactionsToThePost(String reactingUserIdentity, String postIdentity) {
         postRepository.deletePossiblePreviousRelations(reactingUserIdentity, postIdentity);
         log.info(String.format(DELETE_PREVIOUS_POSSIBLE_REACTIONS_TO_THE_POST_TEMPLATE, reactingUserIdentity, postIdentity));
@@ -131,11 +115,6 @@ public class PostServiceImpl implements PostService {
         usersToNotify.addAll(postClient.findAllUsersCommentingThePost(postIdentity, postAuthorIdentity));
         usersToNotify.add(postAuthorIdentity);
         return usersToNotify;
-    }
-
-    private void deletePreviousUserReactionsToTheComment(String reactingUserIdentity, String commentIdentity) {
-        commentRepository.deletePossiblePreviousRelations(reactingUserIdentity, commentIdentity);
-        log.info(String.format(DELETE_PREVIOUS_POSSIBLE_REACTIONS_TO_THE_COMMENT_TEMPLATE, reactingUserIdentity, commentIdentity));
     }
 
     private void sendKafkaMessageNotificationsToTheRelatedUsers(Set<String> usersToNotify, String postAuthorIdentity,
