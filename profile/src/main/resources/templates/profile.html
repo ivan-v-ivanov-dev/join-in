@@ -1042,11 +1042,14 @@
                                                               class="comment-text d-flex align-items-center mt-3"
                                                               method="post"
                                                               th:action="@{/comment}">
-                                                            <input th:name="userIdentity"
+                                                            <input th:name="commentAuthorIdentity"
                                                                    th:value="${profile.getIdentity()}"
                                                                    type="hidden"/>
                                                             <input th:name="postIdentity"
                                                                    th:value="${currentPost.getPostIdentity()}"
+                                                                   type="hidden"/>
+                                                            <input th:name="postAuthorIdentity"
+                                                                   th:value="${currentPost.getAuthorIdentity()}"
                                                                    type="hidden"/>
                                                             <input class="form-control rounded"
                                                                    placeholder="Enter Your Comment"
