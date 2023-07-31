@@ -44,7 +44,7 @@ public class Queries {
                     "post.identity = $postIdentity " +
                     "MERGE (profile)-[:LIKE]->(post)";
 
-    public static final String DELETE_POSSIBLE_PREVIOUS_REACTIONS =
+    public static final String DELETE_POSSIBLE_PREVIOUS_REACTIONS_TO_THE_POST =
             "OPTIONAL MATCH (profile:Profile)-[reaction:LIKE|STAR|DISLIKE]->(post:Post) " +
                     "WHERE profile.identity = $reactingUserIdentity AND post.identity = $postIdentity " +
                     "DELETE reaction";
@@ -60,6 +60,17 @@ public class Queries {
                     "WHERE profile.identity = $reactingUserIdentity AND " +
                     "post.identity = $postIdentity " +
                     "MERGE (profile)-[:STAR]->(post)";
+
+    public static final String DELETE_POSSIBLE_PREVIOUS_REACTIONS_TO_THE_COMMENT =
+            "OPTIONAL MATCH (profile:Profile)-[reaction:LIKE|DISLIKE]->(comment:Comment) " +
+                    "WHERE profile.identity = $reactingUserIdentity AND comment.identity = $commentIdentity " +
+                    "DELETE reaction";
+
+    public static final String USER_LIKES_COMMENT =
+            "MATCH (profile:Profile), (comment:Comment) " +
+                    "WHERE profile.identity = $reactingUserIdentity AND " +
+                    "comment.identity = $commentIdentity " +
+                    "MERGE (profile)-[:LIKE]->(comment)";
 
     private Queries() {
     }

@@ -31,6 +31,12 @@ public class LoggerConstants {
     public static final String STAR_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "STAR post message send to Notification service (Kafka topic: %s)";
 
+    public static final String LIKE_COMMENT_NOTIFICATION_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "LIKE comment message send to Notification service (Kafka topic: %s)";
+
+    public static final String LIKE_COMMENT_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "LIKE comment message received from Profile service (Kafka topic: %s, comment identity: %s)";
+
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
 
@@ -45,7 +51,7 @@ public class LoggerConstants {
 
     public static final String POST_NODE_DELETED = "Post node deleted with its relations";
 
-    public static final String DELETE_PREVIOUS_POSSIBLE_REACTIONS_TEMPLATE =
+    public static final String DELETE_PREVIOUS_POSSIBLE_REACTIONS_TO_THE_POST_TEMPLATE =
             "Delete previous possible reactions (User identity: %s, Post identity: %s)";
 
     public static final String POST_LIKED_BY_USER_TEMPLATE = "Post liked by user (User identity: %s, Post identity: %s)";
@@ -53,6 +59,11 @@ public class LoggerConstants {
     public static final String POST_DISLIKED_BY_USER_TEMPLATE = "Post disliked by user (User identity: %s, Post identity: %s)";
 
     public static final String POST_STARED_BY_USER_TEMPLATE = "Post stared by user (User identity: %s, Post identity: %s)";
+
+    public static final String DELETE_PREVIOUS_POSSIBLE_REACTIONS_TO_THE_COMMENT_TEMPLATE =
+            "Delete previous possible reactions (User identity: %s, Comment identity: %s)";
+
+    public static final String COMMENT_LIKED_BY_USER_TEMPLATE = "Comment liked by user (User identity: %s, Comment identity: %s)";
 
     private LoggerConstants() {
     }
