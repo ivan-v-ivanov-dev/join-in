@@ -43,6 +43,7 @@ spring:
           comment: like-comment-topic
         dislike:
           post: dislike-post-topic
+          comment: dislike-comment-topic
         star:
           post: star-post-topic
         accept:

@@ -23,19 +23,22 @@ public class ReactionServiceImpl implements ReactionService {
     private final String dislikePostTopic;
     private final String starPostTopic;
     private final String likeCommentTopic;
+    private final String dislikeCommentTopic;
 
     public ReactionServiceImpl(ProfileRepository profileRepository,
                                KafkaMessageSender kafkaMessageSender,
                                @Value("${spring.kafka.topic.name.like.post}") String likePostTopic,
                                @Value("${spring.kafka.topic.name.dislike.post}") String dislikePostTopic,
                                @Value("${spring.kafka.topic.name.star.post}") String starPostTopic,
-                               @Value("${spring.kafka.topic.name.like.comment}") String likeCommentTopic) {
+                               @Value("${spring.kafka.topic.name.like.comment}") String likeCommentTopic,
+                               @Value("${spring.kafka.topic.name.dislike.comment}") String dislikeCommentTopic) {
         this.profileRepository = profileRepository;
         this.kafkaMessageSender = kafkaMessageSender;
         this.likePostTopic = likePostTopic;
         this.dislikePostTopic = dislikePostTopic;
         this.starPostTopic = starPostTopic;
         this.likeCommentTopic = likeCommentTopic;
+        this.dislikeCommentTopic = dislikeCommentTopic;
     }
 
     @Override
@@ -68,6 +71,14 @@ public class ReactionServiceImpl implements ReactionService {
         kafkaMessageSender.send(likeCommentMessage, likeCommentTopic);
         log.info(String.format(LIKE_COMMENT_MESSAGE_CREATED_AND_SEND_TO_REACTION_SERVICE_TOPIC_NAME_COMMENT_IDENTITY_TEMPLATE,
                 likeCommentTopic, commentIdentity));
+    }
+
+    @Override
+    public void dislikeComment(String reactingUserIdentity, String commentIdentity, String postIdentity, String commentAuthorIdentity) {
+        KafkaMessage dislikeCommentMessage = createCommentReactionKafkaMessage(reactingUserIdentity, commentIdentity, postIdentity, commentAuthorIdentity);
+        kafkaMessageSender.send(dislikeCommentMessage, dislikeCommentTopic);
+        log.info(String.format(DISLIKE_COMMENT_MESSAGE_CREATED_AND_SEND_TO_REACTION_SERVICE_TOPIC_NAME_COMMENT_IDENTITY_TEMPLATE,
+                dislikeCommentTopic, commentIdentity));
     }
 
     private KafkaMessage createPostReactionKafkaMessage(String reactingUserIdentity, String postIdentity, String postAuthorIdentity) {

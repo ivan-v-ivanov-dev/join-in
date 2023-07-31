@@ -1029,13 +1029,26 @@
                                                                         <div class="d-flex flex-wrap align-items-center comment-activity">
 
                                                                             <form th:action="@{/comment/like}" method="post" style="float:left">
-                                                                                <input type="hidden" name="reactingUserIdentity" th:value="${profile.getIdentity()}" />
-                                                                                <input type="hidden" name="commentIdentity" th:value="${currentComment.getCommentIdentity()}" />
-                                                                                <input type="hidden" name="postIdentity" th:value="${currentPost.getPostIdentity()}" />
-                                                                                <input type="hidden" name="commentAuthorIdentity" th:value="${currentComment.getAuthorIdentity()}" />
+                                                                                <input type="hidden" name="reactingUserIdentity" th:value="${profile.getIdentity()}"/>
+                                                                                <input type="hidden" name="commentIdentity" th:value="${currentComment.getCommentIdentity()}"/>
+                                                                                <input type="hidden" name="postIdentity" th:value="${currentPost.getPostIdentity()}"/>
+                                                                                <input type="hidden" name="commentAuthorIdentity" th:value="${currentComment.getAuthorIdentity()}"/>
+
                                                                                 <button class="me-2" data-bs-placement="top" data-bs-toggle="tooltip"
                                                                                         style="padding: 0; border: none; background: none;" title="Like">
                                                                                     <i class="fa fa-thumbs-up" style="font-size:16px; color: #4da0e0;"></i>
+                                                                                </button>
+                                                                            </form>
+
+                                                                            <form th:action="@{/comment/dislike}" method="post">
+                                                                                <input type="hidden" name="reactingUserIdentity" th:value="${profile.getIdentity()}"/>
+                                                                                <input type="hidden" name="commentIdentity" th:value="${currentComment.getCommentIdentity()}"/>
+                                                                                <input type="hidden" name="postIdentity" th:value="${currentPost.getPostIdentity()}"/>
+                                                                                <input type="hidden" name="commentAuthorIdentity" th:value="${currentComment.getAuthorIdentity()}"/>
+
+                                                                                <button class="me-2" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                                                        style="padding: 0; border: none; background: none;" title="Dislike">
+                                                                                    <i class="fa fa-thumbs-down" style="font-size:16px; color:red;"></i>
                                                                                 </button>
                                                                             </form>
 

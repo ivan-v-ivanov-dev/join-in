@@ -40,6 +40,9 @@ public class LoggerConstants {
     public static final String LIKE_COMMENT_MESSAGE_CREATED_AND_SEND_TO_REACTION_SERVICE_TOPIC_NAME_COMMENT_IDENTITY_TEMPLATE =
             KAFKA_MESSAGING + "LIKE comment message created and send to Reaction service (Kafka topic: %s, Comment identity %s)";
 
+    public static final String DISLIKE_COMMENT_MESSAGE_CREATED_AND_SEND_TO_REACTION_SERVICE_TOPIC_NAME_COMMENT_IDENTITY_TEMPLATE =
+            KAFKA_MESSAGING + "DISLIKE comment message created and send to Reaction service (Kafka topic: %s, Comment identity %s)";
+
     public static final String NEW_REGISTERED_USER_PROFILE_SAVED_IN_DATABASE_TEMPLATE =
             "New registered user saved in database (User identity: %s)";
 

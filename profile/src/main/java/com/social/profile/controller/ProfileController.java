@@ -165,6 +165,15 @@ public class ProfileController {
         return "redirect:/profile?identity=" + reactingUserIdentity;
     }
 
+    @PostMapping("/comment/dislike")
+    public String dislikeAComment(@RequestParam("reactingUserIdentity") String reactingUserIdentity,
+                                  @RequestParam("commentIdentity") String commentIdentity,
+                                  @RequestParam("postIdentity") String postIdentity,
+                                  @RequestParam("commentAuthorIdentity") String commentAuthorIdentity) {
+        reactionService.dislikeComment(reactingUserIdentity, commentIdentity, postIdentity, commentAuthorIdentity);
+        return "redirect:/profile?identity=" + reactingUserIdentity;
+    }
+
     @PostMapping("/friendship-request/confirm")
     public String confirmFriendship(@RequestParam("recipientUserIdentity") String recipientUserIdentity,
                                     @RequestParam("senderUserIdentity") String senderUserIdentity) {
