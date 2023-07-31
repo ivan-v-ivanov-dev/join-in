@@ -98,10 +98,16 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> findUserPosts(String identity) {
         List<Post> posts = postClient.findAllPostsByAuthorIdentity(identity);
-        posts.forEach(post ->
-                post.setAuthorNames(String.format(AUTHOR_NAME_TEMPLATE,
-                        profileRepository.findProfileFirstName(identity),
-                        profileRepository.findProfileLastName(identity))));
+        posts.forEach(post -> {
+            post.setAuthorNames(String.format(AUTHOR_NAME_TEMPLATE,
+                    profileRepository.findProfileFirstName(post.getAuthorIdentity()),
+                    profileRepository.findProfileLastName(post.getAuthorIdentity())));
+
+            post.getComments().forEach(comment ->
+                    comment.setAuthorNames(String.format(AUTHOR_NAME_TEMPLATE,
+                            profileRepository.findProfileFirstName(comment.getAuthorIdentity()),
+                            profileRepository.findProfileLastName(comment.getAuthorIdentity()))));
+        });
 
         log.info(String.format(RETRIEVE_USER_POSTS_FROM_POST_SERVICE_TEMPLATE, identity));
         return posts;
