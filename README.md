@@ -165,11 +165,11 @@ Runs on **http://localhost:8085/**. Service stores user images (profile photo, b
 
 ## 4.5. Reaction service  
 
-Runs on **http://localhost:8084/**. Stores posts reactions (likes, dislikes and stars) and comment reactions (likes, dislikes). Uses Neo4j as a database. Posts, comments and users are created as nodes (with identity as Id) and Users has a relationship to the posts and comments.
+Runs on **http://localhost:8084/**. Stores posts reactions (LIKE, DISLIKE and STAR) and comment reactions (LIKE and DISLIKE). Uses Neo4j as a database. Posts, comments and users are created as nodes (with identity as Id) and Users has a relationship to the posts and comments.
 
-Example of Users (purple nodes) and Posts/Comments (orange nodes)
+Example of Users (purple nodes), Posts (orange nodes) and Comments (blue nodes)
 
-![image](https://github.com/ivanovbiol/join-in/assets/51414119/c4b8f185-073b-41af-a7f8-d6365bc287d8)
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/d837a834-a08d-4a9a-8a9c-9f68ab153ad0)
 
 ### Technical overview     
 
