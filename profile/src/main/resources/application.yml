@@ -40,6 +40,7 @@ spring:
           post: edit-post-topic
         like:
           post: like-post-topic
+          comment: like-comment-topic
         dislike:
           post: dislike-post-topic
         star:

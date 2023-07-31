@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="theme-fs-md" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="theme-fs-md" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="utf-8">
@@ -1012,6 +1012,7 @@
                                                         </div>
 
                                                         <hr>
+
                                                         <!-- Start of Comments -->
                                                         <ul class="post-comments p-0 m-0" th:each="currentComment : ${currentPost.getComments()}">
                                                             <li class="mb-2">
@@ -1021,14 +1022,36 @@
                                                                              loading="lazy" alt="userimg" class="avatar-35 rounded-circle img-fluid">
                                                                     </div>
                                                                     <div class="comment-data-block ms-3">
-                                                                        <h6 th:text="${currentComment.getAuthorNames()}">Monty Carlo</h6>
-                                                                        <p class="mb-0" th:text="${currentComment.getContent()}">Lorem ipsum dolor sit amet</p>
+                                                                        <h5 th:text="${currentComment.getAuthorNames()}">Monty Carlo</h5>
+
+                                                                        <h6 class="mb-0" th:text="${currentComment.getContent()}">Lorem ipsum dolor sit amet</h6>
+
                                                                         <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                            <a href="#">like</a>
-                                                                            <a href="#">reply</a>
-                                                                            <a href="#">translate</a>
+
+                                                                            <form th:action="@{/comment/like}" method="post" style="float:left">
+                                                                                <input type="hidden" name="reactingUserIdentity" th:value="${profile.getIdentity()}" />
+                                                                                <input type="hidden" name="commentIdentity" th:value="${currentComment.getCommentIdentity()}" />
+                                                                                <input type="hidden" name="commentAuthorIdentity" th:value="${currentComment.getAuthorIdentity()}" />
+                                                                                <button class="me-2" data-bs-placement="top" data-bs-toggle="tooltip"
+                                                                                        style="padding: 0; border: none; background: none;" title="Like">
+                                                                                    <i class="fa fa-thumbs-up" style="font-size:16px; color: #4da0e0;"></i>
+                                                                                </button>
+                                                                            </form>
+
+                                                                            <span aria-expanded="false" aria-haspopup="true"
+                                                                                  th:text="${currentComment.getLikes()} + ' Likes'">140 Likes</span>
+
+                                                                            <label>&nbsp;
+                                                                            <span aria-expanded="false" aria-haspopup="true"
+                                                                                  th:text="${currentComment.getDislikes()} + ' Dislikes'">140 Likes</span>
+                                                                            </label>
+
+                                                                            <label>&nbsp;
                                                                             <span th:text="${currentComment.getPostedAgo()}"> 5 min </span>
+                                                                            </label>
+
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </li>

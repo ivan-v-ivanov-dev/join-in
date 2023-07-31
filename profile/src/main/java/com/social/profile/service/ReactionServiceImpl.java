@@ -21,17 +21,20 @@ public class ReactionServiceImpl implements ReactionService {
     private final String likePostTopic;
     private final String dislikePostTopic;
     private final String starPostTopic;
+    private final String likeCommentTopic;
 
     public ReactionServiceImpl(ProfileRepository profileRepository,
                                KafkaMessageSender kafkaMessageSender,
                                @Value("${spring.kafka.topic.name.like.post}") String likePostTopic,
                                @Value("${spring.kafka.topic.name.dislike.post}") String dislikePostTopic,
-                               @Value("${spring.kafka.topic.name.star.post}") String starPostTopic) {
+                               @Value("${spring.kafka.topic.name.star.post}") String starPostTopic,
+                               @Value("${spring.kafka.topic.name.like.comment}") String likeCommentTopic) {
         this.profileRepository = profileRepository;
         this.kafkaMessageSender = kafkaMessageSender;
         this.likePostTopic = likePostTopic;
         this.dislikePostTopic = dislikePostTopic;
         this.starPostTopic = starPostTopic;
+        this.likeCommentTopic = likeCommentTopic;
     }
 
     @Override
@@ -56,6 +59,14 @@ public class ReactionServiceImpl implements ReactionService {
         kafkaMessageSender.send(starPostMessage, starPostTopic);
         log.info(String.format(STAR_POST_MESSAGE_CREATED_AND_SEND_TO_REACTION_SERVICE_TOPIC_NAME_POST_IDENTITY_TEMPLATE,
                 starPostTopic, postIdentity));
+    }
+
+    @Override
+    public void likeComment(String reactingUserIdentity, String commentIdentity, String commentAuthorIdentity) {
+        KafkaMessage likeCommentMessage = createKafkaMessage(reactingUserIdentity, commentIdentity, commentAuthorIdentity);
+        kafkaMessageSender.send(likeCommentMessage, likeCommentTopic);
+        log.info(String.format(LIKE_COMMENT_MESSAGE_CREATED_AND_SEND_TO_REACTION_SERVICE_TOPIC_NAME_COMMENT_IDENTITY_TEMPLATE,
+                likeCommentTopic, commentIdentity));
     }
 
     private KafkaMessage createKafkaMessage(String reactingUserIdentity, String postIdentity, String postAuthorIdentity) {
