@@ -846,8 +846,7 @@
                                                     </div>
                                                     <div class="user-post">
                                                         <a href="#">
-                                                            <h4 th:text="${currentPost.getContent()}">This is a
-                                                                comment</h4>
+                                                            <h4 th:text="${currentPost.getContent()}">This is a comment</h4>
                                                         </a>
                                                     </div>
                                                     <div class="comment-area mt-3">
@@ -1014,6 +1013,30 @@
                                                             </div>
 
                                                         </div>
+
+                                                        <hr>
+                                                        <!-- Start of Comments -->
+                                                        <ul class="post-comments p-0 m-0" th:each="currentComment : ${currentPost.getComments()}">
+                                                            <li class="mb-2">
+                                                                <div class="d-flex flex-wrap">
+                                                                    <div class="user-img">
+                                                                        <img th:src="${currentComment.getAuthorProfileImage()}"
+                                                                             loading="lazy" alt="userimg" class="avatar-35 rounded-circle img-fluid">
+                                                                    </div>
+                                                                    <div class="comment-data-block ms-3">
+                                                                        <h6 th:text="${currentComment.getAuthorNames()}">Monty Carlo</h6>
+                                                                        <p class="mb-0" th:text="${currentComment.getContent()}">Lorem ipsum dolor sit amet</p>
+                                                                        <div class="d-flex flex-wrap align-items-center comment-activity">
+                                                                            <a href="#">like</a>
+                                                                            <a href="#">reply</a>
+                                                                            <a href="#">translate</a>
+                                                                            <span th:text="${currentComment.getPostedAgo()}"> 5 min </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <!-- End of Comments -->
 
                                                         <form action="javascript:void(0);"
                                                               class="comment-text d-flex align-items-center mt-3"
@@ -1418,6 +1441,7 @@
     </div>
 </div>
 <!-- Wrapper End-->
+
 <!-- offcanvas start -->
 <div class="right-sidebar-mini right-sidebar">
     <div class="right-sidebar-panel p-0">
