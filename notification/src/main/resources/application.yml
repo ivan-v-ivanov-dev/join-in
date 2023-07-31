@@ -29,11 +29,12 @@ spring:
     topic:
       name:
         like:
-          notification: like-post-notification-topic
+          post-notification: like-post-notification-topic
+          comment-notification: like-comment-notification
         dislike:
-          notification: dislike-post-notification-topic
+          post-notification: dislike-post-notification-topic
         star:
-          notification: star-post-notification-topic
+          post-notification: star-post-notification-topic
         new:
           user: new-user-topic
           post:

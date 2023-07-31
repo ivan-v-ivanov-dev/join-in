@@ -22,6 +22,9 @@ public class LoggerConstants {
     public static final String STAR_POST_NOTIFICATION_MESSAGE_RECEIVED_FROM_REACTION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "STAR post notification message received from Reaction service (Kafka topic: %s)";
 
+    public static final String LIKE_COMMENT_NOTIFICATION_MESSAGE_RECEIVED_FROM_REACTION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "LIKE comment notification message received from Reaction service (Kafka topic: %s)";
+
     public static final String NEW_COLLECTION_CREATED_TEMPLATE =
             "New Collection created (Collection name: %s)";
 

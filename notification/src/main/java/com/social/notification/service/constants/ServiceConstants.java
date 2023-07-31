@@ -14,6 +14,8 @@ public class ServiceConstants {
 
     public static final String STARS_POST_NOTIFICATION_TEMPLATE = "%s stared a post";
 
+    public static final String LIKE_COMMENT_NOTIFICATION_TEMPLATE = "%s likes your comment";
+
     private ServiceConstants() {
     }
 }
