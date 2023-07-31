@@ -1,6 +1,6 @@
 package com.social.post.repository;
 
-import com.social.post.model.Comment;
+import com.social.post.model.Post;
 import com.social.post.repository.contract.ProfileRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -22,8 +22,10 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     @Override
     public Set<String> findAllUsersCommentingThePost(String postIdentity, String collection) {
         Set<String> authors = new HashSet<>();
-        Query query = new Query(Criteria.where("postIdentity").is(postIdentity).all(Comment.class));
-        mongoTemplate.find(query, Comment.class, collection).forEach(comment -> authors.add(comment.getAuthorIdentity()));
+        Query query = new Query(Criteria.where("postIdentity").is(postIdentity));
+        mongoTemplate.find(query, Post.class, collection)
+                .forEach(post -> post.getComments()
+                        .forEach(comment -> authors.add(comment.getAuthorIdentity())));
         return authors;
     }
 }

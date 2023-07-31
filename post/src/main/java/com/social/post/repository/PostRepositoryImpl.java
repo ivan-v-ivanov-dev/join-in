@@ -70,8 +70,10 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public Set<String> findAllCommentIdentitiesForAPost(String postIdentity, String collection) {
         Set<String> commentIdentities = new LinkedHashSet<>();
-        Query query = new Query(Criteria.where("postIdentity").is(postIdentity).all(Comment.class));
-        mongoTemplate.find(query, Comment.class, collection).forEach(comment -> commentIdentities.add(comment.getCommentIdentity()));
+        Query query = new Query(Criteria.where("postIdentity").is(postIdentity));
+        mongoTemplate.find(query, Post.class, collection)
+                .forEach(post -> post.getComments()
+                                .forEach(comment -> commentIdentities.add(comment.getCommentIdentity())));
         return commentIdentities;
     }
 }
