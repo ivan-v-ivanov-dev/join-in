@@ -33,9 +33,9 @@ public class NotificationListener {
                                 @Value("${spring.kafka.topic.name.new.user}") String newUserTopic,
                                 @Value("${spring.kafka.topic.name.new.post.notification}") String newPostNotificationTopic,
                                 @Value("${spring.kafka.topic.name.new.comment.notification}") String newCommentNotificationTopic,
-                                @Value("${spring.kafka.topic.name.like.notification}") String likePostNotificationTopic,
-                                @Value("${spring.kafka.topic.name.dislike.notification}") String dislikePostNotificationTopic,
-                                @Value("${spring.kafka.topic.name.star.notification}") String starPostNotificationTopic,
+                                @Value("${spring.kafka.topic.name.like.post-notification}") String likePostNotificationTopic,
+                                @Value("${spring.kafka.topic.name.dislike.post-notification}") String dislikePostNotificationTopic,
+                                @Value("${spring.kafka.topic.name.star.post-notification}") String starPostNotificationTopic,
                                 @Value("${spring.kafka.topic.name.like.comment-notification}") String likeCommentNotificationTopic,
                                 @Value("${spring.kafka.topic.name.dislike.comment-notification}") String dislikeCommentNotificationTopic) {
         this.notificationService = notificationService;
@@ -90,7 +90,7 @@ public class NotificationListener {
         notificationService.save(notification, notificationMessage.getPeopleToNotify());
     }
 
-    @KafkaListener(topics = "${spring.kafka.topic.name.like.notification}", groupId = "${spring.kafka.group.id}")
+    @KafkaListener(topics = "${spring.kafka.topic.name.like.post-notification}", groupId = "${spring.kafka.group.id}")
     public void likePostNotificationListener(KafkaMessage kafkaMessage) {
         NotificationMessage notificationMessage = (NotificationMessage) kafkaMessage;
         log.info(String.format(LIKE_POST_NOTIFICATION_MESSAGE_RECEIVED_FROM_REACTION_SERVICE_TEMPLATE, likePostNotificationTopic));
@@ -106,7 +106,7 @@ public class NotificationListener {
         notificationService.save(notification, notificationMessage.getPeopleToNotify());
     }
 
-    @KafkaListener(topics = "${spring.kafka.topic.name.dislike.notification}", groupId = "${spring.kafka.group.id}")
+    @KafkaListener(topics = "${spring.kafka.topic.name.dislike.post-notification}", groupId = "${spring.kafka.group.id}")
     public void dislikePostNotificationListener(KafkaMessage kafkaMessage) {
         NotificationMessage notificationMessage = (NotificationMessage) kafkaMessage;
         log.info(String.format(DISLIKE_POST_NOTIFICATION_MESSAGE_RECEIVED_FROM_REACTION_SERVICE_TEMPLATE, dislikePostNotificationTopic));
@@ -122,7 +122,7 @@ public class NotificationListener {
         notificationService.save(notification, notificationMessage.getPeopleToNotify());
     }
 
-    @KafkaListener(topics = "${spring.kafka.topic.name.star.notification}", groupId = "${spring.kafka.group.id}")
+    @KafkaListener(topics = "${spring.kafka.topic.name.star.post-notification}", groupId = "${spring.kafka.group.id}")
     public void starPostNotificationListener(KafkaMessage kafkaMessage) {
         NotificationMessage notificationMessage = (NotificationMessage) kafkaMessage;
         log.info(String.format(STAR_POST_NOTIFICATION_MESSAGE_RECEIVED_FROM_REACTION_SERVICE_TEMPLATE, starPostNotificationTopic));
