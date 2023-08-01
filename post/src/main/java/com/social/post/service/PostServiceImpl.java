@@ -113,7 +113,7 @@ public class PostServiceImpl implements PostService {
             post.setDislikes(reactionClient.findDislikesAPostProfileCount(post.getPostIdentity()));
             post.setPeopleIdentitiesWhoDislikedThePost(reactionClient.findPeopleWhoDislikedThePost(post.getPostIdentity()));
             post.setStars(reactionClient.findStarsAPostProfileCount(post.getPostIdentity()));
-
+            post.setPeopleIdentitiesWhoStaredThePost(reactionClient.findPeopleWhoStaredThePost(post.getPostIdentity()));
             post.getComments().forEach(comment -> {
                 comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity()));
                 comment.setPostedAgo(calculatePostedAgo(comment.getPostDate()));

@@ -32,4 +32,7 @@ public interface ReactionClient {
 
     @PostMapping("${reaction.find.post.stars.count}")
     int findStarsAPostProfileCount(@RequestParam("postIdentity") String postIdentity);
+
+    @PostMapping("/post/stars/users")
+    Set<String> findPeopleWhoStaredThePost(@RequestParam("postIdentity") String postIdentity);
 }

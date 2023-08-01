@@ -55,4 +55,7 @@ public class Post implements Serializable {
     @Transient
     private int stars;
 
+    @Transient
+    private Set<String> peopleIdentitiesWhoStaredThePost;
+
 }
