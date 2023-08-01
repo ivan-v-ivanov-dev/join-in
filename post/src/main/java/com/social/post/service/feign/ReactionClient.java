@@ -24,6 +24,9 @@ public interface ReactionClient {
     @PostMapping("${reaction.find.post.dislikes.count}")
     int findDislikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity);
 
+    @PostMapping("/post/dislikes/users")
+    Set<String> findPeopleWhoDislikedThePost(@RequestParam("postIdentity") String postIdentity);
+
     @PostMapping("${reaction.find.comment.dislikes.count}")
     int findDislikesACommentProfileCount(@RequestParam("commentIdentity") String commentIdentity);
 

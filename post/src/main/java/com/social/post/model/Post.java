@@ -50,6 +50,9 @@ public class Post implements Serializable {
     private int dislikes;
 
     @Transient
+    private Set<String> peopleIdentitiesWhoDislikedThePost;
+
+    @Transient
     private int stars;
 
 }
