@@ -103,6 +103,14 @@ public class PostServiceImpl implements PostService {
                     profileRepository.findProfileFirstName(post.getAuthorIdentity()),
                     profileRepository.findProfileLastName(post.getAuthorIdentity())));
 
+            List<String> peopleNamesWhiLikeThePost = post.getPeopleIdentitiesWhoLikedThePost()
+                    .stream()
+                    .map(e -> String.format(AUTHOR_NAME_TEMPLATE,
+                            profileRepository.findProfileFirstName(e),
+                            profileRepository.findProfileLastName(e)))
+                    .toList();
+            post.setPeopleNamesWhoLikedThePost(peopleNamesWhiLikeThePost);
+
             post.getComments().forEach(comment ->
                     comment.setAuthorNames(String.format(AUTHOR_NAME_TEMPLATE,
                             profileRepository.findProfileFirstName(comment.getAuthorIdentity()),

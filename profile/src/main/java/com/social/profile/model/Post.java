@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,6 +37,10 @@ public class Post implements Serializable {
     private String postedAgo;
 
     private int likes;
+
+    private Set<String> peopleIdentitiesWhoLikedThePost;
+
+    private List<String> peopleNamesWhoLikedThePost;
 
     private int dislikes;
 
