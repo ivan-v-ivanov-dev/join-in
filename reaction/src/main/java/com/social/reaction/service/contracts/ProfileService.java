@@ -21,4 +21,6 @@ public interface ProfileService {
     Set<String> findPeopleWhoReactedToPost(String postIdentity);
 
     Set<String> findPeopleWhoLikedThePost(String postIdentity);
+
+    Set<String> findPeopleWhoDislikedThePost(String postIdentity);
 }

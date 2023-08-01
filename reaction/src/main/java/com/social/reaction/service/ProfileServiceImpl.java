@@ -64,4 +64,11 @@ public class ProfileServiceImpl implements ProfileService {
         log.info(String.format(RETRIEVE_USERS_WHO_LIKED_THE_POST_TEMPLATE, postIdentity));
         return peopleWhoLikedThePost;
     }
+
+    @Override
+    public Set<String> findPeopleWhoDislikedThePost(String postIdentity) {
+        Set<String> peopleWhoDislikedThePost = profileRepository.findPeopleWhoDislikedThePost(postIdentity);
+        log.info(String.format(RETRIEVE_USERS_WHO_DISLIKED_THE_POST_TEMPLATE, postIdentity));
+        return peopleWhoDislikedThePost;
+    }
 }
