@@ -231,9 +231,13 @@ Runs on **http://localhost:8086/**. Stores the notificatins for each user. Each 
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/7776f18b-6fa1-4104-9be4-b00920d106c9)
 
-## Friendship requests
+## 5.4. Friendship requests
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/2bea4a4b-1be6-4c50-af37-d9904e0117cf)
+
+## 5.5. Notifications
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/8f0a177d-22e9-431c-9f0c-ccdc4d19e3d8)
 
 # 6. Disclaimer  
 
