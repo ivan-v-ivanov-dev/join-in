@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-import static com.social.reaction.service.constants.LoggerConstants.NEW_USER_SAVED_IN_DATABASE_TEMPLATE;
-import static com.social.reaction.service.constants.LoggerConstants.RETRIEVE_USERS_WHO_REACTED_TO_POST_TEMPLATE;
+import static com.social.reaction.service.constants.LoggerConstants.*;
 
 @Service
 @Slf4j
@@ -57,5 +56,12 @@ public class ProfileServiceImpl implements ProfileService {
         Set<String> peopleWhoReactedToPost = profileRepository.findPeopleWhoReactedToPost(postIdentity);
         log.info(String.format(RETRIEVE_USERS_WHO_REACTED_TO_POST_TEMPLATE, postIdentity));
         return peopleWhoReactedToPost;
+    }
+
+    @Override
+    public Set<String> findPeopleWhoLikedThePost(String postIdentity) {
+        Set<String> peopleWhoLikedThePost = profileRepository.findPeopleWhoLikedThePost(postIdentity);
+        log.info(String.format(RETRIEVE_USERS_WHO_LIKED_THE_POST_TEMPLATE, postIdentity));
+        return peopleWhoLikedThePost;
     }
 }

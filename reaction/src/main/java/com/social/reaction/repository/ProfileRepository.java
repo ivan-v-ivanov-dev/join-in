@@ -29,4 +29,6 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
     @Query(FIND_USER_IDENTITIES_WHO_REACTED_TO_THE_POST)
     Set<String> findPeopleWhoReactedToPost(@Param("postIdentity") String postIdentity);
 
+    @Query(FIND_USER_IDENTITIES_WHO_LIKED_THE_POST)
+    Set<String> findPeopleWhoLikedThePost(@Param("postIdentity") String postIdentity);
 }
