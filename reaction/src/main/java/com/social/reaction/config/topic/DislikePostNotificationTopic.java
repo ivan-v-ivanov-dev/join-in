@@ -15,7 +15,7 @@ import static com.social.reaction.config.ConfigConstants.KAFKA_TOPIC_FOR_DISLIKE
 @Slf4j
 public class DislikePostNotificationTopic {
 
-    @Value("${spring.kafka.topic.name.dislike.notification}")
+    @Value("${spring.kafka.topic.name.dislike.post-notification}")
     private String topicName;
     @Value("${spring.kafka.partitions}")
     private String partitions;

@@ -15,7 +15,7 @@ import static com.social.reaction.config.ConfigConstants.KAFKA_TOPIC_FOR_STAR_A_
 @Slf4j
 public class StarPostNotificationTopic {
 
-    @Value("${spring.kafka.topic.name.star.notification}")
+    @Value("${spring.kafka.topic.name.star.post-notification}")
     private String topicName;
     @Value("${spring.kafka.partitions}")
     private String partitions;
