@@ -57,6 +57,11 @@ public class ReactionController {
         return profileService.findPeopleWhoDislikedThePost(postIdentity);
     }
 
+    @PostMapping("/post/stars/users")
+    public Set<String> findPeopleWhoStaredThePost(@RequestParam("postIdentity") String postIdentity) {
+        return profileService.findPeopleWhoStaredThePost(postIdentity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Reaction service is HEALTHY!";
