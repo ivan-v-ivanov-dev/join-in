@@ -217,7 +217,7 @@ Runs on **http://localhost:8086/**. Stores the notificatins for each user. Each 
  - **MongoTemplate** used as persistent strategy for the MongoDB persistence
 
 
-# 5. Page layout  
+# 5. Pages layouts  
 
 ## 5.1. Sign in
 
@@ -238,6 +238,10 @@ Runs on **http://localhost:8086/**. Stores the notificatins for each user. Each 
 ## 5.5. Notifications
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/8f0a177d-22e9-431c-9f0c-ccdc4d19e3d8)
+
+## 5.6. Edit profile
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/920ba7fc-13ad-4bf8-bc56-31650999a75b)
 
 # 6. Disclaimer  
 
