@@ -113,3 +113,13 @@ image:
   background: /profile-background-image
 album:
   images: /profile-album-images
+
+#Feign Notification service
+notification:
+  service:
+    feign:
+      client:
+        name: Notification-Service
+    url: http://localhost:8086
+user:
+  notifications: /user/notifications

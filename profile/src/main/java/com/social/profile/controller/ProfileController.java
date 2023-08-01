@@ -23,6 +23,7 @@ public class ProfileController {
     private final ImageService imageService;
     private final RelationshipService relationshipService;
     private final ReactionService reactionService;
+    private final NotificationService notificationService;
 
     public ProfileController(LoginService loginService,
                              RegisterService registerService,
@@ -31,7 +32,8 @@ public class ProfileController {
                              CommentService commentService,
                              ImageService imageService,
                              RelationshipService relationshipService,
-                             ReactionService reactionService) {
+                             ReactionService reactionService,
+                             NotificationService notificationService) {
         this.loginService = loginService;
         this.registerService = registerService;
         this.profileService = profileService;
@@ -40,6 +42,7 @@ public class ProfileController {
         this.imageService = imageService;
         this.relationshipService = relationshipService;
         this.reactionService = reactionService;
+        this.notificationService = notificationService;
     }
 
     @GetMapping("/")
@@ -89,6 +92,7 @@ public class ProfileController {
         model.addAttribute("friendsCount", relationshipService.findFriendsCount(identity));
         model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
         model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(identity));
+        model.addAttribute("notifications", notificationService.findUserNotifications(identity));
         return "profile";
     }
 

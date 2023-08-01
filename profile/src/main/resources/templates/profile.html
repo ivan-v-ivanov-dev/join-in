@@ -332,83 +332,45 @@
                     <!--End Friendship request-->
 
                 </li>
+
                 <li class="nav-item dropdown d-none d-lg-block">
                     <a class="search-toggle dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"
                        href="javascript:void(0);" id="notification-drop">
                         <i class="material-symbols-outlined">notifications</i>
                     </a>
+
+                    <!--Notifications-->
                     <div aria-labelledby="notification-drop" class="sub-drop dropdown-menu">
                         <div class="card shadow-none m-0">
                             <div class="card-header d-flex justify-content-between bg-primary">
                                 <div class="header-title bg-primary">
                                     <h5 class="mb-0 text-white">All Notifications</h5>
                                 </div>
-                                <small class="badge  bg-light text-dark">4</small>
+                                <small class="badge  bg-light text-dark" th:text="${notifications.size()}">4</small>
                             </div>
-                            <div class="card-body p-0">
-                                <a class="iq-sub-card" href="javascript:void(0);">
+
+                            <div class="card-body p-0" th:each="currentNotification : ${notifications}">
+
+                                <div class="iq-sub-card" href="javascript:void(0);">
                                     <div class="d-flex align-items-center">
                                         <div class="">
-                                            <img alt="" class="avatar-40 rounded" src="../assets/images/user/01.jpg">
+                                            <img alt="" class="avatar-40 rounded" th:src="${currentNotification.getAuthorProfileImage()}">
                                         </div>
                                         <div class="ms-3 w-100">
-                                            <h6 class="mb-0 ">Emma Watson Bni</h6>
+                                            <h6 class="mb-0 " th:text="${currentNotification.getNotification()}">Emma Watson Bni</h6>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-0">95 MB</p>
-                                                <small class="float-right font-size-12">Just Now</small>
+                                                <small class="float-right font-size-12" th:text="${currentNotification.getPostedAgo()}">Just Now</small>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
-                                <a class="iq-sub-card" href="javascript:void(0);">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img alt="" class="avatar-40 rounded" loading="lazy"
-                                                 src="../assets/images/user/02.jpg">
-                                        </div>
-                                        <div class="ms-3 w-100">
-                                            <h6 class="mb-0 ">New customer is join</h6>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-0">Cyst Bni</p>
-                                                <small class="float-right font-size-12">5 days ago</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="iq-sub-card" href="javascript:void(0);">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img alt="" class="avatar-40 rounded" loading="lazy"
-                                                 src="../assets/images/user/03.jpg">
-                                        </div>
-                                        <div class="ms-3 w-100">
-                                            <h6 class="mb-0 ">Two customer is left</h6>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-0">Cyst Bni</p>
-                                                <small class="float-right font-size-12">2 days ago</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="iq-sub-card" href="javascript:void(0);">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img alt="" class="avatar-40 rounded" loading="lazy"
-                                                 src="../assets/images/user/04.jpg">
-                                        </div>
-                                        <div class="w-100 ms-3">
-                                            <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-0">Cyst Bni</p>
-                                                <small class="float-right font-size-12">3 days ago</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!--End Notifications-->
+
                 </li>
+
                 <li class="nav-item dropdown d-none d-lg-block">
                     <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle d-flex align-items-center"
                        data-bs-toggle="dropdown" href="javascript:void(0);" id="mail-drop">
