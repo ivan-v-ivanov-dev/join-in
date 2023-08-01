@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static com.social.profile.service.constants.LoggerConstants.*;
 import static com.social.profile.service.constants.ServiceConstants.AUTHOR_NAME_TEMPLATE;
@@ -48,9 +49,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public EditPost findByIdentity(String postIdentity, String authorIdentity) {
         EditPost post = postClient.findByPostIdentity(postIdentity, authorIdentity);
-        post.setAuthorNames(String.format(AUTHOR_NAME_TEMPLATE,
-                profileRepository.findProfileFirstName(authorIdentity),
-                profileRepository.findProfileLastName(authorIdentity)));
+        post.setAuthorNames(findUserNamesFromUserIdentity(authorIdentity));
         log.info(String.format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
         return post;
     }
@@ -59,9 +58,7 @@ public class PostServiceImpl implements PostService {
     public void post(String userIdentity, String content) {
         KafkaMessage postPublicationMessage = PostMessage.builder()
                 .userIdentity(userIdentity)
-                .userNames(String.format(AUTHOR_NAME_TEMPLATE,
-                        profileRepository.findProfileFirstName(userIdentity),
-                        profileRepository.findProfileLastName(userIdentity)))
+                .userNames(findUserNamesFromUserIdentity(userIdentity))
                 .content(content)
                 .postDate(LocalDate.now().toString())
                 .build();
@@ -99,22 +96,12 @@ public class PostServiceImpl implements PostService {
     public List<Post> findUserPosts(String identity) {
         List<Post> posts = postClient.findAllPostsByAuthorIdentity(identity);
         posts.forEach(post -> {
-            post.setAuthorNames(String.format(AUTHOR_NAME_TEMPLATE,
-                    profileRepository.findProfileFirstName(post.getAuthorIdentity()),
-                    profileRepository.findProfileLastName(post.getAuthorIdentity())));
-
-            List<String> peopleNamesWhiLikeThePost = post.getPeopleIdentitiesWhoLikedThePost()
-                    .stream()
-                    .map(e -> String.format(AUTHOR_NAME_TEMPLATE,
-                            profileRepository.findProfileFirstName(e),
-                            profileRepository.findProfileLastName(e)))
-                    .toList();
-            post.setPeopleNamesWhoLikedThePost(peopleNamesWhiLikeThePost);
+            post.setAuthorNames(findUserNamesFromUserIdentity(post.getAuthorIdentity()));
+            post.setPeopleNamesWhoLikedThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoLikedThePost()));
+            post.setPeopleNamesWhoDislikedThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoDislikedThePost()));
 
             post.getComments().forEach(comment ->
-                    comment.setAuthorNames(String.format(AUTHOR_NAME_TEMPLATE,
-                            profileRepository.findProfileFirstName(comment.getAuthorIdentity()),
-                            profileRepository.findProfileLastName(comment.getAuthorIdentity()))));
+                    comment.setAuthorNames(findUserNamesFromUserIdentity(comment.getAuthorIdentity())));
         });
 
         log.info(String.format(RETRIEVE_USER_POSTS_FROM_POST_SERVICE_TEMPLATE, identity));
@@ -124,5 +111,18 @@ public class PostServiceImpl implements PostService {
     @Override
     public int findUserPostsCount(String identity) {
         return postClient.findAuthorPostsCount(identity);
+    }
+
+    private List<String> findUsersNamesFromUserIdentity(Set<String> userIdentities) {
+        return userIdentities
+                .stream()
+                .map(this::findUserNamesFromUserIdentity)
+                .toList();
+    }
+
+    private String findUserNamesFromUserIdentity(String identity) {
+        return String.format(AUTHOR_NAME_TEMPLATE,
+                profileRepository.findProfileFirstName(identity),
+                profileRepository.findProfileLastName(identity));
     }
 }

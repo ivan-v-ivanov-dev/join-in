@@ -44,5 +44,9 @@ public class Post implements Serializable {
 
     private int dislikes;
 
+    private Set<String> peopleIdentitiesWhoDislikedThePost;
+
+    private List<String> peopleNamesWhoDislikedThePost;
+
     private int stars;
 }

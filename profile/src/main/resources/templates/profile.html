@@ -916,6 +916,7 @@
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
+
                                                                         </div>
                                                                     </div>
 
@@ -928,8 +929,12 @@
                                                        140 Dislikes
                                                    </span>
                                                                             <div class="dropdown-menu">
-                                                                                <a class="dropdown-item" href="#">Max
-                                                                                    Emum</a>
+                                                                                <ul>
+                                                                                    <li style="list-style-type: none; color: white; padding-left: 0;"
+                                                                                        th:each="currentUserWhoDislikesThePost : ${currentPost.getPeopleNamesWhoDislikedThePost()}">
+                                                                                        <a th:text="${currentUserWhoDislikesThePost}">Max Emum</a>
+                                                                                    </li>
+                                                                                </ul>
 
                                                                             </div>
                                                                         </div>
