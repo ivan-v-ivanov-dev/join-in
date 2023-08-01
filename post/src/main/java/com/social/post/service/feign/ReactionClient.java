@@ -15,6 +15,9 @@ public interface ReactionClient {
     @PostMapping("${reaction.find.post.likes.count}")
     int findLikesAPostProfileCount(@RequestParam("postIdentity") String postIdentity);
 
+    @PostMapping("/post/likes/users")
+    Set<String> findPeopleWhoLikedThePost(@RequestParam("postIdentity") String postIdentity);
+
     @PostMapping("${reaction.find.comment.likes.count}")
     int findLikesACommentProfileCount(@RequestParam("commentIdentity") String commentIdentity);
 

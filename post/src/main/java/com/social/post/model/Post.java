@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -41,6 +42,9 @@ public class Post implements Serializable {
 
     @Transient
     private int likes;
+
+    @Transient
+    private Set<String> peopleIdentitiesWhoLikedThePost;
 
     @Transient
     private int dislikes;
