@@ -99,7 +99,7 @@ public class PostServiceImpl implements PostService {
             post.setAuthorNames(findUserNamesFromUserIdentity(post.getAuthorIdentity()));
             post.setPeopleNamesWhoLikedThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoLikedThePost()));
             post.setPeopleNamesWhoDislikedThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoDislikedThePost()));
-
+            post.setPeopleNamesWhoStaredThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoStaredThePost()));
             post.getComments().forEach(comment ->
                     comment.setAuthorNames(findUserNamesFromUserIdentity(comment.getAuthorIdentity())));
         });

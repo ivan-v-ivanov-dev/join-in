@@ -949,20 +949,13 @@
                                                        140 Stars
                                                    </span>
                                                                             <div class="dropdown-menu">
-                                                                                <a class="dropdown-item" href="#">Max
-                                                                                    Emum</a>
-                                                                                <a class="dropdown-item" href="#">Bill
-                                                                                    Yerds</a>
-                                                                                <a class="dropdown-item" href="#">Hap E.
-                                                                                    Birthday</a>
-                                                                                <a class="dropdown-item" href="#">Tara
-                                                                                    Misu</a>
-                                                                                <a class="dropdown-item" href="#">Midge
-                                                                                    Itz</a>
-                                                                                <a class="dropdown-item" href="#">Sal
-                                                                                    Vidge</a>
-                                                                                <a class="dropdown-item"
-                                                                                   href="#">Other</a>
+                                                                                <ul>
+                                                                                    <li style="list-style-type: none; color: white; padding-left: 0;"
+                                                                                        th:each="currentUserWhoStarsThePost : ${currentPost.getPeopleNamesWhoStaredThePost()}">
+                                                                                        <a th:text="${currentUserWhoStarsThePost}">Max Emum</a>
+                                                                                    </li>
+                                                                                </ul>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
