@@ -6,10 +6,10 @@ import com.social.notification.service.contracts.NotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
-import static com.social.notification.service.constants.LoggerConstants.NEW_COLLECTION_CREATED_TEMPLATE;
-import static com.social.notification.service.constants.LoggerConstants.NOTIFICATIONS_SAVED_FOR_ALL_RELATED_USERS;
+import static com.social.notification.service.constants.LoggerConstants.*;
 import static com.social.notification.service.constants.ServiceConstants.COLLECTION_TEMPLATE;
 
 @Service
@@ -32,5 +32,13 @@ public class NotificationServiceImpl implements NotificationService {
     public void save(Notification notification, Set<String> peopleToNotify) {
         peopleToNotify.forEach(person -> notificationRepository.save(notification, String.format(COLLECTION_TEMPLATE, person)));
         log.info(NOTIFICATIONS_SAVED_FOR_ALL_RELATED_USERS);
+    }
+
+    @Override
+    public List<Notification> findUserNotifications(String userIdentity) {
+        List<Notification> notifications = notificationRepository
+                .findUserNotifications(String.format(COLLECTION_TEMPLATE, userIdentity));
+        log.info(String.format(RETRIEVE_USER_NOTIFICATIONS_TEMPLATE, userIdentity));
+        return notifications;
     }
 }

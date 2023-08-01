@@ -34,5 +34,8 @@ public class LoggerConstants {
     public static final String NOTIFICATIONS_SAVED_FOR_ALL_RELATED_USERS =
             "Notifications saved for all related users";
 
+    public static final String RETRIEVE_USER_NOTIFICATIONS_TEMPLATE =
+            "Retrieve user notifications (user identity: %s)";
+
     private LoggerConstants(){}
 }
