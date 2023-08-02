@@ -277,6 +277,7 @@
                     </div>
                 </div>
             </div>
+
             <ul class="navbar-nav navbar-list">
                 <li class="nav-item">
                     <form id="feedForm" th:action="@{/feed}" method="post">
@@ -516,6 +517,7 @@
                     </div>
                 </li>
             </ul>
+
             <div class=" border-top  top-header-responsive d-lg-none">
                 <ul class="list-unstyled p-0 m-0 menu-list">
                     <li class="icon-class"><a class="" href="../dashboard/index.html"><i
@@ -764,8 +766,7 @@
                                                                             th:text="${currentPost.getAuthorNames()}">
                                                                             <a class="">Bni Cyst</a>
                                                                         </h5>
-                                                                        <p class="ms-1 mb-0 d-inline-block">added new
-                                                                            post</p>
+                                                                        <p class="ms-1 mb-0 d-inline-block">added new post</p>
                                                                         <p class="mb-0"
                                                                            th:text="${currentPost.getPostedAgo}">3 hour
                                                                             ago</p>
