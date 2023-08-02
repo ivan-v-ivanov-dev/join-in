@@ -150,6 +150,54 @@ db.profiles.insertMany([
         status: "Single",
         website: "tanya.com",
         hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
+      },
+      {
+        identity: "67c80c58573c12562067629782b72c455fbd8ab06bbf8dfbd4bc20331d1cbedf",
+        firstName: "Silviya",
+        lastName: "Teodorova",
+        email: "silviya@silviya.com",
+        aboutMe: "I am a young person.",
+        mobile: "+359 123 123 123",
+        city: "Vratsa",
+        country: "Bulgaria",
+        birthDate: "2001-02-15",
+        gender: "Female",
+        joined: "2020-05-22",
+        status: "Single",
+        website: "silviya.com",
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
+      },
+      {
+        identity: "41d52bee906b4347466558329fb7a6cbc24b5ab0a5f6c58e2e614decc764fab3",
+        firstName: "Teodor",
+        lastName: "Ivanov",
+        email: "teodor@teodor.com",
+        aboutMe: "I am a young person.",
+        mobile: "+359 123 123 123",
+        city: "Sofiya",
+        country: "Bulgaria",
+        birthDate: "1992-04-27",
+        gender: "Male",
+        joined: "2015-05-22",
+        status: "Single",
+        website: "teodor.com",
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
+      },
+      {
+        identity: "cda07e665379ec023b0577605bfd6f91770fe997d72b4e7d3b90e17c29a1ad9e",
+        firstName: "Asen",
+        lastName: "Asenov",
+        email: "asen@asen.com",
+        aboutMe: "I am a young person.",
+        mobile: "+359 123 123 123",
+        city: "Pleven",
+        country: "Bulgaria",
+        birthDate: "1995-05-07",
+        gender: "Male",
+        joined: "2016-05-22",
+        status: "Single",
+        website: "asen.com",
+        hobbies: "I like to ride my bike to work, swim, and work out. I also like reading design magazines, going to museums, and watching good TV shows while it’s raining outside."
       }
 ]);
 console.log('*** Data Imported ***')
