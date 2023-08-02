@@ -366,6 +366,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="text-center">
+                            <form th:action="@{/notifications}" method="post">
+                                <input type="hidden" th:name="userIdentity" th:value="${profile.getIdentity()}" />
+                                <button class="btn text-primary" type="submit">View All Notification</button>
+                            </form>
+                        </div>
                     </div>
                     <!--End Notifications-->
 
