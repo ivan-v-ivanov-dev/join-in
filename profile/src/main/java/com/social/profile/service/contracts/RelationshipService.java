@@ -1,6 +1,7 @@
 package com.social.profile.service.contracts;
 
 import com.social.profile.model.Friend;
+import com.social.profile.model.FriendSuggestion;
 import com.social.profile.model.FriendshipRequest;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface RelationshipService {
     void declineFriendship(String recipientUserIdentity, String senderUserIdentity);
 
     void unfriend(String recipientUserIdentity, String senderUserIdentity);
+
+    List<FriendSuggestion> findFriendSuggestions(String userIdentity);
 }

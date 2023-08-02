@@ -91,6 +91,8 @@ relationship:
       count: /profile/friends/count
       for:
         user: /profile/friends
+    friend:
+      suggestions: /profile/friend/suggestions
     friendship:
       requests:
         for:

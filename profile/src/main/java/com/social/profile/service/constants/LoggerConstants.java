@@ -82,6 +82,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_USER_NOTIFICATIONS_FROM_NOTIFICATION_SERVICE_TEMPLATE =
             "Retrieve user notifications from Notification service (Profile identity: %s)";
 
+    public static final String RETRIEVE_FRIEND_SUGGESTIONS_FROM_RELATIONSHIP_SERVICE_TEMPLATE =
+            "Retrieve friend suggestions for user from Relationship service (User identity: %s)";
+
     private LoggerConstants() {
     }
 }

@@ -1,6 +1,7 @@
 package com.social.profile.service.feign;
 
 import com.social.profile.model.Friend;
+import com.social.profile.model.FriendSuggestion;
 import com.social.profile.model.FriendshipRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,4 +23,7 @@ public interface RelationshipClient {
 
     @PostMapping("${relationship.find.friendship.requests.count}")
     int findFriendshipRequestsCount(@RequestParam("identity") String identity);
+
+    @PostMapping("${relationship.find.friend.suggestions}")
+    List<FriendSuggestion> findFriendSuggestions(@RequestParam("identity") String identity);
 }

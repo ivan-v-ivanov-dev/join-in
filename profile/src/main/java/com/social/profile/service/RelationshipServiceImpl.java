@@ -3,6 +3,7 @@ package com.social.profile.service;
 import com.social.kafka.messages.FriendshipMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.profile.model.Friend;
+import com.social.profile.model.FriendSuggestion;
 import com.social.profile.model.FriendshipRequest;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.KafkaMessageSender;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.social.profile.service.constants.LoggerConstants.*;
+import static com.social.profile.service.constants.ServiceConstants.AUTHOR_NAME_TEMPLATE;
 
 @Service
 @Slf4j
@@ -112,5 +114,16 @@ public class RelationshipServiceImpl implements RelationshipService {
         kafkaMessageSender.send(unfriendMessage, unfriendTopic);
         log.info(String.format(UNFRIEND_MESSAGE_CREATED_AND_SEND_TO_RELATIONSHIP_SERVICE_TOPIC_NAME_RECIPIENT_IDENTITY_TEMPLATE,
                 unfriendTopic, recipientUserIdentity));
+    }
+
+    @Override
+    public List<FriendSuggestion> findFriendSuggestions(String userIdentity) {
+        List<FriendSuggestion> friendSuggestions = relationshipClient.findFriendSuggestions(userIdentity);
+        friendSuggestions.forEach(friendSuggestion ->
+                friendSuggestion.setNames(String.format(AUTHOR_NAME_TEMPLATE,
+                        profileRepository.findProfileFirstName(friendSuggestion.getProfileIdentity()),
+                        profileRepository.findProfileLastName(friendSuggestion.getProfileIdentity()))));
+        log.info(String.format(RETRIEVE_FRIEND_SUGGESTIONS_FROM_RELATIONSHIP_SERVICE_TEMPLATE, userIdentity));
+        return friendSuggestions;
     }
 }
