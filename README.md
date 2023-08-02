@@ -237,7 +237,9 @@ Runs on **http://localhost:8086/**. Stores the notificatins for each user. Each 
 
 ## 5.5. Notifications
 
-![image](https://github.com/ivanovbiol/join-in/assets/51414119/8f0a177d-22e9-431c-9f0c-ccdc4d19e3d8)
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/9398fc94-a318-4139-b6f7-88a9bcf487b6)
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/2932ea88-998b-41f0-9e59-6f70a1df025e)
 
 ## 5.6. Edit profile
 
