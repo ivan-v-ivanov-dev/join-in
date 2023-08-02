@@ -184,7 +184,7 @@ Runs on **http://localhost:8083/**. Stores friendship relations for the users an
 
 Example
 
-![image](https://github.com/ivanovbiol/join-in/assets/51414119/21386696-b01e-409a-9503-4cc0357b330c)
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/d3e76a18-88c8-4680-b34b-9f998b937ed5)
 
 ### Technical overview     
 
