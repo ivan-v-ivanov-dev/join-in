@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.social.image.service.constants.LoggerConstants.NEW_COLLECTION_CREATED_TEMPLATE;
+import static com.social.image.service.constants.LoggerConstants.*;
 import static com.social.image.service.constants.ServiceConstants.COLLECTION_TEMPLATE;
 
 @Service
@@ -22,17 +22,23 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public String findProfileImage(String userIdentity) {
-        return imageRepository.findProfileImage(String.format(COLLECTION_TEMPLATE, userIdentity));
+        String profileImage = imageRepository.findProfileImage(String.format(COLLECTION_TEMPLATE, userIdentity));
+        log.info(String.format(RETRIEVE_PROFILE_IMAGE_FOR_USER_TEMPLATE, userIdentity));
+        return profileImage;
     }
 
     @Override
     public String findProfileBackgroundImage(String userIdentity) {
-        return imageRepository.findProfileBackgroundImage(String.format(COLLECTION_TEMPLATE, userIdentity));
+        String backgroundImage = imageRepository.findProfileBackgroundImage(String.format(COLLECTION_TEMPLATE, userIdentity));
+        log.info(String.format(RETRIEVE_BACKGROUND_IMAGE_FOR_USER_TEMPLATE, userIdentity));
+        return backgroundImage;
     }
 
     @Override
     public List<String> findProfileAlbumImage(String userIdentity) {
-        return imageRepository.findProfileAlbumImage(String.format(COLLECTION_TEMPLATE, userIdentity));
+        List<String> albumImages = imageRepository.findProfileAlbumImage(String.format(COLLECTION_TEMPLATE, userIdentity));
+        log.info(String.format(RETRIEVE_ALBUM_IMAGES_FOR_USER_TEMPLATE, userIdentity));
+        return albumImages;
     }
 
     @Override
