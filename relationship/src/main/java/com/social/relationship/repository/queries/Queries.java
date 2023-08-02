@@ -42,7 +42,7 @@ public class Queries {
 
     public static final String FIND_TEN_FRIEND_SUGGESTIONS =
             "MATCH (profile:Profile), (currentProfile: Profile) " +
-                    "WHERE currentProfile.identity = %currentUserIdentity AND " +
+                    "WHERE currentProfile.identity = $currentUserIdentity AND " +
                     "NOT EXISTS((profile)-[:FRIEND]->(currentProfile)) AND " +
                     "NOT EXISTS((profile)-[:FRIENDSHIP_REQUEST]->(currentProfile)) AND " +
                     "profile.identity <> $currentUserIdentity " +

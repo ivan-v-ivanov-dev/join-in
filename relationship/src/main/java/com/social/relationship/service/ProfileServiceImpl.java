@@ -108,12 +108,12 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<FriendSuggestion> findFriendSuggestions(String identity) {
-        List<Profile> profiles = profileRepository.findFriendSuggestions(identity);
+        List<String> profiles = profileRepository.findFriendSuggestions(identity);
         List<FriendSuggestion> friendSuggestions = new ArrayList<>();
-        profiles.forEach(profile -> friendSuggestions.add(
+        profiles.forEach(profileIdentity -> friendSuggestions.add(
                 FriendSuggestion.builder()
-                        .profileIdentity(profile.getIdentity())
-                        .profileImage(imageClient.findProfileImage(profile.getIdentity()))
+                        .profileIdentity(profileIdentity)
+                        .profileImage(imageClient.findProfileImage(profileIdentity))
                         .build()));
         log.info(String.format(RETRIEVE_FRIEND_SUGGESTIONS_TEMPLATE, identity));
         return friendSuggestions;

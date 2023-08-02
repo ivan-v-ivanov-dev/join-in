@@ -37,5 +37,5 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
                                   @Param("recipientUserIdentity") String recipientUserIdentity);
 
     @Query(FIND_TEN_FRIEND_SUGGESTIONS)
-    List<Profile> findFriendSuggestions(@Param("currentUserIdentity") String currentUserIdentity);
+    List<String> findFriendSuggestions(@Param("currentUserIdentity") String currentUserIdentity);
 }
