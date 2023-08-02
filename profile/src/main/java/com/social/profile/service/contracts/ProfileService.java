@@ -7,4 +7,5 @@ public interface ProfileService {
 
     Profile save(Profile profile);
 
+    String findProfileNames(String userIdentity);
 }

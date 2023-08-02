@@ -199,6 +199,17 @@ public class ProfileController {
         return "redirect:/profile?identity=" + senderUserIdentity;
     }
 
+    @PostMapping("/notifications")
+    public String notifications(@RequestParam("userIdentity") String userIdentity, Model model) {
+        model.addAttribute("profileIdentity", userIdentity);
+        model.addAttribute("profileImage", imageService.findProfileImage(userIdentity));
+        model.addAttribute("profileNames", profileService.findProfileNames(userIdentity));
+        model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(userIdentity));
+        model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(userIdentity));
+        model.addAttribute("notifications", notificationService.findUserNotifications(userIdentity));
+        return "notifications";
+    }
+
     @GetMapping("/signout")
     public String signOut() {
         return "redirect:/";
