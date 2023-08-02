@@ -5,6 +5,7 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Set;
 
 import static com.social.relationship.repository.queries.Queries.*;
@@ -35,4 +36,6 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
     void deleteFriendRelationship(@Param("senderUserIdentity") String senderUserIdentity,
                                   @Param("recipientUserIdentity") String recipientUserIdentity);
 
+    @Query(FIND_TEN_FRIEND_SUGGESTIONS)
+    List<Profile> findFriendSuggestions(@Param("currentUserIdentity") String currentUserIdentity);
 }

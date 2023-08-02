@@ -1,6 +1,7 @@
 package com.social.relationship.service;
 
 import com.social.relationship.model.Friend;
+import com.social.relationship.model.FriendSuggestion;
 import com.social.relationship.model.FriendshipRequest;
 import com.social.relationship.model.Profile;
 import com.social.relationship.repository.ProfileRepository;
@@ -103,6 +104,19 @@ public class ProfileServiceImpl implements ProfileService {
         profileRepository.deleteFriendRelationship(recipientUserIdentity, senderUserIdentity);
         log.info(String.format(DELETE_FRIEND_RELATIONSHIP_FOR_BOTH_USERS_TEMPLATE,
                 senderUserIdentity, recipientUserIdentity));
+    }
+
+    @Override
+    public List<FriendSuggestion> findFriendSuggestions(String identity) {
+        List<Profile> profiles = profileRepository.findFriendSuggestions(identity);
+        List<FriendSuggestion> friendSuggestions = new ArrayList<>();
+        profiles.forEach(profile -> friendSuggestions.add(
+                FriendSuggestion.builder()
+                        .profileIdentity(profile.getIdentity())
+                        .profileImage(imageClient.findProfileImage(profile.getIdentity()))
+                        .build()));
+        log.info(String.format(RETRIEVE_FRIEND_SUGGESTIONS_TEMPLATE, identity));
+        return friendSuggestions;
     }
 
     private void deleteFriendshipRequestRelationship(String senderUserIdentity, String recipientUserIdentity) {

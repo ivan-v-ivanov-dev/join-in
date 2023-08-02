@@ -1,6 +1,7 @@
 package com.social.relationship.service.contracts;
 
 import com.social.relationship.model.Friend;
+import com.social.relationship.model.FriendSuggestion;
 import com.social.relationship.model.FriendshipRequest;
 import com.social.relationship.model.Profile;
 
@@ -24,4 +25,6 @@ public interface ProfileService {
     void declineFriendship(String senderUserIdentity, String recipientUserIdentity);
 
     void unfriend(String senderUserIdentity, String recipientUserIdentity);
+
+    List<FriendSuggestion> findFriendSuggestions(String identity);
 }

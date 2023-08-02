@@ -43,6 +43,9 @@ public class LoggerConstants {
     public static final String DELETE_FRIEND_RELATIONSHIP_FOR_BOTH_USERS_TEMPLATE =
             "Delete friend relationship for both users (Sender identity: %s, Recipient identity: %s)";
 
+    public static final String RETRIEVE_FRIEND_SUGGESTIONS_TEMPLATE =
+            "Retrieve friend suggestions for user (User identity: %s)";
+
     private LoggerConstants() {
     }
 }

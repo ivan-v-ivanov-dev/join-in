@@ -1,6 +1,7 @@
 package com.social.relationship.controller;
 
 import com.social.relationship.model.Friend;
+import com.social.relationship.model.FriendSuggestion;
 import com.social.relationship.model.FriendshipRequest;
 import com.social.relationship.service.contracts.ProfileService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,11 @@ public class RelationController {
     @PostMapping("/profile/friendship/requests/count")
     public int findFriendshipRequestsCount(@RequestParam("identity") String identity) {
         return profileService.findFriendshipRequestCountByProfileIdentity(identity);
+    }
+
+    @PostMapping("/profile/friend/suggestions")
+    public List<FriendSuggestion> findFriendSuggestions(@RequestParam("identity") String identity) {
+        return profileService.findFriendSuggestions(identity);
     }
 
     @GetMapping("/health")

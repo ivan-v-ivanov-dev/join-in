@@ -40,6 +40,15 @@ public class Queries {
                     "recipient.identity = $recipientUserIdentity " +
                     "DELETE relationship";
 
+    public static final String FIND_TEN_FRIEND_SUGGESTIONS =
+            "MATCH (profile:Profile), (currentProfile: Profile) " +
+                    "WHERE currentProfile.identity = %currentUserIdentity AND " +
+                    "NOT EXISTS((profile)-[:FRIEND]->(currentProfile)) AND " +
+                    "NOT EXISTS((profile)-[:FRIENDSHIP_REQUEST]->(currentProfile)) AND " +
+                    "profile.identity <> $currentUserIdentity " +
+                    "RETURN DISTINCT profile.identity " +
+                    "LIMIT 10";
+
     private Queries() {
     }
 }
