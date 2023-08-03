@@ -100,8 +100,7 @@ public class ProfileController {
     public String post(@RequestParam("userIdentity") String userIdentity,
                        @RequestParam("content") String content) {
         postService.post(userIdentity, content);
-        // TODO: Redirect to FEED when implemented
-        return "redirect:/profile?identity=" + userIdentity;
+        return "redirect:/feed?userIdentity=" + userIdentity;
     }
 
     @PostMapping("/post/view")
