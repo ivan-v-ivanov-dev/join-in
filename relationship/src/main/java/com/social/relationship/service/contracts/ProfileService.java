@@ -27,4 +27,6 @@ public interface ProfileService {
     void unfriend(String senderUserIdentity, String recipientUserIdentity);
 
     List<FriendSuggestion> findFriendSuggestions(String identity);
+
+    Set<String> findFriendsIdentitiesByProfileIdentity(String identity);
 }

@@ -119,6 +119,13 @@ public class ProfileServiceImpl implements ProfileService {
         return friendSuggestions;
     }
 
+    @Override
+    public Set<String> findFriendsIdentitiesByProfileIdentity(String identity) {
+        Set<String> friendsIdentities = profileRepository.findFriendsByProfileIdentity(identity);
+        log.info(String.format(RETRIEVE_FRIENDS_IDENTITIES_FOR_USER_TEMPLATE, identity));
+        return friendsIdentities;
+    }
+
     private void deleteFriendshipRequestRelationship(String senderUserIdentity, String recipientUserIdentity) {
         profileRepository.deleteFriendshipRequestRelationship(senderUserIdentity, recipientUserIdentity);
         log.info(String.format(DELETE_FRIENDSHIP_REQUESTS_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
