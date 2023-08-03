@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -105,22 +106,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> findAllPostsByAuthorIdentity(String authorIdentity) {
         List<Post> posts = postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, authorIdentity));
-        posts.forEach(post -> {
-            post.setAuthorProfileImage(imageClient.findProfileImage(post.getAuthorIdentity()));
-            post.setPostedAgo(calculatePostedAgo(post.getPostDate()));
-            post.setLikes(reactionClient.findLikesAPostProfileCount(post.getPostIdentity()));
-            post.setPeopleIdentitiesWhoLikedThePost(reactionClient.findPeopleWhoLikedThePost(post.getPostIdentity()));
-            post.setDislikes(reactionClient.findDislikesAPostProfileCount(post.getPostIdentity()));
-            post.setPeopleIdentitiesWhoDislikedThePost(reactionClient.findPeopleWhoDislikedThePost(post.getPostIdentity()));
-            post.setStars(reactionClient.findStarsAPostProfileCount(post.getPostIdentity()));
-            post.setPeopleIdentitiesWhoStaredThePost(reactionClient.findPeopleWhoStaredThePost(post.getPostIdentity()));
-            post.getComments().forEach(comment -> {
-                comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity()));
-                comment.setPostedAgo(calculatePostedAgo(comment.getPostDate()));
-                comment.setLikes(reactionClient.findLikesACommentProfileCount(comment.getCommentIdentity()));
-                comment.setLikes(reactionClient.findDislikesACommentProfileCount(comment.getCommentIdentity()));
-            });
-        });
+        posts.forEach(this::setPostTransientFields);
         log.info(String.format(RETRIEVE_POSTS_FOR_USER_TEMPLATE, authorIdentity));
         return posts;
     }
@@ -191,6 +177,18 @@ public class PostServiceImpl implements PostService {
         log.info(String.format(NEW_COMMENT_NODE_MESSAGE_SEND_TO_REACTION_SERVICE_TEMPLATE, newCommentNodeTopic));
     }
 
+    @Override
+    public List<Post> findFeedPosts(String userIdentity) {
+        Set<String> users = relationshipClient.findFriends(userIdentity);
+        users.add(userIdentity);
+
+        List<Post> posts = new ArrayList<>();
+        users.forEach(user -> posts.addAll(postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, user))));
+        posts.forEach(this::setPostTransientFields);
+        log.info(String.format(RETRIEVE_USERS_FEED_POSTS_TEMPLATE, userIdentity));
+        return posts;
+    }
+
     private String calculatePostedAgo(LocalDate postDate) {
         LocalDate now = LocalDate.now();
 
@@ -219,5 +217,22 @@ public class PostServiceImpl implements PostService {
             int days = period.getDays();
             return String.format(SEVERAL_DAYS_AGO_TEMPLATE, days);
         }
+    }
+
+    private void setPostTransientFields(Post post) {
+        post.setAuthorProfileImage(imageClient.findProfileImage(post.getAuthorIdentity()));
+        post.setPostedAgo(calculatePostedAgo(post.getPostDate()));
+        post.setLikes(reactionClient.findLikesAPostProfileCount(post.getPostIdentity()));
+        post.setPeopleIdentitiesWhoLikedThePost(reactionClient.findPeopleWhoLikedThePost(post.getPostIdentity()));
+        post.setDislikes(reactionClient.findDislikesAPostProfileCount(post.getPostIdentity()));
+        post.setPeopleIdentitiesWhoDislikedThePost(reactionClient.findPeopleWhoDislikedThePost(post.getPostIdentity()));
+        post.setStars(reactionClient.findStarsAPostProfileCount(post.getPostIdentity()));
+        post.setPeopleIdentitiesWhoStaredThePost(reactionClient.findPeopleWhoStaredThePost(post.getPostIdentity()));
+        post.getComments().forEach(comment -> {
+            comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity()));
+            comment.setPostedAgo(calculatePostedAgo(comment.getPostDate()));
+            comment.setLikes(reactionClient.findLikesACommentProfileCount(comment.getCommentIdentity()));
+            comment.setLikes(reactionClient.findDislikesACommentProfileCount(comment.getCommentIdentity()));
+        });
     }
 }

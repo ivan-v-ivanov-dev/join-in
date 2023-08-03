@@ -45,6 +45,11 @@ public class PostController {
         return postService.findAuthorPostsCount(authorIdentity);
     }
 
+    @PostMapping("/feed/posts")
+    public List<Post> findFeedPosts(@RequestParam("userIdentity") String userIdentity) {
+        return postService.findFeedPosts(userIdentity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Post service is HEALTHY";

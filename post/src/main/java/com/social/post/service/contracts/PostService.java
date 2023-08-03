@@ -21,4 +21,6 @@ public interface PostService {
     void createNewUserCollection(String identity);
 
     void saveComment(Comment comment, String postIdentity, String postAuthorIdentity, String authorNames);
+
+    List<Post> findFeedPosts(String userIdentity);
 }

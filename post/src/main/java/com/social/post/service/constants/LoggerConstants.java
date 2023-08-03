@@ -69,6 +69,8 @@ public class LoggerConstants {
     public static final String RETRIEVE_COMMENT_IDENTITIES_FOR_A_POST_TEMPLATE =
             "Retrieve comment identities for a post (Post identity: %s)";
 
+    public static final String RETRIEVE_USERS_FEED_POSTS_TEMPLATE =
+            "Retrieve user's feed posts (User identity: %s)";
 
     private LoggerConstants() {
     }
