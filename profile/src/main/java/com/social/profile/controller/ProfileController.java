@@ -219,6 +219,7 @@ public class ProfileController {
         model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(userIdentity));
         model.addAttribute("notifications", notificationService.findUserNotifications(userIdentity));
         model.addAttribute("friendSuggestions", relationshipService.findFriendSuggestions(userIdentity));
+        model.addAttribute("posts", postService.findFeedPosts(userIdentity));
         return "feed";
     }
 

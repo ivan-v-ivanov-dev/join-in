@@ -95,15 +95,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> findUserPosts(String identity) {
         List<Post> posts = postClient.findAllPostsByAuthorIdentity(identity);
-        posts.forEach(post -> {
-            post.setAuthorNames(findUserNamesFromUserIdentity(post.getAuthorIdentity()));
-            post.setPeopleNamesWhoLikedThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoLikedThePost()));
-            post.setPeopleNamesWhoDislikedThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoDislikedThePost()));
-            post.setPeopleNamesWhoStaredThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoStaredThePost()));
-            post.getComments().forEach(comment ->
-                    comment.setAuthorNames(findUserNamesFromUserIdentity(comment.getAuthorIdentity())));
-        });
-
+        posts.forEach(this::setUserNamesForThePostFields);
         log.info(String.format(RETRIEVE_USER_POSTS_FROM_POST_SERVICE_TEMPLATE, identity));
         return posts;
     }
@@ -111,6 +103,23 @@ public class PostServiceImpl implements PostService {
     @Override
     public int findUserPostsCount(String identity) {
         return postClient.findAuthorPostsCount(identity);
+    }
+
+    @Override
+    public List<Post> findFeedPosts(String userIdentity) {
+        List<Post> posts = postClient.findFeedPosts(userIdentity);
+        posts.forEach(this::setUserNamesForThePostFields);
+        log.info(String.format(RETRIEVE_USERS_FEED_POSTS_FROM_POST_SERVICE_TEMPLATE, userIdentity));
+        return posts;
+    }
+
+    private void setUserNamesForThePostFields(Post post) {
+        post.setAuthorNames(findUserNamesFromUserIdentity(post.getAuthorIdentity()));
+        post.setPeopleNamesWhoLikedThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoLikedThePost()));
+        post.setPeopleNamesWhoDislikedThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoDislikedThePost()));
+        post.setPeopleNamesWhoStaredThePost(findUsersNamesFromUserIdentity(post.getPeopleIdentitiesWhoStaredThePost()));
+        post.getComments().forEach(comment ->
+                comment.setAuthorNames(findUserNamesFromUserIdentity(comment.getAuthorIdentity())));
     }
 
     private List<String> findUsersNamesFromUserIdentity(Set<String> userIdentities) {

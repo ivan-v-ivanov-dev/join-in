@@ -21,4 +21,6 @@ public interface PostClient {
     @PostMapping("${post.author.posts.count}")
     int findAuthorPostsCount(@RequestParam(name = "authorIdentity") String authorIdentity);
 
+    @PostMapping("${post.user.feed.posts}")
+    List<Post> findFeedPosts(@RequestParam("userIdentity") String userIdentity);
 }

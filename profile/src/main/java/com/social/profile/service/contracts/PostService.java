@@ -17,4 +17,6 @@ public interface PostService {
     List<Post> findUserPosts(String identity);
 
     int findUserPostsCount(String identity);
+
+    List<Post> findFeedPosts(String userIdentity);
 }

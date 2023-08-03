@@ -1,13 +1,11 @@
 package com.social.profile.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -16,9 +14,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class Post implements Serializable {
-
-    @JsonIgnore
-    private String id;
 
     private String authorIdentity;
 
@@ -31,8 +26,6 @@ public class Post implements Serializable {
     private String content;
 
     List<Comment> comments;
-
-    private LocalDate postDate;
 
     private String postedAgo;
 
