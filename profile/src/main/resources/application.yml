@@ -78,6 +78,9 @@ post:
   author:
     posts:
       count: /author/posts/count
+  user:
+    feed:
+      posts: /user/feed/posts
   service:
     feign:
       client:

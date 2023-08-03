@@ -45,7 +45,7 @@ public class PostController {
         return postService.findAuthorPostsCount(authorIdentity);
     }
 
-    @PostMapping("/feed/posts")
+    @PostMapping("/user/feed/posts")
     public List<Post> findFeedPosts(@RequestParam("userIdentity") String userIdentity) {
         return postService.findFeedPosts(userIdentity);
     }
