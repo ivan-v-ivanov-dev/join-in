@@ -28,9 +28,6 @@ public class Comment implements Serializable {
     @Transient
     private String authorProfileImage;
 
-    @Transient
-    private String authorNames;
-
     private String content;
 
     @JsonIgnore

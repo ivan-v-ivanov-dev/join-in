@@ -82,8 +82,8 @@ public class PostServiceImpl implements PostService {
         log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE,
                 authorIdentity, post.getPostIdentity()));
 
-        Set<String> friends = relationshipClient.findFriends(authorIdentity);
-        log.info(String.format(RETRIEVE_ALL_FRIENDS_FROM_RELATIONSHIP_SERVICE_TEMPLATE, authorIdentity));
+        Set<String> friends = relationshipClient.findFriendsIdentities(authorIdentity);
+        log.info(String.format(RETRIEVE_ALL_FRIENDS_IDENTITIES_FROM_RELATIONSHIP_SERVICE_TEMPLATE, authorIdentity));
 
         KafkaMessage newPostCommentNotificationMessage = NotificationMessage.builder()
                 .peopleToNotify(friends)
@@ -179,7 +179,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findFeedPosts(String userIdentity) {
-        Set<String> users = relationshipClient.findFriends(userIdentity);
+        Set<String> users = relationshipClient.findFriendsIdentities(userIdentity);
         users.add(userIdentity);
 
         List<Post> posts = new ArrayList<>();

@@ -65,7 +65,8 @@ relationship:
         name: Relationship-Service
   find:
     profile:
-      friends: /profile/friends
+      friends:
+        identities: /profile/friends/identities
 
 #Feign Reaction service
 reaction:

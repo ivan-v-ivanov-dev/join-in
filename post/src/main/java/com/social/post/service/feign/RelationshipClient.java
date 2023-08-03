@@ -9,6 +9,6 @@ import java.util.Set;
 @FeignClient(name = "${relationship.service.feign.client.name}", url = "${relationship.service.url}")
 public interface RelationshipClient {
 
-    @PostMapping("${relationship.find.profile.friends}")
-    Set<String> findFriends(@RequestParam("identity") String identity);
+    @PostMapping("${relationship.find.profile.friends.identities}")
+    Set<String> findFriendsIdentities(@RequestParam("identity") String identity);
 }

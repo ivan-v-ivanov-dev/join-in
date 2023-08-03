@@ -42,8 +42,8 @@ public class LoggerConstants {
     public static final String NEW_COLLECTION_SAVED_IN_DATABASE_TEMPLATE =
             "New collection created (Collection: %s)";
 
-    public static final String RETRIEVE_ALL_FRIENDS_FROM_RELATIONSHIP_SERVICE_TEMPLATE =
-            "Retrieve all friends from Relationship service (User identity: %s)";
+    public static final String RETRIEVE_ALL_FRIENDS_IDENTITIES_FROM_RELATIONSHIP_SERVICE_TEMPLATE =
+            "Retrieve all friends identities from Relationship service (User identity: %s)";
 
     public static final String NEW_COMMENT_SAVED_IN_DATABASE_AUTHOR_IDENTITY_COMMENT_IDENTITY_TEMPLATE =
             "New Comment saved in database (User identity %s, Comment identity: %s)";
