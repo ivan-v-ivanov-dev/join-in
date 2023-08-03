@@ -504,16 +504,25 @@
                            </a>
                         </div>
                         <div class="modal-body">
-                           <div class="d-flex align-items-center">
-                              <div class="user-img">
-                                 <img th:src="${profileImage}" alt="userimg" class="avatar-60 rounded-circle img-fluid" loading="lazy">
-                              </div>
-                              <form class="post-text ms-3 w-100" action="javascript:void();">
-                                 <input type="text" class="form-control rounded" placeholder="Write something here..." style="border:none;">
+                              <form class="post-text ms-3 w-100" th:action="@{/post}" method="post">
+                                    <div class="d-flex align-items-center">
+                                       <div class="user-img">
+                                          <img th:src="${profileImage}" alt="userimg" class="avatar-60 rounded-circle img-fluid" loading="lazy">
+                                       </div>
+
+                                       <input th:name="userIdentity"
+                                              th:value="${profileIdentity}"
+                                              type="hidden"/>
+                                       <input class="form-control rounded"
+                                              placeholder="Write something here..."
+                                              style="border:none;"
+                                              th:name="content"
+                                              type="text">
+<!--                                          <input type="text" class="form-control rounded" placeholder="Write something here..." style="border:none;">-->
+                                    </div>
+                                    <hr>
+                                    <button type="submit" class="btn btn-primary d-block w-100 mt-3">Post</button>
                               </form>
-                           </div>
-                           <hr>
-                           <button type="submit" class="btn btn-primary d-block w-100 mt-3">Post</button>
                         </div>
                      </div>
                   </div>
