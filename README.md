@@ -169,7 +169,7 @@ Runs on **http://localhost:8084/**. Stores posts reactions (LIKE, DISLIKE and ST
 
 Example of Users (purple nodes), Posts (orange nodes) and Comments (blue nodes)
 
-![image](https://github.com/ivanovbiol/join-in/assets/51414119/d837a834-a08d-4a9a-8a9c-9f68ab153ad0)
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/16b51e68-7bb5-48e0-8f6b-71fcc835925f)
 
 ### Technical overview     
 
