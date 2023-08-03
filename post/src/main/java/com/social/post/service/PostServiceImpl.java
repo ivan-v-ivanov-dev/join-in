@@ -232,7 +232,7 @@ public class PostServiceImpl implements PostService {
             comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity()));
             comment.setPostedAgo(calculatePostedAgo(comment.getPostDate()));
             comment.setLikes(reactionClient.findLikesACommentProfileCount(comment.getCommentIdentity()));
-            comment.setLikes(reactionClient.findDislikesACommentProfileCount(comment.getCommentIdentity()));
+            comment.setDislikes(reactionClient.findDislikesACommentProfileCount(comment.getCommentIdentity()));
         });
     }
 }
