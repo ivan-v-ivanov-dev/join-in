@@ -165,7 +165,7 @@ Runs on **http://localhost:8085/**. Service stores user images (profile photo, b
 
 ## 4.5. Reaction service  
 
-Runs on **http://localhost:8084/**. Stores posts reactions (LIKE, DISLIKE and STAR) and comment reactions (LIKE and DISLIKE). Uses Neo4j as a database. Posts, comments and users are created as nodes (with identity as Id) and Users has a relationship to the posts and comments.
+Runs on **http://localhost:8084/**. Stores posts reactions (LIKE, DISLIKE and STAR) and comment reactions (LIKE and DISLIKE). Uses Neo4j as a database. Posts, comments and users are created as nodes (with identity as Id) and Users has a relationship to the posts and comments. It is debatable whether we should split this service into two services: one handles the reactions to the posts and the other to the comments.
 
 Example of Users (purple nodes), Posts (orange nodes) and Comments (blue nodes)
 
@@ -180,7 +180,7 @@ Example of Users (purple nodes), Posts (orange nodes) and Comments (blue nodes)
 
 ## 4.6. Relashionship service  
 
-Runs on **http://localhost:8083/**. Stores friendship relations for the users and friend invitations.  Uses Neo4j as a database. The FRIENDSHIP relationships are outgoing for each user. The FRIENDSHIP_REQUEST relationship are outgoing from the user who sends the invitation to another who accepts it. After accepting the frienship this relation is replaced with FRINEDSHIP. The service can be extended to support other relationships (FOLLOWS, for example).
+Runs on **http://localhost:8083/**. Stores friendship relations for the users and friend invitations.  Uses Neo4j as a database. The FRIENDSHIP relationships are outgoing for each user. The FRIENDSHIP_REQUEST relationship are outgoing from the user who sends the invitation to another who accepts it. After accepting the frienship this relation is replaced with FRIENDSHIP. The service can be extended to support other relationships (FOLLOWS, some family members for example).
 
 Example
 
@@ -244,6 +244,10 @@ Runs on **http://localhost:8086/**. Stores the notificatins for each user. Each 
 ## 5.6. Edit profile
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/920ba7fc-13ad-4bf8-bc56-31650999a75b)
+
+## 5.7. Feed
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/2900209f-0f6d-4adb-bad3-c986b6779a74)
 
 # 6. Disclaimer  
 
