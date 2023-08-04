@@ -1,4 +1,4 @@
-package com.social.post;
+package com.social.notification;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

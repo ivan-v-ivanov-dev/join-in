@@ -1,4 +1,4 @@
-package com.social.post.service;
+package com.social.notification.service;
 
 import com.social.kafka.messages.NewUserMessage;
 import com.social.kafka.messages.NotificationMessage;
