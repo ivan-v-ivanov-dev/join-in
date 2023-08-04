@@ -1,4 +1,4 @@
-package com.social.relationship;
+package com.social.reaction;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
