@@ -9,6 +9,7 @@ import com.social.reaction.repository.ProfileRepository;
 import com.social.reaction.service.contracts.KafkaMessageSender;
 import com.social.reaction.service.contracts.PostService;
 import com.social.reaction.service.feign.PostClient;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -65,43 +66,52 @@ public class PostServiceImpl implements PostService {
     @Override
     public void likePost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames) {
         deletePreviousUserReactionsToThePost(reactingUserIdentity, postIdentity);
-        Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
-
         postRepository.likePost(reactingUserIdentity, postIdentity);
         log.info(String.format(POST_LIKED_BY_USER_TEMPLATE, reactingUserIdentity, postIdentity));
 
-        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
-                postAuthorNames, postIdentity, likePostNotificationTopic);
-        log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
-                likePostNotificationTopic));
+        try {
+            Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
+            sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
+                    postAuthorNames, postIdentity, likePostNotificationTopic);
+            log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                    likePostNotificationTopic));
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+        }
     }
 
     @Override
     public void dislikePost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames) {
         deletePreviousUserReactionsToThePost(reactingUserIdentity, postIdentity);
-        Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
-
         postRepository.dislikePost(reactingUserIdentity, postIdentity);
         log.info(String.format(POST_DISLIKED_BY_USER_TEMPLATE, reactingUserIdentity, postIdentity));
 
-        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
-                postAuthorNames, postIdentity, dislikePostNotificationTopic);
-        log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
-                dislikePostNotificationTopic));
+        try {
+            Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
+            sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
+                    postAuthorNames, postIdentity, dislikePostNotificationTopic);
+            log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                    dislikePostNotificationTopic));
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+        }
     }
 
     @Override
     public void starPost(String reactingUserIdentity, String postIdentity, String postAuthorIdentity, String postAuthorNames) {
         deletePreviousUserReactionsToThePost(reactingUserIdentity, postIdentity);
-        Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
-
         postRepository.starPost(reactingUserIdentity, postIdentity);
         log.info(String.format(POST_STARED_BY_USER_TEMPLATE, reactingUserIdentity, postIdentity));
 
-        sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
-                postAuthorNames, postIdentity, starPostNotificationTopic);
-        log.info(String.format(STAR_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
-                starPostNotificationTopic));
+        try {
+            Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
+            sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
+                    postAuthorNames, postIdentity, starPostNotificationTopic);
+            log.info(String.format(STAR_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                    starPostNotificationTopic));
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+        }
     }
 
     private void deletePreviousUserReactionsToThePost(String reactingUserIdentity, String postIdentity) {
