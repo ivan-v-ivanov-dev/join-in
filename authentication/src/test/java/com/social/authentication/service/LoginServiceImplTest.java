@@ -4,6 +4,7 @@ import com.social.authentication.model.User;
 import com.social.authentication.repository.LogRepository;
 import com.social.authentication.repository.UserRepository;
 import com.social.authentication.service.contract.PasswordEncoder;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,9 +27,16 @@ public class LoginServiceImplTest {
     @InjectMocks
     LoginServiceImpl loginService;
 
-    private String identity = "identity";
-    private String email = "email";
-    private String password = "password";
+    private String identity;
+    private String email;
+    private String password;
+
+    @BeforeEach
+    public void init() {
+        identity = "identity";
+        email = "email";
+        password = "password";
+    }
 
     @Test
     public void login_should_returnUserIdentity_when_credentialsAreRight() {

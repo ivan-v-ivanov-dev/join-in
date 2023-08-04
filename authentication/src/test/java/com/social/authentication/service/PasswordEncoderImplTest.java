@@ -1,5 +1,6 @@
 package com.social.authentication.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,9 +20,16 @@ public class PasswordEncoderImplTest {
     @InjectMocks
     PasswordEncoderImpl passwordEncoder;
 
-    private final String queryPassword = "password";
-    private final String wrongQueryPassword = "wrong";
-    private final String databasePassword = "password";
+    private String queryPassword;
+    private String wrongQueryPassword;
+    private String databasePassword;
+
+    @BeforeEach
+    public void init() {
+        queryPassword = "password";
+        wrongQueryPassword = "wrong";
+        databasePassword = "password";
+    }
 
     @Test
     public void areEqual_returnsTrue_when_passwordsAreEqual() {
