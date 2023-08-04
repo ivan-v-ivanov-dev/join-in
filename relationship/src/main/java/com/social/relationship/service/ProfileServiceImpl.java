@@ -7,14 +7,17 @@ import com.social.relationship.model.Profile;
 import com.social.relationship.repository.ProfileRepository;
 import com.social.relationship.service.contracts.ProfileService;
 import com.social.relationship.service.feign.ImageClient;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.social.relationship.service.constants.ExceptionConstants.IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
 import static com.social.relationship.service.constants.LoggerConstants.*;
 
 @Service
@@ -32,17 +35,22 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Set<Friend> findFriendsByProfileIdentity(String identity) {
-        Set<Friend> friends = new HashSet<>();
-        Set<String> friendsIdentities = profileRepository.findFriendsByProfileIdentity(identity);
-        log.info(String.format(RETRIEVE_FRIENDS_IDENTITIES_FOR_USER_TEMPLATE, identity));
+        try {
+            Set<Friend> friends = new HashSet<>();
+            Set<String> friendsIdentities = profileRepository.findFriendsByProfileIdentity(identity);
+            log.info(String.format(RETRIEVE_FRIENDS_IDENTITIES_FOR_USER_TEMPLATE, identity));
 
-        friendsIdentities.forEach(friendsIdentity ->
-                friends.add(Friend.builder()
-                        .profileIdentity(friendsIdentity)
-                        .profileImage(imageClient.findProfileImage(friendsIdentity))
-                        .build()));
-        log.info(String.format(RETRIEVE_FRIENDS_PROFILE_IMAGES_FOR_USER_TEMPLATE, identity));
-        return friends;
+            friendsIdentities.forEach(friendsIdentity ->
+                    friends.add(Friend.builder()
+                            .profileIdentity(friendsIdentity)
+                            .profileImage(imageClient.findProfileImage(friendsIdentity))
+                            .build()));
+            log.info(String.format(RETRIEVE_FRIENDS_PROFILE_IMAGES_FOR_USER_TEMPLATE, identity));
+            return friends;
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
     }
 
     @Override
@@ -60,17 +68,21 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<FriendshipRequest> findFriendshipRequest(String identity) {
-        List<FriendshipRequest> friendshipRequests = new ArrayList<>();
-        Set<String> friendshipRequestProfileIdentities = profileRepository.findFriendshipRequestByProfileIdentity(identity);
-
-        friendshipRequestProfileIdentities.forEach(profileIdentity ->
-                friendshipRequests.add(FriendshipRequest.builder()
-                        .profileIdentity(profileIdentity)
-                        .profileImage(imageClient.findProfileImage(profileIdentity))
-                        .friendsCount(profileRepository.findFriendCountByProfileIdentity(profileIdentity))
-                        .build()));
-        log.info(String.format(RETRIEVE_FRIENDSHIP_REQUESTS_FOR_USER_TEMPLATE, identity));
-        return friendshipRequests;
+        try {
+            List<FriendshipRequest> friendshipRequests = new ArrayList<>();
+            Set<String> friendshipRequestProfileIdentities = profileRepository.findFriendshipRequestByProfileIdentity(identity);
+            friendshipRequestProfileIdentities.forEach(profileIdentity ->
+                    friendshipRequests.add(FriendshipRequest.builder()
+                            .profileIdentity(profileIdentity)
+                            .profileImage(imageClient.findProfileImage(profileIdentity))
+                            .friendsCount(profileRepository.findFriendCountByProfileIdentity(profileIdentity))
+                            .build()));
+            log.info(String.format(RETRIEVE_FRIENDSHIP_REQUESTS_FOR_USER_TEMPLATE, identity));
+            return friendshipRequests;
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
     }
 
     @Override
@@ -108,15 +120,20 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<FriendSuggestion> findFriendSuggestions(String identity) {
-        List<String> profiles = profileRepository.findFriendSuggestions(identity);
-        List<FriendSuggestion> friendSuggestions = new ArrayList<>();
-        profiles.forEach(profileIdentity -> friendSuggestions.add(
-                FriendSuggestion.builder()
-                        .profileIdentity(profileIdentity)
-                        .profileImage(imageClient.findProfileImage(profileIdentity))
-                        .build()));
-        log.info(String.format(RETRIEVE_FRIEND_SUGGESTIONS_TEMPLATE, identity));
-        return friendSuggestions;
+        try {
+            List<String> profiles = profileRepository.findFriendSuggestions(identity);
+            List<FriendSuggestion> friendSuggestions = new ArrayList<>();
+            profiles.forEach(profileIdentity -> friendSuggestions.add(
+                    FriendSuggestion.builder()
+                            .profileIdentity(profileIdentity)
+                            .profileImage(imageClient.findProfileImage(profileIdentity))
+                            .build()));
+            log.info(String.format(RETRIEVE_FRIEND_SUGGESTIONS_TEMPLATE, identity));
+            return friendSuggestions;
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
     }
 
     @Override
