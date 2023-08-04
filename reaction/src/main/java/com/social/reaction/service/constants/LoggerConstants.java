@@ -58,6 +58,21 @@ public class LoggerConstants {
     public static final String RETRIEVE_USERS_WHO_STARED_THE_POST_TEMPLATE =
             "Retrieve users identities who stared the post (Post identity: %s)";
 
+    public static final String RETRIEVE_LIKES_A_POST_USER_COUNT_POST_TEMPLATE =
+            "Retrieve likes a post users count (Post identity: %s)";
+
+    public static final String RETRIEVE_DISLIKES_A_POST_USER_COUNT_POST_TEMPLATE =
+            "Retrieve dislikes a post users count (Post identity: %s)";
+
+    public static final String RETRIEVE_STARS_A_POST_USER_COUNT_POST_TEMPLATE =
+            "Retrieve start a post users count (Post identity: %s)";
+
+    public static final String RETRIEVE_LIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE =
+            "Retrieve likes a comment users count (Comment identity: %s)";
+
+    public static final String RETRIEVE_DISLIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE =
+            "Retrieve dislikes a comment users count (Comment identity: %s)";
+
     public static final String SAVE_POST_IN_DATABASE_TEMPLATE = "Save post in database (Post identity: %s)";
 
     public static final String SAVE_COMMENT_IN_DATABASE_TEMPLATE = "Save comment in database (Comment identity: %s)";

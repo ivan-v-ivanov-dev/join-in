@@ -22,27 +22,37 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public int findLikesAPostProfileCount(String postIdentity) {
-        return profileRepository.findLikesAPostProfileCount(postIdentity);
+        int likesAPostProfileCount = profileRepository.findLikesAPostProfileCount(postIdentity);
+        log.info(String.format(RETRIEVE_LIKES_A_POST_USER_COUNT_POST_TEMPLATE, postIdentity));
+        return likesAPostProfileCount;
     }
 
     @Override
     public int findLikesACommentProfileCount(String commentIdentity) {
-        return profileRepository.findLikesACommentProfileCount(commentIdentity);
+        int likesACommentProfileCount = profileRepository.findLikesACommentProfileCount(commentIdentity);
+        log.info(String.format(RETRIEVE_LIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE, commentIdentity));
+        return likesACommentProfileCount;
     }
 
     @Override
     public int findDislikesAPostProfileCount(String postIdentity) {
-        return profileRepository.findDislikesAPostProfileCount(postIdentity);
+        int dislikesAPostProfileCount = profileRepository.findDislikesAPostProfileCount(postIdentity);
+        log.info(String.format(RETRIEVE_DISLIKES_A_POST_USER_COUNT_POST_TEMPLATE, postIdentity));
+        return dislikesAPostProfileCount;
     }
 
     @Override
     public int findDislikesACommentProfileCount(String commentIdentity) {
-        return profileRepository.findDislikesACommentProfileCount(commentIdentity);
+        int dislikesACommentProfileCount = profileRepository.findDislikesACommentProfileCount(commentIdentity);
+        log.info(String.format(RETRIEVE_DISLIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE, commentIdentity));
+        return dislikesACommentProfileCount;
     }
 
     @Override
     public int findStarsAPostProfileCount(String postIdentity) {
-        return profileRepository.findStarsAPostProfileCount(postIdentity);
+        int starsAPostProfileCount = profileRepository.findStarsAPostProfileCount(postIdentity);
+        log.info(String.format(RETRIEVE_STARS_A_POST_USER_COUNT_POST_TEMPLATE, postIdentity));
+        return starsAPostProfileCount;
     }
 
     @Override
