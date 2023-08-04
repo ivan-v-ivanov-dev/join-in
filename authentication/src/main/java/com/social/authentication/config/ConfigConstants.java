@@ -1,6 +1,6 @@
 package com.social.authentication.config;
 
-public class KafkaConstants {
+public class ConfigConstants {
 
     private static final String KAFKA_CONFIGURATIONS = "Kafka Configurations :: ";
 
@@ -21,6 +21,9 @@ public class KafkaConstants {
     public static final String KAFKA_TOPIC_FOR_NEW_USER_CREATED_TEMPLATE =
             "Kafka Topic :: New topic for new user created (name:  %s)";
 
-    private KafkaConstants() {
+    public static final String B_CRYPT_PASSWORD_ENCODER_CREATED =
+            "BCryptPasswordEncoder :: New BCryptPasswordEncoder created";
+
+    private ConfigConstants() {
     }
 }

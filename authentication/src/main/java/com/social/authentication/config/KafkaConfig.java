@@ -19,7 +19,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.social.authentication.config.KafkaConstants.*;
+import static com.social.authentication.config.ConfigConstants.*;
 
 @Configuration
 @EnableKafka

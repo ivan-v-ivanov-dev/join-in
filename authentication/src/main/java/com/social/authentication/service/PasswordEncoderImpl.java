@@ -9,8 +9,8 @@ public class PasswordEncoderImpl implements PasswordEncoder {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public PasswordEncoderImpl() {
-        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    public PasswordEncoderImpl(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public boolean areEqual(String queryPassword, String databasePassword) {

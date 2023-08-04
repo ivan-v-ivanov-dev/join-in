@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.TopicBuilder;
 
-import static com.social.authentication.config.KafkaConstants.KAFKA_TOPIC_FOR_NEW_USER_CREATED_TEMPLATE;
+import static com.social.authentication.config.ConfigConstants.KAFKA_TOPIC_FOR_NEW_USER_CREATED_TEMPLATE;
 
 @Configuration
 @EnableKafka
