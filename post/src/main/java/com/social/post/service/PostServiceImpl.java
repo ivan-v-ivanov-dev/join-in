@@ -13,9 +13,11 @@ import com.social.post.service.contracts.PostService;
 import com.social.post.service.feign.ImageClient;
 import com.social.post.service.feign.ReactionClient;
 import com.social.post.service.feign.RelationshipClient;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -23,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static com.social.post.service.constants.ExceptionConstants.IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
+import static com.social.post.service.constants.ExceptionConstants.RELATIONSHIP_OR_REACTION_OR_IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
 import static com.social.post.service.constants.LoggerConstants.*;
 import static com.social.post.service.constants.ServiceConstant.*;
 
@@ -68,12 +72,17 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post findByPostIdentity(String postIdentity, String authorIdentity) {
-        Post post = postRepository.findByPostIdentity(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
-        post.setAuthorProfileImage(imageClient.findProfileImage(post.getAuthorIdentity()));
-        post.getComments().forEach(comment ->
-                comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity())));
-        log.info(String.format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
-        return post;
+        try {
+            Post post = postRepository.findByPostIdentity(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
+            post.setAuthorProfileImage(imageClient.findProfileImage(post.getAuthorIdentity()));
+            post.getComments().forEach(comment ->
+                    comment.setAuthorProfileImage(imageClient.findProfileImage(comment.getAuthorIdentity())));
+            log.info(String.format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
+            return post;
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
     }
 
     @Override
@@ -179,14 +188,18 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findFeedPosts(String userIdentity) {
-        Set<String> users = relationshipClient.findFriendsIdentities(userIdentity);
-        users.add(userIdentity);
-
-        List<Post> posts = new ArrayList<>();
-        users.forEach(user -> posts.addAll(postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, user))));
-        posts.forEach(this::setPostTransientFields);
-        log.info(String.format(RETRIEVE_USERS_FEED_POSTS_TEMPLATE, userIdentity));
-        return posts;
+        try {
+            Set<String> users = relationshipClient.findFriendsIdentities(userIdentity);
+            users.add(userIdentity);
+            List<Post> posts = new ArrayList<>();
+            users.forEach(user -> posts.addAll(postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, user))));
+            posts.forEach(this::setPostTransientFields);
+            log.info(String.format(RETRIEVE_USERS_FEED_POSTS_TEMPLATE, userIdentity));
+            return posts;
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(RELATIONSHIP_OR_REACTION_OR_IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
     }
 
     private String calculatePostedAgo(LocalDate postDate) {
