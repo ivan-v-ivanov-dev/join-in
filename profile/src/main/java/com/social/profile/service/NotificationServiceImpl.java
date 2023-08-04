@@ -5,6 +5,7 @@ import com.social.profile.service.contracts.NotificationService;
 import com.social.profile.service.feign.NotificationClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.List;
 
@@ -22,8 +23,13 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public List<Notification> findUserNotifications(String identity) {
-        List<Notification> notifications = notificationClient.findUserNotifications(identity);
-        log.info(String.format(RETRIEVE_USER_NOTIFICATIONS_FROM_NOTIFICATION_SERVICE_TEMPLATE, identity));
-        return notifications;
+        try {
+            List<Notification> notifications = notificationClient.findUserNotifications(identity);
+            log.info(String.format(RETRIEVE_USER_NOTIFICATIONS_FROM_NOTIFICATION_SERVICE_TEMPLATE, identity));
+            return notifications;
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
+        }
     }
 }

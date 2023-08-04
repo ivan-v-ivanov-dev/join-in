@@ -10,14 +10,17 @@ import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.KafkaMessageSender;
 import com.social.profile.service.contracts.PostService;
 import com.social.profile.service.feign.PostClient;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+import static com.social.profile.service.constants.ExceptionConstants.POST_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
 import static com.social.profile.service.constants.LoggerConstants.*;
 import static com.social.profile.service.constants.ServiceConstants.AUTHOR_NAME_TEMPLATE;
 
@@ -48,10 +51,15 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public EditPost findByIdentity(String postIdentity, String authorIdentity) {
-        EditPost post = postClient.findByPostIdentity(postIdentity, authorIdentity);
-        post.setAuthorNames(findUserNamesFromUserIdentity(authorIdentity));
-        log.info(String.format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
-        return post;
+        try {
+            EditPost post = postClient.findByPostIdentity(postIdentity, authorIdentity);
+            post.setAuthorNames(findUserNamesFromUserIdentity(authorIdentity));
+            log.info(String.format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
+            return post;
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
+        }
     }
 
     @Override
@@ -94,23 +102,40 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findUserPosts(String identity) {
-        List<Post> posts = postClient.findAllPostsByAuthorIdentity(identity);
-        posts.forEach(this::setUserNamesForThePostFields);
-        log.info(String.format(RETRIEVE_USER_POSTS_FROM_POST_SERVICE_TEMPLATE, identity));
-        return posts;
+        try {
+            List<Post> posts = postClient.findAllPostsByAuthorIdentity(identity);
+            posts.forEach(this::setUserNamesForThePostFields);
+            log.info(String.format(RETRIEVE_USER_POSTS_FROM_POST_SERVICE_TEMPLATE, identity));
+            return posts;
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
+        }
     }
 
     @Override
     public int findUserPostsCount(String identity) {
-        return postClient.findAuthorPostsCount(identity);
+        try {
+            int postCount = postClient.findAuthorPostsCount(identity);
+            log.info(String.format(RETRIEVE_USER_POSTS_COUNT_FROM_POST_SERVICE_TEMPLATE, identity));
+            return postCount;
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(POST_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
     }
 
     @Override
     public List<Post> findFeedPosts(String userIdentity) {
-        List<Post> posts = postClient.findFeedPosts(userIdentity);
-        posts.forEach(this::setUserNamesForThePostFields);
-        log.info(String.format(RETRIEVE_USERS_FEED_POSTS_FROM_POST_SERVICE_TEMPLATE, userIdentity));
-        return posts;
+        try {
+            List<Post> posts = postClient.findFeedPosts(userIdentity);
+            posts.forEach(this::setUserNamesForThePostFields);
+            log.info(String.format(RETRIEVE_USERS_FEED_POSTS_FROM_POST_SERVICE_TEMPLATE, userIdentity));
+            return posts;
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
+        }
     }
 
     private void setUserNamesForThePostFields(Post post) {

@@ -9,12 +9,15 @@ import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.KafkaMessageSender;
 import com.social.profile.service.contracts.RelationshipService;
 import com.social.profile.service.feign.RelationshipClient;
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.List;
 
+import static com.social.profile.service.constants.ExceptionConstants.RELATIONSHIP_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
 import static com.social.profile.service.constants.LoggerConstants.*;
 import static com.social.profile.service.constants.ServiceConstants.AUTHOR_NAME_TEMPLATE;
 
@@ -45,39 +48,59 @@ public class RelationshipServiceImpl implements RelationshipService {
 
     @Override
     public List<Friend> findFriends(String identity) {
-        List<Friend> friends = relationshipClient.findFriends(identity);
-        friends.forEach(friend -> {
-            friend.setFirstName(profileRepository.findProfileFirstName(friend.getProfileIdentity()));
-            friend.setLastName(profileRepository.findProfileLastName(friend.getProfileIdentity()));
-        });
-        log.info(String.format(RETRIEVE_ALL_FRIENDS_FROM_RELATION_SERVICE_TEMPLATE, identity));
-        return friends;
+        try {
+            List<Friend> friends = relationshipClient.findFriends(identity);
+            friends.forEach(friend -> {
+                friend.setFirstName(profileRepository.findProfileFirstName(friend.getProfileIdentity()));
+                friend.setLastName(profileRepository.findProfileLastName(friend.getProfileIdentity()));
+            });
+            log.info(String.format(RETRIEVE_ALL_FRIENDS_FROM_RELATION_SERVICE_TEMPLATE, identity));
+            return friends;
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
+        }
     }
 
     @Override
     public int findFriendsCount(String identity) {
-        int friendsCount = relationshipClient.findFriendCount(identity);
-        log.info(String.format(RETRIEVE_FRIENDS_COUNT_FROM_RELATION_SERVICE_TEMPLATE, identity));
-        return friendsCount;
+        try {
+            int friendsCount = relationshipClient.findFriendCount(identity);
+            log.info(String.format(RETRIEVE_FRIENDS_COUNT_FROM_RELATION_SERVICE_TEMPLATE, identity));
+            return friendsCount;
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(RELATIONSHIP_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
     }
 
     @Override
     public List<FriendshipRequest> findFriendshipRequests(String identity) {
-        List<FriendshipRequest> friendshipRequests = relationshipClient.findFriendshipRequests(identity);
-        log.info(String.format(RETRIEVE_FRIENDSHIP_REQUESTS_FROM_RELATION_SERVICE_TEMPLATE, identity));
+        try {
+            List<FriendshipRequest> friendshipRequests = relationshipClient.findFriendshipRequests(identity);
+            log.info(String.format(RETRIEVE_FRIENDSHIP_REQUESTS_FROM_RELATION_SERVICE_TEMPLATE, identity));
 
-        friendshipRequests.forEach(friendshipRequest -> {
-            friendshipRequest.setFirstName(profileRepository.findProfileFirstName(friendshipRequest.getProfileIdentity()));
-            friendshipRequest.setLastName(profileRepository.findProfileLastName(friendshipRequest.getProfileIdentity()));
-        });
-        return friendshipRequests;
+            friendshipRequests.forEach(friendshipRequest -> {
+                friendshipRequest.setFirstName(profileRepository.findProfileFirstName(friendshipRequest.getProfileIdentity()));
+                friendshipRequest.setLastName(profileRepository.findProfileLastName(friendshipRequest.getProfileIdentity()));
+            });
+            return friendshipRequests;
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
+        }
     }
 
     @Override
     public int findFriendshipRequestsCount(String identity) {
-        int friendshipRequestsCount = relationshipClient.findFriendshipRequestsCount(identity);
-        log.info(String.format(RETRIEVE_FRIENDSHIP_REQUEST_COUNT_FROM_RELATION_SERVICE_TEMPLATE, identity));
-        return friendshipRequestsCount;
+        try {
+            int friendshipRequestsCount = relationshipClient.findFriendshipRequestsCount(identity);
+            log.info(String.format(RETRIEVE_FRIENDSHIP_REQUEST_COUNT_FROM_RELATION_SERVICE_TEMPLATE, identity));
+            return friendshipRequestsCount;
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(RELATIONSHIP_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
     }
 
     @Override
@@ -118,12 +141,17 @@ public class RelationshipServiceImpl implements RelationshipService {
 
     @Override
     public List<FriendSuggestion> findFriendSuggestions(String userIdentity) {
-        List<FriendSuggestion> friendSuggestions = relationshipClient.findFriendSuggestions(userIdentity);
-        friendSuggestions.forEach(friendSuggestion ->
-                friendSuggestion.setNames(String.format(AUTHOR_NAME_TEMPLATE,
-                        profileRepository.findProfileFirstName(friendSuggestion.getProfileIdentity()),
-                        profileRepository.findProfileLastName(friendSuggestion.getProfileIdentity()))));
-        log.info(String.format(RETRIEVE_FRIEND_SUGGESTIONS_FROM_RELATIONSHIP_SERVICE_TEMPLATE, userIdentity));
-        return friendSuggestions;
+        try {
+            List<FriendSuggestion> friendSuggestions = relationshipClient.findFriendSuggestions(userIdentity);
+            friendSuggestions.forEach(friendSuggestion ->
+                    friendSuggestion.setNames(String.format(AUTHOR_NAME_TEMPLATE,
+                            profileRepository.findProfileFirstName(friendSuggestion.getProfileIdentity()),
+                            profileRepository.findProfileLastName(friendSuggestion.getProfileIdentity()))));
+            log.info(String.format(RETRIEVE_FRIEND_SUGGESTIONS_FROM_RELATIONSHIP_SERVICE_TEMPLATE, userIdentity));
+            return friendSuggestions;
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
+        }
     }
 }

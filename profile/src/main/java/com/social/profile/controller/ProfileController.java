@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.ResourceAccessException;
 
 import javax.validation.Valid;
 
@@ -57,8 +58,8 @@ public class ProfileController {
         try {
             String profileIndentity = loginService.login(email, password);
             return "redirect:/profile?identity=" + profileIndentity;
-        } catch (IllegalArgumentException illegalArgumentException) {
-            model.addAttribute("error", illegalArgumentException.getMessage());
+        } catch (IllegalArgumentException | ResourceAccessException exception) {
+            model.addAttribute("error", exception.getMessage());
             return "error";
         }
     }
@@ -75,25 +76,29 @@ public class ProfileController {
         if (errors.hasErrors()) {
             return "register";
         }
-
         registerService.register(register);
         return "redirect:/";
     }
 
     @GetMapping("/profile")
     public String profile(@RequestParam("identity") String identity, Model model) {
-        model.addAttribute("profile", profileService.findByIdentity(identity));
-        model.addAttribute("profileImage", imageService.findProfileImage(identity));
-        model.addAttribute("backgroundImage", imageService.findProfileBackgroundImage(identity));
-        model.addAttribute("albumImages", imageService.findProfileAlbumImage(identity));
-        model.addAttribute("posts", postService.findUserPosts(identity));
-        model.addAttribute("postsCount", postService.findUserPostsCount(identity));
-        model.addAttribute("friends", relationshipService.findFriends(identity));
-        model.addAttribute("friendsCount", relationshipService.findFriendsCount(identity));
-        model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
-        model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(identity));
-        model.addAttribute("notifications", notificationService.findUserNotifications(identity));
-        return "profile";
+        try {
+            model.addAttribute("profile", profileService.findByIdentity(identity));
+            model.addAttribute("profileImage", imageService.findProfileImage(identity));
+            model.addAttribute("backgroundImage", imageService.findProfileBackgroundImage(identity));
+            model.addAttribute("albumImages", imageService.findProfileAlbumImage(identity));
+            model.addAttribute("posts", postService.findUserPosts(identity));
+            model.addAttribute("postsCount", postService.findUserPostsCount(identity));
+            model.addAttribute("friends", relationshipService.findFriends(identity));
+            model.addAttribute("friendsCount", relationshipService.findFriendsCount(identity));
+            model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
+            model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(identity));
+            model.addAttribute("notifications", notificationService.findUserNotifications(identity));
+            return "profile";
+        } catch (ResourceAccessException resourceAccessException) {
+            model.addAttribute("error", resourceAccessException.getMessage());
+            return "error";
+        }
     }
 
     @PostMapping("/post")
@@ -107,8 +112,13 @@ public class ProfileController {
     public String editPostView(@RequestParam("postIdentity") String postIdentity,
                                @RequestParam("authorIdentity") String authorIdentity,
                                Model model) {
-        model.addAttribute("post", postService.findByIdentity(postIdentity, authorIdentity));
-        return "edit-post";
+        try {
+            model.addAttribute("post", postService.findByIdentity(postIdentity, authorIdentity));
+            return "edit-post";
+        } catch (ResourceAccessException resourceAccessException) {
+            model.addAttribute("error", resourceAccessException.getMessage());
+            return "error";
+        }
     }
 
     @PostMapping("/post/edit")
@@ -200,26 +210,36 @@ public class ProfileController {
 
     @PostMapping("/notifications")
     public String notifications(@RequestParam("userIdentity") String userIdentity, Model model) {
-        model.addAttribute("profileIdentity", userIdentity);
-        model.addAttribute("profileImage", imageService.findProfileImage(userIdentity));
-        model.addAttribute("profileNames", profileService.findProfileNames(userIdentity));
-        model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(userIdentity));
-        model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(userIdentity));
-        model.addAttribute("notifications", notificationService.findUserNotifications(userIdentity));
-        return "notifications";
+        try {
+            model.addAttribute("profileIdentity", userIdentity);
+            model.addAttribute("profileImage", imageService.findProfileImage(userIdentity));
+            model.addAttribute("profileNames", profileService.findProfileNames(userIdentity));
+            model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(userIdentity));
+            model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(userIdentity));
+            model.addAttribute("notifications", notificationService.findUserNotifications(userIdentity));
+            return "notifications";
+        } catch (ResourceAccessException resourceAccessException) {
+            model.addAttribute("error", resourceAccessException.getMessage());
+            return "error";
+        }
     }
 
     @PostMapping("/feed")
     public String feed(@RequestParam("userIdentity") String userIdentity, Model model) {
-        model.addAttribute("profileIdentity", userIdentity);
-        model.addAttribute("profileImage", imageService.findProfileImage(userIdentity));
-        model.addAttribute("profileNames", profileService.findProfileNames(userIdentity));
-        model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(userIdentity));
-        model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(userIdentity));
-        model.addAttribute("notifications", notificationService.findUserNotifications(userIdentity));
-        model.addAttribute("friendSuggestions", relationshipService.findFriendSuggestions(userIdentity));
-        model.addAttribute("posts", postService.findFeedPosts(userIdentity));
-        return "feed";
+        try {
+            model.addAttribute("profileIdentity", userIdentity);
+            model.addAttribute("profileImage", imageService.findProfileImage(userIdentity));
+            model.addAttribute("profileNames", profileService.findProfileNames(userIdentity));
+            model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(userIdentity));
+            model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(userIdentity));
+            model.addAttribute("notifications", notificationService.findUserNotifications(userIdentity));
+            model.addAttribute("friendSuggestions", relationshipService.findFriendSuggestions(userIdentity));
+            model.addAttribute("posts", postService.findFeedPosts(userIdentity));
+            return "feed";
+        } catch (ResourceAccessException resourceAccessException) {
+            model.addAttribute("error", resourceAccessException.getMessage());
+            return "error";
+        }
     }
 
     @GetMapping("/signout")

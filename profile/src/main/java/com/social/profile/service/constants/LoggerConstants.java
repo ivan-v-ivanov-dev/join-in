@@ -70,6 +70,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_USER_POSTS_FROM_POST_SERVICE_TEMPLATE =
             "Retrieve user posts from Post service (User identity: %s)";
 
+    public static final String RETRIEVE_USER_POSTS_COUNT_FROM_POST_SERVICE_TEMPLATE =
+            "Retrieve user posts count from Post service (User identity: %s)";
+
     public static final String RETRIEVE_USERS_FEED_POSTS_FROM_POST_SERVICE_TEMPLATE =
             "Retrieve user's feed posts from Post service (User identity: %s)";
 
@@ -87,6 +90,8 @@ public class LoggerConstants {
 
     public static final String RETRIEVE_FRIEND_SUGGESTIONS_FROM_RELATIONSHIP_SERVICE_TEMPLATE =
             "Retrieve friend suggestions for user from Relationship service (User identity: %s)";
+
+    public static final String USER_LOGGED_TEMPLATE = "User logged (User identity: %s)";
 
     private LoggerConstants() {
     }
