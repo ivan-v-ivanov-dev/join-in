@@ -72,6 +72,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_USERS_FEED_POSTS_TEMPLATE =
             "Retrieve user's feed posts (User identity: %s)";
 
+    public static final String RETRIEVE_ALL_USERS_IDENTITIES_COMMENTING_THE_POST_TEMPLATE =
+            "Retrieve all user identities commenting the post (Post identity: %s)";
+
     private LoggerConstants() {
     }
 }

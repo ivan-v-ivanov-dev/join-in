@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+import static com.social.post.service.constants.LoggerConstants.RETRIEVE_ALL_USERS_IDENTITIES_COMMENTING_THE_POST_TEMPLATE;
 import static com.social.post.service.constants.ServiceConstant.COLLECTION_TEMPLATE;
 
 @Service
@@ -21,6 +22,9 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Set<String> findAllUsersCommentingThePost(String postIdentity, String authorIdentity) {
-        return profileRepository.findAllUsersCommentingThePost(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
+        Set<String> users = profileRepository
+                .findAllUsersCommentingThePost(postIdentity, String.format(COLLECTION_TEMPLATE, authorIdentity));
+        log.info(RETRIEVE_ALL_USERS_IDENTITIES_COMMENTING_THE_POST_TEMPLATE);
+        return users;
     }
 }

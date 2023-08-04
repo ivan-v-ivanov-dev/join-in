@@ -91,19 +91,23 @@ public class PostServiceImpl implements PostService {
         log.info(String.format(NEW_POST_SAVED_IN_DATABASE_AUTHOR_IDENTITY_POST_IDENTITY_TEMPLATE,
                 authorIdentity, post.getPostIdentity()));
 
-        Set<String> friends = relationshipClient.findFriendsIdentities(authorIdentity);
-        log.info(String.format(RETRIEVE_ALL_FRIENDS_IDENTITIES_FROM_RELATIONSHIP_SERVICE_TEMPLATE, authorIdentity));
+        try {
+            Set<String> friends = relationshipClient.findFriendsIdentities(authorIdentity);
+            log.info(String.format(RETRIEVE_ALL_FRIENDS_IDENTITIES_FROM_RELATIONSHIP_SERVICE_TEMPLATE, authorIdentity));
 
-        KafkaMessage newPostCommentNotificationMessage = NotificationMessage.builder()
-                .peopleToNotify(friends)
-                .authorIdentity(authorIdentity)
-                .postIdentity(post.getPostIdentity())
-                .authorNames(authorNames)
-                .date(LocalDate.now().toString())
-                .build();
-        kafkaMessageSender.send(newPostCommentNotificationMessage, newPostNotificationTopic);
-        log.info(String.format(NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
-                newPostNotificationTopic));
+            KafkaMessage newPostCommentNotificationMessage = NotificationMessage.builder()
+                    .peopleToNotify(friends)
+                    .authorIdentity(authorIdentity)
+                    .postIdentity(post.getPostIdentity())
+                    .authorNames(authorNames)
+                    .date(LocalDate.now().toString())
+                    .build();
+            kafkaMessageSender.send(newPostCommentNotificationMessage, newPostNotificationTopic);
+            log.info(String.format(NEW_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                    newPostNotificationTopic));
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+        }
 
         KafkaMessage newPostNodeMessage = NewNodeMessage.builder()
                 .identity(post.getPostIdentity())
@@ -114,10 +118,15 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findAllPostsByAuthorIdentity(String authorIdentity) {
-        List<Post> posts = postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, authorIdentity));
-        posts.forEach(this::setPostTransientFields);
-        log.info(String.format(RETRIEVE_POSTS_FOR_USER_TEMPLATE, authorIdentity));
-        return posts;
+        try {
+            List<Post> posts = postRepository.findAllPostsByAuthorIdentity(String.format(COLLECTION_TEMPLATE, authorIdentity));
+            posts.forEach(this::setPostTransientFields);
+            log.info(String.format(RETRIEVE_POSTS_FOR_USER_TEMPLATE, authorIdentity));
+            return posts;
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(RELATIONSHIP_OR_REACTION_OR_IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
     }
 
     @Override
@@ -162,22 +171,26 @@ public class PostServiceImpl implements PostService {
         log.info(String.format(NEW_COMMENT_SAVED_IN_DATABASE_AUTHOR_IDENTITY_COMMENT_IDENTITY_TEMPLATE,
                 comment.getAuthorIdentity(), postIdentity));
 
-        Set<String> peopleToNotify = profileRepository
-                .findAllUsersCommentingThePost(postIdentity, String.format(COLLECTION_TEMPLATE, postAuthorIdentity));
-        peopleToNotify.addAll(reactionClient.findPeopleWhoReactedToPost(postIdentity));
-        peopleToNotify.add(comment.getAuthorIdentity());
-        log.info(String.format(RETRIEVE_ALL_USERS_WHO_REACTED_AND_COMMENTED_THE_POST_TEMPLATE, postIdentity));
+        try {
+            Set<String> peopleToNotify = profileRepository
+                    .findAllUsersCommentingThePost(postIdentity, String.format(COLLECTION_TEMPLATE, postAuthorIdentity));
+            peopleToNotify.addAll(reactionClient.findPeopleWhoReactedToPost(postIdentity));
+            peopleToNotify.add(comment.getAuthorIdentity());
+            log.info(String.format(RETRIEVE_ALL_USERS_WHO_REACTED_AND_COMMENTED_THE_POST_TEMPLATE, postIdentity));
 
-        KafkaMessage newPostCommentNotificationMessage = NotificationMessage.builder()
-                .peopleToNotify(peopleToNotify)
-                .authorIdentity(comment.getAuthorIdentity())
-                .postIdentity(postIdentity)
-                .authorNames(authorNames)
-                .date(LocalDate.now().toString())
-                .build();
-        kafkaMessageSender.send(newPostCommentNotificationMessage, newCommentNotificationTopic);
-        log.info(String.format(NEW_COMMENT_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
-                newCommentNotificationTopic));
+            KafkaMessage newPostCommentNotificationMessage = NotificationMessage.builder()
+                    .peopleToNotify(peopleToNotify)
+                    .authorIdentity(comment.getAuthorIdentity())
+                    .postIdentity(postIdentity)
+                    .authorNames(authorNames)
+                    .date(LocalDate.now().toString())
+                    .build();
+            kafkaMessageSender.send(newPostCommentNotificationMessage, newCommentNotificationTopic);
+            log.info(String.format(NEW_COMMENT_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+                    newCommentNotificationTopic));
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+        }
 
         KafkaMessage newCommentNodeMessage = NewNodeMessage.builder()
                 .identity(comment.getCommentIdentity())
