@@ -1,8 +1,7 @@
-package com.social.graph.service;
+package com.social.relationship.service;
 
 import com.social.kafka.messages.FriendshipMessage;
 import com.social.kafka.messages.NewUserMessage;
-import com.social.relationship.service.RelationListener;
 import com.social.relationship.service.contracts.ProfileService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,11 +1,10 @@
-package com.social.graph.service;
+package com.social.relationship.service;
 
 import com.social.relationship.model.Friend;
 import com.social.relationship.model.FriendSuggestion;
 import com.social.relationship.model.FriendshipRequest;
 import com.social.relationship.model.Profile;
 import com.social.relationship.repository.ProfileRepository;
-import com.social.relationship.service.ProfileServiceImpl;
 import com.social.relationship.service.feign.ImageClient;
 import feign.FeignException;
 import org.junit.jupiter.api.Test;
