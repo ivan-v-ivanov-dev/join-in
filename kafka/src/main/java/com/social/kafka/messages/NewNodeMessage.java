@@ -1,14 +1,12 @@
 package com.social.kafka.messages;
 
 import com.social.kafka.messages.contract.KafkaMessage;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
 @Builder
-public class NewNodeMessage implements KafkaMessage {
+public final class NewNodeMessage implements KafkaMessage {
 
-    private String identity;
+    private final String identity;
 }

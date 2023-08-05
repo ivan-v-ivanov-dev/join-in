@@ -1,18 +1,16 @@
 package com.social.kafka.messages;
 
 import com.social.kafka.messages.contract.KafkaMessage;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.util.Set;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
 @Builder
-public class DeleteNodesMessage implements KafkaMessage {
+public final class DeleteNodesMessage implements KafkaMessage {
 
-    private Set<String> commentsNodesIdentities;
+    private final Set<String> commentsNodesIdentities;
 
-    private String postIdentity;
+    private final String postIdentity;
 }

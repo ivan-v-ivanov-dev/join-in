@@ -1,21 +1,19 @@
 package com.social.kafka.messages;
 
 import com.social.kafka.messages.contract.KafkaMessage;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
 @Builder
-public class PostMessage implements KafkaMessage {
+public final class PostMessage implements KafkaMessage {
 
-    private String userIdentity;
+    private final String userIdentity;
 
-    private String userNames;
+    private final String userNames;
 
-    private String content;
+    private final String content;
 
-    private String postDate;
+    private final String postDate;
 
 }

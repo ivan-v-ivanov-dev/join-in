@@ -1,18 +1,16 @@
 package com.social.kafka.messages;
 
 import com.social.kafka.messages.contract.KafkaMessage;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
 @Builder
-public class EditPostMessage implements KafkaMessage {
+public final class EditPostMessage implements KafkaMessage {
 
-    private String postIdentity;
+    private final String postIdentity;
 
-    private String auhthorIdentity;
+    private final String auhthorIdentity;
 
-    private String newContent;
+    private final String newContent;
 }

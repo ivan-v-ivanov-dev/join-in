@@ -1,24 +1,22 @@
 package com.social.kafka.messages;
 
 import com.social.kafka.messages.contract.KafkaMessage;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.util.Set;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
 @Builder
-public class NotificationMessage implements KafkaMessage {
+public final class NotificationMessage implements KafkaMessage {
 
-    private Set<String> peopleToNotify;
+    private final Set<String> peopleToNotify;
 
-    private String authorIdentity;
+    private final String authorIdentity;
 
-    private String authorNames;
+    private final String authorNames;
 
-    private String postIdentity;
+    private final String postIdentity;
 
-    private String date;
+    private final String date;
 }
