@@ -28,11 +28,6 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile save(Profile profile) {
-        return profileRepository.save(profile);
-    }
-
-    @Override
     public String findProfileNames(String userIdentity) {
         String names = String.format(AUTHOR_NAME_TEMPLATE,
                 profileRepository.findProfileFirstName(userIdentity),
