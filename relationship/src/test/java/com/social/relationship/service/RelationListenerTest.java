@@ -2,6 +2,7 @@ package com.social.relationship.service;
 
 import com.social.kafka.messages.FriendshipMessage;
 import com.social.kafka.messages.NewUserMessage;
+import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.relationship.service.contracts.ProfileService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +23,7 @@ public class RelationListenerTest {
 
     @Test
     public void listener_should_callService() {
-        NewUserMessage newUserMessage = NewUserMessage.builder().identity(anyString()).build();
+        KafkaMessage newUserMessage = NewUserMessage.builder().identity(anyString()).build();
         relationListener.listener(newUserMessage);
 
         verify(profileService, times(1)).save(any());
@@ -30,7 +31,7 @@ public class RelationListenerTest {
 
     @Test
     public void acceptFriendshipListener_should_callService() {
-        FriendshipMessage friendshipMessage = createFriendshipMessage();
+        KafkaMessage friendshipMessage = createFriendshipMessage();
         relationListener.acceptFriendshipListener(friendshipMessage);
 
         verify(profileService, times(1)).acceptFriendship(any(), any());
@@ -38,7 +39,7 @@ public class RelationListenerTest {
 
     @Test
     public void declineFriendshipListener_should_callService() {
-        FriendshipMessage friendshipMessage = createFriendshipMessage();
+        KafkaMessage friendshipMessage = createFriendshipMessage();
         relationListener.declineFriendshipListener(friendshipMessage);
 
         verify(profileService, times(1)).declineFriendship(any(), any());
@@ -46,7 +47,7 @@ public class RelationListenerTest {
 
     @Test
     public void unfriendListener_should_callService() {
-        FriendshipMessage friendshipMessage = createFriendshipMessage();
+        KafkaMessage friendshipMessage = createFriendshipMessage();
         relationListener.unfriendListener(friendshipMessage);
 
         verify(profileService, times(1)).unfriend(any(), any());
