@@ -2,7 +2,6 @@ package com.social.notification.service;
 
 import com.social.kafka.messages.NewUserMessage;
 import com.social.kafka.messages.NotificationMessage;
-import com.social.notification.service.NotificationListener;
 import com.social.notification.service.contracts.NotificationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
