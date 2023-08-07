@@ -3,7 +3,6 @@ package com.social.reaction.service;
 import com.social.kafka.messages.NotificationMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.reaction.model.Post;
-import com.social.reaction.repository.CommentRepository;
 import com.social.reaction.repository.PostRepository;
 import com.social.reaction.repository.ProfileRepository;
 import com.social.reaction.service.contracts.KafkaMessageSender;
@@ -25,7 +24,6 @@ import static com.social.reaction.service.constants.LoggerConstants.*;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-    private final CommentRepository commentRepository;
     private final ProfileRepository profileRepository;
     private final PostClient postClient;
     private final KafkaMessageSender kafkaMessageSender;
@@ -34,7 +32,6 @@ public class PostServiceImpl implements PostService {
     private final String starPostNotificationTopic;
 
     public PostServiceImpl(PostRepository postRepository,
-                           CommentRepository commentRepository,
                            ProfileRepository profileRepository,
                            PostClient postClient,
                            KafkaMessageSender kafkaMessageSender,
@@ -42,7 +39,6 @@ public class PostServiceImpl implements PostService {
                            @Value("${spring.kafka.topic.name.dislike.post-notification}") String dislikePostNotificationTopic,
                            @Value("${spring.kafka.topic.name.star.post-notification}") String starPostNotificationTopic) {
         this.postRepository = postRepository;
-        this.commentRepository = commentRepository;
         this.profileRepository = profileRepository;
         this.postClient = postClient;
         this.kafkaMessageSender = kafkaMessageSender;
