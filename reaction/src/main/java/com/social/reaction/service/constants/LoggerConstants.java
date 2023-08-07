@@ -28,6 +28,9 @@ public class LoggerConstants {
     public static final String LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "LIKE post message send to Notification service (Kafka topic: %s)";
 
+    public static final String DISLIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
+            KAFKA_MESSAGING + "DISLIKE post message send to Notification service (Kafka topic: %s)";
+
     public static final String STAR_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE =
             KAFKA_MESSAGING + "STAR post message send to Notification service (Kafka topic: %s)";
 

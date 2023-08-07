@@ -86,7 +86,7 @@ public class PostServiceImpl implements PostService {
             Set<String> usersToNotify = collectUsersToNotify(postIdentity, postAuthorIdentity);
             sendKafkaMessageNotificationsToTheRelatedUsers(usersToNotify, postAuthorIdentity,
                     postAuthorNames, postIdentity, dislikePostNotificationTopic);
-            log.info(String.format(LIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
+            log.info(String.format(DISLIKE_POST_NOTIFICATIONS_MESSAGE_SEND_TO_NOTIFICATION_SERVICE_TEMPLATE,
                     dislikePostNotificationTopic));
         } catch (FeignException feignException) {
             log.error(feignException.getMessage());
