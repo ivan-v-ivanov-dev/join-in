@@ -3,7 +3,6 @@ package com.social.post.service;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.security.MessageDigest;
@@ -11,21 +10,15 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 public class IdentityGeneratorImplTest {
 
-    @Mock
-    MessageDigest messageDigest;
     @InjectMocks
     IdentityGeneratorImpl identityGenerator;
 
     @Test
-    public void testGenerate() throws NoSuchAlgorithmException {
-        lenient().when(messageDigest.digest(any())).thenReturn(new byte[]{1, 2, 3});
-
+    public void generate_should_calculateChecksum() throws NoSuchAlgorithmException {
         String userIdentity = "userIdentity";
         String content = "content";
         String createDate = LocalDate.now().toString();
