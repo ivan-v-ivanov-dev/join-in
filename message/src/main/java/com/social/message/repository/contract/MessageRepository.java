@@ -6,4 +6,6 @@ public interface MessageRepository {
     Boolean isFriendOnline(String identity);
 
     User findFriend (String identity);
+
+    void userIsOnline(String identity);
 }

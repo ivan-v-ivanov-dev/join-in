@@ -5,6 +5,7 @@ import com.social.message.repository.contract.MessageRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -26,5 +27,12 @@ public class MessageRepositoryImpl implements MessageRepository {
     public User findFriend(String identity) {
         Query query = new Query(Criteria.where("identity").is(identity));
         return mongoTemplate.findOne(query, User.class, "online_users");
+    }
+
+    @Override
+    public void userIsOnline(String identity) {
+        Query query = new Query(Criteria.where("identity").is(identity));
+        Update update = new Update().set("online", true);
+        mongoTemplate.updateFirst(query, update, User.class, "online_users");
     }
 }

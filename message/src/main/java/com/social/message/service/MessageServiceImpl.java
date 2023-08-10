@@ -15,6 +15,7 @@ import java.util.Set;
 
 import static com.social.message.service.constants.ExceptionConstants.RELATIONSHIP_OR_IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
 import static com.social.message.service.constants.LoggerConstants.RETRIEVE_ONLINE_FRIENDS_FOR_USER_TEMPLATE;
+import static com.social.message.service.constants.LoggerConstants.SET_USER_ONLINE_TEMPLATE;
 
 @Service
 @Slf4j
@@ -50,5 +51,11 @@ public class MessageServiceImpl implements MessageService {
             log.error(feignException.getMessage());
             throw new ResourceAccessException(RELATIONSHIP_OR_IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
         }
+    }
+
+    @Override
+    public void userIsOnline(String identity) {
+        messageRepository.userIsOnline(identity);
+        log.info(String.format(SET_USER_ONLINE_TEMPLATE, identity));
     }
 }
