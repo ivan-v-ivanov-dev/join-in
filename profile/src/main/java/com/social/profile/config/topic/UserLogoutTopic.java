@@ -15,7 +15,7 @@ import static com.social.profile.config.ConfigConstants.KAFKA_TOPIC_FOR_LOGOUT_U
 @Slf4j
 public class UserLogoutTopic {
 
-    @Value("${spring.kafka.topic.user.logout}")
+    @Value("${spring.kafka.topic.name.user.logout}")
     private String topicName;
     @Value("${spring.kafka.partitions}")
     private String partitions;
@@ -23,14 +23,14 @@ public class UserLogoutTopic {
     private String replicas;
 
     @Bean
-    public NewTopic userLogoutTopicForAuthenticationService() {
-        NewTopic logoutUserTopicForAuthenticationService = TopicBuilder
+    public NewTopic userLogoutTopicForMessageService() {
+        NewTopic logoutUserTopicForMessageService = TopicBuilder
                 .name(topicName)
                 .partitions(Integer.parseInt(partitions))
                 .replicas(Integer.parseInt(replicas))
                 .build();
         log.info(String.format(KAFKA_TOPIC_FOR_LOGOUT_USER_TEMPLATE, topicName));
 
-        return logoutUserTopicForAuthenticationService;
+        return logoutUserTopicForMessageService;
     }
 }
