@@ -26,6 +26,10 @@ spring:
       value:
         type:
           packages: com.social.kafka.messages.contract.KafkaMessage
+    topic:
+      name:
+        user:
+          login: user-login-topic
 
 #Exclude Kafka logging
 logging:
