@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @Controller
 public class ProfileController {
 
-    private final LoginService loginService;
+    private final AuthenticationService authenticationService;
     private final RegisterService registerService;
     private final ProfileService profileService;
     private final PostService postService;
@@ -26,7 +26,7 @@ public class ProfileController {
     private final ReactionService reactionService;
     private final NotificationService notificationService;
 
-    public ProfileController(LoginService loginService,
+    public ProfileController(AuthenticationService authenticationService,
                              RegisterService registerService,
                              ProfileService profileService,
                              PostService postService,
@@ -35,7 +35,7 @@ public class ProfileController {
                              RelationshipService relationshipService,
                              ReactionService reactionService,
                              NotificationService notificationService) {
-        this.loginService = loginService;
+        this.authenticationService = authenticationService;
         this.registerService = registerService;
         this.profileService = profileService;
         this.postService = postService;
@@ -56,7 +56,7 @@ public class ProfileController {
                                @RequestParam("password") String password,
                                Model model) {
         try {
-            String profileIndentity = loginService.login(email, password);
+            String profileIndentity = authenticationService.login(email, password);
             return "redirect:/profile?identity=" + profileIndentity;
         } catch (IllegalArgumentException | ResourceAccessException exception) {
             model.addAttribute("error", exception.getMessage());
@@ -243,7 +243,8 @@ public class ProfileController {
     }
 
     @GetMapping("/signout")
-    public String signOut() {
+    public String signOut(@RequestParam("userIdentity") String userIdentity) {
+        authenticationService.logout(userIdentity);
         return "redirect:/";
     }
 

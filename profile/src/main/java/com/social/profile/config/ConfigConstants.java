@@ -61,6 +61,9 @@ public class ConfigConstants {
     public static final String KAFKA_TOPIC_FOR_DISLIKE_COMMENT_TEMPLATE =
             KAFKA_TOPIC_NEW_TOPIC_FOR + "dislike comment" + CREATED_TOPIC_NAME;
 
+    public static final String KAFKA_TOPIC_FOR_LOGOUT_USER_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "logout user" + CREATED_TOPIC_NAME;
+
     private ConfigConstants() {
     }
 }

@@ -51,6 +51,8 @@ spring:
         decline:
           friendship: decline-friendship-topic
         unfriend: unfriend-topic
+        user:
+          logout: user-logout-topic
     partitions: 3
     replicas: 1
     group:
