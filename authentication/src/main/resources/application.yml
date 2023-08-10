@@ -33,6 +33,8 @@ spring:
           user: registered-user-topic
         new:
           user: new-user-topic
+        user:
+          login: user-login-topic
     group:
       id: group-id
     producer:
