@@ -3,7 +3,9 @@ package com.social.authentication.service;
 import com.social.authentication.model.User;
 import com.social.authentication.repository.LogRepository;
 import com.social.authentication.repository.UserRepository;
+import com.social.authentication.service.contract.KafkaMessageSender;
 import com.social.authentication.service.contract.PasswordEncoder;
+import com.social.kafka.messages.UserLogin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class LoginServiceImplTest {
@@ -24,6 +26,8 @@ public class LoginServiceImplTest {
     UserRepository userRepository;
     @Mock
     PasswordEncoder passwordEncoder;
+    @Mock
+    KafkaMessageSender kafkaMessageSender;
     @InjectMocks
     LoginServiceImpl loginService;
 
@@ -46,6 +50,18 @@ public class LoginServiceImplTest {
         when(passwordEncoder.areEqual(password, loggedUser.getPassword())).thenReturn(true);
 
         assertEquals(identity, loginService.login(email, password));
+    }
+
+    @Test
+    public void login_should_sedKafkaMessage_when_credentialsAreRight() {
+        User loggedUser = createUser(identity, password);
+
+        when(userRepository.findByEmail(email)).thenReturn(loggedUser);
+        when(passwordEncoder.areEqual(password, loggedUser.getPassword())).thenReturn(true);
+
+        loginService.login(email, password);
+
+        verify(kafkaMessageSender, times(1)).send(any(UserLogin.class), eq(null));
     }
 
     @Test

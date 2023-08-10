@@ -26,10 +26,11 @@ public class RegisteredUserListenerTest {
 
     @Test
     public void listener_shouldCallService() {
-        RegisteredUserMessage registeredUserMessage = new RegisteredUserMessage();
-        registeredUserMessage.setIdentity("identity");
-        registeredUserMessage.setEmail("mail@mail.com");
-        registeredUserMessage.setPassword("password");
+        RegisteredUserMessage registeredUserMessage = RegisteredUserMessage.builder()
+                .identity("identity")
+                .email("mail@mail.com")
+                .password("password")
+                .build();
         when(passwordEncoder.encode(registeredUserMessage.getPassword())).thenReturn(registeredUserMessage.getPassword());
 
         registeredUserListener.listener(registeredUserMessage);
