@@ -10,5 +10,7 @@ public interface MessageService {
 
     void userIsOnline(String identity);
 
+    void userIsOffline(String identity);
+
     Set<Chat> findUserChatHistory(String identity);
 }

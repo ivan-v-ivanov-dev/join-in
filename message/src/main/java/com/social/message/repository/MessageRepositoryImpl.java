@@ -40,6 +40,13 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
+    public void userIsOffline(String identity) {
+        Query query = new Query(Criteria.where("identity").is(identity));
+        Update update = new Update().set("online", false);
+        mongoTemplate.updateFirst(query, update, User.class, "online_users");
+    }
+
+    @Override
     public List<String> findUserChatIdentities(String identity) {
         Query query = new Query(Criteria.where("identity").is(identity));
         return mongoTemplate.findDistinct(query, "chatIdentities", "chat_identities", String.class);

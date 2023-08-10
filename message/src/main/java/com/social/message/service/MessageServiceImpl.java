@@ -20,8 +20,7 @@ import java.util.Set;
 
 import static com.social.message.service.constants.ExceptionConstants.IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
 import static com.social.message.service.constants.ExceptionConstants.RELATIONSHIP_OR_IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
-import static com.social.message.service.constants.LoggerConstants.RETRIEVE_ONLINE_FRIENDS_FOR_USER_TEMPLATE;
-import static com.social.message.service.constants.LoggerConstants.SET_USER_ONLINE_TEMPLATE;
+import static com.social.message.service.constants.LoggerConstants.*;
 import static com.social.message.service.constants.ServiceConstants.*;
 
 @Service
@@ -64,6 +63,12 @@ public class MessageServiceImpl implements MessageService {
     public void userIsOnline(String identity) {
         messageRepository.userIsOnline(identity);
         log.info(String.format(SET_USER_ONLINE_TEMPLATE, identity));
+    }
+
+    @Override
+    public void userIsOffline(String identity) {
+        messageRepository.userIsOffline(identity);
+        log.info(String.format(SET_USER_OFFLINE_TEMPLATE, identity));
     }
 
     @Override

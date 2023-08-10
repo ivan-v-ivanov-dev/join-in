@@ -30,6 +30,7 @@ spring:
       name:
         user:
           login: user-login-topic
+          logout: user-logout-topic
 
 #Exclude Kafka logging
 logging:

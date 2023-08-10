@@ -12,6 +12,8 @@ public interface MessageRepository {
 
     void userIsOnline(String identity);
 
+    void userIsOffline(String identity);
+
     List<String> findUserChatIdentities(String identity);
 
     List<ChatMessage> findChatMessages(String collection);
