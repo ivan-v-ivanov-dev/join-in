@@ -130,3 +130,13 @@ notification:
     url: http://localhost:8086
 user:
   notifications: /user/notifications
+
+#Feign Message service
+message:
+  service:
+    feign:
+      client:
+        name: Message-Service
+    url: http://localhost:8087
+friends:
+  online: /friends/online
