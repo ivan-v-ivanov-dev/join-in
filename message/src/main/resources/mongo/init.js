@@ -6,7 +6,7 @@ use ("storage");
 db.createCollection("online_users");
 console.log('*** Collection created ***')
 
-db.online_users.insertMany{
+db.online_users.insertMany (
     [
         {
             identity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
@@ -56,5 +56,6 @@ db.online_users.insertMany{
            identity: "cda07e665379ec023b0577605bfd6f91770fe997d72b4e7d3b90e17c29a1ad9e",
            online: true
         }
-    ]
-}
+    ]);
+
+console.log('*** Data Imported ***')
