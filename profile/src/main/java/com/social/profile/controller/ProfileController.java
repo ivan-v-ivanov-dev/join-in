@@ -240,6 +240,7 @@ public class ProfileController {
             model.addAttribute("notifications", notificationService.findUserNotifications(userIdentity));
             model.addAttribute("friendSuggestions", relationshipService.findFriendSuggestions(userIdentity));
             model.addAttribute("posts", postService.findFeedPosts(userIdentity));
+            model.addAttribute("onlineFriends", messageService.onlineFriends(userIdentity));
             return "feed";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
