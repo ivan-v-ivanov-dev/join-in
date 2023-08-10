@@ -58,6 +58,7 @@ public class LoginServiceImpl implements LoginService {
 
         KafkaMessage userLogin = UserLogin.builder().identity(loggedUser.getIdentity()).build();
         kafkaMessageSender.send(userLogin, userLoginTopic);
+        log.info(String.format(USER_LOGIN_MESSAGE_SEND_TO_MESSAGE_SERVICE_TEMPLATE, userLoginTopic, loggedUser.getIdentity()));
 
         return loggedUser.getIdentity();
     }
