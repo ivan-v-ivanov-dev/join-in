@@ -400,6 +400,22 @@
                              </div>
                           </div>
                           <div class="card-body p-0 ">
+
+                             <div class="d-flex align-items-center iq-sub-card border-0">
+                             <span class="material-symbols-outlined">
+                                   edit_note
+                                </span>
+                                <div class="ms-3">
+                                   <form id="viewProfileForm" method="get" th:action="@{/profile}">
+                                      <input th:name="identity" th:value="${profileIdentity}"
+                                             type="hidden"/>
+                                   </form>
+                                   <a class="mb-0 h6" onclick=document.getElementById("viewProfileForm").submit()>
+                                      View Profile
+                                   </a>
+                                </div>
+                             </div>
+
                              <div class="d-flex align-items-center iq-sub-card border-0">
                                 <span class="material-symbols-outlined">
                                    edit_note
