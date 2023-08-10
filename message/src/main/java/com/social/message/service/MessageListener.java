@@ -41,7 +41,7 @@ public class MessageListener {
     public void userLogoutListener(KafkaMessage kafkaMessage) {
         UserLogout userLogout = (UserLogout) kafkaMessage;
         log.info(String.format(USER_LOGOUT_MESSAGE_RECEIVED_FROM_PROFILE_SERVICE_TEMPLATE,
-                userLogout, userLogout.getIdentity()));
+                userLoginTopic, userLogout.getIdentity()));
 
         messageService.userIsOffline(userLogout.getIdentity());
     }
