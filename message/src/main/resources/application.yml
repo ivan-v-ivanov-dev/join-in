@@ -31,6 +31,8 @@ spring:
         user:
           login: user-login-topic
           logout: user-logout-topic
+    group:
+      id: group-id
 
 #Exclude Kafka logging
 logging:
