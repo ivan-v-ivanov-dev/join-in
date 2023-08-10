@@ -25,6 +25,7 @@ public class ProfileController {
     private final RelationshipService relationshipService;
     private final ReactionService reactionService;
     private final NotificationService notificationService;
+    private final MessageService messageService;
 
     public ProfileController(AuthenticationService authenticationService,
                              RegisterService registerService,
@@ -34,7 +35,8 @@ public class ProfileController {
                              ImageService imageService,
                              RelationshipService relationshipService,
                              ReactionService reactionService,
-                             NotificationService notificationService) {
+                             NotificationService notificationService,
+                             MessageService messageService) {
         this.authenticationService = authenticationService;
         this.registerService = registerService;
         this.profileService = profileService;
@@ -44,6 +46,7 @@ public class ProfileController {
         this.relationshipService = relationshipService;
         this.reactionService = reactionService;
         this.notificationService = notificationService;
+        this.messageService = messageService;
     }
 
     @GetMapping("/")
@@ -94,6 +97,7 @@ public class ProfileController {
             model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
             model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(identity));
             model.addAttribute("notifications", notificationService.findUserNotifications(identity));
+            model.addAttribute("onlineFriends", messageService.onlineFriends(identity));
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());

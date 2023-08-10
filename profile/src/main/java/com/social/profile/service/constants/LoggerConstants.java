@@ -88,6 +88,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_FRIENDSHIP_REQUEST_COUNT_FROM_RELATION_SERVICE_TEMPLATE =
             "Retrieve friendship request count from Relation service (Profile identity: %s)";
 
+    public static final String RETRIEVE_ONLINE_FRIENDS_FROM_MESSAGE_SERVICE_TEMPLATE =
+            "Retrieve online friends from Message service (Profile identity: %s)";
+
     public static final String RETRIEVE_USER_NOTIFICATIONS_FROM_NOTIFICATION_SERVICE_TEMPLATE =
             "Retrieve user notifications from Notification service (Profile identity: %s)";
 

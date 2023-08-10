@@ -10,6 +10,8 @@ public class ExceptionConstants {
 
     private static final String RELATIONSHIP_SERVICE = "Relationship Service :: ";
 
+    private static final String MESSAGE_SERVICE = "Message Service :: ";
+
     private static final String RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN =
             "Resource not available or service is down";
 
@@ -24,6 +26,9 @@ public class ExceptionConstants {
 
     public static final String RELATIONSHIP_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN =
             RELATIONSHIP_SERVICE + RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
+
+    public static final String MESSAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN =
+            MESSAGE_SERVICE + RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
 
 
 
