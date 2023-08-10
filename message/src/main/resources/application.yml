@@ -31,3 +31,15 @@ spring:
 logging:
   level:
     org.apache: OFF
+
+#Feign Relationship service
+relationship:
+  service:
+    url: http://localhost:8083
+    feign:
+      client:
+        name: Relationship-Service
+  find:
+    profile:
+      friends:
+        identities: /profile/friends/identities
