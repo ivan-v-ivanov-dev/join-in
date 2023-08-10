@@ -43,3 +43,13 @@ relationship:
     profile:
       friends:
         identities: /profile/friends/identities
+
+#Feign Image service
+image:
+  service:
+    feign:
+      client:
+        name: Image-Service
+    url: http://localhost:8085
+profile:
+  image: /profile-image
