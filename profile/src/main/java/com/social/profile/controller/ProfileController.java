@@ -221,6 +221,7 @@ public class ProfileController {
             model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(userIdentity));
             model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(userIdentity));
             model.addAttribute("notifications", notificationService.findUserNotifications(userIdentity));
+            model.addAttribute("onlineFriends", messageService.onlineFriends(userIdentity));
             return "notifications";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
