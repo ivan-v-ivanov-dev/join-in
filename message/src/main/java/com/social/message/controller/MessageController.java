@@ -1,5 +1,6 @@
 package com.social.message.controller;
 
+import com.social.message.model.Chat;
 import com.social.message.model.User;
 import com.social.message.service.contract.MessageService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,16 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @PostMapping("/user/friends/online")
+    @PostMapping("/friends/online")
     public Set<User> findUserOnlineFriends(@RequestParam("identity") String identity) {
         return messageService.findUserOnlineFriends(identity);
     }
+
+    @PostMapping("/chat/history")
+    public Set<Chat> findUserChatHistory(@RequestParam("identity") String identity) {
+        return messageService.findUserChatHistory(identity);
+    }
+
 
     @GetMapping("/health")
     public String health() {
