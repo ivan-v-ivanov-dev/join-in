@@ -1,6 +1,7 @@
 package com.social.message.service;
 
 import com.social.message.model.DirectChat;
+import com.social.message.model.DirectChatMessage;
 import com.social.message.model.User;
 import com.social.message.repository.contract.MessageRepository;
 import com.social.message.service.contract.MessageService;
@@ -69,9 +70,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Set<DirectChat> findUserDirectChatHistory(String identity) {
+    public List<DirectChat> findUserDirectChatHistory(String identity) {
         try {
-            Set<DirectChat> userDirectChatHistory = new LinkedHashSet<>();
+            List<DirectChat> userDirectChatHistory = new ArrayList<>();
             List<String> userChatIdentities = messageRepository.findUserDirectChatIdentities(identity);
             userChatIdentities.forEach(chatIdentity -> {
                 DirectChat directChat = DirectChat.builder()
@@ -84,6 +85,7 @@ public class MessageServiceImpl implements MessageService {
                     chatMessage.setReceiverProfileImage(imageClient.findProfileImage(chatMessage.getReceiverIdentity()));
                     chatMessage.setPostedAgo(calculatePostedAgo(chatMessage.getDate()));
                 });
+                directChat.getDirectChatMessages().sort(Comparator.comparing(DirectChatMessage::getDate));
                 userDirectChatHistory.add(directChat);
             });
             return userDirectChatHistory;
@@ -113,7 +115,7 @@ public class MessageServiceImpl implements MessageService {
             int months = period.getMonths();
             return String.format(SEVERAL_MONTHS_AGO_TEMPLATE, months);
         } else {
-            if (now.isBefore(postDate.plusDays(2))) {
+            if (now.isBefore(postDate.plusDays(1))) {
                 return ONE_DAY_AGO;
             }
 

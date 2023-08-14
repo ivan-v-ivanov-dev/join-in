@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -25,7 +26,7 @@ public class MessageController {
     }
 
     @PostMapping("/direct-chat/history")
-    public Set<DirectChat> findUserDirectChatHistory(@RequestParam("identity") String identity) {
+    public List<DirectChat> findUserDirectChatHistory(@RequestParam("identity") String identity) {
         return messageService.findUserDirectChatHistory(identity);
     }
 
