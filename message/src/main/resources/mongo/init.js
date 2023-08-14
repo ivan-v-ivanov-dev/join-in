@@ -92,13 +92,25 @@ db.c_01f34eec06beb9d15b9d4272b72b91d80dec0abf608e53e8ba91417d559b23b84ced411d9c1
                     senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
                     receiverIdentity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551",
                     content: "Hey, how are you?",
-                    date: "2023-08-13"
+                    date: "2023-05-13"
                 },
                 {
-                   senderIdentity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551",
-                   receiverIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
-                   content: "I am fine.",
-                   date: "2023-08-14"
+                    senderIdentity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551",
+                    receiverIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    content: "I am fine.",
+                    date: "2023-07-13"
+                },
+                {
+                    senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    receiverIdentity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551",
+                    content: "Do you want to go out for a beer?",
+                    date: "2023-08-10"
+                },
+                {
+                    senderIdentity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551",
+                    receiverIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    content: "Super, let's meet at 18:00.",
+                    date: "2023-08-13"
                 }
             ]
         },
@@ -119,13 +131,31 @@ db.c_a3db6886e9585fca38e22c4e4988e7d08173ffb5a86a9206fd5c09061dae4cf35ea9fc1db20
                     senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
                     receiverIdentity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
                     content: "I want to learn React.",
-                    date: "2023-08-13"
+                    date: "2023-05-12"
                 },
                 {
-                   senderIdentity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
-                   receiverIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
-                   content: "This is great! Learn it.",
-                   date: "2023-08-14"
+                    senderIdentity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
+                    receiverIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    content: "This is great!",
+                    date: "2023-06-12"
+                },
+                {
+                    senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    receiverIdentity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
+                    content: "Yes, it is. I've started already.",
+                    date: "2023-07-12"
+                },
+                {
+                    senderIdentity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
+                    receiverIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    content: "Great! You can take a look at some tutorials at udemy.com",
+                    date: "2023-07-13"
+                },
+                {
+                    senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    receiverIdentity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
+                    content: "Yes, I found one already.",
+                    date: "2023-08-13"
                 }
             ]
         },
@@ -146,13 +176,25 @@ db.c_104765ce63f6e95212b0638559d7e75811b68ed59ff061352fb613ee701d661fd5427860cf5
                     senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
                     receiverIdentity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
                     content: "Shall we talk about microservice architecture?",
-                    date: "2023-08-13"
+                    date: "2023-05-13"
                 },
                 {
-                   senderIdentity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
-                   receiverIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
-                   content: "Yea, sure. What do you want to know?",
-                   date: "2023-08-14"
+                    senderIdentity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
+                    receiverIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    content: "Yea, sure. What do you want to know?",
+                    date: "2023-06-14"
+                },
+                {
+                    senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    receiverIdentity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
+                    content: "What do you think about my Join In repository?",
+                    date: "2023-07-13"
+                },
+                {
+                    senderIdentity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
+                    receiverIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    content: "I think that the project is great!",
+                    date: "2023-08-14"
                 }
             ]
         },
