@@ -58,10 +58,10 @@ db.online_users.insertMany (
         }
     ]);
 
-db.createCollection("chat_identities");
+db.createCollection("direct_chat_identities");
 console.log('*** Collection created ***')
 
-db.chat_identities.insertMany (
+db.direct_chat_identities.insertMany (
     [
         {
             userIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
@@ -73,6 +73,20 @@ db.chat_identities.insertMany (
                 "a3db6886e9585fca38e22c4e4988e7d08173ffb5a86a9206fd5c09061dae4cf35ea9fc1db20f7dfe1e42ee6d3cb6736ce680cb3342bc567f5052a9b742621ea0",
                 // Viktoriya
                 "104765ce63f6e95212b0638559d7e75811b68ed59ff061352fb613ee701d661fd5427860cf510e8aeee2579e90890f3904b9e53e1262a50e9a161dacdf176caa",
+            ]
+        },
+
+    ]);
+
+db.createCollection("group_chat_identities");
+console.log('*** Collection created ***')
+
+db.group_chat_identities.insertMany (
+    [
+        {
+            userIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+            chatIdentities:
+            [
                 // Group chat
                 "f234338ff7d069dea0e9fa1f7d172426d25c1c44524b30be61d288e5b0562e7bcfdf7d7e17d7b597c114066b58c8041f03c25c2deabe2fe33441fd3567c7d829"
             ]
