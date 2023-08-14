@@ -248,6 +248,21 @@ public class ProfileController {
         }
     }
 
+    @PostMapping("/chat")
+    public String chat(@RequestParam("userIdentity") String userIdentity, Model model) {
+        try {
+            model.addAttribute("profileIdentity", userIdentity);
+            model.addAttribute("profileImage", imageService.findProfileImage(userIdentity));
+            model.addAttribute("profileNames", profileService.findProfileNames(userIdentity));
+            model.addAttribute("onlineFriends", messageService.onlineFriends(userIdentity));
+            model.addAttribute("directChatHistory", messageService.findUserDirectChatHistory(userIdentity));
+            return "chat";
+        } catch (ResourceAccessException resourceAccessException) {
+            model.addAttribute("error", resourceAccessException.getMessage());
+            return "error";
+        }
+    }
+
     @GetMapping("/signout")
     public String signOut(@RequestParam("userIdentity") String userIdentity) {
         authenticationService.logout(userIdentity);
