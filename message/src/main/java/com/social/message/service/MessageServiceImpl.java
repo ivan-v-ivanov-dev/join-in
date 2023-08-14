@@ -1,6 +1,6 @@
 package com.social.message.service;
 
-import com.social.message.model.Chat;
+import com.social.message.model.DirectChat;
 import com.social.message.model.User;
 import com.social.message.repository.contract.MessageRepository;
 import com.social.message.service.contract.MessageService;
@@ -69,24 +69,24 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public Set<Chat> findUserChatHistory(String identity) {
+    public Set<DirectChat> findUserDirectChatHistory(String identity) {
         try {
-            Set<Chat> userChatHistory = new LinkedHashSet<>();
-            List<String> userChatIdentities = messageRepository.findUserChatIdentities(identity);
+            Set<DirectChat> userDirectChatHistory = new LinkedHashSet<>();
+            List<String> userChatIdentities = messageRepository.findUserDirectChatIdentities(identity);
             userChatIdentities.forEach(chatIdentity -> {
-                Chat chat = Chat.builder()
+                DirectChat directChat = DirectChat.builder()
                         .chatIdentity(chatIdentity)
-                        .chatMessages(new ArrayList<>())
+                        .directChatMessages(new ArrayList<>())
                         .build();
-                chat.setChatMessages(messageRepository.findChatMessages(String.format(COLLECTION_TEMPLATE, chatIdentity)));
-                chat.getChatMessages().forEach(chatMessage -> {
+                directChat.setDirectChatMessages(messageRepository.findDirectChatMessages(String.format(COLLECTION_TEMPLATE, chatIdentity)));
+                directChat.getDirectChatMessages().forEach(chatMessage -> {
                     chatMessage.setSenderProfileImage(imageClient.findProfileImage(chatMessage.getSenderIdentity()));
                     chatMessage.setReceiverProfileImage(imageClient.findProfileImage(chatMessage.getReceiverIdentity()));
                     chatMessage.setPostedAgo(calculatePostedAgo(chatMessage.getDate()));
                 });
-                userChatHistory.add(chat);
+                userDirectChatHistory.add(directChat);
             });
-            return userChatHistory;
+            return userDirectChatHistory;
         } catch (FeignException feignException) {
             log.error(feignException.getMessage());
             throw new ResourceAccessException(IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);

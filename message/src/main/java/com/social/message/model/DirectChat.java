@@ -9,9 +9,9 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-public class Chat {
+public class DirectChat {
 
     private String chatIdentity;
 
-    private List<ChatMessage> chatMessages;
+    private List<DirectChatMessage> directChatMessages;
 }

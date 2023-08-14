@@ -1,6 +1,6 @@
 package com.social.message.controller;
 
-import com.social.message.model.Chat;
+import com.social.message.model.DirectChat;
 import com.social.message.model.User;
 import com.social.message.service.contract.MessageService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +24,10 @@ public class MessageController {
         return messageService.findUserOnlineFriends(identity);
     }
 
-    @PostMapping("/chat/history")
-    public Set<Chat> findUserChatHistory(@RequestParam("identity") String identity) {
-        return messageService.findUserChatHistory(identity);
+    @PostMapping("/direct-chat/history")
+    public Set<DirectChat> findUserDirectChatHistory(@RequestParam("identity") String identity) {
+        return messageService.findUserDirectChatHistory(identity);
     }
-
 
     @GetMapping("/health")
     public String health() {
