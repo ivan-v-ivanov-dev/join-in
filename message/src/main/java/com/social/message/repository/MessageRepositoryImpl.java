@@ -3,6 +3,7 @@ package com.social.message.repository;
 import com.social.message.model.ChatMessage;
 import com.social.message.model.User;
 import com.social.message.repository.contract.MessageRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -49,11 +50,14 @@ public class MessageRepositoryImpl implements MessageRepository {
     @Override
     public List<String> findUserChatIdentities(String identity) {
         Query query = new Query(Criteria.where("identity").is(identity));
+        query.with(Sort.by(Sort.Direction.ASC, "identity"));
         return mongoTemplate.findDistinct(query, "chatIdentities", "chat_identities", String.class);
     }
 
     @Override
     public List<ChatMessage> findChatMessages(String collection) {
-        return mongoTemplate.find(new Query(), ChatMessage.class, collection);
+        Query query = new Query();
+        query.with(Sort.by(Sort.Direction.ASC, "date"));
+        return mongoTemplate.find(query, ChatMessage.class, collection);
     }
 }

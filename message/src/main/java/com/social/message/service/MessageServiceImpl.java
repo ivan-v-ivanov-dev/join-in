@@ -13,10 +13,7 @@ import org.springframework.web.client.ResourceAccessException;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.social.message.service.constants.ExceptionConstants.IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
 import static com.social.message.service.constants.ExceptionConstants.RELATIONSHIP_OR_IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
@@ -74,7 +71,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Set<Chat> findUserChatHistory(String identity) {
         try {
-            Set<Chat> userChatHistory = new HashSet<>();
+            Set<Chat> userChatHistory = new LinkedHashSet<>();
             List<String> userChatIdentities = messageRepository.findUserChatIdentities(identity);
             userChatIdentities.forEach(chatIdentity -> {
                 Chat chat = Chat.builder()
