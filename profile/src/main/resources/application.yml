@@ -140,3 +140,6 @@ message:
     url: http://localhost:8087
 friends:
   online: /friends/online
+direct:
+  chat:
+    history: /direct-chat/history
