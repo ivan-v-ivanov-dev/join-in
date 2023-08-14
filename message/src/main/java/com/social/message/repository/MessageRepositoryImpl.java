@@ -49,7 +49,7 @@ public class MessageRepositoryImpl implements MessageRepository {
 
     @Override
     public List<String> findUserDirectChatIdentities(String identity) {
-        Query query = new Query(Criteria.where("identity").is(identity));
+        Query query = new Query(Criteria.where("userIdentity").is(identity));
         query.with(Sort.by(Sort.Direction.ASC, "identity"));
         return mongoTemplate.findDistinct(query, "chatIdentities", "direct_chat_identities", String.class);
     }
@@ -58,6 +58,6 @@ public class MessageRepositoryImpl implements MessageRepository {
     public List<DirectChatMessage> findDirectChatMessages(String collection) {
         Query query = new Query();
         query.with(Sort.by(Sort.Direction.ASC, "date"));
-        return mongoTemplate.find(query, DirectChatMessage.class, collection);
+        return mongoTemplate.findDistinct(query, "directChatMessages", collection, DirectChatMessage.class);
     }
 }
