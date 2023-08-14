@@ -1,8 +1,9 @@
 package com.social.profile.service;
 
 import com.social.kafka.messages.UserLogout;
-import com.social.profile.service.contracts.KafkaMessageSender;
+import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.profile.service.contracts.AuthenticationService;
+import com.social.profile.service.contracts.KafkaMessageSender;
 import com.social.profile.service.feign.LoginClient;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
 import static com.social.profile.service.constants.ExceptionConstants.AUTHENTICATION_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
-import static com.social.profile.service.constants.LoggerConstants.*;
+import static com.social.profile.service.constants.LoggerConstants.USER_LOGGED_TEMPLATE;
+import static com.social.profile.service.constants.LoggerConstants.USER_LOGOUT_MESSAGE_CREATED_AND_SEND_TO_MESSAGE_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE;
 
 @Service
 @Slf4j
@@ -19,7 +21,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final LoginClient loginClient;
     private final KafkaMessageSender kafkaMessageSender;
-    private String userLogoutTopic;
+    private final String userLogoutTopic;
 
     public AuthenticationServiceImpl(LoginClient loginClient,
                                      KafkaMessageSender kafkaMessageSender,
@@ -43,7 +45,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void logout(String userIdentity) {
-        UserLogout userLogout = UserLogout.builder().identity(userIdentity).build();
+        KafkaMessage userLogout = UserLogout.builder().identity(userIdentity).build();
         kafkaMessageSender.send(userLogout, userLogoutTopic);
         log.info(String.format(USER_LOGOUT_MESSAGE_CREATED_AND_SEND_TO_MESSAGE_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE,
                 userLogoutTopic, userIdentity));
