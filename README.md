@@ -32,7 +32,7 @@ password: ```petur@petur.com```
 **Note**   
 In order to start the project you need to have Docker Desktop installed on your machine. Also, the Flyway container in Authentication service starts, creates the tables and imports the data into the MySQL container then shuts down, which is normal behavior. Despite the fact that Flyway depends on MySQL, keep an eye on it and restart it manually if needed.
 
-![image](https://github.com/ivanovbiol/join-in/assets/51414119/c138f481-c8cb-4455-9aad-1f61ebce17c9)
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/3941eab7-cdb1-498d-8322-6bea6b0287c4)
 
 # 3. Microvervice communication
 
@@ -216,6 +216,15 @@ Runs on **http://localhost:8086/**. Stores the notificatins for each user. Each 
  - **Mongo express** as official docker image running on port **9094** as database UI tool
  - **MongoTemplate** used as persistent strategy for the MongoDB persistence
 
+## 4.9. Message service
+
+Runs on **http://localhost:8087/**. Stores the currently online users (**online_users** collection) and the chat messages between users. When the user logs in, Kafka message is sent from Authentication service to Message service to set the user online and when the user logs out Kafka message is sent from Profile service to Message service to set the user offline. Each chat has its own chat identity and all chat messages between participants (despite group chat with multiple users or direct chat between only two users) are stored in that collection (see **resources/mongo/init.js**). The chat identities themselves are stored in **direct_chat_identities** collection for the direct chats and **group_chat_identities** collection for the group chats.
+
+ - **Spring Boot 2.5** and and **Java 17** used
+ - **Maven** used as a software project management and comprehension tool
+ - **MongoDB** as official docker image runnig on port **27021** (see **message/docker-compose.yml**). Collection and sample data are imported on start up via docker volume and **.js** script (see **resources/mongo/init.js**)
+ - **Mongo express** as official docker image running on port **9095** as database UI tool
+ - **MongoTemplate** used as persistent strategy for the MongoDB persistence    
 
 # 5. Pages layouts  
 
@@ -248,6 +257,20 @@ Runs on **http://localhost:8086/**. Stores the notificatins for each user. Each 
 ## 5.7. Feed
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/2900209f-0f6d-4adb-bad3-c986b6779a74)
+
+## 5.8. Online users (examples with profile and feed pages)
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/78e3620e-bf82-452c-82ea-4ba5ad93752c)
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/f16b407e-4832-4996-9c77-e9e6ff945de5)
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/4a5f6993-0c82-446d-9d16-65870f53e460)
+
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/c15ab47b-9970-45ff-99d1-609829628270)
+
+## 5.9. Chat page
+
+
 
 # 6. Disclaimer  
 
