@@ -17,4 +17,6 @@ public final class NewChatMessage implements KafkaMessage {
     private final String chatIdentity;
 
     private final String senderIdentity;
+
+    private final String date;
 }
