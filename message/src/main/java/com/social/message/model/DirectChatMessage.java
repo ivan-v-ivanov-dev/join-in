@@ -19,11 +19,6 @@ public class DirectChatMessage {
     @Transient
     private String senderProfileImage;
 
-    private String receiverIdentity;
-
-    @Transient
-    private String receiverProfileImage;
-
     private String content;
 
     private LocalDate date;
