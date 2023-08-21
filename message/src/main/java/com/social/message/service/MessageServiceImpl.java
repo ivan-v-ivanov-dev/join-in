@@ -82,7 +82,6 @@ public class MessageServiceImpl implements MessageService {
                 directChat.setDirectChatMessages(messageRepository.findDirectChatMessages(String.format(COLLECTION_TEMPLATE, chatIdentity)));
                 directChat.getDirectChatMessages().forEach(chatMessage -> {
                     chatMessage.setSenderProfileImage(imageClient.findProfileImage(chatMessage.getSenderIdentity()));
-                    chatMessage.setReceiverProfileImage(imageClient.findProfileImage(chatMessage.getReceiverIdentity()));
                     chatMessage.setPostedAgo(calculatePostedAgo(chatMessage.getDate()));
                 });
                 directChat.getDirectChatMessages().sort(Comparator.comparing(DirectChatMessage::getDate));
@@ -93,6 +92,17 @@ public class MessageServiceImpl implements MessageService {
             log.error(feignException.getMessage());
             throw new ResourceAccessException(IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
         }
+    }
+
+    @Override
+    public void saveMessage(String chatIdentity, String senderIdentity, String messageContent, LocalDate date) {
+        DirectChatMessage directChatMessage = DirectChatMessage.builder()
+                .senderIdentity(senderIdentity)
+                .content(messageContent)
+                .date(date)
+                .build();
+        messageRepository.saveMessage(directChatMessage, String.format(COLLECTION_TEMPLATE, chatIdentity));
+        log.info(NEW_CHAT_MESSAGE_SAVED_IN_DATABASE);
     }
 
     private String calculatePostedAgo(LocalDate postDate) {

@@ -31,6 +31,9 @@ spring:
         user:
           login: user-login-topic
           logout: user-logout-topic
+        new:
+          chat:
+            message: new-chat-message-topic
     group:
       id: group-id
 

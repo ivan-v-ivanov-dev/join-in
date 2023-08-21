@@ -60,4 +60,9 @@ public class MessageRepositoryImpl implements MessageRepository {
         query.with(Sort.by(Sort.Direction.ASC, "date"));
         return mongoTemplate.findDistinct(query, "directChatMessages", collection, DirectChatMessage.class);
     }
+
+    @Override
+    public void saveMessage(DirectChatMessage directChatMessage, String collection) {
+        mongoTemplate.save(directChatMessage, collection);
+    }
 }

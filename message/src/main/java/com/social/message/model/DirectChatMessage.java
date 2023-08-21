@@ -1,9 +1,6 @@
 package com.social.message.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Transient;
 
 import java.time.LocalDate;
@@ -12,6 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class DirectChatMessage {
 
     private String senderIdentity;
