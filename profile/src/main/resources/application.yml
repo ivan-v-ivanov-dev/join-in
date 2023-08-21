@@ -146,3 +146,6 @@ friends:
 direct:
   chat:
     history: /direct-chat/history
+group:
+  chat:
+    history: /group-chat/history

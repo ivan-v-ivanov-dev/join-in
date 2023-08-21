@@ -31,6 +31,7 @@
     <div id="loading-center">
     </div>
 </div>
+
 <aside class="sidebar sidebar-chat sidebar-base border-end shadow-none" data-sidebar="responsive">
 
     <div class="chat-search pt-3 px-3">
@@ -108,14 +109,13 @@
                    data-bs-toggle="tab"
                    href="#user-content-104" role="tab">
                     <div class="position-relative">
-                        <img alt="status-104" class="avatar-50 rounded" loading="lazy"
-                             src="../assets/images/chat/avatar/08.png">
-                        <div class="iq-profile-badge bg-danger"></div>
+                        <div class="material-symbols-outlined filled text-success pe-1 md-14">
+                        </div>
                     </div>
                     <div class="d-flex align-items-center w-100 iq-userlist-data">
                         <div class="d-flex flex-grow-1 flex-column">
                             <div class="d-flex align-items-center gap-1">
-                                <p class="mb-0 text-ellipsis short-1 flex-grow-1 iq-userlist-name">Developer</p>
+                                <p class="mb-0 text-ellipsis short-1 flex-grow-1 iq-userlist-name">Developers Group</p>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,11 @@
                     <div class="position-relative">
                         <img alt="status-105" class="avatar-50 rounded" loading="lazy"
                              th:src="${onlineFriends.^[identity eq '771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551'].getProfileImage()}">
-                        <div class="iq-profile-badge bg-danger"></div>
+                        <div class="iq-profile-badge">
+                            <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                circle
+                            </i>
+                        </div>
                     </div>
                     <div class="d-flex align-items-center w-100 iq-userlist-data">
                         <div class="d-flex flex-grow-1 flex-column">
@@ -156,7 +160,11 @@
                     <div class="position-relative">
                         <img alt="status-106" class="avatar-50 rounded" loading="lazy"
                              th:src="${onlineFriends.^[identity eq '788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627'].getProfileImage()}">
-                        <div class="iq-profile-badge bg-danger"></div>
+                        <div class="iq-profile-badge">
+                            <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                circle
+                            </i>
+                        </div>
                     </div>
                     <div class="d-flex align-items-center w-100 iq-userlist-data">
                         <div class="d-flex flex-grow-1 flex-column">
@@ -177,7 +185,11 @@
                     <div class="position-relative">
                         <img alt="status-107" class="avatar-50 rounded" loading="lazy"
                              th:src="${onlineFriends.^[identity eq 'd52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8'].getProfileImage()}">
-                        <div class="iq-profile-badge bg-danger"></div>
+                        <div class="iq-profile-badge">
+                            <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                circle
+                            </i>
+                        </div>
                     </div>
                     <div class="d-flex align-items-center w-100 iq-userlist-data">
                         <div class="d-flex flex-grow-1 flex-column">
@@ -221,13 +233,7 @@
                             </span>
                                 </button>
                             </div>
-                            <div class="avatar chat-user-profile m-0 me-3">
-                                <img alt="avatar" class="avatar-50 rounded " loading="lazy"
-                                     src="../assets/images/chat/avatar/08.png">
-                                <div class="iq-profile-badge  bg-danger"></div>
-
-                            </div>
-                            <h5 class="mb-0">Developer</h5>
+                            <h5 class="mb-0">Developers Group</h5>
                         </div>
 
                         <div class="chat-user-detail-popup scroller">
@@ -236,11 +242,9 @@
                                         class="material-symbols-outlined md-18">close</i></button>
                                 <div class="user mb-4 text-center">
                                     <a class="avatar m-0">
-                                        <img alt="avatar" class="rounded" loading="lazy"
-                                             src="../assets/images/chat/avatar/08.png">
                                     </a>
                                     <div class="user-name mt-4">
-                                        <h4>Developer</h4>
+                                        <h4>Developers</h4>
                                     </div>
                                     <div class="user-desc">
                                         <p>Atlanta, USA</p>
@@ -279,147 +283,37 @@
                     </header>
                 </div>
 
-                <div class="card-body chat-body bg-body">
+                <div class="card-body chat-body bg-body"
+                     th:with="chatMessages=${groupChatHistory.^[chatIdentity eq 'f234338ff7d069dea0e9fa1f7d172426d25c1c44524b30be61d288e5b0562e7bcfdf7d7e17d7b597c114066b58c8041f03c25c2deabe2fe33441fd3567c7d829'].getMessages()}">
 
-                    <div class="iq-message-body iq-current-user">
-                        <div class="chat-profile">
-                            <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
-                                 src="../assets/images/chat/avatar/01.png">
-                            <small class="iq-chating p-0 mb-0">16:34</small>
-                        </div>
-                        <div class="iq-chat-text">
-                            <div class="d-flex align-items-center justify-content-end">
-                                <div class="iq-chating-content d-flex align-items-center ">
-                                    <p class="mr-2 mb-0">How can we help? We&#x27;re here for you! 😄</p>
+                    <div th:each="message : ${chatMessages}">
+                        <div class="iq-message-body"
+                             th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'iq-current-user' : 'iq-other-user'">
+                            <div class="chat-profile">
+                                <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
+                                     th:src="${message.getSenderProfileImage()}">
+                                <small class="iq-chating p-0 mb-0 d-block"
+                                       th:text="${message.getPostedAgo()}">16:34</small>
+                            </div>
+                            <div class="iq-chat-text">
+                                <div class="d-flex align-items-center"
+                                     th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'justify-content-end' : 'justify-content-start'">
+                                    <div class="iq-chating-content d-flex align-items-center">
+                                        <p class="mr-2 mb-0" th:text="${message.getContent()}">Default message content.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="iq-message-body iq-other-user">
-                        <div class="chat-profile">
-                            <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
-                                 src="../assets/images/chat/avatar/08.png">
-                            <small class="iq-chating p-0 mb-0 d-block">16:40</small>
-                        </div>
-                        <div class="iq-chat-text">
-                            <div class="d-flex align-items-center justify-content-start">
-                                <div class="iq-chating-content d-flex align-items-center ">
-                                    <p class="mr-2 mb-0">Hey John, I am looking for the best admin template.
-                                        Could you please help me to find it out? 🤔</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="iq-message-body iq-current-user">
-                        <div class="chat-profile">
-                            <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
-                                 src="../assets/images/chat/avatar/01.png">
-                            <small class="iq-chating p-0 mb-0">6:49</small>
-                        </div>
-                        <div class="iq-chat-text">
-                            <div class="d-flex align-items-center justify-content-end">
-                                <div class="iq-chating-content d-flex align-items-center ">
-                                    <p class="mr-2 mb-0">Absolutely Yes! Hope-UI is the Responsive Bootstrap 5 Admin
-                                        Dashboard Template.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="iq-message-body iq-other-user">
-                        <div class="chat-profile">
-                            <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
-                                 src="../assets/images/chat/avatar/08.png">
-                            <small class="iq-chating p-0 mb-0 d-block">6:52</small>
-                        </div>
-                        <div class="iq-chat-text">
-                            <div class="d-flex align-items-center justify-content-start">
-                                <div class="iq-chating-content d-flex align-items-center ">
-                                    <p class="mr-2 mb-0">Looks clean and fresh UI.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="iq-message-body iq-current-user">
-                        <div class="chat-profile">
-                            <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
-                                 src="../assets/images/chat/avatar/01.png">
-                            <small class="iq-chating p-0 mb-0">6:53</small>
-                        </div>
-                        <div class="iq-chat-text">
-                            <div class="d-flex align-items-center justify-content-end">
-                                <div class="iq-chating-content d-flex align-items-center ">
-                                    <p class="mr-2 mb-0">Thanks, from ThemeForest.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="iq-message-body iq-other-user">
-                        <div class="chat-profile">
-                            <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
-                                 src="../assets/images/chat/avatar/08.png">
-                            <small class="iq-chating p-0 mb-0 d-block">6:54</small>
-                        </div>
-                        <div class="iq-chat-text">
-                            <div class="d-flex align-items-center justify-content-start">
-                                <div class="iq-chating-content d-flex align-items-center ">
-                                    <p class="mr-2 mb-0">I will purchase it for sure. 👍</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="iq-message-body iq-current-user">
-                        <div class="chat-profile">
-                            <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
-                                 src="../assets/images/chat/avatar/01.png">
-                            <small class="iq-chating p-0 mb-0">6:55</small>
-                        </div>
-                        <div class="iq-chat-text">
-                            <div class="d-flex align-items-center justify-content-end">
-                                <div class="iq-chating-content d-flex align-items-center ">
-                                    <p class="mr-2 mb-0">Okay Thanks..</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="iq-message-body iq-other-user">
-                        <div class="chat-profile">
-                            <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
-                                 src="../assets/images/chat/avatar/08.png">
-                            <small class="iq-chating p-0 mb-0 d-block">7:54</small>
-                        </div>
-                        <div class="iq-chat-text">
-                            <div class="d-flex align-items-center justify-content-start">
-                                <div class="iq-chating-content d-flex align-items-center ">
-                                    <p class="mr-2 mb-0">Looks clean and fresh UI.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="iq-message-body iq-current-user">
-                        <div class="chat-profile">
-                            <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
-                                 src="../assets/images/chat/avatar/01.png">
-                            <small class="iq-chating p-0 mb-0">7:55</small>
-                        </div>
-                        <div class="iq-chat-text">
-                            <div class="d-flex align-items-center justify-content-end">
-                                <div class="iq-chating-content d-flex align-items-center ">
-                                    <p class="mr-2 mb-0">Thanks, from ThemeForest.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="card-footer px-3 py-3 border-top rounded-0">
-                    <form action="#" class="d-flex align-items-center">
+                    <form action="#" class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
                         <div class="chat-attagement d-flex">
                         </div>
-                        <input class="form-control me-3" placeholder="Type your message" type="text">
+                        <input class="form-control me-3" th:name="messageContent" th:value="*{messageContent}" placeholder="Type your message" type="text">
+                        <input type="hidden" th:name="chatIdentity" th:value="f234338ff7d069dea0e9fa1f7d172426d25c1c44524b30be61d288e5b0562e7bcfdf7d7e17d7b597c114066b58c8041f03c25c2deabe2fe33441fd3567c7d829" />
+                        <input type="hidden" th:name="senderIdentity" th:value="${profileIdentity}" />
                         <button class="btn btn-primary d-flex align-items-center" type="submit">
                             <svg class="icon-20" fill="none" viewBox="0 0 20 21" width="18"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -454,7 +348,11 @@
                             <div class="avatar chat-user-profile m-0 me-3">
                                 <img alt="avatar" class="avatar-50 rounded " loading="lazy"
                                      th:src="${onlineFriends.^[identity eq '771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551'].getProfileImage()}">
-                                <div class="iq-profile-badge  bg-danger"></div>
+                                <div class="iq-profile-badge ">
+                                    <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                        circle
+                                    </i>
+                                </div>
 
                             </div>
                             <h5 class="mb-0"
@@ -576,7 +474,11 @@
                             <div class="avatar chat-user-profile m-0 me-3">
                                 <img alt="avatar" class="avatar-50 rounded " loading="lazy"
                                      th:src="${onlineFriends.^[identity eq '788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627'].getProfileImage()}" >
-                                <div class="iq-profile-badge  bg-danger"></div>
+                                <div class="iq-profile-badge ">
+                                    <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                        circle
+                                    </i>
+                                </div>
 
                             </div>
                             <h5 class="mb-0"
@@ -699,7 +601,11 @@
                             <div class="avatar chat-user-profile m-0 me-3">
                                 <img alt="avatar" class="avatar-50 rounded " loading="lazy"
                                      th:src="${onlineFriends.^[identity eq 'd52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8'].getProfileImage()}" >
-                                <div class="iq-profile-badge  bg-danger"></div>
+                                <div class="iq-profile-badge ">
+                                    <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                        circle
+                                    </i>
+                                </div>
 
                             </div>
                             <h5 class="mb-0"

@@ -256,6 +256,7 @@ public class ProfileController {
             model.addAttribute("profileNames", profileService.findProfileNames(userIdentity));
             model.addAttribute("onlineFriends", messageService.onlineFriends(userIdentity));
             model.addAttribute("directChatHistory", messageService.findUserDirectChatHistory(userIdentity));
+            model.addAttribute("groupChatHistory", messageService.findUserGroupChatHistory(userIdentity));
             return "chat";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());

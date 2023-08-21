@@ -86,4 +86,14 @@ public class MessageServiceImpl implements MessageService {
         log.info(String.format(NEW_CHAT_MESSAGE_CREATED_AND_SEND_TO_MESSAGE_SERVICE_TOPIC_NAME_MESSAGE_SENDER_IDENTITY_TEMPLATE,
                 newChatMessageTopic, senderIdentity));
     }
+
+    @Override
+    public List<Chat> findUserGroupChatHistory(String userIdentity) {
+        try {
+            return messageClient.findUserGroupChatHistory(userIdentity);
+        } catch (FeignException | ResourceAccessException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(MESSAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
+    }
 }

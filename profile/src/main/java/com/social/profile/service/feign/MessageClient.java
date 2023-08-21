@@ -17,4 +17,7 @@ public interface MessageClient {
 
     @PostMapping("${direct.chat.history}")
     List<Chat> findUserDirectChatHistory(@RequestParam("identity") String identity);
+
+    @PostMapping("${group.chat.history}")
+    List<Chat> findUserGroupChatHistory(@RequestParam("identity") String identity);
 }
