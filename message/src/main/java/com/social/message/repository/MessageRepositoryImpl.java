@@ -1,6 +1,7 @@
 package com.social.message.repository;
 
-import com.social.message.model.DirectChatMessage;
+import com.social.message.model.Chat;
+import com.social.message.model.ChatMessage;
 import com.social.message.model.User;
 import com.social.message.repository.contract.MessageRepository;
 import org.springframework.data.domain.Sort;
@@ -55,14 +56,17 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<DirectChatMessage> findDirectChatMessages(String collection) {
+    public List<ChatMessage> findDirectChatMessages(String collection) {
         Query query = new Query();
         query.with(Sort.by(Sort.Direction.ASC, "date"));
-        return mongoTemplate.findDistinct(query, "directChatMessages", collection, DirectChatMessage.class);
+        return mongoTemplate.findDistinct(query, "messages", collection, ChatMessage.class);
     }
 
     @Override
-    public void saveMessage(DirectChatMessage directChatMessage, String collection) {
-        mongoTemplate.save(directChatMessage, collection);
+    public void saveMessage(ChatMessage chatMessage, String chatIdentity, String collection) {
+        Query query = new Query(Criteria.where("chatIdentity").is(chatIdentity));
+        Update update = new Update().push("messages", chatMessage);
+
+        mongoTemplate.updateFirst(query, update, Chat.class, collection);
     }
 }
