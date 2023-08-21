@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -78,6 +79,7 @@ public class MessageServiceImpl implements MessageService {
                 .messageContent(messageContent)
                 .chatIdentity(chatIdentity)
                 .senderIdentity(senderIdentity)
+                .date(LocalDate.now().toString())
                 .build();
 
         kafkaMessageSender.send(newChatMessage, newChatMessageTopic);
