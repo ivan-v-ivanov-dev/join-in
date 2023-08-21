@@ -258,7 +258,7 @@ Runs on **http://localhost:8087/**. Stores the currently online users (**online_
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/2900209f-0f6d-4adb-bad3-c986b6779a74)
 
-## 5.8. Online users (examples with profile and feed pages)
+## 5.8. Online users - examples with Profile and Feed pages
 
 ![image](https://github.com/ivanovbiol/join-in/assets/51414119/78e3620e-bf82-452c-82ea-4ba5ad93752c)
 
@@ -270,7 +270,9 @@ Runs on **http://localhost:8087/**. Stores the currently online users (**online_
 
 ## 5.9. Chat page
 
+## 5.10. Error page - example with error in Message service
 
+![image](https://github.com/ivanovbiol/join-in/assets/51414119/165e7982-4b2f-4c9c-a965-f55d190af32e)
 
 # 6. Disclaimer  
 
