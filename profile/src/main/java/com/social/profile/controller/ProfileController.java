@@ -248,7 +248,7 @@ public class ProfileController {
         }
     }
 
-    @PostMapping("/chat")
+    @GetMapping("/chat")
     public String chat(@RequestParam("userIdentity") String userIdentity, Model model) {
         try {
             model.addAttribute("profileIdentity", userIdentity);

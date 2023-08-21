@@ -538,7 +538,7 @@
                 </div>
 
                 <div class="card-footer px-3 py-3 border-top rounded-0">
-                    <form action="#" class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
+                    <form class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
                         <div class="chat-attagement d-flex">
                         </div>
                         <input class="form-control me-3" th:name="messageContent" th:value="*{messageContent}" placeholder="Type your message" type="text">

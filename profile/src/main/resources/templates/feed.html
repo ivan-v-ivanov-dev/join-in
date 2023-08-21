@@ -406,7 +406,7 @@
 
                             <div class="card-body p-0 " th:each="currentOnlineFriend : ${onlineFriends}">
 
-                                <form class="iq-sub-card" th:action="@{/chat}" method="post">
+                                <form class="iq-sub-card" th:action="@{/chat}" method="get">
                                     <input type="hidden" th:name="userIdentity" th:value="${profileIdentity}" />
                                     <div class="d-flex  align-items-center">
                                         <div class="">
@@ -931,7 +931,7 @@
 
                 <div class="media-height p-2" data-scrollbar="init" th:each="currentOnlineFriend : ${onlineFriends}" >
 
-                    <form th:action="@{/chat}" method="post">
+                    <form th:action="@{/chat}" method="get">
                         <input type="hidden" th:name="userIdentity" th:value="${profileIdentity}" />
                         <div class="d-flex align-items-center" >
                             <div class="iq-profile-avatar status-online">
