@@ -86,7 +86,7 @@ db.c_01f34eec06beb9d15b9d4272b72b91d80dec0abf608e53e8ba91417d559b23b84ced411d9c1
     [
         {
             chatIdentity: "01f34eec06beb9d15b9d4272b72b91d80dec0abf608e53e8ba91417d559b23b84ced411d9c161172f320c80df9322298cf7d7b7cebdff213aa06e647a1c67c40",
-            directChatMessages:
+            messages:
             [
                 {
                     senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
@@ -121,7 +121,7 @@ db.c_a3db6886e9585fca38e22c4e4988e7d08173ffb5a86a9206fd5c09061dae4cf35ea9fc1db20
     [
         {
             chatIdentity: "a3db6886e9585fca38e22c4e4988e7d08173ffb5a86a9206fd5c09061dae4cf35ea9fc1db20f7dfe1e42ee6d3cb6736ce680cb3342bc567f5052a9b742621ea0",
-            directChatMessages:
+            messages:
             [
                 {
                     senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
@@ -161,7 +161,7 @@ db.c_104765ce63f6e95212b0638559d7e75811b68ed59ff061352fb613ee701d661fd5427860cf5
     [
         {
             chatIdentity: "104765ce63f6e95212b0638559d7e75811b68ed59ff061352fb613ee701d661fd5427860cf510e8aeee2579e90890f3904b9e53e1262a50e9a161dacdf176caa",
-            directChatMessages:
+            messages:
             [
                 {
                     senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",

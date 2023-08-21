@@ -1,6 +1,6 @@
 package com.social.message.service.contract;
 
-import com.social.message.model.DirectChat;
+import com.social.message.model.Chat;
 import com.social.message.model.User;
 
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ public interface MessageService {
 
     void userIsOffline(String identity);
 
-    List<DirectChat> findUserDirectChatHistory(String identity);
+    List<Chat> findUserDirectChatHistory(String identity);
 
     void saveMessage(String chatIdentity, String senderIdentity, String messageContent, LocalDate date);
 }

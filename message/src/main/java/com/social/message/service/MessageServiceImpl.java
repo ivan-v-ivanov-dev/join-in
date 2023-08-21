@@ -1,7 +1,7 @@
 package com.social.message.service;
 
-import com.social.message.model.DirectChat;
-import com.social.message.model.DirectChatMessage;
+import com.social.message.model.Chat;
+import com.social.message.model.ChatMessage;
 import com.social.message.model.User;
 import com.social.message.repository.contract.MessageRepository;
 import com.social.message.service.contract.MessageService;
@@ -70,24 +70,24 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<DirectChat> findUserDirectChatHistory(String identity) {
+    public List<Chat> findUserDirectChatHistory(String identity) {
         try {
-            List<DirectChat> userDirectChatHistory = new ArrayList<>();
+            List<Chat> userChatHistory = new ArrayList<>();
             List<String> userChatIdentities = messageRepository.findUserDirectChatIdentities(identity);
             userChatIdentities.forEach(chatIdentity -> {
-                DirectChat directChat = DirectChat.builder()
+                Chat chat = Chat.builder()
                         .chatIdentity(chatIdentity)
-                        .directChatMessages(new ArrayList<>())
+                        .messages(new ArrayList<>())
                         .build();
-                directChat.setDirectChatMessages(messageRepository.findDirectChatMessages(String.format(COLLECTION_TEMPLATE, chatIdentity)));
-                directChat.getDirectChatMessages().forEach(chatMessage -> {
+                chat.setMessages(messageRepository.findDirectChatMessages(String.format(COLLECTION_TEMPLATE, chatIdentity)));
+                chat.getMessages().forEach(chatMessage -> {
                     chatMessage.setSenderProfileImage(imageClient.findProfileImage(chatMessage.getSenderIdentity()));
                     chatMessage.setPostedAgo(calculatePostedAgo(chatMessage.getDate()));
                 });
-                directChat.getDirectChatMessages().sort(Comparator.comparing(DirectChatMessage::getDate));
-                userDirectChatHistory.add(directChat);
+                chat.getMessages().sort(Comparator.comparing(ChatMessage::getDate));
+                userChatHistory.add(chat);
             });
-            return userDirectChatHistory;
+            return userChatHistory;
         } catch (FeignException feignException) {
             log.error(feignException.getMessage());
             throw new ResourceAccessException(IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
@@ -96,12 +96,12 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public void saveMessage(String chatIdentity, String senderIdentity, String messageContent, LocalDate date) {
-        DirectChatMessage directChatMessage = DirectChatMessage.builder()
+        ChatMessage chatMessage = ChatMessage.builder()
                 .senderIdentity(senderIdentity)
                 .content(messageContent)
                 .date(date)
                 .build();
-        messageRepository.saveMessage(directChatMessage, String.format(COLLECTION_TEMPLATE, chatIdentity));
+        messageRepository.saveMessage(chatMessage, chatIdentity, String.format(COLLECTION_TEMPLATE, chatIdentity));
         log.info(NEW_CHAT_MESSAGE_SAVED_IN_DATABASE);
     }
 

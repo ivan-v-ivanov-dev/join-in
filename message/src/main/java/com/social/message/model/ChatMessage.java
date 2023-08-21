@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-public class DirectChatMessage {
+public class ChatMessage {
 
     private String senderIdentity;
 

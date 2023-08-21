@@ -1,6 +1,6 @@
 package com.social.message.repository.contract;
 
-import com.social.message.model.DirectChatMessage;
+import com.social.message.model.ChatMessage;
 import com.social.message.model.User;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface MessageRepository {
 
     List<String> findUserDirectChatIdentities(String identity);
 
-    List<DirectChatMessage> findDirectChatMessages(String collection);
+    List<ChatMessage> findDirectChatMessages(String collection);
 
-    void saveMessage(DirectChatMessage directChatMessage, String collection);
+    void saveMessage(ChatMessage chatMessage, String chatIdentity, String collection);
 }
