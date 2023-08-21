@@ -49,19 +49,14 @@
                 </button>
                 <div class="user text-center mb-4">
                     <a class="avatar m-0">
-                        <img alt="avatar" loading="lazy" src="../assets/images/user/1.jpg">
+                        <img alt="avatar" loading="lazy" th:src="${profileImage}">
                     </a>
                     <div class="user-name mt-4">
-                        <h4 class="text-center">Bni Jordan</h4>
-                    </div>
-                    <div class="user-desc">
-                        <p class="text-center">Web Designer</p>
+                        <h4 class="text-center" th:text="${profileNames}">Bni Jordan</h4>
                     </div>
                 </div>
                 <hr>
                 <div class="user-detail text-left mt-4 ps-4 pe-4">
-                    <h5 class="mt-4 mb-4">About</h5>
-                    <p>It is long established fact that a reader will be distracted bt the reddable.</p>
                     <h5 class="mt-3 mb-3">Status</h5>
                     <ul class="user-status p-0">
                         <li class="mb-1 d-flex align-items-center">
@@ -69,24 +64,6 @@
                                 circle
                             </i>
                             <span>Online</span>
-                        </li>
-                        <li class="mb-1 d-flex align-items-center">
-                            <i class="material-symbols-outlined filled text-warning pe-1 md-14">
-                                circle
-                            </i>
-                            <span>Away</span>
-                        </li>
-                        <li class="mb-1 d-flex align-items-center">
-                            <i class="material-symbols-outlined filled text-danger pe-1 md-14">
-                                circle
-                            </i>
-                            <span>Do Not Disturb</span>
-                        </li>
-                        <li class="mb-1 d-flex align-items-center">
-                            <i class="material-symbols-outlined filled text-light pe-1 md-14">
-                                circle
-                            </i>
-                            <span>Offline</span>
                         </li>
                     </ul>
                 </div>
@@ -116,6 +93,7 @@
     </div>
 
     <div class="sidebar-body pt-0 data-scrollbar mb-5 pb-5">
+
         <!-- Sidebar Menu Start -->
         <ul class="nav navbar-nav iq-main-menu mb-5 pb-5" id="sidebar-menu" role="tablist">
 
@@ -138,10 +116,6 @@
                         <div class="d-flex flex-grow-1 flex-column">
                             <div class="d-flex align-items-center gap-1">
                                 <p class="mb-0 text-ellipsis short-1 flex-grow-1 iq-userlist-name">Developer</p>
-                            </div>
-                            <div class="d-flex align-items-center gap-2">
-                                <small class="text-ellipsis short-1 flex-grow-1">Lorem ipsum</small>
-                                <small class="text-capitalize"></small>
                             </div>
                         </div>
                     </div>
@@ -170,9 +144,6 @@
                                    th:text="${onlineFriends.^[identity eq '771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551'].getNames()}">
                                     Paul Molive</p>
                             </div>
-                            <div class="d-flex align-items-center gap-2">
-                                <small class="text-capitalize"></small>
-                            </div>
                         </div>
                     </div>
                 </a>
@@ -193,10 +164,6 @@
                                 <p class="mb-0 text-ellipsis short-1 flex-grow-1 iq-userlist-name"
                                    th:text="${onlineFriends.^[identity eq '788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627'].getNames()}">
                                     Paige Turner</p>
-                            </div>
-                            <div class="d-flex align-items-center gap-2">
-                                <small class="text-ellipsis short-1 flex-grow-1">Lorem Ipsum which</small>
-                                <small class="text-capitalize"></small>
                             </div>
                         </div>
                     </div>
@@ -219,10 +186,6 @@
                                    th:text="${onlineFriends.^[identity eq 'd52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8'].getNames()}">
                                     Barb Ackue</p>
                             </div>
-                            <div class="d-flex align-items-center gap-2">
-                                <small class="text-ellipsis short-1 flex-grow-1">simply random text</small>
-                                <small class="text-capitalize"></small>
-                            </div>
                         </div>
                     </div>
                 </a>
@@ -232,6 +195,7 @@
 
         <!-- Sidebar Menu End -->
     </div>
+
     <div class="sidebar-footer"></div>
 
 </aside>
@@ -242,6 +206,7 @@
 
             <!-- Group chat -->
             <div class="card tab-pane mb-0 fade" id="user-content-104" role="tabpanel">
+
                 <div class="chat-head">
                     <header class="d-flex justify-content-between align-items-center bg-white pt-3  ps-3 pe-3 pb-3">
                         <div class="d-flex align-items-center">
@@ -263,8 +228,8 @@
 
                             </div>
                             <h5 class="mb-0">Developer</h5>
-                            <small class="text-capitalize"></small>
                         </div>
+
                         <div class="chat-user-detail-popup scroller">
                             <div class="user-profile">
                                 <button class="close-popup p-3" type="submit"><i
@@ -310,45 +275,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="chat-header-icons d-inline-flex ms-auto">
-                            <a class="chat-icon-phone bg-soft-primary d-flex align-items-center justify-content-center"
-                               href="#">
-                                <i class="material-symbols-outlined md-18">phone</i>
-                            </a>
-                            <a class="chat-icon-video bg-soft-primary d-flex align-items-center justify-content-center"
-                               href="#">
-                                <i class="material-symbols-outlined md-18">videocam</i>
-                            </a>
-                            <a class="chat-icon-delete bg-soft-primary d-flex align-items-center justify-content-center"
-                               href="#">
-                                <i class="material-symbols-outlined md-18">delete</i>
-                            </a>
-                            <span class="dropdown bg-soft-primary d-flex align-items-center justify-content-center">
-                        <svg aria-expanded="false" aria-haspopup="true"
-                             class="icon-20 nav-hide-arrow cursor-pointer pe-0" data-bs-toggle="dropdown" fill="none"
-                             id="dropdownMenuButton-11" role="menu"
-                             viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd"
-                                  d="M10 20.6788C10 21.9595 11.0378 23 12.3113 23C13.5868 23 14.6265 21.9595 14.6265 20.6788C14.6265 19.3981 13.5868 18.3576 12.3113 18.3576C11.0378 18.3576 10 19.3981 10 20.6788ZM10 12.0005C10 13.2812 11.0378 14.3217 12.3113 14.3217C13.5868 14.3217 14.6265 13.2812 14.6265 12.0005C14.6265 10.7198 13.5868 9.67929 12.3113 9.67929C11.0378 9.67929 10 10.7198 10 12.0005ZM12.3113 5.64239C11.0378 5.64239 10 4.60192 10 3.3212C10 2.04047 11.0378 1 12.3113 1C13.5868 1 14.6265 2.04047 14.6265 3.3212C14.6265 4.60192 13.5868 5.64239 12.3113 5.64239Z"
-                                  fill="currentColor"
-                                  fill-rule="evenodd"></path>
-                        </svg>
-                        <span aria-labelledby="dropdownMenuButton-11" class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                    class="material-symbols-outlined md-18 me-1">push_pin</i>Pin to top</a>
-                            <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                    class="material-symbols-outlined md-18 me-1">delete_outline</i>Delete chat</a>
-                            <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                    class="material-symbols-outlined md-18 me-1">watch_later</i>Block</a>
-                        </span>
-                    </span>
-                        </div>
+
                     </header>
                 </div>
+
                 <div class="card-body chat-body bg-body">
-                    <div class="chat-day-title">
-                        <span class="main-title">Feb 1,2021</span>
-                    </div>
 
                     <div class="iq-message-body iq-current-user">
                         <div class="chat-profile">
@@ -483,49 +414,10 @@
                     </div>
 
                 </div>
+
                 <div class="card-footer px-3 py-3 border-top rounded-0">
                     <form action="#" class="d-flex align-items-center">
                         <div class="chat-attagement d-flex">
-                            <a class="d-flex align-items-center pe-3" href="#">
-                                <svg class="icon-24" fill="none" viewBox="0 0 24 25" width="24"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_156_599)">
-                                        <path d="M20.4853 4.01473C18.2188 1.74823 15.2053 0.5 12 0.5C8.79469 0.5 5.78119 1.74823 3.51473 4.01473C1.24819 6.28119 0 9.29469 0 12.5C0 15.7053 1.24819 18.7188 3.51473 20.9853C5.78119 23.2518 8.79469 24.5 12 24.5C15.2053 24.5 18.2188 23.2518 20.4853 20.9853C22.7518 18.7188 24 15.7053 24 12.5C24 9.29469 22.7518 6.28119 20.4853 4.01473ZM12 23.0714C6.17091 23.0714 1.42856 18.3291 1.42856 12.5C1.42856 6.67091 6.17091 1.92856 12 1.92856C17.8291 1.92856 22.5714 6.67091 22.5714 12.5C22.5714 18.3291 17.8291 23.0714 12 23.0714Z"
-                                              fill="currentcolor"></path>
-                                        <path d="M9.40398 9.3309C8.23431 8.16114 6.33104 8.16123 5.16136 9.3309C4.88241 9.60981 4.88241 10.0621 5.16136 10.3411C5.44036 10.62 5.89266 10.62 6.17157 10.3411C6.78432 9.72836 7.78126 9.7284 8.39392 10.3411C8.53342 10.4806 8.71618 10.5503 8.89895 10.5503C9.08171 10.5503 9.26457 10.4806 9.40398 10.3411C9.68293 10.0621 9.68293 9.60986 9.40398 9.3309Z"
-                                              fill="currentcolor"></path>
-                                        <path d="M18.8384 9.3309C17.6688 8.16123 15.7655 8.16114 14.5958 9.3309C14.3169 9.60981 14.3169 10.0621 14.5958 10.3411C14.8748 10.62 15.3271 10.62 15.606 10.3411C16.2187 9.72836 17.2156 9.72831 17.8284 10.3411C17.9679 10.4806 18.1506 10.5503 18.3334 10.5503C18.5162 10.5503 18.699 10.4806 18.8384 10.3411C19.1174 10.0621 19.1174 9.60986 18.8384 9.3309Z"
-                                              fill="currentcolor"></path>
-                                        <path d="M18.3335 13.024H5.6668C5.2723 13.024 4.95251 13.3438 4.95251 13.7383C4.95251 17.6243 8.11409 20.7859 12.0001 20.7859C15.8862 20.7859 19.0477 17.6243 19.0477 13.7383C19.0477 13.3438 18.728 13.024 18.3335 13.024ZM12.0001 19.3573C9.14366 19.3573 6.77816 17.215 6.42626 14.4525H17.574C17.2221 17.215 14.8566 19.3573 12.0001 19.3573Z"
-                                              fill="currentcolor"></path>
-                                    </g>
-                                    <defs>
-                                        <clipPath>
-                                            <rect fill="white" height="24" transform="translate(0 0.5)"
-                                                  width="24"></rect>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </a>
-                            <a class="d-flex align-items-center pe-3" href="#">
-                                <svg class="icon-24" fill="none" height="23" viewBox="0 0 18 23" width="18"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.00021 21.5V18.3391" stroke="currentcolor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"></path>
-                                    <path clip-rule="evenodd"
-                                          d="M9.00021 14.3481V14.3481C6.75611 14.3481 4.9384 12.5218 4.9384 10.2682V5.58095C4.9384 3.32732 6.75611 1.5 9.00021 1.5C11.2433 1.5 13.061 3.32732 13.061 5.58095V10.2682C13.061 12.5218 11.2433 14.3481 9.00021 14.3481Z"
-                                          fill-rule="evenodd"
-                                          stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"></path>
-                                    <path d="M17 10.3006C17 14.7394 13.418 18.3383 9 18.3383C4.58093 18.3383 1 14.7394 1 10.3006"
-                                          stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"></path>
-                                    <path d="M11.0689 6.25579H13.0585" stroke="currentcolor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"></path>
-                                    <path d="M10.0704 9.59344H13.0605" stroke="currentcolor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </a>
                         </div>
                         <input class="form-control me-3" placeholder="Type your message" type="text">
                         <button class="btn btn-primary d-flex align-items-center" type="submit">
@@ -539,10 +431,12 @@
                         </button>
                     </form>
                 </div>
+
             </div>
             <!-- End Group chat -->
 
             <div class="card tab-pane mb-0 fade" id="user-content-105" role="tabpanel">
+
                 <div class="chat-head">
                     <header class="d-flex justify-content-between align-items-center bg-white pt-3  ps-3 pe-3 pb-3">
                         <div class="d-flex align-items-center">
@@ -568,6 +462,7 @@
                                 Paul Molive</h5>
                             <small class="text-capitalize"></small>
                         </div>
+
                         <div class="chat-user-detail-popup scroller">
                             <div class="user-profile">
                                 <button class="close-popup p-3" type="submit"><i
@@ -613,8 +508,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="chat-header-icons d-inline-flex ms-auto">
-                        </div>
+
                     </header>
                 </div>
 
@@ -644,10 +538,12 @@
                 </div>
 
                 <div class="card-footer px-3 py-3 border-top rounded-0">
-                    <form action="#" class="d-flex align-items-center">
+                    <form action="#" class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
                         <div class="chat-attagement d-flex">
                         </div>
-                        <input class="form-control me-3" placeholder="Type your message" type="text">
+                        <input class="form-control me-3" th:name="messageContent" th:value="*{messageContent}" placeholder="Type your message" type="text">
+                        <input type="hidden" th:name="chatIdentity" th:value="01f34eec06beb9d15b9d4272b72b91d80dec0abf608e53e8ba91417d559b23b84ced411d9c161172f320c80df9322298cf7d7b7cebdff213aa06e647a1c67c40" />
+                        <input type="hidden" th:name="senderIdentity" th:value="${profileIdentity}" />
                         <button class="btn btn-primary d-flex align-items-center" type="submit">
                             <svg class="icon-20" fill="none" viewBox="0 0 20 21" width="18"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -662,6 +558,7 @@
             </div>
 
             <div class="card tab-pane mb-0 fade" id="user-content-106" role="tabpanel">
+
                 <div class="chat-head">
                     <header class="d-flex justify-content-between align-items-center bg-white pt-3  ps-3 pe-3 pb-3">
                         <div class="d-flex align-items-center">
@@ -686,6 +583,7 @@
                                 th:text="${onlineFriends.^[identity eq '788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627'].getNames()}">Paige Turner</h5>
                             <small class="text-capitalize"></small>
                         </div>
+
                         <div class="chat-user-detail-popup scroller">
                             <div class="user-profile">
                                 <button class="close-popup p-3" type="submit"><i
@@ -731,39 +629,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="chat-header-icons d-inline-flex ms-auto">
-                            <a class="chat-icon-phone bg-soft-primary d-flex align-items-center justify-content-center"
-                               href="#">
-                                <i class="material-symbols-outlined md-18">phone</i>
-                            </a>
-                            <a class="chat-icon-video bg-soft-primary d-flex align-items-center justify-content-center"
-                               href="#">
-                                <i class="material-symbols-outlined md-18">videocam</i>
-                            </a>
-                            <a class="chat-icon-delete bg-soft-primary d-flex align-items-center justify-content-center"
-                               href="#">
-                                <i class="material-symbols-outlined md-18">delete</i>
-                            </a>
-                            <span class="dropdown bg-soft-primary d-flex align-items-center justify-content-center">
-                        <svg aria-expanded="false" aria-haspopup="true"
-                             class="icon-20 nav-hide-arrow cursor-pointer pe-0" data-bs-toggle="dropdown" fill="none"
-                             id="dropdownMenuButton-13" role="menu"
-                             viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd"
-                                  d="M10 20.6788C10 21.9595 11.0378 23 12.3113 23C13.5868 23 14.6265 21.9595 14.6265 20.6788C14.6265 19.3981 13.5868 18.3576 12.3113 18.3576C11.0378 18.3576 10 19.3981 10 20.6788ZM10 12.0005C10 13.2812 11.0378 14.3217 12.3113 14.3217C13.5868 14.3217 14.6265 13.2812 14.6265 12.0005C14.6265 10.7198 13.5868 9.67929 12.3113 9.67929C11.0378 9.67929 10 10.7198 10 12.0005ZM12.3113 5.64239C11.0378 5.64239 10 4.60192 10 3.3212C10 2.04047 11.0378 1 12.3113 1C13.5868 1 14.6265 2.04047 14.6265 3.3212C14.6265 4.60192 13.5868 5.64239 12.3113 5.64239Z"
-                                  fill="currentColor"
-                                  fill-rule="evenodd"></path>
-                        </svg>
-                        <span aria-labelledby="dropdownMenuButton-13" class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                    class="material-symbols-outlined md-18 me-1">push_pin</i>Pin to top</a>
-                            <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                    class="material-symbols-outlined md-18 me-1">delete_outline</i>Delete chat</a>
-                            <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                    class="material-symbols-outlined md-18 me-1">watch_later</i>Block</a>
-                        </span>
-                    </span>
-                        </div>
+
                     </header>
                 </div>
 
@@ -794,50 +660,12 @@
                 </div>
 
                 <div class="card-footer px-3 py-3 border-top rounded-0">
-                    <form action="#" class="d-flex align-items-center">
+                    <form action="#" class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
                         <div class="chat-attagement d-flex">
-                            <a class="d-flex align-items-center pe-3" href="#">
-                                <svg class="icon-24" fill="none" viewBox="0 0 24 25" width="24"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_156_599)">
-                                        <path d="M20.4853 4.01473C18.2188 1.74823 15.2053 0.5 12 0.5C8.79469 0.5 5.78119 1.74823 3.51473 4.01473C1.24819 6.28119 0 9.29469 0 12.5C0 15.7053 1.24819 18.7188 3.51473 20.9853C5.78119 23.2518 8.79469 24.5 12 24.5C15.2053 24.5 18.2188 23.2518 20.4853 20.9853C22.7518 18.7188 24 15.7053 24 12.5C24 9.29469 22.7518 6.28119 20.4853 4.01473ZM12 23.0714C6.17091 23.0714 1.42856 18.3291 1.42856 12.5C1.42856 6.67091 6.17091 1.92856 12 1.92856C17.8291 1.92856 22.5714 6.67091 22.5714 12.5C22.5714 18.3291 17.8291 23.0714 12 23.0714Z"
-                                              fill="currentcolor"></path>
-                                        <path d="M9.40398 9.3309C8.23431 8.16114 6.33104 8.16123 5.16136 9.3309C4.88241 9.60981 4.88241 10.0621 5.16136 10.3411C5.44036 10.62 5.89266 10.62 6.17157 10.3411C6.78432 9.72836 7.78126 9.7284 8.39392 10.3411C8.53342 10.4806 8.71618 10.5503 8.89895 10.5503C9.08171 10.5503 9.26457 10.4806 9.40398 10.3411C9.68293 10.0621 9.68293 9.60986 9.40398 9.3309Z"
-                                              fill="currentcolor"></path>
-                                        <path d="M18.8384 9.3309C17.6688 8.16123 15.7655 8.16114 14.5958 9.3309C14.3169 9.60981 14.3169 10.0621 14.5958 10.3411C14.8748 10.62 15.3271 10.62 15.606 10.3411C16.2187 9.72836 17.2156 9.72831 17.8284 10.3411C17.9679 10.4806 18.1506 10.5503 18.3334 10.5503C18.5162 10.5503 18.699 10.4806 18.8384 10.3411C19.1174 10.0621 19.1174 9.60986 18.8384 9.3309Z"
-                                              fill="currentcolor"></path>
-                                        <path d="M18.3335 13.024H5.6668C5.2723 13.024 4.95251 13.3438 4.95251 13.7383C4.95251 17.6243 8.11409 20.7859 12.0001 20.7859C15.8862 20.7859 19.0477 17.6243 19.0477 13.7383C19.0477 13.3438 18.728 13.024 18.3335 13.024ZM12.0001 19.3573C9.14366 19.3573 6.77816 17.215 6.42626 14.4525H17.574C17.2221 17.215 14.8566 19.3573 12.0001 19.3573Z"
-                                              fill="currentcolor"></path>
-                                    </g>
-                                    <defs>
-                                        <clipPath>
-                                            <rect fill="white" height="24" transform="translate(0 0.5)"
-                                                  width="24"></rect>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </a>
-                            <a class="d-flex align-items-center pe-3" href="#">
-                                <svg class="icon-24" fill="none" height="23" viewBox="0 0 18 23" width="18"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.00021 21.5V18.3391" stroke="currentcolor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"></path>
-                                    <path clip-rule="evenodd"
-                                          d="M9.00021 14.3481V14.3481C6.75611 14.3481 4.9384 12.5218 4.9384 10.2682V5.58095C4.9384 3.32732 6.75611 1.5 9.00021 1.5C11.2433 1.5 13.061 3.32732 13.061 5.58095V10.2682C13.061 12.5218 11.2433 14.3481 9.00021 14.3481Z"
-                                          fill-rule="evenodd"
-                                          stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"></path>
-                                    <path d="M17 10.3006C17 14.7394 13.418 18.3383 9 18.3383C4.58093 18.3383 1 14.7394 1 10.3006"
-                                          stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"></path>
-                                    <path d="M11.0689 6.25579H13.0585" stroke="currentcolor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"></path>
-                                    <path d="M10.0704 9.59344H13.0605" stroke="currentcolor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </a>
                         </div>
-                        <input class="form-control me-3" placeholder="Type your message" type="text">
+                        <input class="form-control me-3" th:name="messageContent" th:value="*{messageContent}" placeholder="Type your message" type="text">
+                        <input type="hidden" th:name="chatIdentity" th:value="a3db6886e9585fca38e22c4e4988e7d08173ffb5a86a9206fd5c09061dae4cf35ea9fc1db20f7dfe1e42ee6d3cb6736ce680cb3342bc567f5052a9b742621ea0" />
+                        <input type="hidden" th:name="senderIdentity" th:value="${profileIdentity}" />
                         <button class="btn btn-primary d-flex align-items-center" type="submit">
                             <svg class="icon-20" fill="none" viewBox="0 0 20 21" width="18"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -849,9 +677,11 @@
                         </button>
                     </form>
                 </div>
+
             </div>
 
             <div class="card tab-pane mb-0 fade" id="user-content-107" role="tabpanel">
+
                 <div class="chat-head">
                     <header class="d-flex justify-content-between align-items-center bg-white pt-3  ps-3 pe-3 pb-3">
                         <div class="d-flex align-items-center">
@@ -876,6 +706,7 @@
                                 th:text="${onlineFriends.^[identity eq 'd52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8'].getNames()}">Barb Ackue</h5>
                             <small class="text-capitalize"></small>
                         </div>
+
                         <div class="chat-user-detail-popup scroller">
                             <div class="user-profile">
                                 <button class="close-popup p-3" type="submit"><i
@@ -921,39 +752,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="chat-header-icons d-inline-flex ms-auto">
-                            <a class="chat-icon-phone bg-soft-primary d-flex align-items-center justify-content-center"
-                               href="#">
-                                <i class="material-symbols-outlined md-18">phone</i>
-                            </a>
-                            <a class="chat-icon-video bg-soft-primary d-flex align-items-center justify-content-center"
-                               href="#">
-                                <i class="material-symbols-outlined md-18">videocam</i>
-                            </a>
-                            <a class="chat-icon-delete bg-soft-primary d-flex align-items-center justify-content-center"
-                               href="#">
-                                <i class="material-symbols-outlined md-18">delete</i>
-                            </a>
-                            <span class="dropdown bg-soft-primary d-flex align-items-center justify-content-center">
-                        <svg aria-expanded="false" aria-haspopup="true"
-                             class="icon-20 nav-hide-arrow cursor-pointer pe-0" data-bs-toggle="dropdown" fill="none"
-                             id="dropdownMenuButton-14" role="menu"
-                             viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd"
-                                  d="M10 20.6788C10 21.9595 11.0378 23 12.3113 23C13.5868 23 14.6265 21.9595 14.6265 20.6788C14.6265 19.3981 13.5868 18.3576 12.3113 18.3576C11.0378 18.3576 10 19.3981 10 20.6788ZM10 12.0005C10 13.2812 11.0378 14.3217 12.3113 14.3217C13.5868 14.3217 14.6265 13.2812 14.6265 12.0005C14.6265 10.7198 13.5868 9.67929 12.3113 9.67929C11.0378 9.67929 10 10.7198 10 12.0005ZM12.3113 5.64239C11.0378 5.64239 10 4.60192 10 3.3212C10 2.04047 11.0378 1 12.3113 1C13.5868 1 14.6265 2.04047 14.6265 3.3212C14.6265 4.60192 13.5868 5.64239 12.3113 5.64239Z"
-                                  fill="currentColor"
-                                  fill-rule="evenodd"></path>
-                        </svg>
-                        <span aria-labelledby="dropdownMenuButton-14" class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                    class="material-symbols-outlined md-18 me-1">push_pin</i>Pin to top</a>
-                            <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                    class="material-symbols-outlined md-18 me-1">delete_outline</i>Delete chat</a>
-                            <a class="dropdown-item d-flex align-items-center" href="#"><i
-                                    class="material-symbols-outlined md-18 me-1">watch_later</i>Block</a>
-                        </span>
-                    </span>
-                        </div>
+
                     </header>
                 </div>
 
@@ -984,50 +783,12 @@
                 </div>
 
                 <div class="card-footer px-3 py-3 border-top rounded-0">
-                    <form action="#" class="d-flex align-items-center">
+                    <form action="#" class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
                         <div class="chat-attagement d-flex">
-                            <a class="d-flex align-items-center pe-3" href="#">
-                                <svg class="icon-24" fill="none" viewBox="0 0 24 25" width="24"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_156_599)">
-                                        <path d="M20.4853 4.01473C18.2188 1.74823 15.2053 0.5 12 0.5C8.79469 0.5 5.78119 1.74823 3.51473 4.01473C1.24819 6.28119 0 9.29469 0 12.5C0 15.7053 1.24819 18.7188 3.51473 20.9853C5.78119 23.2518 8.79469 24.5 12 24.5C15.2053 24.5 18.2188 23.2518 20.4853 20.9853C22.7518 18.7188 24 15.7053 24 12.5C24 9.29469 22.7518 6.28119 20.4853 4.01473ZM12 23.0714C6.17091 23.0714 1.42856 18.3291 1.42856 12.5C1.42856 6.67091 6.17091 1.92856 12 1.92856C17.8291 1.92856 22.5714 6.67091 22.5714 12.5C22.5714 18.3291 17.8291 23.0714 12 23.0714Z"
-                                              fill="currentcolor"></path>
-                                        <path d="M9.40398 9.3309C8.23431 8.16114 6.33104 8.16123 5.16136 9.3309C4.88241 9.60981 4.88241 10.0621 5.16136 10.3411C5.44036 10.62 5.89266 10.62 6.17157 10.3411C6.78432 9.72836 7.78126 9.7284 8.39392 10.3411C8.53342 10.4806 8.71618 10.5503 8.89895 10.5503C9.08171 10.5503 9.26457 10.4806 9.40398 10.3411C9.68293 10.0621 9.68293 9.60986 9.40398 9.3309Z"
-                                              fill="currentcolor"></path>
-                                        <path d="M18.8384 9.3309C17.6688 8.16123 15.7655 8.16114 14.5958 9.3309C14.3169 9.60981 14.3169 10.0621 14.5958 10.3411C14.8748 10.62 15.3271 10.62 15.606 10.3411C16.2187 9.72836 17.2156 9.72831 17.8284 10.3411C17.9679 10.4806 18.1506 10.5503 18.3334 10.5503C18.5162 10.5503 18.699 10.4806 18.8384 10.3411C19.1174 10.0621 19.1174 9.60986 18.8384 9.3309Z"
-                                              fill="currentcolor"></path>
-                                        <path d="M18.3335 13.024H5.6668C5.2723 13.024 4.95251 13.3438 4.95251 13.7383C4.95251 17.6243 8.11409 20.7859 12.0001 20.7859C15.8862 20.7859 19.0477 17.6243 19.0477 13.7383C19.0477 13.3438 18.728 13.024 18.3335 13.024ZM12.0001 19.3573C9.14366 19.3573 6.77816 17.215 6.42626 14.4525H17.574C17.2221 17.215 14.8566 19.3573 12.0001 19.3573Z"
-                                              fill="currentcolor"></path>
-                                    </g>
-                                    <defs>
-                                        <clipPath>
-                                            <rect fill="white" height="24" transform="translate(0 0.5)"
-                                                  width="24"></rect>
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </a>
-                            <a class="d-flex align-items-center pe-3" href="#">
-                                <svg class="icon-24" fill="none" height="23" viewBox="0 0 18 23" width="18"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.00021 21.5V18.3391" stroke="currentcolor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"></path>
-                                    <path clip-rule="evenodd"
-                                          d="M9.00021 14.3481V14.3481C6.75611 14.3481 4.9384 12.5218 4.9384 10.2682V5.58095C4.9384 3.32732 6.75611 1.5 9.00021 1.5C11.2433 1.5 13.061 3.32732 13.061 5.58095V10.2682C13.061 12.5218 11.2433 14.3481 9.00021 14.3481Z"
-                                          fill-rule="evenodd"
-                                          stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"></path>
-                                    <path d="M17 10.3006C17 14.7394 13.418 18.3383 9 18.3383C4.58093 18.3383 1 14.7394 1 10.3006"
-                                          stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"></path>
-                                    <path d="M11.0689 6.25579H13.0585" stroke="currentcolor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"></path>
-                                    <path d="M10.0704 9.59344H13.0605" stroke="currentcolor" stroke-linecap="round"
-                                          stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </a>
                         </div>
-                        <input class="form-control me-3" placeholder="Type your message" type="text">
+                        <input class="form-control me-3" th:name="messageContent" th:value="*{messageContent}" placeholder="Type your message" type="text">
+                        <input type="hidden" th:name="chatIdentity" th:value="104765ce63f6e95212b0638559d7e75811b68ed59ff061352fb613ee701d661fd5427860cf510e8aeee2579e90890f3904b9e53e1262a50e9a161dacdf176caa" />
+                        <input type="hidden" th:name="senderIdentity" th:value="${profileIdentity}" />
                         <button class="btn btn-primary d-flex align-items-center" type="submit">
                             <svg class="icon-20" fill="none" viewBox="0 0 20 21" width="18"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -1039,6 +800,7 @@
                         </button>
                     </form>
                 </div>
+
             </div>
 
         </div>

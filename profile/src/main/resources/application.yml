@@ -53,6 +53,9 @@ spring:
         unfriend: unfriend-topic
         user:
           logout: user-logout-topic
+        new:
+          chat:
+            message: new-chat-message-topic
     partitions: 3
     replicas: 1
     group:

@@ -64,6 +64,9 @@ public class ConfigConstants {
     public static final String KAFKA_TOPIC_FOR_LOGOUT_USER_TEMPLATE =
             KAFKA_TOPIC_NEW_TOPIC_FOR + "logout user" + CREATED_TOPIC_NAME;
 
+    public static final String KAFKA_TOPIC_FOR_NEW_CHAT_MESSAGE_TEMPLATE =
+            KAFKA_TOPIC_NEW_TOPIC_FOR + "new chat message" + CREATED_TOPIC_NAME;
+
     private ConfigConstants() {
     }
 }

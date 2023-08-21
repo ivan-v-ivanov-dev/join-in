@@ -263,6 +263,14 @@ public class ProfileController {
         }
     }
 
+    @PostMapping("/chat/message")
+    public String postChatMessage(@RequestParam("messageContent") String messageContent,
+                                  @RequestParam("chatIdentity") String chatIdentity,
+                                  @RequestParam("senderIdentity") String senderIdentity) {
+        messageService.send(messageContent, chatIdentity, senderIdentity);
+        return "redirect:/chat?userIdentity=" + senderIdentity;
+    }
+
     @GetMapping("/signout")
     public String signOut(@RequestParam("userIdentity") String userIdentity) {
         authenticationService.logout(userIdentity);

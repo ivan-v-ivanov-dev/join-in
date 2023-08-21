@@ -9,4 +9,6 @@ public interface MessageService {
     List<OnlineFriend> onlineFriends(String identity);
 
     List<DirectChat> findUserDirectChatHistory(String userIdentity);
+
+    void send(String messageContent, String chatIdentity, String senderIdentity);
 }
