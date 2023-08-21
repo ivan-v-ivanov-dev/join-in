@@ -17,10 +17,6 @@ public class DirectChatMessage {
 
     private String senderProfileImage;
 
-    private String receiverIdentity;
-
-    private String receiverProfileImage;
-
     private String content;
 
     private LocalDate date;
