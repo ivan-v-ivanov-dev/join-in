@@ -72,22 +72,19 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Chat> findUserDirectChatHistory(String identity) {
         try {
-            List<Chat> userChatHistory = new ArrayList<>();
             List<String> userChatIdentities = messageRepository.findUserDirectChatIdentities(identity);
-            userChatIdentities.forEach(chatIdentity -> {
-                Chat chat = Chat.builder()
-                        .chatIdentity(chatIdentity)
-                        .messages(new ArrayList<>())
-                        .build();
-                chat.setMessages(messageRepository.findDirectChatMessages(String.format(COLLECTION_TEMPLATE, chatIdentity)));
-                chat.getMessages().forEach(chatMessage -> {
-                    chatMessage.setSenderProfileImage(imageClient.findProfileImage(chatMessage.getSenderIdentity()));
-                    chatMessage.setPostedAgo(calculatePostedAgo(chatMessage.getDate()));
-                });
-                chat.getMessages().sort(Comparator.comparing(ChatMessage::getDate));
-                userChatHistory.add(chat);
-            });
-            return userChatHistory;
+            return findChatMessages(userChatIdentities);
+        } catch (FeignException feignException) {
+            log.error(feignException.getMessage());
+            throw new ResourceAccessException(IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        }
+    }
+
+    @Override
+    public List<Chat> findUserGroupChatHistory(String identity) {
+        try {
+            List<String> userChatIdentities = messageRepository.findUserGroupChatIdentities(identity);
+            return findChatMessages(userChatIdentities);
         } catch (FeignException feignException) {
             log.error(feignException.getMessage());
             throw new ResourceAccessException(IMAGE_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
@@ -103,6 +100,24 @@ public class MessageServiceImpl implements MessageService {
                 .build();
         messageRepository.saveMessage(chatMessage, chatIdentity, String.format(COLLECTION_TEMPLATE, chatIdentity));
         log.info(NEW_CHAT_MESSAGE_SAVED_IN_DATABASE);
+    }
+
+    private List<Chat> findChatMessages(List<String> userChatIdentities) {
+        List<Chat> userChatHistory = new ArrayList<>();
+        userChatIdentities.forEach(chatIdentity -> {
+            Chat chat = Chat.builder()
+                    .chatIdentity(chatIdentity)
+                    .messages(new ArrayList<>())
+                    .build();
+            chat.setMessages(messageRepository.findChatMessages(String.format(COLLECTION_TEMPLATE, chatIdentity)));
+            chat.getMessages().forEach(chatMessage -> {
+                chatMessage.setSenderProfileImage(imageClient.findProfileImage(chatMessage.getSenderIdentity()));
+                chatMessage.setPostedAgo(calculatePostedAgo(chatMessage.getDate()));
+            });
+            chat.getMessages().sort(Comparator.comparing(ChatMessage::getDate));
+            userChatHistory.add(chat);
+        });
+        return userChatHistory;
     }
 
     private String calculatePostedAgo(LocalDate postDate) {

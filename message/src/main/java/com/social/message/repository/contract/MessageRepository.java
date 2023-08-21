@@ -16,7 +16,9 @@ public interface MessageRepository {
 
     List<String> findUserDirectChatIdentities(String identity);
 
-    List<ChatMessage> findDirectChatMessages(String collection);
+    List<ChatMessage> findChatMessages(String collection);
 
     void saveMessage(ChatMessage chatMessage, String chatIdentity, String collection);
+
+    List<String> findUserGroupChatIdentities(String identity);
 }

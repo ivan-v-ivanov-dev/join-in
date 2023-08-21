@@ -16,5 +16,7 @@ public interface MessageService {
 
     List<Chat> findUserDirectChatHistory(String identity);
 
+    List<Chat> findUserGroupChatHistory(String identity);
+
     void saveMessage(String chatIdentity, String senderIdentity, String messageContent, LocalDate date);
 }

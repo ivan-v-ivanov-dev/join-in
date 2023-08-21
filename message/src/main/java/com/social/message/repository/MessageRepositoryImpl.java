@@ -56,7 +56,7 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public List<ChatMessage> findDirectChatMessages(String collection) {
+    public List<ChatMessage> findChatMessages(String collection) {
         Query query = new Query();
         query.with(Sort.by(Sort.Direction.ASC, "date"));
         return mongoTemplate.findDistinct(query, "messages", collection, ChatMessage.class);
@@ -68,5 +68,12 @@ public class MessageRepositoryImpl implements MessageRepository {
         Update update = new Update().push("messages", chatMessage);
 
         mongoTemplate.updateFirst(query, update, Chat.class, collection);
+    }
+
+    @Override
+    public List<String> findUserGroupChatIdentities(String identity) {
+        Query query = new Query(Criteria.where("userIdentity").is(identity));
+        query.with(Sort.by(Sort.Direction.ASC, "identity"));
+        return mongoTemplate.findDistinct(query, "chatIdentities", "group_chat_identities", String.class);
     }
 }

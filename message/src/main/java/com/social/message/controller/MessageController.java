@@ -30,6 +30,11 @@ public class MessageController {
         return messageService.findUserDirectChatHistory(identity);
     }
 
+    @PostMapping("/group-chat/history")
+    public List<Chat> findUserGroupChatHistory(@RequestParam("identity") String identity) {
+        return messageService.findUserGroupChatHistory(identity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Message service is HEALTHY";
