@@ -205,4 +205,59 @@ db.group_chat_identities.insertMany (
 
     ]);
 
+//Direct chat with Viktoriya
+db.createCollection("c_f234338ff7d069dea0e9fa1f7d172426d25c1c44524b30be61d288e5b0562e7bcfdf7d7e17d7b597c114066b58c8041f03c25c2deabe2fe33441fd3567c7d829");
+console.log('*** Collection created ***')
+
+db.c_f234338ff7d069dea0e9fa1f7d172426d25c1c44524b30be61d288e5b0562e7bcfdf7d7e17d7b597c114066b58c8041f03c25c2deabe2fe33441fd3567c7d829.insertMany (
+    [
+        {
+            chatIdentity: "f234338ff7d069dea0e9fa1f7d172426d25c1c44524b30be61d288e5b0562e7bcfdf7d7e17d7b597c114066b58c8041f03c25c2deabe2fe33441fd3567c7d829",
+            messages:
+            [
+                {
+                    senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    content: "Shall we make a group chat?",
+                    date: "2023-05-13"
+                },
+                {
+                    senderIdentity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551",
+                    content: "Yea, sure.",
+                    date: "2023-05-14"
+                },
+                {
+                    senderIdentity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
+                    content: "This is great. We'll have a place to speak all of use",
+                    date: "2023-06-13"
+                },
+                {
+                    senderIdentity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
+                    content: "I think that this is great!",
+                    date: "2023-06-14"
+                },
+                {
+                    senderIdentity: "1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032",
+                    content: "What do you think about my Join IN project",
+                    date: "2023-06-20"
+                },
+                {
+                    senderIdentity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551",
+                    content: "It's great. The services are independent from one another.",
+                    date: "2023-06-20"
+                },
+                {
+                    senderIdentity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
+                    content: "Looks good.",
+                    date: "2023-07-20"
+                },
+                {
+                    senderIdentity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
+                    content: "I think that you did it. Congrats.",
+                    date: "2023-08-20"
+                }
+            ]
+        },
+
+    ]);
+
 console.log('*** Data Imported ***')
