@@ -2,7 +2,7 @@ package com.social.profile.service;
 
 import com.social.kafka.messages.NewChatMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
-import com.social.profile.model.DirectChat;
+import com.social.profile.model.Chat;
 import com.social.profile.model.OnlineFriend;
 import com.social.profile.repository.contract.ProfileRepository;
 import com.social.profile.service.contracts.KafkaMessageSender;
@@ -64,7 +64,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<DirectChat> findUserDirectChatHistory(String userIdentity) {
+    public List<Chat> findUserDirectChatHistory(String userIdentity) {
         try {
             return messageClient.findUserDirectChatHistory(userIdentity);
         } catch (FeignException | ResourceAccessException exception) {

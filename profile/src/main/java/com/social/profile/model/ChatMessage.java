@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-public class DirectChatMessage {
+public class ChatMessage {
 
     private String senderIdentity;
 

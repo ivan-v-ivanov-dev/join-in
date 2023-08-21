@@ -1,6 +1,6 @@
 package com.social.profile.service.feign;
 
-import com.social.profile.model.DirectChat;
+import com.social.profile.model.Chat;
 import com.social.profile.model.OnlineFriend;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,5 +16,5 @@ public interface MessageClient {
     Set<OnlineFriend> findUserOnlineFriends(@RequestParam("identity") String identity);
 
     @PostMapping("${direct.chat.history}")
-    List<DirectChat> findUserDirectChatHistory(@RequestParam("identity") String identity);
+    List<Chat> findUserDirectChatHistory(@RequestParam("identity") String identity);
 }

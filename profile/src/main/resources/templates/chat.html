@@ -513,7 +513,7 @@
                 </div>
 
                 <div class="card-body chat-body bg-body"
-                     th:with="chatMessages=${directChatHistory.^[chatIdentity eq '01f34eec06beb9d15b9d4272b72b91d80dec0abf608e53e8ba91417d559b23b84ced411d9c161172f320c80df9322298cf7d7b7cebdff213aa06e647a1c67c40'].getDirectChatMessages()}">
+                     th:with="chatMessages=${directChatHistory.^[chatIdentity eq '01f34eec06beb9d15b9d4272b72b91d80dec0abf608e53e8ba91417d559b23b84ced411d9c161172f320c80df9322298cf7d7b7cebdff213aa06e647a1c67c40'].getMessages()}">
 
                     <div th:each="message : ${chatMessages}">
                         <div class="iq-message-body"
@@ -634,7 +634,7 @@
                 </div>
 
                 <div class="card-body chat-body bg-body"
-                     th:with="chatMessages=${directChatHistory.^[chatIdentity eq 'a3db6886e9585fca38e22c4e4988e7d08173ffb5a86a9206fd5c09061dae4cf35ea9fc1db20f7dfe1e42ee6d3cb6736ce680cb3342bc567f5052a9b742621ea0'].getDirectChatMessages()}">
+                     th:with="chatMessages=${directChatHistory.^[chatIdentity eq 'a3db6886e9585fca38e22c4e4988e7d08173ffb5a86a9206fd5c09061dae4cf35ea9fc1db20f7dfe1e42ee6d3cb6736ce680cb3342bc567f5052a9b742621ea0'].getMessages()}">
 
                     <div th:each="message : ${chatMessages}">
                         <div class="iq-message-body"
@@ -757,7 +757,7 @@
                 </div>
 
                 <div class="card-body chat-body bg-body"
-                     th:with="chatMessages=${directChatHistory.^[chatIdentity eq '104765ce63f6e95212b0638559d7e75811b68ed59ff061352fb613ee701d661fd5427860cf510e8aeee2579e90890f3904b9e53e1262a50e9a161dacdf176caa'].getDirectChatMessages()}">
+                     th:with="chatMessages=${directChatHistory.^[chatIdentity eq '104765ce63f6e95212b0638559d7e75811b68ed59ff061352fb613ee701d661fd5427860cf510e8aeee2579e90890f3904b9e53e1262a50e9a161dacdf176caa'].getMessages()}">
 
                     <div th:each="message : ${chatMessages}">
                         <div class="iq-message-body"
