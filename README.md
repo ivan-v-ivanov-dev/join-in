@@ -1,7 +1,5 @@
 # Join-IN
 
-This repository is **under development**.
-
 # Content
 
 **1. General overview**   
