@@ -1,7 +1,8 @@
 # Read Me First
 This branch is under development. Please refer to the **old-architecture** branch of this project.
 
-![image](https://github.com/user-attachments/assets/0cf85c5e-2bfa-4194-ab2f-19832c24d2c5)
+![image](https://github.com/user-attachments/assets/b716d330-a943-4368-9f8f-b7b7b9c6bead)
+
 
 
 ![image](https://github.com/user-attachments/assets/56222024-5148-432f-b8b8-280a1cbaa71b)
