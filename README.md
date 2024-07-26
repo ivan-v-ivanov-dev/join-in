@@ -28,7 +28,8 @@ This branch is under development. Please refer to the **old-architecture** branc
 
 Generate User profile page
 
-![image](https://github.com/user-attachments/assets/3c92704f-4cd9-4edd-ae02-798189a98bba)
+![image](https://github.com/user-attachments/assets/74c8edd2-df86-4548-be8f-2d550e1daa5f)
+
 
 Accept / Decline / Send Friendship request
 
