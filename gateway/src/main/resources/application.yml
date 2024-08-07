@@ -42,8 +42,11 @@ logging:
     org.apache: OFF
 
 #Feign Login service
-login:
-  endpoint: /
+authentication:
+  login:
+    endpoint: /
+  register:
+    endpoint: /register
   service:
     feign:
       client:

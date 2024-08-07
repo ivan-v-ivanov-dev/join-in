@@ -12,9 +12,15 @@ public class ApiGatewayController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/")
-    public String authenticate(@RequestParam("email") String email,
+    public String login(@RequestParam("email") String email,
                                @RequestParam("password") String password) {
         return authenticationService.login(email, password);
+    }
+
+    @PostMapping("/register")
+    public void register(@RequestParam("email") String email,
+                         @RequestParam("password") String password) {
+        authenticationService.register(email, password);
     }
 
     @GetMapping("/health")

@@ -4,9 +4,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "${login.service.feign.client.name}", url = "${login.service.url}")
+@FeignClient(name = "${authentication.service.feign.client.name}", url = "${authentication.service.url}")
 public interface AuthenticationClient {
 
-    @PostMapping("${login.endpoint}")
+    @PostMapping("${authentication.login.endpoint}")
     String login(@RequestParam("email") String email, @RequestParam("password") String password);
+
+    @PostMapping("${authentication.register.endpoint}")
+    void register(@RequestParam("email") String email, @RequestParam("password") String password);
 }
