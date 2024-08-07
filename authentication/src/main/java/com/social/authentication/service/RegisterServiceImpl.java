@@ -8,8 +8,10 @@ import com.social.authentication.service.contract.PasswordEncoder;
 import com.social.authentication.service.contract.RegisterService;
 import com.social.kafka.messages.NewUserMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,7 @@ import static java.lang.String.format;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
+@AllArgsConstructor(onConstructor_ = @__(@Autowired))
 public class RegisterServiceImpl implements RegisterService {
 
     private final UserRepository userRepository;
