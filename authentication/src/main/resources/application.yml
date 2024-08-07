@@ -30,11 +30,11 @@ spring:
     topic:
       name:
         registered:
-          user: registered-user-topic
+          user: registered-user
         new:
-          user: new-user-topic
+          user: new-user
         user:
-          login: user-login-topic
+          login: user-login
     group:
       id: group-id
     producer:
