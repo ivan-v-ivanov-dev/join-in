@@ -1,0 +1,51 @@
+server:
+  port: 8080
+  max-http-header-size: 10MB
+
+spring:
+  #Kafka
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+      key:
+        type:
+          packages: '*'
+      value:
+        type:
+          packages: com.social.kafka.messages.contract.KafkaMessage
+    producer:
+      bootstrap-servers: localhost:9092
+    topic:
+      name:
+        registered:
+          user: registered-user
+        user:
+          logout: user-logout
+        new:
+          chat:
+            message: new-chat-message
+    partitions: 3
+    replicas: 1
+    group:
+      id: group-id
+
+#Exclude Kafka logging
+logging:
+  level:
+    org.apache: OFF
+
+#Feign Login service
+login:
+  endpoint: /
+  service:
+    feign:
+      client:
+        name: Login-Service
+    url: http://localhost:8081
