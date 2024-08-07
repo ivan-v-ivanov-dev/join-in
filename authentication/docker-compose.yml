@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+
+  # MySQL
+  mysql:
+    image: mysql:8.0.33
+    container_name: mysql
+    ports:
+      - 3306:3306
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: storage
+
+  # Flyway
+  flyway:
+    image: flyway/flyway:9.8.1
+    container_name: flyway
+    volumes:
+      - ./src/main/resources/flyway:/flyway/sql
+    command:
+      -url=jdbc:mysql://mysql:3306/storage 
+      -user=root 
+      -password=root 
+      -locations=filesystem:/flyway/sql migrate
+    depends_on:
+      - mysql
+    restart: on-failure
