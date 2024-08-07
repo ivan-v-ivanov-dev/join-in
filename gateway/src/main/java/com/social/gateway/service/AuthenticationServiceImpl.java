@@ -40,7 +40,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         try {
             authenticationClient.register(email, password);
             log.info(format(USER_REGISTERED_TEMPLATE, email));
-        }catch (FeignException feignException) {
+        } catch (IllegalArgumentException illegalArgumentException) {
+            log.error(illegalArgumentException.getMessage());
+            throw illegalArgumentException;
+        } catch (FeignException feignException) {
             log.error(feignException.getMessage());
             throw new ResourceAccessException(AUTHENTICATION_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
         }
