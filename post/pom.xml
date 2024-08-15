@@ -11,7 +11,7 @@
 	<artifactId>post</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>post</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Post Service</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
