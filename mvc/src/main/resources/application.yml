@@ -1,0 +1,146 @@
+server:
+  port: 8080
+  max-http-header-size: 10MB
+
+spring:
+  #Kafka
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+      key:
+        type:
+          packages: '*'
+      value:
+        type:
+          packages: com.social.kafka.messages.contract.KafkaMessage
+    producer:
+      bootstrap-servers: localhost:9092
+    topic:
+      name:
+        registered:
+          user: registered-user-topic
+        post:
+          publication: post-publication-topic
+          comment: post-comment-topic
+        delete:
+          post: delete-post-topic
+        edit:
+          post: edit-post-topic
+        like:
+          post: like-post-topic
+          comment: like-comment-topic
+        dislike:
+          post: dislike-post-topic
+          comment: dislike-comment-topic
+        star:
+          post: star-post-topic
+        accept:
+          friendship: accept-friendship-topic
+        decline:
+          friendship: decline-friendship-topic
+        unfriend: unfriend-topic
+        user:
+          logout: user-logout-topic
+        new:
+          chat:
+            message: new-chat-message-topic
+    partitions: 3
+    replicas: 1
+    group:
+      id: group-id
+
+#Exclude Kafka logging
+logging:
+  level:
+    org.apache: OFF
+
+#Feign Login service
+login:
+  endpoint: /
+  service:
+    feign:
+      client:
+        name: Login-Service
+    url: http://localhost:8081
+
+#Feign Post service
+post:
+  find:
+    all: /author/posts
+    one: /post
+  author:
+    posts:
+      count: /author/posts/count
+  user:
+    feed:
+      posts: /user/feed/posts
+  service:
+    feign:
+      client:
+        name: Post-Service
+    url: http://localhost:8082
+
+#Feign Relationship service
+relationship:
+  find:
+    friends:
+      count: /profile/friends/count
+      for:
+        user: /profile/friends
+    friend:
+      suggestions: /profile/friend/suggestions
+    friendship:
+      requests:
+        for:
+          user: /profile/friendship/requests
+        count: /profile/friendship/requests/count
+  service:
+    feign:
+      client:
+        name: Relationship-Service
+    url: http://localhost:8083
+
+#Feign Image service
+image:
+  service:
+    feign:
+      client:
+        name: Image-Service
+    url: http://localhost:8085
+  profile: /profile-image
+  background: /profile-background-image
+album:
+  images: /profile-album-images
+
+#Feign Notification service
+notification:
+  service:
+    feign:
+      client:
+        name: Notification-Service
+    url: http://localhost:8086
+user:
+  notifications: /user/notifications
+
+#Feign Message service
+message:
+  service:
+    feign:
+      client:
+        name: Message-Service
+    url: http://localhost:8087
+friends:
+  online: /friends/online
+direct:
+  chat:
+    history: /direct-chat/history
+group:
+  chat:
+    history: /group-chat/history
