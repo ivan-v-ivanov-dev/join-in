@@ -1,0 +1,33 @@
+server:
+  port: 8089
+
+spring:
+
+  #Kafka
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+      key:
+        type:
+          packages: '*'
+      value:
+        type:
+          packages: com.social.kafka.messages.contract.KafkaMessage
+    topic:
+      name:
+        new:
+          user: new-user
+    group:
+      id: group-id
+
+#Exclude Kafka logging
+logging:
+  level:
+    org.apache: OFF
