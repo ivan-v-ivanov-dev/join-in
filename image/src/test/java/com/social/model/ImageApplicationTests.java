@@ -1,4 +1,4 @@
-package com.social.image;
+package com.social.model;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

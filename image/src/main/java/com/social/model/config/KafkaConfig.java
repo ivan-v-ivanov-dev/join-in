@@ -1,4 +1,4 @@
-package com.social.image.config;
+package com.social.model.config;
 
 import com.social.kafka.messages.contract.KafkaMessage;
 import lombok.extern.slf4j.Slf4j;
