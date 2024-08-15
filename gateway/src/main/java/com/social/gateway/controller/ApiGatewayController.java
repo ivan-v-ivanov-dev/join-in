@@ -11,9 +11,9 @@ public class ApiGatewayController {
 
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/")
+    @PostMapping("/login")
     public String login(@RequestParam("email") String email,
-                               @RequestParam("password") String password) {
+                        @RequestParam("password") String password) {
         return authenticationService.login(email, password);
     }
 
