@@ -1,5 +1,6 @@
 package com.social.mvc.controller;
 
+import com.social.mvc.model.Register;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ public class MvcController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("register", new com.social.mvc.model.Register());
+        model.addAttribute("register", new Register());
         return "register";
     }
 

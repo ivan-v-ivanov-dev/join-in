@@ -1,0 +1,36 @@
+server:
+  port: 8083
+  max-http-header-size: 10MB
+
+spring:
+  #Mongo
+  data:
+    mongodb:
+      uri: mongodb://rootuser:rootpass@localhost:27017/storage
+      database: storage
+  #Kafka
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+      key:
+        type:
+          packages: '*'
+      value:
+        type:
+          packages: com.social.kafka.messages.contract.KafkaMessage
+    partitions: 3
+    replicas: 1
+    group:
+      id: group-id
+
+#Exclude Kafka logging
+logging:
+  level:
+    org.apache: OFF
