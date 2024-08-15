@@ -1,0 +1,59 @@
+server:
+  port: 8085
+
+spring:
+  data:
+    neo4j:
+      uri: bolt://localhost:7688
+      username: neo4j
+      password: Root_123
+
+  # Kafka
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+      key:
+        type:
+          packages: '*'
+      value:
+        type:
+          packages: com.social.kafka.messages.contract.KafkaMessage
+    topic:
+      name:
+        new:
+          user: new-user-topic
+          post:
+            node: new-post-node
+          comment:
+            node: new-comment-node
+        delete:
+          nodes: delete-nodes-topic
+        like:
+          post: like-post-topic
+          post-notification: like-post-notification-topic
+          comment: like-comment-topic
+          comment-notification: like-comment-notification-topic
+        dislike:
+          post: dislike-post-topic
+          post-notification: dislike-post-notification-topic
+          comment: dislike-comment-topic
+          comment-notification: dislike-comment-notification-topic
+        star:
+          post: star-post-topic
+          post-notification: star-post-notification-topic
+    partitions: 3
+    replicas: 1
+    group:
+      id: group-id
+
+#Exclude Kafka logging
+logging:
+  level:
+    org.apache: OFF
