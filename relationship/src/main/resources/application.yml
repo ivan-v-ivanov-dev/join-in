@@ -1,0 +1,43 @@
+server:
+  port: 8087
+
+spring:
+  data:
+    neo4j:
+      uri: bolt://localhost:7687
+      username: neo4j
+      password: Root_123
+
+  # Kafka
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+      key:
+        type:
+          packages: '*'
+      value:
+        type:
+          packages: com.social.kafka.messages.contract.KafkaMessage
+    topic:
+      name:
+        new:
+          user: new-user
+        accept:
+          friendship: accept-friendship
+        decline:
+          friendship: decline-friendship
+        unfriend: unfriend
+    group:
+      id: group-id
+
+#Exclude Kafka logging
+logging:
+  level:
+    org.apache: OFF
