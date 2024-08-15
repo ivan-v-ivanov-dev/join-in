@@ -1,0 +1,55 @@
+server:
+  port: 8084
+
+spring:
+
+  #Mongo
+  data:
+    mongodb:
+      uri: mongodb://rootuser:rootpass@localhost:27020/storage
+      database: storage
+
+  #Kafka
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+      key:
+        type:
+          packages: '*'
+      value:
+        type:
+          packages: com.social.kafka.messages.contract.KafkaMessage
+    topic:
+      name:
+        post:
+          publication: post-publication
+          comment: post-comment
+        delete:
+          post: delete-post
+          nodes: delete-nodes
+        edit:
+          post: edit-post
+        new:
+          user: new-user
+          post:
+            notification: new-post-notification
+            node: new-post-node
+          comment:
+            notification: new-comment-notification
+            node: new-comment-node
+    partitions: 3
+    replicas: 1
+    group:
+      id: group-id
+
+#Exclude Kafka logging
+logging:
+  level:
+    org.apache: OFF
