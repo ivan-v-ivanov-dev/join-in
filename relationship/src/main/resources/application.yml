@@ -27,8 +27,8 @@ spring:
           packages: com.social.kafka.messages.contract.KafkaMessage
     topic:
       name:
-        new:
-          user: new-user
+        registered:
+          user: registered-user
         accept:
           friendship: accept-friendship
         decline:
