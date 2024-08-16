@@ -12,13 +12,10 @@ Register User
 
 Login, Logout
 
+![image](https://github.com/user-attachments/assets/a6b04ab7-e897-417b-bc28-4864e866604d)
 
 
 
-![image](https://github.com/user-attachments/assets/56222024-5148-432f-b8b8-280a1cbaa71b)
-
-
-![image](https://github.com/user-attachments/assets/f8dfccf8-2864-4c33-b7c5-4873d77afbe8)
 
 
 ![image](https://github.com/user-attachments/assets/643291fd-77a4-4bde-bb3c-c0bf09eba2f7)
