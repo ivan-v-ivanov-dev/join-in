@@ -1,7 +1,12 @@
 # Read Me First
 This branch is under development. Please refer to the **old-architecture** branch of this project.
 
-![image](https://github.com/user-attachments/assets/b716d330-a943-4368-9f8f-b7b7b9c6bead)
+General overview
+
+![image](https://github.com/user-attachments/assets/9ff2a929-7208-40d1-b822-6597bbe17347)
+
+
+Login, Logout, Register
 
 
 
