@@ -2,13 +2,18 @@ package com.social.mvc.controller;
 
 import com.social.mvc.model.Register;
 import com.social.mvc.service.contract.AuthenticationService;
+import feign.FeignException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.ResourceAccessException;
+
+import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
@@ -38,6 +43,33 @@ public class MvcController {
     public String register(Model model) {
         model.addAttribute("register", new Register());
         return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@Valid @ModelAttribute("register") Register register,
+                               BindingResult errors, Model model) {
+        if (errors.hasErrors()) {
+            return "register";
+        }
+
+        try {
+            authenticationService.register(register);
+            return "redirect:/";
+        } catch (FeignException exception) {
+            model.addAttribute("error", exception.getMessage());
+            return "error";
+        }
+    }
+
+    @GetMapping("/logout")
+    public String signOut(@RequestParam("userIdentity") String userIdentity, Model model) {
+        try {
+            authenticationService.logout(userIdentity);
+            return "redirect:/";
+        } catch (FeignException exception) {
+            model.addAttribute("error", exception.getMessage());
+            return "error";
+        }
     }
 
     @GetMapping("/health")

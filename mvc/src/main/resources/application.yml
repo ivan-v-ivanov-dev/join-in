@@ -65,6 +65,10 @@ logging:
 gateway:
   login:
     endpoint: /api/login
+  logout:
+    endpoint: /api/logout
+  register:
+    endpoint: /api/register
     service:
       feign:
         client:
