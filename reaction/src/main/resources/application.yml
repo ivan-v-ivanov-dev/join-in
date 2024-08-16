@@ -27,27 +27,28 @@ spring:
           packages: com.social.kafka.messages.contract.KafkaMessage
     topic:
       name:
+        registered:
+          user: registered-user
         new:
-          user: new-user-topic
           post:
             node: new-post-node
           comment:
             node: new-comment-node
         delete:
-          nodes: delete-nodes-topic
+          nodes: delete-nodes
         like:
           post: like-post-topic
-          post-notification: like-post-notification-topic
+          post-notification: like-post-notification
           comment: like-comment-topic
-          comment-notification: like-comment-notification-topic
+          comment-notification: like-comment-notification
         dislike:
-          post: dislike-post-topic
-          post-notification: dislike-post-notification-topic
+          post: dislike-post
+          post-notification: dislike-post-notification
           comment: dislike-comment-topic
-          comment-notification: dislike-comment-notification-topic
+          comment-notification: dislike-comment-notification
         star:
-          post: star-post-topic
-          post-notification: star-post-notification-topic
+          post: star-post
+          post-notification: star-post-notification
     partitions: 3
     replicas: 1
     group:
