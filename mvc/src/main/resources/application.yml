@@ -69,6 +69,8 @@ gateway:
     endpoint: /api/logout
   register:
     endpoint: /api/register
+  profile:
+    endpoint: /api/profile/{identity}
     service:
       feign:
         client:
