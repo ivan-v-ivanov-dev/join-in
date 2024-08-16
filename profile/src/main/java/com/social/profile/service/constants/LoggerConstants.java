@@ -10,5 +10,8 @@ public class LoggerConstants {
     public static final String NEW_COLLECTION_CREATED_TEMPLATE =
             "New Collection created (Collection name: %s)";
 
+    public static final String RETRIEVE_PROFILE_TEMPLATE =
+            "Retrieve Profile (User identity: %s)";
+
     private LoggerConstants(){}
 }
