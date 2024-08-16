@@ -8,5 +8,11 @@ public class LoggerConstants {
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
 
+    public static final String CREATE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE =
+            "Create friend relationship between sender and recipient (Sender identity: %s, Recipient identity: %s)";
+
+    public static final String CREATE_FRIEND_RELATIONSHIP_REQUEST_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE =
+            "Create friend request relationship between sender and recipient (Sender identity: %s, Recipient identity: %s)";
+
     private LoggerConstants(){}
 }
