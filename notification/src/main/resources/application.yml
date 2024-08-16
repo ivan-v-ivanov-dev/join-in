@@ -36,8 +36,8 @@ spring:
           comment-notification: dislike-comment-notification
         star:
           post-notification: star-post-notification
-        new:
-          user: new-user
+        registered:
+          user: registered-user
           post:
             notification: new-post-notification
           comment:
