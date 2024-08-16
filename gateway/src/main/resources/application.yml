@@ -28,6 +28,7 @@ spring:
           user: registered-user
         user:
           logout: user-logout
+          login: user-login
         new:
           chat:
             message: new-chat-message

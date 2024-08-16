@@ -9,7 +9,4 @@ public interface AuthenticationClient {
 
     @PostMapping("${authentication.login.endpoint}")
     String login(@RequestParam("email") String email, @RequestParam("password") String password);
-
-    @PostMapping("${authentication.register.endpoint}")
-    void register(@RequestParam("email") String email, @RequestParam("password") String password);
 }

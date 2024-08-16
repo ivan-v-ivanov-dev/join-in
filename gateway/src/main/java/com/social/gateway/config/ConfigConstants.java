@@ -30,6 +30,10 @@ public class ConfigConstants {
     public static final String KAFKA_TOPIC_FOR_LOGOUT_USER_TEMPLATE =
             KAFKA_TOPIC_NEW_TOPIC_FOR + "logout user" + CREATED_TOPIC_NAME;
 
+    public static final String KAFKA_TOPIC_FOR_LOGIN_USER_CREATED_TEMPLATE =
+            "Kafka Topic :: New topic for login user created (name:  %s)";
+
+
     private ConfigConstants() {
     }
 }

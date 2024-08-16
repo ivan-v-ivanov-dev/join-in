@@ -1,4 +1,4 @@
-package com.social.authentication.config.topic;
+package com.social.gateway.config.topic;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.TopicBuilder;
 
-import static com.social.authentication.config.ConfigConstants.KAFKA_TOPIC_FOR_LOGIN_USER_CREATED_TEMPLATE;
+import static com.social.gateway.config.ConfigConstants.KAFKA_TOPIC_FOR_LOGIN_USER_CREATED_TEMPLATE;
 
 @Configuration
 @EnableKafka
