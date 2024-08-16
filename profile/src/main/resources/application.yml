@@ -29,6 +29,10 @@ spring:
     replicas: 1
     group:
       id: group-id
+    topic:
+      name:
+        registered:
+          user: registered-user
 
 #Exclude Kafka logging
 logging:
