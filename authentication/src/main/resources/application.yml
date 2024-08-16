@@ -31,10 +31,6 @@ spring:
       name:
         registered:
           user: registered-user
-        new:
-          user: new-user
-        user:
-          login: user-login
     group:
       id: group-id
     producer:
