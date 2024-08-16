@@ -36,8 +36,8 @@ spring:
           nodes: delete-nodes
         edit:
           post: edit-post
-        new:
-          user: new-user
+        registered:
+          user: registered-user
           post:
             notification: new-post-notification
             node: new-post-node
