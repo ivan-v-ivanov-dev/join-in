@@ -51,7 +51,7 @@ public class ProfileGatewayRp {
 
     List<FriendGatewayRp> friends;
 
-    List<FriendshipRequesGatewaytRp> friendshipRequests;
+    List<FriendshipRequestGatewayRp> friendshipRequests;
 
     List<NotificationGatewayRp> notifications;
 }
