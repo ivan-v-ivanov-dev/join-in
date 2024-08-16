@@ -6,7 +6,12 @@ General overview
 ![image](https://github.com/user-attachments/assets/9ff2a929-7208-40d1-b822-6597bbe17347)
 
 
-Login, Logout, Register
+Register User
+
+![image](https://github.com/user-attachments/assets/09d9eeae-cfba-44e0-929a-a4b7b8b9f2e8)
+
+Login, Logout
+
 
 
 
