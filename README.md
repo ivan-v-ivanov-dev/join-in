@@ -15,8 +15,7 @@ Login, Logout
 ![image](https://github.com/user-attachments/assets/a6b04ab7-e897-417b-bc28-4864e866604d)
 
 
-
-
+Post a publication
 
 ![image](https://github.com/user-attachments/assets/643291fd-77a4-4bde-bb3c-c0bf09eba2f7)
 
