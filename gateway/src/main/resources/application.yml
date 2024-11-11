@@ -53,3 +53,15 @@ authentication:
       client:
         name: Login-Service
     url: http://localhost:8082
+
+#Feign Profile service
+profile:
+  register:
+    endpoint: /register
+  identity:
+    endpoint: /profile/{identity}
+  service:
+    feign:
+      client:
+        name: Profile-Service
+    url: http://localhost:8083
