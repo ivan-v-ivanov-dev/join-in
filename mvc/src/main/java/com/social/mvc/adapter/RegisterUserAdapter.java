@@ -2,7 +2,9 @@ package com.social.mvc.adapter;
 
 import com.social.model.dto.RegisterUserRq;
 import com.social.mvc.model.Register;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RegisterUserAdapter {
 
     public RegisterUserRq fromRegisterToRegisterUserRq(Register register) {

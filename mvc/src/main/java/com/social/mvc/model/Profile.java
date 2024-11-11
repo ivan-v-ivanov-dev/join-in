@@ -1,18 +1,18 @@
 package com.social.mvc.model;
 
-import com.social.model.dto.FriendRp;
 import com.social.model.dto.FriendshipRequestRp;
 import com.social.model.dto.NotificationRp;
-import com.social.model.dto.PostRp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 public class Profile {

@@ -63,6 +63,11 @@ logging:
 
 #Feign Login service
 gateway:
+  service:
+    feign:
+      client:
+        name: API-Gateway-Service
+    url: http://localhost:8081
   login:
     endpoint: /api/login
   logout:
@@ -71,11 +76,6 @@ gateway:
     endpoint: /api/register
   profile:
     endpoint: /api/profile/{identity}
-    service:
-      feign:
-        client:
-          name: API-Gateway-Service
-      url: http://localhost:8081
 
 ##Feign Post service
 #post:
