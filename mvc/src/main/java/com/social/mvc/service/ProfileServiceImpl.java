@@ -24,12 +24,28 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Profile findProfileInfoByIdentity(String identity) {
         try {
-            Profile profile = profileAdapter.fromProfileRpToProfile(gatewayClient.findProfileInfoByIdentity(identity));
+            Profile profile = profileAdapter.fromProfileGatewayRpToProfile(gatewayClient.findProfileInfoByIdentity(identity));
+            // make call to Gateway for the other info
+            // profile image
+
+            //albums
+
+            //posts
+
+            //friends
+
+            //friendshipRequests
+
+            //notifications
+
             log.info(format(PROFILE_INFORMATION_RETRIEVED_FOR_USER_TEMPLATE, identity));
             return profile;
         } catch (FeignException feignException) {
             log.error(feignException.getMessage());
             throw new ResourceAccessException(feignException.getMessage());
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
         }
     }
 }

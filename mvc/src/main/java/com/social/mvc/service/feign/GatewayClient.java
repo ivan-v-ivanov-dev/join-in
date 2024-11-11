@@ -1,6 +1,6 @@
 package com.social.mvc.service.feign;
 
-import com.social.model.dto.ProfileRp;
+import com.social.model.dto.ProfileGatewayRp;
 import com.social.model.dto.RegisterUserRq;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,5 +21,5 @@ public interface GatewayClient {
     void register(@RequestBody RegisterUserRq registerUserRq);
 
     @PostMapping("${gateway.profile.endpoint}")
-    ProfileRp findProfileInfoByIdentity(@PathVariable("identity") String identity);
+    ProfileGatewayRp findProfileInfoByIdentity(@PathVariable("identity") String identity);
 }
