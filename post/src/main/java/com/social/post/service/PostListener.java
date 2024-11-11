@@ -4,6 +4,7 @@ import com.social.kafka.messages.RegisteredUserMessage;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.post.service.contract.PostService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -13,6 +14,7 @@ import static com.social.post.service.constants.LoggerConstants.NEW_REGISTERED_U
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 @Slf4j
 public class PostListener {
 
