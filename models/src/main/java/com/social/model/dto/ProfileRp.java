@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,18 +40,4 @@ public class ProfileRp {
     private String website;
 
     private String hobbies;
-
-    private String profileImage;
-
-    private String backgroundImage;
-
-    Map<String, List<String>> albums;
-
-    List<PostRp> posts;
-
-    List<FriendRp> friends;
-
-    List<FriendshipRequestRp> friendshipRequests;
-
-    List<NotificationRp> notifications;
 }

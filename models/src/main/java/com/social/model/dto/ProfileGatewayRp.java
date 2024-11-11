@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
 
 @AllArgsConstructor
 @Builder
@@ -41,17 +39,4 @@ public class ProfileGatewayRp {
 
     private String hobbies;
 
-    private String profileImage;
-
-    private String backgroundImage;
-
-    Map<String, List<String>> albums;
-
-    List<PostGatewayRp> posts;
-
-    List<FriendGatewayRp> friends;
-
-    List<FriendshipRequestGatewayRp> friendshipRequests;
-
-    List<NotificationGatewayRp> notifications;
 }
