@@ -5,6 +5,7 @@ import com.social.kafka.messages.UserLogout;
 import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.message.service.contracts.MessageService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -15,6 +16,7 @@ import static com.social.message.service.constants.LoggerConstants.USER_LOGOUT_M
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 @Slf4j
 public class MessageListener {
 
