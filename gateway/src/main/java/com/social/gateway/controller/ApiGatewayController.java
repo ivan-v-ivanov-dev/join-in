@@ -1,6 +1,8 @@
 package com.social.gateway.controller;
 
 import com.social.gateway.service.contract.AuthenticationService;
+import com.social.gateway.service.contract.ProfileService;
+import com.social.model.dto.ProfileGatewayRp;
 import com.social.model.dto.RegisterUserRq;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class ApiGatewayController {
 
     private final AuthenticationService authenticationService;
+    private final ProfileService profileService;
 
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
@@ -27,6 +30,11 @@ public class ApiGatewayController {
     @PostMapping("/register")
     public void register(@RequestBody RegisterUserRq registerUserRq) {
         authenticationService.register(registerUserRq);
+    }
+
+    @PostMapping("/profile/{identity}")
+    public ProfileGatewayRp findProfileInfoByIdentity(@PathVariable String identity) {
+        return profileService.findProfileInfoByIdentity(identity);
     }
 
     @GetMapping("/health")

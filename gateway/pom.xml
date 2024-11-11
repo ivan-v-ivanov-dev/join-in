@@ -35,6 +35,19 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.6.0.Beta1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.5.3.Final</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>com.social</groupId>
 			<artifactId>kafka</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

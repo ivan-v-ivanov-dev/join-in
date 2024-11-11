@@ -15,6 +15,8 @@ public class LoggerConstants {
     public static final String USER_LOGOUT_MESSAGE_CREATED_AND_SEND_TO_MESSAGE_SERVICE_TOPIC_NAME_USER_IDENTITY_TEMPLATE =
             KAFKA_MESSAGING + "User logout message created and send to Authentication service (Kafka topic: %s, User identity %s)";
 
+    public static final String USER_RETRIEVED_TEMPLATE = "User %s retrieved";
+
     private LoggerConstants() {
     }
 }
