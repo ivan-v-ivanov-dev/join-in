@@ -74,3 +74,4 @@ image:
         name: Image-Service
     url: http://localhost:8089
   profile: /profile/{identity}
+  background: /profile/{identity}/background-image

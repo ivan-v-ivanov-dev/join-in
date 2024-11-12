@@ -9,4 +9,7 @@ public interface ImageClient {
 
     @GetMapping("${image.profile}")
     String findProfileImage(@PathVariable("identity") String userIdentity);
+
+    @GetMapping("${image.profile.background}")
+    String findProfileBackgroundImage(@PathVariable String identity);
 }

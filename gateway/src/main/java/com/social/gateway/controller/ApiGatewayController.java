@@ -44,6 +44,11 @@ public class ApiGatewayController {
         return imageService.findProfileImage(identity);
     }
 
+    @GetMapping("/profile/{identity}/background-image")
+    public String findProfileBackgroundImage(@PathVariable String identity) {
+        return imageService.findProfileBackgroundImage(identity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";
