@@ -5,6 +5,9 @@ import com.social.model.dto.RegisterUserRq;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @FeignClient(name = "${gateway.service.feign.client.name}", url = "${gateway.service.url}")
 public interface GatewayClient {
 
@@ -25,4 +28,7 @@ public interface GatewayClient {
 
     @GetMapping("${gateway.profile.background.image.endpoint}")
     String findProfileBackgroundImage(@PathVariable String identity);
+
+    @GetMapping("${gateway.profile.albums.endpoint}")
+    Map<String, List<String>> findProfileAlbumImages(@PathVariable String identity);
 }

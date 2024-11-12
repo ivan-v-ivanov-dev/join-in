@@ -80,8 +80,9 @@ public class MvcController {
             //TODO:
             // make call to Gateway for the other info
             model.addAttribute("profileImage", imageService.findProfileImage(identity));
-            //albums
             model.addAttribute("backgroundImage", imageService.findBackgroundImage(identity));
+            //albums
+            model.addAttribute("albums", imageService.findAlbums(identity));
             //posts
 
             //friends
