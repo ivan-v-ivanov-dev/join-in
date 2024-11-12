@@ -2,7 +2,7 @@ package com.social.model.config;
 
 public class ConfigConstants {
 
-    // Mongo Configuration Logger Constants
+    // Mongo Configuration Logger RepositoryConstants
     private static final String MONGO_CONFIGURATION = "Mongo Configuration :: ";
 
     private static final String CREATED = " created";
@@ -11,7 +11,7 @@ public class ConfigConstants {
 
     public static final String MONGO_TEMPLATE_CREATED = MONGO_CONFIGURATION + "Mongo Template" + CREATED;
 
-    // Kafka Configuration Logger Constants
+    // Kafka Configuration Logger RepositoryConstants
     private static final String KAFKA_CONFIGURATION = "Kafka Configuration :: ";
 
     private static final String FOR_KAFKA_MESSAGING_CREATED = " for Kafka messaging created";
