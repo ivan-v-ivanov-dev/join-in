@@ -78,3 +78,6 @@ gateway:
     endpoint: /api/profile/{identity}
     image:
       endpoint: /api/profile/{identity}/profile-image
+    background:
+      image:
+        endpoint: /profile/{identity}/background-image

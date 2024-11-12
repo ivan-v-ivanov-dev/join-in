@@ -22,4 +22,7 @@ public interface GatewayClient {
 
     @GetMapping("${gateway.profile.image.endpoint}")
     String findProfileImage(@PathVariable String identity);
+
+    @GetMapping("${gateway.profile.background.image.endpoint}")
+    String findProfileBackgroundImage(@PathVariable String identity);
 }
