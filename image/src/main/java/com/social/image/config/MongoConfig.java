@@ -1,4 +1,4 @@
-package com.social.model.config;
+package com.social.image.config;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -9,9 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
-
-import static com.social.model.config.ConfigConstants.MONGO_CLIENT_CREATED;
-import static com.social.model.config.ConfigConstants.MONGO_TEMPLATE_CREATED;
 
 @Configuration
 @Slf4j
@@ -28,14 +25,14 @@ public class MongoConfig {
                 .applyConnectionString(new ConnectionString(mongoUri))
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
-        log.info(MONGO_CLIENT_CREATED);
+        log.info(ConfigConstants.MONGO_CLIENT_CREATED);
         return mongoClient;
     }
 
     @Bean
     public MongoTemplate mongoTemplate() {
         MongoTemplate mongoTemplate = new MongoTemplate(mongoClient(), database);
-        log.info(MONGO_TEMPLATE_CREATED);
+        log.info(ConfigConstants.MONGO_TEMPLATE_CREATED);
         return mongoTemplate;
     }
 }

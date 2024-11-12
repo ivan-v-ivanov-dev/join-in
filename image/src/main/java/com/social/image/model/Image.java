@@ -1,4 +1,4 @@
-package com.social.model.model;
+package com.social.image.model;
 
 import lombok.Getter;
 import org.springframework.data.annotation.Id;

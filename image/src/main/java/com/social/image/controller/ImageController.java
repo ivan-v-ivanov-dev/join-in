@@ -1,6 +1,6 @@
-package com.social.model.controller;
+package com.social.image.controller;
 
-import com.social.model.service.contract.ImageService;
+import com.social.image.service.contract.ImageService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

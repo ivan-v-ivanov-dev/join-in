@@ -1,6 +1,6 @@
-package com.social.model.repository.contract;
+package com.social.image.repository.contract;
 
-import com.social.model.model.Image;
+import com.social.image.model.Image;
 
 import java.util.List;
 

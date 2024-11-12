@@ -1,7 +1,7 @@
-package com.social.model.repository;
+package com.social.image.repository;
 
-import com.social.model.model.Image;
-import com.social.model.repository.contract.ImageRepository;
+import com.social.image.model.Image;
+import com.social.image.repository.contract.ImageRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.social.model.repository.constants.RepositoryConstants.*;
+import static com.social.image.repository.constants.RepositoryConstants.*;
 
 @Repository
 public class ImageRepositoryImpl implements ImageRepository {
