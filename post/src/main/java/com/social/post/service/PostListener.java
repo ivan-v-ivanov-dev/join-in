@@ -19,6 +19,7 @@ import static com.social.post.service.constants.LoggerConstants.NEW_REGISTERED_U
 public class PostListener {
 
     private final PostService postService;
+
     @Value("${spring.kafka.topic.name.registered.user}")
     String registeredUserTopic;
 
