@@ -17,6 +17,9 @@ public class LoggerConstants {
 
     public static final String USER_RETRIEVED_TEMPLATE = "User %s retrieved";
 
+    public static final String RETRIEVE_PROFILE_IMAGE_FROM_IMAGE_SERVICE_TEMPLATE =
+            "Retrieve Profile image from Image Service (Profile identity: %s)";
+
     private LoggerConstants() {
     }
 }

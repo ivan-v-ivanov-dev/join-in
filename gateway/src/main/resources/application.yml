@@ -65,3 +65,12 @@ profile:
       client:
         name: Profile-Service
     url: http://localhost:8083
+
+#Feign Image service
+image:
+  service:
+    feign:
+      client:
+        name: Image-Service
+    url: http://localhost:8089
+  profile: /profile/{identity}
