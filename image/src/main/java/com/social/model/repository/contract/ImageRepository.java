@@ -1,13 +1,15 @@
 package com.social.model.repository.contract;
 
+import com.social.model.model.Image;
+
 import java.util.List;
 
 public interface ImageRepository {
-    String findProfileImage(String collection);
+    Image findProfileImage(String collection);
 
-    String findProfileBackgroundImage(String collection);
+    Image findProfileBackgroundImage(String collection);
 
-    List<String> findProfileAlbumImage(String collection);
+    List<Image> findProfileAlbumImages(String collection);
 
     void createCollection(String collection);
 }

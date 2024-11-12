@@ -1,7 +1,9 @@
 package com.social.model.repository;
 
+import com.social.model.model.Image;
 import com.social.model.repository.contract.ImageRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -19,18 +21,20 @@ public class ImageRepositoryImpl implements ImageRepository {
     }
 
     @Override
-    public String findProfileImage(String collection) {
-        return mongoTemplate.findDistinct(new Query(), PROFILE_IMAGE_FIELD, collection, String.class).get(0);
+    public Image findProfileImage(String collection) {
+        Query profileQuery = Query.query(Criteria.where(TYPE).is(PROFILE));
+        return mongoTemplate.findOne(profileQuery, Image.class, collection);
     }
 
     @Override
-    public String findProfileBackgroundImage(String collection) {
-        return mongoTemplate.findDistinct(new Query(), BACKGROUND_IMAGE_FIELD, collection, String.class).get(0);
+    public Image findProfileBackgroundImage(String collection) {
+        Query profileQuery = Query.query(Criteria.where(TYPE).is(BACKGROUND));
+        return mongoTemplate.findOne(profileQuery, Image.class, collection);
     }
 
-    @Override
-    public List<String> findProfileAlbumImage(String collection) {
-        return mongoTemplate.findDistinct(new Query(), ALBUM_IMAGES_FIELD, collection, String.class);
+    public List<Image> findProfileAlbumImages(String collectionName) {
+        Query query = new Query(Criteria.where(TYPE).is(ALBUM));
+        return mongoTemplate.find(query, Image.class, collectionName);
     }
 
     @Override

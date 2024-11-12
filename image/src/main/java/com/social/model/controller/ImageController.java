@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @AllArgsConstructor
 public class ImageController {
@@ -20,6 +23,11 @@ public class ImageController {
     @GetMapping("/profile/{identity}/background-image")
     public String findProfileBackgroundImage(@PathVariable String identity) {
         return imageService.findProfileBackgroundImage(identity);
+    }
+
+    @GetMapping("/profile/{identity}/albums")
+    public Map<String, List<String>> findProfileAlbumImages(@PathVariable String identity) {
+        return imageService.findProfileAlbumImages(identity);
     }
 
     @GetMapping("/health")
