@@ -1,5 +1,6 @@
 package com.social.post.controller;
 
+import com.social.model.dto.PostRp;
 import com.social.post.model.Post;
 import com.social.post.service.contract.PostService;
 import lombok.AllArgsConstructor;
@@ -15,8 +16,8 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/author/{authorIdentity}/post/{postIdentity}")
-    public ResponseEntity<Post> findByPostIdentity(@PathVariable("authorIdentity") String authorIdentity,
-                                                   @PathVariable("postIdentity") String postIdentity) {
+    public ResponseEntity<PostRp> findByAuthorIdentityAndPostIdentity(@PathVariable("authorIdentity") String authorIdentity,
+                                                     @PathVariable("postIdentity") String postIdentity) {
         return ResponseEntity.ok(postService.findByAuthorIdentityAndPostIdentity(authorIdentity, postIdentity));
     }
 

@@ -1,5 +1,7 @@
 package com.social.post.service;
 
+import com.social.model.dto.PostRp;
+import com.social.post.adapter.adapter.ApiGatewayAdapter;
 import com.social.post.model.Post;
 import com.social.post.repository.contract.PostRepository;
 import com.social.post.service.contract.PostService;
@@ -21,6 +23,7 @@ import static java.lang.String.format;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final ApiGatewayAdapter adapter;
 
     @Override
     public void createCollection(String identity) {
@@ -29,12 +32,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findByAuthorIdentityAndPostIdentity(String authorIdentity, String postIdentity) {
+    public PostRp findByAuthorIdentityAndPostIdentity(String authorIdentity, String postIdentity) {
         Post post = postRepository.findByAuthorIdentityAndPostIdentity(postIdentity, format(COLLECTION_TEMPLATE, authorIdentity));
         post.setPostedAgo(calculatePostedAgo(post.getPostDate()));
         post.getComments().forEach(comment -> comment.setPostedAgo(calculatePostedAgo(comment.getPostDate())));
         log.info(format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
-        return post;
+        return adapter.fromPostToPostRp(post);
     }
 
     private String calculatePostedAgo(LocalDate postDate) {
