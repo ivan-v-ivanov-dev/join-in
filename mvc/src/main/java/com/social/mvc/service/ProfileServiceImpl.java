@@ -1,9 +1,5 @@
 package com.social.mvc.service;
 
-import com.social.model.dto.FriendRp;
-import com.social.model.dto.FriendshipRequestRp;
-import com.social.model.dto.NotificationRp;
-import com.social.model.dto.PostRp;
 import com.social.mvc.adapter.ProfileAdapter;
 import com.social.mvc.model.Profile;
 import com.social.mvc.service.contract.ProfileService;
@@ -13,9 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
-
-import java.util.List;
-import java.util.Map;
 
 import static com.social.mvc.service.constants.LoggerConstants.PROFILE_INFORMATION_RETRIEVED_FOR_USER_TEMPLATE;
 import static java.lang.String.format;
@@ -31,32 +24,8 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Profile findProfileInfoByIdentity(String identity) {
         try {
-            Profile profile = profileAdapter.fromProfileGatewayRpToProfile(gatewayClient.findProfileInfoByIdentity(identity));
-            // make call to Gateway for the other info
-            // profile image
-
-            //albums
-
-            //posts
-
-            //friends
-
-            //friendshipRequests
-
-            //notifications
-//            private String profileImage;
-//
-//            private String backgroundImage;
-//
-//            Map<String, List<String>> albums;
-//
-//            List<PostRp> posts;
-//
-//            List<FriendRp> friends;
-//
-//            List<FriendshipRequestRp> friendshipRequests;
-//
-//            List<NotificationRp> notifications;
+            Profile profile = profileAdapter.fromProfileGatewayRpToProfile(
+                    gatewayClient.findProfileInfoByIdentity(identity));
             log.info(format(PROFILE_INFORMATION_RETRIEVED_FOR_USER_TEMPLATE, identity));
             return profile;
         } catch (FeignException feignException) {

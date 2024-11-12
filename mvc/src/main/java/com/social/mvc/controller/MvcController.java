@@ -2,6 +2,7 @@ package com.social.mvc.controller;
 
 import com.social.mvc.model.Register;
 import com.social.mvc.service.contract.AuthenticationService;
+import com.social.mvc.service.contract.ImageService;
 import com.social.mvc.service.contract.ProfileService;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class MvcController {
 
     private final AuthenticationService authenticationService;
     private final ProfileService profileService;
+    private final ImageService imageService;
 
     @GetMapping("/")
     public String login() {
@@ -75,6 +77,31 @@ public class MvcController {
     public String profile(@PathVariable("identity") String identity, Model model) {
         try {
             model.addAttribute("profile", profileService.findProfileInfoByIdentity(identity));
+            //TODO:
+            // make call to Gateway for the other info
+            model.addAttribute("profileImage", imageService.findProfileImage(identity));
+            //albums
+
+            //posts
+
+            //friends
+
+            //friendshipRequests
+
+            //notifications
+//            private String profileImage;
+//
+//            private String backgroundImage;
+//
+//            Map<String, List<String>> albums;
+//
+//            List<PostRp> posts;
+//
+//            List<FriendRp> friends;
+//
+//            List<FriendshipRequestRp> friendshipRequests;
+//
+//            List<NotificationRp> notifications;
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());

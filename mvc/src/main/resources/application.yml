@@ -61,7 +61,7 @@ logging:
   level:
     org.apache: OFF
 
-#Feign Login service
+#Feign Gateway API service
 gateway:
   service:
     feign:
@@ -76,78 +76,5 @@ gateway:
     endpoint: /api/register
   profile:
     endpoint: /api/profile/{identity}
-
-##Feign Post service
-#post:
-#  find:
-#    all: /author/posts
-#    one: /post
-#  author:
-#    posts:
-#      count: /author/posts/count
-#  user:
-#    feed:
-#      posts: /user/feed/posts
-#  service:
-#    feign:
-#      client:
-#        name: Post-Service
-#    url: http://localhost:8082
-#
-##Feign Relationship service
-#relationship:
-#  find:
-#    friends:
-#      count: /profile/friends/count
-#      for:
-#        user: /profile/friends
-#    friend:
-#      suggestions: /profile/friend/suggestions
-#    friendship:
-#      requests:
-#        for:
-#          user: /profile/friendship/requests
-#        count: /profile/friendship/requests/count
-#  service:
-#    feign:
-#      client:
-#        name: Relationship-Service
-#    url: http://localhost:8083
-#
-##Feign Image service
-#image:
-#  service:
-#    feign:
-#      client:
-#        name: Image-Service
-#    url: http://localhost:8085
-#  profile: /profile-image
-#  background: /profile-background-image
-#album:
-#  images: /profile-album-images
-#
-##Feign Notification service
-#notification:
-#  service:
-#    feign:
-#      client:
-#        name: Notification-Service
-#    url: http://localhost:8086
-#user:
-#  notifications: /user/notifications
-#
-##Feign Message service
-#message:
-#  service:
-#    feign:
-#      client:
-#        name: Message-Service
-#    url: http://localhost:8087
-#friends:
-#  online: /friends/online
-#direct:
-#  chat:
-#    history: /direct-chat/history
-#group:
-#  chat:
-#    history: /group-chat/history
+    image:
+      endpoint: /api/profile/{identity}/profile-image

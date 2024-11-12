@@ -7,6 +7,9 @@ public class LoggerConstants {
     public static final String PROFILE_INFORMATION_RETRIEVED_FOR_USER_TEMPLATE =
             "Profile information retrieved for User %s";
 
+    public static final String RETRIEVE_PROFILE_IMAGE_FROM_GATEWAY_SERVICE_TEMPLATE =
+            "Retrieve Profile image from Gateway API Service (Profile identity: %s)";
+
     private LoggerConstants() {
     }
 }
