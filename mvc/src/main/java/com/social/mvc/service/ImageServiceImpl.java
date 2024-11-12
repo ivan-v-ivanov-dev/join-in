@@ -28,6 +28,9 @@ public class ImageServiceImpl implements ImageService {
         } catch (FeignException feignException) {
             log.error(feignException.getMessage());
             throw new ResourceAccessException(GATEWAY_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
         }
     }
 
@@ -40,6 +43,9 @@ public class ImageServiceImpl implements ImageService {
         } catch (FeignException feignException) {
             log.error(feignException.getMessage());
             throw new ResourceAccessException(GATEWAY_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN);
+        } catch (ResourceAccessException resourceAccessException) {
+            log.error(resourceAccessException.getMessage());
+            throw resourceAccessException;
         }
     }
 }
