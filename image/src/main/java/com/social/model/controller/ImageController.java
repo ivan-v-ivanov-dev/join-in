@@ -17,6 +17,11 @@ public class ImageController {
         return imageService.findProfileImage(identity);
     }
 
+    @GetMapping("/profile/{identity}/background-image")
+    public String findProfileBackgroundImage(@PathVariable String identity) {
+        return imageService.findProfileBackgroundImage(identity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Image service is HEALTHY";
