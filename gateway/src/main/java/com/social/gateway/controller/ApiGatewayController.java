@@ -8,6 +8,9 @@ import com.social.model.dto.RegisterUserRq;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api")
 @AllArgsConstructor
@@ -47,6 +50,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/background-image")
     public String findProfileBackgroundImage(@PathVariable String identity) {
         return imageService.findProfileBackgroundImage(identity);
+    }
+
+    @GetMapping("/profile/{identity}/albums-images")
+    public Map<String, List<String>> findProfileAlbumImages(@PathVariable String identity) {
+        return imageService.findProfileAlbumImages(identity);
     }
 
     @GetMapping("/health")

@@ -75,3 +75,4 @@ image:
     url: http://localhost:8089
   profile: /profile/{identity}
   background: /profile/{identity}/background-image
+  albums: /profile/{identity}/albums
