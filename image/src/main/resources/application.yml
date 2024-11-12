@@ -3,6 +3,12 @@ server:
 
 spring:
 
+  #Mongo
+  data:
+    mongodb:
+      uri: mongodb://rootuser:rootpass@localhost:27018/storage
+      database: storage
+
   #Kafka
   kafka:
     consumer:

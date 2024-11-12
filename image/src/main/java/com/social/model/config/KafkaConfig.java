@@ -17,20 +17,13 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.social.model.config.ConfigConstants.CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED;
+import static com.social.model.config.ConfigConstants.DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED;
+
 @Configuration
 @EnableKafka
 @Slf4j
 public class KafkaConfig {
-
-    private static final String KAFKA_CONFIGURATION = "Kafka Configuration :: ";
-
-    private static final String FOR_KAFKA_MESSAGING_CREATED = " for Kafka messaging created";
-
-    private static final String DEFAULT_CONSUMER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
-            KAFKA_CONFIGURATION + "Default Consumer Factory" + FOR_KAFKA_MESSAGING_CREATED;
-
-    private static final String CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY_FOR_KAFKA_MESSAGING_CREATED =
-            KAFKA_CONFIGURATION + "Concurrent Kafka Listener Container Factor" + FOR_KAFKA_MESSAGING_CREATED;
 
     @Value("${spring.kafka.consumer.bootstrap-servers}")
     private String consumerServer;
