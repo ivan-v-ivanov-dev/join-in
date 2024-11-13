@@ -10,8 +10,8 @@ import org.springframework.web.client.ResourceAccessException;
 
 import java.util.Set;
 
-import static com.social.gateway.service.constants.LoggerConstants.RETRIEVE_LIKES_A_POST_USER_COUNT_TEMPLATE;
-import static com.social.gateway.service.constants.LoggerConstants.RETRIEVE_USER_IDENTITIES_WHO_LIKED_THE_POST_TEMPLATE;
+import static com.social.gateway.service.constants.LoggerConstants.*;
+import static java.lang.String.format;
 
 @Service
 @AllArgsConstructor
@@ -24,8 +24,32 @@ public class ReactionServiceImpl implements ReactionService {
     public int findPostLikesCount(String postIdentity) {
         try {
             int likes = reactionClient.findPostLikesCount(postIdentity);
-            log.info(String.format(RETRIEVE_LIKES_A_POST_USER_COUNT_TEMPLATE, postIdentity));
+            log.info(format(RETRIEVE_LIKES_A_POST_USER_COUNT_TEMPLATE, postIdentity));
             return likes;
+        } catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public int findPostDislikesCount(String postIdentity) {
+        try {
+            int dislikes = reactionClient.findPostDislikesCount(postIdentity);
+            log.info(format(RETRIEVE_DISLIKES_A_POST_USER_COUNT_TEMPLATE, postIdentity));
+            return dislikes;
+        } catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public int findPostStarsCount(String postIdentity) {
+        try {
+            int stars = reactionClient.findPostStarsCount(postIdentity);
+            log.info(format(RETRIEVE_STARS_A_POST_USER_COUNT_TEMPLATE, postIdentity));
+            return stars;
         } catch (FeignException exception) {
             log.error(exception.getMessage());
             throw new ResourceAccessException(exception.getMessage());
@@ -36,7 +60,7 @@ public class ReactionServiceImpl implements ReactionService {
     public Set<String> findProfileIdentitiesWhoLikedThePost(String postIdentity) {
         try {
             Set<String> identities = reactionClient.findProfileIdentitiesWhoLikedThePost(postIdentity);
-            log.info(String.format(RETRIEVE_USER_IDENTITIES_WHO_LIKED_THE_POST_TEMPLATE, postIdentity));
+            log.info(format(RETRIEVE_USER_IDENTITIES_WHO_LIKED_THE_POST_TEMPLATE, postIdentity));
             return identities;
         } catch (FeignException exception) {
             log.error(exception.getMessage());

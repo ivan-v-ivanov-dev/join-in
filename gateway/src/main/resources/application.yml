@@ -94,7 +94,11 @@ reaction:
   find:
     post:
       likes:
-        count: /post/{identity}/likes
+        count: /post/{postIdentity}/likes
+      dislike:
+        count: /post/{postIdentity}/dislikes
+      stars:
+        count: /post/{postIdentity}/stars
         user:
           identity:
             count: /post/{postIdentity}/likes/profile-identities

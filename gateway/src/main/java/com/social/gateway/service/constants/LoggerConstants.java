@@ -35,6 +35,12 @@ public class LoggerConstants {
     public static final String RETRIEVE_LIKES_A_POST_USER_COUNT_TEMPLATE =
             "Retrieve likes a post users count (Post identity: %s)";
 
+    public static final String RETRIEVE_DISLIKES_A_POST_USER_COUNT_TEMPLATE =
+            "Retrieve dislikes a post users count (Post identity: %s)";
+
+    public static final String RETRIEVE_STARS_A_POST_USER_COUNT_TEMPLATE =
+            "Retrieve stars a post users count (Post identity: %s)";
+
     public static final String RETRIEVE_USER_IDENTITIES_WHO_LIKED_THE_POST_TEMPLATE =
             "Retrieve users' identities who liked the post (Post identity: %s)";
 

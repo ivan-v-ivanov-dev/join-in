@@ -39,13 +39,16 @@ public class PostServiceImpl implements PostService {
                 post.setAuthorNames(profileService.findProfileNames(post.getAuthorIdentity()));
                 post.setAuthorProfileImage(imageService.findProfileImage(post.getAuthorIdentity()));
                 post.setLikes(reactionService.findPostLikesCount(post.getPostIdentity()));
-                // peopleIdentitiesWhoLikedThePost
                 post.setPeopleIdentitiesWhoDislikedThePost(reactionService.findProfileIdentitiesWhoLikedThePost(post.getPostIdentity()));
-                // peopleNamesWhoLikedThePost
+                post.getPeopleIdentitiesWhoLikedThePost().forEach(profileIdentity -> {
+                    post.getPeopleNamesWhoLikedThePost().add(profileService.findProfileNames(profileIdentity));
+                });
                 // dislikes
+                post.setDislikes(reactionService.findPostDislikesCount(post.getPostIdentity()));
                 // peopleIdentitiesWhoDislikedThePost
                 // peopleNamesWhoDislikedThePost
                 // stars
+                post.setStars(reactionService.findPostStarsCount(post.getPostIdentity()));
                 // peopleIdentitiesWhoStaredThePost
                 // peopleNamesWhoStaredThePost
                 // CommentGatewayRp
