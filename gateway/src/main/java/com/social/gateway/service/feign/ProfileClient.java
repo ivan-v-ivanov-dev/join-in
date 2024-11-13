@@ -10,4 +10,7 @@ public interface ProfileClient {
 
     @GetMapping("${profile.identity.endpoint}")
     ProfileRp findByIdentity(@PathVariable("identity") String identity);
+
+    @GetMapping("${profile.identity.names.endpoint}")
+    String findProfileNames(@PathVariable("identity") String identity);
 }

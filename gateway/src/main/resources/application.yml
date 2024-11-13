@@ -60,6 +60,8 @@ profile:
     endpoint: /register
   identity:
     endpoint: /profile/{identity}
+    names:
+      endpoint: /profile/{identity}/names
   service:
     feign:
       client:
@@ -76,3 +78,25 @@ image:
   profile: /profile/{identity}
   background: /profile/{identity}/background-image
   albums: /profile/{identity}/albums
+
+#Feign Post service
+post:
+  author:
+    endpoint: /author/{authorIdentity}/post/{postIdentity}
+  service:
+    feign:
+      client:
+        name: Post-Service
+    url: http://localhost:8084
+
+#Feign Reaction service
+reaction:
+  find:
+    post:
+      likes:
+        count: /post/{identity}/likes
+  service:
+    url: http://localhost:8085
+    feign:
+      client:
+        name: Reaction-Service

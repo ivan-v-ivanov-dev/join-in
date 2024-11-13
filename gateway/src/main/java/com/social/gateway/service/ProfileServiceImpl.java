@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
+import static com.social.gateway.service.constants.LoggerConstants.RETRIEVE_PROFILE_NAMES_FROM_PROFILE_SERVICE_TEMPLATE;
 import static com.social.gateway.service.constants.LoggerConstants.USER_RETRIEVED_TEMPLATE;
 import static java.lang.String.format;
 
@@ -28,6 +29,18 @@ public class ProfileServiceImpl implements ProfileService {
                     profileClient.findByIdentity(identity));
             log.info(format(USER_RETRIEVED_TEMPLATE, profileGatewayRp.getIdentity()));
             return profileGatewayRp;
+        } catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public String findProfileNames(String authorIdentity) {
+        try {
+            String names = profileClient.findProfileNames(authorIdentity);
+            log.info(format(RETRIEVE_PROFILE_NAMES_FROM_PROFILE_SERVICE_TEMPLATE, authorIdentity));
+            return names;
         } catch (FeignException exception) {
             log.error(exception.getMessage());
             throw new ResourceAccessException(exception.getMessage());

@@ -2,7 +2,9 @@ package com.social.gateway.controller;
 
 import com.social.gateway.service.contract.AuthenticationService;
 import com.social.gateway.service.contract.ImageService;
+import com.social.gateway.service.contract.PostService;
 import com.social.gateway.service.contract.ProfileService;
+import com.social.model.dto.PostGatewayRp;
 import com.social.model.dto.ProfileGatewayRp;
 import com.social.model.dto.RegisterUserRq;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ public class ApiGatewayController {
     private final AuthenticationService authenticationService;
     private final ProfileService profileService;
     private final ImageService imageService;
+    private final PostService postService;
 
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
@@ -55,6 +58,12 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/albums-images")
     public Map<String, List<String>> findProfileAlbumImages(@PathVariable String identity) {
         return imageService.findProfileAlbumImages(identity);
+    }
+
+    @GetMapping("/profile/{authorIdentity}/post/{postIdentity}")
+    public PostGatewayRp findByAuthorIdentityAndPostIdentity(@PathVariable("authorIdentity") String authorIdentity,
+                                                             @PathVariable("postIdentity") String postIdentity) {
+        return postService.findByAuthorIdentityAndPostIdentity(authorIdentity, postIdentity);
     }
 
     @GetMapping("/health")

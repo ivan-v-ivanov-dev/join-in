@@ -4,4 +4,6 @@ import com.social.model.dto.ProfileGatewayRp;
 
 public interface ProfileService {
     ProfileGatewayRp findProfileInfoByIdentity(String identity);
+
+    String findProfileNames(String authorIdentity);
 }

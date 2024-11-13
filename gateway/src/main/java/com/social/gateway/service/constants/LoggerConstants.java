@@ -20,11 +20,20 @@ public class LoggerConstants {
     public static final String RETRIEVE_PROFILE_IMAGE_FROM_IMAGE_SERVICE_TEMPLATE =
             "Retrieve Profile image from Image Service (Profile identity: %s)";
 
+    public static final String RETRIEVE_PROFILE_NAMES_FROM_PROFILE_SERVICE_TEMPLATE =
+            "Retrieve Profile names from Profile Service (Profile identity: %s)";
+
     public static final String RETRIEVE_PROFILE_BACKGROUND_IMAGE_FROM_IMAGE_SERVICE_TEMPLATE =
             "Retrieve Profile background image from Image Service (Profile identity: %s)";
 
     public static final String RETRIEVE_ALBUM_IMAGES_FOR_USER_TEMPLATE =
             "Retrieve album images for user (User identity: %s)";
+
+    public static final String RETRIEVE_POST_TEMPLATE =
+            "Retrieve post (Post identity: %s)";
+
+    public static final String RETRIEVE_LIKES_A_POST_USER_COUNT_TEMPLATE =
+            "Retrieve likes a post users count (Post identity: %s)";
 
     private LoggerConstants() {
     }
