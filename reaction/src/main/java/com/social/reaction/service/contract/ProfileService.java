@@ -13,4 +13,5 @@ public interface ProfileService {
     
     Set<String> findProfileIdentitiesWhoLikedThePost(String postIdentity);
 
+    Set<String> findProfileIdentitiesWhoDislikedThePost(String postIdentity);
 }
