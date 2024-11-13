@@ -34,39 +34,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostRp findByAuthorIdentityAndPostIdentity(String authorIdentity, String postIdentity) {
         Post post = postRepository.findByAuthorIdentityAndPostIdentity(postIdentity, format(COLLECTION_TEMPLATE, authorIdentity));
-        post.setPostedAgo(calculatePostedAgo(post.getPostDate()));
-        post.getComments().forEach(comment -> comment.setPostedAgo(calculatePostedAgo(comment.getPostDate())));
         log.info(format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
         return adapter.fromPostToPostRp(post);
-    }
-
-    private String calculatePostedAgo(LocalDate postDate) {
-        LocalDate now = LocalDate.now();
-
-        if (now.isAfter(postDate.plusYears(1))) {
-            if (now.isBefore(postDate.plusYears(2))) {
-                return ONE_YEAR_AGO;
-            }
-
-            Period period = Period.between(postDate, now);
-            int years = period.getYears();
-            return String.format(SEVERAL_YEARS_AGO_TEMPLATE, years);
-        } else if (now.isAfter(postDate.plusMonths(1))) {
-            if (now.isBefore(postDate.plusMonths(2))) {
-                return ONE_MONTH_AGO;
-            }
-
-            Period period = Period.between(postDate, now);
-            int months = period.getMonths();
-            return String.format(SEVERAL_MONTHS_AGO_TEMPLATE, months);
-        } else {
-            if (now.isBefore(postDate.plusDays(2))) {
-                return ONE_DAY_AGO;
-            }
-
-            Period period = Period.between(postDate, now);
-            int days = period.getDays();
-            return String.format(SEVERAL_DAYS_AGO_TEMPLATE, days);
-        }
     }
 }
