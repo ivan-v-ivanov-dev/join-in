@@ -67,4 +67,17 @@ public class ReactionServiceImpl implements ReactionService {
             throw new ResourceAccessException(exception.getMessage());
         }
     }
+
+    @Override
+    public Set<String> findProfileIdentitiesWhoDislikedThePost(String postIdentity) {
+        try {
+            Set<String> identities = reactionClient.findProfileIdentitiesWhoDislikedThePost(postIdentity);
+            log.info(format(RETRIEVE_USER_IDENTITIES_WHO_DISLIKED_THE_POST_TEMPLATE, postIdentity));
+            return identities;
+        } catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
+
 }

@@ -95,13 +95,15 @@ reaction:
     post:
       likes:
         count: /post/{postIdentity}/likes
+        user:
+          identities: /post/{postIdentity}/likes/profile-identities
       dislike:
         count: /post/{postIdentity}/dislikes
+        user:
+          identities: /post/{postIdentity}/dislikes/profile-identities
       stars:
         count: /post/{postIdentity}/stars
-        user:
-          identity:
-            count: /post/{postIdentity}/likes/profile-identities
+
   service:
     url: http://localhost:8085
     feign:

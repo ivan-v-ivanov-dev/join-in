@@ -44,6 +44,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_USER_IDENTITIES_WHO_LIKED_THE_POST_TEMPLATE =
             "Retrieve users' identities who liked the post (Post identity: %s)";
 
+    public static final String RETRIEVE_USER_IDENTITIES_WHO_DISLIKED_THE_POST_TEMPLATE =
+            "Retrieve users' identities who disliked the post (Post identity: %s)";
+
     private LoggerConstants() {
     }
 }
