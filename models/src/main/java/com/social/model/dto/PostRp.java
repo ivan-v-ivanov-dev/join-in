@@ -13,8 +13,6 @@ public class PostRp {
 
     private String authorIdentity;
 
-    private String authorNames;
-
     private String postIdentity;
 
     private String content;

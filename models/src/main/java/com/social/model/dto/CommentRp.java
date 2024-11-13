@@ -13,8 +13,6 @@ public class CommentRp {
 
     private String authorIdentity;
 
-    private String authorNames;
-
     private String content;
 
     private String postedAgo;
