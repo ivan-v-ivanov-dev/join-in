@@ -48,10 +48,11 @@ public class PostServiceImpl implements PostService {
                 // peopleIdentitiesWhoDislikedThePost
                 post.setPeopleIdentitiesWhoDislikedThePost(reactionService.findProfileIdentitiesWhoDislikedThePost(post.getPostIdentity()));
                 // peopleNamesWhoDislikedThePost
+
                 // stars
                 post.setStars(reactionService.findPostStarsCount(post.getPostIdentity()));
                 // peopleIdentitiesWhoStaredThePost
-
+                post.setPeopleIdentitiesWhoStaredThePost(reactionService.findProfileIdentitiesWhoStaredThePost(post.getPostIdentity()));
                 // peopleNamesWhoStaredThePost
                 // CommentGatewayRp
                 log.info(format(RETRIEVE_POST_TEMPLATE, postIdentity));

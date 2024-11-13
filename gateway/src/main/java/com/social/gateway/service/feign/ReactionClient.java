@@ -15,7 +15,7 @@ public interface ReactionClient {
     @GetMapping("${reaction.find.post.dislikes.count}")
     int findPostDislikesCount(@PathVariable("postIdentity") String postIdentity);
 
-    @GetMapping("${reaction.find.post.dislikes.count}")
+    @GetMapping("${reaction.find.post.stars.count}")
     int findPostStarsCount(@PathVariable("postIdentity") String postIdentity);
 
     @GetMapping("${reaction.find.post.likes.user.identities}")
@@ -23,4 +23,7 @@ public interface ReactionClient {
 
     @GetMapping("${reaction.find.post.dislikes.user.identities}")
     Set<String> findProfileIdentitiesWhoDislikedThePost(@PathVariable("postIdentity") String postIdentity);
+
+    @GetMapping("${reaction.find.post.stars.user.identities}")
+    Set<String> findProfileIdentitiesWhoStaredThePost(@PathVariable("postIdentity") String postIdentity);
 }

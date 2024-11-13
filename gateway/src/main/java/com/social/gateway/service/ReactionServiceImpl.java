@@ -80,4 +80,15 @@ public class ReactionServiceImpl implements ReactionService {
         }
     }
 
+    @Override
+    public Set<String> findProfileIdentitiesWhoStaredThePost(String postIdentity) {
+        try {
+            Set<String> identities = reactionClient.findProfileIdentitiesWhoStaredThePost(postIdentity);
+            log.info(format(RETRIEVE_USER_IDENTITIES_WHO_STARED_THE_POST_TEMPLATE, postIdentity));
+            return identities;
+        } catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
 }

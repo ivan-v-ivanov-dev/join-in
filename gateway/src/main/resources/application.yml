@@ -97,12 +97,14 @@ reaction:
         count: /post/{postIdentity}/likes
         user:
           identities: /post/{postIdentity}/likes/profile-identities
-      dislike:
+      dislikes:
         count: /post/{postIdentity}/dislikes
         user:
           identities: /post/{postIdentity}/dislikes/profile-identities
       stars:
         count: /post/{postIdentity}/stars
+        user:
+          identities: /post/{postIdentity}/stars/profile-identities
 
   service:
     url: http://localhost:8085
