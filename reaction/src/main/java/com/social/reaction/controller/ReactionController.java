@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 @AllArgsConstructor
 public class ReactionController {
@@ -15,6 +17,11 @@ public class ReactionController {
     @GetMapping("/post/{postIdentity}/likes")
     public int findPostLikesCount(@PathVariable("postIdentity") String postIdentity) {
         return profileService.findPostLikesCount(postIdentity);
+    }
+
+    @GetMapping("/post/{postIdentity}/likes/profile-identities")
+    public Set<String> findProfileIdentitiesWhoLikedThePost(@PathVariable("postIdentity") String postIdentity) {
+        return profileService.findProfileIdentitiesWhoLikedThePost(postIdentity);
     }
 
     @GetMapping("/health")

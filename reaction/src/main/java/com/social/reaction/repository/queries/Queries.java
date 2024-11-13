@@ -1,4 +1,4 @@
-package com.social.reaction.repository;
+package com.social.reaction.repository.queries;
 
 public class Queries {
 
@@ -7,6 +7,13 @@ public class Queries {
             MATCH (profile:Profile)-[:LIKE]->(post:Post)  
             WHERE post.identity = $postIdentity  
             RETURN COUNT(DISTINCT profile) 
+            """;
+
+    public static final String FIND_USER_IDENTITIES_WHO_LIKED_THE_POST =
+            """
+            MATCH (profile:Profile)-[:LIKE]->(post:Post)
+            WHERE post.identity = $postIdentity
+            RETURN DISTINCT profile.identity
             """;
 
     private Queries() {

@@ -1,7 +1,11 @@
 package com.social.reaction.service.contract;
 
+import java.util.Set;
+
 public interface ProfileService {
     void createProfile(String identity);
 
     int findPostLikesCount(String postIdentity);
+
+    Set<String> findProfileIdentitiesWhoLikedThePost(String postIdentity);
 }

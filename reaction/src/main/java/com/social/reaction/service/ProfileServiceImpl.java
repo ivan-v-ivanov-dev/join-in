@@ -7,8 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import static com.social.reaction.service.constants.LoggerConstants.NEW_USER_SAVED_IN_DATABASE_TEMPLATE;
-import static com.social.reaction.service.constants.LoggerConstants.RETRIEVE_LIKES_A_POST_USER_COUNT_TEMPLATE;
+import java.util.Set;
+
+import static com.social.reaction.service.constants.LoggerConstants.*;
 
 @Service
 @AllArgsConstructor
@@ -28,5 +29,12 @@ public class ProfileServiceImpl implements ProfileService {
         int likesAPostProfileCount = profileRepository.findPostLikesCount(postIdentity);
         log.info(String.format(RETRIEVE_LIKES_A_POST_USER_COUNT_TEMPLATE, postIdentity));
         return likesAPostProfileCount;
+    }
+
+    @Override
+    public Set<String> findProfileIdentitiesWhoLikedThePost(String postIdentity) {
+        Set<String> identities = profileRepository.findProfileIdentitiesWhoLikedThePost(postIdentity);
+        log.info(String.format(RETRIEVE_USER_IDENTITIES_WHO_LIKED_THE_POST_TEMPLATE, postIdentity));
+        return identities;
     }
 }
