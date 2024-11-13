@@ -65,4 +65,11 @@ public class ProfileServiceImpl implements ProfileService {
         log.info(String.format(RETRIEVE_USER_IDENTITIES_WHO_STARED_THE_POST_TEMPLATE, postIdentity));
         return identities;
     }
+
+    @Override
+    public int findCommentLikesCount(String commentIdentity) {
+        int likes = profileRepository.findCommentLikesCount(commentIdentity);
+        log.info(String.format(RETRIEVE_LIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE, commentIdentity));
+        return likes;
+    }
 }

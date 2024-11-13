@@ -26,5 +26,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_USER_IDENTITIES_WHO_STARED_THE_POST_TEMPLATE =
             "Retrieve users' identities who stared the post (Post identity: %s)";
 
+    public static final String RETRIEVE_LIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE =
+            "Retrieve likes a comment users count (Comment identity: %s)";
+
+
     private LoggerConstants(){}
 }

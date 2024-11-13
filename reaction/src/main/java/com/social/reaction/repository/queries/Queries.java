@@ -42,6 +42,14 @@ public class Queries {
             RETURN DISTINCT profile.identity
             """;
 
+    public static final String FIND_HOW_MANY_PROFILES_LIKE_THE_COMMENT_TEMPLATE =
+            """
+            MATCH (profile:Profile)-[:LIKE]->(comment:Comment)
+            WHERE comment.identity = $commentIdentity
+            RETURN COUNT(DISTINCT profile)
+            """;
+
+
     private Queries() {
     }
 }

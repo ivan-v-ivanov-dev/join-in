@@ -16,4 +16,6 @@ public interface ProfileService {
     Set<String> findProfileIdentitiesWhoDislikedThePost(String postIdentity);
 
     Set<String> findProfileIdentitiesWhoStaredThePost(String postIdentity);
+
+    int findCommentLikesCount(String commentIdentity);
 }
