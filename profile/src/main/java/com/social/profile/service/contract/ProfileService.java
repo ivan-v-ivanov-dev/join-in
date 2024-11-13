@@ -6,4 +6,6 @@ public interface ProfileService {
     void createCollection(String identity);
 
     ProfileRp findByIdentity(String identity);
+
+    String findProfileNames(String identity);
 }

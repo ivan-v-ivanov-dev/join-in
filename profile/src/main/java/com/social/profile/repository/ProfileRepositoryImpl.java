@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import static com.social.profile.repository.constants.RepositoryConstants.IDENTITY_FIELD;
+import static com.social.profile.repository.constants.RepositoryConstants.*;
 
 @Repository
 @AllArgsConstructor
@@ -24,6 +24,13 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     @Override
     public Profile findByIdentity(String identity) {
         Query query = Query.query(Criteria.where(IDENTITY_FIELD).is(identity));
+        return mongoTemplate.findOne(query, Profile.class);
+    }
+
+    @Override
+    public Profile findProfileNames(String identity) {
+        Query query = new Query(Criteria.where(IDENTITY_FIELD).is(identity));
+        query.fields().include(FIRST_NAME_FIELD).include(LAST_NAME_FIELD).exclude(ID_FIELD);
         return mongoTemplate.findOne(query, Profile.class);
     }
 }

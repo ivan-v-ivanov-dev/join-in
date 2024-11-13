@@ -13,5 +13,7 @@ public class LoggerConstants {
     public static final String RETRIEVE_PROFILE_TEMPLATE =
             "Retrieve Profile (User identity: %s)";
 
+    public static final String RETRIEVE_PROFILE_NAMES_TEMPLATE = "Retrieve Profile names (User identity: %s)";
+
     private LoggerConstants(){}
 }
