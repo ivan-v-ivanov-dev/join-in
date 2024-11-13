@@ -1,7 +1,7 @@
 package com.social.post.service;
 
 import com.social.model.dto.PostRp;
-import com.social.post.adapter.adapter.ApiGatewayAdapter;
+import com.social.post.adapter.ApiGatewayAdapter;
 import com.social.post.model.Post;
 import com.social.post.repository.contract.PostRepository;
 import com.social.post.service.contract.PostService;
@@ -9,12 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Period;
+import java.util.List;
 
-import static com.social.post.service.constants.LoggerConstants.NEW_COLLECTION_CREATED_TEMPLATE;
-import static com.social.post.service.constants.LoggerConstants.RETRIEVE_POST_TEMPLATE;
-import static com.social.post.service.constants.ServiceConstants.*;
+import static com.social.post.service.constants.LoggerConstants.*;
+import static com.social.post.service.constants.ServiceConstants.COLLECTION_TEMPLATE;
 import static java.lang.String.format;
 
 @Service
@@ -36,5 +34,12 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findByAuthorIdentityAndPostIdentity(postIdentity, format(COLLECTION_TEMPLATE, authorIdentity));
         log.info(format(RETRIEVE_POST_TEMPLATE, post.getPostIdentity()));
         return adapter.fromPostToPostRp(post);
+    }
+
+    @Override
+    public List<PostRp> findPostsByAuthorIdentity(String authorIdentity) {
+        List<Post> posts = postRepository.findPostsByAuthorIdentity(format(COLLECTION_TEMPLATE, authorIdentity));
+        log.info(format(RETRIEVE_POSTS_FOR_USER_TEMPLATE, authorIdentity));
+        return posts.stream().map(adapter::fromPostToPostRp).toList();
     }
 }

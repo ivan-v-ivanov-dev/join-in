@@ -28,22 +28,22 @@ spring:
           packages: com.social.kafka.messages.contract.KafkaMessage
     topic:
       name:
-        post:
-          publication: post-publication
-          comment: post-comment
-        delete:
-          post: delete-post
-          nodes: delete-nodes
-        edit:
-          post: edit-post
+#        post:
+#          publication: post-publication
+#          comment: post-comment
+#        delete:
+#          post: delete-post
+#          nodes: delete-nodes
+#        edit:
+#          post: edit-post
         registered:
           user: registered-user
-          post:
-            notification: new-post-notification
-            node: new-post-node
-          comment:
-            notification: new-comment-notification
-            node: new-comment-node
+#          post:
+#            notification: new-post-notification
+#            node: new-post-node
+#          comment:
+#            notification: new-comment-notification
+#            node: new-comment-node
     partitions: 3
     replicas: 1
     group:

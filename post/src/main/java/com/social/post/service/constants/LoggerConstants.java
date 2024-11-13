@@ -11,5 +11,8 @@ public class LoggerConstants {
     public static final String RETRIEVE_POST_TEMPLATE =
             "Retrieve Post (Post identity: %s)";
 
+    public static final String RETRIEVE_POSTS_FOR_USER_TEMPLATE =
+            "Retrieve Posts for user (User identity: %s)";
+
     private LoggerConstants(){}
 }

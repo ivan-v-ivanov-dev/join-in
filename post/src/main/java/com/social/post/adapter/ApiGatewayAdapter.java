@@ -1,4 +1,4 @@
-package com.social.post.adapter.adapter;
+package com.social.post.adapter;
 
 import com.social.model.dto.CommentRp;
 import com.social.model.dto.PostRp;
