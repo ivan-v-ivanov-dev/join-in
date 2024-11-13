@@ -3,13 +3,15 @@ package com.social.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 @Getter
+@Setter
 public class PostGatewayRp {
 
     private String authorIdentity;
