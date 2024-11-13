@@ -33,9 +33,15 @@ public class ReactionController {
     public Set<String> findProfileIdentitiesWhoLikedThePost(@PathVariable("postIdentity") String postIdentity) {
         return profileService.findProfileIdentitiesWhoLikedThePost(postIdentity);
     }
+
     @GetMapping("/post/{postIdentity}/dislikes/profile-identities")
     public Set<String> findProfileIdentitiesWhoDislikedThePost(@PathVariable("postIdentity") String postIdentity) {
         return profileService.findProfileIdentitiesWhoDislikedThePost(postIdentity);
+    }
+
+    @GetMapping("/post/{postIdentity}/stars/profile-identities")
+    public Set<String> findProfileIdentitiesWhoStaredThePost(@PathVariable("postIdentity") String postIdentity) {
+        return profileService.findProfileIdentitiesWhoStaredThePost(postIdentity);
     }
 
     @GetMapping("/health")

@@ -58,4 +58,11 @@ public class ProfileServiceImpl implements ProfileService {
         log.info(String.format(RETRIEVE_USER_IDENTITIES_WHO_DISLIKED_THE_POST_TEMPLATE, postIdentity));
         return identities;
     }
+
+    @Override
+    public Set<String> findProfileIdentitiesWhoStaredThePost(String postIdentity) {
+        Set<String> identities = profileRepository.findProfileIdentitiesWhoStaredThePost(postIdentity);
+        log.info(String.format(RETRIEVE_USER_IDENTITIES_WHO_STARED_THE_POST_TEMPLATE, postIdentity));
+        return identities;
+    }
 }

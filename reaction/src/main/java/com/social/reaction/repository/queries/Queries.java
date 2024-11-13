@@ -35,6 +35,13 @@ public class Queries {
             RETURN DISTINCT profile.identity
             """;
 
+    public static final String FIND_USER_IDENTITIES_WHO_STARED_THE_POST =
+            """
+            MATCH (profile:Profile)-[:STAR]->(post:Post)
+            WHERE post.identity = $postIdentity
+            RETURN DISTINCT profile.identity
+            """;
+
     private Queries() {
     }
 }
