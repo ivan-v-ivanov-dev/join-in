@@ -81,7 +81,6 @@ public class MvcController {
             // make call to Gateway for the other info
             model.addAttribute("profileImage", imageService.findProfileImage(identity));
             model.addAttribute("backgroundImage", imageService.findBackgroundImage(identity));
-            //albums
             model.addAttribute("albums", imageService.findAlbums(identity));
             //posts
 
@@ -90,19 +89,6 @@ public class MvcController {
             //friendshipRequests
 
             //notifications
-//            private String profileImage;
-//
-//            private String backgroundImage;
-//
-//            Map<String, List<String>> albums;
-//
-//            List<PostRp> posts;
-//
-//            List<FriendRp> friends;
-//
-//            List<FriendshipRequestRp> friendshipRequests;
-//
-//            List<NotificationRp> notifications;
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
