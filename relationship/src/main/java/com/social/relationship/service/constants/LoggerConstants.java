@@ -14,5 +14,8 @@ public class LoggerConstants {
     public static final String CREATE_FRIEND_RELATIONSHIP_REQUEST_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE =
             "Create friend request relationship between sender and recipient (Sender identity: %s, Recipient identity: %s)";
 
+    public static final String RETRIEVE_FRIENDS_IDENTITIES_FOR_USER_TEMPLATE =
+            "Retrieve friends identities for user (User identity: %s)";
+
     private LoggerConstants(){}
 }

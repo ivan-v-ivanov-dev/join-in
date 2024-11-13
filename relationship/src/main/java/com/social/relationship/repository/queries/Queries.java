@@ -14,6 +14,13 @@ public class Queries {
                     "recipient.identity = $recipientUserIdentity " +
                     "MERGE (sender)-[:FRIENDSHIP_REQUEST]->(recipient)";
 
+    public static final String FIND_THE_FRIENDS_FOR_A_PROFILE_BY_PROFILE_IDENTITY_TEMPLATE =
+            """
+            MATCH (profile:Profile)-[:FRIEND]->(friend:Profile)
+            WHERE profile.identity = $identity
+            RETURN DISTINCT friend.identity
+            """;
+
     private Queries() {
     }
 }

@@ -1,10 +1,14 @@
 package com.social.relationship.service.contract;
 
+import java.util.Set;
+
 public interface ProfileService {
     void createProfile(String identity);
 
-    void createFriendship(String senderIdentity, String recipientIdentity);
+    Set<String> findFriendsByProfileIdentity(String identity);
 
-    void createFriendshipRequest(String senderIdentity, String recipientIdentity);
+//    void createFriendship(String senderIdentity, String recipientIdentity);
+//
+//    void createFriendshipRequest(String senderIdentity, String recipientIdentity);
 
 }

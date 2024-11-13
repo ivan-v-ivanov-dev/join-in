@@ -5,8 +5,9 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.repository.query.Param;
 
-import static com.social.relationship.repository.queries.Queries.CREATE_FRIENDSHIP_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT;
-import static com.social.relationship.repository.queries.Queries.CREATE_FRIENDSHIP_REQUEST_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT;
+import java.util.Set;
+
+import static com.social.relationship.repository.queries.Queries.*;
 
 public interface ProfileRepository extends Neo4jRepository<Profile, String> {
 
@@ -17,4 +18,7 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
     @Query(CREATE_FRIENDSHIP_REQUEST_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT)
     void createFriendshipRequestRelationship(@Param("senderUserIdentity") String senderUserIdentity,
                                              @Param("recipientUserIdentity") String recipientUserIdentity);
+
+    @Query(FIND_THE_FRIENDS_FOR_A_PROFILE_BY_PROFILE_IDENTITY_TEMPLATE)
+    Set<String> findFriendsByProfileIdentity(@Param("identity") String identity);
 }
