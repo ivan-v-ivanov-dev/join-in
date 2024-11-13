@@ -24,6 +24,11 @@ public class ReactionController {
         return profileService.findPostDislikesCount(postIdentity);
     }
 
+    @GetMapping("/post/{postIdentity}/stars")
+    public int findPostStarsCount(@PathVariable("postIdentity") String postIdentity) {
+        return profileService.findPostStarsCount(postIdentity);
+    }
+
     @GetMapping("/post/{postIdentity}/likes/profile-identities")
     public Set<String> findProfileIdentitiesWhoLikedThePost(@PathVariable("postIdentity") String postIdentity) {
         return profileService.findProfileIdentitiesWhoLikedThePost(postIdentity);

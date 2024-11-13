@@ -9,5 +9,8 @@ public interface ProfileService {
 
     int findPostDislikesCount(String postIdentity);
 
+    int findPostStarsCount(String postIdentity);
+    
     Set<String> findProfileIdentitiesWhoLikedThePost(String postIdentity);
+
 }

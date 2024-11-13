@@ -15,9 +15,12 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
     int findPostLikesCount(@Param("postIdentity") String postIdentity);
 
     @Query(FIND_HOW_MANY_PROFILES_DISLIKE_THE_POST_TEMPLATE)
-    int findPostDislikesCount(String postIdentity);
+    int findPostDislikesCount(@Param("postIdentity") String postIdentity);
+
+    @Query(FIND_HOW_MANY_PROFILES_STAR_THE_POST_TEMPLATE)
+    int findPostStarsCount(@Param("postIdentity") String postIdentity);
 
     @Query(FIND_USER_IDENTITIES_WHO_LIKED_THE_POST)
-    Set<String> findProfileIdentitiesWhoLikedThePost(@Param("postIdentity")  String postIdentity);
+    Set<String> findProfileIdentitiesWhoLikedThePost(@Param("postIdentity") String postIdentity);
 
 }
