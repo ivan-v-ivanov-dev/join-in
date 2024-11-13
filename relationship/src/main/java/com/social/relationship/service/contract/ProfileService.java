@@ -7,6 +7,8 @@ public interface ProfileService {
 
     Set<String> findFriendsByProfileIdentity(String identity);
 
+    Set<String> findFriendshipRequestsByProfileIdentity(String identity);
+
 //    void createFriendship(String senderIdentity, String recipientIdentity);
 //
 //    void createFriendshipRequest(String senderIdentity, String recipientIdentity);

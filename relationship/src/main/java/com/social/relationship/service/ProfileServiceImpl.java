@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-import static com.social.relationship.service.constants.LoggerConstants.NEW_USER_SAVED_IN_DATABASE_TEMPLATE;
-import static com.social.relationship.service.constants.LoggerConstants.RETRIEVE_FRIENDS_IDENTITIES_FOR_USER_TEMPLATE;
+import static com.social.relationship.service.constants.LoggerConstants.*;
 import static java.lang.String.format;
 
 @Service
@@ -33,7 +32,13 @@ public class ProfileServiceImpl implements ProfileService {
         return identities;
     }
 
-    //    public void createFriendship(String senderIdentity, String recipientIdentity) {
+    @Override
+    public Set<String> findFriendshipRequestsByProfileIdentity(String identity) {
+        Set<String> identities = profileRepository.findFriendshipRequestsByProfileIdentity(identity);
+        log.info(format(RETRIEVE_FRIENDSHIP_REQUESTS_IDENTITIES_FOR_USER_TEMPLATE, identity));
+        return identities;
+    }
+//    public void createFriendship(String senderIdentity, String recipientIdentity) {
 //        profileRepository.createFriendshipRelationship(senderIdentity, recipientIdentity);
 //        log.info(String.format(CREATE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
 //                senderIdentity, recipientIdentity));

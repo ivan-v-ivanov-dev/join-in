@@ -21,6 +21,13 @@ public class Queries {
             RETURN DISTINCT friend.identity
             """;
 
+    public static final String FIND_FRIENDSHIP_REQUESTS_FOR_A_PROFILE_BY_PROFILE_IDENTITY_TEMPLATE =
+            """
+            MATCH (friendship_request:Profile)-[:FRIENDSHIP_REQUEST]->(profile:Profile)
+            WHERE profile.identity = $identity
+            RETURN DISTINCT friendship_request.identity
+            """;
+
     private Queries() {
     }
 }

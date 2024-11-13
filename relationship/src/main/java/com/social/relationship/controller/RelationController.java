@@ -15,8 +15,13 @@ public class RelationController {
     private final ProfileService profileService;
 
     @GetMapping("/profile/{identity}/friends")
-    public Set<String> findFriends(@PathVariable("identity") String identity) {
+    public Set<String> findFriendsByProfileIdentity(@PathVariable("identity") String identity) {
         return profileService.findFriendsByProfileIdentity(identity);
+    }
+
+    @GetMapping("/profile/{identity}/friendship-requests")
+    public Set<String> findFriendshipRequestsByProfileIdentity(@PathVariable("identity") String identity) {
+        return profileService.findFriendshipRequestsByProfileIdentity(identity);
     }
 
     @GetMapping("/health")
