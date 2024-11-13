@@ -38,9 +38,9 @@ public class PostServiceImpl implements PostService {
                 //TODO
                 post.setAuthorNames(profileService.findProfileNames(post.getAuthorIdentity()));
                 post.setAuthorProfileImage(imageService.findProfileImage(post.getAuthorIdentity()));
-                // likes
                 post.setLikes(reactionService.findPostLikesCount(post.getPostIdentity()));
                 // peopleIdentitiesWhoLikedThePost
+                post.setPeopleIdentitiesWhoDislikedThePost(reactionService.findProfileIdentitiesWhoLikedThePost(post.getPostIdentity()));
                 // peopleNamesWhoLikedThePost
                 // dislikes
                 // peopleIdentitiesWhoDislikedThePost

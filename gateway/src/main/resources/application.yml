@@ -95,6 +95,9 @@ reaction:
     post:
       likes:
         count: /post/{identity}/likes
+        user:
+          identity:
+            count: /post/{postIdentity}/likes/profile-identities
   service:
     url: http://localhost:8085
     feign:
