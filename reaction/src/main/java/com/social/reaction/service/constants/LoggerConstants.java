@@ -8,5 +8,8 @@ public class LoggerConstants {
     public static final String NEW_USER_SAVED_IN_DATABASE_TEMPLATE =
             "New user saved in database (User identity: %s)";
 
+    public static final String RETRIEVE_LIKES_A_POST_USER_COUNT_TEMPLATE =
+            "Retrieve likes a post users count (Post identity: %s)";
+
     private LoggerConstants(){}
 }
