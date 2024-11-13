@@ -7,5 +7,7 @@ public interface ProfileService {
 
     int findPostLikesCount(String postIdentity);
 
+    int findPostDislikesCount(String postIdentity);
+
     Set<String> findProfileIdentitiesWhoLikedThePost(String postIdentity);
 }

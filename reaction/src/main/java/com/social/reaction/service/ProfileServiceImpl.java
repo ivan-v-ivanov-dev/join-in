@@ -32,6 +32,13 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public int findPostDislikesCount(String postIdentity) {
+        int dislikesAPostProfileCount = profileRepository.findPostDislikesCount(postIdentity);
+        log.info(String.format(RETRIEVE_DISLIKES_A_POST_USER_COUNT_TEMPLATE, postIdentity));
+        return dislikesAPostProfileCount;
+    }
+
+    @Override
     public Set<String> findProfileIdentitiesWhoLikedThePost(String postIdentity) {
         Set<String> identities = profileRepository.findProfileIdentitiesWhoLikedThePost(postIdentity);
         log.info(String.format(RETRIEVE_USER_IDENTITIES_WHO_LIKED_THE_POST_TEMPLATE, postIdentity));
