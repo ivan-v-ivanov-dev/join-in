@@ -91,4 +91,28 @@ public class ReactionServiceImpl implements ReactionService {
             throw new ResourceAccessException(exception.getMessage());
         }
     }
+
+    @Override
+    public int findCommentsLikesCount(String commentIdentity) {
+        try {
+            int likes = reactionClient.findLikesACommentProfileCount(commentIdentity);
+            log.info(format(RETRIEVE_LIKES_A_COMMENT_USER_COUNT_TEMPLATE, commentIdentity));
+            return likes;
+        } catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public int findCommentDislikesCount(String commentIdentity) {
+        try {
+            int dislikes = reactionClient.findDislikesACommentProfileCount(commentIdentity);
+            log.info(format(RETRIEVE_DISLIKES_A_COMMENT_USER_COUNT_TEMPLATE, commentIdentity));
+            return dislikes;
+        } catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
 }

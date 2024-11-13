@@ -105,7 +105,11 @@ reaction:
         count: /post/{postIdentity}/stars
         user:
           identities: /post/{postIdentity}/stars/profile-identities
-
+    comment:
+      likes:
+        count: /comment/{commentIdentity}/likes
+      dislikes:
+        count: /comment/{commentIdentity}/dislikes
   service:
     url: http://localhost:8085
     feign:

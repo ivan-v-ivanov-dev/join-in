@@ -26,4 +26,10 @@ public interface ReactionClient {
 
     @GetMapping("${reaction.find.post.stars.user.identities}")
     Set<String> findProfileIdentitiesWhoStaredThePost(@PathVariable("postIdentity") String postIdentity);
+
+    @GetMapping("${reaction.find.comment.likes.count}")
+    int findLikesACommentProfileCount(@PathVariable("commentIdentity") String commentIdentity);
+
+    @GetMapping("${reaction.find.comment.dislikes.count}")
+    int findDislikesACommentProfileCount(@PathVariable("commentIdentity") String commentIdentity);
 }

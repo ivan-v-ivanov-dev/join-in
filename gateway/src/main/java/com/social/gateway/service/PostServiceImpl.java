@@ -35,28 +35,27 @@ public class PostServiceImpl implements PostService {
             ResponseEntity<PostRp> response = postClient.findByAuthorIdentityAndPostIdentity(authorIdentity, postIdentity);
             if (response.hasBody()) {
                 PostGatewayRp post = postAdapter.fromPostRpToPostGatewayRp(response.getBody());
-                //TODO
                 post.setAuthorNames(profileService.findProfileNames(post.getAuthorIdentity()));
                 post.setAuthorProfileImage(imageService.findProfileImage(post.getAuthorIdentity()));
                 post.setLikes(reactionService.findPostLikesCount(post.getPostIdentity()));
                 post.setPeopleIdentitiesWhoLikedThePost(reactionService.findProfileIdentitiesWhoLikedThePost(post.getPostIdentity()));
-                post.getPeopleIdentitiesWhoLikedThePost().forEach(profileIdentity -> {
-                    post.getPeopleNamesWhoLikedThePost().add(profileService.findProfileNames(profileIdentity));
-                });
-                // dislikes
+                post.getPeopleIdentitiesWhoLikedThePost().forEach(profileIdentity ->
+                        post.getPeopleNamesWhoLikedThePost().add(profileService.findProfileNames(profileIdentity)));
                 post.setDislikes(reactionService.findPostDislikesCount(post.getPostIdentity()));
-                // peopleIdentitiesWhoDislikedThePost
                 post.setPeopleIdentitiesWhoDislikedThePost(reactionService.findProfileIdentitiesWhoDislikedThePost(post.getPostIdentity()));
-                // peopleNamesWhoDislikedThePost
-
-                // stars
+                post.getPeopleIdentitiesWhoDislikedThePost().forEach(profileIdentity ->
+                        post.getPeopleNamesWhoDislikedThePost().add(profileService.findProfileNames(profileIdentity)));
                 post.setStars(reactionService.findPostStarsCount(post.getPostIdentity()));
-                // peopleIdentitiesWhoStaredThePost
                 post.setPeopleIdentitiesWhoStaredThePost(reactionService.findProfileIdentitiesWhoStaredThePost(post.getPostIdentity()));
-                // peopleNamesWhoStaredThePost
-                // CommentGatewayRp
+                post.getPeopleIdentitiesWhoStaredThePost().forEach(profileIdentity ->
+                        post.getPeopleNamesWhoStaredThePost().add(profileService.findProfileNames(profileIdentity)));
+                post.getComments().forEach(comment -> {
+                    comment.setAuthorNames(profileService.findProfileNames(comment.getAuthorIdentity()));
+                    comment.setAuthorProfileImage(imageService.findProfileImage(comment.getAuthorIdentity()));
+                    comment.setLikes(reactionService.findCommentsLikesCount(comment.getCommentIdentity()));
+                    comment.setDislikes(reactionService.findCommentDislikesCount(comment.getCommentIdentity()));
+                });
                 log.info(format(RETRIEVE_POST_TEMPLATE, postIdentity));
-                //TODO return proper object
                 return post;
             }
             //TODO return proper object

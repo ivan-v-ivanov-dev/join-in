@@ -14,4 +14,8 @@ public interface ReactionService {
     Set<String> findProfileIdentitiesWhoDislikedThePost(String postIdentity);
 
     Set<String> findProfileIdentitiesWhoStaredThePost(String postIdentity);
+
+    int findCommentsLikesCount(String commentIdentity);
+
+    int findCommentDislikesCount(String commentIdentity);
 }
