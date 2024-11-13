@@ -13,9 +13,9 @@ public class ReactionController {
 
     private final ProfileService profileService;
 
-    @GetMapping("/post/{identity}/likes")
-    public int findPostLikesCount(@PathVariable("identity") String identity) {
-        return profileService.findPostLikesCount(identity);
+    @GetMapping("/post/{postIdentity}/likes")
+    public int findPostLikesCount(@PathVariable("postIdentity") String postIdentity) {
+        return profileService.findPostLikesCount(postIdentity);
     }
 
     @GetMapping("/health")
