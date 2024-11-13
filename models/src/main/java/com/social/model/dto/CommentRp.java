@@ -13,15 +13,10 @@ public class CommentRp {
 
     private String authorIdentity;
 
-    private String authorProfileImage;
-
     private String authorNames;
 
     private String content;
 
     private String postedAgo;
 
-    private int likes;
-
-    private int dislikes;
 }
