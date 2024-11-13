@@ -31,4 +31,7 @@ public interface ProfileRepository extends Neo4jRepository<Profile, String> {
 
     @Query(FIND_HOW_MANY_PROFILES_LIKE_THE_COMMENT_TEMPLATE)
     int findCommentLikesCount(@Param("commentIdentity") String commentIdentity);
+
+    @Query(FIND_HOW_MANY_PROFILES_DISLIKE_THE_COMMENT_TEMPLATE)
+    int findCommentDislikesCount(@Param("commentIdentity") String commentIdentity);
 }

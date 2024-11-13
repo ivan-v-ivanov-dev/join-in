@@ -50,6 +50,14 @@ public class Queries {
             """;
 
 
+    public static final String FIND_HOW_MANY_PROFILES_DISLIKE_THE_COMMENT_TEMPLATE =
+            """
+            MATCH (profile:Profile)-[:DISLIKE]->(comment:Comment)
+            WHERE comment.identity = $commentIdentity
+            RETURN COUNT(DISTINCT profile)
+            """;
+
+
     private Queries() {
     }
 }

@@ -29,6 +29,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_LIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE =
             "Retrieve likes a comment users count (Comment identity: %s)";
 
+    public static final String RETRIEVE_DISLIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE =
+            "Retrieve dislikes a comment users count (Comment identity: %s)";
+
 
     private LoggerConstants(){}
 }

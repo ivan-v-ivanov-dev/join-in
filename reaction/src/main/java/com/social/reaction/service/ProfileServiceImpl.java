@@ -72,4 +72,11 @@ public class ProfileServiceImpl implements ProfileService {
         log.info(String.format(RETRIEVE_LIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE, commentIdentity));
         return likes;
     }
+
+    @Override
+    public int findCommentDislikesCount(String commentIdentity) {
+        int dislikes = profileRepository.findCommentDislikesCount(commentIdentity);
+        log.info(String.format(RETRIEVE_DISLIKES_A_COMMENT_USER_COUNT_COMMENT_TEMPLATE, commentIdentity));
+        return dislikes;
+    }
 }

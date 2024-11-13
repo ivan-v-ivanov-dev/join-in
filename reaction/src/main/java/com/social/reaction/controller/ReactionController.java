@@ -49,6 +49,11 @@ public class ReactionController {
         return profileService.findCommentLikesCount(commentIdentity);
     }
 
+    @GetMapping("/comment/{commentIdentity}/dislikes")
+    public int findDislikesACommentProfileCount(@PathVariable("commentIdentity") String commentIdentity) {
+        return profileService.findCommentDislikesCount(commentIdentity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Reaction service is HEALTHY!";
