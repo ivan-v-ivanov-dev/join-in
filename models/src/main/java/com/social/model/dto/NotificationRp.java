@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class NotificationRp {
 
-    private String authorProfileImage;
+    private String authorIdentity;
 
     private String postIdentity;
 
