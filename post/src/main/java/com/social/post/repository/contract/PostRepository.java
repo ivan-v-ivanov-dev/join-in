@@ -10,4 +10,6 @@ public interface PostRepository {
     Post findByAuthorIdentityAndPostIdentity(String postIdentity, String collection);
 
     List<Post> findPostsByAuthorIdentity(String collection);
+
+    int findAuthorPostsCount(String collection);
 }

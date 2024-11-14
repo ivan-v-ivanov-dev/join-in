@@ -10,4 +10,6 @@ public interface PostService {
     PostRp findByAuthorIdentityAndPostIdentity(String authorIdentity, String postIdentity);
 
     List<PostRp> findPostsByAuthorIdentity(String authorIdentity);
+
+    int findAuthorPostsCount(String authorIdentity);
 }

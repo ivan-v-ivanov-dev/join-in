@@ -28,6 +28,11 @@ public class PostController {
         return ResponseEntity.ok(postService.findPostsByAuthorIdentity(authorIdentity));
     }
 
+    @GetMapping("/author/{authorIdentity}/posts/count")
+    public int findAuthorPostsCount(@PathVariable("authorIdentity") String authorIdentity) {
+        return postService.findAuthorPostsCount(authorIdentity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "Post service is HEALTHY";

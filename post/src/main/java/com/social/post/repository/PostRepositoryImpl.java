@@ -35,4 +35,10 @@ public class PostRepositoryImpl implements PostRepository {
                 .limit(3);
         return mongoTemplate.find(query, Post.class, collection);
     }
+
+    @Override
+    public int findAuthorPostsCount(String collection) {
+        return (int) mongoTemplate.count(new Query(), collection);
+    }
+
 }

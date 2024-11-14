@@ -42,4 +42,11 @@ public class PostServiceImpl implements PostService {
         log.info(format(RETRIEVE_POSTS_FOR_USER_TEMPLATE, authorIdentity));
         return posts.stream().map(adapter::fromPostToPostRp).toList();
     }
+
+    @Override
+    public int findAuthorPostsCount(String authorIdentity) {
+        int count = postRepository.findAuthorPostsCount(format(COLLECTION_TEMPLATE, authorIdentity));
+        log.info(format(RETRIEVE_AUTHOR_POSTS_COUNT_TEMPLATE, authorIdentity));
+        return count;
+    }
 }
