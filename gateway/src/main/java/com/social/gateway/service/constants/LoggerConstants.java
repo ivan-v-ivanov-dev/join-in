@@ -56,6 +56,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_DISLIKES_A_COMMENT_USER_COUNT_TEMPLATE =
             "Retrieve dislikes a comment users count (Post identity: %s)";
 
+    public static final String RETRIEVE_POSTS_FOR_USER_TEMPLATE =
+            "Retrieve Posts for user (User identity: %s)";
+
     private LoggerConstants() {
     }
 }

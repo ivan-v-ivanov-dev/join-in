@@ -8,6 +8,7 @@ import com.social.model.dto.PostGatewayRp;
 import com.social.model.dto.ProfileGatewayRp;
 import com.social.model.dto.RegisterUserRq;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -64,6 +65,11 @@ public class ApiGatewayController {
     public PostGatewayRp findByAuthorIdentityAndPostIdentity(@PathVariable("authorIdentity") String authorIdentity,
                                                              @PathVariable("postIdentity") String postIdentity) {
         return postService.findByAuthorIdentityAndPostIdentity(authorIdentity, postIdentity);
+    }
+
+    @GetMapping("/profile/{identity}/posts")
+    public List<PostGatewayRp> findPostsByAuthorIdentity(@PathVariable("identity") String identity) {
+        return postService.findPostsByAuthorIdentity(identity);
     }
 
     @GetMapping("/health")

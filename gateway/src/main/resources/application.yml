@@ -88,6 +88,10 @@ post:
       client:
         name: Post-Service
     url: http://localhost:8084
+all:
+  posts:
+    author:
+      endpoint: /author/{authorIdentity}/posts
 
 #Feign Reaction service
 reaction:

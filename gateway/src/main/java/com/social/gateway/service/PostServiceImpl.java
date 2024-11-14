@@ -15,6 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
+import java.util.List;
+
+import static com.social.gateway.service.constants.LoggerConstants.RETRIEVE_POSTS_FOR_USER_TEMPLATE;
 import static com.social.gateway.service.constants.LoggerConstants.RETRIEVE_POST_TEMPLATE;
 import static java.lang.String.format;
 
@@ -35,26 +38,7 @@ public class PostServiceImpl implements PostService {
             ResponseEntity<PostRp> response = postClient.findByAuthorIdentityAndPostIdentity(authorIdentity, postIdentity);
             if (response.hasBody()) {
                 PostGatewayRp post = postAdapter.fromPostRpToPostGatewayRp(response.getBody());
-                post.setAuthorNames(profileService.findProfileNames(post.getAuthorIdentity()));
-                post.setAuthorProfileImage(imageService.findProfileImage(post.getAuthorIdentity()));
-                post.setLikes(reactionService.findPostLikesCount(post.getPostIdentity()));
-                post.setPeopleIdentitiesWhoLikedThePost(reactionService.findProfileIdentitiesWhoLikedThePost(post.getPostIdentity()));
-                post.getPeopleIdentitiesWhoLikedThePost().forEach(profileIdentity ->
-                        post.getPeopleNamesWhoLikedThePost().add(profileService.findProfileNames(profileIdentity)));
-                post.setDislikes(reactionService.findPostDislikesCount(post.getPostIdentity()));
-                post.setPeopleIdentitiesWhoDislikedThePost(reactionService.findProfileIdentitiesWhoDislikedThePost(post.getPostIdentity()));
-                post.getPeopleIdentitiesWhoDislikedThePost().forEach(profileIdentity ->
-                        post.getPeopleNamesWhoDislikedThePost().add(profileService.findProfileNames(profileIdentity)));
-                post.setStars(reactionService.findPostStarsCount(post.getPostIdentity()));
-                post.setPeopleIdentitiesWhoStaredThePost(reactionService.findProfileIdentitiesWhoStaredThePost(post.getPostIdentity()));
-                post.getPeopleIdentitiesWhoStaredThePost().forEach(profileIdentity ->
-                        post.getPeopleNamesWhoStaredThePost().add(profileService.findProfileNames(profileIdentity)));
-                post.getComments().forEach(comment -> {
-                    comment.setAuthorNames(profileService.findProfileNames(comment.getAuthorIdentity()));
-                    comment.setAuthorProfileImage(imageService.findProfileImage(comment.getAuthorIdentity()));
-                    comment.setLikes(reactionService.findCommentsLikesCount(comment.getCommentIdentity()));
-                    comment.setDislikes(reactionService.findCommentDislikesCount(comment.getCommentIdentity()));
-                });
+                retrievePostInfo(post);
                 log.info(format(RETRIEVE_POST_TEMPLATE, postIdentity));
                 return post;
             }
@@ -65,4 +49,48 @@ public class PostServiceImpl implements PostService {
             throw new ResourceAccessException(exception.getMessage());
         }
     }
+
+    @Override
+    public List<PostGatewayRp> findPostsByAuthorIdentity(String identity) {
+        try {
+            ResponseEntity<List<PostRp>> posts = postClient.findPostsByAuthorIdentity(identity);
+            if (posts.hasBody()) {
+                List<PostGatewayRp> postGatewayRp = posts.getBody().stream()
+                        .map(postAdapter::fromPostRpToPostGatewayRp)
+                        .toList();
+                postGatewayRp.forEach(this::retrievePostInfo);
+                log.info(format(RETRIEVE_POSTS_FOR_USER_TEMPLATE, identity));
+                return postGatewayRp;
+            }
+            //TODO return proper object
+            return null;
+        } catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
+
+    private void retrievePostInfo(PostGatewayRp post) {
+        post.setAuthorNames(profileService.findProfileNames(post.getAuthorIdentity()));
+        post.setAuthorProfileImage(imageService.findProfileImage(post.getAuthorIdentity()));
+        post.setLikes(reactionService.findPostLikesCount(post.getPostIdentity()));
+        post.setPeopleIdentitiesWhoLikedThePost(reactionService.findProfileIdentitiesWhoLikedThePost(post.getPostIdentity()));
+        post.getPeopleIdentitiesWhoLikedThePost().forEach(profileIdentity ->
+                post.getPeopleNamesWhoLikedThePost().add(profileService.findProfileNames(profileIdentity)));
+        post.setDislikes(reactionService.findPostDislikesCount(post.getPostIdentity()));
+        post.setPeopleIdentitiesWhoDislikedThePost(reactionService.findProfileIdentitiesWhoDislikedThePost(post.getPostIdentity()));
+        post.getPeopleIdentitiesWhoDislikedThePost().forEach(profileIdentity ->
+                post.getPeopleNamesWhoDislikedThePost().add(profileService.findProfileNames(profileIdentity)));
+        post.setStars(reactionService.findPostStarsCount(post.getPostIdentity()));
+        post.setPeopleIdentitiesWhoStaredThePost(reactionService.findProfileIdentitiesWhoStaredThePost(post.getPostIdentity()));
+        post.getPeopleIdentitiesWhoStaredThePost().forEach(profileIdentity ->
+                post.getPeopleNamesWhoStaredThePost().add(profileService.findProfileNames(profileIdentity)));
+        post.getComments().forEach(comment -> {
+            comment.setAuthorNames(profileService.findProfileNames(comment.getAuthorIdentity()));
+            comment.setAuthorProfileImage(imageService.findProfileImage(comment.getAuthorIdentity()));
+            comment.setLikes(reactionService.findCommentsLikesCount(comment.getCommentIdentity()));
+            comment.setDislikes(reactionService.findCommentDislikesCount(comment.getCommentIdentity()));
+        });
+    }
+
 }
