@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Map;
 
 @FeignClient(name = "${image.service.feign.client.name}", url = "${image.service.url}")
 public interface ImageClient {
@@ -17,5 +16,5 @@ public interface ImageClient {
     String findProfileBackgroundImage(@PathVariable String identity);
 
     @GetMapping("${image.albums}")
-    Map<String, List<String>> findProfileAlbumImages(@PathVariable String identity);
+    List<String> findProfileAlbumImages(@PathVariable String identity);
 }

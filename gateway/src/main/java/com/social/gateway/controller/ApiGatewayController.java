@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -53,8 +52,8 @@ public class ApiGatewayController {
         return imageService.findProfileBackgroundImage(identity);
     }
 
-    @GetMapping("/profile/{identity}/albums-images")
-    public Map<String, List<String>> findProfileAlbumImages(@PathVariable String identity) {
+    @GetMapping("/profile/{identity}/album-images")
+    public List<String> findProfileAlbumImages(@PathVariable String identity) {
         return imageService.findProfileAlbumImages(identity);
     }
 

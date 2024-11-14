@@ -77,7 +77,7 @@ image:
     url: http://localhost:8089
   profile: /profile/{identity}
   background: /profile/{identity}/background-image
-  albums: /profile/{identity}/albums
+  albums: /profile/{identity}/album
 
 #Feign Post service
 post:
@@ -146,6 +146,7 @@ notification:
     profile:
       notifications: /profile/{identity}
 
+#Feign Message service
 message:
   service:
     feign:
