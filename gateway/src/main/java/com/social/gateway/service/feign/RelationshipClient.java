@@ -11,4 +11,10 @@ public interface RelationshipClient {
 
     @GetMapping("${relationship.find.user.friends}")
     Set<String> findFriendsByProfileIdentity(@PathVariable("identity") String identity);
+
+    @GetMapping("${relationship.find.friends.count}")
+    int findFriendsCountByProfileIdentity(@PathVariable("identity") String identity);
+
+    @GetMapping("${relationship.find.user.friendship.requests}")
+    Set<String> findFriendshipRequestsByProfileIdentity(@PathVariable("identity") String identity);
 }

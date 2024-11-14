@@ -1,12 +1,8 @@
 package com.social.gateway.controller;
 
 import com.social.gateway.service.contract.*;
-import com.social.model.dto.FriendGatewayRp;
-import com.social.model.dto.PostGatewayRp;
-import com.social.model.dto.ProfileGatewayRp;
-import com.social.model.dto.RegisterUserRq;
+import com.social.model.dto.*;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -74,6 +70,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/friends")
     public List<FriendGatewayRp> findProfileFriends(@PathVariable("identity") String identity) {
         return relationshipService.findProfileFriends(identity);
+    }
+
+    @GetMapping("/profile/{identity}/friendship-requests")
+    public List<FriendshipRequestRp> findFriendshipRequestsByProfileIdentity(@PathVariable("identity") String identity) {
+        return relationshipService.findFriendshipRequestsByProfileIdentity(identity);
     }
 
     @GetMapping("/health")

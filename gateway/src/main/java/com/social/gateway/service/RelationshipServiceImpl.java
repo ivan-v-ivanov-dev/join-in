@@ -5,6 +5,7 @@ import com.social.gateway.service.contract.ProfileService;
 import com.social.gateway.service.contract.RelationshipService;
 import com.social.gateway.service.feign.RelationshipClient;
 import com.social.model.dto.FriendGatewayRp;
+import com.social.model.dto.FriendshipRequestRp;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.web.client.ResourceAccessException;
 import java.util.List;
 import java.util.Set;
 
+import static com.social.gateway.service.constants.LoggerConstants.RETRIEVE_USER_FRIENDSHIP_REQUESTS_TEMPLATE;
 import static com.social.gateway.service.constants.LoggerConstants.RETRIEVE_USER_FRIENDS_TEMPLATE;
 import static java.lang.String.format;
 
@@ -39,6 +41,27 @@ public class RelationshipServiceImpl implements RelationshipService {
                     .toList();
             log.info(format(RETRIEVE_USER_FRIENDS_TEMPLATE, identity));
             return friends;
+        } catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
+
+    @Override
+    public List<FriendshipRequestRp> findFriendshipRequestsByProfileIdentity(String identity) {
+        try {
+            Set<String> identities = relationshipClient.findFriendshipRequestsByProfileIdentity(identity);
+            List<FriendshipRequestRp> requests = identities.stream()
+                    .map(requestIdentity ->
+                            FriendshipRequestRp.builder()
+                                    .profileIdentity(requestIdentity)
+                                    .profileImage(imageService.findProfileImage(requestIdentity))
+                                    .names(profileService.findProfileNames(requestIdentity))
+                                    .friendCount(relationshipClient.findFriendsCountByProfileIdentity(requestIdentity))
+                                    .build())
+                    .toList();
+            log.info(format(RETRIEVE_USER_FRIENDSHIP_REQUESTS_TEMPLATE, identity));
+            return requests;
         } catch (FeignException exception) {
             log.error(exception.getMessage());
             throw new ResourceAccessException(exception.getMessage());
