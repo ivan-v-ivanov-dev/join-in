@@ -11,6 +11,7 @@ import com.social.kafka.messages.contract.KafkaMessage;
 import com.social.model.dto.RegisterUserRq;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import static java.lang.String.format;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 @Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
 

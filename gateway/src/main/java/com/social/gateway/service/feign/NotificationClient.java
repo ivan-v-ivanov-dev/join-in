@@ -10,6 +10,6 @@ import java.util.List;
 @FeignClient(name = "${notification.service.feign.client.name}", url = "${notification.service.url}")
 public interface NotificationClient {
 
-    @GetMapping("${notification.find.profile.notifications.endpoint}")
+    @GetMapping("${notification.find.profile.notifications}")
     List<NotificationRp> findProfileNotifications(@PathVariable("identity") String identity);
 }

@@ -125,10 +125,10 @@ relationship:
   find:
     user:
       friends: /profile/{identity}/friends
-    friends:
-      count: /profile/{identity}/friends/count
       friendship:
         requests: /profile/{identity}/friendship-requests
+    friends:
+      count: /profile/{identity}/friends/count
   service:
     feign:
       client:
