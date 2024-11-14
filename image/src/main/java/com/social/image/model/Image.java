@@ -11,7 +11,6 @@ public class Image {
     @Id
     private String id;
     private String type;
-    private String albumName;
     private String image;
 
 }

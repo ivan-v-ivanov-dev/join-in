@@ -1,7 +1,6 @@
 package com.social.image.service.contract;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ImageService {
     String findProfileImage(String identity);
@@ -10,5 +9,5 @@ public interface ImageService {
 
     String findProfileBackgroundImage(String identity);
 
-    Map<String, List<String>> findProfileAlbumImages(String identity);
+    List<String> findProfileAlbumImages(String identity);
 }
