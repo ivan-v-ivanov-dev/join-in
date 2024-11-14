@@ -134,3 +134,14 @@ relationship:
       client:
         name: Relationship-Service
     url: http://localhost:8087
+
+#Feign Notification service
+notification:
+  service:
+    feign:
+      client:
+        name: Notification-Service
+    url: http://localhost:8086
+  find:
+    profile:
+      notifications: /profile/{identity}
