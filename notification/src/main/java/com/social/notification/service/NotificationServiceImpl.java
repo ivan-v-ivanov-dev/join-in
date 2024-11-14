@@ -33,7 +33,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public List<NotificationRp> findProfileNotifications(String identity) {
         List<Notification> notifications = notificationRepository.findProfileNotifications(format(COLLECTION_TEMPLATE, identity));
-        log.info(String.format(RETRIEVE_USER_NOTIFICATIONS_TEMPLATE, identity));
+        log.info(format(RETRIEVE_USER_NOTIFICATIONS_TEMPLATE, identity));
         return adapter.fromListNotificationToListNotificationRp(notifications);
     }
 }
