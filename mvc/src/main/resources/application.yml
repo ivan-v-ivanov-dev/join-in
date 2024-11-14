@@ -83,3 +83,5 @@ gateway:
         endpoint: /profile/{identity}/background-image
     albums:
       endpoint: /profile/{identity}/albums-images
+    posts:
+      endpoint: /profile/{identity}/posts

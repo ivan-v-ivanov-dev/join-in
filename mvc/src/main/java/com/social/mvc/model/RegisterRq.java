@@ -13,7 +13,7 @@ import static com.social.mvc.service.constants.ModelEntityConstants.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Register {
+public class RegisterRq {
 
     @NotBlank(message = NAME_CAN_NOT_BE_EMPTY)
     @Size(min = 3, max = 30, message = NAME_MUST_BE_BETWEEN_3_AND_30_SYMBOLS)

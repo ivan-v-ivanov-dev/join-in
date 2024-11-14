@@ -5,16 +5,19 @@ public class LoggerConstants {
     public static final String USER_LOGGED_TEMPLATE = "User logged: %s";
 
     public static final String PROFILE_INFORMATION_RETRIEVED_FOR_USER_TEMPLATE =
-            "Profile information retrieved for User %s";
+            "ProfileRq information retrieved for User %s";
 
     public static final String RETRIEVE_PROFILE_IMAGE_FROM_GATEWAY_SERVICE_TEMPLATE =
-            "Retrieve Profile image from Gateway API Service (Profile identity: %s)";
+            "Retrieve ProfileRq image from Gateway API Service (ProfileRq identity: %s)";
 
     public static final String RETRIEVE_PROFILE_BACKGROUND_IMAGE_FROM_GATEWAY_SERVICE_TEMPLATE =
-            "Retrieve Profile background image from Gateway API Service (Profile identity: %s)";
+            "Retrieve ProfileRq background image from Gateway API Service (ProfileRq identity: %s)";
 
     public static final String RETRIEVE_ALBUM_IMAGES_FOR_USER_TEMPLATE =
-            "Retrieve album images for user (Profile identity: %s)";
+            "Retrieve album images for user (ProfileRq identity: %s)";
+
+    public static final String RETRIEVE_POSTS_FOR_USER_TEMPLATE =
+            "Retrieve Posts for user (User identity: %s)";
 
     private LoggerConstants() {
     }

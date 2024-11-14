@@ -1,7 +1,7 @@
 package com.social.mvc.service;
 
 import com.social.mvc.adapter.RegisterUserAdapter;
-import com.social.mvc.model.Register;
+import com.social.mvc.model.RegisterRq;
 import com.social.mvc.service.contract.AuthenticationService;
 import com.social.mvc.service.feign.GatewayClient;
 import feign.FeignException;
@@ -44,9 +44,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public void register(Register register) {
+    public void register(RegisterRq registerRq) {
         try {
-            gatewayClient.register(registerUserAdapter.fromRegisterToRegisterUserRq(register));
+            gatewayClient.register(registerUserAdapter.fromRegisterToRegisterUserRq(registerRq));
         } catch (FeignException exception) {
             log.error(exception.getMessage());
             throw exception;

@@ -1,7 +1,6 @@
 package com.social.mvc.service;
 
-import com.social.mvc.adapter.ProfileAdapter;
-import com.social.mvc.model.Profile;
+import com.social.model.dto.ProfileGatewayRp;
 import com.social.mvc.service.contract.ProfileService;
 import com.social.mvc.service.feign.GatewayClient;
 import feign.FeignException;
@@ -19,13 +18,11 @@ import static java.lang.String.format;
 public class ProfileServiceImpl implements ProfileService {
 
     private final GatewayClient gatewayClient;
-    private final ProfileAdapter profileAdapter;
 
     @Override
-    public Profile findProfileInfoByIdentity(String identity) {
+    public ProfileGatewayRp findProfileInfoByIdentity(String identity) {
         try {
-            Profile profile = profileAdapter.fromProfileGatewayRpToProfile(
-                    gatewayClient.findProfileInfoByIdentity(identity));
+            ProfileGatewayRp profile = gatewayClient.findProfileInfoByIdentity(identity);
             log.info(format(PROFILE_INFORMATION_RETRIEVED_FOR_USER_TEMPLATE, identity));
             return profile;
         } catch (FeignException feignException) {

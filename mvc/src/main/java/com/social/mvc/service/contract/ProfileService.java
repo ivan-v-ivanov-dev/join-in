@@ -1,7 +1,7 @@
 package com.social.mvc.service.contract;
 
-import com.social.mvc.model.Profile;
+import com.social.model.dto.ProfileGatewayRp;
 
 public interface ProfileService {
-    Profile findProfileInfoByIdentity(String identity);
+    ProfileGatewayRp findProfileInfoByIdentity(String identity);
 }

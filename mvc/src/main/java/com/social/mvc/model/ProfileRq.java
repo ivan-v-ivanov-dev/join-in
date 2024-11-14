@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @Getter
-public class Profile {
+public class ProfileRq {
 
     private String identity;
 

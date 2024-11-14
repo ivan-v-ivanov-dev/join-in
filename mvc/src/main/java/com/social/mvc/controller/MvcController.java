@@ -1,8 +1,9 @@
 package com.social.mvc.controller;
 
-import com.social.mvc.model.Register;
+import com.social.mvc.model.RegisterRq;
 import com.social.mvc.service.contract.AuthenticationService;
 import com.social.mvc.service.contract.ImageService;
+import com.social.mvc.service.contract.PostService;
 import com.social.mvc.service.contract.ProfileService;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class MvcController {
     private final AuthenticationService authenticationService;
     private final ProfileService profileService;
     private final ImageService imageService;
+    private final PostService postService;
 
     @GetMapping("/")
     public String login() {
@@ -42,19 +44,19 @@ public class MvcController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("register", new Register());
+        model.addAttribute("register", new RegisterRq());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("register") Register register,
+    public String registerUser(@Valid @ModelAttribute("register") RegisterRq registerRq,
                                BindingResult errors, Model model) {
         if (errors.hasErrors()) {
             return "register";
         }
 
         try {
-            authenticationService.register(register);
+            authenticationService.register(registerRq);
             return "redirect:/";
         } catch (FeignException exception) {
             model.addAttribute("error", exception.getMessage());
@@ -83,7 +85,7 @@ public class MvcController {
             model.addAttribute("backgroundImage", imageService.findBackgroundImage(identity));
             model.addAttribute("albums", imageService.findAlbums(identity));
             //posts
-
+            model.addAttribute("posts", postService.findPostsByAuthorIdentity(identity));
             //friends
 
             //friendshipRequests

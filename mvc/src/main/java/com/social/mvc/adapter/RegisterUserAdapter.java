@@ -1,18 +1,18 @@
 package com.social.mvc.adapter;
 
 import com.social.model.dto.RegisterUserRq;
-import com.social.mvc.model.Register;
+import com.social.mvc.model.RegisterRq;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RegisterUserAdapter {
 
-    public RegisterUserRq fromRegisterToRegisterUserRq(Register register) {
+    public RegisterUserRq fromRegisterToRegisterUserRq(RegisterRq registerRq) {
         return RegisterUserRq.builder()
-                .email(register.getEmail())
-                .firstName(register.getFirstName())
-                .lastName(register.getLastName())
-                .email(register.getEmail())
-                .password(register.getPassword()).build();
+                .email(registerRq.getEmail())
+                .firstName(registerRq.getFirstName())
+                .lastName(registerRq.getLastName())
+                .email(registerRq.getEmail())
+                .password(registerRq.getPassword()).build();
     }
 }
