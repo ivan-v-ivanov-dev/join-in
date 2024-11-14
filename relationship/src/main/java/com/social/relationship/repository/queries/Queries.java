@@ -28,6 +28,14 @@ public class Queries {
             RETURN DISTINCT friendship_request.identity
             """;
 
+    public static final String FIND_FRIENDS_COUNT_FOR_A_PROFILE_TEMPLATE =
+            """
+            MATCH (profile:Profile)-[:FRIEND]->() 
+            WHERE profile.identity = $identity 
+            RETURN count(profile)
+            """;
+
+
     private Queries() {
     }
 }

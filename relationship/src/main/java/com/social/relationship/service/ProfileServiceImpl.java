@@ -33,6 +33,13 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public int findFriendsCountByProfileIdentity(String identity) {
+        int friendsCount = profileRepository.findFriendsCountByProfileIdentity(identity);
+        log.info(String.format(RETRIEVE_FRIENDS_COUNT_FOR_USER_TEMPLATE, identity));
+        return friendsCount;
+    }
+
+    @Override
     public Set<String> findFriendshipRequestsByProfileIdentity(String identity) {
         Set<String> identities = profileRepository.findFriendshipRequestsByProfileIdentity(identity);
         log.info(format(RETRIEVE_FRIENDSHIP_REQUESTS_IDENTITIES_FOR_USER_TEMPLATE, identity));

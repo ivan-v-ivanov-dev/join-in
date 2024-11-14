@@ -19,6 +19,11 @@ public class RelationController {
         return profileService.findFriendsByProfileIdentity(identity);
     }
 
+    @GetMapping("/profile/{identity}/friends/count")
+    public int findFriendsCountByProfileIdentity(@PathVariable("identity") String identity) {
+        return profileService.findFriendsCountByProfileIdentity(identity);
+    }
+
     @GetMapping("/profile/{identity}/friendship-requests")
     public Set<String> findFriendshipRequestsByProfileIdentity(@PathVariable("identity") String identity) {
         return profileService.findFriendshipRequestsByProfileIdentity(identity);
