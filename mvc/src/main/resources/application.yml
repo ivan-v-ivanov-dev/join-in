@@ -90,3 +90,5 @@ gateway:
     friendship:
       requests:
         endpoint: /profile/{identity}/friendship-requests
+    notifications:
+      endpoint: /profile/{identity}/notifications

@@ -25,6 +25,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_USER_FRIENDSHIP_REQUESTS_TEMPLATE =
             "Retrieve user friendship requests (User identity: %s)";
 
+    public static final String RETRIEVE_USER_NOTIFICATIONS_TEMPLATE =
+            "Retrieve user notifications (user identity: %s)";
+
     private LoggerConstants() {
     }
 }

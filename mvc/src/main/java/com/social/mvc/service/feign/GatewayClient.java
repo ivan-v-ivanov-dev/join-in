@@ -39,4 +39,7 @@ public interface GatewayClient {
 
     @GetMapping("${gateway.profile.friendship.requests.endpoint}")
     List<FriendshipRequestGatewayRp> findFriendshipRequestsByProfileIdentity(@PathVariable("identity") String identity);
+
+    @GetMapping("${gateway.profile.notifications}")
+    List<NotificationGatewayRp> findNotificationsByProfileIdentity(@PathVariable("identity") String identity);
 }

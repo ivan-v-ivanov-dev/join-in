@@ -21,6 +21,7 @@ public class MvcController {
     private final ImageService imageService;
     private final PostService postService;
     private final RelationshipService relationshipService;
+    private final NotificationService notificationService;
 
     @GetMapping("/")
     public String login() {
@@ -77,16 +78,13 @@ public class MvcController {
     public String profile(@PathVariable("identity") String identity, Model model) {
         try {
             model.addAttribute("profile", profileService.findProfileInfoByIdentity(identity));
-            //TODO:
-            // make call to Gateway for the other info
             model.addAttribute("profileImage", imageService.findProfileImage(identity));
             model.addAttribute("backgroundImage", imageService.findBackgroundImage(identity));
             model.addAttribute("albums", imageService.findAlbums(identity));
             model.addAttribute("posts", postService.findPostsByAuthorIdentity(identity));
             model.addAttribute("friends", relationshipService.findProfileFriends(identity));
-            //friendshipRequests
             model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
-            //notifications
+            model.addAttribute("notifications", notificationService.findProfileNotifications(identity));
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
