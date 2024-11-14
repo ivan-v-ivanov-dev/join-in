@@ -89,7 +89,7 @@ gateway:
       endpoint: /api/profile/{identity}/friends
     online:
       friends:
-        endpoint: /profile/{identity}/online-friends
+        endpoint: /api/profile/{identity}/online-friends
     friendship:
       requests:
         endpoint: /api/profile/{identity}/friendship-requests

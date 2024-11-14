@@ -302,7 +302,8 @@
                                 <div class="header-title">
                                     <h5 class="mb-0 text-white">Friend Request</h5>
                                 </div>
-                                <small class="badge  bg-light text-dark " th:text="${friendshipRequestsCount}">4</small>
+<!--                                <small class="badge  bg-light text-dark " th:text="${friendshipRequestsCount}">4</small>-->
+                                <small class="badge  bg-light text-dark " th:text="${#lists.size(friendshipRequests)}">4</small>
                             </div>
                             <div class="card-body p-0" th:each="currentFriendshipRequest: ${friendshipRequests}">
 
@@ -312,7 +313,7 @@
                                             <img alt="" class="avatar-40 rounded"
                                                  loading="lazy" th:src="${currentFriendshipRequest.getProfileImage()}">
                                             <div class="ms-3">
-                                                <h6 class="mb-0 " th:text="${currentFriendshipRequest.getFirstName()} + ' ' + ${currentFriendshipRequest.getLastName()}">Jaques Amole</h6>
+                                                <h6 class="mb-0 " th:text="${currentFriendshipRequest.getNames()}">Jaques Amole</h6>
                                                 <p class="mb-0" th:text="${currentFriendshipRequest.getFriendCount()}">40 friends</p>
                                             </div>
                                         </div>
@@ -436,14 +437,14 @@
                              src="../assets/images/user/1.jpg" th:src="${profileImage}">
                         <div class="caption">
                             <h6 class="mb-0 line-height"
-                                th:text="${profile.getFirstName()} + ' ' + ${profile.getLastName()}">Bni Cyst</h6>
+                                th:text="${profile.firstName + ' ' + profile.lastName}">Bni Cyst</h6>
                         </div>
                     </a>
                     <div aria-labelledby="drop-down-arrow" class="sub-drop dropdown-menu caption-menu">
                         <div class="card shadow-none m-0">
                             <div class="card-header ">
                                 <div class="header-title">
-                                    <h5 class="mb-0 " th:text="${profile.getFirstName()} + ' ' + ${profile.getLastName()}">Hello Bni Cyst</h5>
+                                    <h5 class="mb-0 " th:text="${profile.firstName + ' ' + profile.lastName}">Hello Bni Cyst</h5>
                                 </div>
                             </div>
 
@@ -542,7 +543,7 @@
                                     </div>
                                     <div class="profile-detail">
                                         <h3 class=""
-                                            th:text="${profile.getFirstName()} + ' ' + ${profile.getLastName()}">Bni
+                                            th:text="${profile.firstName + ' ' + profile.lastName}">Bni
                                             Cyst</h3>
                                     </div>
                                 </div>
@@ -554,11 +555,13 @@
                                         <ul class="social-data-block d-flex align-items-center justify-content-between list-inline p-0 m-0">
                                             <li class="text-center ps-3">
                                                 <h6>Posts</h6>
-                                                <p class="mb-0" th:text="${postsCount}">690</p>
+<!--                                                <p class="mb-0" th:text="${postsCount}">690</p>-->
+                                                <p class="mb-0" th:text="${#lists.size(posts)}">690</p>
                                             </li>
                                             <li class="text-center ps-3">
                                                 <h6>Friends</h6>
-                                                <p class="mb-0" th:text="${friendsCount}">100</p>
+<!--                                                <p class="mb-0" th:text="${friendsCount}">100</p>-->
+                                                <p class="mb-0" th:text="${#lists.size(friends)}">100</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -636,7 +639,7 @@
                                                             <img alt="gallary-image" class="img-fluid"
                                                                  loading="lazy" th:src="${friend.getProfileImage()}"/></a>
                                                         <h6 class="mt-2 text-center"
-                                                            th:text="${friend.getFirstName()} + ' ' + ${friend.getLastName()}">Anna Rexia</h6>
+                                                            th:text="${friend.getNames()}">Anna Rexia</h6>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1288,7 +1291,7 @@
                                                                                  th:src="${currentFriend.getProfileImage()}">
                                                                         </a>
                                                                         <div class="friend-info ms-3">
-                                                                            <h5 th:text="${currentFriend.getFirstName()} + ' ' + ${currentFriend.getLastName()}">Petey Cruiser</h5>
+                                                                            <h5 th:text="${currentFriend.getNames()}">Petey Cruiser</h5>
                                                                             <p class="mb-0">15 friends</p>
                                                                         </div>
                                                                     </div>
