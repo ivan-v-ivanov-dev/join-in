@@ -13,7 +13,5 @@ public class FriendGatewayRp {
 
     private String profileImage;
 
-    private String firstName;
-
-    private String lastName;
+    private String names;
 }
