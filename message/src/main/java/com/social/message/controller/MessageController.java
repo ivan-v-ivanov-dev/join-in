@@ -12,7 +12,7 @@ public class MessageController {
 
     private final MessageService messageService;
 
-    @GetMapping("/profile/{identity}/online/status")
+    @GetMapping("/profile/{identity}/online-status")
     public boolean findUserOnlineStatus(@PathVariable("identity") String identity) {
         return messageService.findUserOnlineStatus(identity);
     }
