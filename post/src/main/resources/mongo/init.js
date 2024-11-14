@@ -48,7 +48,9 @@ db.c_1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032.insertMany
                 }
         ],
         postDate: "2023-07-09"
-    },
+    }]);
+
+db.c_771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551.insertMany( [
     {
         postIdentity: "8a1e8ba0f2a44c81fbead8a5a3a6a9cc46bcda95b468c8c039ba2f483e803fa2df38960ccb54351cfe93493b37318477a76be2fdbae67549fd7c9168e0861dde",
         authorIdentity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551",
@@ -82,7 +84,9 @@ db.c_1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032.insertMany
             }
         ],
         postDate: "2023-02-17"
-    },
+    }]);
+
+db.c_788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627.insertMany( [
     {
         postIdentity: "5f4183b360dd972469675a768e00d64a0b72bb18850dd7d7445eab6dca9dd612f0684d07926a2b318d6fad7dc734821e150e36ac8db8c25a736dded741e41aa9",
         authorIdentity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
@@ -128,7 +132,9 @@ db.c_1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032.insertMany
              }
         ],
         postDate: "2023-05-18"
-    },
+    }]);
+
+db.c_d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8.insertMany( [
     {
         postIdentity: "13a81b6c121c9835eeb780a7a145d4cc7345d173ab2e217c4721447bc79aedf50cf292b6b51b4808b067bb34ae2f3f9538a109146b51aa06b9ad65d56178e8c0",
         authorIdentity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
@@ -156,5 +162,6 @@ db.c_1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032.insertMany
         postDate: "2023-08-15"
     }
 ]);
+
 console.log('*** Data Imported ***')
 
