@@ -19,6 +19,7 @@ public class ApiGatewayController {
     private final PostService postService;
     private final RelationshipService relationshipService;
     private final NotificationService notificationService;
+    private final MessageService messageService;
 
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
@@ -81,6 +82,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/notifications")
     public List<NotificationGatewayRp> findNotificationsByProfileIdentity(@PathVariable("identity") String identity) {
         return notificationService.findNotificationsByProfileIdentity(identity);
+    }
+
+    @GetMapping("/profile/{identity}/online-friends")
+    public List<FriendGatewayRp> findProfileOnlineFriends(@PathVariable("identity") String identity) {
+        return messageService.findProfileOnlineFriends(identity);
     }
 
     @GetMapping("/health")

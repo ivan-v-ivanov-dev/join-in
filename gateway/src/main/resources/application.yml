@@ -145,3 +145,13 @@ notification:
   find:
     profile:
       notifications: /profile/{identity}
+
+message:
+  service:
+    feign:
+      client:
+        name: Message-Service
+    url: http://localhost:8088
+    friend:
+      online:
+        status: /profile/{identity}/online-status

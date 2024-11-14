@@ -67,4 +67,15 @@ public class RelationshipServiceImpl implements RelationshipService {
             throw new ResourceAccessException(exception.getMessage());
         }
     }
+
+    public Set<String> findFriendsByProfileIdentity(String identity) {
+        try {
+            Set<String> friends = relationshipClient.findFriendsByProfileIdentity(identity);
+            log.info(format(RETRIEVE_USER_FRIENDS_TEMPLATE, identity));
+            return friends;
+        }catch (FeignException exception) {
+            log.error(exception.getMessage());
+            throw new ResourceAccessException(exception.getMessage());
+        }
+    }
 }
