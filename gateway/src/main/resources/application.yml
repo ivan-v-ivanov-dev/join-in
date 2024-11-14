@@ -119,3 +119,14 @@ reaction:
     feign:
       client:
         name: Reaction-Service
+
+#Feign Relationship service
+relationship:
+  find:
+    user:
+      friends: /profile/{identity}/friends
+  service:
+    feign:
+      client:
+        name: Relationship-Service
+    url: http://localhost:8087

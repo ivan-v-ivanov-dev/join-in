@@ -1,9 +1,7 @@
 package com.social.gateway.controller;
 
-import com.social.gateway.service.contract.AuthenticationService;
-import com.social.gateway.service.contract.ImageService;
-import com.social.gateway.service.contract.PostService;
-import com.social.gateway.service.contract.ProfileService;
+import com.social.gateway.service.contract.*;
+import com.social.model.dto.FriendGatewayRp;
 import com.social.model.dto.PostGatewayRp;
 import com.social.model.dto.ProfileGatewayRp;
 import com.social.model.dto.RegisterUserRq;
@@ -23,6 +21,7 @@ public class ApiGatewayController {
     private final ProfileService profileService;
     private final ImageService imageService;
     private final PostService postService;
+    private final RelationshipService relationshipService;
 
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
@@ -70,6 +69,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/posts")
     public List<PostGatewayRp> findPostsByAuthorIdentity(@PathVariable("identity") String identity) {
         return postService.findPostsByAuthorIdentity(identity);
+    }
+
+    @GetMapping("/profile/{identity}/friends")
+    public List<FriendGatewayRp> findProfileFriends(@PathVariable("identity") String identity) {
+        return relationshipService.findProfileFriends(identity);
     }
 
     @GetMapping("/health")

@@ -59,6 +59,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_POSTS_FOR_USER_TEMPLATE =
             "Retrieve Posts for user (User identity: %s)";
 
+    public static final String RETRIEVE_USER_FRIENDS_TEMPLATE =
+            "Retrieve user friends (User identity: %s)";
+
     private LoggerConstants() {
     }
 }
