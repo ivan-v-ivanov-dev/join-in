@@ -1,9 +1,6 @@
 package com.social.mvc.service.feign;
 
-import com.social.model.dto.FriendGatewayRp;
-import com.social.model.dto.PostGatewayRp;
-import com.social.model.dto.ProfileGatewayRp;
-import com.social.model.dto.RegisterUserRq;
+import com.social.model.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,4 +36,7 @@ public interface GatewayClient {
 
     @GetMapping("${gateway.profile.friends.endpoint}")
     List<FriendGatewayRp> findProfileFriends(@PathVariable("identity") String identity);
+
+    @GetMapping("${gateway.profile.friendship.requests.endpoint}")
+    List<FriendshipRequestGatewayRp> findFriendshipRequestsByProfileIdentity(@PathVariable("identity") String identity);
 }

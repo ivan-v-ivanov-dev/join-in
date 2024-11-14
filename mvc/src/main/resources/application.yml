@@ -87,3 +87,6 @@ gateway:
       endpoint: /profile/{identity}/posts
     friends:
       endpoint: /profile/{identity}/friends
+    friendship:
+      requests:
+        endpoint: /profile/{identity}/friendship-requests

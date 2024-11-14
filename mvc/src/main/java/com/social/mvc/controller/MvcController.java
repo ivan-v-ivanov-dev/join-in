@@ -85,7 +85,7 @@ public class MvcController {
             model.addAttribute("posts", postService.findPostsByAuthorIdentity(identity));
             model.addAttribute("friends", relationshipService.findProfileFriends(identity));
             //friendshipRequests
-
+            model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
             //notifications
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
