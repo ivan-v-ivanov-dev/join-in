@@ -22,6 +22,9 @@ public class LoggerConstants {
     public static final String RETRIEVE_USER_FRIENDS_TEMPLATE =
             "Retrieve user friends (User identity: %s)";
 
+    public static final String RETRIEVE_USER_ONLINE_FRIENDS_TEMPLATE =
+            "Retrieve user online friends (User identity: %s)";
+
     public static final String RETRIEVE_USER_FRIENDSHIP_REQUESTS_TEMPLATE =
             "Retrieve user friendship requests (User identity: %s)";
 

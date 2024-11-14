@@ -37,6 +37,9 @@ public interface GatewayClient {
     @GetMapping("${gateway.profile.friends.endpoint}")
     List<FriendGatewayRp> findProfileFriends(@PathVariable("identity") String identity);
 
+    @GetMapping("${gateway.profile.online.friends.endpoint}")
+    List<FriendGatewayRp> findProfileOnlineFriends(@PathVariable("identity") String identity);
+
     @GetMapping("${gateway.profile.friendship.requests.endpoint}")
     List<FriendshipRequestGatewayRp> findFriendshipRequestsByProfileIdentity(@PathVariable("identity") String identity);
 
