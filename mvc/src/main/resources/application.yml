@@ -85,3 +85,5 @@ gateway:
       endpoint: /profile/{identity}/albums-images
     posts:
       endpoint: /profile/{identity}/posts
+    friends:
+      endpoint: /profile/{identity}/friends

@@ -1,10 +1,7 @@
 package com.social.mvc.controller;
 
 import com.social.mvc.model.RegisterRq;
-import com.social.mvc.service.contract.AuthenticationService;
-import com.social.mvc.service.contract.ImageService;
-import com.social.mvc.service.contract.PostService;
-import com.social.mvc.service.contract.ProfileService;
+import com.social.mvc.service.contract.*;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,6 +20,7 @@ public class MvcController {
     private final ProfileService profileService;
     private final ImageService imageService;
     private final PostService postService;
+    private final RelationshipService relationshipService;
 
     @GetMapping("/")
     public String login() {
@@ -84,10 +82,8 @@ public class MvcController {
             model.addAttribute("profileImage", imageService.findProfileImage(identity));
             model.addAttribute("backgroundImage", imageService.findBackgroundImage(identity));
             model.addAttribute("albums", imageService.findAlbums(identity));
-            //posts
             model.addAttribute("posts", postService.findPostsByAuthorIdentity(identity));
-            //friends
-
+            model.addAttribute("friends", relationshipService.findProfileFriends(identity));
             //friendshipRequests
 
             //notifications

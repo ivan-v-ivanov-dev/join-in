@@ -1,5 +1,6 @@
 package com.social.mvc.service.feign;
 
+import com.social.model.dto.FriendGatewayRp;
 import com.social.model.dto.PostGatewayRp;
 import com.social.model.dto.ProfileGatewayRp;
 import com.social.model.dto.RegisterUserRq;
@@ -35,4 +36,7 @@ public interface GatewayClient {
 
     @GetMapping("${gateway.profile.posts.endpoint}")
     List<PostGatewayRp> findPostsByAuthorIdentity(@PathVariable("identity") String identity);
+
+    @GetMapping("${gateway.profile.friends.endpoint}")
+    List<FriendGatewayRp> findProfileFriends(@PathVariable("identity") String identity);
 }
