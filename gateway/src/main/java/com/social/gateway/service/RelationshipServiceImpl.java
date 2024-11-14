@@ -5,7 +5,7 @@ import com.social.gateway.service.contract.ProfileService;
 import com.social.gateway.service.contract.RelationshipService;
 import com.social.gateway.service.feign.RelationshipClient;
 import com.social.model.dto.FriendGatewayRp;
-import com.social.model.dto.FriendshipRequestRp;
+import com.social.model.dto.FriendshipRequestGatewayRp;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,12 +48,12 @@ public class RelationshipServiceImpl implements RelationshipService {
     }
 
     @Override
-    public List<FriendshipRequestRp> findFriendshipRequestsByProfileIdentity(String identity) {
+    public List<FriendshipRequestGatewayRp> findFriendshipRequestsByProfileIdentity(String identity) {
         try {
             Set<String> identities = relationshipClient.findFriendshipRequestsByProfileIdentity(identity);
-            List<FriendshipRequestRp> requests = identities.stream()
+            List<FriendshipRequestGatewayRp> requests = identities.stream()
                     .map(requestIdentity ->
-                            FriendshipRequestRp.builder()
+                            FriendshipRequestGatewayRp.builder()
                                     .profileIdentity(requestIdentity)
                                     .profileImage(imageService.findProfileImage(requestIdentity))
                                     .names(profileService.findProfileNames(requestIdentity))

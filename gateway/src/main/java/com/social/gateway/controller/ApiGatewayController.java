@@ -73,7 +73,7 @@ public class ApiGatewayController {
     }
 
     @GetMapping("/profile/{identity}/friendship-requests")
-    public List<FriendshipRequestRp> findFriendshipRequestsByProfileIdentity(@PathVariable("identity") String identity) {
+    public List<FriendshipRequestGatewayRp> findFriendshipRequestsByProfileIdentity(@PathVariable("identity") String identity) {
         return relationshipService.findFriendshipRequestsByProfileIdentity(identity);
     }
 
