@@ -5,4 +5,6 @@ public interface MessageRepository {
     void userIsOnline(String identity);
 
     void userIsOffline(String identity);
+
+    boolean findUserOnlineStatus(String identity);
 }

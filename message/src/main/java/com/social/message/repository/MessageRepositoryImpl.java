@@ -30,4 +30,11 @@ public class MessageRepositoryImpl implements MessageRepository {
         Update update = new Update().set("online", false);
         mongoTemplate.updateFirst(query, update, User.class, "online_users");
     }
+
+    @Override
+    public boolean findUserOnlineStatus(String identity) {
+        Query query = new Query(Criteria.where("identity").is(identity));
+        User user = mongoTemplate.findOne(query, User.class, "online_users");
+        return user != null && user.isOnline();
+    }
 }

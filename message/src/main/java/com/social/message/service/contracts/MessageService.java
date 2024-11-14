@@ -4,4 +4,6 @@ public interface MessageService {
     void userIsOnline(String identity);
 
     void userIsOffline(String identity);
+
+    boolean findUserOnlineStatus(String identity);
 }
