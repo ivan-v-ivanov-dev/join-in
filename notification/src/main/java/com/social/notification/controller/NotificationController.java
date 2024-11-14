@@ -15,7 +15,7 @@ public class NotificationController {
 
     private final NotificationService notificationService;
 
-    @GetMapping("/profile/{identity}/notifications")
+    @GetMapping("/profile/{identity}")
     public List<NotificationRp> findProfileNotifications(@PathVariable("identity") String identity) {
         return notificationService.findProfileNotifications(identity);
     }
