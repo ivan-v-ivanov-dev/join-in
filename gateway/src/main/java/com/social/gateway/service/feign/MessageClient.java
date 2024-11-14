@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "${message.service.feign.client.name}", url = "${message.service.url}")
 public interface MessageClient {
 
-    @GetMapping("message.service.online.status")
+    @GetMapping("${message.service.friend.online.status}")
     boolean findUserOnlineStatus(@PathVariable("identity") String identity);
 }
