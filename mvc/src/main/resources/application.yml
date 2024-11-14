@@ -80,15 +80,15 @@ gateway:
       endpoint: /api/profile/{identity}/profile-image
     background:
       image:
-        endpoint: /profile/{identity}/background-image
+        endpoint: /api/profile/{identity}/background-image
     albums:
-      endpoint: /profile/{identity}/albums-images
+      endpoint: /api/profile/{identity}/albums-images
     posts:
-      endpoint: /profile/{identity}/posts
+      endpoint: /api/profile/{identity}/posts
     friends:
-      endpoint: /profile/{identity}/friends
+      endpoint: /api/profile/{identity}/friends
     friendship:
       requests:
-        endpoint: /profile/{identity}/friendship-requests
+        endpoint: /api/profile/{identity}/friendship-requests
     notifications:
-      endpoint: /profile/{identity}/notifications
+      endpoint: /api/profile/{identity}/notifications
