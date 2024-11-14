@@ -5,7 +5,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @FeignClient(name = "${gateway.service.feign.client.name}", url = "${gateway.service.url}")
 public interface GatewayClient {
@@ -29,7 +28,7 @@ public interface GatewayClient {
     String findProfileBackgroundImage(@PathVariable String identity);
 
     @GetMapping("${gateway.profile.albums.endpoint}")
-    Map<String, List<String>> findProfileAlbumImages(@PathVariable String identity);
+    List<String> findProfileAlbumImages(@PathVariable String identity);
 
     @GetMapping("${gateway.profile.posts.endpoint}")
     List<PostGatewayRp> findPostsByAuthorIdentity(@PathVariable("identity") String identity);

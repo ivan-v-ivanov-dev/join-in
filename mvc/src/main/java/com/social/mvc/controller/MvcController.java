@@ -81,15 +81,12 @@ public class MvcController {
             model.addAttribute("profile", profileService.findProfileInfoByIdentity(identity));
             model.addAttribute("profileImage", imageService.findProfileImage(identity));
             model.addAttribute("backgroundImage", imageService.findBackgroundImage(identity));
-            model.addAttribute("albums", imageService.findAlbums(identity));
+            model.addAttribute("albums", imageService.findAlbum(identity));
             model.addAttribute("posts", postService.findPostsByAuthorIdentity(identity));
-//            model.addAttribute("postsCount", postService.findPostsCountByAuthorIdentity(identity));
             model.addAttribute("friends", relationshipService.findProfileFriends(identity));
-//            model.addAttribute("friendsCount", relationshipService.findFriendsCount(identity));
             model.addAttribute("onlineFriends", messageService.findProfileOnlineFriends(identity));
             model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
             model.addAttribute("notifications", notificationService.findProfileNotifications(identity));
-//            model.addAttribute("friendshipRequestsCount", relationshipService.findFriendshipRequestsCount(identity));
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());

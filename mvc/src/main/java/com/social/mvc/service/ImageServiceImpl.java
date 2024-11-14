@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
 import java.util.List;
-import java.util.Map;
 
 import static com.social.mvc.service.constants.ExceptionConstants.GATEWAY_SERVICE_RESOURCE_NOT_AVAILABLE_OR_SERVICE_IS_DOWN;
 import static com.social.mvc.service.constants.LoggerConstants.*;
@@ -53,9 +52,9 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Map<String, List<String>> findAlbums(String identity) {
+    public List<String> findAlbum(String identity) {
         try {
-            Map<String, List<String>> albums = gatewayClient.findProfileAlbumImages(identity);
+            List<String> albums = gatewayClient.findProfileAlbumImages(identity);
             log.info(format(RETRIEVE_ALBUM_IMAGES_FOR_USER_TEMPLATE, identity));
             return albums;
         } catch (FeignException feignException) {
