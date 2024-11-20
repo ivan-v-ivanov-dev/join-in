@@ -94,6 +94,13 @@ public class MvcController {
         }
     }
 
+    @PostMapping("/profile/{identity}/post")
+    public String post(@PathVariable("identity") String identity,
+                       @RequestParam("content") String content) {
+        postService.post(identity, content);
+        return "redirect:/feed?userIdentity=" + identity;
+    }
+
     @GetMapping("/health")
     public String health() {
         return "MVC service is HEALTHY.";

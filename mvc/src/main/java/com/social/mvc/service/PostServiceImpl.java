@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.social.mvc.service.constants.LoggerConstants.RETRIEVE_POSTS_FOR_USER_TEMPLATE;
+import static com.social.mvc.service.constants.LoggerConstants.USER_POST_A_PUBLICATION_TEMPLATE;
 import static java.lang.String.format;
 
 @Service
@@ -24,5 +25,11 @@ public class PostServiceImpl implements PostService {
         List<PostGatewayRp> posts = gatewayClient.findPostsByAuthorIdentity(identity);
         log.info(format(RETRIEVE_POSTS_FOR_USER_TEMPLATE, identity));
         return posts;
+    }
+
+    @Override
+    public void post(String identity, String content) {
+        gatewayClient.post(identity, content);
+        log.info(format(USER_POST_A_PUBLICATION_TEMPLATE, identity));
     }
 }

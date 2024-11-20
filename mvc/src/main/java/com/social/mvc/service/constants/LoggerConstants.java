@@ -31,6 +31,10 @@ public class LoggerConstants {
     public static final String RETRIEVE_USER_NOTIFICATIONS_TEMPLATE =
             "Retrieve user notifications (user identity: %s)";
 
+    public static final String USER_POST_A_PUBLICATION_TEMPLATE =
+            "User post a publication (User identity: %s)";
+
+
     private LoggerConstants() {
     }
 }

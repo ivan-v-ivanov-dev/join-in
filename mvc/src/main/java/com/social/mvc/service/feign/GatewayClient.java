@@ -44,4 +44,7 @@ public interface GatewayClient {
 
     @GetMapping("${gateway.profile.notifications.endpoint}")
     List<NotificationGatewayRp> findNotificationsByProfileIdentity(@PathVariable("identity") String identity);
+
+    @PostMapping("${gateway.profile.post.publication.endpoint}")
+    void post(@PathVariable("identity") String identity, @RequestParam String content);
 }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PostService {
     List<PostGatewayRp> findPostsByAuthorIdentity(String identity);
+
+    void post(String identity, String content);
 }
