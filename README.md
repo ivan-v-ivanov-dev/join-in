@@ -13,12 +13,12 @@ Register User
 
 Login, Logout
 
-<img src="https://github.com/user-attachments/assets/a6b04ab7-e897-417b-bc28-4864e866604d" alt="image" width="600"/>
+<img src="https://github.com/user-attachments/assets/a6b04ab7-e897-417b-bc28-4864e866604d" alt="image" width="600"/>  
 
 
-Post a publication
+Post a publication   
 
-<img src="https://github.com/user-attachments/assets/643291fd-77a4-4bde-bb3c-c0bf09eba2f7" alt="image" width="600"/>
+<img src="https://github.com/user-attachments/assets/f8f224fe-0009-4060-b12d-46d310727fc0" alt="image" width="600"/>  
 
 
 <img src="https://github.com/user-attachments/assets/504f4178-43af-495a-896c-6fe58fa2575c" alt="image" width="600"/>
