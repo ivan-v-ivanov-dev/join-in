@@ -88,6 +88,12 @@ public class ApiGatewayController {
         return messageService.findProfileOnlineFriends(identity);
     }
 
+    @PostMapping("/profile/{identity}/post")
+    public void post(@PathVariable("identity") String identity,
+                     @RequestParam String content) {
+        postService.post(identity, content);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";

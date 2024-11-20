@@ -32,6 +32,8 @@ spring:
         new:
           chat:
             message: new-chat-message
+        post:
+          publication: post-publication
     partitions: 3
     replicas: 1
     group:

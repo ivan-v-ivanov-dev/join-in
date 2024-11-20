@@ -8,4 +8,6 @@ public interface PostService {
     PostGatewayRp findByAuthorIdentityAndPostIdentity(String authorIdentity, String postIdentity);
 
     List<PostGatewayRp> findPostsByAuthorIdentity(String identity);
+
+    void post(String identity, String content);
 }
