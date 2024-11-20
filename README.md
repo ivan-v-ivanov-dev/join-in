@@ -18,7 +18,7 @@ Login, Logout
 
 Post a publication   
 
-<img src="https://github.com/user-attachments/assets/f8f224fe-0009-4060-b12d-46d310727fc0" alt="image" width="600"/>  
+<img src="https://github.com/user-attachments/assets/14708f72-f973-4b5a-9a74-d75e8335a6da" alt="image" width="600"/>  
 
 
 <img src="https://github.com/user-attachments/assets/504f4178-43af-495a-896c-6fe58fa2575c" alt="image" width="600"/>
