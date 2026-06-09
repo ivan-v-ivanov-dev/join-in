@@ -1,3 +1,11 @@
 spring:
   application:
     name: mvc
+
+#Feign Gateway API service
+gateway:
+  service:
+    feign:
+      client:
+        name: API-Gateway-Service
+    url: http://localhost:8081/api
