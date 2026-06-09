@@ -1,0 +1,755 @@
+<!doctype html>
+<html class="theme-fs-md" dir="ltr" lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Join In</title>
+    <!-- Config Options -->
+    <meta content='{&quot;saveLocal&quot;:&quot;sessionStorage&quot;,&quot;storeKey&quot;:&quot;huisetting&quot;,&quot;setting&quot;:{&quot;theme_scheme_direction&quot;:{&quot;value&quot;:&quot;ltr&quot;},&quot;theme_scheme&quot;:{&quot;value&quot;:&quot;light&quot;},&quot;theme_color&quot;:{&quot;colors&quot;:{&quot;--{{prefix}}primary&quot;:&quot;#50b5ff&quot;,&quot;--{{prefix}}info&quot;:&quot;#d592ff&quot;},&quot;value&quot;:&quot;theme-color-default&quot;},&quot;sidebar_type&quot;:{&quot;value&quot;:[]},&quot;sidebar_menu_style&quot;:{&quot;value&quot;:&quot;navs-rounded-all&quot;},&quot;footer&quot;:{&quot;value&quot;:&quot;default&quot;}}}'
+          name="setting_options">
+    <!-- End Config Options -->
+    <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/libs.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/socialv.css?v=5.0.2}">
+    <link rel="stylesheet"
+          th:href="@{https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200}"/>
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Poppins:300,400,500,700&display=swap}">
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap}">
+    <!-- flatpickr css -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/flatpickr/dist/flatpickr.min.css}"/>
+    <!-- Sweetlaert2 css -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/sweetalert2/dist/sweetalert2.min.css}"/>
+
+    <!-- vanillajs css -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/vanillajs-datepicker/dist/css/datepicker.min.css}">
+    <!-- color customizer css -->
+    <link rel="stylesheet" th:href="@{/assets/css/customizer.css}">
+</head>
+<body class="iq-chat-theme">
+<!-- loader Start -->
+<div id="loading">
+    <div id="loading-center">
+    </div>
+</div>
+
+<aside class="sidebar sidebar-chat sidebar-base border-end shadow-none" data-sidebar="responsive">
+
+    <div class="chat-search pt-3 px-3">
+        <div class="d-flex align-items-center">
+            <div class="chat-profile me-3 avatar-60 rounded-pill text-primary btn-icon bg-body">
+                <img alt="101" class="avatar-60  rounded" loading="lazy" th:src="${profileImage}">
+            </div>
+            <div class="chat-caption">
+                <h5 class="mb-0" th:text="${profileNames}">Bni Jordan</h5>
+            </div>
+        </div>
+
+        <div class="scroller" id="user-detail-popup">
+            <div class="user-profile">
+                <button class="close-popup p-3" type="submit"><i class="material-symbols-outlined md-18">close</i>
+                </button>
+                <div class="user text-center mb-4">
+                    <a class="avatar m-0">
+                        <img alt="avatar" loading="lazy" th:src="${profileImage}">
+                    </a>
+                    <div class="user-name mt-4">
+                        <h4 class="text-center" th:text="${profileNames}">Bni Jordan</h4>
+                    </div>
+                </div>
+                <hr>
+                <div class="user-detail text-left mt-4 ps-4 pe-4">
+                    <h5 class="mt-3 mb-3">Status</h5>
+                    <ul class="user-status p-0">
+                        <li class="mb-1 d-flex align-items-center">
+                            <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                circle
+                            </i>
+                            <span>Online</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-toggle d-block d-xl-none" data-active="true" data-toggle="sidebar">
+            <i class="icon">
+                <svg class="icon-20" fill="none" height="20" viewBox="0 0 24 24" width="20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-linecap="round"
+                          stroke-linejoin="round" stroke-width="1.5"></path>
+                    <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round" stroke-width="1.5"></path>
+                </svg>
+            </i>
+        </div>
+        <div class="chat-searchbar mt-4 mb-2">
+            <div class="form-group chat-search-data m-0">
+                <input class="form-control round" id="chat-search" placeholder="Search" type="text">
+                <i class="material-symbols-outlined">
+                    search
+                </i>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar-body pt-0 data-scrollbar mb-5 pb-5">
+
+        <!-- Sidebar Menu Start -->
+        <ul class="nav navbar-nav iq-main-menu mb-5 pb-5" id="sidebar-menu" role="tablist">
+
+            <li class="nav-item static-item mt-3">
+                <a class="nav-link static-item disabled" href="#" tabindex="-1">
+                    <h5 class="default-icon">Group Messages</h5>
+                </a>
+            </li>
+
+            <li class="nav-item iq-chat-list ">
+                <a aria-controls="user-content-104" aria-selected="true" class="nav-link  d-flex gap-3 "
+                   data-bs-toggle="tab"
+                   href="#user-content-104" role="tab">
+                    <div class="position-relative">
+                        <div class="material-symbols-outlined filled text-success pe-1 md-14">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center w-100 iq-userlist-data">
+                        <div class="d-flex flex-grow-1 flex-column">
+                            <div class="d-flex align-items-center gap-1">
+                                <p class="mb-0 text-ellipsis short-1 flex-grow-1 iq-userlist-name">Developers Group</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-item static-item mt-3">
+                <a class="nav-link static-item disabled" href="#" tabindex="-1">
+                    <h5 class="default-icon">Direct Message</h5>
+                </a>
+            </li>
+
+            <li class="nav-item iq-chat-list ">
+                <a aria-controls="user-content-105" aria-selected="true" class="nav-link  d-flex gap-3 "
+                   data-bs-toggle="tab"
+                   href="#user-content-105" role="tab">
+                    <div class="position-relative">
+                        <img alt="status-105" class="avatar-50 rounded" loading="lazy"
+                             th:src="${onlineFriends.^[identity eq '771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551'].getProfileImage()}">
+                        <div class="iq-profile-badge">
+                            <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                circle
+                            </i>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center w-100 iq-userlist-data">
+                        <div class="d-flex flex-grow-1 flex-column">
+                            <div class="d-flex align-items-center gap-1">
+                                <p class="mb-0 text-ellipsis short-1 flex-grow-1 iq-userlist-name"
+                                   th:text="${onlineFriends.^[identity eq '771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551'].getNames()}">
+                                    Paul Molive</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-item iq-chat-list ">
+                <a aria-controls="user-content-106" aria-selected="true" class="nav-link  d-flex gap-3 "
+                   data-bs-toggle="tab"
+                   href="#user-content-106" role="tab">
+                    <div class="position-relative">
+                        <img alt="status-106" class="avatar-50 rounded" loading="lazy"
+                             th:src="${onlineFriends.^[identity eq '788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627'].getProfileImage()}">
+                        <div class="iq-profile-badge">
+                            <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                circle
+                            </i>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center w-100 iq-userlist-data">
+                        <div class="d-flex flex-grow-1 flex-column">
+                            <div class="d-flex align-items-center gap-1">
+                                <p class="mb-0 text-ellipsis short-1 flex-grow-1 iq-userlist-name"
+                                   th:text="${onlineFriends.^[identity eq '788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627'].getNames()}">
+                                    Paige Turner</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-item iq-chat-list ">
+                <a aria-controls="user-content-107" aria-selected="true" class="nav-link  d-flex gap-3 "
+                   data-bs-toggle="tab"
+                   href="#user-content-107" role="tab">
+                    <div class="position-relative">
+                        <img alt="status-107" class="avatar-50 rounded" loading="lazy"
+                             th:src="${onlineFriends.^[identity eq 'd52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8'].getProfileImage()}">
+                        <div class="iq-profile-badge">
+                            <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                circle
+                            </i>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center w-100 iq-userlist-data">
+                        <div class="d-flex flex-grow-1 flex-column">
+                            <div class="d-flex align-items-center gap-1">
+                                <p class="mb-0 text-ellipsis short-1 flex-grow-1 iq-userlist-name"
+                                   th:text="${onlineFriends.^[identity eq 'd52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8'].getNames()}">
+                                    Barb Ackue</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- Sidebar Menu End -->
+    </div>
+
+    <div class="sidebar-footer"></div>
+
+</aside>
+
+<main class="main-content">
+    <div class="container-fluid content-inner p-0" id="page_layout">
+        <div class="tab-content" id="myTabContent">
+
+            <!-- Group chat -->
+            <div class="card tab-pane mb-0 fade" id="user-content-104" role="tabpanel">
+
+                <div class="chat-head">
+                    <header class="d-flex justify-content-between align-items-center bg-white pt-3  ps-3 pe-3 pb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="d-block d-xl-none">
+                                <button class="btn btn-sm btn-primary rounded btn-icon me-3" data-active="true"
+                                        data-toggle="sidebar">
+                            <span class="btn-inner">
+                                <svg viewBox="0 0 24 24" width="20px">
+                                    <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+                                          fill="currentColor"></path>
+                                </svg>
+                            </span>
+                                </button>
+                            </div>
+                            <h5 class="mb-0">Developers Group</h5>
+                        </div>
+
+                        <div class="chat-user-detail-popup scroller">
+                            <div class="user-profile">
+                                <button class="close-popup p-3" type="submit"><i
+                                        class="material-symbols-outlined md-18">close</i></button>
+                                <div class="user mb-4 text-center">
+                                    <a class="avatar m-0">
+                                    </a>
+                                    <div class="user-name mt-4">
+                                        <h4>Developers</h4>
+                                    </div>
+                                    <div class="user-desc">
+                                        <p>Atlanta, USA</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="chatuser-detail text-left mt-4">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Bni Name:</div>
+                                        <div class="col-6 col-md-6 text-right">Mark</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Tel:</div>
+                                        <div class="col-6 col-md-6 text-right">072 143 9920</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Date Of Birth:</div>
+                                        <div class="col-6 col-md-6 text-right">July 12, 1989</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Gender:</div>
+                                        <div class="col-6 col-md-6 text-right">Female</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Language:</div>
+                                        <div class="col-6 col-md-6 text-right">Engliah</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </header>
+                </div>
+
+                <div class="card-body chat-body bg-body"
+                     th:with="chatMessages=${groupChatHistory.^[chatIdentity eq 'f234338ff7d069dea0e9fa1f7d172426d25c1c44524b30be61d288e5b0562e7bcfdf7d7e17d7b597c114066b58c8041f03c25c2deabe2fe33441fd3567c7d829'].getMessages()}">
+
+                    <div th:each="message : ${chatMessages}">
+                        <div class="iq-message-body"
+                             th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'iq-current-user' : 'iq-other-user'">
+                            <div class="chat-profile">
+                                <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
+                                     th:src="${message.getSenderProfileImage()}">
+                                <small class="iq-chating p-0 mb-0 d-block"
+                                       th:text="${message.getPostedAgo()}">16:34</small>
+                            </div>
+                            <div class="iq-chat-text">
+                                <div class="d-flex align-items-center"
+                                     th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'justify-content-end' : 'justify-content-start'">
+                                    <div class="iq-chating-content d-flex align-items-center">
+                                        <p class="mr-2 mb-0" th:text="${message.getContent()}">Default message content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer px-3 py-3 border-top rounded-0">
+                    <form action="#" class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
+                        <div class="chat-attagement d-flex">
+                        </div>
+                        <input class="form-control me-3" th:name="messageContent" th:value="*{messageContent}" placeholder="Type your message" type="text">
+                        <input type="hidden" th:name="chatIdentity" th:value="f234338ff7d069dea0e9fa1f7d172426d25c1c44524b30be61d288e5b0562e7bcfdf7d7e17d7b597c114066b58c8041f03c25c2deabe2fe33441fd3567c7d829" />
+                        <input type="hidden" th:name="senderIdentity" th:value="${profileIdentity}" />
+                        <button class="btn btn-primary d-flex align-items-center" type="submit">
+                            <svg class="icon-20" fill="none" viewBox="0 0 20 21" width="18"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.8325 6.67463L8.10904 12.4592L1.59944 8.38767C0.66675 7.80414 0.860765 6.38744 1.91572 6.07893L17.3712 1.55277C18.3373 1.26963 19.2326 2.17283 18.9456 3.142L14.3731 18.5868C14.0598 19.6432 12.6512 19.832 12.0732 18.8953L8.10601 12.4602"
+                                      stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"></path>
+                            </svg>
+                            <span class="d-none d-lg-block ms-1">Send</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+            <!-- End Group chat -->
+
+            <div class="card tab-pane mb-0 fade" id="user-content-105" role="tabpanel">
+
+                <div class="chat-head">
+                    <header class="d-flex justify-content-between align-items-center bg-white pt-3  ps-3 pe-3 pb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="d-block d-xl-none">
+                                <button class="btn btn-sm btn-primary rounded btn-icon me-3" data-active="true"
+                                        data-toggle="sidebar">
+                            <span class="btn-inner">
+                                <svg viewBox="0 0 24 24" width="20px">
+                                    <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+                                          fill="currentColor"></path>
+                                </svg>
+                            </span>
+                                </button>
+                            </div>
+                            <div class="avatar chat-user-profile m-0 me-3">
+                                <img alt="avatar" class="avatar-50 rounded " loading="lazy"
+                                     th:src="${onlineFriends.^[identity eq '771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551'].getProfileImage()}">
+                                <div class="iq-profile-badge ">
+                                    <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                        circle
+                                    </i>
+                                </div>
+
+                            </div>
+                            <h5 class="mb-0"
+                                th:text="${onlineFriends.^[identity eq '771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551'].getNames()}">
+                                Paul Molive</h5>
+                            <small class="text-capitalize"></small>
+                        </div>
+
+                        <div class="chat-user-detail-popup scroller">
+                            <div class="user-profile">
+                                <button class="close-popup p-3" type="submit"><i
+                                        class="material-symbols-outlined md-18">close</i></button>
+                                <div class="user mb-4 text-center">
+                                    <a class="avatar m-0">
+                                        <img alt="avatar" class="rounded" loading="lazy"
+                                             src="../assets/images/chat/avatar/10.png">
+                                    </a>
+                                    <div class="user-name mt-4">
+                                        <h4>Paul Molive</h4>
+                                    </div>
+                                    <div class="user-desc">
+                                        <p>Atlanta, USA</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="chatuser-detail text-left mt-4">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Bni Name:</div>
+                                        <div class="col-6 col-md-6 text-right">Mark</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Tel:</div>
+                                        <div class="col-6 col-md-6 text-right">072 143 9920</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Date Of Birth:</div>
+                                        <div class="col-6 col-md-6 text-right">July 12, 1989</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Gender:</div>
+                                        <div class="col-6 col-md-6 text-right">Female</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Language:</div>
+                                        <div class="col-6 col-md-6 text-right">Engliah</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </header>
+                </div>
+
+                <div class="card-body chat-body bg-body"
+                     th:with="chatMessages=${directChatHistory.^[chatIdentity eq '01f34eec06beb9d15b9d4272b72b91d80dec0abf608e53e8ba91417d559b23b84ced411d9c161172f320c80df9322298cf7d7b7cebdff213aa06e647a1c67c40'].getMessages()}">
+
+                    <div th:each="message : ${chatMessages}">
+                        <div class="iq-message-body"
+                             th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'iq-current-user' : 'iq-other-user'">
+                            <div class="chat-profile">
+                                <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
+                                     th:src="${message.getSenderProfileImage()}">
+                                <small class="iq-chating p-0 mb-0 d-block"
+                                       th:text="${message.getPostedAgo()}">16:34</small>
+                            </div>
+                            <div class="iq-chat-text">
+                                <div class="d-flex align-items-center"
+                                     th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'justify-content-end' : 'justify-content-start'">
+                                    <div class="iq-chating-content d-flex align-items-center">
+                                        <p class="mr-2 mb-0" th:text="${message.getContent()}">Default message
+                                            content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer px-3 py-3 border-top rounded-0">
+                    <form class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
+                        <div class="chat-attagement d-flex">
+                        </div>
+                        <input class="form-control me-3" th:name="messageContent" th:value="*{messageContent}" placeholder="Type your message" type="text">
+                        <input type="hidden" th:name="chatIdentity" th:value="01f34eec06beb9d15b9d4272b72b91d80dec0abf608e53e8ba91417d559b23b84ced411d9c161172f320c80df9322298cf7d7b7cebdff213aa06e647a1c67c40" />
+                        <input type="hidden" th:name="senderIdentity" th:value="${profileIdentity}" />
+                        <button class="btn btn-primary d-flex align-items-center" type="submit">
+                            <svg class="icon-20" fill="none" viewBox="0 0 20 21" width="18"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.8325 6.67463L8.10904 12.4592L1.59944 8.38767C0.66675 7.80414 0.860765 6.38744 1.91572 6.07893L17.3712 1.55277C18.3373 1.26963 19.2326 2.17283 18.9456 3.142L14.3731 18.5868C14.0598 19.6432 12.6512 19.832 12.0732 18.8953L8.10601 12.4602"
+                                      stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"></path>
+                            </svg>
+                            <span class="d-none d-lg-block ms-1">Send</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card tab-pane mb-0 fade" id="user-content-106" role="tabpanel">
+
+                <div class="chat-head">
+                    <header class="d-flex justify-content-between align-items-center bg-white pt-3  ps-3 pe-3 pb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="d-block d-xl-none">
+                                <button class="btn btn-sm btn-primary rounded btn-icon me-3" data-active="true"
+                                        data-toggle="sidebar">
+                            <span class="btn-inner">
+                                <svg viewBox="0 0 24 24" width="20px">
+                                    <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+                                          fill="currentColor"></path>
+                                </svg>
+                            </span>
+                                </button>
+                            </div>
+                            <div class="avatar chat-user-profile m-0 me-3">
+                                <img alt="avatar" class="avatar-50 rounded " loading="lazy"
+                                     th:src="${onlineFriends.^[identity eq '788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627'].getProfileImage()}" >
+                                <div class="iq-profile-badge ">
+                                    <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                        circle
+                                    </i>
+                                </div>
+
+                            </div>
+                            <h5 class="mb-0"
+                                th:text="${onlineFriends.^[identity eq '788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627'].getNames()}">Paige Turner</h5>
+                            <small class="text-capitalize"></small>
+                        </div>
+
+                        <div class="chat-user-detail-popup scroller">
+                            <div class="user-profile">
+                                <button class="close-popup p-3" type="submit"><i
+                                        class="material-symbols-outlined md-18">close</i></button>
+                                <div class="user mb-4 text-center">
+                                    <a class="avatar m-0">
+                                        <img alt="avatar" class="rounded" loading="lazy"
+                                             src="../assets/images/chat/avatar/05.png">
+                                    </a>
+                                    <div class="user-name mt-4">
+                                        <h4>Paige Turner</h4>
+                                    </div>
+                                    <div class="user-desc">
+                                        <p>Atlanta, USA</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="chatuser-detail text-left mt-4">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Bni Name:</div>
+                                        <div class="col-6 col-md-6 text-right">Mark</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Tel:</div>
+                                        <div class="col-6 col-md-6 text-right">072 143 9920</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Date Of Birth:</div>
+                                        <div class="col-6 col-md-6 text-right">July 12, 1989</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Gender:</div>
+                                        <div class="col-6 col-md-6 text-right">Female</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Language:</div>
+                                        <div class="col-6 col-md-6 text-right">Engliah</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </header>
+                </div>
+
+                <div class="card-body chat-body bg-body"
+                     th:with="chatMessages=${directChatHistory.^[chatIdentity eq 'a3db6886e9585fca38e22c4e4988e7d08173ffb5a86a9206fd5c09061dae4cf35ea9fc1db20f7dfe1e42ee6d3cb6736ce680cb3342bc567f5052a9b742621ea0'].getMessages()}">
+
+                    <div th:each="message : ${chatMessages}">
+                        <div class="iq-message-body"
+                             th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'iq-current-user' : 'iq-other-user'">
+                            <div class="chat-profile">
+                                <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
+                                     th:src="${message.getSenderProfileImage()}">
+                                <small class="iq-chating p-0 mb-0 d-block"
+                                       th:text="${message.getPostedAgo()}">16:34</small>
+                            </div>
+                            <div class="iq-chat-text">
+                                <div class="d-flex align-items-center"
+                                     th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'justify-content-end' : 'justify-content-start'">
+                                    <div class="iq-chating-content d-flex align-items-center">
+                                        <p class="mr-2 mb-0" th:text="${message.getContent()}">Default message
+                                            content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer px-3 py-3 border-top rounded-0">
+                    <form action="#" class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
+                        <div class="chat-attagement d-flex">
+                        </div>
+                        <input class="form-control me-3" th:name="messageContent" th:value="*{messageContent}" placeholder="Type your message" type="text">
+                        <input type="hidden" th:name="chatIdentity" th:value="a3db6886e9585fca38e22c4e4988e7d08173ffb5a86a9206fd5c09061dae4cf35ea9fc1db20f7dfe1e42ee6d3cb6736ce680cb3342bc567f5052a9b742621ea0" />
+                        <input type="hidden" th:name="senderIdentity" th:value="${profileIdentity}" />
+                        <button class="btn btn-primary d-flex align-items-center" type="submit">
+                            <svg class="icon-20" fill="none" viewBox="0 0 20 21" width="18"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.8325 6.67463L8.10904 12.4592L1.59944 8.38767C0.66675 7.80414 0.860765 6.38744 1.91572 6.07893L17.3712 1.55277C18.3373 1.26963 19.2326 2.17283 18.9456 3.142L14.3731 18.5868C14.0598 19.6432 12.6512 19.832 12.0732 18.8953L8.10601 12.4602"
+                                      stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"></path>
+                            </svg>
+                            <span class="d-none d-lg-block ms-1">Send</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="card tab-pane mb-0 fade" id="user-content-107" role="tabpanel">
+
+                <div class="chat-head">
+                    <header class="d-flex justify-content-between align-items-center bg-white pt-3  ps-3 pe-3 pb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="d-block d-xl-none">
+                                <button class="btn btn-sm btn-primary rounded btn-icon me-3" data-active="true"
+                                        data-toggle="sidebar">
+                            <span class="btn-inner">
+                                <svg viewBox="0 0 24 24" width="20px">
+                                    <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+                                          fill="currentColor"></path>
+                                </svg>
+                            </span>
+                                </button>
+                            </div>
+                            <div class="avatar chat-user-profile m-0 me-3">
+                                <img alt="avatar" class="avatar-50 rounded " loading="lazy"
+                                     th:src="${onlineFriends.^[identity eq 'd52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8'].getProfileImage()}" >
+                                <div class="iq-profile-badge ">
+                                    <i class="material-symbols-outlined filled text-success pe-1 md-14">
+                                        circle
+                                    </i>
+                                </div>
+
+                            </div>
+                            <h5 class="mb-0"
+                                th:text="${onlineFriends.^[identity eq 'd52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8'].getNames()}">Barb Ackue</h5>
+                            <small class="text-capitalize"></small>
+                        </div>
+
+                        <div class="chat-user-detail-popup scroller">
+                            <div class="user-profile">
+                                <button class="close-popup p-3" type="submit"><i
+                                        class="material-symbols-outlined md-18">close</i></button>
+                                <div class="user mb-4 text-center">
+                                    <a class="avatar m-0">
+                                        <img alt="avatar" class="rounded" loading="lazy"
+                                             src="../assets/images/chat/avatar/06.png">
+                                    </a>
+                                    <div class="user-name mt-4">
+                                        <h4>Barb Ackue</h4>
+                                    </div>
+                                    <div class="user-desc">
+                                        <p>Atlanta, USA</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="chatuser-detail text-left mt-4">
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Bni Name:</div>
+                                        <div class="col-6 col-md-6 text-right">Mark</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Tel:</div>
+                                        <div class="col-6 col-md-6 text-right">072 143 9920</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Date Of Birth:</div>
+                                        <div class="col-6 col-md-6 text-right">July 12, 1989</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Gender:</div>
+                                        <div class="col-6 col-md-6 text-right">Female</div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6 col-md-6 title">Language:</div>
+                                        <div class="col-6 col-md-6 text-right">Engliah</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </header>
+                </div>
+
+                <div class="card-body chat-body bg-body"
+                     th:with="chatMessages=${directChatHistory.^[chatIdentity eq '104765ce63f6e95212b0638559d7e75811b68ed59ff061352fb613ee701d661fd5427860cf510e8aeee2579e90890f3904b9e53e1262a50e9a161dacdf176caa'].getMessages()}">
+
+                    <div th:each="message : ${chatMessages}">
+                        <div class="iq-message-body"
+                             th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'iq-current-user' : 'iq-other-user'">
+                            <div class="chat-profile">
+                                <img alt="chat-user" class="avatar-40 rounded" loading="lazy"
+                                     th:src="${message.getSenderProfileImage()}">
+                                <small class="iq-chating p-0 mb-0 d-block"
+                                       th:text="${message.getPostedAgo()}">16:34</small>
+                            </div>
+                            <div class="iq-chat-text">
+                                <div class="d-flex align-items-center"
+                                     th:classappend="${message.getSenderIdentity() eq '1567b3cb857f132473d4907fd3fee2f96e661308826522e823f5f2e6e20b6032'} ? 'justify-content-end' : 'justify-content-start'">
+                                    <div class="iq-chating-content d-flex align-items-center">
+                                        <p class="mr-2 mb-0" th:text="${message.getContent()}">Default message
+                                            content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-footer px-3 py-3 border-top rounded-0">
+                    <form action="#" class="d-flex align-items-center" method="post" th:action="@{/chat/message}">
+                        <div class="chat-attagement d-flex">
+                        </div>
+                        <input class="form-control me-3" th:name="messageContent" th:value="*{messageContent}" placeholder="Type your message" type="text">
+                        <input type="hidden" th:name="chatIdentity" th:value="104765ce63f6e95212b0638559d7e75811b68ed59ff061352fb613ee701d661fd5427860cf510e8aeee2579e90890f3904b9e53e1262a50e9a161dacdf176caa" />
+                        <input type="hidden" th:name="senderIdentity" th:value="${profileIdentity}" />
+                        <button class="btn btn-primary d-flex align-items-center" type="submit">
+                            <svg class="icon-20" fill="none" viewBox="0 0 20 21" width="18"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.8325 6.67463L8.10904 12.4592L1.59944 8.38767C0.66675 7.80414 0.860765 6.38744 1.91572 6.07893L17.3712 1.55277C18.3373 1.26963 19.2326 2.17283 18.9456 3.142L14.3731 18.5868C14.0598 19.6432 12.6512 19.832 12.0732 18.8953L8.10601 12.4602"
+                                      stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"></path>
+                            </svg>
+                            <span class="d-none d-lg-block ms-1">Send</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</main>
+<!-- Wrapper End-->
+<!-- Backend Bundle JavaScript -->
+<script th:src="@{/assets/js/libs.min.js}"></script>
+<!-- Lodash Utility -->
+<script th:src="@{/assets/vendor/lodash/lodash.min.js}"></script>
+<!-- Utilities Functions -->
+<script th:src="@{/assets/js/setting/utility.js}"></script>
+<!-- Settings Script -->
+<script th:src="@{/assets/js/setting/setting.js}"></script>
+<!-- Settings Init Script -->
+<script defer th:src="@{/assets/js/setting/setting-init.js}"></script>
+<!-- slider JavaScript -->
+<script th:src="@{/assets/js/slider.js}"></script>
+<!-- masonry JavaScript -->
+<script th:src="@{/assets/js/masonry.pkgd.min.js}"></script>
+<!-- SweetAlert JavaScript -->
+<script th:src="@{/assets/js/enchanter.js}"></script>
+<!-- Sweet-alert Script -->
+<script async th:src="@{/assets/vendor/sweetalert2/dist/sweetalert2.min.js}"></script>
+<script defer th:src="@{/assets/js/sweet-alert.js}"></script>
+<!-- Chart Custom JavaScript -->
+<script th:src="@{/assets/js/customizer.js}"></script>
+<!-- app JavaScript -->
+<script th:src="@{/assets/js/charts/weather-chart.js}"></script>
+<script th:src="@{/assets/js/app.js}"></script>
+<!-- Flatpickr Script -->
+<script th:src="@{/assets/vendor/flatpickr/dist/flatpickr.min.js}"></script>
+<!-- fslightbox Script -->
+<script defer th:src="@{/assets/js/fslightbox.js}"></script>
+<!-- vanilla Script -->
+<script th:src="@{/assets/vendor/vanillajs-datepicker/dist/js/datepicker.min.js}"></script>
+<!--lottie Script -->
+<script th:src="@{/assets/js/lottie.js}"></script>
+<!--select2 Script -->
+<script th:src="@{/assets/js/select2.js}"></script>
+
+<script defer th:src="@{/assets/js/chat.js}"></script>
+</body>
+</html>
+
+
