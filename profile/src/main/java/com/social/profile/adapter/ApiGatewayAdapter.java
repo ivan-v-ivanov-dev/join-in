@@ -4,6 +4,7 @@ import com.social.model.dto.ProfileRp;
 import com.social.profile.model.Profile;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface ApiGatewayAdapter {
@@ -21,5 +22,5 @@ public interface ApiGatewayAdapter {
     @Mapping(source = "profile.status", target = "status")
     @Mapping(source = "profile.website", target = "website")
     @Mapping(source = "profile.hobbies", target = "hobbies")
-    ProfileRp fromProfileToProfileGatewayRp(Profile profile, ProfileRp profileRp);
+    ProfileRp fromProfileToProfileGatewayRp(Profile profile, @MappingTarget ProfileRp profileRp);
 }

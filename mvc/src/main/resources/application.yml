@@ -82,7 +82,7 @@ gateway:
       image:
         endpoint: /api/profile/{identity}/background-image
     albums:
-      endpoint: /api/profile/{identity}/albums-images
+      endpoint: /api/profile/{identity}/album-images
     posts:
       endpoint: /api/profile/{identity}/posts
     friends:

@@ -1,10 +1,6 @@
 package com.social.profile.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Builder
 public class Profile {
 
@@ -22,7 +19,7 @@ public class Profile {
     private String id;
 
     @Indexed(unique = true)
-    @JsonIgnore
+//    @JsonIgnore
     private String identity;
 
     private String firstName;
@@ -51,4 +48,64 @@ public class Profile {
     private String website;
 
     private String hobbies;
+
+    public String getId() {
+        return id;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public LocalDate getJoined() {
+        return joined;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
 }

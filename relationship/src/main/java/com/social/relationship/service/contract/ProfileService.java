@@ -11,9 +11,8 @@ public interface ProfileService {
 
     Set<String> findFriendshipRequestsByProfileIdentity(String identity);
 
+    void createFriendship(String senderIdentity, String recipientIdentity);
 
-//    void createFriendship(String senderIdentity, String recipientIdentity);
-//
-//    void createFriendshipRequest(String senderIdentity, String recipientIdentity);
+    void createFriendshipRequest(String senderIdentity, String recipientIdentity);
 
 }

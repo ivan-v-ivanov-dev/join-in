@@ -9,6 +9,7 @@ import com.social.model.dto.PostGatewayRp;
 import com.social.model.dto.PostRp;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ import static com.social.gateway.service.constants.LoggerConstants.*;
 import static java.lang.String.format;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class PostServiceImpl implements PostService {
 

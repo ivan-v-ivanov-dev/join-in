@@ -45,16 +45,16 @@ public class ProfileServiceImpl implements ProfileService {
         log.info(format(RETRIEVE_FRIENDSHIP_REQUESTS_IDENTITIES_FOR_USER_TEMPLATE, identity));
         return identities;
     }
-//    public void createFriendship(String senderIdentity, String recipientIdentity) {
-//        profileRepository.createFriendshipRelationship(senderIdentity, recipientIdentity);
-//        log.info(String.format(CREATE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
-//                senderIdentity, recipientIdentity));
-//    }
-//
-//    @Override
-//    public void createFriendshipRequest(String senderIdentity, String recipientIdentity) {
-//        profileRepository.createFriendshipRequestRelationship(senderIdentity, recipientIdentity);
-//        log.info(String.format(CREATE_FRIEND_RELATIONSHIP_REQUEST_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
-//                senderIdentity, recipientIdentity));
-//    }
+    public void createFriendship(String senderIdentity, String recipientIdentity) {
+        profileRepository.createFriendshipRelationship(senderIdentity, recipientIdentity);
+        log.info(String.format(CREATE_FRIEND_RELATIONSHIP_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
+                senderIdentity, recipientIdentity));
+    }
+
+    @Override
+    public void createFriendshipRequest(String senderIdentity, String recipientIdentity) {
+        profileRepository.createFriendshipRequestRelationship(senderIdentity, recipientIdentity);
+        log.info(String.format(CREATE_FRIEND_RELATIONSHIP_REQUEST_BETWEEN_SENDER_AND_RECIPIENT_TEMPLATE,
+                senderIdentity, recipientIdentity));
+    }
 }
