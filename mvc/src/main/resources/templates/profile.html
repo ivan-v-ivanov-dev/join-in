@@ -454,7 +454,7 @@
                                    edit_note
                                 </span>
                                     <div class="ms-3">
-                                        <form id="viewProfileForm" th:action="@{/profile}" method="get">
+                                        <form id="viewProfileForm" th:action="@{/profile/{identity}(identity=${profile.getIdentity()})}" method="get">
                                             <input type="hidden" th:name="identity" th:value="${profile.getIdentity()}" />
                                         </form>
                                         <a class="mb-0 h6" onclick=document.getElementById("viewProfileForm").submit()>
@@ -612,7 +612,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <ul class="profile-img-gallary p-0 m-0 list-unstyled">
-                                                    <li class="" th:each="currentImage: ${albumImages}">
+                                                    <li class="" th:each="currentImage: ${albums}">
                                                         <a data-fslightbox="gallery"
                                                            href="../assets/images/page-img/g1.jpg">
                                                             <img alt="photo-profile"

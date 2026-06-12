@@ -12,6 +12,7 @@ spring:
 
   # Kafka
   kafka:
+    bootstrap-servers: localhost:9092
     consumer:
       auto-offset-reset: earliest
       bootstrap-servers: localhost:9092
@@ -31,6 +32,8 @@ spring:
       name:
         registered:
           user: registered-user
+        user:
+          login: user-login
     group:
       id: group-id
     producer:

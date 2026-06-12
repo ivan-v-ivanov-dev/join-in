@@ -15,6 +15,9 @@ public class ConfigConstants {
     public static final String B_CRYPT_PASSWORD_ENCODER_CREATED =
             "BCryptPasswordEncoder :: New BCryptPasswordEncoder created";
 
+    public static final String KAFKA_TOPIC_FOR_LOGIN_USER_CREATED_TEMPLATE =
+            "Kafka Topic :: New topic for login user created (name:  %s)";
+
     private ConfigConstants() {
     }
 }
