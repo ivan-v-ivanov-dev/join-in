@@ -1,7 +1,20 @@
+server:
+  port: 8082
+  max-http-header-size: 10MB
+
 spring:
   application:
     name: identity
 
-server:
-  port: 8082
-  max-http-header-size: 10MB
+  mongodb:
+    uri: ${SPRING_DATA_MONGODB_URI:mongodb://localhost:27017/storage}
+    auto-index-creation: true
+
+  kafka:
+    bootstrap-servers: kafka:19092
+    group-id: groupId
+    trusted-packages: com.join_in.kafka_models.messages
+    offset-reset: earliest
+    topic:
+      register-new-user: register-new-user
+

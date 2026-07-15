@@ -1,0 +1,59 @@
+services:
+
+  # MongoDB
+  mongo:
+    image: mongo:6.0
+    container_name: mongo-identity-service
+    volumes:
+      - ./src/main/resources/mongo/init.js:/docker-entrypoint-initdb.d/init.js
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+      - MONGO_INITDB_DATABASE=storage
+    networks:
+      - join-in-network
+
+  # Mongo Express web tool
+  mongo-express:
+    image: mongo-express:1.0.0-alpha
+    container_name: mongo-express-profile-service
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - 9090:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+      - ME_CONFIG_MONGODB_URL=mongodb://rootuser:rootpass@mongo:27017/
+    networks:
+      - join-in-network
+
+  # Identity service
+  identity-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+    container_name: identity-service
+    ports:
+      - "8082:8082"
+    environment:
+      SERVER_PORT: 8082
+      SPRING_MONGODB_URI: mongodb://rootuser:rootpass@mongo:27017/storage?authSource=admin
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    depends_on:
+      - mongo
+    networks:
+      - join-in-network
+
+networks:
+  join-in-network:
+    external: true
+
+secrets:
+  maven_settings:
+    file: C:/Users/Иван/.m2/settings.xml
