@@ -32,7 +32,7 @@ public class IdentityServiceImpl implements IdentityService {
     @Override
     public void registerUser(RegisterUserMVCRq registerUserMVCRq) {
         KafkaMessage registerNewUser =
-                new RegisterNewUser(registerUserMVCRq.getFirstName(), registerUserMVCRq.getLastName(), registerUserMVCRq.getEmail(), registerUserMVCRq.getPassword());
+                new RegisterNewUser(registerUserMVCRq.firstName(), registerUserMVCRq.lastName(), registerUserMVCRq.email(), registerUserMVCRq.password());
         kafkaTemplate.send(registerNewUserTopic, registerNewUser);
         log.info("New registered user message request received from API Gateway and sent in topic " + registerNewUserTopic);
     }

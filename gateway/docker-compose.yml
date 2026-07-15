@@ -1,0 +1,28 @@
+services:
+
+  # API Gateway service
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+
+    container_name: api-gateway
+
+    ports:
+      - "8081:8081"
+
+    environment:
+      SERVER_PORT: 8081
+
+    networks:
+      - join-in-network
+
+networks:
+  join-in-network:
+    external: true
+
+secrets:
+  maven_settings:
+    file: C:/Users/Иван/.m2/settings.xml
