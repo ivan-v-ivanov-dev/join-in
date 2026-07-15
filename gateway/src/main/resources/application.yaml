@@ -1,7 +1,21 @@
-spring:
-  application:
-    name: gateway
-
 server:
   port: 8081
   max-http-header-size: 10MB
+
+spring:
+  application:
+    name: gateway
+  kafka:
+    bootstrap-servers: localhost:9092
+    partitions: 3
+    replicas: 1
+    topic:
+      register-new-user: register-new-user
+
+#Identity service Feign client
+identity:
+  service:
+    feign:
+      client:
+        name: Identity-service-Feign-client
+    url: http://localhost:8082
