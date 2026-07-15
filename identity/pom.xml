@@ -33,7 +33,7 @@
 
 	<repositories>
 		<repository>
-			<id>github</id>
+			<id>github-kafka-models</id>
 			<name>GitHub Packages</name>
 			<url>
 				https://maven.pkg.github.com/ivan-v-ivanov-dev/join-in-kafka-topic-models
