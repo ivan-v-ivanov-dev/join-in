@@ -2,10 +2,15 @@ spring:
   application:
     name: mvc
 
+server:
+  address: 0.0.0.0
+  port: 8080
+  max-http-request-header-size: 10MB
+
 #Feign Gateway API service
 gateway:
   service:
     feign:
       client:
         name: API-Gateway-Service
-    url: http://localhost:8081/api
+    url: http://localhost:8081
