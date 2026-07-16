@@ -13,4 +13,4 @@ gateway:
     feign:
       client:
         name: API-Gateway-Service
-    url: http://localhost:8081
+    url: http://api-gateway:8081

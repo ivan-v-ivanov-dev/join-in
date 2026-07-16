@@ -28,6 +28,6 @@ public class IdentityServiceImpl implements IdentityService {
     public void register(RegisterRq registerRq) {
         RegisterUserMVCRq registerUserMVCRq = registerUserMapper.fromRegisterRqtoRegisterUserMVCRq(registerRq);
         gatewayClient.registerUser(registerUserMVCRq);
-        log.info("Send new registered user to API Gateway : " + registerUserMVCRq.getFirstName());
+        log.info("Send new registered user to API Gateway : " + registerUserMVCRq.firstName());
     }
 }

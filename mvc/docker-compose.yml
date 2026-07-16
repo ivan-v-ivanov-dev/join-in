@@ -1,0 +1,25 @@
+services:
+  mvc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+
+    container_name: mvc
+
+    ports:
+      - "8080:8080"
+
+    networks:
+      - join-in-network
+
+    restart: unless-stopped
+
+networks:
+  join-in-network:
+    external: true
+
+secrets:
+  maven_settings:
+    file: C:/Users/Иван/.m2/settings.xml
