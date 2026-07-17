@@ -1,7 +1,7 @@
 package com.joinin.profile.mapper;
 
 import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
-import com.joinin.profile.models.User;
+import com.joinin.profile.models.Profile;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -34,5 +34,5 @@ public interface UserMapper {
     @Mapping(target = "currentCity", constant = "Add current city")
     @Mapping(target = "hometown", constant = "Add hometown")
     @Mapping(target = "otherPlacesLived", constant = "Add other places lived")
-    User fromNewRegisteredUserInfotoUser(NewRegisteredUserInfo newRegisteredUserInfo);
+    Profile fromNewRegisteredUserInfotoUser(NewRegisteredUserInfo newRegisteredUserInfo);
 }

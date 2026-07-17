@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @ToString
 @Document(collection = "profiles")
-public class User {
+public class Profile {
 
     @Id
     private String id;
