@@ -12,7 +12,7 @@ spring:
 
   kafka:
     bootstrap-servers: kafka:19092
-    group-id: groupId
+    group-id: profile-service-group
     partitions: 3
     replicas: 1
     trusted-packages: com.join_in.kafka_models.messages
