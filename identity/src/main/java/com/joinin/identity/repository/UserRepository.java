@@ -11,7 +11,7 @@ public class UserRepository {
 
     private final MongoTemplate mongoTemplate;
 
-    public void save(User user) {
-        mongoTemplate.insert(user);
+    public User save(User user) {
+        return mongoTemplate.insert(user);
     }
 }

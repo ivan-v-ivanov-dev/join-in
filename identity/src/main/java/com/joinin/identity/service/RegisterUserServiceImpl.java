@@ -40,8 +40,8 @@ public class RegisterUserServiceImpl implements RegisterUserService {
                 .password(passwordEncoder.encode(registerUser.getPassword()))
                 .build();
 
-        userRepository.save(user);
-        log.info("User saved in database. User identity: " + user.getIdentity());
+        User savedUser = userRepository.save(user);
+        log.info("User saved in database. User identity: " + savedUser.getIdentity());
 
         KafkaMessage newRegisteredUser = new NewRegisteredUserInfo(user.getIdentity(), registerUser.getFirstName(), registerUser.getLastName());
         kafkaTemplate.send(newRegisteredUserInfo, newRegisteredUser);

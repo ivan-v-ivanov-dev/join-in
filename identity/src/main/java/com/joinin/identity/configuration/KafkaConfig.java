@@ -58,8 +58,6 @@ public class KafkaConfig {
         properties.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
         properties.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JacksonJsonDeserializer.class);
         properties.put(JacksonJsonDeserializer.TRUSTED_PACKAGES, trustedPackages);
-        properties.put(JacksonJsonDeserializer.VALUE_DEFAULT_TYPE, RegisterNewUser.class.getName());
-        properties.put(JacksonJsonDeserializer.USE_TYPE_INFO_HEADERS, false);
 
         return new DefaultKafkaConsumerFactory<>(properties);
     }

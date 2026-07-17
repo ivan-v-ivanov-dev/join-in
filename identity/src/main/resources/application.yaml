@@ -7,7 +7,7 @@ spring:
     name: identity
 
   mongodb:
-    uri: mongodb://rootuser:rootpass@mongo:27017/storage?authSource=admin
+    uri: mongodb://rootuser:rootpass@identity-mongo:27017/storage?authSource=admin
     auto-index-creation: true
 
   kafka:
