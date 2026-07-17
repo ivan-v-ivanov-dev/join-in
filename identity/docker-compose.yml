@@ -18,7 +18,7 @@ services:
   # Mongo Express web tool
   mongo-express:
     image: mongo-express:1.0.0-alpha
-    container_name: mongo-express-profile-service
+    container_name: mongo-express-identity-service
     restart: always
     depends_on:
       - mongo
@@ -40,8 +40,7 @@ services:
         - maven_settings
     container_name: identity-service
     ports:
-      - "8082:8082"
-
+      - 8082:8082
     depends_on:
       - mongo
     networks:
