@@ -1,0 +1,21 @@
+server:
+  port: 8086
+  max-http-header-size: 10MB
+
+spring:
+  application:
+    name: notification
+
+  mongodb:
+    uri: mongodb://rootuser:rootpass@notification-mongo:27017/storage?authSource=admin
+    auto-index-creation: true
+
+  kafka:
+    bootstrap-servers: kafka:19092
+    group-id: notification-service-group
+    partitions: 3
+    replicas: 1
+    trusted-packages: com.join_in.kafka_models.messages
+    offset-reset: earliest
+    topic:
+      new-registered-user-info: new-registered-user-info

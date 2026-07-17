@@ -1,0 +1,55 @@
+services:
+
+  # MongoDB
+  notification-mongo:
+    image: mongo:6.0
+    container_name: mongo-notification-service
+    volumes:
+      - ./src/main/resources/mongo/init.js:/docker-entrypoint-initdb.d/init.js
+    ports:
+      - 27019:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+      - MONGO_INITDB_DATABASE=notifications
+    networks:
+      - join-in-network
+
+  # Mongo Express web tool
+  notification-mongo-express:
+    image: mongo-express:1.0.0-alpha
+    container_name: mongo-express-notification-service
+    restart: always
+    depends_on:
+      - notification-mongo
+    ports:
+      - 9092:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+      - ME_CONFIG_MONGODB_URL=mongodb://rootuser:rootpass@notification-mongo:27017/
+    networks:
+      - join-in-network
+
+  # Notification Service
+  notification-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+    container_name: notification-service
+    ports:
+      - 8086:8086
+    depends_on:
+      - notification-mongo
+    networks:
+      - join-in-network
+
+networks:
+  join-in-network:
+    external: true
+
+secrets:
+  maven_settings:
+    file: C:/Users/Иван/.m2/settings.xml
