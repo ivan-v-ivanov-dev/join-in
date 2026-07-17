@@ -1,11 +1,15 @@
 package com.joinin.identity.service;
 
+import com.join_in.kafka_models.KafkaMessage;
+import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
 import com.joinin.identity.model.RegisterUser;
 import com.joinin.identity.model.User;
 import com.joinin.identity.repository.UserRepository;
 import com.joinin.identity.service.contract.RegisterUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +27,10 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
+
+    @Value("${spring.kafka.topic.new-registered-user-info}")
+    private String newRegisteredUserInfo;
 
     @Override
     public void register(RegisterUser registerUser) {
@@ -34,6 +42,10 @@ public class RegisterUserServiceImpl implements RegisterUserService {
 
         userRepository.save(user);
         log.info("User saved in database. User identity: " + user.getIdentity());
+
+        KafkaMessage newRegisteredUser = new NewRegisteredUserInfo(user.getIdentity(), registerUser.getFirstName(), registerUser.getLastName());
+        kafkaTemplate.send(newRegisteredUserInfo, newRegisteredUser);
+        log.info("Send new registered user info to other services in topic: " + newRegisteredUserInfo);
     }
 
     private String calculateIdentity(RegisterUser registerUser) {

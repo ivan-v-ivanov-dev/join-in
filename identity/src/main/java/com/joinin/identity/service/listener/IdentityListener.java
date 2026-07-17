@@ -22,7 +22,7 @@ public class IdentityListener {
             groupId = "${spring.kafka.group-id}")
     public void registeredUser(KafkaMessage message) {
         RegisterNewUser registerNewUserMessage = (RegisterNewUser) message;
-        log.info("New user register message received. User first name: " + registerNewUserMessage.getFirstName());
+        log.info("New user register message received. User first name: " + registerNewUserMessage.firstName());
         registerUserService.register(registerUserMapper.fromRegisterNewUsertoRegisterUser(registerNewUserMessage));
     }
 }
