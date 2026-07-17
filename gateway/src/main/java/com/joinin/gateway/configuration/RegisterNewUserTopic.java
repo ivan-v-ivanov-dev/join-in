@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
-public class KafkaTopicConfiguration {
+public class RegisterNewUserTopic {
 
     @Value("${spring.kafka.topic.register-new-user}")
     private String registerNewUserTopic;
