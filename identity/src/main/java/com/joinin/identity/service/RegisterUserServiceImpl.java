@@ -28,8 +28,6 @@ public class RegisterUserServiceImpl implements RegisterUserService {
     public void register(RegisterUser registerUser) {
         User user = User.builder()
                 .identity(calculateIdentity(registerUser))
-                .firstName(registerUser.getFirstName())
-                .lastName(registerUser.getLastName())
                 .email(registerUser.getEmail())
                 .password(passwordEncoder.encode(registerUser.getPassword()))
                 .build();

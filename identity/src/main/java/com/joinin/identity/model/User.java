@@ -19,8 +19,6 @@ public class User {
     private String id;
     @Indexed(unique = true)
     private final String identity;
-    private final String firstName;
-    private final String lastName;
     private final String email;
     private final String password;
 }
