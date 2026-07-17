@@ -1,0 +1,57 @@
+services:
+
+  # MongoDB
+  search-mongo:
+    image: mongo:6.0
+    container_name: mongo-search-service
+    restart: always
+    volumes:
+      - ./src/main/resources/mongo/init.js:/docker-entrypoint-initdb.d/init.js
+    ports:
+      - 27021:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+      - MONGO_INITDB_DATABASE=storage
+    networks:
+      - join-in-network
+
+  # Mongo Express web tool
+  search-mongo-express:
+    image: mongo-express:1.0.0-alpha
+    container_name: mongo-express-search-service
+    restart: always
+    depends_on:
+      - search-mongo
+    ports:
+      - 9094:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+      - ME_CONFIG_MONGODB_URL=mongodb://rootuser:rootpass@search-mongo:27017/?authSource=admin
+    networks:
+      - join-in-network
+
+  # Search Service
+  search-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+    container_name: search-service
+    restart: always
+    ports:
+      - 8092:8092
+    depends_on:
+      - search-mongo
+    networks:
+      - join-in-network
+
+networks:
+  join-in-network:
+    external: true
+
+secrets:
+  maven_settings:
+    file: C:/Users/Иван/.m2/settings.xml
