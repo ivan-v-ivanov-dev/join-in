@@ -13,8 +13,11 @@ spring:
   kafka:
     bootstrap-servers: kafka:19092
     group-id: groupId
+    partitions: 3
+    replicas: 1
     trusted-packages: com.join_in.kafka_models.messages
     offset-reset: earliest
     topic:
       register-new-user: register-new-user
+      new-registered-user-info: new-registered-user-info
 
