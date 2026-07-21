@@ -1,4 +1,4 @@
-package com.joinin.reaction.service.configuration;
+package com.joinin.reaction.configuration;
 
 import com.join_in.kafka_models.KafkaMessage;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
