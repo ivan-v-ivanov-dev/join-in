@@ -1,0 +1,7 @@
+server:
+  port: 8091
+  max-http-header-size: 10MB
+
+spring:
+  application:
+    name: message
