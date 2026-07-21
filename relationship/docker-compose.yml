@@ -1,0 +1,80 @@
+services:
+
+  # Neo4j for Relationship Service
+  relationship-neo4j:
+    image: neo4j:5.26.28
+    container_name: neo4j-relationship-service
+    restart: always
+    ports:
+      - 7475:7474
+      - 7688:7687
+    environment:
+      NEO4J_AUTH: neo4j/relationshippass
+    volumes:
+      - relationship-neo4j-data:/data
+    networks:
+      - join-in-network
+
+  # Executes init.cypher after Neo4j starts
+  relationship-neo4j-init:
+    image: neo4j:5.26.28
+    container_name: neo4j-relationship-init
+    restart: "no"
+    depends_on:
+      - relationship-neo4j
+    volumes:
+      - ./src/main/resources/neo4j/init.cypher:/scripts/init.cypher:ro
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        set -e
+
+        until cypher-shell -a bolt://relationship-neo4j:7687 -u neo4j -p relationshippass -d neo4j "RETURN 1;" >/dev/null 2>&1; do
+          echo "Waiting for Neo4j..."
+          sleep 2
+        done
+
+        echo "Neo4j is ready. Importing sample data..."
+
+        cypher-shell \
+          -a bolt://relationship-neo4j:7687 \
+          -u neo4j \
+          -p relationshippass \
+          -d neo4j \
+          --file /scripts/init.cypher
+
+        echo "Sample data imported successfully."
+    networks:
+      - join-in-network
+
+  # Relationship Service
+  relationship-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+    container_name: relationship-service
+    restart: always
+    ports:
+      - 8087:8087
+    environment:
+      SPRING_NEO4J_URI: bolt://relationship-neo4j:7687
+      SPRING_NEO4J_AUTHENTICATION_USERNAME: neo4j
+      SPRING_NEO4J_AUTHENTICATION_PASSWORD: relationshippass
+    depends_on:
+      relationship-neo4j-init:
+        condition: service_completed_successfully
+    networks:
+      - join-in-network
+
+networks:
+  join-in-network:
+    external: true
+
+volumes:
+  relationship-neo4j-data:
+
+secrets:
+  maven_settings:
+    file: C:/Users/Иван/.m2/settings.xml
