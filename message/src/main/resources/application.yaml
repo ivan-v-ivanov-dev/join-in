@@ -5,3 +5,18 @@ server:
 spring:
   application:
     name: message
+
+  kafka:
+    bootstrap-servers: kafka:19092
+    group-id: search-service-group
+    partitions: 3
+    replicas: 1
+    trusted-packages: com.join_in.kafka_models.messages
+    offset-reset: earliest
+    topic:
+      new-registered-user-info: new-registered-user-info
+
+  data:
+    redis:
+      host: message-redis
+      port: 6379

@@ -1,0 +1,35 @@
+services:
+
+  # Redis
+  message-redis:
+    image: redis:7.4-alpine
+    container_name: redis-message-service
+    restart: always
+    ports:
+      - 6381:6379
+    networks:
+      - join-in-network
+
+  # Message Service
+  message-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+    container_name: message-service
+    restart: always
+    ports:
+      - 8091:8091
+    depends_on:
+      - message-redis
+    networks:
+      - join-in-network
+
+networks:
+  join-in-network:
+    external: true
+
+secrets:
+  maven_settings:
+    file: C:/Users/Иван/.m2/settings.xml
