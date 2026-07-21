@@ -1,15 +1,17 @@
-CREATE CONSTRAINT user_identity_unique IF NOT EXISTS
-FOR (user:User)
-REQUIRE user.identity IS UNIQUE;
+```cypher
+CREATE CONSTRAINT profile_identity_unique IF NOT EXISTS
+FOR (profile:Profile)
+REQUIRE profile.identity IS UNIQUE;
 
-MERGE (user1:User {
+MERGE (profile1:Profile {
     identity: "429e71a7f1773bf2619c4c54ca4a7c67ab949efc7fffc1097a9629e8dff3528b"
 });
 
-MERGE (user2:User {
+MERGE (profile2:Profile {
     identity: "9b5d4f5c0a71d7fef2c7c9f5f8cb45f4c1d49d6c9d4c9b9e3d6f2b1c4f8e7a91"
 });
 
-MERGE (user3:User {
+MERGE (profile3:Profile {
     identity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551"
 });
+```
