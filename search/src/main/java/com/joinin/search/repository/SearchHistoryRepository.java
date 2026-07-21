@@ -1,6 +1,6 @@
 package com.joinin.search.repository;
 
-import com.joinin.search.model.SearchHistoryEntry;
+import com.joinin.search.model.mongo.SearchHistoryEntry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;

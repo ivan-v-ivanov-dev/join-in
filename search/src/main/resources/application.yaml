@@ -19,3 +19,6 @@ spring:
     offset-reset: earliest
     topic:
       new-registered-user-info: new-registered-user-info
+
+  elasticsearch:
+    uris: http://search-elasticsearch:9200

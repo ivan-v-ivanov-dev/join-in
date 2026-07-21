@@ -1,4 +1,4 @@
-package com.joinin.search.model;
+package com.joinin.search.model.mongo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

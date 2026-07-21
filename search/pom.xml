@@ -49,6 +49,10 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.joinin</groupId>
 			<artifactId>kafka-models</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
