@@ -1,4 +1,3 @@
-```cypher
 CREATE CONSTRAINT profile_identity_unique IF NOT EXISTS
 FOR (profile:Profile)
 REQUIRE profile.identity IS UNIQUE;
@@ -14,4 +13,3 @@ MERGE (profile2:Profile {
 MERGE (profile3:Profile {
     identity: "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551"
 });
-```
