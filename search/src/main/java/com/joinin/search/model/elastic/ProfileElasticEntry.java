@@ -9,6 +9,7 @@ import org.springframework.data.elasticsearch.annotations.*;
 @Getter
 @Builder
 @ToString
+@Setting(shards = 1, replicas = 0)
 @Document(indexName = "profiles")
 public class ProfileElasticEntry {
 
