@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface ProfileMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "identity", source = "identity")
@@ -34,5 +34,5 @@ public interface UserMapper {
     @Mapping(target = "currentCity", constant = "Add current city")
     @Mapping(target = "hometown", constant = "Add hometown")
     @Mapping(target = "otherPlacesLived", constant = "Add other places lived")
-    Profile fromNewRegisteredUserInfotoUser(NewRegisteredUserInfo newRegisteredUserInfo);
+    Profile fromNewRegisteredUserInfotoProfile(NewRegisteredUserInfo newRegisteredUserInfo);
 }
