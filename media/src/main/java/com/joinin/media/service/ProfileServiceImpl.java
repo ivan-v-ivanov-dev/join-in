@@ -22,9 +22,9 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public void saveUserWithDefaultPictures(String identity) {
         Profile profile = Profile.builder().identity(identity)
-                .profilePictureUrl(PROFILE_DEFAULT_PICTURE)
-                .backgroundPictureUrl(BACKGROUND_DEFAULT_PICTURE)
-                .albumPictureUrls(List.of(AlbumPictureUrl.builder().url(ALBUM_DEFAULT_PICTURE).build()))
+                .profilePictureUrl(PROFILE_DEFAULT_PICTURE_URL)
+                .backgroundPictureUrl(BACKGROUND_DEFAULT_PICTURE_URL)
+                .albumPictureUrls(List.of(AlbumPictureUrl.builder().url(ALBUM_DEFAULT_PICTURE_URL).build()))
                 .build();
         Profile savedProfile = profileRepository.save(profile);
         log.info("Profile saved. Profile identity: " + savedProfile.getIdentity());
