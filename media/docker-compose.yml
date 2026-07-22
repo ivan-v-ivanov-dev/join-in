@@ -40,7 +40,7 @@ services:
         - maven_settings
     container_name: media-service
     ports:
-      - 8085:8085
+      - 8090:8090
     depends_on:
       - media-mongo
     networks:

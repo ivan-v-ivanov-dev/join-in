@@ -25,5 +25,5 @@ public class Profile {
     private String profilePictureUrl;
     private String backgroundPictureUrl;
     @Builder.Default
-    private List<String> albumPictureUrls = new ArrayList<>();
+    private List<AlbumPictureUrl> albumPictureUrls = new ArrayList<>();
 }

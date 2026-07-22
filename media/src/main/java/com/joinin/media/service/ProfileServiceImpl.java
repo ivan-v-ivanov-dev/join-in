@@ -1,11 +1,16 @@
 package com.joinin.media.service;
 
+import com.joinin.media.model.AlbumPictureUrl;
 import com.joinin.media.model.Profile;
 import com.joinin.media.repository.ProfileRepository;
 import com.joinin.media.service.contract.ProfileService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+import static com.joinin.media.service.contrants.ProfilePicConstants.*;
 
 @Service
 @AllArgsConstructor
@@ -14,11 +19,20 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository profileRepository;
 
-    //TODO Add default pictures from S3
     @Override
     public void saveUserWithDefaultPictures(String identity) {
-        Profile profile = Profile.builder().identity(identity).build();
+        Profile profile = Profile.builder().identity(identity)
+                .profilePictureUrl(PROFILE_DEFAULT_PICTURE)
+                .backgroundPictureUrl(BACKGROUND_DEFAULT_PICTURE)
+                .albumPictureUrls(List.of(AlbumPictureUrl.builder().url(ALBUM_DEFAULT_PICTURE).build()))
+                .build();
         Profile savedProfile = profileRepository.save(profile);
         log.info("Profile saved. Profile identity: " + savedProfile.getIdentity());
+    }
+
+    public Profile getProfileByIdentity(String identity) {
+        Profile profile = profileRepository.getProfileByIdentity(identity);
+        log.info("Retrieve profile from database. Profile identity: " + profile.getIdentity());
+        return profile;
     }
 }
