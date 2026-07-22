@@ -2,10 +2,10 @@ package com.joinin.identity.service;
 
 import com.join_in.kafka_models.KafkaMessage;
 import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
-import com.joinin.identity.model.RegisterUser;
-import com.joinin.identity.model.User;
-import com.joinin.identity.repository.UserRepository;
-import com.joinin.identity.service.contract.RegisterUserService;
+import com.joinin.identity.model.Profile;
+import com.joinin.identity.model.RegisterProfile;
+import com.joinin.identity.repository.ProfileRepository;
+import com.joinin.identity.service.contract.RegisterProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,39 +23,39 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class RegisterUserServiceImpl implements RegisterUserService {
+public class RegisterProfileServiceImpl implements RegisterProfileService {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
     private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
 
     @Value("${spring.kafka.topic.new-registered-user-info}")
     private String newRegisteredUserInfo;
 
     @Override
-    public void register(RegisterUser registerUser) {
-        User user = User.builder()
-                .identity(calculateIdentity(registerUser))
-                .email(registerUser.getEmail())
-                .password(passwordEncoder.encode(registerUser.getPassword()))
+    public void register(RegisterProfile registerProfile) {
+        Profile profile = Profile.builder()
+                .identity(calculateIdentity(registerProfile))
+                .email(registerProfile.getEmail())
+                .password(passwordEncoder.encode(registerProfile.getPassword()))
                 .build();
 
-        User savedUser = userRepository.save(user);
-        log.info("User saved in database. User identity: " + savedUser.getIdentity());
+        Profile savedProfile = profileRepository.save(profile);
+        log.info("Profile saved in database. Profile identity: " + savedProfile.getIdentity());
 
-        KafkaMessage newRegisteredUser = new NewRegisteredUserInfo(user.getIdentity(), registerUser.getFirstName(), registerUser.getLastName());
+        KafkaMessage newRegisteredUser = new NewRegisteredUserInfo(profile.getIdentity(), registerProfile.getFirstName(), registerProfile.getLastName());
         kafkaTemplate.send(newRegisteredUserInfo, newRegisteredUser);
-        log.info("Send new registered user info to other services in topic: " + newRegisteredUserInfo);
+        log.info("Send new registered profile info to other services in topic: " + newRegisteredUserInfo);
     }
 
-    private String calculateIdentity(RegisterUser registerUser) {
+    private String calculateIdentity(RegisterProfile registerProfile) {
         try {
             StringBuffer data = new StringBuffer()
-                    .append(registerUser.getFirstName().trim().toLowerCase())
+                    .append(registerProfile.getFirstName().trim().toLowerCase())
                     .append("-")
-                    .append(registerUser.getLastName().trim().toLowerCase())
+                    .append(registerProfile.getLastName().trim().toLowerCase())
                     .append("-")
-                    .append(registerUser.getEmail().trim().toLowerCase())
+                    .append(registerProfile.getEmail().trim().toLowerCase())
                     .append("-")
                     .append(LocalDateTime.now());
 

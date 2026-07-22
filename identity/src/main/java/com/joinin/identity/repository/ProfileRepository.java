@@ -1,17 +1,17 @@
 package com.joinin.identity.repository;
 
-import com.joinin.identity.model.User;
+import com.joinin.identity.model.Profile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepository {
+public class ProfileRepository {
 
     private final MongoTemplate mongoTemplate;
 
-    public User save(User user) {
-        return mongoTemplate.insert(user);
+    public Profile save(Profile profile) {
+        return mongoTemplate.insert(profile);
     }
 }
