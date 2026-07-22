@@ -1,5 +1,6 @@
 package com.joinin.media.service;
 
+import com.joinin.media.model.AlbumPictureUrl;
 import com.joinin.media.model.Profile;
 import com.joinin.media.service.contract.ProfileService;
 import com.joinin.media.service.contract.S3MediaService;
@@ -12,6 +13,8 @@ import org.springframework.web.server.ResponseStatusException;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -87,6 +90,44 @@ public class S3MediaServiceImpl implements S3MediaService {
 
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not read the background picture from S3.", exception
             );
+        }
+    }
+
+    @Override
+    public List<byte[]> getProfileAlbumImages(String identity) {
+        Profile profile = profileService.getProfileByIdentity(identity);
+
+        List<byte[]> albumImages = profile.getAlbumPictureUrls()
+                .stream()
+                .map(AlbumPictureUrl::getUrl)
+                .map(this::readImageFromS3)
+                .toList();
+        log.info("Retrieve album images for profile: " + profile.getIdentity());
+        return albumImages;
+    }
+
+    private byte[] readImageFromS3(String objectKey) {
+        GetObjectRequest request = GetObjectRequest.builder()
+                .bucket(bucket)
+                .key(objectKey)
+                .build();
+
+        try {
+            return s3Client.getObjectAsBytes(request).asByteArray();
+        } catch (S3Exception exception) {
+            log.error("Could not retrieve album image {}. Status: {}, message: {}",
+                    objectKey,
+                    exception.statusCode(),
+                    exception.awsErrorDetails() == null
+                            ? exception.getMessage()
+                            : exception.awsErrorDetails().errorMessage(),
+                    exception);
+
+            if (exception.statusCode() == 404) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Album image was not found.", exception);
+            }
+
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not read the album image from S3.", exception);
         }
     }
 }
