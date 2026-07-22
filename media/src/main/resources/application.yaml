@@ -19,3 +19,8 @@ spring:
     offset-reset: earliest
     topic:
       new-registered-user-info: new-registered-user-info
+
+aws:
+  s3:
+    bucket: join-in-media-service-bucket
+    region: eu-central-1

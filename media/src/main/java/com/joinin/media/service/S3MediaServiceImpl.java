@@ -24,7 +24,7 @@ public class S3MediaServiceImpl implements S3MediaService {
     private String bucket;
 
     @Override
-    public byte[] getProfilePicture(String identity) {
+    public byte[] getProfileImage(String identity) {
         Profile profile = profileService.getProfileByIdentity(identity);
 
         GetObjectRequest request = GetObjectRequest.builder()
@@ -34,7 +34,7 @@ public class S3MediaServiceImpl implements S3MediaService {
 
         try {
             byte[] profilePictureArray = s3Client.getObjectAsBytes(request).asByteArray();
-            log.info("Retrieve profile picture for profile: " + profile.getIdentity());
+            log.info("Retrieve profile image for profile: " + profile.getIdentity());
             return profilePictureArray;
         } catch (S3Exception exception) {
             log.error("S3 error. Status: {}, code: {}, message: {}",
@@ -54,6 +54,38 @@ public class S3MediaServiceImpl implements S3MediaService {
                     HttpStatus.INTERNAL_SERVER_ERROR,
                     "Could not read the profile picture from S3.",
                     exception
+            );
+        }
+    }
+
+    @Override
+    public byte[] getProfileBackgroundImage(String identity) {
+        Profile profile = profileService.getProfileByIdentity(identity);
+
+        GetObjectRequest request = GetObjectRequest.builder()
+                .bucket(bucket)
+                .key(profile.getBackgroundPictureUrl())
+                .build();
+        try {
+            byte[] backgroundImageArray = s3Client.getObjectAsBytes(request).asByteArray();
+            log.info("Retrieved background image for profile: {}", profile.getIdentity());
+            return backgroundImageArray;
+        } catch (S3Exception exception) {
+            log.error("S3 error. Status: {}, code: {}, message: {}",
+                    exception.statusCode(),
+                    exception.awsErrorDetails() == null
+                            ? null
+                            : exception.awsErrorDetails().errorCode(),
+                    exception.awsErrorDetails() == null
+                            ? exception.getMessage()
+                            : exception.awsErrorDetails().errorMessage(),
+                    exception);
+
+            if (exception.statusCode() == 404) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Background picture was not found.", exception);
+            }
+
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not read the background picture from S3.", exception
             );
         }
     }
