@@ -7,5 +7,5 @@ public interface S3MediaService {
 
     byte[] getProfileBackgroundImage(String identity);
 
-    List<byte[]> getProfileAlbumImages(String identity);
+    List<String> getProfileAlbumImages(String identity);
 }

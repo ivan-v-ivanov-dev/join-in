@@ -26,7 +26,7 @@ public class MediaController {
     }
 
     @GetMapping(value = "/profile/{identity}/album-images", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<byte[]> getProfileAlbumImages(@PathVariable String identity) {
+    public List<String> getProfileAlbumImages(@PathVariable String identity) {
         return s3MediaService.getProfileAlbumImages(identity);
     }
 }
