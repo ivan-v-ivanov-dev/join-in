@@ -19,3 +19,11 @@ identity:
       client:
         name: Identity-service-Feign-client
     url:  http://identity-service:8082
+
+#Media service Feign client
+media:
+  service:
+    feign:
+      client:
+        name: Media-service-Feign-client
+    url:  http://media-service:8090
