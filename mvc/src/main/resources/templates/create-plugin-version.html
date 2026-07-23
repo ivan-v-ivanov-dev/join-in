@@ -1,16 +1,15 @@
 
+
 <!doctype html>
-<html lang="en" class="theme-fs-md" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" class="theme-fs-md" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Join In</title>
-
+  <title>join IN | The social network</title>
   <!-- Config Options -->
   <meta name="setting_options" content='{&quot;saveLocal&quot;:&quot;sessionStorage&quot;,&quot;storeKey&quot;:&quot;huisetting&quot;,&quot;setting&quot;:{&quot;theme_scheme_direction&quot;:{&quot;value&quot;:&quot;ltr&quot;},&quot;theme_scheme&quot;:{&quot;value&quot;:&quot;light&quot;},&quot;theme_color&quot;:{&quot;colors&quot;:{&quot;--{{prefix}}primary&quot;:&quot;#50b5ff&quot;,&quot;--{{prefix}}info&quot;:&quot;#d592ff&quot;},&quot;value&quot;:&quot;theme-color-default&quot;},&quot;sidebar_type&quot;:{&quot;value&quot;:[]},&quot;sidebar_menu_style&quot;:{&quot;value&quot;:&quot;navs-rounded-all&quot;},&quot;footer&quot;:{&quot;value&quot;:&quot;default&quot;}}}'>
   <!-- End Config Options -->
-
   <link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}" />
   <link rel="stylesheet" th:href="@{/assets/css/libs.min.css}">
   <link rel="stylesheet" th:href="@{/assets/css/socialv.css?v=5.0.2}">
@@ -40,12 +39,16 @@
      <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar p-lg-0">
            <div class="container-fluid navbar-inner">
               <div class="d-flex align-items-center gap-3">
-                 <a class="d-flex align-items-center gap-2 iq-header-logo d-none d-lg-flex"
-                    onclick=document.getElementById("feedForm").submit() >
+                 <a href="../dashboard/index.html" class="d-flex align-items-center gap-2 iq-header-logo d-none d-lg-flex">
                     <svg width="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.67733 9.50001L7.88976 20.2602C9.81426 23.5936 14.6255 23.5936 16.55 20.2602L22.7624 9.5C24.6869 6.16666 22.2813 2 18.4323 2H6.00746C2.15845 2 -0.247164 6.16668 1.67733 9.50001ZM14.818 19.2602C13.6633 21.2602 10.7765 21.2602 9.62181 19.2602L9.46165 18.9828L9.46597 18.7275C9.48329 17.7026 9.76288 16.6993 10.2781 15.8131L12.0767 12.7195L14.1092 16.2155C14.4957 16.8803 14.7508 17.6132 14.8607 18.3743L14.9544 19.0239L14.818 19.2602ZM16.4299 16.4683L19.3673 11.3806C18.7773 11.5172 18.172 11.5868 17.5629 11.5868H13.7316L15.8382 15.2102C16.0721 15.6125 16.2699 16.0335 16.4299 16.4683ZM20.9542 8.63193L21.0304 8.5C22.1851 6.5 20.7417 4 18.4323 4H17.8353L17.1846 4.56727C16.6902 4.99824 16.2698 5.50736 15.9402 6.07437L13.8981 9.58676H17.5629C18.4271 9.58676 19.281 9.40011 20.0663 9.03957L20.9542 8.63193ZM14.9554 4C14.6791 4.33499 14.4301 4.69248 14.2111 5.06912L12.0767 8.74038L10.0324 5.22419C9.77912 4.78855 9.48582 4.37881 9.15689 4H14.9554ZM6.15405 4H6.00746C3.69806 4 2.25468 6.50001 3.40938 8.50001L3.4915 8.64223L4.37838 9.04644C5.15962 9.40251 6.00817 9.58676 6.86672 9.58676H10.2553L8.30338 6.22943C7.9234 5.57587 7.42333 5.00001 6.8295 4.53215L6.15405 4ZM5.07407 11.3833L7.88909 16.2591C8.05955 15.7565 8.28025 15.2702 8.54905 14.8079L10.4218 11.5868H6.86672C6.26169 11.5868 5.66037 11.5181 5.07407 11.3833Z" fill="currentColor"/>
                     </svg>
-                    <h3 class="logo-title d-none d-sm-block" data-setting="app_name">Join In</h3>
+                    <h3 class="logo-title d-none d-sm-block" data-setting="app_name">join IN</h3>
+                 </a>
+                 <a class="sidebar-toggle" data-toggle="sidebar" data-active="true" href="javascript:void(0);">
+                    <div class="icon material-symbols-outlined iq-burger-menu">
+                       menu
+                    </div>
                  </a>
               </div>
               <div class="d-block d-md-none">
@@ -53,9 +56,11 @@
                        <svg width="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd" clip-rule="evenodd" d="M1.67733 9.50001L7.88976 20.2602C9.81426 23.5936 14.6255 23.5936 16.55 20.2602L22.7624 9.5C24.6869 6.16666 22.2813 2 18.4323 2H6.00746C2.15845 2 -0.247164 6.16668 1.67733 9.50001ZM14.818 19.2602C13.6633 21.2602 10.7765 21.2602 9.62181 19.2602L9.46165 18.9828L9.46597 18.7275C9.48329 17.7026 9.76288 16.6993 10.2781 15.8131L12.0767 12.7195L14.1092 16.2155C14.4957 16.8803 14.7508 17.6132 14.8607 18.3743L14.9544 19.0239L14.818 19.2602ZM16.4299 16.4683L19.3673 11.3806C18.7773 11.5172 18.172 11.5868 17.5629 11.5868H13.7316L15.8382 15.2102C16.0721 15.6125 16.2699 16.0335 16.4299 16.4683ZM20.9542 8.63193L21.0304 8.5C22.1851 6.5 20.7417 4 18.4323 4H17.8353L17.1846 4.56727C16.6902 4.99824 16.2698 5.50736 15.9402 6.07437L13.8981 9.58676H17.5629C18.4271 9.58676 19.281 9.40011 20.0663 9.03957L20.9542 8.63193ZM14.9554 4C14.6791 4.33499 14.4301 4.69248 14.2111 5.06912L12.0767 8.74038L10.0324 5.22419C9.77912 4.78855 9.48582 4.37881 9.15689 4H14.9554ZM6.15405 4H6.00746C3.69806 4 2.25468 6.50001 3.40938 8.50001L3.4915 8.64223L4.37838 9.04644C5.15962 9.40251 6.00817 9.58676 6.86672 9.58676H10.2553L8.30338 6.22943C7.9234 5.57587 7.42333 5.00001 6.8295 4.53215L6.15405 4ZM5.07407 11.3833L7.88909 16.2591C8.05955 15.7565 8.28025 15.2702 8.54905 14.8079L10.4218 11.5868H6.86672C6.26169 11.5868 5.66037 11.5181 5.07407 11.3833Z" fill="currentColor"/>
                        </svg>
-                    <h3 class="logo-title d-none d-sm-block" data-setting="app_name">Join In</h3>
+                    <h3 class="logo-title d-none d-sm-block" data-setting="app_name">join IN</h3>
                  </a>
               </div>
+
+              <!--               Search bar-->
               <div class="iq-search-bar device-search  position-relative">
                  <form action="#" class="searchbox" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreenSm">
                     <a class="search-link d-none d-lg-block" href="javascript:void(0);" >
@@ -79,135 +84,124 @@
                                 </form>
                                 <a href="javascript:void(0);" class="material-symbols-outlined text-dark" data-bs-dismiss="modal">close</a>
                              </div>
+
                              <div class="d-none d-lg-flex align-items-center justify-content-between w-100">
                                 <h4 class="modal-title" id="exampleModalFullscreenLabel">Recent</h4>
                                 <a  class="text-dark" href="javascript:void(0);">Clear All</a>
                              </div>
+
                           </div>
                           <div class="modal-body p-0">
                              <div class="d-flex d-lg-none align-items-center justify-content-between w-100 p-3 pb-0">
                                 <h5 class="modal-title h4" id="exampleModalFullscreenLabel">Recent</h5>
                                 <a href="javascript:void(0);" class="text-dark">Clear All</a>
                              </div>
+
+                             <!-- original key word search-->
+                             <!--                             <div class="d-flex align-items-center border-bottom search-hover py-2 px-3">-->
+                             <!--                                   <div class="flex-shrink-0">-->
+                             <!--                                      <img src="../assets/images/page-img/19.jpg" class="align-self-center img-fluid avatar-50 rounded-pill" alt="#">-->
+                             <!--                                   </div>-->
+                             <!--                                   <div class="d-flex flex-column ms-3 w-100">-->
+                             <!--                                      <a href="javascript:void(0);" class="h5">Paige Turner</a>-->
+                             <!--                                      <span>Paige001</span>-->
+                             <!--                                   </div>-->
+                             <!--                                   <div class="d-flex align-items-center ms-auto">-->
+                             <!--                                      <a href="javascript:void(0);" class="me-3 d-flex align-items-center"><small>Follow</small> </a>-->
+                             <!--                                      <a href="javascript:void(0);" class="material-symbols-outlined text-dark">close</a>-->
+                             <!--                                   </div>-->
+                             <!--                             </div>-->
+                             <!-- end original key word search-->
+
+
+                             <!--  key word search-->
                              <div class="d-flex align-items-center border-bottom search-hover py-2 px-3">
-                                   <div class="flex-shrink-0">
-                                      <img src="../assets/images/page-img/19.jpg" class="align-self-center img-fluid avatar-50 rounded-pill" alt="#">
-                                   </div>
-                                   <div class="d-flex flex-column ms-3 w-100">
-                                      <a href="javascript:void(0);" class="h5">Paige Turner</a>
-                                      <span>Paige001</span>
-                                   </div>
-                                   <div class="d-flex align-items-center ms-auto">
-                                      <a href="javascript:void(0);" class="me-3 d-flex align-items-center"><small>Follow</small> </a>
-                                      <a href="javascript:void(0);" class="material-symbols-outlined text-dark">close</a>
-                                   </div>
+
+    <span class="material-symbols-outlined me-2">
+        search
+    </span>
+
+                                <a href="javascript:void(0);"
+                                   class="text-dark text-decoration-none flex-grow-1">
+                                   spring boot
+                                </a>
+
+                                <span class="material-symbols-outlined">
+        close
+    </span>
+
                              </div>
+                             <!-- end key word search-->
+
+                             <!-- 2nd key word search-->
                              <div class="d-flex align-items-center border-bottom search-hover py-2 px-3">
-                                <div class="flex-shrink-0">
-                                   <img src="../assets/images/page-img/18.jpg" class="align-self-center img-fluid avatar-50 rounded-pill" alt="#">
-                                </div>
-                                <div class="d-flex flex-column ms-3 w-100">
-                                   <a href="javascript:void(0);" class="h5">Monty Carlo</a>
-                                   <span>Carlo.m</span>
-                                </div>
-                                <div class="d-flex align-items-center ms-auto">
-                                   <a href="javascript:void(0);" class="me-3 d-flex align-items-center"><small>Unfollow</small> </a>
-                                   <a href="javascript:void(0);" class="material-symbols-outlined text-dark">close</a>
-                                </div>
+
+    <span class="material-symbols-outlined me-2">
+        search
+    </span>
+
+                                <a href="javascript:void(0);"
+                                   class="text-dark text-decoration-none flex-grow-1">
+                                   ivan
+                                </a>
+
+                                <span class="material-symbols-outlined">
+        close
+    </span>
+
                              </div>
-                             <div class="d-flex align-items-center search-hover py-2 px-3 border-bottom">
-                                <div class="flex-shrink-0">
-                                   <img src="../assets/images/page-img/20.jpg" class="align-self-center img-fluid avatar-50 rounded-pill" alt="#">
-                                </div>
-                                <div class="d-flex flex-column ms-3 w-100">
-                                   <a href="javascript:void(0);" class="h5">Paul Molive</a>
-                                   <span>Paul.45</span>
-                                </div>
-                                <div class="d-flex align-items-center ms-auto">
-                                   <a href="javascript:void(0);" class="me-3 d-flex align-items-center"><small>Request</small> </a>
-                                   <a href="javascript:void(0);" class="material-symbols-outlined text-dark">close</a>
-                                </div>
-                             </div>
-                             <div class="">
-                                <h4 class="px-3 py-2">Suggestions</h4>
-                                <div class="suggestion-card px-3">
-                                   <div class="text-center story">
-                                      <div class="story-profile">
-                                         <img src="../assets/images/page-img/20.jpg" class=" avatar-50 rounded-pill" alt="#">
-                                         <a href="javascript:void(0);"class="h6 mt-0 mt-lg-2 ms-3 ms-lg-0 text-ellipsis short-2 small">Ammy Paul</a>
-                                      </div>
-                                      <a href="javascript:void(0);" class="d-lg-none align-items-center d-flex"><small>Follow</small> </a>
-                                   </div>
-                                   <div class="text-center story ">
-                                      <div class="story-profile">
-                                         <img src="../assets/images/page-img/21.jpg" class=" avatar-50 rounded-pill" alt="#">
-                                         <a href="javascript:void(0);"class="h6 mt-0 mt-lg-2 ms-3 ms-lg-0 text-ellipsis short-2 small">Roger Carlo</a>
-                                      </div> 
-                                      <a href="javascript:void(0);" class="d-lg-none align-items-center d-flex"><small>Unfollow</small> </a>                               
-                                   </div>
-                                   <div class="text-center story ">
-                                      <div class="story-profile">
-                                         <img src="../assets/images/page-img/22.jpg" class=" avatar-50 rounded-pill" alt="#">
-                                         <a href="javascript:void(0);"class="h6 mt-0 mt-lg-2 ms-3 ms-lg-0 text-ellipsis short-2 small">Justin Molive</a>
-                                      </div>
-                                   <a href="javascript:void(0);" class="d-lg-none align-items-center d-flex"><small>Follow</small> </a>                               
-                                   </div>
-                                   <div class="text-center story">
-                                      <div class="story-profile">
-                                         <img src="../assets/images/page-img/23.jpg" class=" avatar-50 rounded-pill" alt="#">
-                                         <a href="javascript:void(0);"class="h6 mt-0 mt-lg-2 ms-3 ms-lg-0 text-ellipsis short-2 small">Roy Fisher</a>
-                                      </div>
-                                      <a href="javascript:void(0);" class="d-lg-none align-items-center d-flex"><small>Request</small> </a>                               
-                                   </div>
-                                   <div class="text-center story">
-                                      <div class="story-profile">
-                                         <img src="../assets/images/page-img/24.jpg" class=" avatar-50 rounded-pill" alt="#">
-                                         <a href="javascript:void(0);"class="h6 mt-0 mt-lg-2 ms-3 ms-lg-0 text-ellipsis short-2 small">Johan Carlo</a>
-                                      </div>
-                                      <a href="javascript:void(0);" class="d-lg-none align-items-center d-flex"><small>Follow</small> </a>                               
-                                   </div>
-                                   <div class="text-center story">
-                                      <div class="story-profile">
-                                         <img src="../assets/images/page-img/09.jpg" class=" avatar-50 rounded-pill" alt="#">
-                                         <a href="javascript:void(0);"class="h6 mt-0 mt-lg-2 ms-3 ms-lg-0 text-ellipsis short-2 small">Medra Miles</a>
-                                      </div>
-                                      <a href="javascript:void(0);" class="d-lg-none align-items-center d-flex"><small>Unfollow</small> </a>                               
-                                   </div>
-                                   <div class="text-center story">
-                                      <div class="story-profile">
-                                         <img src="../assets/images/page-img/03.jpg" class=" avatar-50 rounded-pill" alt="#">
-                                         <a href="javascript:void(0);"class="h6 mt-0 mt-lg-2 ms-3 ms-lg-0 text-ellipsis short-2 small">Aohan Paul</a>
-                                      </div>
-                                      <a href="javascript:void(0);" class="d-lg-none align-items-center d-flex"><small>Request</small> </a>                               
-                                   </div>
-                                   <div class="text-center story">
-                                      <div class="story-profile">
-                                         <img src="../assets/images/page-img/02.jpg" class=" avatar-50 rounded-pill" alt="#">
-                                         <a href="javascript:void(0);"class="h6 mt-0 mt-lg-2 ms-3 ms-lg-0 text-ellipsis short-2 small">Rokni Joy</a>
-                                      </div>
-                                      <a href="javascript:void(0);" class="d-lg-none align-items-center d-flex"><small>Follow</small> </a>                               
-                                   </div>
-                                   <div class="text-center story">
-                                      <div class="story-profile">
-                                         <img src="../assets/images/page-img/01.jpg" class=" avatar-50 rounded-pill" alt="#">
-                                         <a href="javascript:void(0);"class="h6 mt-0 mt-lg-2 ms-3 ms-lg-0 text-ellipsis short-2 small">Sepid Ryan</a>
-                                      </div>
-                                      <a href="javascript:void(0);" class="d-lg-none align-items-center d-flex"><small>Unfollow</small> </a>                               
-                                   </div>
-                                </div>
-                             </div>
+                             <!-- end 2nd key word search-->
+
+                             <!-- thymeleaf key word search-->
+                             <!--                             <div th:each="search : ${searchHistory}"-->
+                             <!--                                  class="d-flex align-items-center border-bottom search-hover py-2 px-3">-->
+
+                             <!--                                <a th:href="@{/search(keyword=${search.keyword})}"-->
+                             <!--                                   class="me-2 text-dark text-decoration-none">-->
+
+                             <!--        <span class="material-symbols-outlined">-->
+                             <!--            search-->
+                             <!--        </span>-->
+
+                             <!--                                </a>-->
+
+                             <!--                                <a th:href="@{/search(keyword=${search.keyword})}"-->
+                             <!--                                   th:text="${search.keyword}"-->
+                             <!--                                   class="text-dark text-decoration-none flex-grow-1">-->
+                             <!--                                </a>-->
+
+                             <!--                                <form th:action="@{/search/history/delete}"-->
+                             <!--                                      method="post"-->
+                             <!--                                      class="m-0">-->
+
+                             <!--                                   <input type="hidden"-->
+                             <!--                                          name="keyword"-->
+                             <!--                                          th:value="${search.keyword}">-->
+
+                             <!--                                   <button type="submit"-->
+                             <!--                                           style="border:none;background:none;padding:0;">-->
+
+                             <!--            <span class="material-symbols-outlined text-dark">-->
+                             <!--                close-->
+                             <!--            </span>-->
+
+                             <!--                                   </button>-->
+
+                             <!--                                </form>-->
+
+                             <!--                             </div>-->
+                             <!-- end thymeleaf key word search-->
+
                           </div>
                        </div>
                     </div>
                  </div>
-              </div> 
+              </div>
+              <!--                end Search bar-->
+
               <ul class="navbar-nav navbar-list">
                  <li class="nav-item">
-                    <form id="feedForm" th:action="@{/feed}" method="post">
-                       <input type="hidden" th:name="userIdentity" th:value="${profileIdentity}" />
-                    </form>
-                    <a class="d-flex align-items-center" href="javascript:void(0);"
-                       onclick=document.getElementById("feedForm").submit()>
+                    <a href="../dashboard/index.html" class="d-flex align-items-center">
                        <i class="material-symbols-outlined">home</i>
                     </a>
                  </li>
@@ -216,95 +210,170 @@
                        aria-haspopup="true" aria-expanded="false">
                        <span class="material-symbols-outlined">group</span>
                     </a>
-
-                    <!--Friendship request-->
-                    <div aria-labelledby="group-drop" class="sub-drop sub-drop-large dropdown-menu ">
+                    <div class="sub-drop sub-drop-large dropdown-menu " aria-labelledby="group-drop">
                        <div class="card shadow-none m-0">
                           <div class="card-header d-flex justify-content-between bg-primary">
                              <div class="header-title">
                                 <h5 class="mb-0 text-white">Friend Request</h5>
                              </div>
-                             <small class="badge  bg-light text-dark " th:text="${friendshipRequestsCount}">4</small>
+                             <small class="badge  bg-light text-dark ">4</small>
                           </div>
-                          <div class="card-body p-0" th:each="currentFriendshipRequest: ${friendshipRequests}">
-
+                          <div class="card-body p-0">
                              <div class="iq-friend-request">
-                                <div class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
+                                <div
+                                   class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
                                    <div class="d-flex align-items-center">
-                                      <img alt="" class="avatar-40 rounded"
-                                           loading="lazy" th:src="${currentFriendshipRequest.getProfileImage()}">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/01.jpg"
+                                         alt="" loading="lazy">
                                       <div class="ms-3">
-                                         <h6 class="mb-0 " th:text="${currentFriendshipRequest.getFirstName()} + ' ' + ${currentFriendshipRequest.getLastName()}">Jaques Amole</h6>
-                                         <p class="mb-0" th:text="${currentFriendshipRequest.getFriendCount()}">40 friends</p>
+                                         <h6 class="mb-0 ">Jaques Amole</h6>
+                                         <p class="mb-0">40 friends</p>
                                       </div>
                                    </div>
-
                                    <div class="d-flex align-items-center">
-
-                                      <form id="confirmForm" th:action="@{/friendship-request/confirm}" method="post">
-                                         <input type="hidden" th:name="recipientUserIdentity" th:value="${profileIdentity}" />
-                                         <input type="hidden" th:name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
-                                         <button class="me-3 btn btn-primary rounded" type="submit">Confirm</button>
-                                      </form>
-
-                                      <form id="declineForm" th:action="@{/friendship-request/decline}" method="post">
-                                         <input type="hidden" th:name="recipientUserIdentity" th:value="${profileIdentity}" />
-                                         <input type="hidden" th:name="senderUserIdentity" th:value="${currentFriendshipRequest.getProfileIdentity()}" />
-                                         <button class="me-3 btn btn-secondary rounded" type="submit">Decline Request</button>
-                                      </form>
-
+                                      <a href="javascript:void(0);"
+                                         class="me-3 btn btn-primary rounded">Confirm</a>
+                                      <a href="javascript:void(0);"
+                                         class="me-3 btn btn-secondary rounded">Delete Request</a>
                                    </div>
                                 </div>
                              </div>
-
+                             <div class="iq-friend-request">
+                                <div
+                                   class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
+                                   <div class="d-flex align-items-center">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/02.jpg"
+                                         alt="" loading="lazy">
+                                      <div class="ms-3">
+                                         <h6 class="mb-0 ">Lucy Tania</h6>
+                                         <p class="mb-0">12 friends</p>
+                                      </div>
+                                   </div>
+                                   <div class="d-flex align-items-center">
+                                      <a href="javascript:void(0);"
+                                         class="me-3 btn btn-primary rounded">Confirm</a>
+                                      <a href="javascript:void(0);"
+                                         class="me-3 btn btn-secondary rounded">Delete Request</a>
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="iq-friend-request">
+                                <div
+                                   class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
+                                   <div class="d-flex align-items-center">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/03.jpg"
+                                         alt="" loading="lazy">
+                                      <div class=" ms-3">
+                                         <h6 class="mb-0 ">Manny Petty</h6>
+                                         <p class="mb-0">3 friends</p>
+                                      </div>
+                                   </div>
+                                   <div class="d-flex align-items-center">
+                                      <a href="javascript:void(0);"
+                                         class="me-3 btn btn-primary rounded">Confirm</a>
+                                      <a href="javascript:void(0);"
+                                         class="me-3 btn btn-secondary rounded">Delete Request</a>
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="iq-friend-request">
+                                <div
+                                   class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
+                                   <div class="d-flex align-items-center">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/04.jpg"
+                                         alt="" loading="lazy">
+                                      <div class="ms-3">
+                                         <h6 class="mb-0 ">Marsha Mello</h6>
+                                         <p class="mb-0">15 friends</p>
+                                      </div>
+                                   </div>
+                                   <div class="d-flex align-items-center">
+                                      <a href="javascript:void(0);"
+                                         class="me-3 btn btn-primary rounded">Confirm</a>
+                                      <a href="javascript:void(0);"
+                                         class="me-3 btn btn-secondary rounded">Delete Request</a>
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="text-center">
+                                <a href="javascript:void(0);" class=" btn text-primary">View More Request</a>
+                             </div>
                           </div>
                        </div>
                     </div>
-                    <!--End Friendship request-->
-
                  </li>
-
                  <li class="nav-item dropdown d-none d-lg-block">
                     <a href="javascript:void(0);" class="search-toggle dropdown-toggle d-flex align-items-center" id="notification-drop" data-bs-toggle="dropdown">
                        <i class="material-symbols-outlined">notifications</i>
                     </a>
-
-                    <!--Notifications-->
-                    <div aria-labelledby="notification-drop" class="sub-drop dropdown-menu">
+                    <div class="sub-drop dropdown-menu" aria-labelledby="notification-drop">
                        <div class="card shadow-none m-0">
                           <div class="card-header d-flex justify-content-between bg-primary">
                              <div class="header-title bg-primary">
                                 <h5 class="mb-0 text-white">All Notifications</h5>
                              </div>
-                             <small class="badge  bg-light text-dark" th:text="${notifications.size()}">4</small>
+                             <small class="badge  bg-light text-dark">4</small>
                           </div>
-
-                          <div class="card-body p-0" th:each="currentNotification : ${notifications}">
-
-                             <div class="iq-sub-card" href="javascript:void(0);">
+                          <div class="card-body p-0">
+                             <a href="javascript:void(0);" class="iq-sub-card">
                                 <div class="d-flex align-items-center">
                                    <div class="">
-                                      <img alt="" class="avatar-40 rounded" th:src="${currentNotification.getAuthorProfileImage()}">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/01.jpg" alt="">
                                    </div>
                                    <div class="ms-3 w-100">
-                                      <h6 class="mb-0 " th:text="${currentNotification.getNotification()}">Emma Watson Bni</h6>
+                                      <h6 class="mb-0 ">Emma Watson Bni</h6>
                                       <div class="d-flex justify-content-between align-items-center">
-                                         <small class="float-right font-size-12" th:text="${currentNotification.getPostedAgo()}">Just Now</small>
+                                         <p class="mb-0">95 MB</p>
+                                         <small class="float-right font-size-12">Just Now</small>
                                       </div>
                                    </div>
                                 </div>
-                             </div>
+                             </a>
+                             <a href="javascript:void(0);" class="iq-sub-card">
+                                <div class="d-flex align-items-center">
+                                   <div class="">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/02.jpg" alt="" loading="lazy">
+                                   </div>
+                                   <div class="ms-3 w-100">
+                                      <h6 class="mb-0 ">New customer is join</h6>
+                                      <div class="d-flex justify-content-between align-items-center">
+                                         <p class="mb-0">Cyst Bni</p>
+                                         <small class="float-right font-size-12">5 days ago</small>
+                                      </div>
+                                   </div>
+                                </div>
+                             </a>
+                             <a href="javascript:void(0);" class="iq-sub-card">
+                                <div class="d-flex align-items-center">
+                                   <div class="">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/03.jpg" alt="" loading="lazy">
+                                   </div>
+                                   <div class="ms-3 w-100">
+                                      <h6 class="mb-0 ">Two customer is left</h6>
+                                      <div class="d-flex justify-content-between align-items-center">
+                                         <p class="mb-0">Cyst Bni</p>
+                                         <small class="float-right font-size-12">2 days ago</small>
+                                      </div>
+                                   </div>
+                                </div>
+                             </a>
+                             <a href="javascript:void(0);" class="iq-sub-card">
+                                <div class="d-flex align-items-center">
+                                   <div class="">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/04.jpg" alt="" loading="lazy">
+                                   </div>
+                                   <div class="w-100 ms-3">
+                                      <h6 class="mb-0 ">New Mail from Fenny</h6>
+                                      <div class="d-flex justify-content-between align-items-center">
+                                         <p class="mb-0">Cyst Bni</p>
+                                         <small class="float-right font-size-12">3 days ago</small>
+                                      </div>
+                                   </div>
+                                </div>
+                             </a>
                           </div>
                        </div>
-                       <div class="text-center">
-                          <form th:action="@{/notifications}" method="post">
-                             <input type="hidden" th:name="userIdentity" th:value="${profileIdentity}" />
-                             <button class="btn text-primary" onclick="submit" type="submit">View All Notifications</button>
-                          </form>
-                       </div>
                     </div>
-                    <!--End Notifications-->
-
                  </li>
                  <li class="nav-item dropdown d-none d-lg-block">
                     <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center" id="mail-drop" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -317,27 +386,65 @@
                              <div class="header-title bg-primary">
                                 <h5 class="mb-0 text-white">All Message</h5>
                              </div>
-                             <small class="badge bg-light text-dark" th:text="${onlineFriends.size()}">4</small>
+                             <small class="badge bg-light text-dark">4</small>
                           </div>
-
-                          <div class="card-body p-0 " th:each="currentOnlineFriend : ${onlineFriends}">
-
-                             <form class="iq-sub-card" th:action="@{/chat}" method="get">
-                                <input type="hidden" th:name="userIdentity" th:value="${profileIdentity}" />
+                          <div class="card-body p-0 ">
+                             <a href="javascript:void(0);" class="iq-sub-card">
                                 <div class="d-flex  align-items-center">
                                    <div class="">
-                                      <img alt="" class="avatar-40 rounded" loading="lazy"
-                                           th:src="${currentOnlineFriend.getProfileImage()}">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/01.jpg" alt="" loading="lazy">
                                    </div>
                                    <div class=" w-100 ms-3">
-                                      <h6 class="mb-0 " th:text="${currentOnlineFriend.getNames()}">Bni Emma Watson</h6>
-                                      <button class="btn text-primary" type="submit">View Chat</button>
+                                      <h6 class="mb-0 ">Bni Emma Watson</h6>
+                                      <small class="float-left font-size-12">13 Jun</small>
                                    </div>
                                 </div>
-                             </form>
-
+                             </a>
+                             <a href="javascript:void(0);" class="iq-sub-card">
+                                <div class="d-flex align-items-center">
+                                   <div class="">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/02.jpg" alt="" loading="lazy">
+                                   </div>
+                                   <div class="ms-3">
+                                      <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
+                                      <small class="float-left font-size-12">20 Apr</small>
+                                   </div>
+                                </div>
+                             </a>
+                             <a href="javascript:void(0);" class="iq-sub-card">
+                                <div class="d-flex align-items-center">
+                                   <div class="">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/03.jpg" alt="" loading="lazy">
+                                   </div>
+                                   <div class="ms-3">
+                                      <h6 class="mb-0 ">Why do we use it?</h6>
+                                      <small class="float-left font-size-12">30 Jun</small>
+                                   </div>
+                                </div>
+                             </a>
+                             <a href="javascript:void(0);" class="iq-sub-card">
+                                <div class="d-flex align-items-center">
+                                   <div class="">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/04.jpg" alt="" loading="lazy">
+                                   </div>
+                                   <div class="ms-3">
+                                      <h6 class="mb-0 ">Variations Passages</h6>
+                                      <small class="float-left font-size-12">12 Sep</small>
+                                   </div>
+                                </div>
+                             </a>
+                             <a href="javascript:void(0);" class="iq-sub-card">
+                                <div class="d-flex align-items-center">
+                                   <div class="">
+                                      <img class="avatar-40 rounded" src="../assets/images/user/05.jpg" alt="" loading="lazy">
+                                   </div>
+                                   <div class="ms-3">
+                                      <h6 class="mb-0 ">Lorem Ipsum generators</h6>
+                                      <small class="float-left font-size-12">5 Dec</small>
+                                   </div>
+                                </div>
+                             </a>
                           </div>
-
                        </div>
                     </div>
                  </li>
@@ -349,66 +456,79 @@
                  </li>
                  <li class="nav-item dropdown d-none d-lg-block">
                     <a href="javascript:void(0);" class="d-flex align-items-center dropdown-toggle" id="drop-down-arrow" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       <img th:src="${profileImage}" class="img-fluid rounded-circle me-3" alt="user" loading="lazy">
+                       <img src="../assets/images/user/1.jpg" class="img-fluid rounded-circle me-3" alt="user" loading="lazy">
                        <div class="caption">
-                          <h6 class="mb-0 line-height" th:text="${profileNames}">Bni Cyst</h6>
+                          <h6 class="mb-0 line-height">Bni Cyst</h6>
                        </div>
                     </a>
-                    <div aria-labelledby="drop-down-arrow" class="sub-drop dropdown-menu caption-menu">
+
+                    <div class="sub-drop dropdown-menu caption-menu" aria-labelledby="drop-down-arrow">
                        <div class="card shadow-none m-0">
                           <div class="card-header ">
                              <div class="header-title">
-                                <h5 class="mb-0 " th:text="${profileNames}">Hello Bni Cyst</h5>
+                                <h5 class="mb-0 ">Hello Bni Cyst</h5>
                              </div>
                           </div>
                           <div class="card-body p-0 ">
-
                              <div class="d-flex align-items-center iq-sub-card border-0">
-                             <span class="material-symbols-outlined">
-                                   edit_note
+                                <span class="material-symbols-outlined">
+                                   line_style
                                 </span>
                                 <div class="ms-3">
-                                   <form id="viewProfileForm" method="get" th:action="@{/profile}">
-                                      <input th:name="identity" th:value="${profileIdentity}"
-                                             type="hidden"/>
-                                   </form>
-                                   <a class="mb-0 h6" onclick=document.getElementById("viewProfileForm").submit()>
-                                      View Profile
+                                   <a href="../app/profile.html" class="mb-0 h6">
+                                      My Profile
                                    </a>
                                 </div>
                              </div>
-
                              <div class="d-flex align-items-center iq-sub-card border-0">
                                 <span class="material-symbols-outlined">
                                    edit_note
                                 </span>
                                 <div class="ms-3">
-                                   <a class="mb-0 h6" href="../app/profile-edit.html">
+                                   <a href="../app/profile-edit.html" class="mb-0 h6">
                                       Edit Profile
                                    </a>
                                 </div>
                              </div>
-
                              <div class="d-flex align-items-center iq-sub-card">
                                 <span class="material-symbols-outlined">
                                    login
                                 </span>
                                 <div class="ms-3">
-                                   <a class="mb-0 h6" th:href="@{/signout}">
+                                   <a href="../dashboard/sign-in.html" class="mb-0 h6">
                                       Sign out
                                    </a>
                                 </div>
                              </div>
-
+                             <div class=" iq-sub-card">
+                                <h5>Chat Settings</h5>
+                             </div>
+                             <div class="d-flex align-items-center iq-sub-card border-0">
+                                <i class="material-symbols-outlined text-success md-14">
+                                   circle
+                                </i>
+                                <div class="ms-3">
+                                   Online
+                                </div>
+                             </div>
+                             <div class="d-flex align-items-center iq-sub-card border-0">
+                                <i class="material-symbols-outlined text-warning md-14">
+                                   circle
+                                </i>
+                                <div class="ms-3">
+                                   Away
+                                </div>
+                             </div>
                           </div>
                        </div>
                     </div>
+
                  </li>
               </ul>
               <div class=" border-top  top-header-responsive d-lg-none">
                  <ul class="list-unstyled p-0 m-0 menu-list">
                     <li class="icon-class"><a href="../dashboard/index.html" class=""><i class="material-symbols-outlined">home</i></a></li>
-                    <li class="icon-class"><a href="../dashboard/notification.html" class="active"><span class="material-symbols-outlined">notifications</span></a></li>
+                    <li class="icon-class"><a href="../dashboard/notification.html" class=""><span class="material-symbols-outlined">notifications</span></a></li>
                     <li class="icon-class"><a href="../app/group.html" class=""><span class="material-symbols-outlined">group</span></a></li>
                     <li class="icon-class"><a href="../app/email.html" class=""><span class="material-symbols-outlined">mail</span></a></li>
                     <li class="icon-class"><a href="../app/profile.html" class=""><span class="material-symbols-outlined">person</span></a></li>
@@ -417,59 +537,158 @@
            </div>
      </nav>
   </div>  
+  <aside class="sidebar sidebar-default sidebar-base navs-rounded-all " id="first-tour" data-toggle="main-sidebar" data-sidebar="responsive">
+      <div class="sidebar-body pt-0 data-scrollbar">
+          <div class="sidebar-list">
 
+             <!-- Sidebar Menu Start -->
+             <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
+                <li class="nav-item static-item">
+                   <a class="nav-link static-item disabled" href="#" tabindex="-1">
+                      <span class="default-icon">MENU</span>
+                      <span class="mini-icon" data-bs-toggle="tooltip" title="Social" data-bs-placement="right">-</span>
+                   </a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link " aria-current="page"
+                      href="../dashboard/index.html">
+                      <i class="icon material-symbols-outlined">
+                         newspaper
+                      </i>
+                      <span class="item-name">Newsfeed</span>
+                   </a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link"
+                      href="../app/profile-list.html">
+                      <i class="icon material-symbols-outlined">person</i>
+                      <span class="item-name">Profile</span>
+                   </a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link"
+                      href="../dashboard/friend-request.html">
+                      <i class="icon material-symbols-outlined">people</i>
+                      <span class="item-name">Friend Requests</span>
+
+                   </a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link " aria-current="page"
+                      href="../dashboard/notification.html">
+                      <i class="icon material-symbols-outlined">
+                         notifications
+                      </i>
+                      <span class="item-name">Notification</span>
+                   </a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link " aria-current="page"
+                      href="../app/group.html">
+                      <i class="icon material-symbols-outlined">
+                         groups
+                      </i>
+                      <span class="item-name">Groups</span>
+                   </a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link " aria-current="page"
+                      href="../app/chat.html" target="_blank">
+                      <i class="icon material-symbols-outlined">
+                         message
+                      </i>
+                      <span class="item-name">Chat</span>
+                   </a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link " aria-current="page"
+                      href="../dashboard/birthday.html">
+                      <i class="icon material-symbols-outlined">
+                         cake
+                      </i>
+                      <span class="item-name">Birthday</span>
+                   </a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link"
+                      href="../dashboard/store-category-list.html">
+                      <i class="icon material-symbols-outlined">storefront</i>
+                      <i class="sidenav-mini-icon">CL</i>
+                      <span class="item-name">Marketplace</span></a>
+                </li>
+
+                <li class="nav-item">
+                   <a class="nav-link"
+                      href="../dashboard/pages-faq.html">
+                      <i class="icon material-symbols-outlined">assignment</i>
+                      <i class="sidenav-mini-icon">F</i>
+                      <span class="item-name">Faq</span></a>
+                </li>
+             </ul>
+             <!-- Sidebar Menu End -->
+
+          </div>
+      </div>
+      <div class="sidebar-footer"></div>
+  </aside>
       <div>
     <div class="position-relative">
     </div>
     <div id="content-page" class="content-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
 
-         <div class="container">
-   <div class="row">
-      <div class="col-sm-12">
-         <h4 class="card-title mb-3">All Notifications</h4>
-      </div>
+               <div class="card position-relative inner-page-bg bg-primary"
+                    style="height:150px;">
 
-      <div class="col-sm-12" th:each="currentNotification : ${notifications}">
+                  <div class="position-absolute top-50 start-50 translate-middle text-center">
+                     <h3 class="text-white mb-0">
+                        Add Plugin Version
+                     </h3>
+                  </div>
 
-         <div class="card">
-            <div class="card-body">
-               <ul class="notification-list m-0 p-0">
-                  <li class="d-flex align-items-center justify-content-between">
-                     <div class="user-img img-fluid">
-                        <img th:src="${currentNotification.getAuthorProfileImage()}" alt="story-img"
-                             class="rounded-circle avatar-40"></div>
-                     <div class="w-100">
-                        <div class="d-flex justify-content-between">
-                           <div class=" ms-3">
-                              <h6 th:text="${currentNotification.getNotification()}">Paige Turner Posted in UI/UX Community</h6>
-                              <p class="mb-0" th:text="${currentNotification.getPostedAgo()}">30  ago</p>
-                           </div>
-                           <div class="d-flex align-items-center">
-
-                              <div class="card-header-toolbar d-flex align-items-center">
-                                
-                                  <div class="dropdown">
-                                    <div class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                                       <span class="material-symbols-outlined">more_horiz</span>
-                                    </div>
-                                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="">
-                                          <a class="dropdown-item d-flex align-items-center" href="#">
-                                             <span class="material-symbols-outlined me-2 md-18">visibility</span>View</a>
-                                       </div>
-                                     </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-               </ul>
+               </div>
             </div>
-         </div>
 
-      </div>
-   </div>
-</div>
+           <div class="row justify-content-center">
+               <div class="col-sm-12 col-lg-6">
 
+                <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Input</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form>
+
+                        <div class="form-group">
+                            <label class="form-label" for="exampleInputPlaceholder">Version</label>
+                            <input type="text" class="form-control" id="exampleInputPlaceholder" placeholder="Enter plugin version">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customFile2" class="form-label custom-file-input">Choose file</label>
+                            <input class="form-control" type="file" id="customFile2">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-danger text-white">cancel</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
     </div>
   </div>
   <!-- Wrapper End-->
@@ -478,25 +697,99 @@
       <div class="right-sidebar-panel p-0">
          <div class="card shadow-none">
             <div class="card-body p-0">
-
-               <div class="media-height p-2" data-scrollbar="init" th:each="currentOnlineFriend : ${onlineFriends}" >
-
-                  <form th:action="@{/chat}" method="get">
-                     <input type="hidden" th:name="userIdentity" th:value="${profileIdentity}" />
-                     <div class="d-flex align-items-center" >
-                        <div class="iq-profile-avatar status-online">
-                           <img alt="" class="rounded-circle avatar-50" loading="lazy"
-                                th:src="${currentOnlineFriend.getProfileImage()}">
-                        </div>
-                        <div class="ms-3">
-                           <h6 class="mb-0" th:text="${currentOnlineFriend.getNames()}">Anna Sthesia</h6>
-                           <button class="btn text-primary" type="submit">View Chat</button>
-                        </div>
+               <div class="media-height p-3" data-scrollbar="init">
+                  <div class="d-flex align-items-center mb-4">
+                     <div class="iq-profile-avatar status-online">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/01.jpg" alt="" loading="lazy">
                      </div>
-                  </form>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Anna Sthesia</h6>
+                        <p class="mb-0">Just Now</p>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-4">
+                     <div class="iq-profile-avatar status-online">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/02.jpg" alt="" loading="lazy">
+                     </div>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Paul Molive</h6>
+                        <p class="mb-0">Admin</p>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-4">
+                     <div class="iq-profile-avatar status-online">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/03.jpg" alt="" loading="lazy">
+                     </div>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Anna Mull</h6>
+                        <p class="mb-0">Admin</p>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-4">
+                     <div class="iq-profile-avatar status-online">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/04.jpg" alt="" loading="lazy">
+                     </div>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Paige Turner</h6>
+                        <p class="mb-0">Admin</p>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-4">
+                     <div class="iq-profile-avatar status-online">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/11.jpg" alt="" loading="lazy">
+                     </div>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Bob Frapples</h6>
+                        <p class="mb-0">Admin</p>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-4">
+                     <div class="iq-profile-avatar status-online">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/02.jpg" alt="" loading="lazy">
+                     </div>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Barb Ackue</h6>
+                        <p class="mb-0">Admin</p>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-4">
+                     <div class="iq-profile-avatar status-online">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/03.jpg" alt="" loading="lazy">
+                     </div>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Greta Life</h6>
+                        <p class="mb-0">Admin</p>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-4">
+                     <div class="iq-profile-avatar status-away">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/12.jpg" alt="" loading="lazy">
+                     </div>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Ira Membrit</h6>
+                        <p class="mb-0">Admin</p>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-4">
+                     <div class="iq-profile-avatar status-away">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/01.jpg" alt="" loading="lazy">
+                     </div>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Pete Sariya</h6>
+                        <p class="mb-0">Admin</p>
+                     </div>
+                  </div>
+                  <div class="d-flex align-items-center">
+                     <div class="iq-profile-avatar">
+                        <img class="rounded-circle avatar-50" src="../assets/images/user/02.jpg" alt="" loading="lazy">
+                     </div>
+                     <div class="ms-3">
+                        <h6 class="mb-0">Monty Carlo</h6>
+                        <p class="mb-0">Admin</p>
+                     </div>
+                  </div>
                </div>
-
-               <div class="right-sidebar-toggle bg-primary text-white mt-3 d-flex">
+                 <div class="right-sidebar-toggle bg-primary text-white mt-3 d-flex">
                     <span class="material-symbols-outlined">chat</span>
                  </div>
             </div>
@@ -509,16 +802,29 @@
         <div class="row">
            <div class="col-lg-6">
               <ul class="list-inline mb-0">
+                 <li class="list-inline-item"><a href="../dashboard/privacy-policy.html">Privacy Policy</a></li>
+                 <li class="list-inline-item"><a href="../dashboard/terms-of-service.html">Terms of Use</a></li>
               </ul>
            </div>
-           <div class="col-lg-6 d-flex justify-content-end">
-              <a href="#">Join In</a>
-              All Rights Reserved.
+           <div class="col-lg-6 d-flex justify-content-end align-items-center">
+
+              <span class="me-3">Copyright 2026</span>
+
+              <a href="https://www.linkedin.com/in/ivan-v-ivanov-dev/"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="me-3">
+                 Ivan Ivanov
+              </a>
+
+              <span>All Rights Reserved.</span>
+
            </div>
         </div>
      </div>
-  </footer>  <!-- Live Customizer start -->
+  </footer>
 
+  <!-- Live Customizer start -->
   <!-- Setting offcanvas start here -->
   <div class="offcanvas offcanvas-end live-customizer" tabindex="-1" id="live-customizer" data-bs-backdrop="false" data-bs-scroll="true" aria-labelledby="live-customizer-label">
       <div class="offcanvas-header pb-0">
@@ -756,8 +1062,12 @@
                               </div>
                                <div class="mb-3" data-setting="radio">
                                   <div class="form-check mb-0 w-100">
-                                      <input class="form-check-input custum-redio-btn" type="radio" name="theme_scheme_direction" data-prop="dir" id="theme-scheme-direction-rtl">
-                                      <label class="form-check-label h6 d-flex align-items-center justify-content-between "  for="theme-scheme-direction-rtl">
+                                     <input class="form-check-input custum-redio-btn btn-check"
+                                            type="radio"
+                                            value="rtl"
+                                            name="theme_scheme_direction"
+                                            data-prop="dir"
+                                            id="theme-scheme-direction-rtl">                                      <label class="form-check-label h6 d-flex align-items-center justify-content-between "  for="theme-scheme-direction-rtl">
                                           <span>RTL</span>
                                           <svg class="text-primary" width="60" height="27" viewBox="0 0 60 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                               <circle r="6.5" transform="matrix(-1 0 0 1 48.5 13.5002)" fill="currentColor"/>

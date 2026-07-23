@@ -58,6 +58,7 @@
                  <h3 class="logo-title d-none d-sm-block" data-setting="app_name">join IN</h3>
               </a>
            </div>
+
            <div class="iq-search-bar device-search  position-relative">
               <form action="#" class="searchbox" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreenSm">
                  <a class="search-link d-none d-lg-block" href="javascript:void(0);" >
@@ -194,6 +195,7 @@
                  </div>
               </div>
            </div>
+
            <ul class="navbar-nav navbar-list">
               <li class="nav-item">
                  <a href="../dashboard/index.html" class="d-flex align-items-center">
@@ -634,116 +636,1368 @@
       <div class="sidebar-footer"></div>
   </aside>
       <div>
-    <div class="position-relative">
-    </div>
+
+         <div class="position-relative">
+
+            <img src="../assets/images/page-img/profile-bg1.jpg"
+                 alt="group-background"
+                 class="img-fluid w-100"
+                 style="height:300px; object-fit:cover;"
+                 loading="lazy">
+
+            <div class="position-absolute top-0 start-0 w-100 h-100"
+                 style="background:linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.15));">
+            </div>
+
+            <div class="position-absolute bottom-0 start-50 translate-middle-x text-center pb-4">
+
+               <h1 class="text-white fw-bold mb-3">
+                  Java Developers
+               </h1>
+
+               <div class="d-flex justify-content-center gap-2">
+
+         <span class="badge bg-light text-dark px-3 py-2">
+            1,245 Members
+         </span>
+
+                  <span class="badge bg-light text-dark px-3 py-2">
+            8,732 Posts
+         </span>
+
+               </div>
+
+            </div>
+
+         </div>
+
     <div id="content-page" class="content-page">
+
 <div class="container">
-   <div class="row">
-      <div class="col-lg-8 row m-0 p-0">
+   <div class="row justify-content-center">
+      <div class="col-lg-8">
 
-         <!-- edit -->
-         <div class="card mt-3">
+<!--         original post modal-->
+
+<!--         <div class="col-sm-12">-->
+<!--            <div id="post-modal-data" class="card card-block card-stretch card-height">-->
+<!--               <div class="card-header d-flex justify-content-between">-->
+<!--                  <div class="header-title">-->
+<!--                     <h4 class="card-title">Create Post</h4>-->
+<!--                  </div>-->
+<!--               </div>-->
+<!--               <div class="card-body">-->
+<!--                  <div class="d-flex align-items-center">-->
+<!--                     <div class="user-img">-->
+<!--                        <img src="../assets/images/user/1.jpg" alt="userimg" class="avatar-60 rounded-circle" loading="lazy">-->
+<!--                     </div>-->
+<!--                     <form class="post-text ms-3 w-100 "  data-bs-toggle="modal" data-bs-target="#post-modal" action="javascript:void();">-->
+<!--                        <input type="text" class="form-control rounded" placeholder="Write something here..." style="border:none;">-->
+<!--                     </form>-->
+<!--                  </div>-->
+<!--                  <hr>-->
+<!--               </div>-->
+<!--               <div class="modal fade" id="post-modal" tabindex="-1"  aria-labelledby="post-modalLabel" aria-hidden="true" >-->
+<!--                  <div class="modal-dialog   modal-fullscreen-sm-down">-->
+<!--                     <div class="modal-content">-->
+<!--                        <div class="modal-header">-->
+<!--                           <h5 class="modal-title" id="post-modalLabel">Create Post</h5>-->
+<!--                           <a href="javascript:void(0);" class="lh-1" data-bs-dismiss="modal">-->
+<!--                              <span class="material-symbols-outlined">close</span>-->
+<!--                           </a>-->
+<!--                        </div>-->
+
+<!--                        <div class="modal-body">-->
+<!--                           <div class="d-flex align-items-center">-->
+<!--                              <div class="user-img">-->
+<!--                                 <img src="../assets/images/user/1.jpg" alt="userimg" class="avatar-60 rounded-circle img-fluid" loading="lazy">-->
+<!--                              </div>-->
+<!--                              <form class="post-text ms-3 w-100" action="javascript:void();">-->
+<!--                                 <input type="text" class="form-control rounded" placeholder="Write something here..." style="border:none;">-->
+<!--                              </form>-->
+<!--                           </div>-->
+<!--                           <hr>-->
+<!--                           <ul class="d-flex flex-wrap align-items-center list-inline m-0 p-0">-->
+<!--                              <li class="col-md-6 mb-3">-->
+<!--                                 <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="../assets/images/small/07.png" alt="icon" class="img-fluid" loading="lazy"> Photo/Video</div>-->
+<!--                              </li>-->
+<!--                           </ul>-->
+<!--                           <hr>-->
+<!--                           <button type="submit" class="btn btn-primary d-block w-100 mt-3">Post</button>-->
+<!--                        </div>-->
+
+<!--                     </div>-->
+<!--                  </div>-->
+<!--               </div>-->
+<!--            </div>-->
+<!--         </div>-->
+         <!--    end original post modal-->
+
+         <div class="col-sm-12">
+            <div id="post-modal-data" class="card card-block card-stretch card-height">
+
+               <div class="card-header d-flex justify-content-between">
+                  <div class="header-title">
+                     <h4 class="card-title">Create Post</h4>
+                  </div>
+               </div>
+
+               <div class="card-body">
+                  <div class="d-flex align-items-center">
+                     <div class="user-img">
+                        <img src="../assets/images/user/1.jpg" alt="userimg"
+                             class="avatar-60 rounded-circle" loading="lazy">
+                     </div>
+
+                     <form class="post-text ms-3 w-100"
+                           data-bs-toggle="modal"
+                           data-bs-target="#post-modal"
+                           action="javascript:void(0);">
+                        <input type="text"
+                               class="form-control rounded"
+                               placeholder="Write something here..."
+                               style="border:none;">
+                     </form>
+                  </div>
+                  <hr>
+               </div>
+
+               <div class="modal fade" id="post-modal" tabindex="-1"
+                    aria-labelledby="post-modalLabel" aria-hidden="true">
+
+                  <div class="modal-dialog modal-fullscreen-sm-down">
+                     <div class="modal-content">
+
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="post-modalLabel">Create Post</h5>
+                           <a href="javascript:void(0);" class="lh-1" data-bs-dismiss="modal">
+                              <span class="material-symbols-outlined">close</span>
+                           </a>
+                        </div>
+
+                        <form action="/posts/create" method="post" enctype="multipart/form-data">
+
+                           <div class="modal-body">
+
+                              <div class="d-flex align-items-center">
+                                 <div class="user-img">
+                                    <img src="../assets/images/user/1.jpg" alt="userimg"
+                                         class="avatar-60 rounded-circle img-fluid"
+                                         loading="lazy">
+                                 </div>
+
+                                 <div class="post-text ms-3 w-100">
+                                    <input type="text"
+                                           name="content"
+                                           class="form-control rounded"
+                                           placeholder="Write something here..."
+                                           style="border:none;">
+                                 </div>
+                              </div>
+
+                              <hr>
+
+                              <ul class="row list-unstyled g-3 m-0">
+
+                                 <!-- Photo Upload -->
+                                 <li class="col-md-6">
+                                    <label class="bg-soft-primary rounded p-3 w-100 h-100 d-flex flex-column justify-content-center"
+                                           style="min-height:140px; cursor:pointer;">
+
+                                       <span class="material-symbols-outlined mb-2">photo_camera</span>
+
+                                       <span class="fw-bold">Photo</span>
+                                       <small>Upload image from your computer</small>
+
+                                       <input type="file"
+                                              id="imageInput"
+                                              name="image"
+                                              accept="image/*"
+                                              class="d-none">
+                                    </label>
+                                 </li>
+
+                                 <!-- YouTube Video -->
+                                 <li class="col-md-6">
+                                    <div class="bg-soft-primary rounded p-3 h-100"
+                                         style="min-height:140px;">
+
+                                       <span class="material-symbols-outlined mb-2">smart_display</span>
+
+                                       <div class="fw-bold mb-2">
+                                          YouTube Video
+                                       </div>
+
+                                       <input type="url"
+                                              id="youtubeInput"
+                                              name="youtubeUrl"
+                                              class="form-control"
+                                              placeholder="https://www.youtube.com/watch?v=...">
+                                    </div>
+                                 </li>
+
+                              </ul>
+
+                              <hr>
+
+                              <button type="submit" class="btn btn-primary d-block w-100 mt-3">
+                                 Post
+                              </button>
+
+                           </div>
+
+                        </form>
+
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+
+         <!--1st text Post from Timeline-->
+         <div class="card">
             <div class="card-body">
+               <div class="post-item">
+                  <div class="user-post-data pb-3">
+                     <div class="d-flex justify-content-between">
+                        <div class="me-3">
+                           <img class="rounded-circle  avatar-60" src="../assets/images/user/1.jpg" alt="" loading="lazy">
+                        </div>
+                        <div class="w-100">
+                           <div class="d-flex justify-content-between flex-wrap">
+                              <div class="">
+                                 <h5 class="mb-0 d-inline-block"><a href="#" class="">Bni Cyst</a></h5>
+                                 <p class="mb-0">3 hour ago</p>
+                              </div>
+                              <div class="card-post-toolbar">
+                                 <div class="dropdown">
+                                                   <span class="dropdown-toggle material-symbols-outlined" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                   more_horiz
+                                                   </span>
+                                    <div class="dropdown-menu m-0 p-0">
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            edit
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Edit Post</h6>
+                                                <p class="mb-0">Update your post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            delete
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Delete</h6>
+                                                <p class="mb-0">Remove this Post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="user-post">
+                     <a href="#">
+                        <h4>This is a post</h4>
+                     </a>
+                  </div>
+                  <div class="comment-area mt-3">
+                     <div class="d-flex justify-content-between align-items-center flex-wrap">
 
-               <h2>Edit Post</h2>
+                        <div class="like-block position-relative d-flex align-items-center">
 
-               <br>
+                           <div class="d-flex align-items-center">
+                              <div class="like-data">
+                                 <div class="dropdown">
 
-               <form action="/posts/update"
-                     method="post"
-                     enctype="multipart/form-data">
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
 
-                  <input type="hidden"
-                         name="postId"
-                         value="1">
+            <span class="material-symbols-outlined text-primary">thumb_up</span></span>
 
-                  <!-- Post Text -->
+                                    <div class="dropdown-menu py-2">
 
-                  <div class="mb-3">
-                     <label class="form-label">Post Text</label>
+                                       <a class="ms-2 me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Like">
+                                          👍
+                                       </a>
 
-                     <textarea name="content"
-                               class="form-control"
-                               rows="4">This is my current post</textarea>
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Dislike">
+                                          👎
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Haha">
+                                          😂
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Angry">
+                                          😡
+                                       </a>
+
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div class="total-like-block ms-2 me-3">
+                                 <div class="dropdown">
+
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
+            140 Likes
+         </span>
+
+                                    <div class="dropdown-menu">
+                                       <a class="dropdown-item" href="#">Max Emum</a>
+                                       <a class="dropdown-item" href="#">Bill Yerds</a>
+                                       <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                       <a class="dropdown-item" href="#">Tara Misu</a>
+                                       <a class="dropdown-item" href="#">Midge Itz</a>
+                                       <a class="dropdown-item" href="#">Sal Vidge</a>
+                                       <a class="dropdown-item" href="#">Other</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="total-comment-block">
+                              <div class="dropdown">
+                                                <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                20 Comment
+                                                </span>
+                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Max Emum</a>
+                                    <a class="dropdown-item" href="#">Bill Yerds</a>
+                                    <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                    <a class="dropdown-item" href="#">Tara Misu</a>
+                                    <a class="dropdown-item" href="#">Midge Itz</a>
+                                    <a class="dropdown-item" href="#">Sal Vidge</a>
+                                    <a class="dropdown-item" href="#">Other</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                     </div>
+                     <hr>
+                     <ul class="post-comments p-0 m-0">
+                        <li class="mb-2">
+                           <div class="d-flex flex-wrap">
+                              <div class="user-img">
+                                 <img src="../assets/images/user/02.jpg" loading="lazy" alt="userimg" class="avatar-35 rounded-circle img-fluid">
+                              </div>
+                              <div class="comment-data-block ms-3">
+                                 <h6>Monty Carlo</h6>
+                                 <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="#">like</a>
+                                    <a href="#">dislike</a>
+                                    <span> 5 min </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                        <li>
+                           <div class="d-flex flex-wrap">
+                              <div class="user-img">
+                                 <img src="../assets/images/user/03.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid" loading="lazy">
+                              </div>
+                              <div class="comment-data-block ms-3">
+                                 <h6>Paul Molive</h6>
+                                 <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="#">like</a>
+                                    <a href="#">dislike</a>
+                                    <span> 5 min </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+
+                     <form class="comment-text d-flex align-items-center mt-3"
+                           action="javascript:void(0);">
+                        <input type="text"
+                               class="form-control rounded"
+                               placeholder="Enter Your Comment">
+                        <button type="submit"
+                                class="border-0 bg-transparent ms-2 p-0">
+                           <span class="material-symbols-outlined text-primary" style="font-size: 32px;">send</span>
+                        </button>
+                     </form>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--end 1st text Post from Timeline-->
+
+         <!--2nd image Post from Timeline-->
+         <div class="card">
+            <div class="card-body">
+               <div class="post-item">
+                  <div class="user-post-data py-3">
+                     <div class="d-flex  justify-content-between">
+                        <div class="me-3">
+                           <img class="rounded-circle  avatar-60" src="../assets/images/user/1.jpg" alt="" loading="lazy">
+                        </div>
+                        <div class="w-100">
+                           <div class="d-flex justify-content-between">
+                              <div class="">
+                                 <h5 class="mb-0 d-inline-block me-1"><a href="#" class="">Bni Cyst</a></h5>
+                                 <p class="mb-0">5 hour ago</p>
+                              </div>
+                              <div class="card-post-toolbar">
+                                 <div class="dropdown">
+                                                   <span class="dropdown-toggle material-symbols-outlined" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                   more_horiz
+                                                   </span>
+                                    <div class="dropdown-menu m-0 p-0">
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            edit
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Edit Post</h6>
+                                                <p class="mb-0">Update your post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            delete
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Delete</h6>
+                                                <p class="mb-0">Remove this Post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="user-post">
+                     <a href="#"><img src="../assets/images/page-img/p1.jpg"
+                                      alt="post-image"
+                                      class="img-fluid w-100"
+                                      style="border-radius:16px;"
+                                      loading="lazy"></a>
+                  </div>
+                  <div class="comment-area mt-3">
+                     <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="like-block position-relative d-flex align-items-center">
+
+                           <div class="d-flex align-items-center">
+                              <div class="like-data">
+                                 <div class="dropdown">
+
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
+
+            <span class="material-symbols-outlined text-primary">thumb_up</span></span>
+
+                                    <div class="dropdown-menu py-2">
+
+                                       <a class="ms-2 me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Like">
+                                          👍
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Dislike">
+                                          👎
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Haha">
+                                          😂
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Angry">
+                                          😡
+                                       </a>
+
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div class="total-like-block ms-2 me-3">
+                                 <div class="dropdown">
+
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
+            140 Likes
+         </span>
+
+                                    <div class="dropdown-menu">
+                                       <a class="dropdown-item" href="#">Max Emum</a>
+                                       <a class="dropdown-item" href="#">Bill Yerds</a>
+                                       <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                       <a class="dropdown-item" href="#">Tara Misu</a>
+                                       <a class="dropdown-item" href="#">Midge Itz</a>
+                                       <a class="dropdown-item" href="#">Sal Vidge</a>
+                                       <a class="dropdown-item" href="#">Other</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="total-comment-block">
+                              <div class="dropdown">
+                                                <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                20 Comment
+                                                </span>
+                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Max Emum</a>
+                                    <a class="dropdown-item" href="#">Bill Yerds</a>
+                                    <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                    <a class="dropdown-item" href="#">Tara Misu</a>
+                                    <a class="dropdown-item" href="#">Midge Itz</a>
+                                    <a class="dropdown-item" href="#">Sal Vidge</a>
+                                    <a class="dropdown-item" href="#">Other</a>
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div>
+                     </div>
+                     <hr>
+                     <ul class="post-comments p-0 m-0">
+                        <li class="mb-2">
+                           <div class="d-flex flex-wrap">
+                              <div class="user-img">
+                                 <img src="../assets/images/user/02.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid" loading="lazy">
+                              </div>
+                              <div class="comment-data-block ms-3">
+                                 <h6>Monty Carlo</h6>
+                                 <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="#">like</a>
+                                    <a href="#">dislike</a>
+                                    <span> 5 min </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                        <li>
+                           <div class="d-flex flex-wrap">
+                              <div class="user-img">
+                                 <img src="../assets/images/user/03.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid" loading="lazy">
+                              </div>
+                              <div class="comment-data-block ms-3">
+                                 <h6>Paul Molive</h6>
+                                 <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="#">like</a>
+                                    <a href="#">dislike</a>
+                                    <span> 5 min </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+                     <form class="comment-text d-flex align-items-center mt-3"
+                           action="javascript:void(0);">
+                        <input type="text"
+                               class="form-control rounded"
+                               placeholder="Enter Your Comment">
+                        <button type="submit"
+                                class="border-0 bg-transparent ms-2 p-0">
+                           <span class="material-symbols-outlined text-primary" style="font-size: 32px;">send</span>
+                        </button>
+                     </form>                                 </div>
+               </div>
+            </div>
+         </div>
+         <!--end 2nd image Post from Timeline-->
+
+         <!-- 3rd image + text Post from Timeline-->
+         <div class="card">
+            <div class="card-body">
+               <div class="post-item">
+
+                  <!-- Post Header -->
+                  <div class="user-post-data pb-3">
+                     <div class="d-flex justify-content-between">
+
+                        <div class="me-3">
+                           <img class="rounded-circle avatar-60"
+                                src="../assets/images/user/1.jpg"
+                                alt=""
+                                loading="lazy">
+                        </div>
+
+                        <div class="w-100">
+                           <div class="d-flex justify-content-between flex-wrap">
+
+                              <div>
+                                 <h5 class="mb-0 d-inline-block"><a href="#">Bni Cyst</a></h5>
+                                 <p class="mb-0">3 hours ago</p>
+                              </div>
+
+                              <div class="card-post-toolbar">
+                                 <div class="dropdown">
+                                                   <span class="dropdown-toggle material-symbols-outlined" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                   more_horiz
+                                                   </span>
+                                    <div class="dropdown-menu m-0 p-0">
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            edit
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Edit Post</h6>
+                                                <p class="mb-0">Update your post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            delete
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Delete</h6>
+                                                <p class="mb-0">Remove this Post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+
+                           </div>
+                        </div>
+
+                     </div>
                   </div>
 
-                  <!-- Current Image -->
+                  <!-- Post Content -->
+                  <div class="user-post">
 
-                  <div class="mb-3">
-
-                     <label class="form-label">Current Image</label>
+                     <p class="fs-5 mb-3">
+                        Just finished implementing image uploads in my social network project.
+                        Users can now create posts with text and photos, similar to Facebook and LinkedIn.
+                     </p>
 
                      <img src="../assets/images/page-img/p1.jpg"
                           alt="post-image"
                           class="img-fluid w-100"
-                          style="border-radius:16px; max-height:400px; object-fit:cover;">
+                          style="border-radius:16px;"
+                          loading="lazy">
 
                   </div>
 
-                  <!-- Replace Image -->
+                  <!-- Reactions -->
+                  <div class="comment-area mt-3">
 
-                  <div class="mb-4">
+                     <div class="d-flex justify-content-between align-items-center flex-wrap">
 
-                     <label class="form-label">
-                        Replace Image
-                     </label>
+                        <div class="like-block position-relative d-flex align-items-center">
 
-                     <input type="file"
-                            id="imageInput"
-                            name="image"
-                            accept="image/*"
-                            class="form-control">
+                           <div class="d-flex align-items-center">
+                              <div class="like-data">
+                                 <div class="dropdown">
 
-                  </div>
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
 
-                  <!-- Current Video -->
+            <span class="material-symbols-outlined text-primary">thumb_up</span></span>
 
-                  <div class="mb-3">
+                                    <div class="dropdown-menu py-2">
 
-                     <label class="form-label">
-                        Current Video
-                     </label>
+                                       <a class="ms-2 me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Like">
+                                          👍
+                                       </a>
 
-                     <div class="ratio ratio-16x9">
-                        <iframe
-                                src="https://www.youtube.com/embed/4UMwLxFNKS0"
-                                allowfullscreen>
-                        </iframe>
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Dislike">
+                                          👎
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Haha">
+                                          😂
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Angry">
+                                          😡
+                                       </a>
+
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div class="total-like-block ms-2 me-3">
+                                 <div class="dropdown">
+
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
+            140 Likes
+         </span>
+
+                                    <div class="dropdown-menu">
+                                       <a class="dropdown-item" href="#">Max Emum</a>
+                                       <a class="dropdown-item" href="#">Bill Yerds</a>
+                                       <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                       <a class="dropdown-item" href="#">Tara Misu</a>
+                                       <a class="dropdown-item" href="#">Midge Itz</a>
+                                       <a class="dropdown-item" href="#">Sal Vidge</a>
+                                       <a class="dropdown-item" href="#">Other</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="total-comment-block">
+                              <div class="dropdown">
+                                                <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                20 Comment
+                                                </span>
+                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Max Emum</a>
+                                    <a class="dropdown-item" href="#">Bill Yerds</a>
+                                    <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                    <a class="dropdown-item" href="#">Tara Misu</a>
+                                    <a class="dropdown-item" href="#">Midge Itz</a>
+                                    <a class="dropdown-item" href="#">Sal Vidge</a>
+                                    <a class="dropdown-item" href="#">Other</a>
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div>
+
                      </div>
 
+                     <hr>
+
+                     <!-- Comments -->
+                     <ul class="post-comments p-0 m-0">
+
+                        <li class="mb-2">
+                           <div class="d-flex flex-wrap">
+
+                              <div class="user-img">
+                                 <img src="../assets/images/user/02.jpg"
+                                      alt="userimg"
+                                      class="avatar-35 rounded-circle img-fluid"
+                                      loading="lazy">
+                              </div>
+
+                              <div class="comment-data-block ms-3">
+
+                                 <h6>Monty Carlo</h6>
+
+                                 <p class="mb-0">
+                                    Looks great!
+                                 </p>
+
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="#">like</a>
+                                    <a href="#">dislike</a>
+                                    <span>5 min</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+
+                        <li>
+                           <div class="d-flex flex-wrap">
+
+                              <div class="user-img">
+                                 <img src="../assets/images/user/03.jpg"
+                                      alt="userimg"
+                                      class="avatar-35 rounded-circle img-fluid"
+                                      loading="lazy">
+                              </div>
+
+                              <div class="comment-data-block ms-3">
+
+                                 <h6>Paul Molive</h6>
+
+                                 <p class="mb-0">
+                                    Amazing work on the social network project.
+                                 </p>
+
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="#">like</a>
+                                    <a href="#">dislike</a>
+                                    <span>12 min</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+
+                     </ul>
+
+                     <!-- Add Comment -->
+                     <form class="comment-text d-flex align-items-center mt-3"
+                           action="javascript:void(0);">
+                        <input type="text"
+                               class="form-control rounded"
+                               placeholder="Enter Your Comment">
+                        <button type="submit"
+                                class="border-0 bg-transparent ms-2 p-0">
+                           <span class="material-symbols-outlined text-primary" style="font-size: 32px;">send</span>
+                        </button>
+                     </form>
+
                   </div>
 
-                  <!-- Replace Video -->
-
-                  <div class="mb-4">
-
-                     <label class="form-label">
-                        Replace YouTube Video
-                     </label>
-
-                     <input type="url"
-                            id="youtubeInput"
-                            name="youtubeUrl"
-                            class="form-control"
-                            value="https://www.youtube.com/watch?v=4UMwLxFNKS0">
-
-                  </div>
-
-                  <button type="submit"
-                          class="btn btn-primary w-100">
-                     Update Post
-                  </button>
-
-               </form>
-
+               </div>
             </div>
          </div>
-         <!-- end edit -->
+         <!--end 3rd image + text Post from Timeline-->
+
+         <!--     4th    video post + text-->
+         <div class="col-sm-12">
+            <div class="card card-block card-stretch card-height">
+               <div class="card-body">
+                  <div class="user-post-data">
+                     <div class="d-flex justify-content-between">
+                        <div class="me-3">
+                           <img class="rounded-circle img-fluid" src="../assets/images/user/02.jpg" alt="" loading="lazy">
+                        </div>
+                        <div class="w-100">
+                           <div class="d-flex justify-content-between">
+                              <div class="">
+                                 <h5 class="mb-0 d-inline-block">Paige Turner</h5>
+                                 <p class="mb-0 text-primary">1 day ago</p>
+                              </div>
+
+                              <div class="card-post-toolbar">
+                                 <div class="dropdown">
+                                                   <span class="dropdown-toggle material-symbols-outlined" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                   more_horiz
+                                                   </span>
+                                    <div class="dropdown-menu m-0 p-0">
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            edit
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Edit Post</h6>
+                                                <p class="mb-0">Update your post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            delete
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Delete</h6>
+                                                <p class="mb-0">Remove this Post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mt-3">
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus</p>
+                  </div>
+                  <div class="user-post">
+                     <div class="ratio ratio-16x9">
+                        <iframe  src="https://www.youtube.com/embed/j_GsIanLxZk?rel=0" allowfullscreen></iframe>
+                     </div>
+                  </div>
+                  <div class="comment-area mt-3">
+                     <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="like-block position-relative d-flex align-items-center">
+                           <div class="d-flex align-items-center">
+                              <div class="like-data">
+                                 <div class="dropdown">
+
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
+
+            <span class="material-symbols-outlined text-primary">thumb_up</span></span>
+
+                                    <div class="dropdown-menu py-2">
+
+                                       <a class="ms-2 me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Like">
+                                          👍
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Dislike">
+                                          👎
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Haha">
+                                          😂
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Angry">
+                                          😡
+                                       </a>
+
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div class="total-like-block ms-2 me-3">
+                                 <div class="dropdown">
+
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
+            140 Likes
+         </span>
+
+                                    <div class="dropdown-menu">
+                                       <a class="dropdown-item" href="#">Max Emum</a>
+                                       <a class="dropdown-item" href="#">Bill Yerds</a>
+                                       <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                       <a class="dropdown-item" href="#">Tara Misu</a>
+                                       <a class="dropdown-item" href="#">Midge Itz</a>
+                                       <a class="dropdown-item" href="#">Sal Vidge</a>
+                                       <a class="dropdown-item" href="#">Other</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="total-comment-block">
+                              <div class="dropdown">
+                                 <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                 20 Comment
+                                 </span>
+                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Max Emum</a>
+                                    <a class="dropdown-item" href="#">Bill Yerds</a>
+                                    <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                    <a class="dropdown-item" href="#">Tara Misu</a>
+                                    <a class="dropdown-item" href="#">Midge Itz</a>
+                                    <a class="dropdown-item" href="#">Sal Vidge</a>
+                                    <a class="dropdown-item" href="#">Other</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                     </div>
+                     <hr>
+                     <ul class="post-comments list-inline p-0 m-0">
+                        <li class="mb-2">
+                           <div class="d-flex flex-wrap">
+                              <div class="user-img">
+                                 <img src="../assets/images/user/02.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid" loading="lazy">
+                              </div>
+                              <div class="comment-data-block ms-3">
+                                 <h6>Monty Carlo</h6>
+                                 <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="javascript:void(0);">like</a>
+                                    <a href="javascript:void(0);">dislike</a>
+                                    <span> 5 min </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                        <li>
+                           <div class="d-flex flex-wrap">
+                              <div class="user-img">
+                                 <img src="../assets/images/user/03.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid" loading="lazy">
+                              </div>
+                              <div class="comment-data-block ms-3">
+                                 <h6>Paul Molive</h6>
+                                 <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="javascript:void(0);">like</a>
+                                    <a href="javascript:void(0);">dislike</a>
+                                    <span> 5 min </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+                     <form class="comment-text d-flex align-items-center mt-3"
+                           action="javascript:void(0);">
+                        <input type="text"
+                               class="form-control rounded"
+                               placeholder="Enter Your Comment">
+                        <button type="submit"
+                                class="border-0 bg-transparent ms-2 p-0">
+                           <span class="material-symbols-outlined text-primary" style="font-size: 32px;">send</span>
+                        </button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- 4th end video post + text-->
+
+         <!--5th poll Post from Timeline-->
+         <div class="card">
+            <div class="card-body">
+               <div class="post-item">
+                  <div class="user-post-data pb-3">
+                     <div class="d-flex justify-content-between">
+                        <div class="me-3">
+                           <img class="rounded-circle  avatar-60" src="../assets/images/user/1.jpg" alt="" loading="lazy">
+                        </div>
+                        <div class="w-100">
+                           <div class="d-flex justify-content-between flex-wrap">
+                              <div class="">
+                                 <h5 class="mb-0 d-inline-block"><a href="#" class="">Bni Cyst</a></h5>
+                                 <p class="mb-0">3 hour ago</p>
+                              </div>
+                              <div class="card-post-toolbar">
+                                 <div class="dropdown">
+                                                   <span class="dropdown-toggle material-symbols-outlined" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                   more_horiz
+                                                   </span>
+                                    <div class="dropdown-menu m-0 p-0">
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            edit
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Edit Post</h6>
+                                                <p class="mb-0">Update your post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                       <a class="dropdown-item p-3" href="#">
+                                          <div class="d-flex align-items-top">
+                                                            <span class="material-symbols-outlined">
+                                                            delete
+                                                            </span>
+                                             <div class="data ms-2">
+                                                <h6>Delete</h6>
+                                                <p class="mb-0">Remove this Post</p>
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="user-post">
+
+                     <h4 class="mb-3">Which is the best programming language?</h4>
+
+                     <form action="/polls/vote" method="post">
+
+                        <input type="hidden" name="pollId" value="1">
+
+                        <div class="poll-option mb-2">
+                           <button type="submit" name="optionId" value="1"
+                                   class="btn btn-outline-primary w-100 text-start">
+                              Java
+                           </button>
+                        </div>
+
+                        <div class="poll-option mb-2">
+                           <button type="submit" name="optionId" value="2"
+                                   class="btn btn-outline-primary w-100 text-start">
+                              C#
+                           </button>
+                        </div>
+
+                        <div class="poll-option mb-2">
+                           <button type="submit" name="optionId" value="3"
+                                   class="btn btn-outline-primary w-100 text-start">
+                              Python
+                           </button>
+                        </div>
+
+                        <div class="poll-option mb-2">
+                           <button type="submit" name="optionId" value="4"
+                                   class="btn btn-outline-primary w-100 text-start">
+                              JavaScript
+                           </button>
+                        </div>
+
+                        <div class="poll-option mb-2">
+                           <button type="submit" name="optionId" value="5"
+                                   class="btn btn-outline-primary w-100 text-start">
+                              Go
+                           </button>
+                        </div>
+
+                        <div class="poll-option mb-2">
+                           <button type="submit" name="optionId" value="6"
+                                   class="btn btn-outline-primary w-100 text-start">
+                              Other
+                           </button>
+                        </div>
+
+                     </form>
+
+                  </div>
+
+                  <div class="comment-area mt-3">
+                     <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                        <div class="like-block position-relative d-flex align-items-center">
+
+                           <div class="d-flex align-items-center">
+                              <div class="like-data">
+                                 <div class="dropdown">
+
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
+
+            <span class="material-symbols-outlined text-primary">thumb_up</span></span>
+
+                                    <div class="dropdown-menu py-2">
+
+                                       <a class="ms-2 me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Like">
+                                          👍
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Dislike">
+                                          👎
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Haha">
+                                          😂
+                                       </a>
+
+                                       <a class="me-2 fs-4"
+                                          href="#"
+                                          data-bs-toggle="tooltip"
+                                          data-bs-placement="top"
+                                          title="Angry">
+                                          😡
+                                       </a>
+
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div class="total-like-block ms-2 me-3">
+                                 <div class="dropdown">
+
+         <span class="dropdown-toggle"
+               data-bs-toggle="dropdown"
+               aria-haspopup="true"
+               aria-expanded="false"
+               role="button">
+            140 Likes
+         </span>
+
+                                    <div class="dropdown-menu">
+                                       <a class="dropdown-item" href="#">Max Emum</a>
+                                       <a class="dropdown-item" href="#">Bill Yerds</a>
+                                       <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                       <a class="dropdown-item" href="#">Tara Misu</a>
+                                       <a class="dropdown-item" href="#">Midge Itz</a>
+                                       <a class="dropdown-item" href="#">Sal Vidge</a>
+                                       <a class="dropdown-item" href="#">Other</a>
+                                    </div>
+
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="total-comment-block">
+                              <div class="dropdown">
+                                                <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                20 Comment
+                                                </span>
+                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Max Emum</a>
+                                    <a class="dropdown-item" href="#">Bill Yerds</a>
+                                    <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                    <a class="dropdown-item" href="#">Tara Misu</a>
+                                    <a class="dropdown-item" href="#">Midge Itz</a>
+                                    <a class="dropdown-item" href="#">Sal Vidge</a>
+                                    <a class="dropdown-item" href="#">Other</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                     </div>
+                     <hr>
+                     <ul class="post-comments p-0 m-0">
+                        <li class="mb-2">
+                           <div class="d-flex flex-wrap">
+                              <div class="user-img">
+                                 <img src="../assets/images/user/02.jpg" loading="lazy" alt="userimg" class="avatar-35 rounded-circle img-fluid">
+                              </div>
+                              <div class="comment-data-block ms-3">
+                                 <h6>Monty Carlo</h6>
+                                 <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="#">like</a>
+                                    <a href="#">dislike</a>
+                                    <span> 5 min </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                        <li>
+                           <div class="d-flex flex-wrap">
+                              <div class="user-img">
+                                 <img src="../assets/images/user/03.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid" loading="lazy">
+                              </div>
+                              <div class="comment-data-block ms-3">
+                                 <h6>Paul Molive</h6>
+                                 <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                 <div class="d-flex flex-wrap align-items-center comment-activity">
+                                    <a href="#">like</a>
+                                    <a href="#">dislike</a>
+                                    <span> 5 min </span>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     </ul>
+
+                     <form class="comment-text d-flex align-items-center mt-3"
+                           action="javascript:void(0);">
+                        <input type="text"
+                               class="form-control rounded"
+                               placeholder="Enter Your Comment">
+                        <button type="submit"
+                                class="border-0 bg-transparent ms-2 p-0">
+                           <span class="material-symbols-outlined text-primary" style="font-size: 32px;">send</span>
+                        </button>
+                     </form>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--end 5th poll Post from Timeline-->
 
       </div>
 
    </div>
 </div>
+
     </div>
   </div>
   <!-- Wrapper End-->
@@ -1225,7 +2479,7 @@
   <!--select2 Script -->
   <script th:src="@{/assets/js/select2.js}"></script>
   <script th:src="@{/assets/js/modal.js}"></script>
-  <script th:src="@{/assets/js/modal.js}"></script>
+
 
 </body>
 

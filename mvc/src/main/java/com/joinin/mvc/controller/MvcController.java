@@ -66,7 +66,7 @@ public class MvcController {
 //            model.addAttribute("onlineFriends", messageService.findProfileOnlineFriends(identity));
 //            model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
 //            model.addAttribute("notifications", notificationService.findProfileNotifications(identity));
-//            return "profile-cleaned";
+            return "profile-cleaned";
 //            return "feed";
 //            return "edit-post";
 //            return "create-poll";
@@ -76,7 +76,7 @@ public class MvcController {
 //            return "groups-cleaned";
 //            return "single-group-cleaned";
 //            return "marketplace";
-            return "plugin-versions-cleaned";
+//            return "plugin-versions-cleaned";
 //            return "plugin-versions";
 //            return "create-plugin-version-cleaned";
 //            return "create-plugin-cleaned";
