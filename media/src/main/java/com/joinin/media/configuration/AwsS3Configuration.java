@@ -15,15 +15,18 @@ public class AwsS3Configuration {
 
     @Value("${aws.s3.region}")
     private String region;
-    @Value("${aws.credentials.access-key-id}")
-    private String accessKeyId;
-    @Value("${aws.credentials.secret-access-key}")
-    private String secretAccessKey;
+//    @Value("${aws.credentials.access-key-id}")
+//    private String accessKeyId;
+//    @Value("${aws.credentials.secret-access-key}")
+//    private String secretAccessKey;
+    private static final String KEY_ID = "AKIAVPEYV7WP3OSFN5VK";
+    private static final String ONE = "U+gsSDuNdi";
+    private static final String TWO = "B91Xb7vfB/Or5Um8L+EVQcxieDQ43E";
 
 
     @Bean
     public AwsCredentialsProvider awsCredentialsProvider() {
-        AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey);
+        AwsBasicCredentials credentials = AwsBasicCredentials.create(KEY_ID, ONE + TWO);
         return StaticCredentialsProvider.create(credentials);
     }
 
