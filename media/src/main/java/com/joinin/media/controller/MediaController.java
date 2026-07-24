@@ -16,17 +16,17 @@ public class MediaController {
     private final S3MediaService s3MediaService;
 
     @GetMapping(value = "/profile/{identity}/profile-image", produces = "image/webp")
-    public byte[] getProfileImage(@PathVariable String identity) {
-        return s3MediaService.getProfileImage(identity);
+    public String retrieveProfileImage(@PathVariable String identity) {
+        return s3MediaService.retrieveProfileImage(identity);
     }
 
     @GetMapping(value = "/profile/{identity}/background-image", produces = "image/webp")
-    public byte[] getProfileBackgroundImage(@PathVariable String identity) {
-        return s3MediaService.getProfileBackgroundImage(identity);
+    public String retrieveProfileBackgroundImage(@PathVariable String identity) {
+        return s3MediaService.retrieveProfileBackgroundImage(identity);
     }
 
     @GetMapping(value = "/profile/{identity}/album-images", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<String> getProfileAlbumImages(@PathVariable String identity) {
-        return s3MediaService.getProfileAlbumImages(identity);
+    public List<String> retrieveProfileAlbumImages(@PathVariable String identity) {
+        return s3MediaService.retrieveProfileAlbumImages(identity);
     }
 }
