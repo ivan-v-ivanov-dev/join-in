@@ -32,7 +32,7 @@ db.profiles.insertMany([
     college: "University of Veliko Tarnovo",
     currentCity: "Plovdiv",
     hometown: "Plovdiv",
-    otherPlacesLived: ""
+    otherPlacesLived: "Vratsa"
   },
   {
     identity: "9b5d4f5c0a71d7fef2c7c9f5f8cb45f4c1d49d6c9d4c9b9e3d6f2b1c4f8e7a91",
