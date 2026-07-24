@@ -6,10 +6,16 @@ COPY pom.xml .
 
 COPY src ./src
 
-RUN --mount=type=secret,id=maven_settings,target=/root/.m2/settings.xml \
-    --mount=type=cache,target=/root/.m2/repository \
-    rm -rf /root/.m2/repository/com/joinin/kafka-models && \
-    mvn --batch-mode --update-snapshots clean package -DskipTests
+RUN --mount=type=secret,id=maven_settings,target=/root/.m2/settings.xml,required=true \
+    --mount=type=cache,id=maven-repository,target=/root/.m2/repository \
+    rm -rf \
+        /root/.m2/repository/com/joinin/kafka-models \
+        /root/.m2/repository/com/joinin/common-models && \
+    mvn --settings /root/.m2/settings.xml \
+        --batch-mode \
+        --update-snapshots \
+        clean package \
+        -DskipTests
 
 FROM eclipse-temurin:21-jre
 
