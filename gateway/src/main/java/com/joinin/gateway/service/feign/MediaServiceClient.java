@@ -11,10 +11,10 @@ import java.util.List;
 public interface MediaServiceClient {
 
     @GetMapping(value = "/profile/{identity}/profile-image", produces = "image/webp")
-    byte[] getProfileImage(@PathVariable String identity);
+    String retrieveProfileImage(@PathVariable String identity);
 
     @GetMapping(value = "/profile/{identity}/background-image", produces = "image/webp")
-    byte[] getProfileBackgroundImage(@PathVariable String identity);
+    String retrieveProfileBackgroundImage(@PathVariable String identity);
 
     @GetMapping(value = "/profile/{identity}/album-images", produces = MediaType.APPLICATION_JSON_VALUE)
     List<String> getProfileAlbumImages(@PathVariable String identity);

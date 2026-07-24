@@ -16,15 +16,15 @@ public class MediaServiceImpl implements MediaService {
     private final MediaServiceClient mediaServiceClient;
 
     @Override
-    public byte[] getProfileImage(String identity) {
-        byte[] profileImage = mediaServiceClient.getProfileImage(identity);
+    public String retrieveProfileImage(String identity) {
+        String profileImage = mediaServiceClient.retrieveProfileImage(identity);
         log.info("Retrieve profile image from Media service for profile: " + identity);
         return profileImage;
     }
 
     @Override
-    public byte[] getProfileBackgroundImage(String identity) {
-        byte[] backgroundImage = mediaServiceClient.getProfileBackgroundImage(identity);
+    public String retrieveProfileBackgroundImage(String identity) {
+        String backgroundImage = mediaServiceClient.retrieveProfileBackgroundImage(identity);
         log.info("Retrieve profile background image from Media service for profile: " + identity);
         return backgroundImage;
     }

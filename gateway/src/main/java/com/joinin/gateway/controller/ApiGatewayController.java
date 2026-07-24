@@ -27,13 +27,13 @@ public class ApiGatewayController {
     }
 
     @GetMapping(value = "/profile/{identity}/profile-image", produces = "image/webp")
-    public byte[] getProfileImage(@PathVariable String identity) {
-        return mediaService.getProfileImage(identity);
+    public String retrieveProfileImage(@PathVariable String identity) {
+        return mediaService.retrieveProfileImage(identity);
     }
 
     @GetMapping(value = "/profile/{identity}/background-image", produces = "image/webp")
-    public byte[] getProfileBackgroundImage(@PathVariable String identity) {
-        return mediaService.getProfileBackgroundImage(identity);
+    public String retrieveProfileBackgroundImage(@PathVariable String identity) {
+        return mediaService.retrieveProfileBackgroundImage(identity);
     }
 
     @GetMapping(value = "/profile/{identity}/album-images", produces = MediaType.APPLICATION_JSON_VALUE)

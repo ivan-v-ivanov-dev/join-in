@@ -3,9 +3,9 @@ package com.joinin.gateway.service.contract;
 import java.util.List;
 
 public interface MediaService {
-    byte[] getProfileImage(String identity);
+    String retrieveProfileImage(String identity);
 
-    byte[] getProfileBackgroundImage(String identity);
+    String retrieveProfileBackgroundImage(String identity);
 
     List<String> getProfileAlbumImages(String identity);
 }
