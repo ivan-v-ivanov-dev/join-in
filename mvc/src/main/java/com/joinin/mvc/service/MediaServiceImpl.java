@@ -30,8 +30,8 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public List<String> getAlbumImages(String identity) {
-        List<String> albumImages = gatewayClient.getProfileAlbumImages(identity);
+    public List<String> retrieveProfileAlbumImages(String identity) {
+        List<String> albumImages = gatewayClient.retrieveProfileAlbumImages(identity);
         log.info("Retrieve profile album images from API Gateway for profile: " + identity);
         return albumImages;
     }

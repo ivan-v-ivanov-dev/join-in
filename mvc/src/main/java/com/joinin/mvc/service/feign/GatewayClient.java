@@ -29,5 +29,5 @@ public interface GatewayClient {
     String retrieveProfileBackgroundImage(@PathVariable String identity);
 
     @GetMapping(value = "/profile/{identity}/album-images", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<String> getProfileAlbumImages(@PathVariable String identity);
+    List<String> retrieveProfileAlbumImages(@PathVariable String identity);
 }

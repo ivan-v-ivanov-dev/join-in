@@ -40,8 +40,8 @@ public class ApiGatewayController {
     }
 
     @GetMapping(value = "/profile/{identity}/album-images", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<String> getProfileAlbumImages(@PathVariable String identity) {
-        return mediaService.getProfileAlbumImages(identity);
+    public List<String> retrieveProfileAlbumImages(@PathVariable String identity) {
+        return mediaService.retrieveProfileAlbumImages(identity);
     }
 
     @GetMapping("/profile/{identity}")

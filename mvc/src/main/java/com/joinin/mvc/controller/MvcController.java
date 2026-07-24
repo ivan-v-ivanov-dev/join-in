@@ -4,7 +4,6 @@ import com.joinin.mvc.model.RegisterRq;
 import com.joinin.mvc.service.contract.IdentityService;
 import com.joinin.mvc.service.contract.MediaService;
 import feign.FeignException;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +60,7 @@ public class MvcController {
         try {
             model.addAttribute("profileImage", mediaService.retrieveProfileImage(identity));
             model.addAttribute("backgroundImage", mediaService.retrieveProfileBackgroundImage(identity));
-            model.addAttribute("albumImages", mediaService.getAlbumImages(identity));
+            model.addAttribute("albumImages", mediaService.retrieveProfileAlbumImages(identity));
 //            model.addAttribute("profile", profileService.findProfileInfoByIdentity(identity));
 //            model.addAttribute("backgroundImage", imageService.findBackgroundImage(identity));
 //            model.addAttribute("posts", postService.findPostsByAuthorIdentity(identity));

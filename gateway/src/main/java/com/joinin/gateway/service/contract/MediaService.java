@@ -7,5 +7,5 @@ public interface MediaService {
 
     String retrieveProfileBackgroundImage(String identity);
 
-    List<String> getProfileAlbumImages(String identity);
+    List<String> retrieveProfileAlbumImages(String identity);
 }
