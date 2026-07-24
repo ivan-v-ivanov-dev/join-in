@@ -1,5 +1,6 @@
 package com.joinin.mvc.service.feign;
 
+import com.join_in.common_models.ProfileRpGatewayService;
 import com.join_in.common_models.RegisterUserMVCRq;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -30,4 +31,7 @@ public interface GatewayClient {
 
     @GetMapping(value = "/profile/{identity}/album-images", produces = MediaType.APPLICATION_JSON_VALUE)
     List<String> retrieveProfileAlbumImages(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}")
+    ProfileRpGatewayService retrieveProfileByIdentity(@PathVariable String identity);
 }

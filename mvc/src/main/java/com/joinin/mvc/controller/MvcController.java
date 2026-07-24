@@ -3,8 +3,10 @@ package com.joinin.mvc.controller;
 import com.joinin.mvc.model.RegisterRq;
 import com.joinin.mvc.service.contract.IdentityService;
 import com.joinin.mvc.service.contract.MediaService;
+import com.joinin.mvc.service.contract.ProfileService;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,7 @@ public class MvcController {
 
     private final IdentityService identityService;
     private final MediaService mediaService;
+    private final ProfileService profileService;
 
     @GetMapping("/")
     public String login() {
@@ -61,6 +64,7 @@ public class MvcController {
             model.addAttribute("profileImage", mediaService.retrieveProfileImage(identity));
             model.addAttribute("backgroundImage", mediaService.retrieveProfileBackgroundImage(identity));
             model.addAttribute("albumImages", mediaService.retrieveProfileAlbumImages(identity));
+            model.addAttribute("profile", profileService.retrieveProfileByIdentity(identity));
 //            model.addAttribute("profile", profileService.findProfileInfoByIdentity(identity));
 //            model.addAttribute("backgroundImage", imageService.findBackgroundImage(identity));
 //            model.addAttribute("posts", postService.findPostsByAuthorIdentity(identity));
