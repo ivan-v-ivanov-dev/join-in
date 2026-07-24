@@ -1,8 +1,10 @@
 package com.joinin.gateway.controller;
 
 import com.join_in.common_models.RegisterUserMVCRq;
+import com.join_in.common_models.ProfileRpGatewayService;
 import com.joinin.gateway.service.contract.IdentityService;
 import com.joinin.gateway.service.contract.MediaService;
+import com.joinin.gateway.service.contract.ProfileService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ public class ApiGatewayController {
 
     private final IdentityService identityService;
     private final MediaService mediaService;
+    private final ProfileService profileService;
 
     @PostMapping("/email/{email}/unique")
     public boolean isEmailUnique(@PathVariable("email") String email) {
@@ -26,12 +29,12 @@ public class ApiGatewayController {
         identityService.registerUser(registerUserMVCRq);
     }
 
-    @GetMapping(value = "/profile/{identity}/profile-image", produces = "image/webp")
+    @GetMapping("/profile/{identity}/profile-image")
     public String retrieveProfileImage(@PathVariable String identity) {
         return mediaService.retrieveProfileImage(identity);
     }
 
-    @GetMapping(value = "/profile/{identity}/background-image", produces = "image/webp")
+    @GetMapping("/profile/{identity}/background-image")
     public String retrieveProfileBackgroundImage(@PathVariable String identity) {
         return mediaService.retrieveProfileBackgroundImage(identity);
     }
@@ -39,6 +42,11 @@ public class ApiGatewayController {
     @GetMapping(value = "/profile/{identity}/album-images", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<String> getProfileAlbumImages(@PathVariable String identity) {
         return mediaService.getProfileAlbumImages(identity);
+    }
+
+    @GetMapping("/profile/{identity}")
+    public ProfileRpGatewayService retrieveProfileByIdentity(@PathVariable String identity) {
+        return profileService.retrieveProfileByIdentity(identity);
     }
 
     @GetMapping("/health")

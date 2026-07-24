@@ -27,3 +27,11 @@ media:
       client:
         name: Media-service-Feign-client
     url:  http://media-service:8090
+
+#Profile service Feign client
+profile:
+  service:
+    feign:
+      client:
+        name: Profile-service-Feign-client
+    url:  http://profile-service:8083
