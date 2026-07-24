@@ -19,3 +19,11 @@ spring:
     offset-reset: earliest
     topic:
       new-registered-user-info: new-registered-user-info
+
+#Identity service Feign client
+identity:
+  service:
+    feign:
+      client:
+        name: Identity-service-Feign-client
+    url:  http://identity-service:8082

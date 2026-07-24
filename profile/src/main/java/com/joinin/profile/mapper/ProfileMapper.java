@@ -1,5 +1,6 @@
 package com.joinin.profile.mapper;
 
+import com.join_in.common_models.ProfileRpProfileService;
 import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
 import com.joinin.profile.models.Profile;
 import org.mapstruct.Mapper;
@@ -35,4 +36,7 @@ public interface ProfileMapper {
     @Mapping(target = "hometown", constant = "Add hometown")
     @Mapping(target = "otherPlacesLived", constant = "Add other places lived")
     Profile fromNewRegisteredUserInfotoProfile(NewRegisteredUserInfo newRegisteredUserInfo);
+
+    @Mapping(target = "email", source = "email")
+    ProfileRpProfileService fromProfiletoProfileRpProfileService(Profile profile, String email);
 }
