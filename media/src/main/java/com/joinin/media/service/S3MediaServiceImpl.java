@@ -28,7 +28,7 @@ public class S3MediaServiceImpl implements S3MediaService {
     private String bucket;
 
     @Override
-    public byte[] getProfileImage(String identity) {
+    public String retrieveProfileImage(String identity) {
         Profile profile = profileService.getProfileByIdentity(identity);
 
         GetObjectRequest request = GetObjectRequest.builder()
@@ -39,7 +39,7 @@ public class S3MediaServiceImpl implements S3MediaService {
         try {
             byte[] profilePictureArray = s3Client.getObjectAsBytes(request).asByteArray();
             log.info("Retrieve profile image for profile: " + profile.getIdentity());
-            return profilePictureArray;
+            return "data:image/webp;base64," + Base64.getEncoder().encodeToString(profilePictureArray);
         } catch (S3Exception exception) {
             log.error("S3 error. Status: {}, code: {}, message: {}",
                     exception.statusCode(),
@@ -63,7 +63,7 @@ public class S3MediaServiceImpl implements S3MediaService {
     }
 
     @Override
-    public byte[] getProfileBackgroundImage(String identity) {
+    public String retrieveProfileBackgroundImage(String identity) {
         Profile profile = profileService.getProfileByIdentity(identity);
 
         GetObjectRequest request = GetObjectRequest.builder()
@@ -73,7 +73,7 @@ public class S3MediaServiceImpl implements S3MediaService {
         try {
             byte[] backgroundImageArray = s3Client.getObjectAsBytes(request).asByteArray();
             log.info("Retrieved background image for profile: {}", profile.getIdentity());
-            return backgroundImageArray;
+            return "data:image/webp;base64," + Base64.getEncoder().encodeToString(backgroundImageArray);
         } catch (S3Exception exception) {
             log.error("S3 error. Status: {}, code: {}, message: {}",
                     exception.statusCode(),
@@ -95,7 +95,7 @@ public class S3MediaServiceImpl implements S3MediaService {
     }
 
     @Override
-    public List<String> getProfileAlbumImages(String identity) {
+    public List<String> retrieveProfileAlbumImages(String identity) {
         Profile profile = profileService.getProfileByIdentity(identity);
 
         List<String> albumImages = profile.getAlbumPictureUrls()
