@@ -19,6 +19,7 @@ public class Profile {
     private String id;
     @Indexed(unique = true)
     private final String identity;
+    @Indexed(unique = true)
     private final String email;
     private final String password;
 }

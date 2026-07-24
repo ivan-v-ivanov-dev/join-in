@@ -17,4 +17,11 @@ public class EmailRepository {
         Query query = Query.query(Criteria.where("email").is(email));
         return !mongoTemplate.exists(query, Profile.class);
     }
+
+    public String retrieveEmailByIdentity(String identity) {
+        Query query = Query.query(Criteria.where("identity").is(identity));
+        query.fields().include("email");
+        Profile profile = mongoTemplate.findOne(query, Profile.class);
+        return profile.getEmail();
+    }
 }

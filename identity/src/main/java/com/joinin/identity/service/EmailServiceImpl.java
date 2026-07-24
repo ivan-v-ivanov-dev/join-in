@@ -19,4 +19,11 @@ public class EmailServiceImpl implements EmailService {
         log.info("Check whether email is unique: " + email + ": " + isEmailUnique);
         return isEmailUnique;
     }
+
+    @Override
+    public String retrieveEmailByIdentity(String identity) {
+        String email = emailRepository.retrieveEmailByIdentity(identity);
+        log.info("Retrieve email by identity: " + email);
+        return email;
+    }
 }
