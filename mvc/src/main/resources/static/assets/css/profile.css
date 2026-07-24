@@ -1,0 +1,29 @@
+.profile-img-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+
+.profile-img-gallery li {
+    width: 100%;
+    overflow: hidden;
+}
+
+.profile-img-gallery a {
+    display: block;
+    width: 100%;
+}
+
+.profile-img-gallery img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+@media (max-width: 576px) {
+    .profile-img-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

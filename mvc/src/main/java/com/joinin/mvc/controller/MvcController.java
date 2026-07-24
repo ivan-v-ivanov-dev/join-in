@@ -2,6 +2,7 @@ package com.joinin.mvc.controller;
 
 import com.joinin.mvc.model.RegisterRq;
 import com.joinin.mvc.service.contract.IdentityService;
+import com.joinin.mvc.service.contract.MediaService;
 import feign.FeignException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.client.ResourceAccessException;
 public class MvcController {
 
     private final IdentityService identityService;
+    private final MediaService mediaService;
 
     @GetMapping("/")
     public String login() {
@@ -57,31 +59,17 @@ public class MvcController {
     @GetMapping("/profile/{identity}")
     public String profile(@PathVariable("identity") String identity, Model model) {
         try {
+            model.addAttribute("profileImage", mediaService.retrieveProfileImage(identity));
+            model.addAttribute("backgroundImage", mediaService.retrieveProfileBackgroundImage(identity));
+            model.addAttribute("albumImages", mediaService.getAlbumImages(identity));
 //            model.addAttribute("profile", profileService.findProfileInfoByIdentity(identity));
-//            model.addAttribute("profileImage", imageService.findProfileImage(identity));
 //            model.addAttribute("backgroundImage", imageService.findBackgroundImage(identity));
-//            model.addAttribute("albums", imageService.findAlbum(identity));
 //            model.addAttribute("posts", postService.findPostsByAuthorIdentity(identity));
 //            model.addAttribute("friends", relationshipService.findProfileFriends(identity));
 //            model.addAttribute("onlineFriends", messageService.findProfileOnlineFriends(identity));
 //            model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
 //            model.addAttribute("notifications", notificationService.findProfileNotifications(identity));
-            return "profile-cleaned";
-//            return "feed";
-//            return "edit-post";
-//            return "create-poll";
-//            return "friend-request";
-//            return "notification";
-//            return "edit-profile";
-//            return "groups-cleaned";
-//            return "single-group-cleaned";
-//            return "marketplace";
-//            return "plugin-versions-cleaned";
-//            return "plugin-versions";
-//            return "create-plugin-version-cleaned";
-//            return "create-plugin-cleaned";
-//            return "search-results-cleaned";
-//            return "chat";
+            return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
             return "error";

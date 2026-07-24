@@ -1,4 +1,4 @@
-package com.joinin.mvc.service;
+package com.joinin.mvc.service.constants;
 
 public class ModelEntityConstants {
     public static final String NAME_CAN_NOT_BE_EMPTY = "Name can not be empty!";

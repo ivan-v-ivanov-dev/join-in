@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import static com.joinin.mvc.service.ModelEntityConstants.*;
+import static com.joinin.mvc.service.constants.ModelEntityConstants.*;
 
 @NoArgsConstructor
 @Getter
