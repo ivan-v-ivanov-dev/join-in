@@ -9,11 +9,11 @@ import com.joinin.relationship.repository.ProfileRepository;
 import com.joinin.relationship.service.contract.ProfileService;
 import com.joinin.relationship.service.feign.MediaServiceClient;
 import com.joinin.relationship.service.feign.ProfileServiceClient;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +40,12 @@ public class ProfileServiceImpl implements ProfileService {
     public List<ProfileRpRelationshipService> retrieveFriendsProfiles(String identity) {
         List<ProfileNode> friends = profileRepository.findAllFriendsByIdentity(identity);
         log.info("Retrieve friends by an identity: " + identity);
+
+        if (friends.isEmpty()) {
+            log.info("Profile does not have friends.");
+            return new ArrayList<>();
+        }
+
         List<ProfileImageRpMediaService> profileImageRpMediaServices =
                 mediaServiceClient.retrieveProfileImagesForProfiles(friends.stream().map(ProfileNode::getIdentity).toList());
         log.info("Retrieve profiles images for all friends from Media Service. Profile identities: " +
