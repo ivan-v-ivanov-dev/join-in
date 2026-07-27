@@ -35,4 +35,11 @@ public class ProfileServiceImpl implements ProfileService {
         log.info("Retrieve profile from database. Profile identity: " + profile.getIdentity());
         return profile;
     }
+
+    @Override
+    public List<Profile> retrieveProfilesByIdentities(List<String> identities) {
+        List<Profile> profiles = profileRepository.retrieveProfilesByIdentities(identities);
+        log.info("Retrieve multiple profiles by identities: " + String.join(", ", identities));
+        return profiles;
+    }
 }

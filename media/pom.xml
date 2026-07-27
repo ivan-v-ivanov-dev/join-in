@@ -47,6 +47,11 @@
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>com.joinin</groupId>
+			<artifactId>common-models</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
@@ -85,6 +90,17 @@
 			<url>
 				https://maven.pkg.github.com/ivan-v-ivanov-dev/join-in-kafka-topic-models
 			</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>github-common-models</id>
+			<url>https://maven.pkg.github.com/ivan-v-ivanov-dev/join-in-common-models</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>

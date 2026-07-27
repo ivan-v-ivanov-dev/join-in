@@ -1,5 +1,6 @@
 package com.joinin.media.service;
 
+import com.join_in.common_models.ProfileImageRpMediaService;
 import com.joinin.media.model.AlbumPictureUrl;
 import com.joinin.media.model.Profile;
 import com.joinin.media.service.contract.ProfileService;
@@ -16,6 +17,7 @@ import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -107,6 +109,30 @@ public class S3MediaServiceImpl implements S3MediaService {
         return albumImages;
     }
 
+    @Override
+    public List<ProfileImageRpMediaService> retrieveProfileImagesForProfiles(List<String> identities) {
+        List<Profile> profiles = profileService.retrieveProfilesByIdentities(identities);
+        List<ProfileImageRpMediaService> profileImageRpMediaServiceList = profiles.stream()
+                .map(profile -> {
+                    String profileImage = null;
+
+                    if (profile.getProfilePictureUrl() != null
+                            && !profile.getProfilePictureUrl().isBlank()) {
+
+                        profileImage = getImageAsBase64(profile.getProfilePictureUrl());
+                    }
+
+                    return new ProfileImageRpMediaService(profile.getIdentity(), profileImage);
+                })
+                .toList();
+        log.info("Retrieve profile images for multiple profiles: " +
+                profileImageRpMediaServiceList
+                        .stream()
+                        .map(ProfileImageRpMediaService::identity)
+                        .collect(Collectors.joining(", ")));
+        return profileImageRpMediaServiceList;
+    }
+
     private String getImageAsBase64(String objectKey) {
         GetObjectRequest request = GetObjectRequest.builder()
                 .bucket(bucket)
@@ -118,7 +144,6 @@ public class S3MediaServiceImpl implements S3MediaService {
             return "data:image/webp;base64," + Base64.getEncoder().encodeToString(image);
         } catch (S3Exception exception) {
             log.error("Could not retrieve album image: {}", objectKey, exception);
-
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not retrieve album image.", exception);
         }
     }
