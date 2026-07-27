@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class ProfileRepository {
@@ -20,5 +22,11 @@ public class ProfileRepository {
     public Profile retrieveProfileByIdentity(String identity) {
         Query query = new Query(Criteria.where("identity").is(identity));
         return mongoTemplate.findOne(query, Profile.class);
+    }
+
+
+    public List<Profile> retrieveProfilesByIdentities(List<String> identities) {
+        Query query = new Query(Criteria.where("identity").in(identities));
+        return mongoTemplate.find(query, Profile.class);
     }
 }

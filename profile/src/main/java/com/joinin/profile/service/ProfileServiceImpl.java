@@ -1,5 +1,6 @@
 package com.joinin.profile.service;
 
+import com.join_in.common_models.ProfileRpProfileNamesProfileService;
 import com.join_in.common_models.ProfileRpProfileService;
 import com.joinin.profile.mapper.ProfileMapper;
 import com.joinin.profile.models.Profile;
@@ -9,6 +10,9 @@ import com.joinin.profile.service.feign.IdentityServiceClient;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -33,5 +37,21 @@ public class ProfileServiceImpl implements ProfileService {
         String email = identityServiceClient.retrieveEmailByIdentity(identity);
         log.info("Retrieve email from Identity Service by profile identity: " + email);
         return profileMapper.fromProfiletoProfileRpProfileService(profile, email);
+    }
+
+    @Override
+    public List<ProfileRpProfileNamesProfileService> retrieveProfilesNames(List<String> identities) {
+        List<Profile> profiles = profileRepository.retrieveProfilesByIdentities(identities);
+        log.info("Retrieve profiles by identities: " +
+                profiles.stream()
+                        .map(Profile::getIdentity)
+                        .collect(Collectors.joining(", ")));
+        return profiles.stream()
+                .map(e -> new ProfileRpProfileNamesProfileService(
+                        e.getIdentity(),
+                        e.getFirstName(),
+                        e.getLastName()
+                ))
+                .collect(Collectors.toList());
     }
 }
