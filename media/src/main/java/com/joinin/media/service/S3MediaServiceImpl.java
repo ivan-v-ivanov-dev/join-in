@@ -143,8 +143,8 @@ public class S3MediaServiceImpl implements S3MediaService {
             byte[] image = s3Client.getObjectAsBytes(request).asByteArray();
             return "data:image/webp;base64," + Base64.getEncoder().encodeToString(image);
         } catch (S3Exception exception) {
-            log.error("Could not retrieve album image: {}", objectKey, exception);
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not retrieve album image.", exception);
+            log.error("Could not retrieve image: {}", objectKey, exception);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not retrieve image.", exception);
         }
     }
 }

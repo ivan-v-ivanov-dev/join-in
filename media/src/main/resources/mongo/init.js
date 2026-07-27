@@ -74,7 +74,7 @@ db.profiles.insertMany([
     },
     {
         identity: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627",
-        profilePictureUrl: "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627/profile.webp",
+        profilePictureUrl: "profile/788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627/profile.webp",
     },
     {
         identity: "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8",
