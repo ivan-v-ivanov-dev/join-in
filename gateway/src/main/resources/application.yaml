@@ -35,3 +35,11 @@ profile:
       client:
         name: Profile-service-Feign-client
     url:  http://profile-service:8083
+
+#Relationship service Feign client
+relationship:
+  service:
+    feign:
+      client:
+        name: Relationship-service-Feign-client
+    url:  http://relationship-service:8087
