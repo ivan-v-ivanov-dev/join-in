@@ -1,5 +1,6 @@
 package com.joinin.mvc.service.feign;
 
+import com.join_in.common_models.ProfileFriendsRpGatewayService;
 import com.join_in.common_models.ProfileRpGatewayService;
 import com.join_in.common_models.RegisterUserMVCRq;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -34,4 +35,7 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}")
     ProfileRpGatewayService retrieveProfileByIdentity(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/friends")
+    List<ProfileFriendsRpGatewayService> retrieveFriends(@PathVariable String identity);
 }
