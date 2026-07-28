@@ -1,85 +1,52 @@
 package com.joinin.post.mapper;
 
 import com.joinin.post.model.*;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
+@RequiredArgsConstructor
 public class PostResponseMapper {
 
-    public PostResponse fromPostById(PostByIdEntity entity) {
-        return new PostResponse(
-                entity.getPostIdentity(),
-                entity.getAuthorIdentity(),
-                entity.getGroupIdentity(),
-                entity.getContent(),
-                entity.isHasText(),
-                entity.isHasImage(),
-                entity.isHasVideo(),
-                entity.isPoll(),
-                entity.getImageIdentity(),
-                entity.getYoutubeUrl(),
-                entity.getPollQuestion(),
-                mapPollOptions(entity.getPollOptions()),
-                entity.getCreatedAt()
+    private final PollOptionResponseMapper pollOptionResponseMapper;
 
-        );
-    }
-
-    public PostResponse fromPostByAuthor(PostByAuthorEntity entity) {
-        return new PostResponse(
-                entity.getKey().getPostIdentity(),
-                entity.getKey().getAuthorIdentity(),
-                entity.getGroupIdentity(),
-                entity.getContent(),
-                entity.isHasText(),
-                entity.isHasImage(),
-                entity.isHasVideo(),
-                entity.isPoll(),
-                entity.getImageIdentity(),
-                entity.getYoutubeUrl(),
-                entity.getPollQuestion(),
-                mapPollOptions(entity.getPollOptions()),
-                entity.getKey().getCreatedAt()
-        );
-    }
-
-    public PostResponse fromPostByGroup(PostByGroupEntity entity) {
-        return new PostResponse(
-                entity.getKey().getPostIdentity(),
-                entity.getAuthorIdentity(),
-                entity.getKey().getGroupIdentity(),
-                entity.getContent(),
-                entity.isHasText(),
-                entity.isHasImage(),
-                entity.isHasVideo(),
-                entity.isPoll(),
-                entity.getImageIdentity(),
-                entity.getYoutubeUrl(),
-                entity.getPollQuestion(),
-                mapPollOptions(entity.getPollOptions()),
-                entity.getKey().getCreatedAt()
-        );
-    }
-
-    private List<PollOptionResponse> mapPollOptions(
-            List<PollOption> pollOptions
+    public PostResponse fromPostByAuthor(
+            PostByAuthorEntity postEntity,
+            List<CommentResponse> comments
     ) {
-        if (pollOptions == null) {
-            return List.of();
-        }
+        PostByAuthorKey primaryKey = postEntity.getKey();
 
-        return pollOptions.stream()
-                .map(this::mapPollOption)
-                .toList();
-    }
+        List<PollOptionResponse> pollOptions =
+                postEntity.getPollOptions() == null
+                        ? List.of()
+                        : postEntity.getPollOptions()
+                        .stream()
+                        .map(pollOptionResponseMapper::fromPollOption)
+                        .toList();
 
-    private PollOptionResponse mapPollOption(PollOption option) {
-        return new PollOptionResponse(
-                option.getOptionIdentity(),
-                option.getOptionText(),
-                option.getVoteCount()
+        return new PostResponse(
+                primaryKey.getPostIdentity(),
+                primaryKey.getAuthorIdentity(),
+                postEntity.getGroupIdentity(),
+
+                postEntity.getContent(),
+
+                postEntity.isHasText(),
+                postEntity.isHasImage(),
+                postEntity.isHasVideo(),
+                postEntity.isPoll(),
+
+                postEntity.getImageIdentity(),
+                postEntity.getYoutubeUrl(),
+
+                postEntity.getPollQuestion(),
+                pollOptions,
+
+                primaryKey.getCreatedAt(),
+
+                comments
         );
     }
 }

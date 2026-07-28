@@ -26,5 +26,6 @@ public record PostResponse(
         String pollQuestion,
         List<PollOptionResponse> pollOptions,
 
-        LocalDateTime createdAt) {
+        LocalDateTime createdAt,
+        List<CommentResponse> comments) {
 }

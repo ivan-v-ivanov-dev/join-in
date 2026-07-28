@@ -5,12 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
-import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyClass;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -31,7 +30,7 @@ public class CommentPrimaryKey implements Serializable {
             type = PrimaryKeyType.CLUSTERED,
             ordinal = 1
     )
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
     @PrimaryKeyColumn(
             name = "comment_identity",

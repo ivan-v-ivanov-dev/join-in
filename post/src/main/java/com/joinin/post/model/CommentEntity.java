@@ -8,8 +8,6 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.time.Instant;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -26,12 +24,4 @@ public class CommentEntity {
     @Column("content")
     private String content;
 
-    @Column("edited_at")
-    private Instant editedAt;
-
-    @Column("is_deleted")
-    private boolean deleted;
-
-    @Column("parent_comment_identity")
-    private String parentCommentIdentity;
 }

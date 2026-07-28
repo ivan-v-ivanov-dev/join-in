@@ -4,8 +4,8 @@ import com.joinin.post.model.CommentEntity;
 import com.joinin.post.model.CommentPrimaryKey;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.data.cassandra.repository.Query;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
+
+import java.util.List;
 
 public interface CommentRepository extends CassandraRepository<CommentEntity, CommentPrimaryKey> {
 
@@ -14,5 +14,5 @@ public interface CommentRepository extends CassandraRepository<CommentEntity, Co
             FROM comments_by_post
             WHERE post_identity = ?0
             """)
-    Slice<CommentEntity> findByPostIdentity(String postIdentity, Pageable pageable);
+    List<CommentEntity> findByPostIdentity(String postIdentity);
 }
