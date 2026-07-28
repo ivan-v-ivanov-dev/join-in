@@ -1,0 +1,111 @@
+services:
+
+  post-cassandra:
+    image: cassandra:5.0
+    container_name: cassandra-post-service
+    restart: unless-stopped
+
+    ports:
+      - 9042:9042
+
+    environment:
+      CASSANDRA_CLUSTER_NAME: join-in-cluster
+      CASSANDRA_DC: datacenter1
+      CASSANDRA_RACK: rack1
+      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+      MAX_HEAP_SIZE: 1G
+      HEAP_NEWSIZE: 256M
+
+    networks:
+      - join-in-network
+
+  # Creates the schema and imports sample data
+  post-cassandra-init:
+    image: cassandra:5.0
+    container_name: cassandra-post-service-init
+    restart: "no"
+
+    depends_on:
+      - post-cassandra
+
+    volumes:
+      - ./src/main/resources/cassandra/schema.cql:/scripts/01-schema.cql:ro
+      - ./src/main/resources/cassandra/sample-data.cql:/scripts/02-sample-data.cql:ro
+
+    entrypoint: ["/bin/bash", "-c"]
+
+    command:
+      - |
+        set -euo pipefail
+        
+        echo "Checking mounted CQL files..."
+        
+        test -s /scripts/01-schema.cql
+        test -s /scripts/02-sample-data.cql
+        
+        ls -la /scripts
+        
+        echo "Waiting for Cassandra..."
+        
+        until cqlsh post-cassandra 9042 \
+          -e "SELECT release_version FROM system.local;" \
+          > /dev/null 2>&1
+        do
+          echo "Cassandra is not ready yet..."
+          sleep 5
+        done
+        
+        echo "Cassandra is ready."
+        
+        echo "Creating keyspace and tables..."
+        cqlsh post-cassandra 9042 \
+          --file /scripts/01-schema.cql
+        
+        echo "Verifying post_service keyspace..."
+        cqlsh post-cassandra 9042 \
+          -e "DESCRIBE KEYSPACE post_service;"
+        
+        echo "Importing sample data..."
+        cqlsh post-cassandra 9042 \
+          --file /scripts/02-sample-data.cql
+        
+        echo "Cassandra initialization completed successfully."
+
+    networks:
+      - join-in-network
+
+  # Post Service
+  post-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+    container_name: post-service
+    restart: unless-stopped
+    ports:
+      - 8084:8084
+
+    environment:
+      SERVER_PORT: 8084
+
+      SPRING_CASSANDRA_CONTACT_POINTS: post-cassandra
+      SPRING_CASSANDRA_PORT: 9042
+      SPRING_CASSANDRA_KEYSPACE_NAME: post_service
+      SPRING_CASSANDRA_LOCAL_DATACENTER: datacenter1
+      SPRING_CASSANDRA_SCHEMA_ACTION: NONE
+
+    depends_on:
+      post-cassandra-init:
+        condition: service_completed_successfully
+
+    networks:
+      - join-in-network
+
+networks:
+  join-in-network:
+    external: true
+
+secrets:
+  maven_settings:
+    file: "C:/Users/Иван/.m2/settings.xml"
