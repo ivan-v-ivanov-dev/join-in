@@ -1,13 +1,34 @@
 package com.joinin.post.controller;
 
+import com.joinin.post.model.PostResponse;
+import com.joinin.post.service.contract.PostService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
+@AllArgsConstructor
 public class PostController {
 
-    @GetMapping
-    public String health() {
-        return "Post service is HEALTHY";
+    private final PostService postService;
+
+    /**
+     * Reads one post from posts_by_id.
+     */
+    @GetMapping("/post/{identity}")
+    public PostResponse retrievePostByIdentity(@PathVariable String identity) {
+        return postService.retrievePostByIdentity(identity);
+    }
+
+    /**
+     * Reads posts from posts_by_author.
+     */
+    @GetMapping("/author/{identity}")
+    public List<PostResponse> retrievePostsByAuthor(@PathVariable String identity) {
+        return postService.retrievePostsByAuthor(identity);
     }
 }
