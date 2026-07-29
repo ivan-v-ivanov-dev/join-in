@@ -1,5 +1,6 @@
 package com.joinin.post.mapper;
 
+import com.join_in.common_models.CommentRpPostService;
 import com.joinin.post.model.CommentEntity;
 import com.joinin.post.model.CommentPrimaryKey;
 import com.joinin.post.model.CommentResponse;
@@ -12,10 +13,10 @@ public class CommentResponseMapper {
 
     private final PostedAgoFormatter postedAgoFormatter;
 
-    public CommentResponse fromCommentEntity(CommentEntity commentEntity) {
+    public CommentRpPostService fromCommentEntitytoCommentRpPostService(CommentEntity commentEntity) {
         CommentPrimaryKey primaryKey = commentEntity.getPrimaryKey();
 
-        return new CommentResponse(
+        return new CommentRpPostService(
                 primaryKey.getCommentIdentity(),
                 primaryKey.getPostIdentity(),
                 commentEntity.getAuthorIdentity(),

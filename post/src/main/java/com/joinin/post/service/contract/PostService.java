@@ -1,9 +1,9 @@
 package com.joinin.post.service.contract;
 
-import com.joinin.post.model.PostResponse;
+import com.join_in.common_models.PostRpPostService;
 
 import java.util.List;
 
 public interface PostService {
-    List<PostResponse> retrievePostsByAuthor(String identity);
+    List<PostRpPostService> retrievePostsByAuthor(String identity);
 }

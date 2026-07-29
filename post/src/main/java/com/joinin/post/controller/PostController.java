@@ -1,5 +1,6 @@
 package com.joinin.post.controller;
 
+import com.join_in.common_models.PostRpPostService;
 import com.joinin.post.model.PostResponse;
 import com.joinin.post.service.contract.PostService;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class PostController {
      * Reads posts from posts_by_author.
      */
     @GetMapping("/author/{identity}")
-    public List<PostResponse> retrievePostsByAuthor(@PathVariable String identity) {
+    public List<PostRpPostService> retrievePostsByAuthor(@PathVariable String identity) {
         return postService.retrievePostsByAuthor(identity);
     }
 }

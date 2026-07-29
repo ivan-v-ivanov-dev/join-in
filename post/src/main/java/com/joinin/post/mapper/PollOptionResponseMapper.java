@@ -1,18 +1,18 @@
 package com.joinin.post.mapper;
 
+import com.join_in.common_models.PollOptionRpPostService;
 import com.joinin.post.model.PollOption;
-import com.joinin.post.model.PollOptionResponse;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PollOptionResponseMapper {
 
-    public PollOptionResponse fromPollOption(PollOption pollOption) {
+    public PollOptionRpPostService fromPollOptiontoPollOptionRpPostService(PollOption pollOption) {
         if (pollOption == null) {
             return null;
         }
 
-        return new PollOptionResponse(
+        return new PollOptionRpPostService(
                 pollOption.getOptionIdentity(),
                 pollOption.getOptionText(),
                 pollOption.getVoteCount()
