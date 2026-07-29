@@ -1,12 +1,10 @@
 package com.joinin.gateway.controller;
 
+import com.join_in.common_models.PostRpGatewayService;
 import com.join_in.common_models.ProfileFriendsRpGatewayService;
-import com.join_in.common_models.RegisterUserMVCRq;
 import com.join_in.common_models.ProfileRpGatewayService;
-import com.joinin.gateway.service.contract.IdentityService;
-import com.joinin.gateway.service.contract.MediaService;
-import com.joinin.gateway.service.contract.ProfileService;
-import com.joinin.gateway.service.contract.RelationshipService;
+import com.join_in.common_models.RegisterUserMVCRq;
+import com.joinin.gateway.service.contract.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +19,7 @@ public class ApiGatewayController {
     private final MediaService mediaService;
     private final ProfileService profileService;
     private final RelationshipService relationshipService;
+    private final PostService postService;
 
     @PostMapping("/email/{email}/unique")
     public boolean isEmailUnique(@PathVariable("email") String email) {
@@ -55,6 +54,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/friends")
     public List<ProfileFriendsRpGatewayService> retrieveFriends(@PathVariable String identity) {
         return relationshipService.retrieveFriends(identity);
+    }
+
+    @GetMapping("/profile/{identity}/posts")
+    public List<PostRpGatewayService> retrieveProfilePosts(@PathVariable String identity) {
+        return postService.retrieveProfilePosts(identity);
     }
 
     @GetMapping("/health")

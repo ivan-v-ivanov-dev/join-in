@@ -1,6 +1,6 @@
 server:
   port: 8081
-  max-http-header-size: 10MB
+  max-http-request-header-size: 10MB
 
 spring:
   application:
@@ -43,3 +43,11 @@ relationship:
       client:
         name: Relationship-service-Feign-client
     url:  http://relationship-service:8087
+
+#Post service Feign client
+post:
+  service:
+    feign:
+      client:
+        name: Post-service-Feign-client
+    url:  http://post-service:8084
