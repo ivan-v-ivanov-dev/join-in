@@ -1,10 +1,7 @@
 package com.joinin.mvc.controller;
 
 import com.joinin.mvc.model.RegisterRq;
-import com.joinin.mvc.service.contract.IdentityService;
-import com.joinin.mvc.service.contract.MediaService;
-import com.joinin.mvc.service.contract.ProfileService;
-import com.joinin.mvc.service.contract.RelationshipService;
+import com.joinin.mvc.service.contract.*;
 import feign.FeignException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -25,6 +22,7 @@ public class MvcController {
     private final MediaService mediaService;
     private final ProfileService profileService;
     private final RelationshipService relationshipService;
+    private final PostService postService;
 
     @GetMapping("/")
     public String login() {
@@ -68,7 +66,7 @@ public class MvcController {
             model.addAttribute("albumImages", mediaService.retrieveProfileAlbumImages(identity));
             model.addAttribute("profile", profileService.retrieveProfileByIdentity(identity));
             model.addAttribute("friends", relationshipService.retrieveFriends(identity));
-//            model.addAttribute("posts", postService.findPostsByAuthorIdentity(identity));
+            model.addAttribute("posts", postService.retrieveProfilePosts(identity));
 //            model.addAttribute("onlineFriends", messageService.findProfileOnlineFriends(identity));
 //            model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
 //            model.addAttribute("notifications", notificationService.findProfileNotifications(identity));

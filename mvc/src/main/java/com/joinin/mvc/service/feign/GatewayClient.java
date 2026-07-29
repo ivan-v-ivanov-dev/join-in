@@ -1,5 +1,6 @@
 package com.joinin.mvc.service.feign;
 
+import com.join_in.common_models.PostRpGatewayService;
 import com.join_in.common_models.ProfileFriendsRpGatewayService;
 import com.join_in.common_models.ProfileRpGatewayService;
 import com.join_in.common_models.RegisterUserMVCRq;
@@ -38,4 +39,7 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}/friends")
     List<ProfileFriendsRpGatewayService> retrieveFriends(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/posts")
+    List<PostRpGatewayService> retrieveProfilePosts(@PathVariable String identity);
 }
