@@ -2,7 +2,6 @@ package com.joinin.post.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public record PostResponse(
@@ -26,6 +25,6 @@ public record PostResponse(
         String pollQuestion,
         List<PollOptionResponse> pollOptions,
 
-        LocalDateTime createdAt,
+        String postedAgo,
         List<CommentResponse> comments) {
 }

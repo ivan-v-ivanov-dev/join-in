@@ -11,11 +11,9 @@ import java.util.List;
 public class PostResponseMapper {
 
     private final PollOptionResponseMapper pollOptionResponseMapper;
+    private final PostedAgoFormatter postedAgoFormatter;
 
-    public PostResponse fromPostByAuthor(
-            PostByAuthorEntity postEntity,
-            List<CommentResponse> comments
-    ) {
+    public PostResponse fromPostByAuthor(PostByAuthorEntity postEntity, List<CommentResponse> comments) {
         PostByAuthorKey primaryKey = postEntity.getKey();
 
         List<PollOptionResponse> pollOptions =
@@ -44,7 +42,7 @@ public class PostResponseMapper {
                 postEntity.getPollQuestion(),
                 pollOptions,
 
-                primaryKey.getCreatedAt(),
+                postedAgoFormatter.calculatePostedAgo(primaryKey.getCreatedAt()),
 
                 comments
         );

@@ -20,7 +20,6 @@ import java.util.List;
 @AllArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    private final PostByIdRepository postByIdRepository;
     private final PostByAuthorRepository postByAuthorRepository;
     private final CommentRepository commentRepository;
     private final PostResponseMapper postResponseMapper;
@@ -28,15 +27,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostResponse> retrievePostsByAuthor(String identity) {
-        List<PostByAuthorEntity> postEntities = postByAuthorRepository
-                .findAllByAuthorIdentity(identity);
+        List<PostByAuthorEntity> postEntities = postByAuthorRepository.findAllByAuthorIdentity(identity);
         log.info("Retrieve posts by author identity: " + identity);
 
         List<PostResponse> posts = postEntities.stream()
                 .map(postEntity -> {
 
-                    String postIdentity =
-                            postEntity.getKey().getPostIdentity();
+                    String postIdentity = postEntity.getKey().getPostIdentity();
 
                     List<CommentResponse> comments = commentRepository
                             .findByPostIdentity(postIdentity)
