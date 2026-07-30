@@ -10,6 +10,9 @@ import java.util.List;
 @Setter
 @ToString
 public class Post {
+    private String authorProfileImage;
+    private String authorNames;
+
     private String postIdentity;
     private String authorIdentity;
     private String groupIdentity;
@@ -26,5 +29,11 @@ public class Post {
 
     private List<PollOption> pollOptions;
     private String postedAgo;
+
+    private int likeCount;
+    private int dislikeCount;
+    private int hahaCount;
+    private int angryCount;
+
     private List<Comment> comments;
 }
