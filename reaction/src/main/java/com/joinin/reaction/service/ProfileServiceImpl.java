@@ -16,10 +16,10 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public void saveProfile(String identity) {
-        ProfileNode user = ProfileNode.builder()
+        ProfileNode profile = ProfileNode.builder()
                 .identity(identity)
                 .build();
-        ProfileNode savedProfileNode = profileRepository.save(user);
-        log.info("User node saved in database. User identity: " + savedProfileNode.getIdentity());
+        ProfileNode savedProfileNode = profileRepository.save(profile);
+        log.info("Profile node saved in database. Profile identity: " + savedProfileNode.getIdentity());
     }
 }
