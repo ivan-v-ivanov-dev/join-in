@@ -1,14 +1,13 @@
 package com.joinin.post.mapper;
 
-import com.join_in.common_models.CommentRpPostService;
-import com.join_in.common_models.PollOptionRpPostService;
-import com.join_in.common_models.PostRpPostService;
+import com.join_in.common_models.*;
 import com.joinin.post.model.PostByAuthorEntity;
 import com.joinin.post.model.PostByAuthorKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +16,23 @@ public class PostResponseMapper {
     private final PollOptionResponseMapper pollOptionResponseMapper;
     private final PostedAgoFormatter postedAgoFormatter;
 
-    public PostRpPostService fromPostByAuthortoPostRpPostService(PostByAuthorEntity postEntity, List<CommentRpPostService> comments) {
+    public PostRpPostService fromPostByAuthortoPostRpPostService(PostByAuthorEntity postEntity,
+                                                                 List<CommentRpPostService> comments,
+                                                                 List<ProfileImageRpMediaService> profileImages,
+                                                                 List<ProfileRpProfileNamesProfileService> profileNames) {
         PostByAuthorKey primaryKey = postEntity.getKey();
+        String profileImage = profileImages
+                .stream()
+                .filter(e -> Objects.equals(e.identity(), primaryKey.getAuthorIdentity()))
+                .map(ProfileImageRpMediaService::profileImage)
+                .findFirst()
+                .orElse("No Image found");
+        String names = profileNames
+                .stream()
+                .filter(e -> Objects.equals(e.identity(), primaryKey.getAuthorIdentity()))
+                .map(e -> String.format("%s %s", e.firstName(), e.lastName()))
+                .findFirst()
+                .orElse("No name found");
 
         List<PollOptionRpPostService> pollOptions =
                 postEntity.getPollOptions() == null
@@ -29,6 +43,9 @@ public class PostResponseMapper {
                         .toList();
 
         return new PostRpPostService(
+                profileImage,
+                names,
+
                 primaryKey.getPostIdentity(),
                 primaryKey.getAuthorIdentity(),
                 postEntity.getGroupIdentity(),
