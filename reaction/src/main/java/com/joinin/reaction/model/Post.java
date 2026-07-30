@@ -11,8 +11,8 @@ import org.springframework.data.neo4j.core.schema.Node;
 @NoArgsConstructor
 @Getter
 @Builder
-@Node("Profile")
-public class ProfileNode {
+@Node("Post")
+public class Post {
 
     @Id
     private String identity;

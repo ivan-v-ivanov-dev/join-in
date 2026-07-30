@@ -1,6 +1,6 @@
 package com.joinin.reaction.service;
 
-import com.joinin.reaction.model.ProfileNode;
+import com.joinin.reaction.model.Profile;
 import com.joinin.reaction.repository.ProfileRepository;
 import com.joinin.reaction.service.contract.ProfileService;
 import lombok.AllArgsConstructor;
@@ -16,10 +16,10 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public void saveProfile(String identity) {
-        ProfileNode profile = ProfileNode.builder()
+        Profile profile = Profile.builder()
                 .identity(identity)
                 .build();
-        ProfileNode savedProfileNode = profileRepository.save(profile);
+        Profile savedProfileNode = profileRepository.save(profile);
         log.info("Profile node saved in database. Profile identity: " + savedProfileNode.getIdentity());
     }
 }
