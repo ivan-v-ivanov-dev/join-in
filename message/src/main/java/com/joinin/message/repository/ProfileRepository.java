@@ -20,4 +20,12 @@ public class ProfileRepository {
 
         return "User not saved in Redis. Problems with the identity: " + identity;
     }
+
+    public String getStatus(String identity) {
+        if (identity == null || identity.isBlank()) {
+            return OFFLINE;
+        }
+
+        return redisTemplate.opsForValue().get(identity);
+    }
 }

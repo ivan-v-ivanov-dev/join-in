@@ -7,6 +7,71 @@ services:
     restart: always
     ports:
       - 6381:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+    networks:
+      - join-in-network
+
+  # Import sample online statuses
+  message-redis-init:
+    image: redis:7.4-alpine
+    container_name: redis-message-service-init
+    restart: "no"
+
+    depends_on:
+      message-redis:
+        condition: service_healthy
+
+    entrypoint:
+      - /bin/sh
+      - -ec
+      - |
+        redis-cli -h message-redis -p 6379 SET \
+          "429e71a7f1773bf2619c4c54ca4a7c67ab949efc7fffc1097a9629e8dff3528b" \
+          "ONLINE"
+
+        redis-cli -h message-redis -p 6379 SET \
+          "9b5d4f5c0a71d7fef2c7c9f5f8cb45f4c1d49d6c9d4c9b9e3d6f2b1c4f8e7a91" \
+          "ONLINE"
+
+        redis-cli -h message-redis -p 6379 SET \
+          "771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551" \
+          "OFFLINE"
+
+        redis-cli -h message-redis -p 6379 SET \
+          "788176f5bb7f654863c2f3aa6bfaa8b49f54d0288019e9d846f772467984b627" \
+          "ONLINE"
+
+        redis-cli -h message-redis -p 6379 SET \
+          "d52ae056d5830fe0a58a7da85465d6561bb0b9aba01706f010c585810b8fd3c8" \
+          "OFFLINE"
+
+        redis-cli -h message-redis -p 6379 SET \
+          "8a27182c66548a4dcdc9b0cbf26227defcc076a464faa6b66e9f1c876590c94f" \
+          "ONLINE"
+
+        redis-cli -h message-redis -p 6379 SET \
+          "c5f825c26e2edad6bedd8c23b5da3006638793c4a38faaa6bd49cfbe4ab6dd85" \
+          "OFFLINE"
+
+        redis-cli -h message-redis -p 6379 SET \
+          "519ba91a5a5b4afb9dc66f8805ce8c442b6576316c19c6896af2fa9bda6aff71" \
+          "OFFLINE"
+
+        redis-cli -h message-redis -p 6379 SET \
+          "a4fe133a6f4bc82ab1e102ba5bdc6aaa66b3e69bbfd6e64ac30ebf7708e8bff6" \
+          "ONLINE"
+
+        redis-cli -h message-redis -p 6379 SET \
+          "31cae906048ac3f9dcd9525d0db54d766ffeca05e3c6f87e92f96306b8122d93" \
+          "OFFLINE"
+
+        echo "Sample Redis presence data imported successfully."
+
     networks:
       - join-in-network
 
