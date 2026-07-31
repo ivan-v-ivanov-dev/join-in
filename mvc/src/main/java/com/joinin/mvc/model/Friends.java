@@ -13,4 +13,5 @@ public class Friends {
     private String firstName;
     private String lastName;
     private String profileImage;
+    private String onlineStatus;
 }

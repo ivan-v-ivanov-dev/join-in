@@ -23,6 +23,9 @@ public class RelationshipServiceImpl implements RelationshipService {
     public List<Friends> retrieveFriends(String identity) {
         List<ProfileFriendsRpGatewayService> friends = gatewayClient.retrieveFriends(identity);
         log.info("Retrieve friends from API Gateway for profile: " + identity);
-        return friendsMapper.fromListProfileFriendsRpGatewayServicetoListFriends(friends);
+        return friends
+                .stream()
+                .map(friendsMapper::fromProfileFriendsRpGatewayServicetoFriends)
+                .toList();
     }
 }
