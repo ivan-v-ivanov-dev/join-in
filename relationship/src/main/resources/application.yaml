@@ -31,3 +31,11 @@ profile:
       client:
         name: Profile-service-Feign-client
     url:  http://profile-service:8083
+
+#Message service Feign client
+message:
+  service:
+    feign:
+      client:
+        name: Message-service-Feign-client
+    url:  http://message-service:8091

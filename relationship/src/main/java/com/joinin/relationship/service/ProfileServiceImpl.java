@@ -1,6 +1,7 @@
 package com.joinin.relationship.service;
 
 import com.join_in.common_models.ProfileImageRpMediaService;
+import com.join_in.common_models.ProfileOnlineStatusRpMessageService;
 import com.join_in.common_models.ProfileRpProfileNamesProfileService;
 import com.join_in.common_models.ProfileRpRelationshipService;
 import com.joinin.relationship.mapper.ProfileRelationshipMapper;
@@ -8,6 +9,7 @@ import com.joinin.relationship.model.ProfileNode;
 import com.joinin.relationship.repository.ProfileRepository;
 import com.joinin.relationship.service.contract.ProfileService;
 import com.joinin.relationship.service.feign.MediaServiceClient;
+import com.joinin.relationship.service.feign.MessageServiceClient;
 import com.joinin.relationship.service.feign.ProfileServiceClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,7 @@ public class ProfileServiceImpl implements ProfileService {
     private final MediaServiceClient mediaServiceClient;
     private final ProfileServiceClient profileServiceClient;
     private final ProfileRelationshipMapper profileRelationshipMapper;
+    private final MessageServiceClient messageServiceClient;
 
     @Override
     public void createProfile(String identity) {
@@ -54,11 +57,15 @@ public class ProfileServiceImpl implements ProfileService {
                 profileServiceClient.retrieveProfilesNames(friends.stream().map(ProfileNode::getIdentity).toList());
         log.info("Retrieve names for all friends from Profile Service. Profile identities: " +
                 profileRpProfileNamesProfileServices.stream().map(ProfileRpProfileNamesProfileService::identity).collect(Collectors.joining(", ")));
+        List<ProfileOnlineStatusRpMessageService> profileOnlineStatuses = messageServiceClient.retrieveProfilesOnlineStatuses(friends.stream().map(ProfileNode::getIdentity).toList());
+        log.info("Retrieve online statuses for friends from Message Service. Profile identities: " +
+                profileOnlineStatuses.stream().map(ProfileOnlineStatusRpMessageService::identity).collect(Collectors.joining(", ")));
         return friends.stream()
-                .map(friend -> profileRelationshipMapper.map(
+                .map(friend -> profileRelationshipMapper.toProfileRpRelationshipService(
                         friend,
                         profileRpProfileNamesProfileServices,
-                        profileImageRpMediaServices))
+                        profileImageRpMediaServices,
+                        profileOnlineStatuses))
                 .toList();
     }
 }
