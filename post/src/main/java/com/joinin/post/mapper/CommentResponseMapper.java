@@ -1,5 +1,6 @@
 package com.joinin.post.mapper;
 
+import com.join_in.common_models.CommentReactionsCountRpReactionService;
 import com.join_in.common_models.CommentRpPostService;
 import com.join_in.common_models.ProfileImageRpMediaService;
 import com.join_in.common_models.ProfileRpProfileNamesProfileService;
@@ -19,7 +20,8 @@ public class CommentResponseMapper {
 
     public CommentRpPostService fromCommentEntitytoCommentRpPostService(CommentEntity commentEntity,
                                                                         List<ProfileImageRpMediaService> profileImagesRpMediaServices,
-                                                                        List<ProfileRpProfileNamesProfileService> commentProfileNames) {
+                                                                        List<ProfileRpProfileNamesProfileService> commentProfileNames,
+                                                                        List<CommentReactionsCountRpReactionService> commentReactionsCount) {
         CommentPrimaryKey primaryKey = commentEntity.getPrimaryKey();
 
         String image = profileImagesRpMediaServices.stream()
@@ -34,6 +36,20 @@ public class CommentResponseMapper {
                 .findFirst()
                 .orElse("No name found");
 
+        int likeCount = commentReactionsCount
+                .stream()
+                .filter(e -> e.identity().equals(primaryKey.getCommentIdentity()))
+                .map(CommentReactionsCountRpReactionService::likeCount)
+                .findFirst()
+                .orElse(0);
+
+        int dislikeCount = commentReactionsCount
+                .stream()
+                .filter(e -> e.identity().equals(primaryKey.getCommentIdentity()))
+                .map(CommentReactionsCountRpReactionService::dislikeCount)
+                .findFirst()
+                .orElse(0);
+
         return new CommentRpPostService(
                 image,
                 names,
@@ -41,6 +57,8 @@ public class CommentResponseMapper {
                 primaryKey.getPostIdentity(),
                 commentEntity.getAuthorIdentity(),
                 commentEntity.getContent(),
+                likeCount,
+                dislikeCount,
                 postedAgoFormatter.calculatePostedAgo(commentEntity.getPrimaryKey().getCreatedAt())
         );
     }

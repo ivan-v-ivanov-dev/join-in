@@ -19,7 +19,8 @@ public class PostResponseMapper {
     public PostRpPostService fromPostByAuthortoPostRpPostService(PostByAuthorEntity postEntity,
                                                                  List<CommentRpPostService> comments,
                                                                  List<ProfileImageRpMediaService> profileImages,
-                                                                 List<ProfileRpProfileNamesProfileService> profileNames) {
+                                                                 List<ProfileRpProfileNamesProfileService> profileNames,
+                                                                 List<PostReactionsCountRpReactionService> postReactionsCount) {
         PostByAuthorKey primaryKey = postEntity.getKey();
         String profileImage = profileImages
                 .stream()
@@ -42,6 +43,34 @@ public class PostResponseMapper {
                         .map(pollOptionResponseMapper::fromPollOptiontoPollOptionRpPostService)
                         .toList();
 
+        int likeCount = postReactionsCount
+                .stream()
+                .filter(e -> e.identity().equals(primaryKey.getPostIdentity()))
+                .map(PostReactionsCountRpReactionService::likeCount)
+                .findFirst()
+                .orElse(0);
+
+        int dislikeCount = postReactionsCount
+                .stream()
+                .filter(e -> e.identity().equals(primaryKey.getPostIdentity()))
+                .map(PostReactionsCountRpReactionService::dislikeCount)
+                .findFirst()
+                .orElse(0);
+
+        int hahaCount = postReactionsCount
+                .stream()
+                .filter(e -> e.identity().equals(primaryKey.getPostIdentity()))
+                .map(PostReactionsCountRpReactionService::hahaCount)
+                .findFirst()
+                .orElse(0);
+
+        int angryCount = postReactionsCount
+                .stream()
+                .filter(e -> e.identity().equals(primaryKey.getPostIdentity()))
+                .map(PostReactionsCountRpReactionService::angryCount)
+                .findFirst()
+                .orElse(0);
+
         return new PostRpPostService(
                 profileImage,
                 names,
@@ -62,6 +91,11 @@ public class PostResponseMapper {
 
                 postEntity.getPollQuestion(),
                 pollOptions,
+
+                likeCount,
+                dislikeCount,
+                hahaCount,
+                angryCount,
 
                 postedAgoFormatter.calculatePostedAgo(primaryKey.getCreatedAt()),
 
