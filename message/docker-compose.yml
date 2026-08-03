@@ -69,6 +69,18 @@ services:
         redis-cli -h message-redis -p 6379 SET \
           "31cae906048ac3f9dcd9525d0db54d766ffeca05e3c6f87e92f96306b8122d93" \
           "OFFLINE"
+        
+        redis-cli -h message-redis -p 6379 SET \
+          "991f49289c5745bbeba353af157a40c48edfed061ead6d417160d9b89a54baa6" \
+          "OFFLINE" 
+        
+        redis-cli -h message-redis -p 6379 SET \
+          "aad12f3aa20775b329a00d0f0ccba97dafbc72fd925163e2e26f5ee91ec6b2cd" \
+          "ONLINE" 
+        
+        redis-cli -h message-redis -p 6379 SET \
+          "f1bc296565b36ec1932fd0b0889fb94f3fc14f56f1141f1327fd4f58cfa6a231" \
+          "ONLINE"
 
         echo "Sample Redis presence data imported successfully."
 
