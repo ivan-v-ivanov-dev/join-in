@@ -18,6 +18,7 @@ public class ApiGatewayController {
     private final RelationshipService relationshipService;
     private final PostService postService;
     private final GroupService groupService;
+    private final ReactionService reactionService;
 
     @PostMapping("/email/{email}/unique")
     public boolean isEmailUnique(@PathVariable("email") String email) {
@@ -77,6 +78,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/friends/count")
     public int retrieveProfilesFriendsCount(@PathVariable String identity) {
         return relationshipService.retrieveFriendsCount(identity);
+    }
+
+    @GetMapping("/profile/{identity}/reactions/count")
+    public int retrievePostsAndCommentsReactionsCount(@PathVariable String identity) {
+        return reactionService.retrievePostsAndCommentsReactionsCount(identity);
     }
 
     @GetMapping("/health")

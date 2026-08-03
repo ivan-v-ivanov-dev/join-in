@@ -59,3 +59,11 @@ group:
       client:
         name: Group-service-Feign-client
     url:  http://group-service:8088
+
+#Reaction service Feign client
+reaction:
+  service:
+    feign:
+      client:
+        name: Reaction-service-Feign-client
+    url:  http://reaction-service:8085
