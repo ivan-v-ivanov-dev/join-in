@@ -1,9 +1,6 @@
 package com.joinin.gateway.controller;
 
-import com.join_in.common_models.PostRpGatewayService;
-import com.join_in.common_models.ProfileFriendsRpGatewayService;
-import com.join_in.common_models.ProfileRpGatewayService;
-import com.join_in.common_models.RegisterUserMVCRq;
+import com.join_in.common_models.*;
 import com.joinin.gateway.service.contract.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -20,6 +17,7 @@ public class ApiGatewayController {
     private final ProfileService profileService;
     private final RelationshipService relationshipService;
     private final PostService postService;
+    private final GroupService groupService;
 
     @PostMapping("/email/{email}/unique")
     public boolean isEmailUnique(@PathVariable("email") String email) {
@@ -59,6 +57,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/posts")
     public List<PostRpGatewayService> retrieveProfilePosts(@PathVariable String identity) {
         return postService.retrieveProfilePosts(identity);
+    }
+
+    @GetMapping("/profile/{identity}/joined-groups")
+    public List<GroupRpGatewayService> retrieveProfileJoinedGroups(@PathVariable String identity) {
+        return groupService.retrieveProfileJoinedGroups(identity);
     }
 
     @GetMapping("/health")

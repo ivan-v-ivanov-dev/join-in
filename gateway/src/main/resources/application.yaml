@@ -51,3 +51,11 @@ post:
       client:
         name: Post-service-Feign-client
     url:  http://post-service:8084
+
+#Group service Feign client
+group:
+  service:
+    feign:
+      client:
+        name: Group-service-Feign-client
+    url:  http://group-service:8088
