@@ -49,6 +49,9 @@ public interface GatewayClient {
     @GetMapping("/profile/{identity}/comments/count")
     int retrieveProfileCommentsCount(@PathVariable String identity);
 
+    @GetMapping("/profile/{identity}/reactions/count")
+    int retrievePostsAndCommentsReactionsCount(@PathVariable String identity);
+
     @GetMapping("/profile/{identity}/friends/count")
     int retrieveProfilesFriendsCount(@PathVariable String identity);
 }
