@@ -17,3 +17,11 @@ spring:
     hibernate:
       ddl-auto: none
     open-in-view: false
+
+#Media service Feign client
+media:
+  service:
+    feign:
+      client:
+        name: Media-service-Feign-client
+    url:  http://media-service:8090
