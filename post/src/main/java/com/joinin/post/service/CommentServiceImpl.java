@@ -1,5 +1,6 @@
 package com.joinin.post.service;
 
+import com.joinin.post.model.CommentByAuthorEntity;
 import com.joinin.post.repository.CommentByAuthorRepository;
 import com.joinin.post.service.contract.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<String> retrieveCommentIdentitiesByAuthor(String identity) {
-        List<String> commentIdentities = commentByAuthorRepository.retrieveCommentIdentitiesByAuthor(identity);
+        List<CommentByAuthorEntity> commentByAuthorEntities = commentByAuthorRepository.retrieveCommentsByAuthor(identity);
         log.info("Retrieve comments count for profile: " + identity);
-        return commentIdentities;
+        return commentByAuthorEntities
+                .stream()
+                .map(e -> e.getKey().getCommentIdentity())
+                .toList();
     }
 }

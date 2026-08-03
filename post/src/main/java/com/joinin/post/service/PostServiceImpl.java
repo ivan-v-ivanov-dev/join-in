@@ -68,8 +68,11 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<String> retrievePostIdentitiesByAuthor(String identity) {
-        List<String> postIdentities = postByAuthorRepository.retrievePostIdentitiesByAuthor(identity);
+        List<PostByAuthorEntity> postsByAuthor = postByAuthorRepository.findAllByAuthorIdentity(identity);
         log.info("Retrieve all post identities for profile: " + identity);
-        return postIdentities;
+        return postsByAuthor
+                .stream()
+                .map(e -> e.getKey().getPostIdentity())
+                .toList();
     }
 }

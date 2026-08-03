@@ -23,4 +23,13 @@ public interface CommentByAuthorRepository extends CassandraRepository<CommentBy
             WHERE author_identity = ?0
             """)
     List<String> retrieveCommentIdentitiesByAuthor(String authorIdentity);
+
+    @Query("""
+            SELECT author_identity,
+                   created_at,
+                   comment_identity
+            FROM comments_by_author
+            WHERE author_identity = ?0
+            """)
+    List<CommentByAuthorEntity> retrieveCommentsByAuthor(String authorIdentity);
 }
