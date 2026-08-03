@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -18,5 +20,12 @@ public class CommentServiceImpl implements CommentService {
         int commentsCount = commentByAuthorRepository.countAuthorComments(identity);
         log.info("Retrieve comments count for profile: " + identity);
         return commentsCount;
+    }
+
+    @Override
+    public List<String> retrieveCommentIdentitiesByAuthor(String identity) {
+        List<String> commentIdentities = commentByAuthorRepository.retrieveCommentIdentitiesByAuthor(identity);
+        log.info("Retrieve comments count for profile: " + identity);
+        return commentIdentities;
     }
 }

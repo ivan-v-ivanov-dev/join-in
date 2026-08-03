@@ -30,6 +30,11 @@ public class PostController {
         return postService.retrievePostIdentitiesByAuthor(identity);
     }
 
+    @GetMapping("/author/{identity}/comment/identities")
+    public List<String> retrieveCommentIdentitiesByAuthor(@PathVariable String identity) {
+        return commentService.retrieveCommentIdentitiesByAuthor(identity);
+    }
+
     @GetMapping("/author/{identity}/posts/count")
     public int retrieveAuthorPostsCount(@PathVariable String identity) {
         return postService.retrieveProfilePostsCount(identity);

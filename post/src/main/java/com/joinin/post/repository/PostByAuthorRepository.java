@@ -22,12 +22,12 @@ public interface PostByAuthorRepository extends CassandraRepository<PostByAuthor
             FROM posts_by_author
             WHERE author_identity = ?0
             """)
-    int retrieveProfilePostsCount(String identity);
+    int retrieveProfilePostsCount(String authorIdentity);
 
     @Query("""
             SELECT post_identity
             FROM posts_by_author
             WHERE author_identity = ?0
             """)
-    List<String> retrievePostIdentitiesByAuthor(String identity);
+    List<String> retrievePostIdentitiesByAuthor(String authorIdentity);
 }
