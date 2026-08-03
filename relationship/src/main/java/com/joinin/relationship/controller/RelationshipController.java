@@ -19,4 +19,9 @@ public class RelationshipController {
     public List<ProfileRpRelationshipService> retrieveFriendsProfiles(@PathVariable String identity) {
         return profileService.retrieveFriendsProfiles(identity);
     }
+
+    @GetMapping("/profile/{identity}/friends/count")
+    public int retrieveProfilesFriendsCount(@PathVariable String identity) {
+        return profileService.retrieveProfilesFriendsCount(identity);
+    }
 }

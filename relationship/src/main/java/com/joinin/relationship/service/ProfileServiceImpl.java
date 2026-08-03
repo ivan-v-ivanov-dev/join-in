@@ -68,4 +68,11 @@ public class ProfileServiceImpl implements ProfileService {
                         profileOnlineStatuses))
                 .toList();
     }
+
+    @Override
+    public int retrieveProfilesFriendsCount(String identity) {
+        int friendsCount = profileRepository.countAllFriendsByIdentity(identity);
+        log.info("Retrieve profile friends count. Profile: " + identity);
+        return friendsCount;
+    }
 }

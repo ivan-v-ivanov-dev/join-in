@@ -15,4 +15,11 @@ public interface ProfileRepository extends Neo4jRepository<ProfileNode, String> 
         RETURN friend
         """)
     List<ProfileNode> findAllFriendsByIdentity(@Param("identity") String identity);
+
+    @Query("""
+        OPTIONAL MATCH (profile:Profile {identity: $identity})
+        OPTIONAL MATCH (profile)-[:FRIEND]->(friend:Profile)
+        RETURN count(DISTINCT friend) AS friendCount
+        """)
+    int countAllFriendsByIdentity(@Param("identity") String identity);
 }

@@ -8,4 +8,6 @@ public interface ProfileService {
     void createProfile(String identity);
 
     List<ProfileRpRelationshipService> retrieveFriendsProfiles(String identity);
+
+    int retrieveProfilesFriendsCount(String identity);
 }
