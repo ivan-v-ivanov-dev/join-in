@@ -696,11 +696,11 @@
                                         <ul class="social-data-block d-flex align-items-center justify-content-between list-inline p-0 m-0">
                                             <li class="text-center ps-3">
                                                 <h6>Posts</h6>
-                                                <p class="mb-0">690</p>
+                                                <p class="mb-0" th:text="${postsCount != null ? postsCount : 0}">690</p>
                                             </li>
                                             <li class="text-center ps-3">
                                                 <h6>Comments</h6>
-                                                <p class="mb-0">206</p>
+                                                <p class="mb-0" th:text="${commentsCount != null ? commentsCount : 0}">206</p>
                                             </li>
                                             <li class="text-center ps-3">
                                                 <h6>Reactions</h6>
@@ -708,7 +708,7 @@
                                             </li>
                                             <li class="text-center ps-3">
                                                 <h6>Friends</h6>
-                                                <p class="mb-0">100</p>
+                                                <p class="mb-0" th:text="${friendsCount != null ? friendsCount : 0}">100</p>
                                             </li>
                                         </ul>
                                     </div>

@@ -28,4 +28,11 @@ public class RelationshipServiceImpl implements RelationshipService {
                 .map(friendsMapper::fromProfileFriendsRpGatewayServicetoFriends)
                 .toList();
     }
+
+    @Override
+    public int retrieveFriendsCount(String identity) {
+        int friendsCount = gatewayClient.retrieveProfilesFriendsCount(identity);
+        log.info("Retrieve friends count for profile: " + identity);
+        return friendsCount;
+    }
 }
