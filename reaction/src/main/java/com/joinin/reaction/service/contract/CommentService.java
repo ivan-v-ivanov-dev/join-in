@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CommentService {
     List<CommentReactionsCountRpReactionService> retrieveCommentsReactionsCount(List<String> identities);
+
+    int retrieveCommentsReactionsCountByProfileIdentity(String identity);
 }
