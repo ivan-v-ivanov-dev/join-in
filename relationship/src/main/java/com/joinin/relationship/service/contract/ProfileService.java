@@ -10,4 +10,6 @@ public interface ProfileService {
     List<ProfileRpRelationshipService> retrieveFriendsProfiles(String identity);
 
     int retrieveProfilesFriendsCount(String identity);
+
+    List<ProfileRpRelationshipService> retrieveFriendshipRequests(String identity);
 }

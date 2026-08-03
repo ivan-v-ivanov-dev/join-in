@@ -10,16 +10,25 @@ import java.util.List;
 public interface ProfileRepository extends Neo4jRepository<ProfileNode, String> {
 
     @Query("""
-        MATCH (:Profile {identity: $identity})
-              -[:FRIEND]->(friend:Profile)
-        RETURN friend
-        """)
+            MATCH (:Profile {identity: $identity})
+                  -[:FRIEND]->(friend:Profile)
+            RETURN friend
+            """)
     List<ProfileNode> findAllFriendsByIdentity(@Param("identity") String identity);
 
     @Query("""
-        OPTIONAL MATCH (profile:Profile {identity: $identity})
-        OPTIONAL MATCH (profile)-[:FRIEND]->(friend:Profile)
-        RETURN count(DISTINCT friend) AS friendCount
-        """)
+            OPTIONAL MATCH (profile:Profile {identity: $identity})
+            OPTIONAL MATCH (profile)-[:FRIEND]->(friend:Profile)
+            RETURN count(DISTINCT friend) AS friendCount
+            """)
     int countAllFriendsByIdentity(@Param("identity") String identity);
+
+    @Query("""
+            MATCH (requester:Profile)
+                  -[:FRIENDSHIP_REQUEST]->
+                  (:Profile {identity: $identity})
+            RETURN DISTINCT requester
+            ORDER BY requester.identity
+            """)
+    List<ProfileNode> findFriendshipRequestsByIdentity(@Param("identity") String identity);
 }

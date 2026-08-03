@@ -20,6 +20,11 @@ public class RelationshipController {
         return profileService.retrieveFriendsProfiles(identity);
     }
 
+    @GetMapping("profile/{identity}/frienship/requests")
+    public  List<ProfileRpRelationshipService> retrieveFriendshipRequests(@PathVariable String identity) {
+        return profileService.retrieveFriendshipRequests(identity);
+    }
+
     @GetMapping("/profile/{identity}/friends/count")
     public int retrieveProfilesFriendsCount(@PathVariable String identity) {
         return profileService.retrieveProfilesFriendsCount(identity);
