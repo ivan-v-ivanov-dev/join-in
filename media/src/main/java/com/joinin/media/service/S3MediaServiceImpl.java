@@ -1,8 +1,11 @@
 package com.joinin.media.service;
 
+import com.join_in.common_models.GroupRpImageService;
 import com.join_in.common_models.ProfileImageRpMediaService;
 import com.joinin.media.model.AlbumPictureUrl;
+import com.joinin.media.model.Group;
 import com.joinin.media.model.Profile;
+import com.joinin.media.service.contract.GroupService;
 import com.joinin.media.service.contract.ProfileService;
 import com.joinin.media.service.contract.S3MediaService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +30,7 @@ public class S3MediaServiceImpl implements S3MediaService {
 
     private final S3Client s3Client;
     private final ProfileService profileService;
+    private final GroupService groupService;
     @Value("${aws.s3.bucket}")
     private String bucket;
 
@@ -131,6 +136,36 @@ public class S3MediaServiceImpl implements S3MediaService {
                         .map(ProfileImageRpMediaService::identity)
                         .collect(Collectors.joining(", ")));
         return profileImageRpMediaServiceList;
+    }
+
+    @Override
+    public List<GroupRpImageService> retrieveGroupsImages(List<String> identities) {
+        List<Group> groups = groupService.retrieveGroups(identities);
+
+        if (groups.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<GroupRpImageService> groupImages = groups.stream()
+                .map(group -> {
+                    String imageBase64 = null;
+
+                    if (group.getImageUrl() != null && !group.getImageUrl().isBlank()) {
+                        imageBase64 = getImageAsBase64(group.getImageUrl());
+                    }
+
+                    return new GroupRpImageService(group.getIdentity(), imageBase64);
+                })
+                .toList();
+
+        log.info(
+                "Retrieved images for groups: {}",
+                groupImages.stream()
+                        .map(GroupRpImageService::identity)
+                        .collect(Collectors.joining(", "))
+        );
+
+        return groupImages;
     }
 
     private String getImageAsBase64(String objectKey) {

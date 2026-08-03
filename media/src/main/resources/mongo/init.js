@@ -139,3 +139,20 @@ db.profiles.insertMany([
 ]);
 
 console.log("*** Profiles inserted successfully ***");
+
+db.groups.insertMany([
+    {
+        identity: "c618b165b455a1bbb4bff8574ec56f70d49f47c901b154493417a2b02ea825c26cb0bd592298995fb3f5d61b7367ee5d9051793448ef3d258fc415fa278ed519",
+        imageUrl: "group/c618b165b455a1bbb4bff8574ec56f70d49f47c901b154493417a2b02ea825c26cb0bd592298995fb3f5d61b7367ee5d9051793448ef3d258fc415fa278ed519.webp"
+    },
+    {
+        identity: "a503cd186622eaf31aebb561f159476cafcebadbc3e6d019b9b2eb85a6d4215600690efe6ff26247795ecee7af333bf45f607812065096e6888977d544e8ad91",
+        imageUrl: "group/a503cd186622eaf31aebb561f159476cafcebadbc3e6d019b9b2eb85a6d4215600690efe6ff26247795ecee7af333bf45f607812065096e6888977d544e8ad91.webp"
+    },
+    {
+        identity: "4b219329051054e53ab7960926d09ea7bbb1177a263706a1eead03c46c2c57fb93e4fe23860f153198bbc1eb754adc0a44c704d35a722a097d43870d315a9a55",
+        imageUrl: "group/4b219329051054e53ab7960926d09ea7bbb1177a263706a1eead03c46c2c57fb93e4fe23860f153198bbc1eb754adc0a44c704d35a722a097d43870d315a9a55.webp"
+    }
+]);
+
+console.log("*** Groups inserted successfully ***");

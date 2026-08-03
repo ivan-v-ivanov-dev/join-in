@@ -1,8 +1,10 @@
 package com.joinin.media.controller;
 
+import com.join_in.common_models.GroupRpImageService;
 import com.join_in.common_models.ProfileImageRpMediaService;
 import com.joinin.media.service.contract.S3MediaService;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,5 +34,10 @@ public class MediaController {
     @GetMapping(value = "/profile/{identity}/album-images", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<String> retrieveProfileAlbumImages(@PathVariable String identity) {
         return s3MediaService.retrieveProfileAlbumImages(identity);
+    }
+
+    @PostMapping("/groups/images")
+    public List<GroupRpImageService> retrieveGroupsImages(@RequestBody List<String> identities) {
+        return s3MediaService.retrieveGroupsImages(identities);
     }
 }
