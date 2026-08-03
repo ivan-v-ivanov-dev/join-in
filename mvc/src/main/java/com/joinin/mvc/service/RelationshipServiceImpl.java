@@ -2,7 +2,7 @@ package com.joinin.mvc.service;
 
 import com.join_in.common_models.ProfileFriendsRpGatewayService;
 import com.joinin.mvc.mappers.FriendsMapper;
-import com.joinin.mvc.model.Friends;
+import com.joinin.mvc.model.Friend;
 import com.joinin.mvc.service.contract.RelationshipService;
 import com.joinin.mvc.service.feign.GatewayClient;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +20,20 @@ public class RelationshipServiceImpl implements RelationshipService {
     private final FriendsMapper friendsMapper;
 
     @Override
-    public List<Friends> retrieveFriends(String identity) {
+    public List<Friend> retrieveFriends(String identity) {
         List<ProfileFriendsRpGatewayService> friends = gatewayClient.retrieveFriends(identity);
         log.info("Retrieve friends from API Gateway for profile: " + identity);
         return friends
+                .stream()
+                .map(friendsMapper::fromProfileFriendsRpGatewayServicetoFriends)
+                .toList();
+    }
+
+    @Override
+    public List<Friend> retrieveFriendshipRequests(String identity) {
+        List<ProfileFriendsRpGatewayService> friendshipRequests = gatewayClient.retrieveFriendshipRequests(identity);
+        log.info("Retrieve friendship requests from API Gateway for profile: " + identity);
+        return friendshipRequests
                 .stream()
                 .map(friendsMapper::fromProfileFriendsRpGatewayServicetoFriends)
                 .toList();

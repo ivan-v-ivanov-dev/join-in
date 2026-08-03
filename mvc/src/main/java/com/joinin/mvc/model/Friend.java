@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class Friends {
+public class Friend {
 
     private String identity;
     private String firstName;

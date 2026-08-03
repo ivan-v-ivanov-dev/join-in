@@ -157,89 +157,96 @@
                                 <div class="header-title">
                                     <h5 class="mb-0 text-white">Friend Request</h5>
                                 </div>
-                                <small class="badge  bg-light text-dark ">4</small>
+                                <small class="badge  bg-light text-dark "
+                                       th:text="${friendshipRequests != null ? friendshipRequests.size() : 0}">4</small>
                             </div>
+
                             <div class="card-body p-0">
-                                <div class="iq-friend-request">
-                                    <div
-                                            class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="avatar-40 rounded" src="../assets/images/user/01.jpg"
-                                                 alt="" loading="lazy">
-                                            <div class="ms-3">
-                                                <h6 class="mb-0 ">Jaques Amole</h6>
-                                                <p class="mb-0">40 friends</p>
+
+                                <div th:if="${friendshipRequests != null and !friendshipRequests.isEmpty()}">
+
+                                    <div class="iq-friend-request"
+                                         th:each="friendshipRequest : ${friendshipRequests}">
+
+                                        <div class="iq-sub-card iq-sub-card-big
+                        d-flex align-items-center justify-content-between">
+
+                                            <div class="d-flex align-items-center">
+
+                                                <img class="avatar-40 rounded"
+                                                     th:src="${friendshipRequest.profileImage != null
+                                  and !friendshipRequest.profileImage.isBlank()
+                                  ? friendshipRequest.profileImage
+                                  : '/assets/images/user/default-profile.webp'}"
+                                                     th:alt="|${friendshipRequest.firstName} ${friendshipRequest.lastName}|"
+                                                     loading="lazy">
+
+                                                <div class="ms-3">
+
+                                                    <h6 class="mb-1"
+                                                        th:text="|${friendshipRequest.firstName} ${friendshipRequest.lastName}|">
+                                                        User name
+                                                    </h6>
+
+                                                    <small class="d-flex align-items-center">
+
+                            <span class="rounded-circle me-1"
+                                  style="width: 8px; height: 8px; display: inline-block;"
+                                  th:classappend="${friendshipRequest.getOnlineStatus() != null
+                                      and #strings.equalsIgnoreCase(
+                                          friendshipRequest.getOnlineStatus().toString(),
+                                          'ONLINE'
+                                      )
+                                      ? ' bg-success'
+                                      : ' bg-secondary'}">
+                            </span>
+
+                                                        <span th:text="${friendshipRequest.getOnlineStatus() != null
+                                    and #strings.equalsIgnoreCase(
+                                        friendshipRequest.getOnlineStatus().toString(),
+                                        'ONLINE'  ) ? 'Online' : 'Offline'}">
+                                Offline
+                            </span>
+
+                                                    </small>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex align-items-center">
+
+                                                <a href="javascript:void(0);"
+                                                   class="me-3 btn btn-primary rounded"
+                                                   th:attr="data-identity=${friendshipRequest.identity}">
+                                                    Confirm
+                                                </a>
+
+                                                <a href="javascript:void(0);"
+                                                   class="btn btn-secondary rounded"
+                                                   th:attr="data-identity=${friendshipRequest.identity}">
+                                                    Delete Request
+                                                </a>
+
                                             </div>
                                         </div>
-                                        <div class="d-flex align-items-center">
-                                            <a href="javascript:void(0);"
-                                               class="me-3 btn btn-primary rounded">Confirm</a>
-                                            <a href="javascript:void(0);"
-                                               class="me-3 btn btn-secondary rounded">Delete Request</a>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="iq-friend-request">
-                                    <div
-                                            class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="avatar-40 rounded" src="../assets/images/user/02.jpg"
-                                                 alt="" loading="lazy">
-                                            <div class="ms-3">
-                                                <h6 class="mb-0 ">Lucy Tania</h6>
-                                                <p class="mb-0">12 friends</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <a href="javascript:void(0);"
-                                               class="me-3 btn btn-primary rounded">Confirm</a>
-                                            <a href="javascript:void(0);"
-                                               class="me-3 btn btn-secondary rounded">Delete Request</a>
-                                        </div>
+
+                                    <div class="text-center">
+                                        <a href="javascript:void(0);"
+                                           class="btn text-primary">
+                                            View More Requests
+                                        </a>
                                     </div>
+
                                 </div>
-                                <div class="iq-friend-request">
-                                    <div
-                                            class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="avatar-40 rounded" src="../assets/images/user/03.jpg"
-                                                 alt="" loading="lazy">
-                                            <div class=" ms-3">
-                                                <h6 class="mb-0 ">Manny Petty</h6>
-                                                <p class="mb-0">3 friends</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <a href="javascript:void(0);"
-                                               class="me-3 btn btn-primary rounded">Confirm</a>
-                                            <a href="javascript:void(0);"
-                                               class="me-3 btn btn-secondary rounded">Delete Request</a>
-                                        </div>
-                                    </div>
+
+                                <div class="text-center p-3"
+                                     th:if="${friendshipRequests == null or friendshipRequests.isEmpty()}">
+                                    <p class="mb-0">No friendship requests</p>
                                 </div>
-                                <div class="iq-friend-request">
-                                    <div
-                                            class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="avatar-40 rounded" src="../assets/images/user/04.jpg"
-                                                 alt="" loading="lazy">
-                                            <div class="ms-3">
-                                                <h6 class="mb-0 ">Marsha Mello</h6>
-                                                <p class="mb-0">15 friends</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <a href="javascript:void(0);"
-                                               class="me-3 btn btn-primary rounded">Confirm</a>
-                                            <a href="javascript:void(0);"
-                                               class="me-3 btn btn-secondary rounded">Delete Request</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <a href="javascript:void(0);" class=" btn text-primary">View More Request</a>
-                                </div>
+
                             </div>
+
                         </div>
                     </div>
                 </li>
@@ -429,7 +436,7 @@
                                    line_style
                                 </span>
                                     <div class="ms-3">
-                                        <a href="../app/profile.html" class="mb-0 h6">
+                                        <a th:href="@{/profile/{identity}(identity=${profile.identity})}" class="mb-0 h6">
                                             My Profile
                                         </a>
                                     </div>
@@ -470,7 +477,7 @@
                                         circle
                                     </i>
                                     <div class="ms-3">
-                                        Away
+                                        Offline
                                     </div>
                                 </div>
                             </div>
@@ -1669,9 +1676,7 @@
                                                                     </div>
                                                                     <div class="edit-relation"><a href="#"
                                                                                                   class="d-flex align-items-center"><span
-                                                                            class="material-symbols-outlined me-2 md-18">
-                                                edit
-                                                </span>Edit</a>
+                                                                            class="material-symbols-outlined me-2 md-18">edit</span>Edit</a>
                                                                     </div>
                                                                 </div>
                                                             </div>

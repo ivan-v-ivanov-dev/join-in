@@ -43,6 +43,9 @@ public interface GatewayClient {
     @GetMapping("/profile/{identity}/joined-groups")
     List<GroupRpGatewayService> retrieveProfileJoinedGroups(@PathVariable String identity);
 
+    @GetMapping("/profile/{identity}/frienship/requests")
+    List<ProfileFriendsRpGatewayService> retrieveFriendshipRequests(@PathVariable String identity);
+
     @GetMapping("/profile/{identity}/posts/count")
     int retrieveProfilePostsCount(@PathVariable String identity);
 

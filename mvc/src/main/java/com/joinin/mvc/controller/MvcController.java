@@ -70,6 +70,7 @@ public class MvcController {
             model.addAttribute("friends", relationshipService.retrieveFriends(identity));
             model.addAttribute("posts", postService.retrieveProfilePosts(identity));
             model.addAttribute("groups", groupService.retrieveProfileJoinedGroups(identity));
+            model.addAttribute("friendshipRequests", relationshipService.retrieveFriendshipRequests(identity));
             model.addAttribute("postsCount", postService.retrievePostsCount(identity));
             model.addAttribute("commentsCount", postService.retrieveCommentsCount(identity));
             model.addAttribute("reactionsCount", reactionService.retrieveReactionsCount(identity));
