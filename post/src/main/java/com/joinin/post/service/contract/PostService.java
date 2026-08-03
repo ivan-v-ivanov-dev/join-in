@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PostService {
     List<PostRpPostService> retrievePostsByAuthor(String identity);
+
+    int retrieveProfilePostsCount(String identity);
 }

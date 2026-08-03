@@ -23,4 +23,9 @@ public class PostController {
     public List<PostRpPostService> retrievePostsByAuthor(@PathVariable String identity) {
         return postService.retrievePostsByAuthor(identity);
     }
+
+    @GetMapping("/author/{identity}/posts/count")
+    public int retrieveAuthorPostsCount(@PathVariable String identity) {
+        return postService.retrieveProfilePostsCount(identity);
+    }
 }

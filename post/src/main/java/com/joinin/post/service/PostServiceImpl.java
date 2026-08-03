@@ -58,4 +58,11 @@ public class PostServiceImpl implements PostService {
         log.info("Retrieve comments for all posts");
         return posts;
     }
+
+    @Override
+    public int retrieveProfilePostsCount(String identity) {
+        int postsCount = postByAuthorRepository.retrieveProfilePostsCount(identity);
+        log.info("Retrieve post count for profile: " + identity);
+        return postsCount;
+    }
 }
