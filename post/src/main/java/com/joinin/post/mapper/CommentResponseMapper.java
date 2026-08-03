@@ -4,8 +4,8 @@ import com.join_in.common_models.CommentReactionsCountRpReactionService;
 import com.join_in.common_models.CommentRpPostService;
 import com.join_in.common_models.ProfileImageRpMediaService;
 import com.join_in.common_models.ProfileRpProfileNamesProfileService;
-import com.joinin.post.model.CommentEntity;
-import com.joinin.post.model.CommentPrimaryKey;
+import com.joinin.post.model.CommentByPostEntity;
+import com.joinin.post.model.CommentByPostPrimaryKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +18,11 @@ public class CommentResponseMapper {
 
     private final PostedAgoFormatter postedAgoFormatter;
 
-    public CommentRpPostService fromCommentEntitytoCommentRpPostService(CommentEntity commentEntity,
+    public CommentRpPostService fromCommentEntitytoCommentRpPostService(CommentByPostEntity commentEntity,
                                                                         List<ProfileImageRpMediaService> profileImagesRpMediaServices,
                                                                         List<ProfileRpProfileNamesProfileService> commentProfileNames,
                                                                         List<CommentReactionsCountRpReactionService> commentReactionsCount) {
-        CommentPrimaryKey primaryKey = commentEntity.getPrimaryKey();
+        CommentByPostPrimaryKey primaryKey = commentEntity.getPrimaryKey();
 
         String image = profileImagesRpMediaServices.stream()
                 .filter(e -> Objects.equals(e.identity(), commentEntity.getAuthorIdentity()))

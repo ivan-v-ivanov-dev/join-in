@@ -3,9 +3,9 @@ package com.joinin.post.service;
 import com.join_in.common_models.*;
 import com.joinin.post.mapper.CommentResponseMapper;
 import com.joinin.post.mapper.PostResponseMapper;
-import com.joinin.post.model.CommentEntity;
+import com.joinin.post.model.CommentByPostEntity;
 import com.joinin.post.model.PostByAuthorEntity;
-import com.joinin.post.repository.CommentRepository;
+import com.joinin.post.repository.CommentByPostRepository;
 import com.joinin.post.repository.PostByAuthorRepository;
 import com.joinin.post.service.contract.PostService;
 import com.joinin.post.service.feign.MediaServiceClient;
@@ -23,7 +23,7 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     private final PostByAuthorRepository postByAuthorRepository;
-    private final CommentRepository commentRepository;
+    private final CommentByPostRepository commentByPostRepository;
     private final PostResponseMapper postResponseMapper;
     private final CommentResponseMapper commentResponseMapper;
     private final MediaServiceClient mediaServiceClient;
@@ -42,8 +42,8 @@ public class PostServiceImpl implements PostService {
         List<PostRpPostService> posts = postEntities.stream()
                 .map(postEntity -> {
                     String postIdentity = postEntity.getKey().getPostIdentity();
-                    List<CommentEntity> commentEntities = commentRepository.findByPostIdentity(postIdentity);
-                    List<String> commentAuthorIdentities = commentEntities.stream().map(CommentEntity::getAuthorIdentity).toList();
+                    List<CommentByPostEntity> commentEntities = commentByPostRepository.findByPostIdentity(postIdentity);
+                    List<String> commentAuthorIdentities = commentEntities.stream().map(CommentByPostEntity::getAuthorIdentity).toList();
                     List<ProfileImageRpMediaService> profileImagesRpMediaServices = mediaServiceClient.retrieveProfileImagesForProfiles(commentAuthorIdentities);
                     List<ProfileRpProfileNamesProfileService> commentProfileNames = profileServiceClient.retrieveProfilesNames(commentAuthorIdentities);
                     List<String> commentIdentities = commentEntities.stream().map(e -> e.getPrimaryKey().getCommentIdentity()).toList();

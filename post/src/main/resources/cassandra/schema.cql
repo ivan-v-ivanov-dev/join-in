@@ -167,3 +167,31 @@ CREATE TABLE IF NOT EXISTS feed_by_user
     PRIMARY KEY ( (user_identity), created_at, post_identity )
 )
             WITH CLUSTERING ORDER BY (created_at DESC, post_identity ASC);
+
+-- =====================================================
+-- Find or count comments belonging to one author
+--
+-- SELECT COUNT(*)
+-- FROM comments_by_author
+-- WHERE author_identity = ?;
+-- =====================================================
+
+CREATE TABLE IF NOT EXISTS comments_by_author
+(
+    author_identity  text,
+    created_at       timestamp,
+    comment_identity text,
+
+    post_identity    text,
+    content          text,
+
+    PRIMARY KEY (
+        (author_identity),
+         created_at,
+         comment_identity
+        )
+)
+    WITH CLUSTERING ORDER BY (
+                              created_at DESC,
+                              comment_identity ASC
+        );

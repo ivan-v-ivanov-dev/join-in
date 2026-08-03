@@ -13,10 +13,10 @@ import org.springframework.data.cassandra.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table("comments_by_post")
-public class CommentEntity {
+public class CommentByPostEntity {
 
     @PrimaryKey
-    private CommentPrimaryKey primaryKey;
+    private CommentByPostPrimaryKey primaryKey;
 
     @Column("author_identity")
     private String authorIdentity;
