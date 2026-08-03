@@ -1,0 +1,42 @@
+services:
+
+  group-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - maven_settings
+    container_name: group-service
+    ports:
+      - 8088:8088
+    depends_on:
+      - group-postgres
+    networks:
+      - join-in-network
+    restart: unless-stopped
+
+  group-postgres:
+    image: postgres:17
+    container_name: group-postgres
+    ports:
+      - 5438:5432
+    environment:
+      POSTGRES_DB: storage
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - ./src/main/resources/postgres/init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - join-in-network
+    restart: unless-stopped
+
+networks:
+  join-in-network:
+    external: true
+
+volumes:
+  group-postgres-data:
+
+secrets:
+  maven_settings:
+    file: C:/Users/Иван/.m2/settings.xml

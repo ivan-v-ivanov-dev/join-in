@@ -1,0 +1,19 @@
+server:
+  port: 8088
+  max-http-request-header-size: 10MB
+
+spring:
+  application:
+    name: group
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://group-postgres:5432/storage
+    username: root
+    password: root
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
