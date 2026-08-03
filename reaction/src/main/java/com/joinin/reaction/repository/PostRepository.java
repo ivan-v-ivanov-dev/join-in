@@ -11,33 +11,42 @@ import java.util.List;
 public interface PostRepository extends Neo4jRepository<Post, String> {
 
     @Query("""
-        MATCH (post:Post)
-        WHERE post.identity IN $identities
-
-        OPTIONAL MATCH (:Profile)-[reaction:LIKE|DISLIKE|HAHA|ANGRY]->(post)
-
-        RETURN
-            post.identity AS identity,
-
-            sum(CASE
-                WHEN type(reaction) = 'LIKE' THEN 1
-                ELSE 0
-            END) AS likeCount,
-
-            sum(CASE
-                WHEN type(reaction) = 'DISLIKE' THEN 1
-                ELSE 0
-            END) AS dislikeCount,
-
-            sum(CASE
-                WHEN type(reaction) = 'HAHA' THEN 1
-                ELSE 0
-            END) AS hahaCount,
-
-            sum(CASE
-                WHEN type(reaction) = 'ANGRY' THEN 1
-                ELSE 0
-            END) AS angryCount
-        """)
+            MATCH (post:Post)
+            WHERE post.identity IN $identities
+            
+            OPTIONAL MATCH (:Profile)-[reaction:LIKE|DISLIKE|HAHA|ANGRY]->(post)
+            
+            RETURN
+                post.identity AS identity,
+            
+                sum(CASE
+                    WHEN type(reaction) = 'LIKE' THEN 1
+                    ELSE 0
+                END) AS likeCount,
+            
+                sum(CASE
+                    WHEN type(reaction) = 'DISLIKE' THEN 1
+                    ELSE 0
+                END) AS dislikeCount,
+            
+                sum(CASE
+                    WHEN type(reaction) = 'HAHA' THEN 1
+                    ELSE 0
+                END) AS hahaCount,
+            
+                sum(CASE
+                    WHEN type(reaction) = 'ANGRY' THEN 1
+                    ELSE 0
+                END) AS angryCount
+            """)
     List<PostReactionsCount> retrievePostReactionsCount(@Param("identities") List<String> identities);
+
+    @Query("""
+            MATCH (:Profile)
+                  -[reaction:LIKE|DISLIKE|HAHA|ANGRY]->
+                  (post:Post)
+            WHERE post.identity IN $postIdentities
+            RETURN count(reaction) AS reactionCount
+            """)
+    int retrievePostsReactionsCount(@Param("postIdentities") List<String> postIdentities);
 }

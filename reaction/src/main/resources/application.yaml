@@ -15,3 +15,11 @@ spring:
     offset-reset: earliest
     topic:
       new-registered-user-info: new-registered-user-info
+
+#Post service Feign client
+post:
+  service:
+    feign:
+      client:
+        name: Post-service-Feign-client
+    url:  http://post-service:8084

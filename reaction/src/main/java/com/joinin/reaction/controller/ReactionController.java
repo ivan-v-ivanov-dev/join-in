@@ -25,4 +25,10 @@ public class ReactionController {
     public List<CommentReactionsCountRpReactionService> retrieveCommentsReactionsCount(@RequestBody List<String> identities) {
         return commentService.retrieveCommentsReactionsCount(identities);
     }
+
+    @GetMapping("/profile/{identity}/posts/reactions/count")
+    public int retrievePostsReactionsCount(@PathVariable String identity) {
+        return postService.retrievePostsReactionsCountByProfileIdentity(identity);
+    }
+
 }
