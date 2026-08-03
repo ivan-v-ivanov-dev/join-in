@@ -409,10 +409,10 @@
                 <li class="nav-item dropdown d-none d-lg-block">
                     <a href="javascript:void(0);" class="d-flex align-items-center dropdown-toggle" id="drop-down-arrow"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="../assets/images/user/1.jpg" class="img-fluid rounded-circle me-3" alt="user"
+                        <img th:src="${profileImage}" src="../assets/images/user/1.jpg" class="img-fluid rounded-circle me-3" alt="user"
                              loading="lazy">
                         <div class="caption">
-                            <h6 class="mb-0 line-height">Bni Cyst</h6>
+                            <h6 class="mb-0 line-height" th:text="|${profile.firstName} ${profile.lastName}|">Bni Cyst</h6>
                         </div>
                     </a>
 
@@ -420,7 +420,7 @@
                         <div class="card shadow-none m-0">
                             <div class="card-header ">
                                 <div class="header-title">
-                                    <h5 class="mb-0 ">Hello Bni Cyst</h5>
+                                    <h5 class="mb-0 " th:text="|Hello ${profile.firstName} ${profile.lastName}|">Hello Bni Cyst</h5>
                                 </div>
                             </div>
                             <div class="card-body p-0 ">
