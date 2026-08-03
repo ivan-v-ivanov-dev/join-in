@@ -866,71 +866,38 @@
 
                                             <div class="card-body">
 
-                                                <ul class="profile-img-gallary p-0 m-0 list-unstyled">
+                                                <ul class="profile-img-gallary p-0 m-0 list-unstyled"
+                                                    th:if="${groups != null and !groups.isEmpty()}">
 
-                                                    <li>
-                                                        <a href="#">
-                                                            <img src="../assets/images/user/05.jpg"
-                                                                 alt="group-image"
+                                                    <li th:each="group : ${groups}">
+
+                                                        <a th:href="@{/groups/{identity}(identity=${group.identity})}">
+                                                            <img th:src="${group.image}"
+                                                                 th:alt="${group.name}"
                                                                  loading="lazy"
                                                                  class="img-fluid"/>
                                                         </a>
-                                                        <h6 class="mt-2 text-center">Java Developers</h6>
-                                                    </li>
 
-                                                    <li>
-                                                        <a href="#">
-                                                            <img src="../assets/images/user/06.jpg"
-                                                                 alt="group-image"
-                                                                 loading="lazy"
-                                                                 class="img-fluid"/>
-                                                        </a>
-                                                        <h6 class="mt-2 text-center">Spring Boot</h6>
-                                                    </li>
+                                                        <h6 class="mt-2 text-center"
+                                                            th:text="${group.name}">
+                                                            Group name
+                                                        </h6>
 
-                                                    <li>
-                                                        <a href="#">
-                                                            <img src="../assets/images/user/07.jpg"
-                                                                 alt="group-image"
-                                                                 loading="lazy"
-                                                                 class="img-fluid"/>
-                                                        </a>
-                                                        <h6 class="mt-2 text-center">Microservices</h6>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#">
-                                                            <img src="../assets/images/user/08.jpg"
-                                                                 alt="group-image"
-                                                                 loading="lazy"
-                                                                 class="img-fluid"/>
-                                                        </a>
-                                                        <h6 class="mt-2 text-center">AWS Cloud</h6>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#">
-                                                            <img src="../assets/images/user/09.jpg"
-                                                                 alt="group-image"
-                                                                 loading="lazy"
-                                                                 class="img-fluid"/>
-                                                        </a>
-                                                        <h6 class="mt-2 text-center">Software Architecture</h6>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="#">
-                                                            <img src="../assets/images/user/10.jpg"
-                                                                 alt="group-image"
-                                                                 loading="lazy"
-                                                                 class="img-fluid"/>
-                                                        </a>
-                                                        <h6 class="mt-2 text-center">Open Source</h6>
                                                     </li>
 
                                                 </ul>
 
+                                                <div class="text-center"
+                                                     th:if="${groups == null or groups.isEmpty()}">
+
+                                                    <p class="text-muted mb-0">
+                                                        The profile has not joined any groups.
+                                                    </p>
+
+                                                </div>
+
                                             </div>
+
                                         </div>
                                     </div>
 

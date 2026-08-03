@@ -1,9 +1,6 @@
 package com.joinin.mvc.service.feign;
 
-import com.join_in.common_models.PostRpGatewayService;
-import com.join_in.common_models.ProfileFriendsRpGatewayService;
-import com.join_in.common_models.ProfileRpGatewayService;
-import com.join_in.common_models.RegisterUserMVCRq;
+import com.join_in.common_models.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,4 +39,7 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}/posts")
     List<PostRpGatewayService> retrieveProfilePosts(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/joined-groups")
+    List<GroupRpGatewayService> retrieveProfileJoinedGroups(@PathVariable String identity);
 }

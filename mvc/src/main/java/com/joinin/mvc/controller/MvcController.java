@@ -23,6 +23,7 @@ public class MvcController {
     private final ProfileService profileService;
     private final RelationshipService relationshipService;
     private final PostService postService;
+    private final GroupService groupService;
 
     @GetMapping("/")
     public String login() {
@@ -67,9 +68,7 @@ public class MvcController {
             model.addAttribute("profile", profileService.retrieveProfileByIdentity(identity));
             model.addAttribute("friends", relationshipService.retrieveFriends(identity));
             model.addAttribute("posts", postService.retrieveProfilePosts(identity));
-//            model.addAttribute("onlineFriends", messageService.findProfileOnlineFriends(identity));
-//            model.addAttribute("friendshipRequests", relationshipService.findFriendshipRequests(identity));
-//            model.addAttribute("notifications", notificationService.findProfileNotifications(identity));
+            model.addAttribute("groups", groupService.retrieveProfileJoinedGroups(identity));
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
