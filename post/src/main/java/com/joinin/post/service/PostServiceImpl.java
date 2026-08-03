@@ -65,4 +65,11 @@ public class PostServiceImpl implements PostService {
         log.info("Retrieve post count for profile: " + identity);
         return postsCount;
     }
+
+    @Override
+    public List<String> retrievePostIdentitiesByAuthor(String identity) {
+        List<String> postIdentities = postByAuthorRepository.retrievePostIdentitiesByAuthor(identity);
+        log.info("Retrieve all post identities for profile: " + identity);
+        return postIdentities;
+    }
 }
