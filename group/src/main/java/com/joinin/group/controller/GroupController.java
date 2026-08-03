@@ -1,13 +1,22 @@
 package com.joinin.group.controller;
 
+import com.join_in.common_models.GroupRpGroupService;
+import com.joinin.group.service.contract.GroupService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
+@AllArgsConstructor
 public class GroupController {
 
-    @GetMapping("/health")
-    public String health() {
-        return "Group service is HEALTHY";
+    private final GroupService groupService;
+
+    @GetMapping("/profile/{identity}/joined-groups")
+    public List<GroupRpGroupService> retrieveProfileJoinedGroups(@PathVariable("identity") String identity) {
+        return groupService.retrieveProfileJoinedGroups(identity);
     }
 }

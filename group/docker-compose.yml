@@ -34,9 +34,6 @@ networks:
   join-in-network:
     external: true
 
-volumes:
-  group-postgres-data:
-
 secrets:
   maven_settings:
     file: C:/Users/Иван/.m2/settings.xml
