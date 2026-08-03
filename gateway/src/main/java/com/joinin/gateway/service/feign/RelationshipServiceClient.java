@@ -12,4 +12,7 @@ public interface RelationshipServiceClient {
 
     @GetMapping("/profile/{identity}/friends")
     List<ProfileRpRelationshipService> retrieveFriendsProfiles(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/friends/count")
+    int retrieveProfilesFriendsCount(@PathVariable String identity);
 }

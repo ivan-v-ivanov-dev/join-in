@@ -11,4 +11,10 @@ import java.util.List;
 public interface PostServiceClient {
     @GetMapping("/author/{identity}")
     List<PostRpPostService> retrievePostsByAuthor(@PathVariable String identity);
+
+    @GetMapping("/author/{identity}/posts/count")
+    int retrieveAuthorPostsCount(@PathVariable String identity);
+
+    @GetMapping("/author/{identity}/comments/count")
+    int retrieveAuthorCommentsCount(@PathVariable String identity);
 }

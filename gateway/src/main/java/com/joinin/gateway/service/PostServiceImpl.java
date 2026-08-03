@@ -27,4 +27,18 @@ public class PostServiceImpl implements PostService {
                 .map(postMapper::fromPostRpPostServicetoPostRpGatewayService)
                 .toList();
     }
+
+    @Override
+    public int retrieveProfilePostsCount(String identity) {
+        int postsCount = postServiceClient.retrieveAuthorPostsCount(identity);
+        log.info("Retrieve posts count for Profile: " + identity);
+        return postsCount;
+    }
+
+    @Override
+    public int retrieveProfileCommentsCount(String identity) {
+        int commentsCount = postServiceClient.retrieveAuthorCommentsCount(identity);
+        log.info("Retrieve comments count for Profile: " + identity);
+        return commentsCount;
+    }
 }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RelationshipService {
     List<ProfileFriendsRpGatewayService> retrieveFriends(String identity);
+
+    int retrieveFriendsCount(String identity);
 }

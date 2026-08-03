@@ -64,6 +64,21 @@ public class ApiGatewayController {
         return groupService.retrieveProfileJoinedGroups(identity);
     }
 
+    @GetMapping("/profile/{identity}/posts/count")
+    public int retrieveProfilePostsCount(@PathVariable String identity) {
+        return postService.retrieveProfilePostsCount(identity);
+    }
+
+    @GetMapping("/profile/{identity}/comments/count")
+    public int retrieveProfileCommentsCount(@PathVariable String identity) {
+        return postService.retrieveProfileCommentsCount(identity);
+    }
+
+    @GetMapping("/profile/{identity}/friends/count")
+    public int retrieveProfilesFriendsCount(@PathVariable String identity) {
+        return relationshipService.retrieveFriendsCount(identity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";
