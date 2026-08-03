@@ -7,5 +7,8 @@ import java.util.List;
 public interface RelationshipService {
     List<ProfileFriendsRpGatewayService> retrieveFriends(String identity);
 
+    List<ProfileFriendsRpGatewayService> retrieveFriendshipRequests(String identity);
+
     int retrieveFriendsCount(String identity);
+
 }

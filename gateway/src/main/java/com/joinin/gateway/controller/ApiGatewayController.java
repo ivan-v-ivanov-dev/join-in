@@ -80,6 +80,11 @@ public class ApiGatewayController {
         return relationshipService.retrieveFriendsCount(identity);
     }
 
+    @GetMapping("/profile/{identity}/frienship/requests")
+    public  List<ProfileFriendsRpGatewayService> retrieveFriendshipRequests(@PathVariable String identity) {
+        return relationshipService.retrieveFriendshipRequests(identity);
+    }
+
     @GetMapping("/profile/{identity}/reactions/count")
     public int retrievePostsAndCommentsReactionsCount(@PathVariable String identity) {
         return reactionService.retrievePostsAndCommentsReactionsCount(identity);

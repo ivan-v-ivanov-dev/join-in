@@ -30,6 +30,16 @@ public class RelationshipServiceImpl implements RelationshipService {
     }
 
     @Override
+    public List<ProfileFriendsRpGatewayService> retrieveFriendshipRequests(String identity) {
+        List<ProfileRpRelationshipService> friendshipRequests = relationshipServiceClient.retrieveFriendshipRequests(identity);
+        log.info("Retrieve friendship requests from Relationship service. Profile identity: " + identity);
+        return friendshipRequests
+                .stream()
+                .map(profileMapper::fromProfileRpRelationshipServicetoProfileFriendsRpGatewayService)
+                .toList();
+    }
+
+    @Override
     public int retrieveFriendsCount(String identity) {
         int friendsCount = relationshipServiceClient.retrieveProfilesFriendsCount(identity);
         log.info("Retrieve friends count for profile: " + identity);
