@@ -36,7 +36,7 @@ public interface CommentRepository extends Neo4jRepository<Comment, String> {
 
     @Query("""
             MATCH (:Profile)-[reaction:LIKE|DISLIKE]->(comment:Comment)
-            WHERE comment.identity IN commentIdentities
+            WHERE comment.identity IN $commentIdentities
             RETURN count(reaction)
             """)
     int retrieveCommentsReactionsCount(@Param("commentIdentities") List<String> commentIdentities);
