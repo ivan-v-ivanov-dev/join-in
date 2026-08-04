@@ -1,22 +1,45 @@
 package com.joinin.notification.mapper;
 
 import com.join_in.common_models.NotificationRpNotificationService;
+import com.join_in.common_models.ProfileImageRpMediaService;
+import com.join_in.common_models.ProfileRpProfileNamesProfileService;
 import com.joinin.notification.model.Notification;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class NotificationMapper {
 
     public NotificationRpNotificationService fromNotificationtoNotificationRpNotificationService(Notification notification,
-                                                        String authorProfileImage,
-                                                        String authorFirstName,
-                                                        String authorLastName) {
+                                                                                                 List<ProfileImageRpMediaService> profileImages,
+                                                                                                 List<ProfileRpProfileNamesProfileService> profileNames) {
         if (notification == null) {
             return null;
         }
+
+        String authorProfileImage = profileImages
+                .stream()
+                .filter(e -> e.identity().equals(notification.getAuthorIdentity()))
+                .map(ProfileImageRpMediaService::profileImage)
+                .findFirst()
+                .orElse("No image");
+
+        String authorFirstName = profileNames
+                .stream()
+                .filter(e -> e.identity().equals(notification.getAuthorIdentity()))
+                .map(ProfileRpProfileNamesProfileService::firstName)
+                .findFirst()
+                .orElse("No Name");
+
+        String authorLastName = profileNames
+                .stream()
+                .filter(e -> e.identity().equals(notification.getAuthorIdentity()))
+                .map(ProfileRpProfileNamesProfileService::lastName)
+                .findFirst()
+                .orElse("No Name");
 
         return new NotificationRpNotificationService(
                 notification.getAuthorIdentity(),
