@@ -75,3 +75,11 @@ search:
       client:
         name: Search-service-Feign-client
     url:  http://search-service:8092
+
+#Notification service Feign client
+notification:
+  service:
+    feign:
+      client:
+        name: Notification-service-Feign-client
+    url:  http://notification-service:8086

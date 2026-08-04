@@ -20,6 +20,7 @@ public class ApiGatewayController {
     private final GroupService groupService;
     private final ReactionService reactionService;
     private final SearchService searchService;
+    private final NotificationService notificationService;
 
     @PostMapping("/email/{email}/unique")
     public boolean isEmailUnique(@PathVariable("email") String email) {
@@ -94,6 +95,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/search/history")
     public List<String> retrieveProfileSearchKeywords(@PathVariable String identity) {
         return searchService.retrieveProfileSearchKeywords(identity);
+    }
+
+    @GetMapping("/profile/{identity}/notifications")
+    public List<NotificationRpGatewayService> retrieveProfileNotifications(@PathVariable("identity") String identity) {
+        return notificationService.retrieveProfileNotifications(identity);
     }
 
     @GetMapping("/health")
