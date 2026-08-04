@@ -102,6 +102,11 @@ public class ApiGatewayController {
         return notificationService.retrieveProfileNotifications(identity);
     }
 
+    @GetMapping("/profile/{identity}/family/members")
+    public List<FamilyMemberRpGatewayService> retrieveProfileFamilyMembers(@PathVariable("identity") String identity) {
+        return relationshipService.retrieveProfileFamilyMembers(identity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";

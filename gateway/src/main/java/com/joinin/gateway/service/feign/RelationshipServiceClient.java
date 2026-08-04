@@ -1,5 +1,6 @@
 package com.joinin.gateway.service.feign;
 
+import com.join_in.common_models.FamilyMemberRpRelationshipService;
 import com.join_in.common_models.ProfileRpRelationshipService;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,4 +19,7 @@ public interface RelationshipServiceClient {
 
     @GetMapping("/profile/{identity}/friends/count")
     int retrieveProfilesFriendsCount(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/family/members")
+    List<FamilyMemberRpRelationshipService> retrieveProfileFamilyMembers(@PathVariable String identity);
 }

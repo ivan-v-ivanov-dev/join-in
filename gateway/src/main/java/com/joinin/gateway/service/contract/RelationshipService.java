@@ -1,5 +1,6 @@
 package com.joinin.gateway.service.contract;
 
+import com.join_in.common_models.FamilyMemberRpGatewayService;
 import com.join_in.common_models.ProfileFriendsRpGatewayService;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface RelationshipService {
 
     int retrieveFriendsCount(String identity);
 
+    List<FamilyMemberRpGatewayService> retrieveProfileFamilyMembers(String identity);
 }
