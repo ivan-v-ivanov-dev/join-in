@@ -19,6 +19,7 @@ public class ApiGatewayController {
     private final PostService postService;
     private final GroupService groupService;
     private final ReactionService reactionService;
+    private final SearchService searchService;
 
     @PostMapping("/email/{email}/unique")
     public boolean isEmailUnique(@PathVariable("email") String email) {
@@ -88,6 +89,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/reactions/count")
     public int retrievePostsAndCommentsReactionsCount(@PathVariable String identity) {
         return reactionService.retrievePostsAndCommentsReactionsCount(identity);
+    }
+
+    @GetMapping("/profile/{identity}/search/history")
+    public List<String> retrieveProfileSearchKeywords(@PathVariable String identity) {
+        return searchService.retrieveProfileSearchKeywords(identity);
     }
 
     @GetMapping("/health")

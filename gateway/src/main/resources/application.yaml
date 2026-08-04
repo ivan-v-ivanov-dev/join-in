@@ -67,3 +67,11 @@ reaction:
       client:
         name: Reaction-service-Feign-client
     url:  http://reaction-service:8085
+
+#Search service Feign client
+search:
+  service:
+    feign:
+      client:
+        name: Search-service-Feign-client
+    url:  http://search-service:8092
