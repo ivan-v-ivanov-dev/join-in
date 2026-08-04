@@ -1,11 +1,16 @@
 package com.joinin.search.repository;
 
+import com.joinin.search.model.mongo.KeywordsHistoryEntry;
 import com.joinin.search.model.mongo.SearchHistoryEntry;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -17,8 +22,17 @@ public class SearchHistoryRepository {
         return mongoTemplate.save(searchHistoryEntry);
     }
 
-    public SearchHistoryEntry retrieveProfileSearchHistory(String identity) {
-        Query query = Query.query(Criteria.where("identity").is(identity));
-        return mongoTemplate.findOne(query, SearchHistoryEntry.class);
+    public List<String> retrieveProfileSearchKeywords(String identity) {
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.match(Criteria.where("profileIdentity").is(identity)),
+                Aggregation.unwind("history"),
+                Aggregation.sort(Sort.Direction.DESC, "history.searchedAt"),
+                Aggregation.replaceRoot("history"));
+
+        return mongoTemplate.aggregate(aggregation, "search_history", KeywordsHistoryEntry.class)
+                .getMappedResults()
+                .stream()
+                .map(KeywordsHistoryEntry::getKeyword)
+                .toList();
     }
 }

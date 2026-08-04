@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -24,9 +26,9 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
     }
 
     @Override
-    public SearchHistoryRpSearchService retrieveProfileSearchHistory(String identity) {
-        SearchHistoryEntry searchHistoryEntry = searchHistoryRepository.retrieveProfileSearchHistory(identity);
+    public List<String> retrieveProfileSearchKeywords(String identity) {
+        List<String> searchHistoryKeywords = searchHistoryRepository.retrieveProfileSearchKeywords(identity);
         log.info("Retrieve search history for profile: " + identity);
-        return searchHistoryMapper.fromSearchHistoryEntrytoSearchHistoryRpSearchService(searchHistoryEntry);
+        return searchHistoryKeywords;
     }
 }
