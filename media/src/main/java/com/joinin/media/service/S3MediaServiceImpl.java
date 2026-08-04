@@ -4,8 +4,10 @@ import com.join_in.common_models.GroupRpImageService;
 import com.join_in.common_models.ProfileImageRpMediaService;
 import com.joinin.media.model.AlbumPictureUrl;
 import com.joinin.media.model.Group;
+import com.joinin.media.model.Post;
 import com.joinin.media.model.Profile;
 import com.joinin.media.service.contract.GroupService;
+import com.joinin.media.service.contract.PostService;
 import com.joinin.media.service.contract.ProfileService;
 import com.joinin.media.service.contract.S3MediaService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,7 @@ public class S3MediaServiceImpl implements S3MediaService {
     private final S3Client s3Client;
     private final ProfileService profileService;
     private final GroupService groupService;
+    private final PostService postService;
     @Value("${aws.s3.bucket}")
     private String bucket;
 
@@ -158,14 +161,28 @@ public class S3MediaServiceImpl implements S3MediaService {
                 })
                 .toList();
 
-        log.info(
-                "Retrieved images for groups: {}",
+        log.info("Retrieved images for groups: {}",
                 groupImages.stream()
                         .map(GroupRpImageService::identity)
-                        .collect(Collectors.joining(", "))
-        );
+                        .collect(Collectors.joining(", ")));
 
         return groupImages;
+    }
+
+    @Override
+    public String retrievePostImage(String identity) {
+        Post post = postService.retrieveByIdentity(identity);
+
+        if (post == null) {
+            return "No image found";
+        }
+
+        String imageObjectKey = post.getImageUrl();
+        String postImage = getImageAsBase64(imageObjectKey);
+
+        log.info("Retrieved image for post: {}, S3 key: {}", post.getIdentity(), imageObjectKey);
+
+        return postImage;
     }
 
     private String getImageAsBase64(String objectKey) {

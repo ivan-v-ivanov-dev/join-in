@@ -15,4 +15,6 @@ public interface S3MediaService {
     List<ProfileImageRpMediaService> retrieveProfileImagesForProfiles(List<String> identities);
 
     List<GroupRpImageService> retrieveGroupsImages(List<String> identities);
+
+    String retrievePostImage(String identity);
 }

@@ -6,6 +6,7 @@ use("storage");
 db.createCollection("profiles");
 db.createCollection("plugins");
 db.createCollection("groups");
+db.createCollection("posts");
 console.log("*** Collection created ***");
 
 db.profiles.insertMany([
@@ -152,6 +153,17 @@ db.groups.insertMany([
     {
         identity: "4b219329051054e53ab7960926d09ea7bbb1177a263706a1eead03c46c2c57fb93e4fe23860f153198bbc1eb754adc0a44c704d35a722a097d43870d315a9a55",
         imageUrl: "group/4b219329051054e53ab7960926d09ea7bbb1177a263706a1eead03c46c2c57fb93e4fe23860f153198bbc1eb754adc0a44c704d35a722a097d43870d315a9a55.webp"
+    }
+]);
+
+db.posts.inserMany([
+    {
+        identity: "afe70797e1b617f524fbbec74d4f8ce4d292cef7ecd500965bf2278591d18c1096a7647f578f0cbafa5d080ef0ba30d4939ed4901c103b08fd326a22cafd0b72",
+        imageUrl: "posts/afe70797e1b617f524fbbec74d4f8ce4d292cef7ecd500965bf2278591d18c1096a7647f578f0cbafa5d080ef0ba30d4939ed4901c103b08fd326a22cafd0b72.webp"
+    },
+    {
+        identity: "2d9f88c586a48377495a3b9691ccc4d651ecf33ca55b735348d398e42f0304194ee08fbd72705b80cdab2b8ae8e24392ee2e4e5983a903225482f452ac592dbb",
+        imageUrl: "posts/2d9f88c586a48377495a3b9691ccc4d651ecf33ca55b735348d398e42f0304194ee08fbd72705b80cdab2b8ae8e24392ee2e4e5983a903225482f452ac592dbb.webp"
     }
 ]);
 

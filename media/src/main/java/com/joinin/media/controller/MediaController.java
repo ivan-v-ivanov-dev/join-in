@@ -40,4 +40,9 @@ public class MediaController {
     public List<GroupRpImageService> retrieveGroupsImages(@RequestBody List<String> identities) {
         return s3MediaService.retrieveGroupsImages(identities);
     }
+
+    @GetMapping("/post/{identity}/image")
+    public String retrievePostImage(@PathVariable("identity") String identity) {
+        return s3MediaService.retrievePostImage(identity);
+    }
 }
