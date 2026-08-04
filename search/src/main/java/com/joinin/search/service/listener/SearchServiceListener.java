@@ -3,7 +3,7 @@ package com.joinin.search.service.listener;
 import com.join_in.kafka_models.KafkaMessage;
 import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
 import com.joinin.search.service.contract.ElasticSearchService;
-import com.joinin.search.service.contract.SearchHistory;
+import com.joinin.search.service.contract.SearchHistoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SearchServiceListener {
 
-    private final SearchHistory searchHistory;
+    private final SearchHistoryService searchHistoryService;
     private final ElasticSearchService elasticSearchService;
 
     @KafkaListener(
@@ -23,7 +23,7 @@ public class SearchServiceListener {
     public void newRegisteredUser(KafkaMessage message) {
         NewRegisteredUserInfo newRegisteredUserInfo = (NewRegisteredUserInfo) message;
         log.info("New registered user message received from Identity service. Profile identity: " + newRegisteredUserInfo.identity());
-        searchHistory.saveProfileSearchHistory(newRegisteredUserInfo.identity());
+        searchHistoryService.saveProfileSearchHistory(newRegisteredUserInfo.identity());
         elasticSearchService.saveProfile(newRegisteredUserInfo.identity(), newRegisteredUserInfo.firstName(), newRegisteredUserInfo.lastName());
     }
 }
