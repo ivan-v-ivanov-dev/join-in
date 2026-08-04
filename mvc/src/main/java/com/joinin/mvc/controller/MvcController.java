@@ -25,6 +25,7 @@ public class MvcController {
     private final PostService postService;
     private final GroupService groupService;
     private final ReactionService reactionService;
+    private final SearchService searchService;
 
     @GetMapping("/")
     public String login() {
@@ -75,6 +76,7 @@ public class MvcController {
             model.addAttribute("commentsCount", postService.retrieveCommentsCount(identity));
             model.addAttribute("reactionsCount", reactionService.retrieveReactionsCount(identity));
             model.addAttribute("friendsCount", relationshipService.retrieveFriendsCount(identity));
+            model.addAttribute("searchKeywords", searchService.retrieveProfileSearchKeywords(identity));
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());

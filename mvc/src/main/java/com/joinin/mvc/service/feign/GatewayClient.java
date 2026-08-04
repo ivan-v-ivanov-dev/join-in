@@ -57,4 +57,7 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}/friends/count")
     int retrieveProfilesFriendsCount(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/search/history")
+    List<String> retrieveProfileSearchKeywords(@PathVariable String identity);
 }
