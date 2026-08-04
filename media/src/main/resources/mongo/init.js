@@ -156,7 +156,7 @@ db.groups.insertMany([
     }
 ]);
 
-db.posts.inserMany([
+db.posts.insertMany([
     {
         identity: "afe70797e1b617f524fbbec74d4f8ce4d292cef7ecd500965bf2278591d18c1096a7647f578f0cbafa5d080ef0ba30d4939ed4901c103b08fd326a22cafd0b72",
         imageUrl: "posts/afe70797e1b617f524fbbec74d4f8ce4d292cef7ecd500965bf2278591d18c1096a7647f578f0cbafa5d080ef0ba30d4939ed4901c103b08fd326a22cafd0b72.webp"
