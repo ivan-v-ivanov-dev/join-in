@@ -79,6 +79,7 @@ public class MvcController {
             model.addAttribute("friendsCount", relationshipService.retrieveFriendsCount(identity));
             model.addAttribute("searchKeywords", searchService.retrieveProfileSearchKeywords(identity));
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
+            model.addAttribute("familyMembers", relationshipService.retrieveProfileFamilyMembers(identity));
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());

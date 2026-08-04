@@ -1,7 +1,10 @@
 package com.joinin.mvc.service;
 
+import com.join_in.common_models.FamilyMemberRpGatewayService;
 import com.join_in.common_models.ProfileFriendsRpGatewayService;
+import com.joinin.mvc.mappers.FamilyMemberMapper;
 import com.joinin.mvc.mappers.FriendsMapper;
+import com.joinin.mvc.model.FamilyMember;
 import com.joinin.mvc.model.Friend;
 import com.joinin.mvc.service.contract.RelationshipService;
 import com.joinin.mvc.service.feign.GatewayClient;
@@ -18,6 +21,7 @@ public class RelationshipServiceImpl implements RelationshipService {
 
     private final GatewayClient gatewayClient;
     private final FriendsMapper friendsMapper;
+    private final FamilyMemberMapper familyMemberMapper;
 
     @Override
     public List<Friend> retrieveFriends(String identity) {
@@ -44,5 +48,15 @@ public class RelationshipServiceImpl implements RelationshipService {
         int friendsCount = gatewayClient.retrieveProfilesFriendsCount(identity);
         log.info("Retrieve friends count for profile: " + identity);
         return friendsCount;
+    }
+
+    @Override
+    public List<FamilyMember> retrieveProfileFamilyMembers(String identity) {
+        List<FamilyMemberRpGatewayService> familyMemberRpGatewayServices = gatewayClient.retrieveProfileFamilyMembers(identity);
+        log.info("Retrieve family mmebers for profile: " + identity);
+        return familyMemberRpGatewayServices
+                .stream()
+                .map(familyMemberMapper::fromFamilyMemberRpGatewayServicetoFamilyMember)
+                .toList();
     }
 }

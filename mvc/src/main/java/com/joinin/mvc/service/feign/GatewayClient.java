@@ -63,4 +63,7 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}/notifications")
     List<NotificationRpGatewayService> retrieveProfileNotifications(@PathVariable("identity") String identity);
+
+    @GetMapping("/profile/{identity}/family/members")
+    List<FamilyMemberRpGatewayService> retrieveProfileFamilyMembers(@PathVariable("identity") String identity);
 }
