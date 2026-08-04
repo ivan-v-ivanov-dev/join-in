@@ -1,5 +1,6 @@
 package com.joinin.relationship.controller;
 
+import com.join_in.common_models.FamilyMemberRpRelationshipService;
 import com.join_in.common_models.ProfileRpRelationshipService;
 import com.joinin.relationship.service.contract.ProfileService;
 import lombok.AllArgsConstructor;
@@ -21,12 +22,17 @@ public class RelationshipController {
     }
 
     @GetMapping("/profile/{identity}/frienship/requests")
-    public  List<ProfileRpRelationshipService> retrieveFriendshipRequests(@PathVariable String identity) {
+    public List<ProfileRpRelationshipService> retrieveFriendshipRequests(@PathVariable String identity) {
         return profileService.retrieveFriendshipRequests(identity);
     }
 
     @GetMapping("/profile/{identity}/friends/count")
     public int retrieveProfilesFriendsCount(@PathVariable String identity) {
         return profileService.retrieveProfilesFriendsCount(identity);
+    }
+
+    @GetMapping("/profile/{identity}/family/members")
+    public List<FamilyMemberRpRelationshipService> retrieveProfileFamilyMembers(@PathVariable String identity) {
+        return profileService.retrieveProfileFamilyMembers(identity);
     }
 }

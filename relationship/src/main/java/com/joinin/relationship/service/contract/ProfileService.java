@@ -1,5 +1,6 @@
 package com.joinin.relationship.service.contract;
 
+import com.join_in.common_models.FamilyMemberRpRelationshipService;
 import com.join_in.common_models.ProfileRpRelationshipService;
 
 import java.util.List;
@@ -12,4 +13,6 @@ public interface ProfileService {
     int retrieveProfilesFriendsCount(String identity);
 
     List<ProfileRpRelationshipService> retrieveFriendshipRequests(String identity);
+
+    List<FamilyMemberRpRelationshipService> retrieveProfileFamilyMembers(String identity);
 }

@@ -1,5 +1,6 @@
 package com.joinin.relationship.repository;
 
+import com.joinin.relationship.model.FamilyMember;
 import com.joinin.relationship.model.ProfileNode;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
@@ -31,4 +32,21 @@ public interface ProfileRepository extends Neo4jRepository<ProfileNode, String> 
             ORDER BY requester.identity
             """)
     List<ProfileNode> findFriendshipRequestsByIdentity(@Param("identity") String identity);
+
+    @Query("""
+            MATCH (profile:Profile {identity: $identity})
+            MATCH (familyMember:Profile)-[relationship:
+                SON |
+                DAUGHTER |
+                MOTHER |
+                FATHER |
+                SISTER |
+                BROTHER
+            ]->(profile)
+            RETURN DISTINCT
+                familyMember.identity AS identity,
+                type(relationship) AS relationshipType
+            ORDER BY relationshipType, identity
+            """)
+    List<FamilyMember> findAllFamilyMembers(@Param("identity") String identity);
 }

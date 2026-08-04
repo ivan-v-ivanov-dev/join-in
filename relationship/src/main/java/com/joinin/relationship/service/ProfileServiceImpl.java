@@ -1,10 +1,9 @@
 package com.joinin.relationship.service;
 
-import com.join_in.common_models.ProfileImageRpMediaService;
-import com.join_in.common_models.ProfileOnlineStatusRpMessageService;
-import com.join_in.common_models.ProfileRpProfileNamesProfileService;
-import com.join_in.common_models.ProfileRpRelationshipService;
+import com.join_in.common_models.*;
+import com.joinin.relationship.mapper.FamilyMemberMapper;
 import com.joinin.relationship.mapper.ProfileRelationshipMapper;
+import com.joinin.relationship.model.FamilyMember;
 import com.joinin.relationship.model.ProfileNode;
 import com.joinin.relationship.repository.ProfileRepository;
 import com.joinin.relationship.service.contract.ProfileService;
@@ -29,6 +28,7 @@ public class ProfileServiceImpl implements ProfileService {
     private final ProfileServiceClient profileServiceClient;
     private final ProfileRelationshipMapper profileRelationshipMapper;
     private final MessageServiceClient messageServiceClient;
+    private final FamilyMemberMapper familyMemberMapper;
 
     @Override
     public void createProfile(String identity) {
@@ -90,6 +90,22 @@ public class ProfileServiceImpl implements ProfileService {
         int friendsCount = profileRepository.countAllFriendsByIdentity(identity);
         log.info("Retrieve profile friends count. Profile: " + identity);
         return friendsCount;
+    }
+
+    @Override
+    public List<FamilyMemberRpRelationshipService> retrieveProfileFamilyMembers(String identity) {
+        List<FamilyMember> allFamilyMembers = profileRepository.findAllFamilyMembers(identity);
+        log.info("Retrieve all family members for a profile: " + identity);
+        List<String> allFamilyMembersIdentities = allFamilyMembers
+                .stream()
+                .map(FamilyMember::getIdentity)
+                .toList();
+        List<ProfileImageRpMediaService> profileImages = retrieveProfileImages(allFamilyMembersIdentities);
+        List<ProfileRpProfileNamesProfileService> profileNames = retrieveProfileNames(allFamilyMembersIdentities);
+        return allFamilyMembers
+                .stream()
+                .map(familyMember -> familyMemberMapper.fromFamilyMembertoFamilyMemberRpRelationshipService(familyMember, profileImages, profileNames))
+                .toList();
     }
 
     private List<ProfileOnlineStatusRpMessageService> retrieveOnlineStatuses(List<String> identities) {
