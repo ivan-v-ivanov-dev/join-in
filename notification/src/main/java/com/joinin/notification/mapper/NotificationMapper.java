@@ -14,8 +14,7 @@ import java.util.List;
 public class NotificationMapper {
 
     public NotificationRpNotificationService fromNotificationtoNotificationRpNotificationService(Notification notification,
-                                                                                                 List<ProfileImageRpMediaService> profileImages,
-                                                                                                 List<ProfileRpProfileNamesProfileService> profileNames) {
+                                                                                                 List<ProfileImageRpMediaService> profileImages) {
         if (notification == null) {
             return null;
         }
@@ -27,25 +26,9 @@ public class NotificationMapper {
                 .findFirst()
                 .orElse("No image");
 
-        String authorFirstName = profileNames
-                .stream()
-                .filter(e -> e.identity().equals(notification.getAuthorIdentity()))
-                .map(ProfileRpProfileNamesProfileService::firstName)
-                .findFirst()
-                .orElse("No Name");
-
-        String authorLastName = profileNames
-                .stream()
-                .filter(e -> e.identity().equals(notification.getAuthorIdentity()))
-                .map(ProfileRpProfileNamesProfileService::lastName)
-                .findFirst()
-                .orElse("No Name");
-
         return new NotificationRpNotificationService(
                 notification.getAuthorIdentity(),
                 authorProfileImage,
-                authorFirstName,
-                authorLastName,
                 notification.getPostIdentity(),
                 notification.getContent(),
                 calculatePostedAgo(notification.getCreatedAt())

@@ -41,11 +41,10 @@ public class NotificationServiceImpl implements NotificationService {
         List<Notification> notifications = notificationRepository.retrieveNotificationForProfile(identity);
         List<String> profileIdentities = notifications.stream().map(Notification::getAuthorIdentity).toList();
         List<ProfileImageRpMediaService> profileImages = mediaServiceClient.retrieveProfileImagesForProfiles(profileIdentities);
-        List<ProfileRpProfileNamesProfileService> profileNames = profileServiceClient.retrieveProfilesNames(profileIdentities);
         log.info("Retrieve profile notifications: " + identity);
         return notifications
                 .stream()
-                .map(e -> notificationMapper.fromNotificationtoNotificationRpNotificationService(e, profileImages, profileNames))
+                .map(e -> notificationMapper.fromNotificationtoNotificationRpNotificationService(e, profileImages))
                 .toList();
     }
 }
