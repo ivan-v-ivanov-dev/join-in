@@ -17,6 +17,7 @@ public class PostResponseMapper {
     private final PostedAgoFormatter postedAgoFormatter;
 
     public PostRpPostService fromPostByAuthortoPostRpPostService(PostByAuthorEntity postEntity,
+                                                                 String postImage,
                                                                  List<CommentRpPostService> comments,
                                                                  List<ProfileImageRpMediaService> profileImages,
                                                                  List<ProfileRpProfileNamesProfileService> profileNames,
@@ -86,7 +87,7 @@ public class PostResponseMapper {
                 postEntity.isHasVideo(),
                 postEntity.isPoll(),
 
-                postEntity.getImageIdentity(),
+                postImage,
                 postEntity.getYoutubeUrl(),
 
                 postEntity.getPollQuestion(),

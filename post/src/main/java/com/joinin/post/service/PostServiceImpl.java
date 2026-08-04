@@ -42,6 +42,10 @@ public class PostServiceImpl implements PostService {
         List<PostRpPostService> posts = postEntities.stream()
                 .map(postEntity -> {
                     String postIdentity = postEntity.getKey().getPostIdentity();
+                    String postImage = null;
+                    if (postEntity.isHasImage()) {
+                        postImage = mediaServiceClient.retrievePostImage(postIdentity);
+                    }
                     List<CommentByPostEntity> commentEntities = commentByPostRepository.findByPostIdentity(postIdentity);
                     List<String> commentAuthorIdentities = commentEntities.stream().map(CommentByPostEntity::getAuthorIdentity).toList();
                     List<ProfileImageRpMediaService> profileImagesRpMediaServices = mediaServiceClient.retrieveProfileImagesForProfiles(commentAuthorIdentities);
@@ -52,7 +56,7 @@ public class PostServiceImpl implements PostService {
                             .stream()
                             .map(e -> commentResponseMapper.fromCommentEntitytoCommentRpPostService(e, profileImagesRpMediaServices, commentProfileNames, commentReactionsCount))
                             .toList();
-                    return postResponseMapper.fromPostByAuthortoPostRpPostService(postEntity, commentRpPostServices, profileImages, profileNames, postReactionsCount);
+                    return postResponseMapper.fromPostByAuthortoPostRpPostService(postEntity, postImage, commentRpPostServices, profileImages, profileNames, postReactionsCount);
                 })
                 .toList();
         log.info("Retrieve comments for all posts");
