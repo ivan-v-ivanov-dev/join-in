@@ -60,4 +60,7 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}/search/history")
     List<String> retrieveProfileSearchKeywords(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/notifications")
+    List<NotificationRpGatewayService> retrieveProfileNotifications(@PathVariable("identity") String identity);
 }
