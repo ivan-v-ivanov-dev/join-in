@@ -322,6 +322,7 @@
                     </div>
 
                 </li>
+
                 <li class="nav-item dropdown d-none d-lg-block">
                     <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center" id="mail-drop"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -1064,9 +1065,9 @@
                                                                                     data-bs-toggle="dropdown"
                                                                                     aria-expanded="false">
 
-                            <span class="material-symbols-outlined">
-                                more_horiz
-                            </span>
+                                                                                 <span class="material-symbols-outlined">
+                                                                                     more_horiz
+                                                                                 </span>
 
                                                                             </button>
 
@@ -1114,9 +1115,9 @@
 
                                                         <!-- Image content:
                                                              supports image-only and text + image posts -->
-                                                        <div th:if="${post.hasImage and post.imageIdentity != null and !#strings.isEmpty(post.imageIdentity)}">
+                                                        <div th:if="${post.hasImage and post.image != null and !#strings.isEmpty(post.image)}">
 
-                                                            <img th:src="@{/media/images/{identity}(identity=${post.imageIdentity} )}"
+                                                            <img th:src="${post.image}"
                                                                  src="../assets/images/page-img/p1.jpg"
                                                                  th:alt="'Image from post '"
                                                                  class="img-fluid w-100"
@@ -1134,12 +1135,12 @@
                                                             <iframe th:src="${#strings.replace(post.youtubeUrl,'https://www.youtube.com/watch?v=','https://www.youtube.com/embed/'  )}"
                                                                     title="YouTube video"
                                                                     allow="accelerometer;
-                                   autoplay;
-                                   clipboard-write;
-                                   encrypted-media;
-                                   gyroscope;
-                                   picture-in-picture;
-                                   web-share"
+                                                                         autoplay;
+                                                                         clipboard-write;
+                                                                         encrypted-media;
+                                                                         gyroscope;
+                                                                         picture-in-picture;
+                                                                         web-share"
                                                                     referrerpolicy="strict-origin-when-cross-origin"
                                                                     allowfullscreen>
                                                             </iframe>

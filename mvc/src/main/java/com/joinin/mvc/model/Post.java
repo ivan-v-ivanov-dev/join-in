@@ -23,7 +23,7 @@ public class Post {
     private boolean hasVideo;
     private boolean poll;
 
-    private String imageIdentity;
+    private String image;
     private String youtubeUrl;
     private String pollQuestion;
 
