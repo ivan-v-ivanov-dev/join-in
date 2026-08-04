@@ -2,9 +2,11 @@ package com.joinin.gateway.mapper;
 
 import com.join_in.common_models.*;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface PostMapper {
+    @Mapping(target = "image", source = "post.image")
     PostRpGatewayService fromPostRpPostServicetoPostRpGatewayService(PostRpPostService post);
 
     PollOptionRpGatewayService fromPollOptionRpPostServicetoPollOptionRpGatewayService(PollOptionRpPostService pollOption);
