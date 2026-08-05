@@ -1,0 +1,18 @@
+server:
+  port: 8089
+  max-http-request-header-size: 10MB
+
+spring:
+  application:
+    name: marketplace
+
+  datasource:
+    url: jdbc:postgresql://marketplace-postgres:5432/marketplace
+    username: marketplace_user
+    password: marketplace_pass
+    driver-class-name: org.postgresql.Driver
+
+    jpa:
+      hibernate:
+        ddl-auto: validate
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
