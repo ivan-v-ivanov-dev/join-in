@@ -52,6 +52,11 @@ public class ApiGatewayController {
         return profileService.retrieveProfileByIdentity(identity);
     }
 
+    @GetMapping("/profile/{identity}/names")
+    public String retrieveProfileNames(@PathVariable String identity) {
+        return profileService.retrieveProfileNames(identity);
+    }
+
     @GetMapping("/profile/{identity}/friends")
     public List<ProfileFriendsRpGatewayService> retrieveFriends(@PathVariable String identity) {
         return relationshipService.retrieveFriends(identity);
@@ -83,7 +88,7 @@ public class ApiGatewayController {
     }
 
     @GetMapping("/profile/{identity}/frienship/requests")
-    public  List<ProfileFriendsRpGatewayService> retrieveFriendshipRequests(@PathVariable String identity) {
+    public List<ProfileFriendsRpGatewayService> retrieveFriendshipRequests(@PathVariable String identity) {
         return relationshipService.retrieveFriendshipRequests(identity);
     }
 

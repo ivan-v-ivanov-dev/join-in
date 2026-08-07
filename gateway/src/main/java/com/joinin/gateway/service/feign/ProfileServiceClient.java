@@ -10,4 +10,7 @@ public interface ProfileServiceClient {
 
     @GetMapping("/profile/{identity}")
     ProfileRpProfileService retrieveProfileByIdentity(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/names")
+    String retrieveProfileNames(@PathVariable String identity);
 }
