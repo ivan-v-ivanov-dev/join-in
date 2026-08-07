@@ -87,6 +87,84 @@ services:
     networks:
       - join-in-network
 
+  # Cassandra for Message Service
+  message-cassandra:
+    image: cassandra:5.0
+    container_name: cassandra-message-service
+    restart: unless-stopped
+
+    ports:
+      - 9043:9042
+
+    environment:
+      CASSANDRA_CLUSTER_NAME: join-in-message-cluster
+      CASSANDRA_DC: datacenter1
+      CASSANDRA_RACK: rack1
+      CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch
+      MAX_HEAP_SIZE: 1G
+      HEAP_NEWSIZE: 256M
+
+    networks:
+      - join-in-network
+
+  # Creates the schema and imports sample data
+  message-cassandra-init:
+    image: cassandra:5.0
+    container_name: cassandra-message-service-init
+    restart: "no"
+
+    depends_on:
+      - message-cassandra
+
+    volumes:
+      - ./src/main/resources/cassandra/schema.cql:/scripts/01-schema.cql:ro
+      - ./src/main/resources/cassandra/sample-data.cql:/scripts/02-sample-data.cql:ro
+
+    entrypoint: ["/bin/bash", "-c"]
+
+    command:
+      - |
+        set -euo pipefail
+
+        echo "Checking mounted CQL files..."
+
+        test -s /scripts/01-schema.cql
+        test -s /scripts/02-sample-data.cql
+
+        ls -la /scripts
+
+        echo "Waiting for Cassandra..."
+
+        until cqlsh message-cassandra 9042 \
+          -e "SELECT release_version FROM system.local;" \
+          > /dev/null 2>&1
+        do
+          echo "Cassandra is not ready yet..."
+          sleep 5
+        done
+
+        echo "Cassandra is ready."
+
+        echo "Creating keyspace and tables..."
+
+        cqlsh message-cassandra 9042 \
+          --file /scripts/01-schema.cql
+
+        echo "Verifying message_service keyspace..."
+
+        cqlsh message-cassandra 9042 \
+          -e "DESCRIBE KEYSPACE message_service;"
+
+        echo "Importing sample data..."
+
+        cqlsh message-cassandra 9042 \
+          --file /scripts/02-sample-data.cql
+
+        echo "Cassandra initialization completed successfully."
+
+    networks:
+      - join-in-network
+
   # Message Service
   message-service:
     build:
