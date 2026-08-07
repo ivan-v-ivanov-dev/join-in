@@ -15,7 +15,6 @@ public interface ChatMessageRepository extends CassandraRepository<ChatMessage, 
         SELECT *
         FROM messages_by_conversation
         WHERE conversation_id = ?0
-        ORDER BY created_at ASC, message_id DESC
         """)
     List<ChatMessage> retrieveConversationMessages(String conversationId);
 }

@@ -37,8 +37,6 @@ public class MessageByConversationKey implements Serializable {
     @PrimaryKeyColumn(
             name = "conversation_id",
             type = PrimaryKeyType.CLUSTERED,
-            ordinal = 2,
-            ordering = Ordering.DESCENDING
-    )
+            ordinal = 2)
     private String conversationId;
 }

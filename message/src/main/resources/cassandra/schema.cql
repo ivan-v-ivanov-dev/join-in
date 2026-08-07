@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS messages_by_conversation
 
     PRIMARY KEY ((conversation_id), created_at, message_id )
 )
-            WITH CLUSTERING ORDER BY (created_at DESC, message_id ASC);
+            WITH CLUSTERING ORDER BY (created_at ASC, message_id ASC);
 
 
 -- CONVERSATIONS BY USER
@@ -46,13 +46,6 @@ CREATE TABLE IF NOT EXISTS conversations_by_user
 
     participant_id  text,
 
-    PRIMARY KEY (
-        (user_id),
-         last_message_at,
-         conversation_id
-        )
+    PRIMARY KEY ((user_id), last_message_at, conversation_id )
 )
-    WITH CLUSTERING ORDER BY (
-                              last_message_at DESC,
-                              conversation_id ASC
-        );
+            WITH CLUSTERING ORDER BY (last_message_at DESC, conversation_id ASC);

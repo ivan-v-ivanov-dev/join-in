@@ -30,7 +30,7 @@ public class ChatMessageKey implements Serializable {
             name = "created_at",
             type = PrimaryKeyType.CLUSTERED,
             ordinal = 1,
-            ordering = Ordering.DESCENDING
+            ordering = Ordering.ASCENDING
     )
     private LocalDateTime createdAt;
 
