@@ -34,6 +34,9 @@ public interface GatewayClient {
     @GetMapping("/profile/{identity}")
     ProfileRpGatewayService retrieveProfileByIdentity(@PathVariable String identity);
 
+    @GetMapping("/profile/{identity}/names")
+    String retrieveProfileNames(@PathVariable String identity);
+
     @GetMapping("/profile/{identity}/friends")
     List<ProfileFriendsRpGatewayService> retrieveFriends(@PathVariable String identity);
 

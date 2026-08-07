@@ -87,6 +87,21 @@ public class MvcController {
         }
     }
 
+    @GetMapping("/profile/{identity}/feed")
+    public String feed(@PathVariable("identity") String identity, Model model) {
+        try {
+            model.addAttribute("profileNames", profileService.retrieveProfileNames(identity));
+            model.addAttribute("profileImage", mediaService.retrieveProfileImage(identity));
+            model.addAttribute("searchKeywords", searchService.retrieveProfileSearchKeywords(identity));
+            model.addAttribute("friendshipRequests", relationshipService.retrieveFriendshipRequests(identity));
+            model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
+            return "feed";
+        } catch (ResourceAccessException resourceAccessException) {
+            model.addAttribute("error", resourceAccessException.getMessage());
+            return "error";
+        }
+    }
+
     @GetMapping("/health")
     public String health() {
         return "MVC service is HEALTHY.";

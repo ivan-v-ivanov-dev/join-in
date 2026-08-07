@@ -23,4 +23,11 @@ public class ProfileServiceImpl implements ProfileService {
         log.info("Retrieve profile by identity from API gateway: " + profileRpGatewayService.identity());
         return profileMapper.fromProfileRpGatewayServicetoProfile(profileRpGatewayService);
     }
+
+    @Override
+    public String retrieveProfileNames(String identity) {
+        String names = gatewayClient.retrieveProfileNames(identity);
+        log.info("Retrieve profile names: " + names);
+        return names;
+    }
 }
