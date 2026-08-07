@@ -22,6 +22,11 @@ public class ProfileController {
         return profileService.retrieveProfileByIdentity(identity);
     }
 
+    @GetMapping("/profile/{identity}/names")
+    public String retrieveProfileNames(@PathVariable String identity) {
+        return profileService.retrieveProfileNames(identity);
+    }
+
     @GetMapping("/profiles/names")
     public List<ProfileRpProfileNamesProfileService> retrieveProfilesNames(@RequestParam List<String> identities) {
         return profileService.retrieveProfilesNames(identities);

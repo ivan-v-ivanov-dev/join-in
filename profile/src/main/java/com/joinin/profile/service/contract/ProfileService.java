@@ -12,4 +12,6 @@ public interface ProfileService {
     ProfileRpProfileService retrieveProfileByIdentity(String identity);
 
     List<ProfileRpProfileNamesProfileService> retrieveProfilesNames(List<String> identities);
+
+    String retrieveProfileNames(String identity);
 }

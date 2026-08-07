@@ -40,6 +40,15 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    public String retrieveProfileNames(String identity) {
+        Profile profile = profileRepository.retrieveProfileByIdentity(identity);
+        log.info("Retrieve profile by identity: " + profile.getIdentity());
+        String names = String.format("%s %s", profile.getFirstName(), profile.getLastName());
+        log.info("Retrieve profile names: " + names);
+        return names;
+    }
+
+    @Override
     public List<ProfileRpProfileNamesProfileService> retrieveProfilesNames(List<String> identities) {
         List<Profile> profiles = profileRepository.retrieveProfilesByIdentities(identities);
         log.info("Retrieve profiles by identities: " +
