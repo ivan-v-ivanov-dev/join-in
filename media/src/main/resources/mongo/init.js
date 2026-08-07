@@ -5,6 +5,7 @@ console.log("*** Authentication with root user ***");
 use("storage");
 db.createCollection("profiles");
 db.createCollection("plugins");
+db.createCollection("plugin_versions");
 db.createCollection("groups");
 db.createCollection("posts");
 console.log("*** Collection created ***");
@@ -164,6 +165,17 @@ db.posts.insertMany([
     {
         identity: "2d9f88c586a48377495a3b9691ccc4d651ecf33ca55b735348d398e42f0304194ee08fbd72705b80cdab2b8ae8e24392ee2e4e5983a903225482f452ac592dbb",
         imageUrl: "posts/2d9f88c586a48377495a3b9691ccc4d651ecf33ca55b735348d398e42f0304194ee08fbd72705b80cdab2b8ae8e24392ee2e4e5983a903225482f452ac592dbb.webp"
+    }
+]);
+
+db.plugin_versions.insertMany([
+    {
+        identity: "afe70797e1b617f524fbbec74d4f8ce4d292cef7ecd500965bf2278591d18c1096a7647f578f0cbafa5d080ef0ba30d4939ed4901c103b08fd326a22cafd0b72",
+        contentUrl: "posts/afe70797e1b617f524fbbec74d4f8ce4d292cef7ecd500965bf2278591d18c1096a7647f578f0cbafa5d080ef0ba30d4939ed4901c103b08fd326a22cafd0b72.webp"
+    },
+    {
+        identity: "2d9f88c586a48377495a3b9691ccc4d651ecf33ca55b735348d398e42f0304194ee08fbd72705b80cdab2b8ae8e24392ee2e4e5983a903225482f452ac592dbb",
+        contentUrl: "posts/2d9f88c586a48377495a3b9691ccc4d651ecf33ca55b735348d398e42f0304194ee08fbd72705b80cdab2b8ae8e24392ee2e4e5983a903225482f452ac592dbb.webp"
     }
 ]);
 
