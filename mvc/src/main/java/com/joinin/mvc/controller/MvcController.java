@@ -27,6 +27,7 @@ public class MvcController {
     private final ReactionService reactionService;
     private final SearchService searchService;
     private final NotificationService notificationService;
+    private final MessageService messageService;
 
     @GetMapping("/")
     public String login() {
@@ -80,6 +81,7 @@ public class MvcController {
             model.addAttribute("searchKeywords", searchService.retrieveProfileSearchKeywords(identity));
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
             model.addAttribute("familyMembers", relationshipService.retrieveProfileFamilyMembers(identity));
+            model.addAttribute("conversations", messageService.retrieveConversations(identity));
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());

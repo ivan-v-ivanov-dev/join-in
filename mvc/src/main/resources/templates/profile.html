@@ -35,7 +35,7 @@
     <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar p-lg-0">
         <div class="container-fluid navbar-inner">
             <div class="d-flex align-items-center gap-3">
-                <a href="../dashboard/index.html"
+                <a th:href="@{/profile/{identity}/feed(identity=${profile.identity})}"
                    class="d-flex align-items-center gap-2 iq-header-logo d-none d-lg-flex">
                     <svg width="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -139,8 +139,8 @@
 
             </div>
             <ul class="navbar-nav navbar-list">
-                <li class="nav-item">
-                    <a href="../dashboard/index.html" class="d-flex align-items-center">
+                <li class="nav-item d-none d-lg-block">
+                    <a th:href="@{/profile/{identity}/feed(identity=${profile.identity})}">
                         <i class="material-symbols-outlined">home</i>
                     </a>
                 </li>
@@ -323,85 +323,78 @@
 
                 </li>
 
+                <!-- Messages-->
                 <li class="nav-item dropdown d-none d-lg-block">
-                    <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center" id="mail-drop"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="javascript:void(0);"
+                       class="dropdown-toggle d-flex align-items-center"
+                       id="mail-drop"
+                       data-bs-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+
                         <i class="material-symbols-outlined">mail</i>
                         <span class="mobile-text d-lg-none ms-3">Message</span>
                     </a>
+
                     <div class="sub-drop dropdown-menu" aria-labelledby="mail-drop">
                         <div class="card shadow-none m-0">
+
                             <div class="card-header d-flex justify-content-between bg-primary">
                                 <div class="header-title bg-primary">
-                                    <h5 class="mb-0 text-white">All Message</h5>
+                                    <h5 class="mb-0 text-white">All Messages</h5>
                                 </div>
-                                <small class="badge bg-light text-dark">4</small>
+
+                                <small class="badge bg-light text-dark"
+                                       th:text="${#lists.size(conversations)}">
+                                    0
+                                </small>
                             </div>
-                            <div class="card-body p-0 ">
-                                <a href="javascript:void(0);" class="iq-sub-card">
-                                    <div class="d-flex  align-items-center">
-                                        <div class="">
-                                            <img class="avatar-40 rounded" src="../assets/images/user/01.jpg" alt=""
-                                                 loading="lazy">
-                                        </div>
-                                        <div class=" w-100 ms-3">
-                                            <h6 class="mb-0 ">Bni Emma Watson</h6>
-                                            <small class="float-left font-size-12">13 Jun</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0);" class="iq-sub-card">
+
+                            <div class="card-body p-0">
+
+                                <!-- Conversations -->
+                                <a th:each="conversation : ${conversations}"
+                                   href="javascript:void(0);"
+                                   class="iq-sub-card">
+
                                     <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="avatar-40 rounded" src="../assets/images/user/02.jpg" alt=""
+
+                                        <!-- Participant profile image -->
+                                        <div>
+                                            <img class="avatar-40 rounded"
+                                                 th:src="${conversation.participantProfileImage}"
+                                                 alt="Profile image"
                                                  loading="lazy">
                                         </div>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0 ">Lorem Ipsum Watson</h6>
-                                            <small class="float-left font-size-12">20 Apr</small>
+
+                                        <!-- Participant information -->
+                                        <div class="w-100 ms-3">
+
+                                            <h6 class="mb-0"
+                                                th:text="${conversation.participantNames}">
+                                                Participant Name
+                                            </h6>
+
+                                            <small class="float-left font-size-12"
+                                                   th:text="${conversation.getPostedAgo()}">
+                                                Last message
+                                            </small>
+
                                         </div>
                                     </div>
                                 </a>
-                                <a href="javascript:void(0);" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="avatar-40 rounded" src="../assets/images/user/03.jpg" alt=""
-                                                 loading="lazy">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0 ">Why do we use it?</h6>
-                                            <small class="float-left font-size-12">30 Jun</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0);" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="avatar-40 rounded" src="../assets/images/user/04.jpg" alt=""
-                                                 loading="lazy">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0 ">Variations Passages</h6>
-                                            <small class="float-left font-size-12">12 Sep</small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0);" class="iq-sub-card">
-                                    <div class="d-flex align-items-center">
-                                        <div class="">
-                                            <img class="avatar-40 rounded" src="../assets/images/user/05.jpg" alt=""
-                                                 loading="lazy">
-                                        </div>
-                                        <div class="ms-3">
-                                            <h6 class="mb-0 ">Lorem Ipsum generators</h6>
-                                            <small class="float-left font-size-12">5 Dec</small>
-                                        </div>
-                                    </div>
-                                </a>
+
+                                <!-- No conversations -->
+                                <div th:if="${#lists.isEmpty(conversations)}"
+                                     class="text-center p-3">
+                                    <small>No conversations</small>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </li>
+
                 <li class="nav-item d-lg-none">
                     <a href="../app/chat.html" class="dropdown-toggle d-flex align-items-center" id="mail-drop-1"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -515,7 +508,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page"
-                       href="../dashboard/index.html">
+                       th:href="@{/profile/{identity}/feed(identity=${profile.identity})}">
                         <i class="icon material-symbols-outlined">
                             newspaper
                         </i>
