@@ -18,14 +18,14 @@ public class ConversationsMapper {
 
         String profileImage = profileImages
                 .stream()
-                .filter(e -> e.identity().equals(messageByConversation.getKey().getUserId()))
+                .filter(e -> e.identity().equals(messageByConversation.getParticipantId()))
                 .map(ProfileImageRpMediaService::profileImage)
                 .findFirst()
                 .orElse("No profile image");
 
         String names = profileNames
                 .stream()
-                .filter(e -> e.identity().equals(messageByConversation.getKey().getUserId()))
+                .filter(e -> e.identity().equals(messageByConversation.getParticipantId()))
                 .map(e -> String.format("%s %s", e.firstName(), e.lastName()))
                 .findFirst()
                 .orElse("No profile names");

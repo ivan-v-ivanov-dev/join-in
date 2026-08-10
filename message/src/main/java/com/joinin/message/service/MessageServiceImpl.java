@@ -32,7 +32,7 @@ public class MessageServiceImpl implements MessageService {
     public List<ConversationRpMessageService> retrieveConversations(String identity) {
         List<MessageByConversation> conversations = conversationRepository.findConversationsByUserId(identity);
         log.info("Retrieve conversations for profile: " + identity);
-        List<String> profileIdentities = conversations.stream().map(e -> e.getKey().getUserId()).toList();
+        List<String> profileIdentities = conversations.stream().map(MessageByConversation::getParticipantId).toList();
         List<ProfileImageRpMediaService> profileImages = mediaServiceClient.retrieveProfileImagesForProfiles(profileIdentities);
         log.info("Retrieve profile images from Media service for profiles: " + String.join(", ", profileIdentities));
         List<ProfileRpProfileNamesProfileService> profileNames = profileServiceClient.retrieveProfilesNames(profileIdentities);
