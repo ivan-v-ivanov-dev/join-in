@@ -21,6 +21,7 @@ public class ApiGatewayController {
     private final ReactionService reactionService;
     private final SearchService searchService;
     private final NotificationService notificationService;
+    private final MessageService messageService;
 
     @PostMapping("/email/{email}/unique")
     public boolean isEmailUnique(@PathVariable("email") String email) {
@@ -110,6 +111,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/family/members")
     public List<FamilyMemberRpGatewayService> retrieveProfileFamilyMembers(@PathVariable("identity") String identity) {
         return relationshipService.retrieveProfileFamilyMembers(identity);
+    }
+
+    @GetMapping("/profile/{identity}/conversations")
+    public List<ConversationRpGatewayService> retrieveProfileConversations(@PathVariable("identity") String identity) {
+        return messageService.retrieveProfileConversations(identity);
     }
 
     @GetMapping("/health")

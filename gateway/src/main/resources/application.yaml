@@ -83,3 +83,11 @@ notification:
       client:
         name: Notification-service-Feign-client
     url:  http://notification-service:8086
+
+#Message service Feign client
+message:
+  service:
+    feign:
+      client:
+        name: Message-service-Feign-client
+    url:  http://message-service:8091
