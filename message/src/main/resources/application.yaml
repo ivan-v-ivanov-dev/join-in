@@ -27,3 +27,19 @@ spring:
     redis:
       host: message-redis
       port: 6379
+
+#Media service Feign client
+media:
+  service:
+    feign:
+      client:
+        name: Media-service-Feign-client
+    url:  http://media-service:8090
+
+#Profile service Feign client
+profile:
+  service:
+    feign:
+      client:
+        name: Profile-service-Feign-client
+    url:  http://profile-service:8083

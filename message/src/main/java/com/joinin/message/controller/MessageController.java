@@ -1,5 +1,6 @@
 package com.joinin.message.controller;
 
+import com.join_in.common_models.ConversationRpMessageService;
 import com.join_in.common_models.ProfileOnlineStatusRpMessageService;
 import com.joinin.message.model.ChatMessage;
 import com.joinin.message.model.MessageByConversation;
@@ -23,7 +24,7 @@ public class MessageController {
     }
 
     @GetMapping("/profile/{identity}/conversations")
-    public List<MessageByConversation> retrieveConversations(@PathVariable("identity") String identity) {
+    public List<ConversationRpMessageService> retrieveConversations(@PathVariable("identity") String identity) {
         return messageService.retrieveConversations(identity);
     }
 
