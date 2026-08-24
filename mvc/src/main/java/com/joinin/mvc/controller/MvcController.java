@@ -101,6 +101,7 @@ public class MvcController {
             model.addAttribute("friendshipRequests", relationshipService.retrieveFriendshipRequests(identity));
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
             model.addAttribute("onlineStatus", messageService.retrieveProfileOnlineStatus(identity));
+            model.addAttribute("conversations", messageService.retrieveConversations(identity));
             model.addAttribute("friendSuggestions", relationshipService.retrieveFriendSuggestions(identity));
             model.addAttribute("suggestedGroups", groupService.retrieveProfileSuggestedGroups(identity));
             return "feed";
