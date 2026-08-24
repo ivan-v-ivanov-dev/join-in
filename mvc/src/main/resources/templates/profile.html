@@ -462,7 +462,7 @@
                                    edit_note
                                 </span>
                                     <div class="ms-3">
-                                        <a href="../app/profile-edit.html" class="mb-0 h6">
+                                        <a th:href="@{/profile/{identity}/edit(identity=${profile.identity})}" class="mb-0 h6">
                                             Edit Profile
                                         </a>
                                     </div>

@@ -82,4 +82,6 @@ public interface GatewayClient {
     @PostMapping("/profile/{identity}/offline")
     void updateProfileOfflineStatus(@PathVariable("identity") String identity);
 
+    @GetMapping("/profile/{identity}/friend/suggestions")
+    List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(@PathVariable String identity);
 }

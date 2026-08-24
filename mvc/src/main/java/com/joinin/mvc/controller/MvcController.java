@@ -100,7 +100,19 @@ public class MvcController {
             model.addAttribute("friendshipRequests", relationshipService.retrieveFriendshipRequests(identity));
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
             model.addAttribute("onlineStatus", messageService.retrieveProfileOnlineStatus(identity));
+            model.addAttribute("friendSuggestions", relationshipService.retrieveFriendSuggestions(identity));
             return "feed";
+        } catch (ResourceAccessException resourceAccessException) {
+            model.addAttribute("error", resourceAccessException.getMessage());
+            return "error";
+        }
+    }
+
+    @GetMapping("/profile/{identity}/edit")
+    public String editProfile(@PathVariable("identity") String identity, Model model) {
+        try {
+            model.addAttribute("profile", profileService.retrieveProfileByIdentity(identity));
+            return "edit-profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
             return "error";

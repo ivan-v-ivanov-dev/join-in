@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" th:href="@{/assets/vendor/vanillajs-datepicker/dist/css/datepicker.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/customizer.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/friend-suggestions.css}">
 </head>
 
 <body class="  ">
@@ -428,7 +429,7 @@
 
                         <div class="caption">
                             <h6 class="mb-0 line-height"
-                                th:text="|${profile.firstName} ${profile.lastName}|">
+                                th:text="${profileNames}">
                                 Bni Cyst
                             </h6>
                         </div>
@@ -458,7 +459,7 @@
                                    edit_note
                                 </span>
                                     <div class="ms-3">
-                                        <a href="../app/profile-edit.html" class="mb-0 h6">
+                                        <a th:href="@{/profile/{identity}/edit(identity=${profileIdentity})}" class="mb-0 h6">
                                             Edit Profile
                                         </a>
                                     </div>
@@ -1900,35 +1901,61 @@
                                 <h4 class="card-title">Friend suggestions</h4>
                             </div>
                         </div>
+
                         <div class="card-body">
-                            <ul class="media-story list-inline m-0 p-0">
-                                <li class="d-flex mb-3 align-items-center active">
-                                    <img src="../assets/images/page-img/s2.jpg" alt="story-img"
-                                         class="rounded-circle img-fluid">
-                                    <div class="stories-data ms-3">
-                                        <h5>Anna Mull</h5>
-                                        <p class="mb-0">1 hour ago</p>
+
+                            <ul class="friend-suggestions-gallery list-inline m-0 p-0">
+
+                                <li th:each="suggestion : ${friendSuggestions}"
+                                    th:with="isOnline=${suggestion.onlineStatus != null and suggestion.onlineStatus.equalsIgnoreCase('ONLINE')}">
+
+                                    <div class="friend-suggestion-avatar">
+
+                                        <a th:href="@{/profile/{identity}(identity=${suggestion.identity})}"
+                                           class="friend-suggestion-image-link">
+
+                                            <img src="../assets/images/user/default-avatar.jpg"
+                                                 th:src="${suggestion.profileImage != null and !#strings.isEmpty(suggestion.profileImage)
+                            ? suggestion.profileImage
+                            : '/assets/images/user/default-avatar.jpg'}"
+                                                 th:alt="|${suggestion.firstName} ${suggestion.lastName}|"
+                                                 class="friend-suggestion-image"
+                                                 loading="lazy">
+
+                                        </a>
+
+                                        <span class="friend-suggestion-status"
+                                              th:classappend="${isOnline ? ' status-online' : ' status-away'}">
+                </span>
+
                                     </div>
+
+                                    <a th:href="@{/profile/{identity}(identity=${suggestion.identity})}"
+                                       class="text-decoration-none text-dark">
+
+                                        <p class="friend-suggestion-name"
+                                           th:text="|${suggestion.firstName} ${suggestion.lastName}|">
+                                            Friend Name
+                                        </p>
+
+                                    </a>
+
+                                    <p class="friend-suggestion-online-status"
+                                       th:classappend="${isOnline ? ' text-success' : ' text-warning'}"
+                                       th:text="${isOnline ? 'Online' : 'Offline'}">
+                                        Offline
+                                    </p>
+
                                 </li>
-                                <li class="d-flex mb-3 align-items-center">
-                                    <img src="../assets/images/page-img/s3.jpg" alt="story-img"
-                                         class="rounded-circle img-fluid">
-                                    <div class="stories-data ms-3">
-                                        <h5>Ira Membrit</h5>
-                                        <p class="mb-0">4 hour ago</p>
-                                    </div>
-                                </li>
-                                <li class="d-flex align-items-center">
-                                    <img src="../assets/images/page-img/s1.jpg" alt="story-img"
-                                         class="rounded-circle img-fluid">
-                                    <div class="stories-data ms-3">
-                                        <h5>Bob Frapples</h5>
-                                        <p class="mb-0">9 hour ago</p>
-                                    </div>
-                                </li>
+
                             </ul>
-                            <a href="#" class="btn btn-primary d-block mt-3">See All</a>
+
+                            <a href="#" class="btn btn-primary d-block mt-3">
+                                See All
+                            </a>
+
                         </div>
+
                     </div>
 
                     <div class="card">
