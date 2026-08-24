@@ -10,4 +10,8 @@ public interface ProfileService {
     List<ProfileOnlineStatusRpMessageService> retrieveProfilesOnlineStatuses(List<String> identities);
 
     String retrieveProfileOnlineStatus(String identity);
+
+    void updateProfileOnlineStatus(String identity);
+
+    void updateProfileOfflineStatus(String identity);
 }

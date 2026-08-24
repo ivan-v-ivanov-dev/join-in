@@ -40,4 +40,16 @@ public class ProfileServiceImpl implements ProfileService {
         log.info("Retrieve online status for profile: " + identity);
         return status;
     }
+
+    @Override
+    public void updateProfileOnlineStatus(String identity) {
+        String status = profileRepository.saveOnline(identity);
+        log.info("Save profile status " + status + " for profile: " + identity);
+    }
+
+    @Override
+    public void updateProfileOfflineStatus(String identity) {
+        String status = profileRepository.saveOffline(identity);
+        log.info("Save profile status " + status + " for profile: " + identity);
+    }
 }

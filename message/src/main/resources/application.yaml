@@ -15,6 +15,8 @@ spring:
     offset-reset: earliest
     topic:
       new-registered-user-info: new-registered-user-info
+      update-profile-online-status: update-profile-online-status
+      update-profile-offline-status: update-profile-offline-status
 
   cassandra:
     contact-points: message-cassandra
