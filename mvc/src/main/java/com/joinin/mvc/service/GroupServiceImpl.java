@@ -22,7 +22,17 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<Group> retrieveProfileJoinedGroups(String identity) {
         List<GroupRpGatewayService> groupRpGatewayServices = gatewayClient.retrieveProfileJoinedGroups(identity);
-        log.info("Retrieve profile joined group from API gateway. Profile identity: " + identity);
+        log.info("Retrieve profile joined groups from API gateway. Profile identity: " + identity);
+        return groupRpGatewayServices
+                .stream()
+                .map(groupMapper::fromGroupRpGatewayServicetoGroup)
+                .toList();
+    }
+
+    @Override
+    public List<Group> retrieveProfileSuggestedGroups(String identity) {
+        List<GroupRpGatewayService> groupRpGatewayServices = gatewayClient.retrieveSuggestedGroups(identity);
+        log.info("Retrieve profile suggested groups from API gateway. Profile identity: " + identity);
         return groupRpGatewayServices
                 .stream()
                 .map(groupMapper::fromGroupRpGatewayServicetoGroup)

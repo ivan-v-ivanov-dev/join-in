@@ -102,6 +102,7 @@ public class MvcController {
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
             model.addAttribute("onlineStatus", messageService.retrieveProfileOnlineStatus(identity));
             model.addAttribute("friendSuggestions", relationshipService.retrieveFriendSuggestions(identity));
+            model.addAttribute("suggestedGroups", groupService.retrieveProfileSuggestedGroups(identity));
             return "feed";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
