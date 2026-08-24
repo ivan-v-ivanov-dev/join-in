@@ -33,4 +33,11 @@ public class ProfileServiceImpl implements ProfileService {
         log.info("Retrieve online status for profiles: " + String.join(", ", identities));
         return profileOnlineStatusRpMessageServices;
     }
+
+    @Override
+    public String retrieveProfileOnlineStatus(String identity) {
+        String status = profileRepository.getStatus(identity);
+        log.info("Retrieve online status for profile: " + identity);
+        return status;
+    }
 }

@@ -23,6 +23,11 @@ public class MessageController {
         return profileService.retrieveProfilesOnlineStatuses(identities);
     }
 
+    @GetMapping("/profile/{identity}/online-status")
+    public String retrieveProfileOnlineStatus(@PathVariable("identity") String identity) {
+        return profileService.retrieveProfileOnlineStatus(identity);
+    }
+
     @GetMapping("/profile/{identity}/conversations")
     public List<ConversationRpMessageService> retrieveConversations(@PathVariable("identity") String identity) {
         return messageService.retrieveConversations(identity);

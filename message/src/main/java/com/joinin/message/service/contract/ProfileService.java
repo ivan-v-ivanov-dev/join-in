@@ -8,4 +8,6 @@ public interface ProfileService {
     void createProfileOffline(String identity);
 
     List<ProfileOnlineStatusRpMessageService> retrieveProfilesOnlineStatuses(List<String> identities);
+
+    String retrieveProfileOnlineStatus(String identity);
 }
