@@ -11,4 +11,7 @@ import java.util.List;
 public interface MessageServiceClient {
     @GetMapping("/profile/{identity}/conversations")
     List<ConversationRpMessageService> retrieveConversations(@PathVariable("identity") String identity);
+
+    @GetMapping("/profile/{identity}/online-status")
+    String retrieveProfileOnlineStatus(@PathVariable("identity") String identity);
 }

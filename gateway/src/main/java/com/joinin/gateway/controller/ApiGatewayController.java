@@ -2,6 +2,7 @@ package com.joinin.gateway.controller;
 
 import com.join_in.common_models.*;
 import com.joinin.gateway.service.contract.*;
+import com.joinin.gateway.service.feign.MessageServiceClient;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ public class ApiGatewayController {
     private final SearchService searchService;
     private final NotificationService notificationService;
     private final MessageService messageService;
+    private final MessageServiceClient messageServiceClient;
 
     @PostMapping("/email/{email}/unique")
     public boolean isEmailUnique(@PathVariable("email") String email) {
@@ -116,6 +118,11 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/conversations")
     public List<ConversationRpGatewayService> retrieveProfileConversations(@PathVariable("identity") String identity) {
         return messageService.retrieveProfileConversations(identity);
+    }
+
+    @GetMapping("/profile/{identity}/online-status")
+    public String retrieveProfileOnlineStatus(@PathVariable("identity") String identity) {
+        return messageServiceClient.retrieveProfileOnlineStatus(identity);
     }
 
     @GetMapping("/health")
