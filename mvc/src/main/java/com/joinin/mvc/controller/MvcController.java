@@ -82,6 +82,7 @@ public class MvcController {
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
             model.addAttribute("familyMembers", relationshipService.retrieveProfileFamilyMembers(identity));
             model.addAttribute("conversations", messageService.retrieveConversations(identity));
+            model.addAttribute("onlineStatus", "OFFLINE");
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
@@ -107,6 +108,6 @@ public class MvcController {
 
     @GetMapping("/health")
     public String health() {
-        return "MVC service is HEALTHY.";
+        return "edit-profile";
     }
 }
