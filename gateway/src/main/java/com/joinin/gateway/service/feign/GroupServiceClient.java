@@ -11,4 +11,7 @@ import java.util.List;
 public interface GroupServiceClient {
     @GetMapping("/profile/{identity}/joined-groups")
     List<GroupRpGroupService> retrieveProfileJoinedGroups(@PathVariable("identity") String identity);
+
+    @GetMapping("/profile/{identity}/suggested-groups")
+    List<GroupRpGroupService> retrieveSuggestedGroups(@PathVariable("identity") String identity);
 }

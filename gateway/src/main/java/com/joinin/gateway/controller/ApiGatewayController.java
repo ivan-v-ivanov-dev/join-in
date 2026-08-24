@@ -75,6 +75,11 @@ public class ApiGatewayController {
         return groupService.retrieveProfileJoinedGroups(identity);
     }
 
+    @GetMapping("/profile/{identity}/suggested-groups")
+    public List<GroupRpGatewayService> retrieveSuggestedGroups(@PathVariable("identity") String identity) {
+        return groupService.retrieveSuggestedGroups(identity);
+    }
+
     @GetMapping("/profile/{identity}/posts/count")
     public int retrieveProfilePostsCount(@PathVariable String identity) {
         return postService.retrieveProfilePostsCount(identity);
@@ -139,7 +144,7 @@ public class ApiGatewayController {
     public List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(@PathVariable String identity) {
         return relationshipService.retrieveFriendSuggestions(identity);
     }
-    
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";

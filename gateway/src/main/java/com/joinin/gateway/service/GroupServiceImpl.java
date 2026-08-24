@@ -32,6 +32,19 @@ public class GroupServiceImpl implements GroupService {
                 .stream()
                 .map(groupMapper::fromGroupRpGroupServicetoGroupRpGatewayService)
                 .toList();
+    }
 
+    @Override
+    public List<GroupRpGatewayService> retrieveSuggestedGroups(String identity) {
+        List<GroupRpGroupService> groupRpGroupServices = groupServiceClient.retrieveSuggestedGroups(identity);
+        log.info("Retrieve suggested groups from Group Service for Profile: " + identity);
+        if (groupRpGroupServices.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return groupRpGroupServices
+                .stream()
+                .map(groupMapper::fromGroupRpGroupServicetoGroupRpGatewayService)
+                .toList();
     }
 }
