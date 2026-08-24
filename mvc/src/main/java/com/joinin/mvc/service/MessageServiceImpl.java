@@ -35,4 +35,16 @@ public class MessageServiceImpl implements MessageService {
         log.info("Retrieve online status for profile: " + identity);
         return status;
     }
+
+    @Override
+    public void updateProfileOnlineStatus(String identity) {
+        gatewayClient.updateProfileOnlineStatus(identity);
+        log.info("Profile status changed to online: " + identity);
+    }
+
+    @Override
+    public void updateProfileOfflineStatus(String identity) {
+        gatewayClient.updateProfileOfflineStatus(identity);
+        log.info("Profile status changed to offline: " + identity);
+    }
 }

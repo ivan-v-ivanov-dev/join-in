@@ -9,4 +9,8 @@ public interface MessageService {
     List<Conversation> retrieveConversations(String identity);
 
     String retrieveProfileOnlineStatus(String identity);
+
+    void updateProfileOnlineStatus(String identity);
+
+    void updateProfileOfflineStatus(String identity);
 }

@@ -99,11 +99,24 @@ public class MvcController {
             model.addAttribute("searchKeywords", searchService.retrieveProfileSearchKeywords(identity));
             model.addAttribute("friendshipRequests", relationshipService.retrieveFriendshipRequests(identity));
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
+            model.addAttribute("onlineStatus", messageService.retrieveProfileOnlineStatus(identity));
             return "feed";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
             return "error";
         }
+    }
+
+    @PostMapping("/profile/{identity}/online")
+    public String updateProfileOnlineStatus(@PathVariable String identity) {
+        messageService.updateProfileOnlineStatus(identity);
+        return "redirect:/profile/" + identity;
+    }
+
+    @PostMapping("/profile/{identity}/offline")
+    public String setProfileOfflineStatus(@PathVariable String identity) {
+        messageService.updateProfileOfflineStatus(identity);
+        return "redirect:/profile/" + identity;
     }
 
     @GetMapping("/health")

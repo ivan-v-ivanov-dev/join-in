@@ -75,4 +75,11 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}/online-status")
     String retrieveProfileOnlineStatus(@PathVariable("identity") String identity);
+
+    @PostMapping("/profile/{identity}/online")
+    void updateProfileOnlineStatus(@PathVariable("identity") String identity);
+
+    @PostMapping("/profile/{identity}/offline")
+    void updateProfileOfflineStatus(@PathVariable("identity") String identity);
+
 }
