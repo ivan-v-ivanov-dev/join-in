@@ -82,7 +82,7 @@ public class MvcController {
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
             model.addAttribute("familyMembers", relationshipService.retrieveProfileFamilyMembers(identity));
             model.addAttribute("conversations", messageService.retrieveConversations(identity));
-            model.addAttribute("onlineStatus", "OFFLINE");
+            model.addAttribute("onlineStatus", messageService.retrieveProfileOnlineStatus(identity));
             return "profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());

@@ -72,4 +72,7 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}/conversations")
     List<ConversationRpGatewayService> retrieveProfileConversations(@PathVariable("identity") String identity);
+
+    @GetMapping("/profile/{identity}/online-status")
+    String retrieveProfileOnlineStatus(@PathVariable("identity") String identity);
 }

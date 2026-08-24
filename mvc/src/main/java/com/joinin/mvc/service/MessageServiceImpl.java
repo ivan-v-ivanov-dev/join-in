@@ -28,4 +28,11 @@ public class MessageServiceImpl implements MessageService {
                 .map(conversationMapper::fromConversationRpGatewayServicetoConversation)
                 .toList();
     }
+
+    @Override
+    public String retrieveProfileOnlineStatus(String identity) {
+        String status = gatewayClient.retrieveProfileOnlineStatus(identity);
+        log.info("Retrieve online status for profile: " + identity);
+        return status;
+    }
 }
