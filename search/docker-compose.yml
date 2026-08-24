@@ -71,6 +71,7 @@ services:
       - 8092:8092
     depends_on:
       - search-mongo
+      - search-elasticsearch
     networks:
       - join-in-network
 

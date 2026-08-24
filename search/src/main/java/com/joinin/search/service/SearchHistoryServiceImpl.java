@@ -1,7 +1,5 @@
 package com.joinin.search.service;
 
-import com.join_in.common_models.SearchHistoryRpSearchService;
-import com.joinin.search.mapper.SearchHistoryMapper;
 import com.joinin.search.model.mongo.SearchHistoryEntry;
 import com.joinin.search.repository.SearchHistoryRepository;
 import com.joinin.search.service.contract.SearchHistoryService;
@@ -17,7 +15,6 @@ import java.util.List;
 public class SearchHistoryServiceImpl implements SearchHistoryService {
 
     private final SearchHistoryRepository searchHistoryRepository;
-    private final SearchHistoryMapper searchHistoryMapper;
 
     @Override
     public void saveProfileSearchHistory(String identity) {
