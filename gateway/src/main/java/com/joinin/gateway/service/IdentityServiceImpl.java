@@ -34,7 +34,7 @@ public class IdentityServiceImpl implements IdentityService {
         KafkaMessage registerNewUser =
                 new RegisterNewUser(registerUserMVCRq.firstName(), registerUserMVCRq.lastName(), registerUserMVCRq.email(), registerUserMVCRq.password());
         kafkaTemplate.send(registerNewUserTopic, registerNewUser);
-        log.info("New registered user message request received from API Gateway and sent in topic " + registerNewUserTopic);
+        log.info("New registered user request received from MVC module and sent in topic " + registerNewUserTopic);
     }
 
 }

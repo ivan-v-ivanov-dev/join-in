@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface MessageService {
     List<ConversationRpGatewayService> retrieveProfileConversations(String identity);
+
+    void updateProfileOnlineStatus(String identity);
+
+    void updateProfileOfflineStatus(String identity);
 }

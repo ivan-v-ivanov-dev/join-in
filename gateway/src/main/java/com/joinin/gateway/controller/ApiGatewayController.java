@@ -125,6 +125,16 @@ public class ApiGatewayController {
         return messageServiceClient.retrieveProfileOnlineStatus(identity);
     }
 
+    @PostMapping("/profile/{identity}/online")
+    public void updateProfileOnlineStatus(@PathVariable("identity") String identity) {
+        messageService.updateProfileOnlineStatus(identity);
+    }
+
+    @PostMapping("/profile/{identity}/offline")
+    public void updateProfileOfflineStatus(@PathVariable("identity") String identity) {
+        messageService.updateProfileOfflineStatus(identity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";

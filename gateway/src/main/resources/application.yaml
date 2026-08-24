@@ -11,6 +11,8 @@ spring:
     replicas: 1
     topic:
       register-new-user: register-new-user
+      update-profile-online-status: update-profile-online-status
+      update-profile-offline-status: update-profile-offline-status
 
 #Identity service Feign client
 identity:
