@@ -18,4 +18,17 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
         """)
     List<Group> findAllJoinedGroupsByProfileIdentity(@Param("profileIdentity") String profileIdentity
     );
+
+    @Query("""
+    SELECT groupEntity
+    FROM Group groupEntity
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM GroupMember groupMember
+        WHERE groupMember.group = groupEntity
+          AND groupMember.profileIdentity = :profileIdentity
+    )
+    ORDER BY groupEntity.name
+    """)
+    List<Group> findAllSuggestedGroupsByProfileIdentity(@Param("profileIdentity") String profileIdentity);
 }

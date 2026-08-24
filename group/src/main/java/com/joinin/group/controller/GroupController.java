@@ -19,4 +19,9 @@ public class GroupController {
     public List<GroupRpGroupService> retrieveProfileJoinedGroups(@PathVariable("identity") String identity) {
         return groupService.retrieveProfileJoinedGroups(identity);
     }
+
+    @GetMapping("/profile/{identity}/suggested-groups")
+    public List<GroupRpGroupService> retrieveSuggestedGroups(@PathVariable("identity") String identity) {
+        return groupService.retrieveProfileSuggestedGroups(identity);
+    }
 }

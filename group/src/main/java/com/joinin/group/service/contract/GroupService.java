@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface GroupService {
     List<GroupRpGroupService> retrieveProfileJoinedGroups(String identity);
+
+    List<GroupRpGroupService> retrieveProfileSuggestedGroups(String identity);
 }

@@ -28,17 +28,30 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<GroupRpGroupService> retrieveProfileJoinedGroups(String identity) {
         List<Group> joinedGroups = groupRepository.findAllJoinedGroupsByProfileIdentity(identity);
-        log.info("Retrieve profile joined groups. Profile identity: " + identity);
 
-        if (joinedGroups.isEmpty()) {
+        log.info("Retrieve profile joined groups. Profile identity: {}", identity);
+
+        return retrieveGroupsWithImages(joinedGroups);
+    }
+
+    @Override
+    public List<GroupRpGroupService> retrieveProfileSuggestedGroups(String identity) {
+        List<Group> suggestedGroups = groupRepository.findAllSuggestedGroupsByProfileIdentity(identity);
+
+        log.info("Retrieve profile suggested groups. Profile identity: {}", identity);
+
+        return retrieveGroupsWithImages(suggestedGroups);
+    }
+
+    private List<GroupRpGroupService> retrieveGroupsWithImages(List<Group> groups) {
+        if (groups == null || groups.isEmpty()) {
             return new ArrayList<>();
         }
 
-        List<String> groupIdentities = joinedGroups.stream()
-                .map(Group::getIdentity)
-                .toList();
+        List<String> groupIdentities = retrieveGroupsIdentities(groups);
 
-        List<GroupRpImageService> groupImages = mediaServiceClient.retrieveGroupsImages(groupIdentities);
+        List<GroupRpImageService> groupImages =
+                mediaServiceClient.retrieveGroupsImages(groupIdentities);
 
         Map<String, String> imagesByGroupIdentity = new HashMap<>();
 
@@ -47,9 +60,13 @@ public class GroupServiceImpl implements GroupService {
                     imagesByGroupIdentity.put(groupImage.identity(), groupImage.image()));
         }
 
-        return joinedGroups.stream()
+        return groups.stream()
                 .map(group ->
                         groupsMapper.fromGrouptoGroupRpGroupService(group, imagesByGroupIdentity.get(group.getIdentity())))
                 .toList();
+    }
+
+    private List<String> retrieveGroupsIdentities(List<Group> groups) {
+        return groups.stream().map(Group::getIdentity).toList();
     }
 }

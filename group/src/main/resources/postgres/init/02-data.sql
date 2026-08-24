@@ -28,8 +28,25 @@ VALUES
         '4b219329051054e53ab7960926d09ea7bbb1177a263706a1eead03c46c2c57fb93e4fe23860f153198bbc1eb754adc0a44c704d35a722a097d43870d315a9a55',
         'Master Thesis Projects',
         'A community for master thesis projects.'
+    ),
+    (
+        4,
+        'a4199f65e484c1df316f2581513ceae75698b372485151c006d63fda5412cc7b2b051827759b25694969669c60ff8811b4e58b67660a183218bd5e1a2dba6fa4',
+        'Cloud Computing',
+        'A community for cloud technologies, AWS, Azure and distributed systems.'
+    ),
+    (
+        5,
+        'b9e55013d3ad4fdc45b9a0766d9f72c10c6e8430097995b4ba9facc54fcaddf4c46c04693e1354fbd212a7c07b53b0d44808ddce87ae36a79268e2354936feba',
+        'Photography Enthusiasts',
+        'A community for photographers to share photos, techniques and ideas.'
+    ),
+    (
+        6,
+        'cd043e97409ff96e355bded695ab414c97d55c748f18bf71c3ffbce80905148cd63d6b629c5f02a98e47c23ae584129d71d2be544dfc4f7fb2b7a3d6df9fb38b',
+        'Travel Community',
+        'A community for sharing travel experiences, destinations and recommendations.'
     );
-
 
 -- =========================================================
 -- VTU Students members
