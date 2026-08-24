@@ -21,7 +21,7 @@ public class RelationshipController {
         return profileService.retrieveFriendsProfiles(identity);
     }
 
-    @GetMapping("/profile/{identity}/friend-suggestions")
+    @GetMapping("/profile/{identity}/friend/suggestions")
     public List<ProfileRpRelationshipService> retrieveFriendSuggestions(@PathVariable String identity) {
         return profileService.retrieveFriendSuggestions(identity);
     }
