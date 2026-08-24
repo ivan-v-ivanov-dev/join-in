@@ -108,9 +108,32 @@ public class ProfileServiceImpl implements ProfileService {
                 .toList();
     }
 
+    @Override
+    public List<ProfileRpRelationshipService> retrieveFriendSuggestions(String identity) {
+        List<ProfileNode> friendSuggestions = profileRepository.findFriendSuggestionsByIdentity(identity);
+        log.info("Retrieve friend suggestions for profile: " + identity);
+
+        if (friendSuggestions.isEmpty()) {
+            log.info("Profile does not have any friend suggestions.");
+            return new ArrayList<>();
+        }
+
+        List<ProfileImageRpMediaService> profileImageRpMediaServices = retrieveProfileImages(friendSuggestions.stream().map(ProfileNode::getIdentity).toList());
+        List<ProfileRpProfileNamesProfileService> profileRpProfileNamesProfileServices = retrieveProfileNames(friendSuggestions.stream().map(ProfileNode::getIdentity).toList());
+        List<ProfileOnlineStatusRpMessageService> profileOnlineStatuses = retrieveOnlineStatuses(friendSuggestions.stream().map(ProfileNode::getIdentity).toList());
+
+        return friendSuggestions.stream()
+                .map(friendSuggestion -> profileRelationshipMapper.toProfileRpRelationshipService(
+                        friendSuggestion,
+                        profileRpProfileNamesProfileServices,
+                        profileImageRpMediaServices,
+                        profileOnlineStatuses))
+                .toList();
+    }
+
     private List<ProfileOnlineStatusRpMessageService> retrieveOnlineStatuses(List<String> identities) {
         List<ProfileOnlineStatusRpMessageService> profileOnlineStatuses = messageServiceClient.retrieveProfilesOnlineStatuses(identities);
-        log.info("Retrieve online statuses for all friendship requests from Message Service. Profile identities: " +
+        log.info("Retrieve online statuses for all friends from Message Service. Profile identities: " +
                 profileOnlineStatuses.stream().map(ProfileOnlineStatusRpMessageService::identity).collect(Collectors.joining(", ")));
         return profileOnlineStatuses;
     }

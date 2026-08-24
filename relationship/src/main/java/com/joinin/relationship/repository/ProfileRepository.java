@@ -49,4 +49,13 @@ public interface ProfileRepository extends Neo4jRepository<ProfileNode, String> 
             ORDER BY relationshipType, identity
             """)
     List<FamilyMember> findAllFamilyMembers(@Param("identity") String identity);
+
+    @Query("""
+            MATCH (me:Profile {identity: $identity})
+            MATCH (profile:Profile)
+            WHERE profile <> me
+              AND NOT (me)--(profile)
+            RETURN profile
+            """)
+    List<ProfileNode> findFriendSuggestionsByIdentity(@Param("identity") String identity);
 }

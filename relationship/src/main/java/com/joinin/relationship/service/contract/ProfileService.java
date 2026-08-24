@@ -15,4 +15,6 @@ public interface ProfileService {
     List<ProfileRpRelationshipService> retrieveFriendshipRequests(String identity);
 
     List<FamilyMemberRpRelationshipService> retrieveProfileFamilyMembers(String identity);
+
+    List<ProfileRpRelationshipService> retrieveFriendSuggestions(String identity);
 }
