@@ -97,6 +97,7 @@ public class MvcController {
             model.addAttribute("profileNames", profileService.retrieveProfileNames(identity));
             model.addAttribute("profileImage", mediaService.retrieveProfileImage(identity));
             model.addAttribute("searchKeywords", searchService.retrieveProfileSearchKeywords(identity));
+            model.addAttribute("friends", relationshipService.retrieveFriends(identity));
             model.addAttribute("friendshipRequests", relationshipService.retrieveFriendshipRequests(identity));
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
             model.addAttribute("onlineStatus", messageService.retrieveProfileOnlineStatus(identity));

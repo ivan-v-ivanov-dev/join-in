@@ -2021,111 +2021,62 @@
     <div class="right-sidebar-panel p-0">
         <div class="card shadow-none">
             <div class="card-body p-0">
-                <div class="media-height p-3" data-scrollbar="init">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="iq-profile-avatar status-online">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/01.jpg" alt=""
-                                 loading="lazy">
+
+                <div class="media-height p-3"
+                     data-scrollbar="init">
+
+                    <div class="d-flex align-items-center mb-4"
+                         th:each="friend : ${friends}"
+                         th:with="isOnline=${friend.onlineStatus != null and friend.onlineStatus.equalsIgnoreCase('ONLINE')}">
+
+                        <div class="iq-profile-avatar"
+                             th:classappend="${isOnline ? ' status-online'  : ' status-away'}">
+
+                            <a th:href="@{/profile/{identity}(identity=${friend.identity})}">
+
+                                <img class="rounded-circle avatar-50"
+                                     src="/assets/images/user/default-avatar.jpg"
+                                     th:src="${friend.profileImage != null and !#strings.isEmpty(friend.profileImage) ? friend.profileImage : '/assets/images/user/default-avatar.jpg'}"
+                                     th:alt="|${friend.firstName} ${friend.lastName}|"
+                                     loading="lazy">
+
+                            </a>
                         </div>
+
                         <div class="ms-3">
-                            <h6 class="mb-0">Anna Sthesia</h6>
-                            <p class="mb-0">Just Now</p>
+
+                            <a th:href="@{/profile/{identity}(identity=${friend.identity})}"
+                               class="text-decoration-none text-dark">
+
+                                <h6 class="mb-0"
+                                    th:text="|${friend.firstName} ${friend.lastName}|">
+                                    Friend Name
+                                </h6>
+
+                            </a>
+
+                            <p class="mb-0"
+                               th:classappend="${isOnline
+                                   ? ' text-success'
+                                   : ' text-warning'}"
+                               th:text="${isOnline ? 'Online' : 'Offline'}">
+                                Offline
+                            </p>
+
                         </div>
                     </div>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="iq-profile-avatar status-online">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/02.jpg" alt=""
-                                 loading="lazy">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0">Paul Molive</h6>
-                            <p class="mb-0">Admin</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="iq-profile-avatar status-online">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/03.jpg" alt=""
-                                 loading="lazy">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0">Anna Mull</h6>
-                            <p class="mb-0">Admin</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="iq-profile-avatar status-online">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/04.jpg" alt=""
-                                 loading="lazy">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0">Paige Turner</h6>
-                            <p class="mb-0">Admin</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="iq-profile-avatar status-online">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/11.jpg" alt=""
-                                 loading="lazy">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0">Bob Frapples</h6>
-                            <p class="mb-0">Admin</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="iq-profile-avatar status-online">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/02.jpg" alt=""
-                                 loading="lazy">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0">Barb Ackue</h6>
-                            <p class="mb-0">Admin</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="iq-profile-avatar status-online">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/03.jpg" alt=""
-                                 loading="lazy">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0">Greta Life</h6>
-                            <p class="mb-0">Admin</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="iq-profile-avatar status-away">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/12.jpg" alt=""
-                                 loading="lazy">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0">Ira Membrit</h6>
-                            <p class="mb-0">Admin</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="iq-profile-avatar status-away">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/01.jpg" alt=""
-                                 loading="lazy">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0">Pete Sariya</h6>
-                            <p class="mb-0">Admin</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <div class="iq-profile-avatar">
-                            <img class="rounded-circle avatar-50" src="../assets/images/user/02.jpg" alt=""
-                                 loading="lazy">
-                        </div>
-                        <div class="ms-3">
-                            <h6 class="mb-0">Monty Carlo</h6>
-                            <p class="mb-0">Admin</p>
-                        </div>
-                    </div>
+
+                    <p class="text-muted text-center"
+                       th:if="${friends == null or #lists.isEmpty(friends)}">
+                        No friends available.
+                    </p>
+
                 </div>
+
                 <div class="right-sidebar-toggle bg-primary text-white mt-3 d-flex">
                     <span class="material-symbols-outlined">chat</span>
                 </div>
+
             </div>
         </div>
     </div>
