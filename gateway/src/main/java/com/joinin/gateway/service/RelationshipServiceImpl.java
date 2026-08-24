@@ -59,4 +59,14 @@ public class RelationshipServiceImpl implements RelationshipService {
                 .map(familyMemberMapper::fromFamilyMemberRpRelationshipServicetoFamilyMemberRpGatewayService)
                 .toList();
     }
+
+    @Override
+    public List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(String identity) {
+        List<ProfileRpRelationshipService> friendSuggestionsProfiles = relationshipServiceClient.retrieveFriendSuggestions(identity);
+        log.info("Retrieve friend suggestions from Relationship service. Profile identity: " + identity);
+        return friendSuggestionsProfiles
+                .stream()
+                .map(profileMapper::fromProfileRpRelationshipServicetoProfileFriendsRpGatewayService)
+                .toList();
+    }
 }

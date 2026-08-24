@@ -135,6 +135,11 @@ public class ApiGatewayController {
         messageService.updateProfileOfflineStatus(identity);
     }
 
+    @GetMapping("/profile/{identity}/friend/suggestions")
+    public List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(@PathVariable String identity) {
+        return relationshipService.retrieveFriendSuggestions(identity);
+    }
+    
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";

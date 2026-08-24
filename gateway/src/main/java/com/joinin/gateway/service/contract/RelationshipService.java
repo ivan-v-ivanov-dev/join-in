@@ -13,4 +13,6 @@ public interface RelationshipService {
     int retrieveFriendsCount(String identity);
 
     List<FamilyMemberRpGatewayService> retrieveProfileFamilyMembers(String identity);
+
+    List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(String identity);
 }

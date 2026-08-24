@@ -22,4 +22,7 @@ public interface RelationshipServiceClient {
 
     @GetMapping("/profile/{identity}/family/members")
     List<FamilyMemberRpRelationshipService> retrieveProfileFamilyMembers(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/friend/suggestions")
+    List<ProfileRpRelationshipService> retrieveFriendSuggestions(@PathVariable String identity);
 }
