@@ -466,7 +466,7 @@
                                     <h5>Chat Settings</h5>
                                 </div>
 
-                                <form th:action="@{/profile/{identity}/online(identity=${profile.identity})}"
+                                <form th:action="@{/profile/{identity}/online(identity=${profileIdentity})}"
                                       method="post"
                                       class="m-0">
 
@@ -482,7 +482,7 @@
                                     </button>
                                 </form>
 
-                                <form th:action="@{/profile/{identity}/offline(identity=${profile.identity})}"
+                                <form th:action="@{/profile/{identity}/offline(identity=${profileIdentity})}"
                                       method="post"
                                       class="m-0">
 
