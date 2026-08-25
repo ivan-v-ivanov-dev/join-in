@@ -1,6 +1,7 @@
 package com.joinin.mvc.service.feign;
 
 import com.join_in.common_models.*;
+import com.joinin.mvc.configuration.FeignMultipartConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@FeignClient(name = "${gateway.service.feign.client.name}", url = "${gateway.service.url}")
+@FeignClient(name = "${gateway.service.feign.client.name}", url = "${gateway.service.url}", configuration = FeignMultipartConfig.class)
 public interface GatewayClient {
 
     @GetMapping("/health")
@@ -89,9 +90,9 @@ public interface GatewayClient {
     @GetMapping("/profile/{identity}/feed")
     List<PostRpGatewayService> retrieveProfileFeedPosts(@PathVariable String identity);
 
-    @PostMapping("/profile/{identity}/edit")
+    @PostMapping(value = "/profile/{identity}/edit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     void editProfile(@PathVariable String identity,
-                     @RequestBody EditProfileGatewayRq editProfileGatewayRq,
+                     @RequestPart("profile") EditProfileGatewayRq editProfileGatewayRq,
                      @RequestPart(value = "profileImage", required = false) MultipartFile profileImage,
                      @RequestPart(value = "backgroundImage", required = false) MultipartFile backgroundImage);
 }
