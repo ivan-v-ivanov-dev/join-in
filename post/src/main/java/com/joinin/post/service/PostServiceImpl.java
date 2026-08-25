@@ -70,13 +70,9 @@ public class PostServiceImpl implements PostService {
     public List<PostRpPostService> retrieveProfileFeedPosts(String identity) {
         List<FeedUserEntity> feedPosts = feedUserRepository.findFeedByUserIdentity(identity);
         log.info("Retrieve user's feed posts by profile identity: " + identity);
-        //Retrieve author identities
         List<String> authorIdentities = feedPosts.stream().map(FeedUserEntity::getAuthorIdentity).toList();
-        //retrieve profile images
         List<ProfileImageRpMediaService> profileImages = mediaServiceClient.retrieveProfileImagesForProfiles(authorIdentities);
-        // Retrieve profile names
         List<ProfileRpProfileNamesProfileService> profileNames = profileServiceClient.retrieveProfilesNames(authorIdentities);
-        //Retrieve posts reactions count
         List<PostReactionsCountRpReactionService> postReactionsCount = reactionServiceClient.retrievePostReactionsCount(authorIdentities);
 
         List<PostRpPostService> posts = feedPosts
