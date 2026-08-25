@@ -637,249 +637,676 @@
                                 <h3 class="card-title">Edit profile</h3>
                             </div>
                         </div>
+
                         <div class="card-body">
-                            <form id="form-wizard1" class="text-center mt-3">
-                                <ul id="top-tab-list" class="p-0 row list-inline">
-                                    <li class="col-lg-3 col-md-6 text-start mb-2 active" id="account">
+
+                            <form id="form-wizard1"
+                                  class="text-center mt-3"
+                                  th:action="@{/profile/{identity}/edit(identity=${profileIdentity})}"
+                                  th:object="${editProfile}"
+                                  method="post"
+                                  enctype="multipart/form-data">
+
+                                <ul id="top-tab-list"
+                                    class="p-0 row list-inline">
+
+                                    <li class="col-lg-3 col-md-6 text-start mb-2 active"
+                                        id="account">
+
                                         <a href="javascript:void(0);">
                                             <i class="material-symbols-outlined">
                                                 lock_open
-                                            </i><span>Account</span>
+                                            </i>
+
+                                            <span>Account</span>
                                         </a>
+
                                     </li>
-                                    <li id="personal" class="col-lg-3 col-md-6 mb-2 text-start">
+
+                                    <li id="personal"
+                                        class="col-lg-3 col-md-6 mb-2 text-start">
+
                                         <a href="javascript:void(0);">
                                             <i class="material-symbols-outlined">
                                                 person
-                                            </i><span>Personal</span>
+                                            </i>
+
+                                            <span>Personal</span>
                                         </a>
+
                                     </li>
-                                    <li id="payment" class="col-lg-3 col-md-6 mb-2 text-start">
+
+                                    <li id="payment"
+                                        class="col-lg-3 col-md-6 mb-2 text-start">
+
                                         <a href="javascript:void(0);">
                                             <i class="material-symbols-outlined">
                                                 photo_camera
-                                            </i><span>Image</span>
+                                            </i>
+
+                                            <span>Image</span>
                                         </a>
+
                                     </li>
-                                    <li id="confirm" class="col-lg-3 col-md-6 mb-2 text-start">
+
+                                    <li id="confirm"
+                                        class="col-lg-3 col-md-6 mb-2 text-start">
+
                                         <a href="javascript:void(0);">
                                             <i class="material-symbols-outlined">
                                                 done
-                                            </i><span>Finish</span>
+                                            </i>
+
+                                            <span>Finish</span>
                                         </a>
+
                                     </li>
+
                                 </ul>
 
-                                <!-- fieldsets -->
+
+                                <!-- ====================================================== -->
+                                <!-- STEP 1 - ACCOUNT -->
+                                <!-- ====================================================== -->
+
                                 <fieldset>
+
                                     <div class="form-card text-start">
+
                                         <div class="row">
+
                                             <div class="col-7">
-                                                <h3 class="mb-4">Account Information:</h3>
+                                                <h3 class="mb-4">
+                                                    Account Information:
+                                                </h3>
                                             </div>
+
                                             <div class="col-5">
-                                                <h2 class="steps">Step 1 - 4</h2>
+                                                <h2 class="steps">
+                                                    Step 1 - 4
+                                                </h2>
                                             </div>
+
                                         </div>
+
+
                                         <div class="row">
+
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Password: *</label>
-                                                    <input type="password" class="form-control" name="pwd"
-                                                           placeholder="Password"/>
+
+                                                    <label class="form-label">
+                                                        New Password
+                                                    </label>
+
+                                                    <input type="password"
+                                                           class="form-control"
+                                                           th:field="*{password}"
+                                                           placeholder="New Password"
+                                                           autocomplete="new-password"/>
+
                                                 </div>
+
                                             </div>
+
+
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Confirm Password: *</label>
-                                                    <input type="password" class="form-control" name="cpwd"
-                                                           placeholder="Confirm Password"/>
+
+                                                    <label class="form-label">
+                                                        Confirm Password
+                                                    </label>
+
+                                                    <input type="password"
+                                                           class="form-control"
+                                                           th:field="*{confirmPassword}"
+                                                           placeholder="Confirm Password"
+                                                           autocomplete="new-password"/>
+
                                                 </div>
+
                                             </div>
+
                                         </div>
+
                                     </div>
-                                    <button type="button" name="next"
-                                            class="btn btn-primary next action-button float-end" value="Next">Next
+
+
+                                    <button type="button"
+                                            name="next"
+                                            class="btn btn-primary next action-button float-end">
+                                        Next
                                     </button>
+
                                 </fieldset>
 
+
+                                <!-- ====================================================== -->
+                                <!-- STEP 2 - PROFILE INFORMATION -->
+                                <!-- ====================================================== -->
+
                                 <fieldset>
 
                                     <div class="form-card text-start">
 
                                         <div class="row">
+
                                             <div class="col-7">
-                                                <h3 class="mb-4">Personal Information</h3>
+                                                <h3 class="mb-4">
+                                                    Personal Information
+                                                </h3>
                                             </div>
+
                                             <div class="col-5">
-                                                <h2 class="steps">Step 2 - 4</h2>
+                                                <h2 class="steps">
+                                                    Step 2 - 4
+                                                </h2>
                                             </div>
+
                                         </div>
+
 
                                         <div class="row">
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">First Name</label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           name="firstName"
-                                                           value="James">
-                                                </div>
-                                            </div>
+
+                                            <!-- FIRST NAME -->
 
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Last Name</label>
+
+                                                    <label class="form-label">
+                                                        First Name
+                                                    </label>
+
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="lastName"
-                                                           value="Johnson">
+                                                           th:field="*{firstName}">
+
                                                 </div>
+
                                             </div>
+
+
+                                            <!-- LAST NAME -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Last Name
+                                                    </label>
+
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           th:field="*{lastName}">
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- ABOUT ME -->
 
                                             <div class="col-12">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">About Me</label>
+
+                                                    <label class="form-label">
+                                                        About Me
+                                                    </label>
+
                                                     <textarea class="form-control"
                                                               rows="4"
-                                                              name="aboutMe">Hi, I'm James, I'm 36 and I work as a Digital Designer.</textarea>
+                                                              th:field="*{aboutMe}">
+                            </textarea>
+
                                                 </div>
+
                                             </div>
 
+
+                                            <!-- MOBILE -->
+
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Mobile</label>
+
+                                                    <label class="form-label">
+                                                        Mobile
+                                                    </label>
+
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="mobile"
-                                                           value="(001) 4544 565 456">
+                                                           th:field="*{mobile}">
+
                                                 </div>
+
                                             </div>
 
+
+                                            <!-- PHONE NUMBER -->
+
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Address</label>
+
+                                                    <label class="form-label">
+                                                        Phone Number
+                                                    </label>
+
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="address"
-                                                           value="United States of America">
+                                                           th:field="*{phoneNumber}">
+
                                                 </div>
+
                                             </div>
 
+
+                                            <!-- ADDRESS -->
+
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Birth Date</label>
+
+                                                    <label class="form-label">
+                                                        Address
+                                                    </label>
+
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           th:field="*{address}">
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- BIRTH DATE -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Birth Date
+                                                    </label>
+
                                                     <input type="date"
                                                            class="form-control"
-                                                           name="birthDate">
+                                                           th:field="*{birthDate}">
+
                                                 </div>
+
                                             </div>
 
+
+                                            <!-- BIRTH YEAR -->
+
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Birthplace</label>
+
+                                                    <label class="form-label">
+                                                        Birth Year
+                                                    </label>
+
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="birthplace"
-                                                           value="Austin, Texas, USA">
+                                                           th:field="*{birthYear}">
+
                                                 </div>
+
                                             </div>
 
+
+                                            <!-- BIRTHPLACE -->
+
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Lives In</label>
+
+                                                    <label class="form-label">
+                                                        Birthplace
+                                                    </label>
+
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="livesIn"
-                                                           value="San Francisco, California, USA">
+                                                           th:field="*{birthplace}">
+
                                                 </div>
+
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">Gender</label>
-                                                    <select class="form-control" name="gender">
-                                                        <option>Male</option>
-                                                        <option selected>Female</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+
+                                            <!-- LIVES IN -->
 
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Interested In</label>
+
+                                                    <label class="form-label">
+                                                        Lives In
+                                                    </label>
+
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="interestedIn"
-                                                           value="Designing">
+                                                           th:field="*{livesIn}">
+
                                                 </div>
+
                                             </div>
 
+
+                                            <!-- CURRENT CITY -->
+
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Languages</label>
+
+                                                    <label class="form-label">
+                                                        Current City
+                                                    </label>
+
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="languages"
-                                                           value="English, French">
+                                                           th:field="*{currentCity}">
+
                                                 </div>
+
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">Status</label>
-                                                    <select class="form-control" name="status">
-                                                        <option>Single</option>
-                                                        <option selected>Married</option>
-                                                        <option>Divorced</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+
+                                            <!-- HOMETOWN -->
 
                                             <div class="col-md-6">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Phone Number</label>
+
+                                                    <label class="form-label">
+                                                        Hometown
+                                                    </label>
+
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="phoneNumber"
-                                                           value="(044) 555 - 4369 - 8957">
+                                                           th:field="*{hometown}">
+
                                                 </div>
+
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">Website</label>
-                                                    <input type="url"
-                                                           class="form-control"
-                                                           name="website"
-                                                           value="https://www.bootstrap.com">
-                                                </div>
-                                            </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">Social Link</label>
-                                                    <input type="url"
-                                                           class="form-control"
-                                                           name="socialLink"
-                                                           value="https://www.bootstrap.com">
-                                                </div>
-                                            </div>
+                                            <!-- OTHER PLACES LIVED -->
 
                                             <div class="col-12">
+
                                                 <div class="form-group">
-                                                    <label class="form-label">Hobbies & Interests</label>
+
+                                                    <label class="form-label">
+                                                        Other Places Lived
+                                                    </label>
+
                                                     <textarea class="form-control"
                                                               rows="3"
-                                                              name="hobbies">Programming, Movies, Gaming, Sports</textarea>
+                                                              th:field="*{otherPlacesLived}">
+                            </textarea>
+
                                                 </div>
+
+                                            </div>
+
+
+                                            <!-- GENDER -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Gender
+                                                    </label>
+
+                                                    <select class="form-control"
+                                                            th:field="*{gender}">
+
+                                                        <option value="">
+                                                            Select gender
+                                                        </option>
+
+                                                        <option value="Male">
+                                                            Male
+                                                        </option>
+
+                                                        <option value="Female">
+                                                            Female
+                                                        </option>
+
+                                                        <option value="Other">
+                                                            Other
+                                                        </option>
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- INTERESTED IN -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Interested In
+                                                    </label>
+
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           th:field="*{interestedIn}">
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- LANGUAGE -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Languages
+                                                    </label>
+
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           th:field="*{language}">
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- STATUS -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Status
+                                                    </label>
+
+                                                    <select class="form-control"
+                                                            th:field="*{status}">
+
+                                                        <option value="">
+                                                            Select status
+                                                        </option>
+
+                                                        <option value="Single">
+                                                            Single
+                                                        </option>
+
+                                                        <option value="Married">
+                                                            Married
+                                                        </option>
+
+                                                        <option value="Divorced">
+                                                            Divorced
+                                                        </option>
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- JOINED -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Joined
+                                                    </label>
+
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           th:field="*{joined}">
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- WEBSITE -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Website
+                                                    </label>
+
+                                                    <input type="url"
+                                                           class="form-control"
+                                                           th:field="*{website}">
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- SOCIAL LINK -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Social Link
+                                                    </label>
+
+                                                    <input type="url"
+                                                           class="form-control"
+                                                           th:field="*{socialLink}">
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- HOBBIES -->
+
+                                            <div class="col-12">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Hobbies & Interests
+                                                    </label>
+
+                                                    <textarea class="form-control"
+                                                              rows="3"
+                                                              th:field="*{hobbies}">
+                            </textarea>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- WORK -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Work
+                                                    </label>
+
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           th:field="*{work}">
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- PROFESSIONAL SKILLS -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        Professional Skills
+                                                    </label>
+
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           th:field="*{professionalSkills}">
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!-- COLLEGE -->
+
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+
+                                                    <label class="form-label">
+                                                        College
+                                                    </label>
+
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           th:field="*{college}">
+
+                                                </div>
+
                                             </div>
 
                                         </div>
 
                                     </div>
+
 
                                     <button type="button"
                                             name="next"
@@ -895,54 +1322,132 @@
 
                                 </fieldset>
 
+
+                                <!-- ====================================================== -->
+                                <!-- STEP 3 - IMAGES -->
+                                <!-- ====================================================== -->
+
                                 <fieldset>
+
                                     <div class="form-card text-start">
+
                                         <div class="row">
+
                                             <div class="col-7">
-                                                <h3 class="mb-4">Image Upload:</h3>
+                                                <h3 class="mb-4">
+                                                    Image Upload:
+                                                </h3>
                                             </div>
+
                                             <div class="col-5">
-                                                <h2 class="steps">Step 3 - 4</h2>
+                                                <h2 class="steps">
+                                                    Step 3 - 4
+                                                </h2>
                                             </div>
+
                                         </div>
+
+
                                         <div class="form-group">
-                                            <label class="form-label">Upload Profile Photo:</label>
-                                            <input type="file" class="form-control" name="pic" accept="image/*">
+
+                                            <label class="form-label">
+                                                Upload Profile Photo:
+                                            </label>
+
+                                            <input type="file"
+                                                   class="form-control"
+                                                   th:field="*{profileImage}"
+                                                   accept="image/*">
+
                                         </div>
+
+
                                         <div class="form-group">
-                                            <label class="form-label">Upload Background Photo:</label>
-                                            <input type="file" class="form-control" name="pic-2" accept="image/*">
+
+                                            <label class="form-label">
+                                                Upload Background Photo:
+                                            </label>
+
+                                            <input type="file"
+                                                   class="form-control"
+                                                   th:field="*{backgroundImage}"
+                                                   accept="image/*">
+
                                         </div>
+
                                     </div>
-                                    <button type="button" name="next"
-                                            class="btn btn-primary next action-button float-end" value="Submit">Submit
+
+
+                                    <button type="button"
+                                            name="next"
+                                            class="btn btn-primary next action-button float-end">
+                                        Next
                                     </button>
-                                    <button type="button" name="previous"
-                                            class="btn btn-dark previous action-button-previous float-end me-3"
-                                            value="Previous">Previous
+
+
+                                    <button type="button"
+                                            name="previous"
+                                            class="btn btn-dark previous action-button-previous float-end me-3">
+                                        Previous
                                     </button>
+
                                 </fieldset>
+
+
+                                <!-- ====================================================== -->
+                                <!-- STEP 4 - FINISH -->
+                                <!-- ====================================================== -->
 
                                 <fieldset>
+
                                     <div class="form-card">
+
                                         <div class="row">
+
                                             <div class="col-7">
-                                                <h3 class="mb-4 text-left">Finish:</h3>
+                                                <h3 class="mb-4 text-left">
+                                                    Finish:
+                                                </h3>
                                             </div>
+
                                             <div class="col-5">
-                                                <h2 class="steps">Step 4 - 4</h2>
+                                                <h2 class="steps">
+                                                    Step 4 - 4
+                                                </h2>
                                             </div>
+
                                         </div>
-                                        <br><br>
-                                        <h2 class="text-success text-center"><strong>SUCCESS !</strong></h2>
+
                                         <br>
                                         <br>
 
+                                        <h4 class="text-center">
+                                            Save your profile changes
+                                        </h4>
+
+                                        <br>
+
                                     </div>
+
+
+                                    <button type="submit"
+                                            class="btn btn-success action-button float-end">
+                                        Save Changes
+                                    </button>
+
+
+                                    <button type="button"
+                                            name="previous"
+                                            class="btn btn-dark previous action-button-previous float-end me-3">
+                                        Previous
+                                    </button>
+
                                 </fieldset>
-                                <!--end fieldsets -->
+
                             </form>
+
                         </div>
+
                     </div>
                 </div>
                 <!--      end Edit profile-->

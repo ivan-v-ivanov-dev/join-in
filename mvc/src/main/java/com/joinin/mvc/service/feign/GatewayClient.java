@@ -3,10 +3,8 @@ package com.joinin.mvc.service.feign;
 import com.join_in.common_models.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -90,4 +88,10 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}/feed")
     List<PostRpGatewayService> retrieveProfileFeedPosts(@PathVariable String identity);
+
+    @PostMapping("/profile/{identity}/edit")
+    void editProfile(@PathVariable String identity,
+                     @RequestBody EditProfileGatewayRq editProfileGatewayRq,
+                     @RequestPart(value = "profileImage", required = false) MultipartFile profileImage,
+                     @RequestPart(value = "backgroundImage", required = false) MultipartFile backgroundImage);
 }

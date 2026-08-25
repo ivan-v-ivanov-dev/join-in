@@ -1,5 +1,6 @@
 package com.joinin.mvc.controller;
 
+import com.joinin.mvc.model.EditProfileRq;
 import com.joinin.mvc.model.RegisterRq;
 import com.joinin.mvc.service.contract.*;
 import feign.FeignException;
@@ -123,12 +124,18 @@ public class MvcController {
             model.addAttribute("friendshipRequests", relationshipService.retrieveFriendshipRequests(identity));
             model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
             model.addAttribute("conversations", messageService.retrieveConversations(identity));
-            model.addAttribute("profile", profileService.retrieveProfileByIdentity(identity));
+            model.addAttribute("editProfile", profileService.retrieveEditProfileRequest(identity));
             return "edit-profile";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());
             return "error";
         }
+    }
+
+    @PostMapping("/profile/{identity}/edit")
+    public String editProfile(@PathVariable String identity, @ModelAttribute("editProfile") EditProfileRq editProfileRq) {
+        profileService.editProfile(identity, editProfileRq);
+        return "redirect:/profile/" + identity;
     }
 
     @PostMapping("/profile/{identity}/online")
