@@ -10,4 +10,6 @@ public interface PostService {
     int retrieveProfilePostsCount(String identity);
 
     int retrieveProfileCommentsCount(String identity);
+
+    List<PostRpGatewayService> retrieveProfileFeedPosts(String identity);
 }

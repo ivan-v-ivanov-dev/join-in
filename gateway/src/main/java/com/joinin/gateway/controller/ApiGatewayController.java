@@ -145,6 +145,11 @@ public class ApiGatewayController {
         return relationshipService.retrieveFriendSuggestions(identity);
     }
 
+    @GetMapping("/profile/{identity}/feed")
+    public List<PostRpGatewayService> retrieveProfileFeedPosts(@PathVariable String identity) {
+        return postService.retrieveProfileFeedPosts(identity);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";

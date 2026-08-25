@@ -17,4 +17,7 @@ public interface PostServiceClient {
 
     @GetMapping("/author/{identity}/comments/count")
     int retrieveAuthorCommentsCount(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/feed")
+    List<PostRpPostService> retrieveProfileFeedPosts(@PathVariable String identity);
 }
