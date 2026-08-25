@@ -1,11 +1,11 @@
 package com.joinin.post.mapper;
 
 import com.join_in.common_models.*;
-import com.joinin.post.model.PostByAuthorEntity;
-import com.joinin.post.model.PostByAuthorKey;
+import com.joinin.post.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,91 +16,199 @@ public class PostResponseMapper {
     private final PollOptionResponseMapper pollOptionResponseMapper;
     private final PostedAgoFormatter postedAgoFormatter;
 
-    public PostRpPostService fromPostByAuthortoPostRpPostService(PostByAuthorEntity postEntity,
-                                                                 String postImage,
-                                                                 List<CommentRpPostService> comments,
-                                                                 List<ProfileImageRpMediaService> profileImages,
-                                                                 List<ProfileRpProfileNamesProfileService> profileNames,
-                                                                 List<PostReactionsCountRpReactionService> postReactionsCount) {
+    public PostRpPostService fromPostByAuthortoPostRpPostService(
+            PostByAuthorEntity postEntity,
+            String postImage,
+            List<CommentRpPostService> comments,
+            List<ProfileImageRpMediaService> profileImages,
+            List<ProfileRpProfileNamesProfileService> profileNames,
+            List<PostReactionsCountRpReactionService> postReactionsCount) {
+
         PostByAuthorKey primaryKey = postEntity.getKey();
-        String profileImage = profileImages
-                .stream()
-                .filter(e -> Objects.equals(e.identity(), primaryKey.getAuthorIdentity()))
-                .map(ProfileImageRpMediaService::profileImage)
-                .findFirst()
-                .orElse("No Image found");
-        String names = profileNames
-                .stream()
-                .filter(e -> Objects.equals(e.identity(), primaryKey.getAuthorIdentity()))
-                .map(e -> String.format("%s %s", e.firstName(), e.lastName()))
-                .findFirst()
-                .orElse("No name found");
 
-        List<PollOptionRpPostService> pollOptions =
-                postEntity.getPollOptions() == null
-                        ? List.of()
-                        : postEntity.getPollOptions()
-                        .stream()
-                        .map(pollOptionResponseMapper::fromPollOptiontoPollOptionRpPostService)
-                        .toList();
+        return mapToPostResponse(
+                primaryKey.getPostIdentity(),
+                primaryKey.getAuthorIdentity(),
+                primaryKey.getCreatedAt(),
+                postEntity.getGroupIdentity(),
+                postEntity.getContent(),
+                postEntity.isHasText(),
+                postEntity.isHasImage(),
+                postEntity.isHasVideo(),
+                postEntity.isPoll(),
+                postEntity.getYoutubeUrl(),
+                postEntity.getPollQuestion(),
+                postEntity.getPollOptions(),
+                postImage,
+                comments,
+                profileImages,
+                profileNames,
+                postReactionsCount
+        );
+    }
 
-        int likeCount = postReactionsCount
-                .stream()
-                .filter(e -> e.identity().equals(primaryKey.getPostIdentity()))
-                .map(PostReactionsCountRpReactionService::likeCount)
-                .findFirst()
-                .orElse(0);
+    public PostRpPostService fromFeedUserEntityToPostRpPostService(
+            FeedUserEntity postEntity,
+            String postImage,
+            List<CommentRpPostService> comments,
+            List<ProfileImageRpMediaService> profileImages,
+            List<ProfileRpProfileNamesProfileService> profileNames,
+            List<PostReactionsCountRpReactionService> postReactionsCount) {
 
-        int dislikeCount = postReactionsCount
-                .stream()
-                .filter(e -> e.identity().equals(primaryKey.getPostIdentity()))
-                .map(PostReactionsCountRpReactionService::dislikeCount)
-                .findFirst()
-                .orElse(0);
+        FeedUserPrimaryKey primaryKey = postEntity.getPrimaryKey();
 
-        int hahaCount = postReactionsCount
-                .stream()
-                .filter(e -> e.identity().equals(primaryKey.getPostIdentity()))
-                .map(PostReactionsCountRpReactionService::hahaCount)
-                .findFirst()
-                .orElse(0);
+        return mapToPostResponse(
+                primaryKey.getPostIdentity(),
+                postEntity.getAuthorIdentity(),
+                primaryKey.getCreatedAt(),
+                postEntity.getGroupIdentity(),
+                postEntity.getContent(),
+                Boolean.TRUE.equals(postEntity.getHasText()),
+                Boolean.TRUE.equals(postEntity.getHasImage()),
+                Boolean.TRUE.equals(postEntity.getHasVideo()),
+                Boolean.TRUE.equals(postEntity.getPoll()),
+                postEntity.getYoutubeUrl(),
+                postEntity.getPollQuestion(),
+                postEntity.getPollOptions(),
+                postImage,
+                comments,
+                profileImages,
+                profileNames,
+                postReactionsCount
+        );
+    }
 
-        int angryCount = postReactionsCount
-                .stream()
-                .filter(e -> e.identity().equals(primaryKey.getPostIdentity()))
-                .map(PostReactionsCountRpReactionService::angryCount)
-                .findFirst()
-                .orElse(0);
+    private PostRpPostService mapToPostResponse(
+            String postIdentity,
+            String authorIdentity,
+            LocalDateTime createdAt,
+            String groupIdentity,
+            String content,
+            boolean hasText,
+            boolean hasImage,
+            boolean hasVideo,
+            boolean poll,
+            String youtubeUrl,
+            String pollQuestion,
+            List<PollOption> pollOptions,
+            String postImage,
+            List<CommentRpPostService> comments,
+            List<ProfileImageRpMediaService> profileImages,
+            List<ProfileRpProfileNamesProfileService> profileNames,
+            List<PostReactionsCountRpReactionService> postReactionsCount) {
+
+        String profileImage = findProfileImage(
+                authorIdentity,
+                profileImages
+        );
+
+        String names = findProfileNames(
+                authorIdentity,
+                profileNames
+        );
+
+        List<PollOptionRpPostService> pollOptionResponses =
+                mapPollOptions(pollOptions);
+
+        PostReactionsCountRpReactionService reactions =
+                findPostReactions(
+                        postIdentity,
+                        postReactionsCount
+                );
 
         return new PostRpPostService(
                 profileImage,
                 names,
 
-                primaryKey.getPostIdentity(),
-                primaryKey.getAuthorIdentity(),
-                postEntity.getGroupIdentity(),
+                postIdentity,
+                authorIdentity,
+                groupIdentity,
 
-                postEntity.getContent(),
+                content,
 
-                postEntity.isHasText(),
-                postEntity.isHasImage(),
-                postEntity.isHasVideo(),
-                postEntity.isPoll(),
+                hasText,
+                hasImage,
+                hasVideo,
+                poll,
 
                 postImage,
-                postEntity.getYoutubeUrl(),
+                youtubeUrl,
 
-                postEntity.getPollQuestion(),
-                pollOptions,
+                pollQuestion,
+                pollOptionResponses,
 
-                likeCount,
-                dislikeCount,
-                hahaCount,
-                angryCount,
+                reactions != null ? reactions.likeCount() : 0,
+                reactions != null ? reactions.dislikeCount() : 0,
+                reactions != null ? reactions.hahaCount() : 0,
+                reactions != null ? reactions.angryCount() : 0,
 
-                postedAgoFormatter.calculatePostedAgo(primaryKey.getCreatedAt()),
+                postedAgoFormatter.calculatePostedAgo(createdAt),
 
                 comments
         );
+    }
+
+    private String findProfileImage(
+            String authorIdentity,
+            List<ProfileImageRpMediaService> profileImages) {
+
+        return profileImages
+                .stream()
+                .filter(e -> Objects.equals(
+                        e.identity(),
+                        authorIdentity
+                ))
+                .map(ProfileImageRpMediaService::profileImage)
+                .findFirst()
+                .orElse("No Image found");
+    }
+
+    private String findProfileNames(
+            String authorIdentity,
+            List<ProfileRpProfileNamesProfileService> profileNames) {
+
+        return profileNames
+                .stream()
+                .filter(e -> Objects.equals(
+                        e.identity(),
+                        authorIdentity
+                ))
+                .map(e -> String.format(
+                        "%s %s",
+                        e.firstName(),
+                        e.lastName()
+                ))
+                .findFirst()
+                .orElse("No name found");
+    }
+
+    private List<PollOptionRpPostService> mapPollOptions(
+            List<PollOption> pollOptions) {
+
+        if (pollOptions == null) {
+            return List.of();
+        }
+
+        return pollOptions
+                .stream()
+                .map(
+                        pollOptionResponseMapper
+                                ::fromPollOptiontoPollOptionRpPostService
+                )
+                .toList();
+    }
+
+    private PostReactionsCountRpReactionService findPostReactions(
+            String postIdentity,
+            List<PostReactionsCountRpReactionService> postReactionsCount) {
+
+        return postReactionsCount
+                .stream()
+                .filter(e -> Objects.equals(
+                        e.identity(),
+                        postIdentity
+                ))
+                .findFirst()
+                .orElse(null);
     }
 }

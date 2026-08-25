@@ -44,4 +44,9 @@ public class PostController {
     public int retrieveAuthorCommentsCount(@PathVariable String identity) {
         return commentService.retrieveAuthorCommentsCount(identity);
     }
+
+    @GetMapping("/profile/{identity}/feed")
+    public List<PostRpPostService> retrieveProfileFeedPosts(@PathVariable String identity) {
+        return postService.retrieveProfileFeedPosts(identity);
+    }
 }

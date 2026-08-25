@@ -1353,7 +1353,7 @@ VALUES ('771fda51cc819105d8f3ce802fce2a4f33d23054c5a102f19872fad2a3208551', '202
 
 
 -- =====================================================
--- POSTS FOR KONSTANTIN - Till here
+-- POSTS FOR KONSTANTIN
 -- =====================================================
 
 -- Konstantin post 1: image

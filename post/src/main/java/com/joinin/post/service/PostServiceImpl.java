@@ -4,8 +4,10 @@ import com.join_in.common_models.*;
 import com.joinin.post.mapper.CommentResponseMapper;
 import com.joinin.post.mapper.PostResponseMapper;
 import com.joinin.post.model.CommentByPostEntity;
+import com.joinin.post.model.FeedUserEntity;
 import com.joinin.post.model.PostByAuthorEntity;
 import com.joinin.post.repository.CommentByPostRepository;
+import com.joinin.post.repository.FeedUserRepository;
 import com.joinin.post.repository.PostByAuthorRepository;
 import com.joinin.post.service.contract.PostService;
 import com.joinin.post.service.feign.MediaServiceClient;
@@ -24,6 +26,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostByAuthorRepository postByAuthorRepository;
     private final CommentByPostRepository commentByPostRepository;
+    private final FeedUserRepository feedUserRepository;
     private final PostResponseMapper postResponseMapper;
     private final CommentResponseMapper commentResponseMapper;
     private final MediaServiceClient mediaServiceClient;
@@ -57,6 +60,45 @@ public class PostServiceImpl implements PostService {
                             .map(e -> commentResponseMapper.fromCommentEntitytoCommentRpPostService(e, profileImagesRpMediaServices, commentProfileNames, commentReactionsCount))
                             .toList();
                     return postResponseMapper.fromPostByAuthortoPostRpPostService(postEntity, postImage, commentRpPostServices, profileImages, profileNames, postReactionsCount);
+                })
+                .toList();
+        log.info("Retrieve comments for all posts");
+        return posts;
+    }
+
+    @Override
+    public List<PostRpPostService> retrieveProfileFeedPosts(String identity) {
+        List<FeedUserEntity> feedPosts = feedUserRepository.findFeedByUserIdentity(identity);
+        log.info("Retrieve user's feed posts by profile identity: " + identity);
+        //Retrieve author identities
+        List<String> authorIdentities = feedPosts.stream().map(FeedUserEntity::getAuthorIdentity).toList();
+        //retrieve profile images
+        List<ProfileImageRpMediaService> profileImages = mediaServiceClient.retrieveProfileImagesForProfiles(authorIdentities);
+        // Retrieve profile names
+        List<ProfileRpProfileNamesProfileService> profileNames = profileServiceClient.retrieveProfilesNames(authorIdentities);
+        //Retrieve posts reactions count
+        List<PostReactionsCountRpReactionService> postReactionsCount = reactionServiceClient.retrievePostReactionsCount(authorIdentities);
+
+        List<PostRpPostService> posts = feedPosts
+                .stream()
+                .map(postEntity -> {
+                    String postIdentity = postEntity.getPrimaryKey().getPostIdentity();
+                    String postImage = null;
+                    if (postEntity.getHasImage()) {
+                        postImage = mediaServiceClient.retrievePostImage(postIdentity);
+                    }
+
+                    List<CommentByPostEntity> commentEntities = commentByPostRepository.findByPostIdentity(postIdentity);
+                    List<String> commentAuthorIdentities = commentEntities.stream().map(CommentByPostEntity::getAuthorIdentity).toList();
+                    List<ProfileImageRpMediaService> profileImagesRpMediaServices = mediaServiceClient.retrieveProfileImagesForProfiles(commentAuthorIdentities);
+                    List<ProfileRpProfileNamesProfileService> commentProfileNames = profileServiceClient.retrieveProfilesNames(commentAuthorIdentities);
+                    List<String> commentIdentities = commentEntities.stream().map(e -> e.getPrimaryKey().getCommentIdentity()).toList();
+                    List<CommentReactionsCountRpReactionService> commentReactionsCount = reactionServiceClient.retrieveCommentsReactionsCount(commentIdentities);
+                    List<CommentRpPostService> commentRpPostServices = commentEntities
+                            .stream()
+                            .map(e -> commentResponseMapper.fromCommentEntitytoCommentRpPostService(e, profileImagesRpMediaServices, commentProfileNames, commentReactionsCount))
+                            .toList();
+                    return postResponseMapper.fromFeedUserEntityToPostRpPostService(postEntity, postImage, commentRpPostServices, profileImages, profileNames, postReactionsCount);
                 })
                 .toList();
         log.info("Retrieve comments for all posts");

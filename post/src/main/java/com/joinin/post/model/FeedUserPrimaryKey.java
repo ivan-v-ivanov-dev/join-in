@@ -10,7 +10,7 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyClass;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -44,7 +44,7 @@ public class FeedUserPrimaryKey implements Serializable {
             ordinal = 1,
             ordering = Ordering.DESCENDING
     )
-    private Instant createdAt;
+    private LocalDateTime createdAt;
 
     /*
      * Distinguishes posts that have the same creation timestamp.

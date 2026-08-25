@@ -10,4 +10,6 @@ public interface PostService {
     int retrieveProfilePostsCount(String identity);
 
     List<String> retrievePostIdentitiesByAuthor(String identity);
+
+    List<PostRpPostService> retrieveProfileFeedPosts(String identity);
 }
