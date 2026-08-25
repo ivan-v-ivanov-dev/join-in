@@ -115,6 +115,14 @@ public class MvcController {
     @GetMapping("/profile/{identity}/edit")
     public String editProfile(@PathVariable("identity") String identity, Model model) {
         try {
+            model.addAttribute("profileIdentity", identity);
+            model.addAttribute("profileNames", profileService.retrieveProfileNames(identity));
+            model.addAttribute("profileImage", mediaService.retrieveProfileImage(identity));
+            model.addAttribute("searchKeywords", searchService.retrieveProfileSearchKeywords(identity));
+            model.addAttribute("friends", relationshipService.retrieveFriends(identity));
+            model.addAttribute("friendshipRequests", relationshipService.retrieveFriendshipRequests(identity));
+            model.addAttribute("notifications", notificationService.retrieveProfileNotifications(identity));
+            model.addAttribute("conversations", messageService.retrieveConversations(identity));
             model.addAttribute("profile", profileService.retrieveProfileByIdentity(identity));
             return "edit-profile";
         } catch (ResourceAccessException resourceAccessException) {
