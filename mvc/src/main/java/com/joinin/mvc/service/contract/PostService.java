@@ -11,4 +11,6 @@ public interface PostService {
     int retrievePostsCount(String identity);
 
     int retrieveCommentsCount(String identity);
+
+    List<Post> retrieveProfileFeedPosts(String identity);
 }

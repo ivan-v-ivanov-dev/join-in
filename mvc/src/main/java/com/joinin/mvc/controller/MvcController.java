@@ -104,6 +104,7 @@ public class MvcController {
             model.addAttribute("conversations", messageService.retrieveConversations(identity));
             model.addAttribute("friendSuggestions", relationshipService.retrieveFriendSuggestions(identity));
             model.addAttribute("suggestedGroups", groupService.retrieveProfileSuggestedGroups(identity));
+            model.addAttribute("posts", postService.retrieveProfileFeedPosts(identity));
             return "feed";
         } catch (ResourceAccessException resourceAccessException) {
             model.addAttribute("error", resourceAccessException.getMessage());

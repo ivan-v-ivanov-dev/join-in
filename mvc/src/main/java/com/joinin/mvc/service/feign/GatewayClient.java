@@ -87,4 +87,7 @@ public interface GatewayClient {
 
     @GetMapping("/profile/{identity}/friend/suggestions")
     List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(@PathVariable String identity);
+
+    @GetMapping("/profile/{identity}/feed")
+    List<PostRpGatewayService> retrieveProfileFeedPosts(@PathVariable String identity);
 }

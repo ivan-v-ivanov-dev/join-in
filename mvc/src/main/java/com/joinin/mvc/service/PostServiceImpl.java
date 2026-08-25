@@ -29,6 +29,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> retrieveProfileFeedPosts(String identity) {
+        List<PostRpGatewayService> postRpGatewayServices = gatewayClient.retrieveProfileFeedPosts(identity);
+        log.info("Retrieve profile feed posts from API Gateway. Profile: " + identity);
+        return postRpGatewayServices.stream()
+                .map(postMapper::fromPostRpGatewayServicetoPost)
+                .toList();
+    }
+
+    @Override
     public int retrievePostsCount(String identity) {
         int postsCount = gatewayClient.retrieveProfilePostsCount(identity);
         log.info("Retrieve posts count for profile: " + identity);
