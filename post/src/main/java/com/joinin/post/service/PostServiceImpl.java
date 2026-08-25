@@ -73,7 +73,8 @@ public class PostServiceImpl implements PostService {
         List<String> authorIdentities = feedPosts.stream().map(FeedUserEntity::getAuthorIdentity).toList();
         List<ProfileImageRpMediaService> profileImages = mediaServiceClient.retrieveProfileImagesForProfiles(authorIdentities);
         List<ProfileRpProfileNamesProfileService> profileNames = profileServiceClient.retrieveProfilesNames(authorIdentities);
-        List<PostReactionsCountRpReactionService> postReactionsCount = reactionServiceClient.retrievePostReactionsCount(authorIdentities);
+        List<String> postIdentities = feedPosts.stream().map(e -> e.getPrimaryKey().getPostIdentity()).toList();
+        List<PostReactionsCountRpReactionService> postReactionsCount = reactionServiceClient.retrievePostReactionsCount(postIdentities);
 
         List<PostRpPostService> posts = feedPosts
                 .stream()
