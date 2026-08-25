@@ -1,5 +1,6 @@
 package com.joinin.gateway.service;
 
+import com.join_in.common_models.EditProfileGatewayRq;
 import com.join_in.common_models.ProfileRpGatewayService;
 import com.join_in.common_models.ProfileRpProfileService;
 import com.joinin.gateway.mapper.ProfileMapper;
@@ -8,6 +9,7 @@ import com.joinin.gateway.service.feign.ProfileServiceClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -29,5 +31,17 @@ public class ProfileServiceImpl implements ProfileService {
         String names = profileServiceClient.retrieveProfileNames(identity);
         log.info("Retrieve profile names: " + names);
         return names;
+    }
+
+    @Override
+    public void editProfile(String identity, EditProfileGatewayRq editProfileGatewayRq, MultipartFile profileImage, MultipartFile backgroundImage) {
+        //TODO Implement
+        log.info(editProfileGatewayRq.toString());
+        if (!profileImage.isEmpty()) {
+            log.info("Profile Image intact");
+        }
+        if (backgroundImage.isEmpty()) {
+            log.info("Background Image is NULL");
+        }
     }
 }

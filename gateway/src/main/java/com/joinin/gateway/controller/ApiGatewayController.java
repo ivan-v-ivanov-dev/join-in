@@ -6,6 +6,7 @@ import com.joinin.gateway.service.feign.MessageServiceClient;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -148,6 +149,14 @@ public class ApiGatewayController {
     @GetMapping("/profile/{identity}/feed")
     public List<PostRpGatewayService> retrieveProfileFeedPosts(@PathVariable String identity) {
         return postService.retrieveProfileFeedPosts(identity);
+    }
+
+    @PostMapping(value = "/profile/{identity}/edit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void editProfile(@PathVariable String identity,
+                            @RequestPart("profile") EditProfileGatewayRq editProfileGatewayRq,
+                            @RequestPart(value = "profileImage", required = false) MultipartFile profileImage,
+                            @RequestPart(value = "backgroundImage", required = false) MultipartFile backgroundImage) {
+        profileService.editProfile(identity, editProfileGatewayRq, profileImage, backgroundImage);
     }
 
     @GetMapping("/health")
