@@ -139,7 +139,7 @@
             </div>
             <ul class="navbar-nav navbar-list">
                 <li class="nav-item">
-                    <a href="../dashboard/index.html" class="d-flex align-items-center">
+                    <a th:href="@{/profile/{identity}/feed(identity=${profileIdentity})}" class="d-flex align-items-center">
                         <i class="material-symbols-outlined">home</i>
                     </a>
                 </li>
@@ -465,22 +465,39 @@
                                 <div class=" iq-sub-card">
                                     <h5>Chat Settings</h5>
                                 </div>
-                                <div class="d-flex align-items-center iq-sub-card border-0">
-                                    <i class="material-symbols-outlined text-success md-14">
-                                        circle
-                                    </i>
-                                    <div class="ms-3">
-                                        Online
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center iq-sub-card border-0">
-                                    <i class="material-symbols-outlined text-warning md-14">
-                                        circle
-                                    </i>
-                                    <div class="ms-3">
-                                        Offline
-                                    </div>
-                                </div>
+
+                                <form th:action="@{/profile/{identity}/online(identity=${profile.identity})}"
+                                      method="post"
+                                      class="m-0">
+
+                                    <button type="submit" class="d-flex align-items-center iq-sub-card border-0 bg-transparent w-100">
+
+                                        <i class="material-symbols-outlined text-success md-14">
+                                            circle
+                                        </i>
+
+                                        <div class="ms-3">
+                                            Online
+                                        </div>
+                                    </button>
+                                </form>
+
+                                <form th:action="@{/profile/{identity}/offline(identity=${profile.identity})}"
+                                      method="post"
+                                      class="m-0">
+
+                                    <button type="submit" class="d-flex align-items-center iq-sub-card border-0 bg-transparent w-100">
+
+                                        <i class="material-symbols-outlined text-warning md-14">
+                                            circle
+                                        </i>
+
+                                        <div class="ms-3">
+                                            Offline
+                                        </div>
+                                    </button>
+                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -520,7 +537,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link " aria-current="page"
-                       href="../dashboard/index.html">
+                       th:href="@{/profile/{identity}/feed(identity=${profileIdentity})}">
                         <i class="icon material-symbols-outlined">
                             newspaper
                         </i>
@@ -614,7 +631,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="user-img">
-                                        <img src="../assets/images/user/1.jpg" alt="userimg"
+                                        <img th:src="${profileImage}" alt="userimg"
                                              class="avatar-60 rounded-circle" loading="lazy">
                                     </div>
 
@@ -650,7 +667,7 @@
 
                                                 <div class="d-flex align-items-center">
                                                     <div class="user-img">
-                                                        <img src="../assets/images/user/1.jpg" alt="userimg"
+                                                        <img th:src="${profileImage}" alt="userimg"
                                                              class="avatar-60 rounded-circle img-fluid"
                                                              loading="lazy">
                                                     </div>
