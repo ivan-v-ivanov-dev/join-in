@@ -15,7 +15,7 @@ public class ProfileRepository {
     private final MongoTemplate mongoTemplate;
 
     public Profile save(Profile profile) {
-        return mongoTemplate.save(profile);
+        return mongoTemplate.insert(profile);
     }
 
     public void updatePassword(String identity, String newPassword) {
