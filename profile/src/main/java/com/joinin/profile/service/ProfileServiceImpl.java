@@ -2,6 +2,7 @@ package com.joinin.profile.service;
 
 import com.join_in.common_models.ProfileRpProfileNamesProfileService;
 import com.join_in.common_models.ProfileRpProfileService;
+import com.join_in.kafka_models.messages.UpdateProfile;
 import com.joinin.profile.mapper.ProfileMapper;
 import com.joinin.profile.models.Profile;
 import com.joinin.profile.repository.ProfileRepository;
@@ -21,8 +22,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository profileRepository;
     private final ProfileMapper profileMapper;
-    private
-    final IdentityServiceClient identityServiceClient;
+    private final IdentityServiceClient identityServiceClient;
 
     @Override
     public void save(Profile profile) {
@@ -62,5 +62,12 @@ public class ProfileServiceImpl implements ProfileService {
                         e.getLastName()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void update(UpdateProfile updateProfileMessage) {
+        Profile profile = profileMapper.fromUpdateProfiletoProfile(updateProfileMessage);
+        profileRepository.update(profile);
+        log.info("Update profile: " + profile.getIdentity());
     }
 }

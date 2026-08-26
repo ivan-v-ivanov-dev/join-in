@@ -2,6 +2,7 @@ package com.joinin.profile.mapper;
 
 import com.join_in.common_models.ProfileRpProfileService;
 import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
+import com.join_in.kafka_models.messages.UpdateProfile;
 import com.joinin.profile.models.Profile;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -39,4 +40,7 @@ public interface ProfileMapper {
 
     @Mapping(target = "email", source = "email")
     ProfileRpProfileService fromProfiletoProfileRpProfileService(Profile profile, String email);
+
+    @Mapping(target = "id", ignore = true)
+    Profile fromUpdateProfiletoProfile(UpdateProfile updateProfile);
 }

@@ -2,6 +2,7 @@ package com.joinin.profile.service.listener;
 
 import com.join_in.kafka_models.KafkaMessage;
 import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
+import com.join_in.kafka_models.messages.UpdateProfile;
 import com.joinin.profile.mapper.ProfileMapper;
 import com.joinin.profile.service.contract.ProfileService;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,14 @@ public class ProfileListener {
         NewRegisteredUserInfo newRegisteredUserInfo = (NewRegisteredUserInfo) message;
         log.info("New registered user message received from Identity service. Profile identity: " + newRegisteredUserInfo.identity());
         profileService.save(profileMapper.fromNewRegisteredUserInfotoProfile(newRegisteredUserInfo));
+    }
+
+    @KafkaListener(
+            topics = "${spring.kafka.topic.update-profile}",
+            groupId = "${spring.kafka.group-id}")
+    public void updateProfile(KafkaMessage message) {
+        UpdateProfile updateProfileMessage = (UpdateProfile) message;
+        log.info("Update profile message received from Gateway service. Profile identity: " + updateProfileMessage.identity());
+        profileService.update(updateProfileMessage);
     }
 }

@@ -19,6 +19,7 @@ spring:
     offset-reset: earliest
     topic:
       new-registered-user-info: new-registered-user-info
+      update-profile: update-profile
 
 #Identity service Feign client
 identity:
