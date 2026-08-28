@@ -2,6 +2,7 @@ package com.joinin.media.service.listener;
 
 import com.join_in.kafka_models.KafkaMessage;
 import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
+import com.join_in.kafka_models.messages.UpdateProfileImage;
 import com.joinin.media.service.contract.ProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,5 +23,14 @@ public class MediaServiceListener {
         NewRegisteredUserInfo newRegisteredUserInfo = (NewRegisteredUserInfo) message;
         log.info("New registered user message received from Identity service. User identity: " + newRegisteredUserInfo.identity());
         profileService.saveUserWithDefaultPictures(newRegisteredUserInfo.identity());
+    }
+
+    @KafkaListener(
+            topics = "${spring.kafka.topic.update-profile}",
+            groupId = "${spring.kafka.group-id}")
+    public void updateProfileImage(KafkaMessage message) {
+        UpdateProfileImage updateProfileImage = (UpdateProfileImage) message;
+        log.info("New update profile image message received from API Gateway service. Profile identity: " + updateProfileImage.identity());
+        profileService.updateProfileImage(updateProfileImage.identity(), updateProfileImage.profileImage());
     }
 }

@@ -16,8 +16,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.util.ArrayList;
@@ -183,6 +185,39 @@ public class S3MediaServiceImpl implements S3MediaService {
         log.info("Retrieved image for post: {}, S3 key: {}", post.getIdentity(), imageObjectKey);
 
         return postImage;
+    }
+
+    @Override
+    public void updateProfilePicture(String identity, String imageName, byte[] imageAsWebpFormat) {
+        String objectKey = "profile/" + identity + "/" + imageName;
+
+        PutObjectRequest request = PutObjectRequest.builder()
+                .bucket(bucket)
+                .key(objectKey)
+                .contentType("image/webp")
+                .build();
+
+        try {
+            s3Client.putObject(request, RequestBody.fromBytes(imageAsWebpFormat));
+            log.info("Updated profile picture for profile: {}, S3 key: {}", identity, objectKey);
+        } catch (S3Exception exception) {
+            log.error(
+                    "Could not update profile picture for profile: {}, S3 key: {}. Status: {}, code: {}, message: {}",
+                    identity,
+                    objectKey,
+                    exception.statusCode(),
+                    exception.awsErrorDetails() == null
+                            ? null
+                            : exception.awsErrorDetails().errorCode(),
+                    exception.awsErrorDetails() == null
+                            ? exception.getMessage()
+                            : exception.awsErrorDetails().errorMessage(),
+                    exception
+            );
+
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Could not update profile picture in S3.", exception);
+        }
     }
 
     private String getImageAsBase64(String objectKey) {

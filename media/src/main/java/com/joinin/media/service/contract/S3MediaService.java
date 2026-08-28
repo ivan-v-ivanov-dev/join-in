@@ -17,4 +17,6 @@ public interface S3MediaService {
     List<GroupRpImageService> retrieveGroupsImages(List<String> identities);
 
     String retrievePostImage(String identity);
+
+    void updateProfilePicture(String identity, String imageName, byte[] imageAsWebpFormat);
 }

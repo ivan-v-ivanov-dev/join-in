@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -27,5 +28,11 @@ public class ProfileRepository {
     public List<Profile> retrieveProfilesByIdentities(List<String> identities) {
         Query query = Query.query(Criteria.where("identity").in(identities));
         return mongoTemplate.find(query, Profile.class);
+    }
+
+    public void updateProfilePicture(String identity, String mongoProfileUrl) {
+        Query query = new Query(Criteria.where("identity").is(identity));
+        Update update = new Update().set("profilePictureUrl", mongoProfileUrl);
+        mongoTemplate.updateFirst(query, update, Profile.class);
     }
 }

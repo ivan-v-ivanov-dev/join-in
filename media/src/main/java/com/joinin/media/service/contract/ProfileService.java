@@ -10,4 +10,6 @@ public interface ProfileService {
     Profile getProfileByIdentity(String identity);
 
     List<Profile> retrieveProfilesByIdentities(List<String> identities);
+
+    void updateProfileImage(String identity, byte[] bytes);
 }
