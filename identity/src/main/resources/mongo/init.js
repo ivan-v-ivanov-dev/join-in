@@ -10,7 +10,7 @@ db.profiles.insertMany([
  {
     identity: "429e71a7f1773bf2619c4c54ca4a7c67ab949efc7fffc1097a9629e8dff3528b",
     email: "ivan@ivan.com",
-    password: "$2b$12$LznTPqlU2E02QQoNGPZOwuNTRgZu.R2z/8rx8tM1lQHBR8k.p24vC"
+    password: "$2a$10$00Ju4/cfBVFaWvE1UjkaBOlT7lAjDRv.QImmocMip6nBP284EYjaK"
   },
 
    //FRIENDS
