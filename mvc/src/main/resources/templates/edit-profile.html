@@ -25,6 +25,7 @@
     <link rel="stylesheet" th:href="@{/assets/vendor/vanillajs-datepicker/dist/css/datepicker.min.css}">
     <!-- color customizer css -->
     <link rel="stylesheet" th:href="@{/assets/css/customizer.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/password-match.css}">
 </head>
 
 <body class="  ">
@@ -757,6 +758,11 @@
 
                                                     <label class="form-label">
                                                         Confirm Password
+
+                                                        <span id="password-match-error"
+                                                              class="password-match-error">
+                Passwords should match.
+            </span>
                                                     </label>
 
                                                     <input type="password"
@@ -773,8 +779,8 @@
 
                                     </div>
 
-
                                     <button type="button"
+                                            id="account-next-button"
                                             name="next"
                                             class="btn btn-primary next action-button float-end">
                                         Next
@@ -1451,6 +1457,7 @@
                     </div>
                 </div>
                 <!--      end Edit profile-->
+
             </div>
         </div>
     </div>
@@ -1975,6 +1982,7 @@
 <script th:src="@{/assets/js/lottie.js}"></script>
 <!--select2 Script -->
 <script th:src="@{/assets/js/select2.js}"></script>
+<script th:src="@{/assets/js/edit-profile.js}"></script>
 
 
 </body>
