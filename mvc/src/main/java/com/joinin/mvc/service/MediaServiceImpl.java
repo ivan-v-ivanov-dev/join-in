@@ -5,6 +5,7 @@ import com.joinin.mvc.service.feign.GatewayClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,5 +35,11 @@ public class MediaServiceImpl implements MediaService {
         List<String> albumImages = gatewayClient.retrieveProfileAlbumImages(identity);
         log.info("Retrieve profile album images from API Gateway for profile: " + identity);
         return albumImages;
+    }
+
+    @Override
+    public void updateProfileImage(String identity, MultipartFile profileImage) {
+        gatewayClient.updateProfileImage(identity, profileImage);
+        log.info("Upload profile image for profile: " + identity);
     }
 }

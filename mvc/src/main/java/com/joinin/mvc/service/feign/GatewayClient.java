@@ -95,4 +95,8 @@ public interface GatewayClient {
                      @RequestPart("profile") EditProfileGatewayRq editProfileGatewayRq,
                      @RequestPart(value = "profileImage", required = false) MultipartFile profileImage,
                      @RequestPart(value = "backgroundImage", required = false) MultipartFile backgroundImage);
+
+    @PostMapping("/profile/{identity}/update/profile/image")
+    void updateProfileImage(@PathVariable String identity,
+                            @RequestParam("profileImage") MultipartFile profileImage);
 }

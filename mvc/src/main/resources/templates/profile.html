@@ -692,7 +692,7 @@
                                     <div class="profile-img position-relative d-inline-block">
 
                                         <form id="profileImageForm"
-                                              action="/profile-image/upload"
+                                              th:action="@{/profile/{identity}/update/profile/image(identity=${profile.identity})}"
                                               method="post"
                                               enctype="multipart/form-data">
 
@@ -702,22 +702,23 @@
                                                  class="avatar-130 img-fluid"/>
 
                                             <input type="file"
-                                                   name="file"
-                                                   accept="image/*"
+                                                   name="profileImage"
+                                                   accept="image/jpeg,image/png,image/webp"
                                                    onchange="this.form.submit();"
                                                    style="
-                    position:absolute;
-                    top:0;
-                    left:0;
-                    width:130px;
-                    height:130px;
-                    opacity:0;
-                    cursor:pointer;
-                    z-index:9999;
+                  position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 130px;
+                    height: 130px;
+                    opacity: 0;
+                    cursor: pointer;
+                    z-index: 9999;
                ">
                                         </form>
 
                                     </div>
+
                                     <div class="profile-detail">
                                         <h3 th:text="|${profile.firstName} ${profile.lastName}|">Bni Cyst</h3>
                                     </div>
