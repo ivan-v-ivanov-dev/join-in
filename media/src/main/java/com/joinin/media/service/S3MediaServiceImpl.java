@@ -188,8 +188,18 @@ public class S3MediaServiceImpl implements S3MediaService {
     }
 
     @Override
-    public void updateProfilePicture(String identity, String imageName, byte[] imageAsWebpFormat) {
-        String objectKey = "profile/" + identity + "/" + imageName;
+    public void updateProfileImage(String identity, String imageName, byte[] imageAsWebpFormat) {
+        uploadImage(identity, imageName, imageAsWebpFormat, "profile", "profile picture");
+    }
+
+    @Override
+    public void updateBackgroundImage(String identity, String imageName, byte[] imageAsWebpFormat) {
+        uploadImage(identity, imageName, imageAsWebpFormat, "background", "background picture");
+    }
+
+    private void uploadImage(String identity, String imageName, byte[] imageBytes,
+                             String folder, String imageType) {
+        String objectKey = folder + "/" + identity + "/" + imageName;
 
         PutObjectRequest request = PutObjectRequest.builder()
                 .bucket(bucket)
@@ -198,11 +208,12 @@ public class S3MediaServiceImpl implements S3MediaService {
                 .build();
 
         try {
-            s3Client.putObject(request, RequestBody.fromBytes(imageAsWebpFormat));
-            log.info("Updated profile picture for profile: {}, S3 key: {}", identity, objectKey);
+            s3Client.putObject(request, RequestBody.fromBytes(imageBytes));
+            log.info("Updated {} for identity: {}, S3 key: {}", imageType, identity, objectKey);
         } catch (S3Exception exception) {
             log.error(
-                    "Could not update profile picture for profile: {}, S3 key: {}. Status: {}, code: {}, message: {}",
+                    "Could not update {} for identity: {}, S3 key: {}. Status: {}, code: {}, message: {}",
+                    imageType,
                     identity,
                     objectKey,
                     exception.statusCode(),
@@ -216,7 +227,7 @@ public class S3MediaServiceImpl implements S3MediaService {
             );
 
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Could not update profile picture in S3.", exception);
+                    "Could not update " + imageType + " in S3.", exception);
         }
     }
 

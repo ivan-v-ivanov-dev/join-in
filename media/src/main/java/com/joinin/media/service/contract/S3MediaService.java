@@ -18,5 +18,7 @@ public interface S3MediaService {
 
     String retrievePostImage(String identity);
 
-    void updateProfilePicture(String identity, String imageName, byte[] imageAsWebpFormat);
+    void updateProfileImage(String identity, String imageName, byte[] imageAsWebpFormat);
+
+    void updateBackgroundImage(String identity, String imageName, byte[] imageAsWebFormat);
 }

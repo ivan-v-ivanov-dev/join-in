@@ -30,9 +30,15 @@ public class ProfileRepository {
         return mongoTemplate.find(query, Profile.class);
     }
 
-    public void updateProfilePicture(String identity, String mongoProfileUrl) {
+    public void updateProfileImage(String identity, String mongoProfileUrl) {
         Query query = new Query(Criteria.where("identity").is(identity));
         Update update = new Update().set("profilePictureUrl", mongoProfileUrl);
+        mongoTemplate.updateFirst(query, update, Profile.class);
+    }
+
+    public void updateBackgroundImage(String identity, String mongoBackgroundPictureUrl) {
+        Query query = new Query(Criteria.where("identity").is(identity));
+        Update update = new Update().set("backgroundPictureUrl", mongoBackgroundPictureUrl);
         mongoTemplate.updateFirst(query, update, Profile.class);
     }
 }

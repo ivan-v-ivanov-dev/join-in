@@ -19,7 +19,8 @@ spring:
     offset-reset: earliest
     topic:
       new-registered-user-info: new-registered-user-info
-      update-profile: update-profile
+      update-profile-image: update-profile-image
+      update-background-image: update-background-image
 
 aws:
   s3:

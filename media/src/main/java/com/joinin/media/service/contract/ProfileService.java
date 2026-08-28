@@ -11,5 +11,7 @@ public interface ProfileService {
 
     List<Profile> retrieveProfilesByIdentities(List<String> identities);
 
-    void updateProfileImage(String identity, byte[] bytes);
+    void updateProfileImage(String identity, byte[] profileImageBytes);
+
+    void updateBackgroundImage(String identity, byte[] backgroundImageBytes);
 }

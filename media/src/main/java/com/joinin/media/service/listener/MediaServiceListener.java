@@ -2,6 +2,7 @@ package com.joinin.media.service.listener;
 
 import com.join_in.kafka_models.KafkaMessage;
 import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
+import com.join_in.kafka_models.messages.UpdateBackgroundImage;
 import com.join_in.kafka_models.messages.UpdateProfileImage;
 import com.joinin.media.service.contract.ProfileService;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +27,20 @@ public class MediaServiceListener {
     }
 
     @KafkaListener(
-            topics = "${spring.kafka.topic.update-profile}",
+            topics = "${spring.kafka.topic.update-profile-image}",
             groupId = "${spring.kafka.group-id}")
     public void updateProfileImage(KafkaMessage message) {
         UpdateProfileImage updateProfileImage = (UpdateProfileImage) message;
         log.info("New update profile image message received from API Gateway service. Profile identity: " + updateProfileImage.identity());
         profileService.updateProfileImage(updateProfileImage.identity(), updateProfileImage.profileImage());
+    }
+
+    @KafkaListener(
+            topics = "${spring.kafka.topic.update-background-image}",
+            groupId = "${spring.kafka.group-id}")
+    public void updateBackgroundImage(KafkaMessage message) {
+        UpdateBackgroundImage updateBackgroundImage = (UpdateBackgroundImage) message;
+        log.info("New update background image message received from API Gateway service. Profile identity: " + updateBackgroundImage.identity());
+        profileService.updateBackgroundImage(updateBackgroundImage.identity(), updateBackgroundImage.backgroundImage());
     }
 }

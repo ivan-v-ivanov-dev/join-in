@@ -49,13 +49,26 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public void updateProfileImage(String identity, byte[] bytes) {
+    public void updateProfileImage(String identity, byte[] profileImageBytes) {
         try {
-            byte[] imageAsWebpFormat = imageConverterService.convertToWebp(bytes);
+            byte[] imageAsWebpFormat = imageConverterService.convertToWebp(profileImageBytes);
             String imageName = "profile.webp";
             String mongoProfileUrl = "profile/" + identity + "/profile.webp";
-            profileRepository.updateProfilePicture(identity, mongoProfileUrl);
-            s3MediaService.updateProfilePicture(identity, imageName, imageAsWebpFormat);
+            profileRepository.updateProfileImage(identity, mongoProfileUrl);
+            s3MediaService.updateProfileImage(identity, imageName, imageAsWebpFormat);
+        } catch (IOException ioException) {
+            log.error(ioException.getMessage());
+        }
+    }
+
+    @Override
+    public void updateBackgroundImage(String identity, byte[] backgroundImageBytes) {
+        try {
+            byte[] imageAsWebFormat = imageConverterService.convertToWebp(backgroundImageBytes);
+            String imageName = "background.webp";
+            String mongoBackgroundPictureUrl = "background/" + identity + "/background.webp";
+            profileRepository.updateBackgroundImage(identity, mongoBackgroundPictureUrl);
+            s3MediaService.updateBackgroundImage(identity, imageName, imageAsWebFormat);
         } catch (IOException ioException) {
             log.error(ioException.getMessage());
         }
