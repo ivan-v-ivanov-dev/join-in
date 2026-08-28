@@ -159,10 +159,16 @@ public class ApiGatewayController {
         profileService.editProfile(identity, editProfileGatewayRq, profileImage, backgroundImage);
     }
 
-    @PostMapping("/profile/{identity}/update/profile/image")
+    @PostMapping(value = "/profile/{identity}/update/profile/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void updateProfileImage(@PathVariable String identity,
-                                   @RequestParam("profileImage") MultipartFile profileImage) {
+                                   @RequestPart("profileImage") MultipartFile profileImage) {
         mediaService.updateProfileImage(identity, profileImage);
+    }
+
+    @PostMapping(value = "/profile/{identity}/update/background/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void updateBackgroundImage(@PathVariable String identity,
+                                      @RequestPart("backgroundImage") MultipartFile backgroundImage) {
+        mediaService.updateBackgroundImage(identity, backgroundImage);
     }
 
     @GetMapping("/health")

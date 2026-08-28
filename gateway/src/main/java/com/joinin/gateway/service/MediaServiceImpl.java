@@ -1,6 +1,7 @@
 package com.joinin.gateway.service;
 
 import com.join_in.kafka_models.KafkaMessage;
+import com.join_in.kafka_models.messages.UpdateBackgroundImage;
 import com.join_in.kafka_models.messages.UpdateProfileImage;
 import com.joinin.gateway.service.contract.MediaService;
 import com.joinin.gateway.service.feign.MediaServiceClient;
@@ -24,6 +25,8 @@ public class MediaServiceImpl implements MediaService {
 
     @Value("${spring.kafka.topic.update-profile-image}")
     private String updateProfileImageTopic;
+    @Value("${spring.kafka.topic.update-background-image}")
+    private String updateBackgroundImageTopic;
 
     @Override
     public String retrieveProfileImage(String identity) {
@@ -55,6 +58,19 @@ public class MediaServiceImpl implements MediaService {
                 log.error("Send new profile image to Media service for Profile: " + identity);
             } catch (IOException ioException) {
                 log.error("Couldn't send profile image to Media service. Profile identity: " + identity);
+            }
+        }
+    }
+
+    @Override
+    public void updateBackgroundImage(String identity, MultipartFile backgroundImage) {
+        if (!backgroundImage.isEmpty()) {
+            try {
+                KafkaMessage updateBackgroundImageMessage = new UpdateBackgroundImage(identity, backgroundImage.getBytes());
+                kafkaTemplate.send(updateBackgroundImageTopic, updateBackgroundImageMessage);
+                log.error("Send new background image to Media service for Profile: " + identity);
+            } catch (IOException ioException) {
+                log.error("Couldn't send background image to Media service. Profile identity: " + identity);
             }
         }
     }
