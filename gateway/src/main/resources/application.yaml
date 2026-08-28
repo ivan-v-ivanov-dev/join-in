@@ -13,6 +13,10 @@ spring:
       register-new-user: register-new-user
       update-profile-online-status: update-profile-online-status
       update-profile-offline-status: update-profile-offline-status
+      update-profile-password: update-profile-password
+      update-profile: update-profile
+      update-profile-image: update-profile-image
+      update-background-image: update-background-image
 
 #Identity service Feign client
 identity:
