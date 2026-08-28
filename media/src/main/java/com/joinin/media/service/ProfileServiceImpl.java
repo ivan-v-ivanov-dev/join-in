@@ -3,14 +3,11 @@ package com.joinin.media.service;
 import com.joinin.media.model.AlbumPictureUrl;
 import com.joinin.media.model.Profile;
 import com.joinin.media.repository.ProfileRepository;
-import com.joinin.media.service.contract.ImageConverterService;
 import com.joinin.media.service.contract.ProfileService;
-import com.joinin.media.service.contract.S3MediaService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.joinin.media.service.contrants.ProfilePicConstants.*;
@@ -21,8 +18,6 @@ import static com.joinin.media.service.contrants.ProfilePicConstants.*;
 public class ProfileServiceImpl implements ProfileService {
 
     private final ProfileRepository profileRepository;
-    private final ImageConverterService imageConverterService;
-    private final S3MediaService s3MediaService;
 
     @Override
     public void saveUserWithDefaultPictures(String identity) {
@@ -49,28 +44,14 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public void updateProfileImage(String identity, byte[] profileImageBytes) {
-        try {
-            byte[] imageAsWebpFormat = imageConverterService.convertToWebp(profileImageBytes);
-            String imageName = "profile.webp";
-            String mongoProfileUrl = "profile/" + identity + "/profile.webp";
-            profileRepository.updateProfileImage(identity, mongoProfileUrl);
-            s3MediaService.updateProfileImage(identity, imageName, imageAsWebpFormat);
-        } catch (IOException ioException) {
-            log.error(ioException.getMessage());
-        }
+    public void updateProfileImage(String identity) {
+        String mongoProfileUrl = "profile/" + identity + "/profile.webp";
+        profileRepository.updateProfileImage(identity, mongoProfileUrl);
     }
 
     @Override
-    public void updateBackgroundImage(String identity, byte[] backgroundImageBytes) {
-        try {
-            byte[] imageAsWebFormat = imageConverterService.convertToWebp(backgroundImageBytes);
-            String imageName = "background.webp";
-            String mongoBackgroundPictureUrl = "background/" + identity + "/background.webp";
-            profileRepository.updateBackgroundImage(identity, mongoBackgroundPictureUrl);
-            s3MediaService.updateBackgroundImage(identity, imageName, imageAsWebFormat);
-        } catch (IOException ioException) {
-            log.error(ioException.getMessage());
-        }
+    public void updateBackgroundImage(String identity) {
+        String mongoBackgroundPictureUrl = "background/" + identity + "/background.webp";
+        profileRepository.updateBackgroundImage(identity, mongoBackgroundPictureUrl);
     }
 }

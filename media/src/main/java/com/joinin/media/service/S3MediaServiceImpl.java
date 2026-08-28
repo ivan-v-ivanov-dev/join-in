@@ -6,10 +6,7 @@ import com.joinin.media.model.AlbumPictureUrl;
 import com.joinin.media.model.Group;
 import com.joinin.media.model.Post;
 import com.joinin.media.model.Profile;
-import com.joinin.media.service.contract.GroupService;
-import com.joinin.media.service.contract.PostService;
-import com.joinin.media.service.contract.ProfileService;
-import com.joinin.media.service.contract.S3MediaService;
+import com.joinin.media.service.contract.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +19,7 @@ import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -32,10 +30,17 @@ import java.util.stream.Collectors;
 @Slf4j
 public class S3MediaServiceImpl implements S3MediaService {
 
+    private static final String PROFILE_FOLDER = "profile";
+    private static final String BACKGROUND_FOLDER = "background";
+    private static final String PROFILE_IMAGE_NAME = "profile.webp";
+    private static final String BACKGROUND_IMAGE_NAME = "background.webp";
+
     private final S3Client s3Client;
     private final ProfileService profileService;
     private final GroupService groupService;
     private final PostService postService;
+    private final ImageConverterService imageConverterService;
+
     @Value("${aws.s3.bucket}")
     private String bucket;
 
@@ -188,34 +193,34 @@ public class S3MediaServiceImpl implements S3MediaService {
     }
 
     @Override
-    public void updateProfileImage(String identity, String imageName, byte[] imageAsWebpFormat) {
-        uploadImage(identity, imageName, imageAsWebpFormat, "profile", "profile picture");
+    public void updateProfileImage(String identity, byte[] bytes) {
+        uploadImage(identity, bytes, PROFILE_FOLDER, PROFILE_IMAGE_NAME, "profile picture");
     }
 
     @Override
-    public void updateBackgroundImage(String identity, String imageName, byte[] imageAsWebpFormat) {
-        uploadImage(identity, imageName, imageAsWebpFormat, "background", "background picture");
+    public void updateBackgroundImage(String identity, byte[] bytes) {
+        uploadImage(identity, bytes, BACKGROUND_FOLDER, BACKGROUND_IMAGE_NAME, "background picture");
     }
 
-    private void uploadImage(String identity, String imageName, byte[] imageBytes,
-                             String folder, String imageType) {
-        String objectKey = folder + "/" + identity + "/" + imageName;
-
-        PutObjectRequest request = PutObjectRequest.builder()
-                .bucket(bucket)
-                .key(objectKey)
-                .contentType("image/webp")
-                .build();
-
+    private void uploadImage(String identity, byte[] imageBytes, String folder, String imageName, String imageType) {
         try {
-            s3Client.putObject(request, RequestBody.fromBytes(imageBytes));
+            byte[] webpBytes = imageConverterService.convertToWebp(imageBytes);
+            String objectKey = folder + "/" + identity + "/" + imageName;
+            PutObjectRequest request = PutObjectRequest.builder()
+                    .bucket(bucket)
+                    .key(objectKey)
+                    .contentType("image/webp")
+                    .build();
+            s3Client.putObject(request, RequestBody.fromBytes(webpBytes));
             log.info("Updated {} for identity: {}, S3 key: {}", imageType, identity, objectKey);
+        } catch (IOException exception) {
+            log.error("Could not convert {} to WebP for identity: {}", imageType, identity, exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not convert " + imageType + " to WebP.", exception);
         } catch (S3Exception exception) {
             log.error(
-                    "Could not update {} for identity: {}, S3 key: {}. Status: {}, code: {}, message: {}",
+                    "Could not upload {} for identity: {}. Status: {}, code: {}, message: {}",
                     imageType,
                     identity,
-                    objectKey,
                     exception.statusCode(),
                     exception.awsErrorDetails() == null
                             ? null
@@ -226,8 +231,11 @@ public class S3MediaServiceImpl implements S3MediaService {
                     exception
             );
 
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Could not update " + imageType + " in S3.", exception);
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Could not upload " + imageType + " to S3.",
+                    exception
+            );
         }
     }
 

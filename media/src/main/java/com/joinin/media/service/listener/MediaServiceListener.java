@@ -5,6 +5,7 @@ import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
 import com.join_in.kafka_models.messages.UpdateBackgroundImage;
 import com.join_in.kafka_models.messages.UpdateProfileImage;
 import com.joinin.media.service.contract.ProfileService;
+import com.joinin.media.service.contract.S3MediaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class MediaServiceListener {
 
     private final ProfileService profileService;
+    private final S3MediaService s3MediaService;
 
     @KafkaListener(
             topics = "${spring.kafka.topic.new-registered-user-info}",
@@ -32,7 +34,8 @@ public class MediaServiceListener {
     public void updateProfileImage(KafkaMessage message) {
         UpdateProfileImage updateProfileImage = (UpdateProfileImage) message;
         log.info("New update profile image message received from API Gateway service. Profile identity: " + updateProfileImage.identity());
-        profileService.updateProfileImage(updateProfileImage.identity(), updateProfileImage.profileImage());
+        profileService.updateProfileImage(updateProfileImage.identity());
+        s3MediaService.updateProfileImage(updateProfileImage.identity(), updateProfileImage.profileImage());
     }
 
     @KafkaListener(
@@ -41,6 +44,7 @@ public class MediaServiceListener {
     public void updateBackgroundImage(KafkaMessage message) {
         UpdateBackgroundImage updateBackgroundImage = (UpdateBackgroundImage) message;
         log.info("New update background image message received from API Gateway service. Profile identity: " + updateBackgroundImage.identity());
-        profileService.updateBackgroundImage(updateBackgroundImage.identity(), updateBackgroundImage.backgroundImage());
+        profileService.updateBackgroundImage(updateBackgroundImage.identity());
+        s3MediaService.updateBackgroundImage(updateBackgroundImage.identity(), updateBackgroundImage.backgroundImage());
     }
 }
