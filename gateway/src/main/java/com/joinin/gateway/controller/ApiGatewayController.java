@@ -159,6 +159,12 @@ public class ApiGatewayController {
         profileService.editProfile(identity, editProfileGatewayRq, profileImage, backgroundImage);
     }
 
+    @PostMapping("/profile/{identity}/update/profile/image")
+    public void updateProfileImage(@PathVariable String identity,
+                                   @RequestParam("profileImage") MultipartFile profileImage) {
+        mediaService.updateProfileImage(identity, profileImage);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";
