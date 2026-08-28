@@ -40,6 +40,12 @@ public class MediaServiceImpl implements MediaService {
     @Override
     public void updateProfileImage(String identity, MultipartFile profileImage) {
         gatewayClient.updateProfileImage(identity, profileImage);
-        log.info("Upload profile image for profile: " + identity);
+        log.info("Update profile image for profile: " + identity);
+    }
+
+    @Override
+    public void updateBackgroundImage(String identity, MultipartFile backgroundImage) {
+        gatewayClient.updateBackgroundImage(identity, backgroundImage);
+        log.info("Update background image for profile: " + identity);
     }
 }

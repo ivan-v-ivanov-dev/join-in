@@ -12,4 +12,6 @@ public interface MediaService {
     List<String> retrieveProfileAlbumImages(String identity);
 
     void updateProfileImage(String identity, MultipartFile profileImage);
+
+    void updateBackgroundImage(String identity, MultipartFile backgroundImage);
 }

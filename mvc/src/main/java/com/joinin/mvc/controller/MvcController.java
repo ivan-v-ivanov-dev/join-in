@@ -154,6 +154,12 @@ public class MvcController {
         return "redirect:/profile/" + identity;
     }
 
+    @PostMapping("/profile/{identity}/update/background/image")
+    public String updateBackgroundImage(@PathVariable String identity, @RequestParam("backgroundImage") MultipartFile backgroundImage) {
+        mediaService.updateBackgroundImage(identity, backgroundImage);
+        return "redirect:/profile/" + identity;
+    }
+
     @GetMapping("/health")
     public String health() {
         return "edit-profile";

@@ -96,7 +96,11 @@ public interface GatewayClient {
                      @RequestPart(value = "profileImage", required = false) MultipartFile profileImage,
                      @RequestPart(value = "backgroundImage", required = false) MultipartFile backgroundImage);
 
-    @PostMapping("/profile/{identity}/update/profile/image")
+    @PostMapping(value = "/profile/{identity}/update/profile/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     void updateProfileImage(@PathVariable String identity,
-                            @RequestParam("profileImage") MultipartFile profileImage);
+                            @RequestPart("profileImage") MultipartFile profileImage);
+
+    @PostMapping(value = "/profile/{identity}/update/background/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    void updateBackgroundImage(@PathVariable String identity,
+                               @RequestPart("backgroundImage") MultipartFile backgroundImage);
 }

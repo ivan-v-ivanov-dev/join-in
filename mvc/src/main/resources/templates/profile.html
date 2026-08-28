@@ -99,7 +99,7 @@
 
                             </div>
 
-                          <!-- Search bar-->
+                            <!-- Search bar-->
                             <div class="modal-body p-0">
 
                                 <div class="d-flex d-lg-none align-items-center justify-content-between w-100 p-3 pb-0">
@@ -140,7 +140,8 @@
             </div>
             <ul class="navbar-nav navbar-list">
                 <li class="nav-item">
-                    <a th:href="@{/profile/{identity}/feed(identity=${profile.identity})}" class="d-flex align-items-center">
+                    <a th:href="@{/profile/{identity}/feed(identity=${profile.identity})}"
+                       class="d-flex align-items-center">
                         <i class="material-symbols-outlined">home</i>
                     </a>
                 </li>
@@ -404,14 +405,14 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown d-none d-lg-block">
-<!--                    <a href="javascript:void(0);" class="d-flex align-items-center dropdown-toggle" id="drop-down-arrow"-->
-<!--                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                        <img th:src="${profileImage}" src="../assets/images/user/1.jpg" class="img-fluid rounded-circle me-3" alt="user"-->
-<!--                             loading="lazy">-->
-<!--                        <div class="caption">-->
-<!--                            <h6 class="mb-0 line-height" th:text="|${profile.firstName} ${profile.lastName}|">Bni Cyst</h6>-->
-<!--                        </div>-->
-<!--                    </a>-->
+                    <!--                    <a href="javascript:void(0);" class="d-flex align-items-center dropdown-toggle" id="drop-down-arrow"-->
+                    <!--                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                    <!--                        <img th:src="${profileImage}" src="../assets/images/user/1.jpg" class="img-fluid rounded-circle me-3" alt="user"-->
+                    <!--                             loading="lazy">-->
+                    <!--                        <div class="caption">-->
+                    <!--                            <h6 class="mb-0 line-height" th:text="|${profile.firstName} ${profile.lastName}|">Bni Cyst</h6>-->
+                    <!--                        </div>-->
+                    <!--                    </a>-->
 
                     <a href="javascript:void(0);"
                        class="d-flex align-items-center dropdown-toggle"
@@ -444,7 +445,8 @@
                         <div class="card shadow-none m-0">
                             <div class="card-header ">
                                 <div class="header-title">
-                                    <h5 class="mb-0 " th:text="|Hello ${profile.firstName} ${profile.lastName}|">Hello Bni Cyst</h5>
+                                    <h5 class="mb-0 " th:text="|Hello ${profile.firstName} ${profile.lastName}|">Hello
+                                        Bni Cyst</h5>
                                 </div>
                             </div>
                             <div class="card-body p-0 ">
@@ -453,7 +455,8 @@
                                    line_style
                                 </span>
                                     <div class="ms-3">
-                                        <a th:href="@{/profile/{identity}(identity=${profile.identity})}" class="mb-0 h6">
+                                        <a th:href="@{/profile/{identity}(identity=${profile.identity})}"
+                                           class="mb-0 h6">
                                             My Profile
                                         </a>
                                     </div>
@@ -463,7 +466,8 @@
                                    edit_note
                                 </span>
                                     <div class="ms-3">
-                                        <a th:href="@{/profile/{identity}/edit(identity=${profile.identity})}" class="mb-0 h6">
+                                        <a th:href="@{/profile/{identity}/edit(identity=${profile.identity})}"
+                                           class="mb-0 h6">
                                             Edit Profile
                                         </a>
                                     </div>
@@ -486,7 +490,8 @@
                                       method="post"
                                       class="m-0">
 
-                                    <button type="submit" class="d-flex align-items-center iq-sub-card border-0 bg-transparent w-100">
+                                    <button type="submit"
+                                            class="d-flex align-items-center iq-sub-card border-0 bg-transparent w-100">
 
                                         <i class="material-symbols-outlined text-success md-14">
                                             circle
@@ -503,7 +508,8 @@
                                       method="post"
                                       class="m-0">
 
-                                    <button type="submit" class="d-flex align-items-center iq-sub-card border-0 bg-transparent w-100">
+                                    <button type="submit"
+                                            class="d-flex align-items-center iq-sub-card border-0 bg-transparent w-100">
 
                                         <i class="material-symbols-outlined text-warning md-14">
                                             circle
@@ -643,19 +649,17 @@
                                 <div class="position-relative">
 
                                     <form id="backgroundImageForm"
-                                          action="/background-image/upload"
+                                          th:action="@{/profile/{identity}/update/background/image(identity=${profile.identity})}"
                                           method="post"
                                           enctype="multipart/form-data"
                                           class="w-100">
 
-                                        <input type="hidden"
-                                               name="userIdentity"
-                                               value="USER_IDENTITY_HERE">
-
                                         <img th:src="${backgroundImage}"
                                              alt="profile-bg"
                                              class="rounded img-fluid w-100"
-                                             style="height: 350px; object-fit: cover; object-position: center;"
+                                             style="height: 350px;
+                object-fit: cover;
+                object-position: center;"
                                              loading="lazy">
 
                                         <ul class="header-nav list-inline d-flex flex-wrap justify-end p-0 m-0">
@@ -668,17 +672,19 @@
                                                 </a>
 
                                                 <input type="file"
-                                                       name="file"
+                                                       name="backgroundImage"
                                                        accept="image/*"
                                                        onchange="this.form.submit();"
-                                                       style="position: absolute;
-                                                                top: 0;
-                                                                left: 0;
-                                                                width: 100%;
-                                                                height: 100%;
-                                                                opacity: 0;
-                                                                cursor: pointer;
-                                                                z-index: 9999;">
+                                                       style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        opacity: 0;
+                        cursor: pointer;
+                        z-index: 9999;
+                   ">
                                             </li>
 
                                         </ul>
@@ -734,15 +740,18 @@
                                             </li>
                                             <li class="text-center ps-3">
                                                 <h6>Comments</h6>
-                                                <p class="mb-0" th:text="${commentsCount != null ? commentsCount : 0}">206</p>
+                                                <p class="mb-0" th:text="${commentsCount != null ? commentsCount : 0}">
+                                                    206</p>
                                             </li>
                                             <li class="text-center ps-3">
                                                 <h6>Reactions</h6>
-                                                <p class="mb-0" th:text="${reactionsCount != null ? reactionsCount : 0}">206</p>
+                                                <p class="mb-0"
+                                                   th:text="${reactionsCount != null ? reactionsCount : 0}">206</p>
                                             </li>
                                             <li class="text-center ps-3">
                                                 <h6>Friends</h6>
-                                                <p class="mb-0" th:text="${friendsCount != null ? friendsCount : 0}">100</p>
+                                                <p class="mb-0" th:text="${friendsCount != null ? friendsCount : 0}">
+                                                    100</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -1237,14 +1246,14 @@
 
                                                             <div class="like-block   position-relative   d-flex align-items-center">
 
-                                                                    <!-- Reaction selector and total count -->
-                                                                    <div class="dropdown flex-shrink-0">
+                                                                <!-- Reaction selector and total count -->
+                                                                <div class="dropdown flex-shrink-0">
 
                                                                                                                                                         <span class="dropdown-toggle d-inline-flex align-items-center gap-1"
-                                                                                      data-bs-toggle="dropdown"
-                                                                                      aria-haspopup="true"
-                                                                                      aria-expanded="false"
-                                                                                      role="button">
+                                                                                                                                                              data-bs-toggle="dropdown"
+                                                                                                                                                              aria-haspopup="true"
+                                                                                                                                                              aria-expanded="false"
+                                                                                                                                                              role="button">
 
                                                                                     <span class="material-symbols-outlined text-primary">
                                                                                         thumb_up
@@ -1259,79 +1268,87 @@
 
                                                                                 </span>
 
-                                                                        <!-- Reaction buttons -->
-                                                                        <div class="dropdown-menu py-2">
+                                                                    <!-- Reaction buttons -->
+                                                                    <div class="dropdown-menu py-2">
 
-                                                                            <form th:action="@{/posts/{identity}/reactions(identity=${post.postIdentity})}"
-                                                                                  method="post"
-                                                                                  class="d-flex px-2">
+                                                                        <form th:action="@{/posts/{identity}/reactions(identity=${post.postIdentity})}"
+                                                                              method="post"
+                                                                              class="d-flex px-2">
 
-                                                                                <button type="submit"
-                                                                                        name="reaction"
-                                                                                        value="LIKE"
-                                                                                        class="btn border-0 fs-4"
-                                                                                        title="Like">
-                                                                                    👍
-                                                                                </button>
+                                                                            <button type="submit"
+                                                                                    name="reaction"
+                                                                                    value="LIKE"
+                                                                                    class="btn border-0 fs-4"
+                                                                                    title="Like">
+                                                                                👍
+                                                                            </button>
 
-                                                                                <button type="submit"
-                                                                                        name="reaction"
-                                                                                        value="DISLIKE"
-                                                                                        class="btn border-0 fs-4"
-                                                                                        title="Dislike">
-                                                                                    👎
-                                                                                </button>
+                                                                            <button type="submit"
+                                                                                    name="reaction"
+                                                                                    value="DISLIKE"
+                                                                                    class="btn border-0 fs-4"
+                                                                                    title="Dislike">
+                                                                                👎
+                                                                            </button>
 
-                                                                                <button type="submit"
-                                                                                        name="reaction"
-                                                                                        value="HAHA"
-                                                                                        class="btn border-0 fs-4"
-                                                                                        title="Haha">
-                                                                                    😂
-                                                                                </button>
+                                                                            <button type="submit"
+                                                                                    name="reaction"
+                                                                                    value="HAHA"
+                                                                                    class="btn border-0 fs-4"
+                                                                                    title="Haha">
+                                                                                😂
+                                                                            </button>
 
-                                                                                <button type="submit"
-                                                                                        name="reaction"
-                                                                                        value="ANGRY"
-                                                                                        class="btn border-0 fs-4"
-                                                                                        title="Angry">
-                                                                                    😡
-                                                                                </button>
+                                                                            <button type="submit"
+                                                                                    name="reaction"
+                                                                                    value="ANGRY"
+                                                                                    class="btn border-0 fs-4"
+                                                                                    title="Angry">
+                                                                                😡
+                                                                            </button>
 
-                                                                            </form>
-                                                                        </div>
+                                                                        </form>
                                                                     </div>
+                                                                </div>
 
-                                                                    <!-- Reaction count by type -->
-                                                                    <div class="d-flex align-items-center gap-2 flex-nowrap reaction-counts">
+                                                                <!-- Reaction count by type -->
+                                                                <div class="d-flex align-items-center gap-2 flex-nowrap reaction-counts">
 
-                                                                        <span class="d-inline-flex align-items-center gap-1" title="Likes">👍<span th:text="${post.likeCount}">0</span></span>
+                                                                    <span class="d-inline-flex align-items-center gap-1"
+                                                                          title="Likes">👍<span
+                                                                            th:text="${post.likeCount}">0</span></span>
 
-                                                                        <span class="d-inline-flex align-items-center gap-1" title="Dislikes">👎<span th:text="${post.dislikeCount}">0</span></span>
+                                                                    <span class="d-inline-flex align-items-center gap-1"
+                                                                          title="Dislikes">👎<span
+                                                                            th:text="${post.dislikeCount}">0</span></span>
 
-                                                                        <span class="d-inline-flex align-items-center gap-1" title="Haha">😂<span th:text="${post.hahaCount}">0</span></span>
+                                                                    <span class="d-inline-flex align-items-center gap-1"
+                                                                          title="Haha">😂<span
+                                                                            th:text="${post.hahaCount}">0</span></span>
 
-                                                                        <span class="d-inline-flex align-items-center gap-1" title="Angry">😡<span th:text="${post.angryCount}">0</span></span>
-
-                                                                    </div>
+                                                                    <span class="d-inline-flex align-items-center gap-1"
+                                                                          title="Angry">😡<span
+                                                                            th:text="${post.angryCount}">0</span></span>
 
                                                                 </div>
 
                                                             </div>
 
+                                                        </div>
 
-                                                            <!-- Dynamic comment count -->
-                                                            <div class="total-comment-block">
-                                                                <span th:text="${post.comments == null ? '0 comments' : #lists.size(post.comments) + (#lists.size(post.comments) == 1 ? ' comment' : ' comments')}">0 comments</span>
 
-                                                            </div>
+                                                        <!-- Dynamic comment count -->
+                                                        <div class="total-comment-block">
+                                                            <span th:text="${post.comments == null ? '0 comments' : #lists.size(post.comments) + (#lists.size(post.comments) == 1 ? ' comment' : ' comments')}">0 comments</span>
 
                                                         </div>
 
-                                                        <hr>
+                                                    </div>
+
+                                                    <hr>
 
 
-                                                        <!-- ==================== COMMENTS ==================== -->
+                                                    <!-- ==================== COMMENTS ==================== -->
 
                                                     <ul class="post-comments p-0 m-0"
                                                         th:if="${post.comments != null and !#lists.isEmpty(post.comments)}">
@@ -1384,7 +1401,7 @@
                                                                                     name="reaction"
                                                                                     value="LIKE"
                                                                                     class="btn btn-link p-0 text-decoration-none">
-                                                                                 Like
+                                                                                Like
                                                                                 <span th:text="${comment.likeCount}">0</span>
 
                                                                             </button>
@@ -1399,7 +1416,7 @@
                                                                                     name="reaction"
                                                                                     value="DISLIKE"
                                                                                     class="btn btn-link p-0 text-decoration-none">
-                                                                                 Dislike
+                                                                                Dislike
                                                                                 <span th:text="${comment.dislikeCount}">0</span>
 
                                                                             </button>
@@ -1418,49 +1435,49 @@
                                                     </ul>
 
 
-                                                        <!-- Empty comments message -->
-                                                        <p class="text-muted"
-                                                           th:if="${post.comments == null or #lists.isEmpty(post.comments)}">
-                                                            No comments yet.
-                                                        </p>
+                                                    <!-- Empty comments message -->
+                                                    <p class="text-muted"
+                                                       th:if="${post.comments == null or #lists.isEmpty(post.comments)}">
+                                                        No comments yet.
+                                                    </p>
 
 
-                                                        <!-- ==================== ADD COMMENT ==================== -->
+                                                    <!-- ==================== ADD COMMENT ==================== -->
 
-                                                        <form class="comment-text d-flex align-items-center mt-3"
-                                                              th:action="@{/post/{identity}/comments(identity=${post.postIdentity})}"
-                                                              method="post">
+                                                    <form class="comment-text d-flex align-items-center mt-3"
+                                                          th:action="@{/post/{identity}/comments(identity=${post.postIdentity})}"
+                                                          method="post">
 
-                                                            <input type="text"
-                                                                   name="content"
-                                                                   class="form-control rounded"
-                                                                   placeholder="Enter your comment"
-                                                                   required
-                                                                   maxlength="1000">
+                                                        <input type="text"
+                                                               name="content"
+                                                               class="form-control rounded"
+                                                               placeholder="Enter your comment"
+                                                               required
+                                                               maxlength="1000">
 
-                                                            <button type="submit"
-                                                                    class="border-0 bg-transparent ms-2 p-0"
-                                                                    aria-label="Send comment">
+                                                        <button type="submit"
+                                                                class="border-0 bg-transparent ms-2 p-0"
+                                                                aria-label="Send comment">
 
                         <span class="material-symbols-outlined text-primary"
                               style="font-size: 32px;">
                             send
                         </span>
 
-                                                            </button>
+                                                        </button>
 
-                                                        </form>
-
-                                                    </div>
+                                                    </form>
 
                                                 </div>
+
                                             </div>
                                         </div>
-
                                     </div>
 
                                 </div>
+
                             </div>
+                        </div>
 
                         <div class="tab-pane fade" id="about" role="tabpanel">
                             <div class="row">
