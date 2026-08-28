@@ -73,7 +73,7 @@ public class ProfileServiceImpl implements ProfileService {
             }
         }
 
-        if (backgroundImage.isEmpty()) {
+        if (!backgroundImage.isEmpty()) {
             try {
                 KafkaMessage updateBackgroundImageMessage = new UpdateBackgroundImage(identity, backgroundImage.getBytes());
                 kafkaTemplate.send(updateBackgroundImageTopic, updateBackgroundImageMessage);
