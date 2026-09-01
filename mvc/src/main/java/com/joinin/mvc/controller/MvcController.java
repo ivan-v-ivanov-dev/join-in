@@ -1,11 +1,13 @@
 package com.joinin.mvc.controller;
 
 import com.joinin.mvc.model.EditProfileRq;
+import com.joinin.mvc.model.PostRq;
 import com.joinin.mvc.model.RegisterRq;
 import com.joinin.mvc.service.contract.*;
 import feign.FeignException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -131,37 +133,37 @@ public class MvcController {
     }
 
     @PostMapping("/profile/{identity}/edit")
-    public String editProfile(@PathVariable String identity, @ModelAttribute("editProfile") EditProfileRq editProfileRq) {
+    public String editProfile(@PathVariable("identity") String identity, @ModelAttribute("editProfile") EditProfileRq editProfileRq) {
         profileService.editProfile(identity, editProfileRq);
         return "redirect:/profile/" + identity;
     }
 
     @PostMapping("/profile/{identity}/online")
-    public String updateProfileOnlineStatus(@PathVariable String identity) {
+    public String updateProfileOnlineStatus(@PathVariable("identity") String identity) {
         messageService.updateProfileOnlineStatus(identity);
         return "redirect:/profile/" + identity;
     }
 
     @PostMapping("/profile/{identity}/offline")
-    public String setProfileOfflineStatus(@PathVariable String identity) {
+    public String setProfileOfflineStatus(@PathVariable("identity") String identity) {
         messageService.updateProfileOfflineStatus(identity);
         return "redirect:/profile/" + identity;
     }
 
     @PostMapping("/profile/{identity}/update/profile/image")
-    public String updateProfileImage(@PathVariable String identity, @RequestParam("profileImage") MultipartFile profileImage) {
+    public String updateProfileImage(@PathVariable("identity") String identity, @RequestParam("profileImage") MultipartFile profileImage) {
         mediaService.updateProfileImage(identity, profileImage);
         return "redirect:/profile/" + identity;
     }
 
     @PostMapping("/profile/{identity}/update/background/image")
-    public String updateBackgroundImage(@PathVariable String identity, @RequestParam("backgroundImage") MultipartFile backgroundImage) {
+    public String updateBackgroundImage(@PathVariable("identity") String identity, @RequestParam("backgroundImage") MultipartFile backgroundImage) {
         mediaService.updateBackgroundImage(identity, backgroundImage);
         return "redirect:/profile/" + identity;
     }
 
     @PostMapping("/profile/{identity}/upload/album/image")
-    public String uploadAlbumImage(@PathVariable String identity, @RequestParam("albumImage") MultipartFile albumImage) {
+    public String uploadAlbumImage(@PathVariable("identity") String identity, @RequestParam("albumImage") MultipartFile albumImage) {
         mediaService.uploadAlbumImage(identity, albumImage);
         return "redirect:/profile/" + identity;
     }
@@ -170,6 +172,12 @@ public class MvcController {
     public String unfriend(@PathVariable String profileIdentity, @PathVariable String friendIdentity) {
         relationshipService.unfriend(profileIdentity, friendIdentity);
         return "redirect:/profile/" + profileIdentity;
+    }
+
+    @PostMapping(value = "/profile/{identity}/post", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String postAPost(@PathVariable("identity") String identity,@ModelAttribute PostRq postRq) {
+        postService.post(identity, postRq);
+        return "redirect:/profile/" + identity;
     }
 
     @GetMapping("/health")

@@ -3,6 +3,7 @@ package com.joinin.mvc.service;
 import com.join_in.common_models.PostRpGatewayService;
 import com.joinin.mvc.mappers.PostMapper;
 import com.joinin.mvc.model.Post;
+import com.joinin.mvc.model.PostRq;
 import com.joinin.mvc.service.contract.PostService;
 import com.joinin.mvc.service.feign.GatewayClient;
 import lombok.RequiredArgsConstructor;
@@ -49,5 +50,11 @@ public class PostServiceImpl implements PostService {
         int commentsCount = gatewayClient.retrieveProfileCommentsCount(identity);
         log.info("Retrieve comments count for profile: " + identity);
         return commentsCount;
+    }
+
+    @Override
+    public void post(String identity, PostRq postRq) {
+        gatewayClient.postAPost(identity, postMapper.fromPostRqToPostGatewayRq(postRq));
+        log.info("Send a post to Gateway Service. Profile identity: " + identity);
     }
 }

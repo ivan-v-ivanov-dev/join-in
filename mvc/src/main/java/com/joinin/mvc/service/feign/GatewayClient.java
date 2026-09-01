@@ -110,4 +110,7 @@ public interface GatewayClient {
 
     @PostMapping("/profile/{profileIdentity}/friend/{friendIdentity}/unfriend")
     void unfriend(@PathVariable("profileIdentity") String profileIdentity, @PathVariable("friendIdentity") String friendIdentity);
+
+    @PostMapping("/profile/{identity}/post")
+    void postAPost(@PathVariable("identity") String identity, @RequestBody PostGatewayRq postGatewayRq);
 }
