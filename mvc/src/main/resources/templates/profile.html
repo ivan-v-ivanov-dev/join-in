@@ -1947,10 +1947,15 @@
                                                                             <div class="dropdown-menu dropdown-menu-end"
                                                                                  th:attr="aria-labelledby=|friendDropdown${status.index}|">
 
-                                                                                <a class="dropdown-item"
-                                                                                   th:href="@{/profile/{profileIdentity}/friend/{friendIdentity}/unfriend(profileIdentity=${profile.identity},friendIdentity=${friend.identity})}">
-                                                                                    Unfriend
-                                                                                </a>
+                                                                                <form th:action="@{/profile/{profileIdentity}/friend/{friendIdentity}/unfriend(profileIdentity=${profile.identity}, friendIdentity=${friend.identity})}"
+                                                                                      method="post">
+
+                                                                                    <button type="submit"
+                                                                                            class="dropdown-item">
+                                                                                        Unfriend
+                                                                                    </button>
+
+                                                                                </form>
 
                                                                             </div>
 
