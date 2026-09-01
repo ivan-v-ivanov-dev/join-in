@@ -131,6 +131,12 @@ public class ProfileServiceImpl implements ProfileService {
                 .toList();
     }
 
+    @Override
+    public void unfriend(String profileIdentity, String friendIdentity) {
+        profileRepository.unfriend(profileIdentity, friendIdentity);
+        log.info("Unfriend a friend. Profile identity: " + profileIdentity + " Friend identity: " + friendIdentity);
+    }
+
     private List<ProfileOnlineStatusRpMessageService> retrieveOnlineStatuses(List<String> identities) {
         List<ProfileOnlineStatusRpMessageService> profileOnlineStatuses = messageServiceClient.retrieveProfilesOnlineStatuses(identities);
         log.info("Retrieve online statuses for all friends from Message Service. Profile identities: " +

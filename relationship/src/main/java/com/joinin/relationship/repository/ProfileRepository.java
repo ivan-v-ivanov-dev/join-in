@@ -58,4 +58,12 @@ public interface ProfileRepository extends Neo4jRepository<ProfileNode, String> 
             RETURN profile
             """)
     List<ProfileNode> findFriendSuggestionsByIdentity(@Param("identity") String identity);
+
+    @Query("""
+            MATCH (profile:Profile {identity: $profileIdentity})
+                  -[friendship:FRIEND]-
+                  (friend:Profile {identity: $friendIdentity})
+            DELETE friendship
+            """)
+    void unfriend(@Param("profileIdentity") String profileIdentity, @Param("friendIdentity") String friendIdentity);
 }

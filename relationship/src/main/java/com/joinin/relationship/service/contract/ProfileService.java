@@ -17,4 +17,6 @@ public interface ProfileService {
     List<FamilyMemberRpRelationshipService> retrieveProfileFamilyMembers(String identity);
 
     List<ProfileRpRelationshipService> retrieveFriendSuggestions(String identity);
+
+    void unfriend(String s, String s1);
 }

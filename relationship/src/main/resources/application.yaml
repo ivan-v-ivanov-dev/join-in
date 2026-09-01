@@ -15,6 +15,7 @@ spring:
     offset-reset: earliest
     topic:
       new-registered-user-info: new-registered-user-info
+      unfriend: unfriend
 
 #Media service Feign client
 media:
