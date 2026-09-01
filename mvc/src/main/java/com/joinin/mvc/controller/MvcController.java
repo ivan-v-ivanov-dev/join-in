@@ -160,6 +160,12 @@ public class MvcController {
         return "redirect:/profile/" + identity;
     }
 
+    @PostMapping("/profile/{identity}/upload/album/image")
+    public String uploadAlbumImage(@PathVariable String identity, @RequestParam("albumImage") MultipartFile albumImage) {
+        mediaService.uploadAlbumImage(identity, albumImage);
+        return "redirect:/profile/" + identity;
+    }
+
     @GetMapping("/health")
     public String health() {
         return "edit-profile";

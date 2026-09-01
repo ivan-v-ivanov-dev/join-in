@@ -103,4 +103,8 @@ public interface GatewayClient {
     @PostMapping(value = "/profile/{identity}/update/background/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     void updateBackgroundImage(@PathVariable String identity,
                                @RequestPart("backgroundImage") MultipartFile backgroundImage);
+
+    @PostMapping(value = "/profile/{identity}/upload/album/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    void uploadAlbumImage(@PathVariable String identity,
+                          @RequestPart("albumImage") MultipartFile albumImage);
 }

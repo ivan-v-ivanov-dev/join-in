@@ -14,4 +14,6 @@ public interface MediaService {
     void updateProfileImage(String identity, MultipartFile profileImage);
 
     void updateBackgroundImage(String identity, MultipartFile backgroundImage);
+
+    void uploadAlbumImage(String identity, MultipartFile albumImage);
 }

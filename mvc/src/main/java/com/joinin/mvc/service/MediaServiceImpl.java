@@ -48,4 +48,10 @@ public class MediaServiceImpl implements MediaService {
         gatewayClient.updateBackgroundImage(identity, backgroundImage);
         log.info("Update background image for profile: " + identity);
     }
+
+    @Override
+    public void uploadAlbumImage(String identity, MultipartFile albumImage) {
+        gatewayClient.uploadAlbumImage(identity, albumImage);
+        log.info("Upload album image for profile: " + identity);
+    }
 }
