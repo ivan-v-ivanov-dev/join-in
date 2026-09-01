@@ -4,12 +4,16 @@ import com.join_in.common_models.FamilyMemberRpGatewayService;
 import com.join_in.common_models.FamilyMemberRpRelationshipService;
 import com.join_in.common_models.ProfileFriendsRpGatewayService;
 import com.join_in.common_models.ProfileRpRelationshipService;
+import com.join_in.kafka_models.KafkaMessage;
+import com.join_in.kafka_models.messages.Unfriend;
 import com.joinin.gateway.mapper.FamilyMemberMapper;
 import com.joinin.gateway.mapper.ProfileMapper;
 import com.joinin.gateway.service.contract.RelationshipService;
 import com.joinin.gateway.service.feign.RelationshipServiceClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +26,10 @@ public class RelationshipServiceImpl implements RelationshipService {
     private final RelationshipServiceClient relationshipServiceClient;
     private final ProfileMapper profileMapper;
     private final FamilyMemberMapper familyMemberMapper;
+    private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
+
+    @Value("${spring.kafka.topic.unfriend}")
+    private String unfriendTopic;
 
     @Override
     public List<ProfileFriendsRpGatewayService> retrieveFriends(String identity) {
@@ -68,5 +76,12 @@ public class RelationshipServiceImpl implements RelationshipService {
                 .stream()
                 .map(profileMapper::fromProfileRpRelationshipServicetoProfileFriendsRpGatewayService)
                 .toList();
+    }
+
+    @Override
+    public void unfriend(String profileIdentity, String friendIdentity) {
+        KafkaMessage unfriedMessage = new Unfriend(profileIdentity, friendIdentity);
+        kafkaTemplate.send(unfriendTopic, unfriedMessage);
+        log.info("Unfriend message send to Relationship service. Profile identity: " + profileIdentity);
     }
 }

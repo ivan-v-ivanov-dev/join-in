@@ -142,17 +142,17 @@ public class ApiGatewayController {
     }
 
     @GetMapping("/profile/{identity}/friend/suggestions")
-    public List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(@PathVariable String identity) {
+    public List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(@PathVariable("identity") String identity) {
         return relationshipService.retrieveFriendSuggestions(identity);
     }
 
     @GetMapping("/profile/{identity}/feed")
-    public List<PostRpGatewayService> retrieveProfileFeedPosts(@PathVariable String identity) {
+    public List<PostRpGatewayService> retrieveProfileFeedPosts(@PathVariable("identity") String identity) {
         return postService.retrieveProfileFeedPosts(identity);
     }
 
     @PostMapping(value = "/profile/{identity}/edit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void editProfile(@PathVariable String identity,
+    public void editProfile(@PathVariable("identity") String identity,
                             @RequestPart("profile") EditProfileGatewayRq editProfileGatewayRq,
                             @RequestPart(value = "profileImage", required = false) MultipartFile profileImage,
                             @RequestPart(value = "backgroundImage", required = false) MultipartFile backgroundImage) {
@@ -160,21 +160,26 @@ public class ApiGatewayController {
     }
 
     @PostMapping(value = "/profile/{identity}/update/profile/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void updateProfileImage(@PathVariable String identity,
+    public void updateProfileImage(@PathVariable("identity") String identity,
                                    @RequestPart("profileImage") MultipartFile profileImage) {
         mediaService.updateProfileImage(identity, profileImage);
     }
 
     @PostMapping(value = "/profile/{identity}/update/background/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void updateBackgroundImage(@PathVariable String identity,
+    public void updateBackgroundImage(@PathVariable("identity") String identity,
                                       @RequestPart("backgroundImage") MultipartFile backgroundImage) {
         mediaService.updateBackgroundImage(identity, backgroundImage);
     }
 
     @PostMapping(value = "/profile/{identity}/upload/album/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void uploadAlbumImage(@PathVariable String identity,
+    public void uploadAlbumImage(@PathVariable("identity") String identity,
                                  @RequestPart("albumImage") MultipartFile albumImage) {
         mediaService.uploadAlbumImage(identity, albumImage);
+    }
+
+    @PostMapping("/profile/{profileIdentity}/friend/{friendIdentity}/unfriend")
+    public void unfriend(@PathVariable("profileIdentity") String profileIdentity, @PathVariable("friendIdentity") String friendIdentity) {
+        relationshipService.unfriend(profileIdentity, friendIdentity);
     }
 
     @GetMapping("/health")
