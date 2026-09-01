@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
-public class UploadAlbumImage {
+public class UploadAlbumImageTopic {
     @Value("${spring.kafka.topic.upload-album-image}")
     private String uploadAlbumImageTopic;
     @Value("${spring.kafka.partitions}")
