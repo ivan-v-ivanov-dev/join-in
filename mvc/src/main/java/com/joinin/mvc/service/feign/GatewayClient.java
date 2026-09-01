@@ -85,26 +85,29 @@ public interface GatewayClient {
     void updateProfileOfflineStatus(@PathVariable("identity") String identity);
 
     @GetMapping("/profile/{identity}/friend/suggestions")
-    List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(@PathVariable String identity);
+    List<ProfileFriendsRpGatewayService> retrieveFriendSuggestions(@PathVariable("identity") String identity);
 
     @GetMapping("/profile/{identity}/feed")
-    List<PostRpGatewayService> retrieveProfileFeedPosts(@PathVariable String identity);
+    List<PostRpGatewayService> retrieveProfileFeedPosts(@PathVariable("identity") String identity);
 
     @PostMapping(value = "/profile/{identity}/edit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    void editProfile(@PathVariable String identity,
+    void editProfile(@PathVariable("identity") String identity,
                      @RequestPart("profile") EditProfileGatewayRq editProfileGatewayRq,
                      @RequestPart(value = "profileImage", required = false) MultipartFile profileImage,
                      @RequestPart(value = "backgroundImage", required = false) MultipartFile backgroundImage);
 
     @PostMapping(value = "/profile/{identity}/update/profile/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    void updateProfileImage(@PathVariable String identity,
+    void updateProfileImage(@PathVariable("identity") String identity,
                             @RequestPart("profileImage") MultipartFile profileImage);
 
     @PostMapping(value = "/profile/{identity}/update/background/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    void updateBackgroundImage(@PathVariable String identity,
+    void updateBackgroundImage(@PathVariable("identity") String identity,
                                @RequestPart("backgroundImage") MultipartFile backgroundImage);
 
     @PostMapping(value = "/profile/{identity}/upload/album/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    void uploadAlbumImage(@PathVariable String identity,
+    void uploadAlbumImage(@PathVariable("identity") String identity,
                           @RequestPart("albumImage") MultipartFile albumImage);
+
+    @PostMapping("/profile/{profileIdentity}/friend/{friendIdentity}/unfriend")
+    void unfriend(@PathVariable("profileIdentity") String profileIdentity, @PathVariable("friendIdentity") String friendIdentity);
 }

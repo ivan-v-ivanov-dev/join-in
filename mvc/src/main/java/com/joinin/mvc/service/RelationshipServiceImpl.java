@@ -69,4 +69,10 @@ public class RelationshipServiceImpl implements RelationshipService {
                 .map(friendsMapper::fromProfileFriendsRpGatewayServicetoFriends)
                 .toList();
     }
+
+    @Override
+    public void unfriend(String profileIdentity, String friendIdentity) {
+        gatewayClient.unfriend(profileIdentity, friendIdentity);
+        log.info("Unfriend a friend. Profile identity: " + profileIdentity + " Friend identity: " + friendIdentity);
+    }
 }

@@ -166,6 +166,12 @@ public class MvcController {
         return "redirect:/profile/" + identity;
     }
 
+    @PostMapping("/profile/{profileIdentity}/friend/{friendIdentity}/unfriend")
+    public String unfriend(@PathVariable String profileIdentity, @PathVariable String friendIdentity) {
+        relationshipService.unfriend(profileIdentity, friendIdentity);
+        return "redirect:/profile/" + profileIdentity;
+    }
+
     @GetMapping("/health")
     public String health() {
         return "edit-profile";

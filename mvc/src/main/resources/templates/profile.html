@@ -1948,7 +1948,7 @@
                                                                                  th:attr="aria-labelledby=|friendDropdown${status.index}|">
 
                                                                                 <a class="dropdown-item"
-                                                                                   th:href="@{/friends/{identity}/remove(identity=${friend.identity})}">
+                                                                                   th:href="@{/profile/{profileIdentity}/friend/{friendIdentity}/unfriend(profileIdentity=${profile.identity},friendIdentity=${friend.identity})}">
                                                                                     Unfriend
                                                                                 </a>
 
@@ -2001,7 +2001,7 @@
 
                                                 <form method="post"
                                                       class="album-delete-form"
-                                                      th:action="@{/profile/{identity}/album/delete(identity=${identity})}"
+                                                      th:action="@{/profile/{identity}/album/image/delete(identity=${identity})}"
                                                       onsubmit="return confirm('Are you sure you want to delete this photo?');">
 
                                                     <input type="hidden"
