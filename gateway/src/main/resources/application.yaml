@@ -17,6 +17,7 @@ spring:
       update-profile: update-profile
       update-profile-image: update-profile-image
       update-background-image: update-background-image
+      upload-album-image: upload-album-image
 
 #Identity service Feign client
 identity:

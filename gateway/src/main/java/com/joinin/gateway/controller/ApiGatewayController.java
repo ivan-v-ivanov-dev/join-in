@@ -171,6 +171,12 @@ public class ApiGatewayController {
         mediaService.updateBackgroundImage(identity, backgroundImage);
     }
 
+    @PostMapping(value = "/profile/{identity}/upload/album/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadAlbumImage(@PathVariable String identity,
+                                 @RequestPart("albumImage") MultipartFile albumImage) {
+        mediaService.uploadAlbumImage(identity, albumImage);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";

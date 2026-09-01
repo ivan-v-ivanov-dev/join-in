@@ -3,6 +3,7 @@ package com.joinin.gateway.service;
 import com.join_in.kafka_models.KafkaMessage;
 import com.join_in.kafka_models.messages.UpdateBackgroundImage;
 import com.join_in.kafka_models.messages.UpdateProfileImage;
+import com.join_in.kafka_models.messages.UploadAlbumImage;
 import com.joinin.gateway.service.contract.MediaService;
 import com.joinin.gateway.service.feign.MediaServiceClient;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,8 @@ public class MediaServiceImpl implements MediaService {
     private String updateProfileImageTopic;
     @Value("${spring.kafka.topic.update-background-image}")
     private String updateBackgroundImageTopic;
+    @Value("${spring.kafka.topic.upload-album-image}")
+    private String uploadAlbumImageTopic;
 
     @Override
     public String retrieveProfileImage(String identity) {
@@ -55,7 +58,7 @@ public class MediaServiceImpl implements MediaService {
             try {
                 KafkaMessage updateProfileImageMessage = new UpdateProfileImage(identity, profileImage.getBytes());
                 kafkaTemplate.send(updateProfileImageTopic, updateProfileImageMessage);
-                log.error("Send new profile image to Media service for Profile: " + identity);
+                log.info("Send new profile image to Media service for Profile: " + identity);
             } catch (IOException ioException) {
                 log.error("Couldn't send profile image to Media service. Profile identity: " + identity);
             }
@@ -68,9 +71,22 @@ public class MediaServiceImpl implements MediaService {
             try {
                 KafkaMessage updateBackgroundImageMessage = new UpdateBackgroundImage(identity, backgroundImage.getBytes());
                 kafkaTemplate.send(updateBackgroundImageTopic, updateBackgroundImageMessage);
-                log.error("Send new background image to Media service for Profile: " + identity);
+                log.info("Send new background image to Media service for Profile: " + identity);
             } catch (IOException ioException) {
                 log.error("Couldn't send background image to Media service. Profile identity: " + identity);
+            }
+        }
+    }
+
+    @Override
+    public void uploadAlbumImage(String identity, MultipartFile albumImage) {
+        if (!albumImage.isEmpty()) {
+            try {
+                KafkaMessage uploadAlbumImageMessage = new UploadAlbumImage(identity, albumImage.getBytes());
+                kafkaTemplate.send(uploadAlbumImageTopic, uploadAlbumImageMessage);
+                log.info("Send new album image to Media service for Profile: " + identity);
+            } catch (IOException ioException) {
+                log.error("Couldn't send album image to Media service. Profile identity: " + identity);
             }
         }
     }
