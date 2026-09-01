@@ -4,6 +4,8 @@ import com.join_in.kafka_models.KafkaMessage;
 import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
 import com.join_in.kafka_models.messages.UpdateBackgroundImage;
 import com.join_in.kafka_models.messages.UpdateProfileImage;
+import com.join_in.kafka_models.messages.UploadAlbumImage;
+import com.joinin.media.service.contract.AlbumImageService;
 import com.joinin.media.service.contract.ProfileService;
 import com.joinin.media.service.contract.S3MediaService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class MediaServiceListener {
 
     private final ProfileService profileService;
     private final S3MediaService s3MediaService;
+    private final AlbumImageService albumImageService;
 
     @KafkaListener(
             topics = "${spring.kafka.topic.new-registered-user-info}",
@@ -46,5 +49,14 @@ public class MediaServiceListener {
         log.info("New update background image message received from API Gateway service. Profile identity: " + updateBackgroundImage.identity());
         profileService.updateBackgroundImage(updateBackgroundImage.identity());
         s3MediaService.updateBackgroundImage(updateBackgroundImage.identity(), updateBackgroundImage.backgroundImage());
+    }
+
+    @KafkaListener(
+            topics = "${spring.kafka.topic.upload-album-image}",
+            groupId = "${spring.kafka.group-id}")
+    public void uploadAlbumImage(KafkaMessage message) {
+        UploadAlbumImage uploadAlbumImage = (UploadAlbumImage) message;
+        log.info("New upload album image message received from API Gateway service. Profile identity: " + uploadAlbumImage.identity());
+        albumImageService.uploadAlbumImage(uploadAlbumImage.identity(), uploadAlbumImage.albumImage());
     }
 }

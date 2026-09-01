@@ -21,6 +21,7 @@ spring:
       new-registered-user-info: new-registered-user-info
       update-profile-image: update-profile-image
       update-background-image: update-background-image
+      upload-album-image: upload-album-image
 
 aws:
   s3:

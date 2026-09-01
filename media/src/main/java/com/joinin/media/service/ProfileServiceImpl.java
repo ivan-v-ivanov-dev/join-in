@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.joinin.media.service.contrants.ProfilePicConstants.*;
@@ -53,5 +54,33 @@ public class ProfileServiceImpl implements ProfileService {
     public void updateBackgroundImage(String identity) {
         String mongoBackgroundPictureUrl = "background/" + identity + "/background.webp";
         profileRepository.updateBackgroundImage(identity, mongoBackgroundPictureUrl);
+    }
+
+    @Override
+    public int retrieveAlbumImagesCount(String identity) {
+        Profile profile = profileRepository.getProfileByIdentity(identity);
+        int albumImagesCount = profile.getAlbumPictureUrls().size();
+        log.info("Retrieve profile album images count. Profile identity: " + identity);
+        return albumImagesCount;
+    }
+
+    @Override
+    public AlbumPictureUrl retrieveOldestAlbumImage(String identity) {
+        return profileRepository.retrieveOldestAlbumImage(identity);
+    }
+
+    @Override
+    public void deleteOldestAlbumImage(String identity, AlbumPictureUrl albumImageUrl) {
+        profileRepository.deleteOldestAlbumImage(identity, albumImageUrl);
+    }
+
+    @Override
+    public void updateAlbumImageUrl(String identity, String albumImageUrl) {
+        AlbumPictureUrl albumImage = AlbumPictureUrl.builder()
+                .url(albumImageUrl)
+                .uploadedOn(LocalDateTime.now())
+                .build();
+        profileRepository.updateAlbumImageUrl(identity, albumImage);
+        log.info("Update profile album image URL. Profile: " + identity + " Image URL: " + albumImage.getUrl());
     }
 }

@@ -21,4 +21,8 @@ public interface S3MediaService {
     void updateProfileImage(String identity, byte[] bytes);
 
     void updateBackgroundImage(String identity, byte[] bytes);
+
+    void deleteAlbumImage(String objectKey);
+
+    String uploadAlbumImage(String identity, byte[] bytes, String imageName);
 }

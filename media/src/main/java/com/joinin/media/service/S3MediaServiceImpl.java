@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
@@ -32,8 +33,10 @@ public class S3MediaServiceImpl implements S3MediaService {
 
     private static final String PROFILE_FOLDER = "profile";
     private static final String BACKGROUND_FOLDER = "background";
+    private static final String ALBUM_FOLDER = "album";
     private static final String PROFILE_IMAGE_NAME = "profile.webp";
     private static final String BACKGROUND_IMAGE_NAME = "background.webp";
+    private static final String ALBUM_IMAGE_TYPE = "album image";
 
     private final S3Client s3Client;
     private final ProfileService profileService;
@@ -202,7 +205,40 @@ public class S3MediaServiceImpl implements S3MediaService {
         uploadImage(identity, bytes, BACKGROUND_FOLDER, BACKGROUND_IMAGE_NAME, "background picture");
     }
 
-    private void uploadImage(String identity, byte[] imageBytes, String folder, String imageName, String imageType) {
+    @Override
+    public void deleteAlbumImage(String objectKey) {
+        DeleteObjectRequest request = DeleteObjectRequest.builder()
+                .bucket(bucket)
+                .key(objectKey)
+                .build();
+
+        try {
+            s3Client.deleteObject(request);
+            log.info("Deleted album image from S3. Key: {}", objectKey);
+        } catch (S3Exception exception) {
+            log.error(
+                    "Could not delete album image from S3. Key: {}, status: {}, code: {}, message: {}",
+                    objectKey,
+                    exception.statusCode(),
+                    exception.awsErrorDetails() == null
+                            ? null
+                            : exception.awsErrorDetails().errorCode(),
+                    exception.awsErrorDetails() == null
+                            ? exception.getMessage()
+                            : exception.awsErrorDetails().errorMessage(),
+                    exception);
+
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Could not delete album image from S3.", exception);
+        }
+    }
+
+    @Override
+    public String uploadAlbumImage(String identity, byte[] bytes, String imageName) {
+        return uploadImage(identity, bytes, ALBUM_FOLDER, imageName, ALBUM_IMAGE_TYPE);
+    }
+
+    private String uploadImage(String identity, byte[] imageBytes, String folder, String imageName, String imageType) {
         try {
             byte[] webpBytes = imageConverterService.convertToWebp(imageBytes);
             String objectKey = folder + "/" + identity + "/" + imageName;
@@ -213,6 +249,7 @@ public class S3MediaServiceImpl implements S3MediaService {
                     .build();
             s3Client.putObject(request, RequestBody.fromBytes(webpBytes));
             log.info("Updated {} for identity: {}, S3 key: {}", imageType, identity, objectKey);
+            return objectKey;
         } catch (IOException exception) {
             log.error("Could not convert {} to WebP for identity: {}", imageType, identity, exception);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not convert " + imageType + " to WebP.", exception);
