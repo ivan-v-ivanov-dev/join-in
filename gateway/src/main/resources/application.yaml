@@ -19,6 +19,7 @@ spring:
       update-background-image: update-background-image
       upload-album-image: upload-album-image
       unfriend: unfriend
+      post-a-post: post-a-post
 
 #Identity service Feign client
 identity:

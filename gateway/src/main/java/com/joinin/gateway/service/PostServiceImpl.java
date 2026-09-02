@@ -1,12 +1,17 @@
 package com.joinin.gateway.service;
 
+import com.join_in.common_models.PostGatewayRq;
 import com.join_in.common_models.PostRpGatewayService;
 import com.join_in.common_models.PostRpPostService;
+import com.join_in.kafka_models.KafkaMessage;
+import com.join_in.kafka_models.messages.Post;
 import com.joinin.gateway.mapper.PostMapper;
 import com.joinin.gateway.service.contract.PostService;
 import com.joinin.gateway.service.feign.PostServiceClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +23,10 @@ public class PostServiceImpl implements PostService {
 
     private final PostServiceClient postServiceClient;
     private final PostMapper postMapper;
+    private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
+
+    @Value("${spring.kafka.topic.post-a-post}")
+    private String postAPostTopic;
 
     @Override
     public List<PostRpGatewayService> retrieveProfilePosts(String identity) {
@@ -49,5 +58,14 @@ public class PostServiceImpl implements PostService {
         int commentsCount = postServiceClient.retrieveAuthorCommentsCount(identity);
         log.info("Retrieve comments count for Profile: " + identity);
         return commentsCount;
+    }
+
+    @Override
+    public void postAPost(String identity, PostGatewayRq postGatewayRq) {
+        KafkaMessage postMessage = new Post(identity, postGatewayRq.content(),
+                postGatewayRq.imageBytes(), postGatewayRq.youtubeUrl(),
+                postGatewayRq.pollQuestion(), postGatewayRq.pollOptions());
+        kafkaTemplate.send(postAPostTopic, postMessage);
+        log.info("Post a new post message sent to Post service. Profile identity: " + identity);
     }
 }

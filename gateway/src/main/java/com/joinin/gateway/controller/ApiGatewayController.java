@@ -182,6 +182,11 @@ public class ApiGatewayController {
         relationshipService.unfriend(profileIdentity, friendIdentity);
     }
 
+    @PostMapping("/profile/{identity}/post")
+    public void postAPost(@PathVariable("identity") String identity, @RequestBody PostGatewayRq postGatewayRq) {
+        postService.postAPost(identity, postGatewayRq);
+    }
+
     @GetMapping("/health")
     public String health() {
         return "API Gateway service is HEALTHY.";
