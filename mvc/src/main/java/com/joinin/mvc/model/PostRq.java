@@ -12,6 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 public class PostRq {
+    private String groupIdentity;
+
     private String content;
 
     private MultipartFile image;
