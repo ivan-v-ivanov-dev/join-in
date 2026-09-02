@@ -21,6 +21,11 @@ public class RelationshipController {
         return profileService.retrieveFriendsProfiles(identity);
     }
 
+    @GetMapping("/profile/{identity}/friends/identites")
+    public List<String> retrieveFriendsIdentities(@PathVariable String identity) {
+        return profileService.retrieveFriendsIdentities(identity);
+    }
+
     @GetMapping("/profile/{identity}/friend/suggestions")
     public List<ProfileRpRelationshipService> retrieveFriendSuggestions(@PathVariable String identity) {
         return profileService.retrieveFriendSuggestions(identity);
