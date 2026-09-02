@@ -6,6 +6,17 @@ spring:
   application:
     name: post
 
+  kafka:
+    bootstrap-servers: kafka:19092
+    group-id: post-service-group
+    partitions: 3
+    replicas: 1
+    trusted-packages: com.join_in.kafka_models.messages
+    offset-reset: earliest
+    topic:
+      post-a-post: post-a-post
+      post-an-image: post-an-image
+
   cassandra:
     contact-points: post-cassandra
     port: 9042
@@ -36,3 +47,11 @@ reaction:
       client:
         name: Reaction-service-Feign-client
     url:  http://reaction-service:8085
+
+#Relationship service Feign client
+relationship:
+  service:
+    feign:
+      client:
+        name: Relationship-service-Feign-client
+    url:  http://relationship-service:8087

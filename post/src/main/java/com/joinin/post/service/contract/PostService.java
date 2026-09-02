@@ -12,4 +12,6 @@ public interface PostService {
     List<String> retrievePostIdentitiesByAuthor(String identity);
 
     List<PostRpPostService> retrieveProfileFeedPosts(String identity);
+
+    void postAPost(String profileIdentity, String groupIdentity, String content, byte[] imageBytes, String youtubeUrl, String pollQuestion, List<String> pollOptions);
 }

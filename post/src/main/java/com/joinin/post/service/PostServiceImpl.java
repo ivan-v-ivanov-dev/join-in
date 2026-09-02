@@ -1,37 +1,48 @@
 package com.joinin.post.service;
 
 import com.join_in.common_models.*;
-import com.joinin.post.mapper.CommentResponseMapper;
-import com.joinin.post.mapper.PostResponseMapper;
-import com.joinin.post.model.CommentByPostEntity;
-import com.joinin.post.model.FeedUserEntity;
-import com.joinin.post.model.PostByAuthorEntity;
-import com.joinin.post.repository.CommentByPostRepository;
-import com.joinin.post.repository.FeedUserRepository;
-import com.joinin.post.repository.PostByAuthorRepository;
+import com.join_in.kafka_models.KafkaMessage;
+import com.join_in.kafka_models.messages.PostImage;
+import com.joinin.post.mapper.*;
+import com.joinin.post.model.*;
+import com.joinin.post.repository.*;
 import com.joinin.post.service.contract.PostService;
 import com.joinin.post.service.feign.MediaServiceClient;
 import com.joinin.post.service.feign.ProfileServiceClient;
 import com.joinin.post.service.feign.ReactionServiceClient;
-import lombok.AllArgsConstructor;
+import com.joinin.post.service.feign.RelationshipServiceClient;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
     private final PostByAuthorRepository postByAuthorRepository;
     private final CommentByPostRepository commentByPostRepository;
     private final FeedUserRepository feedUserRepository;
-    private final PostResponseMapper postResponseMapper;
-    private final CommentResponseMapper commentResponseMapper;
+    private final PostByIdRepository postByIdRepository;
+    private final PostByGroupRepository postByGroupRepository;
     private final MediaServiceClient mediaServiceClient;
     private final ProfileServiceClient profileServiceClient;
     private final ReactionServiceClient reactionServiceClient;
+    private final RelationshipServiceClient relationshipServiceClient;
+    private final PostResponseMapper postResponseMapper;
+    private final CommentResponseMapper commentResponseMapper;
+    private final PostByIdMapper postByIdMapper;
+    private final PostByAuthorMapper postByAuthorMapper;
+    private final PostByGroupMapper postByGroupMapper;
+    private final FeedUserMapper feedUserMapper;
+    private final KafkaTemplate<String, KafkaMessage> kafkaTemplate;
+
+    @Value("${spring.kafka.topic.post-an-image}")
+    private String postAnImageTopic;
 
     @Override
     public List<PostRpPostService> retrievePostsByAuthor(String identity) {
@@ -117,5 +128,43 @@ public class PostServiceImpl implements PostService {
                 .stream()
                 .map(e -> e.getKey().getPostIdentity())
                 .toList();
+    }
+
+    @Override
+    public void postAPost(String profileIdentity, String groupIdentity, String content, byte[] imageBytes, String youtubeUrl, String pollQuestion, List<String> pollOptions) {
+        // create posts_by_identity
+        PostByIdEntity postByIdEntity = postByIdMapper.toEntity(profileIdentity, groupIdentity, content,
+                imageBytes, youtubeUrl, pollQuestion, pollOptions);
+        postByIdRepository.save(postByIdEntity);
+        log.info("Post saved in posts_by_identity table. Post identity: " + postByIdEntity.getPostIdentity());
+
+        // if has Image send to media service
+        if (imageBytes != null && imageBytes.length != 0) {
+            KafkaMessage postImageMessage = new PostImage(postByIdEntity.getPostIdentity(), postByIdEntity.getImageIdentity(), imageBytes);
+            kafkaTemplate.send(postAnImageTopic, postImageMessage);
+            log.info("Image sent to Media service. Image identity: " + postByIdEntity.getImageIdentity());
+        }
+
+        // create posts_by_author
+        PostByAuthorEntity postByAuthorEntity = postByAuthorMapper.toEntity(postByIdEntity);
+        postByAuthorRepository.save(postByAuthorEntity);
+        log.info("Post saved in posts_by_author table. Post identity: " + postByIdEntity.getPostIdentity());
+
+        // create posts_by_group
+        if (groupIdentity != null && !groupIdentity.isBlank()) {
+            PostByGroupEntity postByGroupEntity = postByGroupMapper.toEntity(postByIdEntity);
+            postByGroupRepository.save(postByGroupEntity);
+            log.info("Post saved in posts_by_group table. Post identity: " + postByIdEntity.getPostIdentity());
+        }
+
+        // create feed_by_user (extract all friends for this table)
+        List<String> friendsIdentities = relationshipServiceClient.retrieveFriendsIdentities(postByIdEntity.getAuthorIdentity());
+        if (!friendsIdentities.isEmpty()) {
+            List<FeedUserEntity> feedByUserPosts = friendsIdentities.stream()
+                    .map(userIdentity -> feedUserMapper.toEntity(postByIdEntity, userIdentity))
+                    .toList();
+            feedUserRepository.saveAll(feedByUserPosts);
+            log.info("Posts saved in feed_by_user table. Post identity: " + postByIdEntity.getPostIdentity());
+        }
     }
 }
