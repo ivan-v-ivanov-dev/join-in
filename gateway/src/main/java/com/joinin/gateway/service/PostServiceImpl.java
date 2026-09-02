@@ -62,7 +62,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void postAPost(String identity, PostGatewayRq postGatewayRq) {
-        KafkaMessage postMessage = new Post(identity, postGatewayRq.content(),
+        KafkaMessage postMessage = new Post(identity, postGatewayRq.groupIdentity(), postGatewayRq.content(),
                 postGatewayRq.imageBytes(), postGatewayRq.youtubeUrl(),
                 postGatewayRq.pollQuestion(), postGatewayRq.pollOptions());
         kafkaTemplate.send(postAPostTopic, postMessage);
