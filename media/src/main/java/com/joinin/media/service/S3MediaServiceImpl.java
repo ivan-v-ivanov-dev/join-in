@@ -240,9 +240,10 @@ public class S3MediaServiceImpl implements S3MediaService {
     }
 
     @Override
-    public String uploadPostImage(String imageIdentity, byte[] imageBytes) {
+    public void uploadPostImage(String postIdentity, String imageIdentity, byte[] imageBytes) {
         if (imageBytes == null || imageBytes.length == 0) {
             log.error("Post image cannot be empty");
+            return;
         }
 
         try {
@@ -256,7 +257,7 @@ public class S3MediaServiceImpl implements S3MediaService {
 
             s3Client.putObject(request, RequestBody.fromBytes(webpBytes));
             log.info("Uploaded post image. Identity: {}, S3 key: {}", imageIdentity, objectKey);
-            return objectKey;
+            postService.savePost(postIdentity, objectKey);
         } catch (IOException exception) {
             log.error("Could not convert post image to WebP. Identity: {}", imageIdentity, exception);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

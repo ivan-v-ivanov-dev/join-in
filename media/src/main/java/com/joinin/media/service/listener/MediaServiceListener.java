@@ -65,6 +65,6 @@ public class MediaServiceListener {
     public void postAnImage(KafkaMessage message) {
         PostImage postImageMessage = (PostImage) message;
         log.info("New post image message received from Post service. Post identity: " + postImageMessage.postIdentity());
-        postService.savePostImage(postImageMessage.postIdentity(), postImageMessage.imageIdentity(), postImageMessage.imageBytes());
+        s3MediaService.uploadPostImage(postImageMessage.postIdentity(), postImageMessage.imageIdentity(), postImageMessage.imageBytes());
     }
 }

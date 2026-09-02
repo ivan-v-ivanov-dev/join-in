@@ -26,5 +26,5 @@ public interface S3MediaService {
 
     String uploadAlbumImage(String identity, byte[] bytes, String imageName);
 
-    String uploadPostImage(String imageIdentity, byte[] imageBytes);
+    void uploadPostImage(String postIdentity, String imageIdentity, byte[] imageBytes);
 }

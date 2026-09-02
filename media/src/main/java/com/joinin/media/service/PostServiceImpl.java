@@ -3,7 +3,6 @@ package com.joinin.media.service;
 import com.joinin.media.model.Post;
 import com.joinin.media.repository.PostRepository;
 import com.joinin.media.service.contract.PostService;
-import com.joinin.media.service.contract.S3MediaService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-    private final S3MediaService s3MediaService;
 
     @Override
     public Post retrieveByIdentity(String identity) {
@@ -24,8 +22,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void savePostImage(String postIdentity, String imageIdentity, byte[] imageBytes) {
-        String imageUrl = s3MediaService.uploadPostImage(imageIdentity, imageBytes);
+    public void savePost(String postIdentity, String imageUrl) {
         Post post = Post.builder().identity(postIdentity).imageUrl(imageUrl).build();
         postRepository.save(post);
         log.info("Post image saved in database. Post identity: " + postIdentity);
