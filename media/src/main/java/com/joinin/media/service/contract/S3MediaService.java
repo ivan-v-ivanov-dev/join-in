@@ -25,4 +25,6 @@ public interface S3MediaService {
     void deleteAlbumImage(String objectKey);
 
     String uploadAlbumImage(String identity, byte[] bytes, String imageName);
+
+    String uploadPostImage(String imageIdentity, byte[] imageBytes);
 }

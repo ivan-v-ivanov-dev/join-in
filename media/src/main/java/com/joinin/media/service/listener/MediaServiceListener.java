@@ -1,11 +1,9 @@
 package com.joinin.media.service.listener;
 
 import com.join_in.kafka_models.KafkaMessage;
-import com.join_in.kafka_models.messages.NewRegisteredUserInfo;
-import com.join_in.kafka_models.messages.UpdateBackgroundImage;
-import com.join_in.kafka_models.messages.UpdateProfileImage;
-import com.join_in.kafka_models.messages.UploadAlbumImage;
+import com.join_in.kafka_models.messages.*;
 import com.joinin.media.service.contract.AlbumImageService;
+import com.joinin.media.service.contract.PostService;
 import com.joinin.media.service.contract.ProfileService;
 import com.joinin.media.service.contract.S3MediaService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +19,7 @@ public class MediaServiceListener {
     private final ProfileService profileService;
     private final S3MediaService s3MediaService;
     private final AlbumImageService albumImageService;
+    private final PostService postService;
 
     @KafkaListener(
             topics = "${spring.kafka.topic.new-registered-user-info}",
@@ -58,5 +57,14 @@ public class MediaServiceListener {
         UploadAlbumImage uploadAlbumImage = (UploadAlbumImage) message;
         log.info("New upload album image message received from API Gateway service. Profile identity: " + uploadAlbumImage.identity());
         albumImageService.uploadAlbumImage(uploadAlbumImage.identity(), uploadAlbumImage.albumImage());
+    }
+
+    @KafkaListener(
+            topics = "${spring.kafka.topic.post-an-image}",
+            groupId = "${spring.kafka.group-id}")
+    public void postAnImage(KafkaMessage message) {
+        PostImage postImageMessage = (PostImage) message;
+        log.info("New post image message received from Post service. Post identity: " + postImageMessage.postIdentity());
+        postService.savePostImage(postImageMessage.postIdentity(), postImageMessage.imageIdentity(), postImageMessage.imageBytes());
     }
 }

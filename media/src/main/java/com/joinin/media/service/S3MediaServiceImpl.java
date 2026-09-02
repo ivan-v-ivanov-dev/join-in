@@ -34,6 +34,7 @@ public class S3MediaServiceImpl implements S3MediaService {
     private static final String PROFILE_FOLDER = "profile";
     private static final String BACKGROUND_FOLDER = "background";
     private static final String ALBUM_FOLDER = "album";
+    private static final String POST_FOLDER = "posts";
     private static final String PROFILE_IMAGE_NAME = "profile.webp";
     private static final String BACKGROUND_IMAGE_NAME = "background.webp";
     private static final String ALBUM_IMAGE_TYPE = "album image";
@@ -236,6 +237,45 @@ public class S3MediaServiceImpl implements S3MediaService {
     @Override
     public String uploadAlbumImage(String identity, byte[] bytes, String imageName) {
         return uploadImage(identity, bytes, ALBUM_FOLDER, imageName, ALBUM_IMAGE_TYPE);
+    }
+
+    @Override
+    public String uploadPostImage(String imageIdentity, byte[] imageBytes) {
+        if (imageBytes == null || imageBytes.length == 0) {
+            log.error("Post image cannot be empty");
+        }
+
+        try {
+            byte[] webpBytes = imageConverterService.convertToWebp(imageBytes);
+            String objectKey = POST_FOLDER + "/" + imageIdentity + ".webp";
+            PutObjectRequest request = PutObjectRequest.builder()
+                    .bucket(bucket)
+                    .key(objectKey)
+                    .contentType("image/webp")
+                    .build();
+
+            s3Client.putObject(request, RequestBody.fromBytes(webpBytes));
+            log.info("Uploaded post image. Identity: {}, S3 key: {}", imageIdentity, objectKey);
+            return objectKey;
+        } catch (IOException exception) {
+            log.error("Could not convert post image to WebP. Identity: {}", imageIdentity, exception);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Could not convert post image to WebP.", exception);
+        } catch (S3Exception exception) {
+            log.error("Could not upload post image. Identity: {}, status: {}, code: {}, message: {}",
+                    imageIdentity,
+                    exception.statusCode(),
+                    exception.awsErrorDetails() == null
+                            ? null
+                            : exception.awsErrorDetails().errorCode(),
+                    exception.awsErrorDetails() == null
+                            ? exception.getMessage()
+                            : exception.awsErrorDetails().errorMessage(),
+                    exception
+            );
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Could not upload post image to S3.", exception);
+        }
     }
 
     private String uploadImage(String identity, byte[] imageBytes, String folder, String imageName, String imageType) {

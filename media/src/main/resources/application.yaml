@@ -22,6 +22,7 @@ spring:
       update-profile-image: update-profile-image
       update-background-image: update-background-image
       upload-album-image: upload-album-image
+      post-an-image: post-an-image
 
 aws:
   s3:

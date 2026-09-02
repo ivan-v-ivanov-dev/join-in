@@ -18,4 +18,8 @@ public class PostRepository {
         Query query = Query.query(where("identity").is(identity));
         return mongoTemplate.findOne(query, Post.class);
     }
+
+    public void save(Post post) {
+        mongoTemplate.save(post);
+    }
 }
